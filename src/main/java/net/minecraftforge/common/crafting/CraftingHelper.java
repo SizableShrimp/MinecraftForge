@@ -31,6 +31,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -659,7 +660,14 @@ public class CraftingHelper {
             }
             else if (mod.getSource().isDirectory())
             {
-                fPath = mod.getSource().toPath().resolve(base).resolve("_factories.json");
+                List<File> allSources = new ArrayList<>(mod.getAdditionalSources());
+                allSources.add(mod.getSource());
+                for (File source : allSources)
+                {
+                    fPath = source.toPath().resolve(base).resolve("_factories.json");
+                    if (Files.exists(fPath))
+                        break;
+                }
             }
 
             if (fPath != null && Files.exists(fPath))
@@ -892,7 +900,16 @@ public class CraftingHelper {
         }
         else if (mod.getSource().isDirectory())
         {
-            fPath = mod.getSource().toPath().resolve(Paths.get("assets", path.getResourceDomain(), path.getResourcePath()));
+            List<File> allSources = new ArrayList<>(mod.getAdditionalSources());
+            allSources.add(mod.getSource());
+            for (File source : allSources)
+            {
+                fPath = source.toPath().resolve(Paths.get("assets", path.getResourceDomain(), path.getResourcePath()));
+                if (!Files.exists(fPath))
+                {
+                    break;
+                }
+            }
         }
 
         if (fPath != null && Files.exists(fPath))

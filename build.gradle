@@ -1,8 +1,7 @@
 buildscript {
     repositories {
         mavenLocal()
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
+        maven { url = 'https://maven.minecraftforge.net/' }
         mavenCentral()
     }
     dependencies {
@@ -239,7 +238,7 @@ project(':forge') {
 
                 environment 'tweakClass',       'net.minecraftforge.fml.common.launcher.FMLServerTweaker'
                 environment 'mainClass',        'net.minecraft.launchwrapper.Launch'
-                environment 'MC_VERSION',       '${MC_VERSION}'
+                environment 'MC_VERSION',       "${MC_VERSION}"
                 environment 'MCP_MAPPINGS',     '{mcp_mappings}'
                 environment 'MCP_TO_SRG',       '{mcp_to_srg}'
                 environment 'FORGE_GROUP',      "${project.group}"
@@ -738,7 +737,7 @@ project(':forge') {
                 environment 'assetIndex',       '{asset_index}'
                 environment 'assetDirectory',   '{assets_root}'
                 environment 'nativesDirectory', '{natives}'
-                environment 'MC_VERSION',       '${MC_VERSION}'
+                environment 'MC_VERSION',       "${MC_VERSION}"
                 environment 'MCP_MAPPINGS',     '{mcp_mappings}'
                 environment 'MCP_TO_SRG',       '{mcp_to_srg}'
                 environment 'FORGE_GROUP',      "${project.group}"
@@ -750,7 +749,7 @@ project(':forge') {
 
                 environment 'tweakClass',       'net.minecraftforge.fml.common.launcher.FMLServerTweaker'
                 environment 'mainClass',        'net.minecraft.launchwrapper.Launch'
-                environment 'MC_VERSION',       '${MC_VERSION}'
+                environment 'MC_VERSION',       "${MC_VERSION}"
                 environment 'MCP_MAPPINGS',     '{mcp_mappings}'
                 environment 'MCP_TO_SRG',       '{mcp_to_srg}'
                 environment 'FORGE_GROUP',      "${project.group}"

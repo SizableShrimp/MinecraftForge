@@ -20,7 +20,10 @@
 package net.minecraftforge.fml.common.discovery;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.LoaderException;
@@ -48,6 +51,30 @@ public class ModDiscoverer
                 // skip reparse coremods here
                 .addAll(CoreModManager.getReparseableCoremods())
                 .build();
+        List<File> modClasses = getModClasses();
+        if (!modClasses.isEmpty())
+        {
+            FMLLog.log.debug("Found a MOD_CLASSES environment variable of {}, examining for mod candidate", modClasses);
+            File classesDir = null;
+            for (File source : modClasses)
+            {
+                if (source.getName().equals("classes"))
+                {
+                    classesDir = source;
+                    break;
+                }
+            }
+            if (classesDir == null)
+                classesDir = modClasses.get(0);
+            List<File> additionals = new ArrayList<>();
+            for (File source : modClasses)
+            {
+                if (source == classesDir)
+                    continue;
+                additionals.add(source);
+            }
+            addCandidate(new ModCandidate(classesDir, classesDir, additionals, ContainerType.DIR, false, true));
+        }
         File[] minecraftSources = modClassLoader.getParentSources();
         if (minecraftSources.length == 1 && minecraftSources[0].isFile())
         {
@@ -59,6 +86,10 @@ public class ModDiscoverer
             int i = 0;
             for (File source : minecraftSources)
             {
+                if (modClasses.contains(source))
+                {
+                    continue;
+                }
                 if (source.isFile())
                 {
                     if (knownLibraries.contains(source.getName()) || modClassLoader.isDefaultLibrary(source))
@@ -130,5 +161,16 @@ public class ModDiscoverer
             }
         }
         candidates.add(candidate);
+    }
+
+    private List<File> getModClasses()
+    {
+        String modClasses = System.getenv("MOD_CLASSES");
+        if (modClasses == null || modClasses.isEmpty())
+        {
+            return ImmutableList.of();
+        }
+
+        return Arrays.stream(modClasses.split(";")).map(File::new).collect(Collectors.toList());
     }
 }

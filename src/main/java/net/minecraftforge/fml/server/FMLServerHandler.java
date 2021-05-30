@@ -20,6 +20,7 @@
 package net.minecraftforge.fml.server;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -238,23 +239,29 @@ public class FMLServerHandler implements IFMLSidedHandler
     {
         String langFile = "assets/" + container.getModId().toLowerCase() + "/lang/en_us.lang";
         String langFile2 = "assets/" + container.getModId().toLowerCase() + "/lang/en_US.lang";
-        File source = container.getSource();
+        List<File> allSources = new ArrayList<>(container.getAdditionalSources());
+        File mainSource = container.getSource();
+        allSources.add(mainSource);
         InputStream stream = null;
         ZipFile zip = null;
         try
         {
-            if (source.isDirectory() && FMLLaunchHandler.isDeobfuscatedEnvironment())
+            if (mainSource.isDirectory() && FMLLaunchHandler.isDeobfuscatedEnvironment())
             {
-                File f = new File(source.toURI().resolve(langFile).getPath());
-                if (!f.exists())
-                    f = new File(source.toURI().resolve(langFile2).getPath());
-                if (!f.exists())
-                    throw new FileNotFoundException(source.toURI().resolve(langFile).getPath());
-                stream = new FileInputStream(f);
+                for (File source : allSources)
+                {
+                    File f = new File(source.toURI().resolve(langFile).getPath());
+                    if (!f.exists())
+                        f = new File(source.toURI().resolve(langFile2).getPath());
+                    if (f.exists())
+                        stream = new FileInputStream(f);
+                }
+                if (stream == null)
+                    throw new FileNotFoundException(mainSource.toURI().resolve(langFile).getPath());
             }
-            else if (source.exists()) //Fake sources.. Yay coremods -.-
+            else if (mainSource.exists()) //Fake sources.. Yay coremods -.-
             {
-                zip = new ZipFile(source);
+                zip = new ZipFile(mainSource);
                 ZipEntry entry = zip.getEntry(langFile);
                 if (entry == null) entry = zip.getEntry(langFile2);
                 if (entry == null) throw new FileNotFoundException(langFile);

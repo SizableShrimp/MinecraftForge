@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraftforge.fml.common.versioning.ArtifactVersion;
 import net.minecraftforge.fml.common.versioning.VersionRange;
 
@@ -72,6 +73,14 @@ public interface ModContainer
      * The location on the file system which this mod came from
      */
     File getSource();
+
+    /**
+     * Get additional source locations, like a resources directory
+     */
+    default List<File> getAdditionalSources()
+    {
+        return ImmutableList.of();
+    }
 
     /**
      * The metadata for this mod

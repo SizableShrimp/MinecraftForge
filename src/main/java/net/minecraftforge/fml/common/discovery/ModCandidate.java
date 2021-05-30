@@ -23,6 +23,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraftforge.fml.common.ModContainer;
 
 import com.google.common.collect.Lists;
@@ -33,6 +34,7 @@ public class ModCandidate
 {
     private File classPathRoot;
     private File modContainer;
+    private List<File> additionals;
     private ContainerType sourceType;
     private boolean classpath;
     private boolean isMinecraft;
@@ -43,12 +45,21 @@ public class ModCandidate
 
     public ModCandidate(File classPathRoot, File modContainer, ContainerType sourceType)
     {
-        this(classPathRoot, modContainer, sourceType, false, false);
+        this(classPathRoot, modContainer, ImmutableList.of(), sourceType);
+    }
+    public ModCandidate(File classPathRoot, File modContainer, List<File> additionals, ContainerType sourceType)
+    {
+        this(classPathRoot, modContainer, additionals, sourceType, false, false);
     }
     public ModCandidate(File classPathRoot, File modContainer, ContainerType sourceType, boolean isMinecraft, boolean classpath)
     {
+        this(classPathRoot, modContainer, ImmutableList.of(), sourceType, isMinecraft, classpath);
+    }
+    public ModCandidate(File classPathRoot, File modContainer, List<File> additionals, ContainerType sourceType, boolean isMinecraft, boolean classpath)
+    {
         this.classPathRoot = classPathRoot;
         this.modContainer = modContainer;
+        this.additionals = additionals;
         this.sourceType = sourceType;
         this.isMinecraft = isMinecraft;
         this.classpath = classpath;
@@ -62,6 +73,11 @@ public class ModCandidate
     public File getModContainer()
     {
         return modContainer;
+    }
+    
+    public List<File> getAdditionalSources()
+    {
+        return additionals;
     }
 
     public ContainerType getSourceType()

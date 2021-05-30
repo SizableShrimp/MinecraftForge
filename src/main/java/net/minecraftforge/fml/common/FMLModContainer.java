@@ -81,6 +81,7 @@ public class FMLModContainer implements ModContainer
 {
     private Object modInstance;
     private File source;
+    private List<File> additionals;
     private ModMetadata modMetadata;
     private String className;
     private Map<String, Object> descriptor;
@@ -109,6 +110,7 @@ public class FMLModContainer implements ModContainer
     {
         this.className = className;
         this.source = container.getModContainer();
+        this.additionals = container.getAdditionalSources();
         this.candidate = container;
         this.descriptor = modDescriptor;
         this.eventMethods = ArrayListMultimap.create();
@@ -197,6 +199,12 @@ public class FMLModContainer implements ModContainer
     public File getSource()
     {
         return source;
+    }
+
+    @Override
+    public List<File> getAdditionalSources()
+    {
+        return additionals;
     }
 
     @Override
