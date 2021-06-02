@@ -19,9 +19,9 @@
 
 package net.minecraftforge.event.entity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event.HasResult;
@@ -31,7 +31,7 @@ import net.minecraftforge.eventbus.api.Event.HasResult;
  * <br>
  * {@link #dimension} contains the id of the dimension the entity is traveling to.<br>
  * <br>
- * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
+ * This event is {@link Cancelable}.<br>
  * If this event is canceled, the Entity does not travel to the dimension.<br>
  * <br>
  * This event does not have a result. {@link HasResult}<br>
@@ -41,15 +41,15 @@ import net.minecraftforge.eventbus.api.Event.HasResult;
 @Cancelable
 public class EntityTravelToDimensionEvent extends EntityEvent
 {
-    private final RegistryKey<World> dimension;
+    private final ResourceKey<Level> dimension;
 
-    public EntityTravelToDimensionEvent(Entity entity, RegistryKey<World> dimension)
+    public EntityTravelToDimensionEvent(Entity entity, ResourceKey<Level> dimension)
     {
         super(entity);
         this.dimension = dimension;
     }
 
-    public RegistryKey<World> getDimension()
+    public ResourceKey<Level> getDimension()
     {
         return dimension;
     }

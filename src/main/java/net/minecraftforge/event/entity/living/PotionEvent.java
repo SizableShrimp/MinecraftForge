@@ -22,9 +22,9 @@ package net.minecraftforge.event.entity.living;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Cancelable;
 
@@ -36,9 +36,9 @@ import net.minecraftforge.eventbus.api.Event.HasResult;
 public class PotionEvent extends LivingEvent
 {
     @Nullable
-    protected final EffectInstance effect;
+    protected final MobEffectInstance effect;
     
-    public PotionEvent(LivingEntity living, EffectInstance effect)
+    public PotionEvent(LivingEntity living, MobEffectInstance effect)
     {
         super(living);
         this.effect = effect;
@@ -47,7 +47,7 @@ public class PotionEvent extends LivingEvent
      * Retuns the PotionEffect.
      */
     @Nullable
-    public EffectInstance getPotionEffect()
+    public MobEffectInstance getPotionEffect()
     {
         return effect;
     }
@@ -60,15 +60,15 @@ public class PotionEvent extends LivingEvent
     @Cancelable
     public static class PotionRemoveEvent extends PotionEvent
     {
-        private final Effect potion;
+        private final MobEffect potion;
         
-        public PotionRemoveEvent(LivingEntity living, Effect potion)
+        public PotionRemoveEvent(LivingEntity living, MobEffect potion)
         {
             super(living, living.getEffect(potion));
             this.potion = potion;
         }
         
-        public PotionRemoveEvent(LivingEntity living, EffectInstance effect)
+        public PotionRemoveEvent(LivingEntity living, MobEffectInstance effect)
         {
             super(living, effect);
             this.potion = effect.getEffect();            
@@ -77,7 +77,7 @@ public class PotionEvent extends LivingEvent
         /**
          * @return the Potion which is tried to remove from the Entity.
          */
-        public Effect getPotion()
+        public MobEffect getPotion()
         {
             return this.potion;
         }
@@ -87,7 +87,7 @@ public class PotionEvent extends LivingEvent
          */
         @Override
         @Nullable
-        public EffectInstance getPotionEffect()
+        public MobEffectInstance getPotionEffect()
         {
             return super.getPotionEffect();
         }
@@ -104,7 +104,7 @@ public class PotionEvent extends LivingEvent
     @HasResult
     public static class PotionApplicableEvent extends PotionEvent
     {
-        public PotionApplicableEvent(LivingEntity living, EffectInstance effect)
+        public PotionApplicableEvent(LivingEntity living, MobEffectInstance effect)
         {
             super(living, effect);
         }
@@ -114,7 +114,7 @@ public class PotionEvent extends LivingEvent
          */
         @Override
         @Nonnull
-        public EffectInstance getPotionEffect()
+        public MobEffectInstance getPotionEffect()
         {
             return super.getPotionEffect();
         }
@@ -127,9 +127,9 @@ public class PotionEvent extends LivingEvent
      */
     public static class PotionAddedEvent extends PotionEvent
     {
-        private final EffectInstance oldEffect;
+        private final MobEffectInstance oldEffect;
         
-        public PotionAddedEvent(LivingEntity living, EffectInstance oldEffect, EffectInstance newEffect)
+        public PotionAddedEvent(LivingEntity living, MobEffectInstance oldEffect, MobEffectInstance newEffect)
         {
             super(living, newEffect);
             this.oldEffect = oldEffect;
@@ -140,7 +140,7 @@ public class PotionEvent extends LivingEvent
          */
         @Override
         @Nonnull
-        public EffectInstance getPotionEffect()
+        public MobEffectInstance getPotionEffect()
         {
             return super.getPotionEffect();
         }
@@ -149,7 +149,7 @@ public class PotionEvent extends LivingEvent
          * @return the old PotionEffect. THis can be null if the entity did not have an effect of this kind before.
          */
         @Nullable
-        public EffectInstance getOldPotionEffect()
+        public MobEffectInstance getOldPotionEffect()
         {
             return oldEffect;
         }
@@ -162,7 +162,7 @@ public class PotionEvent extends LivingEvent
      */
     public static class PotionExpiryEvent extends PotionEvent
     {
-        public PotionExpiryEvent(LivingEntity living, EffectInstance effect)
+        public PotionExpiryEvent(LivingEntity living, MobEffectInstance effect)
         {
             super(living, effect);
         }

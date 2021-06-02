@@ -25,34 +25,44 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.IResourceManager;
-import net.minecraft.util.Direction;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.core.Direction;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
 
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Function;
 
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.BlockModel;
+import net.minecraft.client.renderer.block.model.ItemOverrides;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelState;
+import net.minecraft.client.resources.model.UnbakedModel;
+
 public class SeparatePerspectiveModel implements IModelGeometry<SeparatePerspectiveModel>
 {
     private final BlockModel baseModel;
-    private final ImmutableMap<ItemCameraTransforms.TransformType, BlockModel> perspectives;
+    private final ImmutableMap<ItemTransforms.TransformType, BlockModel> perspectives;
 
-    public SeparatePerspectiveModel(BlockModel baseModel, ImmutableMap<ItemCameraTransforms.TransformType, BlockModel> perspectives)
+    public SeparatePerspectiveModel(BlockModel baseModel, ImmutableMap<ItemTransforms.TransformType, BlockModel> perspectives)
     {
         this.baseModel = baseModel;
         this.perspectives = perspectives;
     }
 
     @Override
-    public IBakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<RenderMaterial, TextureAtlasSprite> spriteGetter, IModelTransform modelTransform, ItemOverrideList overrides, ResourceLocation modelLocation)
+    public BakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform, ItemOverrides overrides, ResourceLocation modelLocation)
     {
         return new BakedModel(
                 owner.useSmoothLighting(), owner.isShadedInGui(), owner.isSideLit(),
@@ -65,26 +75,26 @@ public class SeparatePerspectiveModel implements IModelGeometry<SeparatePerspect
     }
 
     @Override
-    public Collection<RenderMaterial> getTextures(IModelConfiguration owner, Function<ResourceLocation, IUnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors)
+    public Collection<Material> getTextures(IModelConfiguration owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors)
     {
-        Set<RenderMaterial> textures = Sets.newHashSet();
+        Set<Material> textures = Sets.newHashSet();
         textures.addAll(baseModel.getMaterials(modelGetter, missingTextureErrors));
         for(BlockModel model : perspectives.values())
             textures.addAll(model.getMaterials(modelGetter, missingTextureErrors));
         return textures;
     }
 
-    public static class BakedModel implements IBakedModel
+    public static class BakedModel implements BakedModel
     {
         private final boolean isAmbientOcclusion;
         private final boolean isGui3d;
         private final boolean isSideLit;
         private final TextureAtlasSprite particle;
-        private final ItemOverrideList overrides;
-        private final IBakedModel baseModel;
-        private final ImmutableMap<ItemCameraTransforms.TransformType, IBakedModel> perspectives;
+        private final ItemOverrides overrides;
+        private final BakedModel baseModel;
+        private final ImmutableMap<ItemTransforms.TransformType, BakedModel> perspectives;
 
-        public BakedModel(boolean isAmbientOcclusion, boolean isGui3d, boolean isSideLit, TextureAtlasSprite particle, ItemOverrideList overrides, IBakedModel baseModel, ImmutableMap<ItemCameraTransforms.TransformType, IBakedModel> perspectives)
+        public BakedModel(boolean isAmbientOcclusion, boolean isGui3d, boolean isSideLit, TextureAtlasSprite particle, ItemOverrides overrides, BakedModel baseModel, ImmutableMap<ItemTransforms.TransformType, BakedModel> perspectives)
         {
             this.isAmbientOcclusion = isAmbientOcclusion;
             this.isGui3d = isGui3d;
@@ -132,7 +142,7 @@ public class SeparatePerspectiveModel implements IModelGeometry<SeparatePerspect
         }
 
         @Override
-        public ItemOverrideList getOverrides()
+        public ItemOverrides getOverrides()
         {
             return overrides;
         }
@@ -144,17 +154,17 @@ public class SeparatePerspectiveModel implements IModelGeometry<SeparatePerspect
         }
 
         @Override
-        public ItemCameraTransforms getTransforms()
+        public ItemTransforms getTransforms()
         {
-            return ItemCameraTransforms.NO_TRANSFORMS;
+            return ItemTransforms.NO_TRANSFORMS;
         }
 
         @Override
-        public IBakedModel handlePerspective(ItemCameraTransforms.TransformType cameraTransformType, MatrixStack mat)
+        public BakedModel handlePerspective(ItemTransforms.TransformType cameraTransformType, PoseStack mat)
         {
             if (perspectives.containsKey(cameraTransformType))
             {
-                IBakedModel p = perspectives.get(cameraTransformType);
+                BakedModel p = perspectives.get(cameraTransformType);
                 return p.handlePerspective(cameraTransformType, mat);
             }
             return baseModel.handlePerspective(cameraTransformType, mat);
@@ -165,20 +175,20 @@ public class SeparatePerspectiveModel implements IModelGeometry<SeparatePerspect
     {
         public static final Loader INSTANCE = new Loader();
 
-        public static final ImmutableBiMap<String, ItemCameraTransforms.TransformType> PERSPECTIVES = ImmutableBiMap.<String, ItemCameraTransforms.TransformType>builder()
-                .put("none", ItemCameraTransforms.TransformType.NONE)
-                .put("third_person_left_hand", ItemCameraTransforms.TransformType.THIRD_PERSON_LEFT_HAND)
-                .put("third_person_right_hand", ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND)
-                .put("first_person_left_hand", ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND)
-                .put("first_person_right_hand", ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND)
-                .put("head", ItemCameraTransforms.TransformType.HEAD)
-                .put("gui", ItemCameraTransforms.TransformType.GUI)
-                .put("ground", ItemCameraTransforms.TransformType.GROUND)
-                .put("fixed", ItemCameraTransforms.TransformType.FIXED)
+        public static final ImmutableBiMap<String, ItemTransforms.TransformType> PERSPECTIVES = ImmutableBiMap.<String, ItemTransforms.TransformType>builder()
+                .put("none", ItemTransforms.TransformType.NONE)
+                .put("third_person_left_hand", ItemTransforms.TransformType.THIRD_PERSON_LEFT_HAND)
+                .put("third_person_right_hand", ItemTransforms.TransformType.THIRD_PERSON_RIGHT_HAND)
+                .put("first_person_left_hand", ItemTransforms.TransformType.FIRST_PERSON_LEFT_HAND)
+                .put("first_person_right_hand", ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND)
+                .put("head", ItemTransforms.TransformType.HEAD)
+                .put("gui", ItemTransforms.TransformType.GUI)
+                .put("ground", ItemTransforms.TransformType.GROUND)
+                .put("fixed", ItemTransforms.TransformType.FIXED)
                 .build();
 
         @Override
-        public void onResourceManagerReload(IResourceManager resourceManager)
+        public void onResourceManagerReload(ResourceManager resourceManager)
         {
             // Not used
         }
@@ -186,16 +196,16 @@ public class SeparatePerspectiveModel implements IModelGeometry<SeparatePerspect
         @Override
         public SeparatePerspectiveModel read(JsonDeserializationContext deserializationContext, JsonObject modelContents)
         {
-            BlockModel baseModel = deserializationContext.deserialize(JSONUtils.getAsJsonObject(modelContents, "base"), BlockModel.class);
+            BlockModel baseModel = deserializationContext.deserialize(GsonHelper.getAsJsonObject(modelContents, "base"), BlockModel.class);
 
-            JsonObject perspectiveData = JSONUtils.getAsJsonObject(modelContents, "perspectives");
+            JsonObject perspectiveData = GsonHelper.getAsJsonObject(modelContents, "perspectives");
 
-            ImmutableMap.Builder<ItemCameraTransforms.TransformType, BlockModel> perspectives = ImmutableMap.builder();
-            for(Map.Entry<String, ItemCameraTransforms.TransformType> perspective : PERSPECTIVES.entrySet())
+            ImmutableMap.Builder<ItemTransforms.TransformType, BlockModel> perspectives = ImmutableMap.builder();
+            for(Map.Entry<String, ItemTransforms.TransformType> perspective : PERSPECTIVES.entrySet())
             {
                 if (perspectiveData.has(perspective.getKey()))
                 {
-                    BlockModel perspectiveModel = deserializationContext.deserialize(JSONUtils.getAsJsonObject(perspectiveData, perspective.getKey()), BlockModel.class);
+                    BlockModel perspectiveModel = deserializationContext.deserialize(GsonHelper.getAsJsonObject(perspectiveData, perspective.getKey()), BlockModel.class);
                     perspectives.put(perspective.getValue(), perspectiveModel);
                 }
             }

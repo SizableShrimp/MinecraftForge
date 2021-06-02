@@ -19,9 +19,9 @@
 
 package net.minecraftforge.event.entity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.Pose;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,7 +30,7 @@ import net.minecraftforge.eventbus.api.Event;
 
 /**
  * EntityEvent is fired when an event involving any Entity occurs.<br>
- * If a method utilizes this {@link net.minecraftforge.eventbus.api.Event} as its parameter, the method will
+ * If a method utilizes this {@link Event} as its parameter, the method will
  * receive every child event of this class.<br>
  * <br>
  * {@link #entity} contains the entity that caused this event to occur.<br>
@@ -55,7 +55,7 @@ public class EntityEvent extends Event
      * EntityConstructing is fired when an Entity is being created. <br>
      * This event is fired within the constructor of the Entity.<br>
      * <br>
-     * This event is not {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
+     * This event is not {@link Cancelable}.<br>
      * <br>
      * This event does not have a result. {@link HasResult}<br>
      * <br>
@@ -152,17 +152,17 @@ public class EntityEvent extends Event
     public static class Size extends EntityEvent
     {
         private final Pose pose;
-        private final EntitySize oldSize;
-        private EntitySize newSize;
+        private final EntityDimensions oldSize;
+        private EntityDimensions newSize;
         private final float oldEyeHeight;
         private float newEyeHeight;
 
-        public Size(Entity entity, Pose pose, EntitySize size, float defaultEyeHeight)
+        public Size(Entity entity, Pose pose, EntityDimensions size, float defaultEyeHeight)
         {
             this(entity, pose, size, size, defaultEyeHeight, defaultEyeHeight);
         }
 
-        public Size(Entity entity, Pose pose, EntitySize oldSize, EntitySize newSize, float oldEyeHeight, float newEyeHeight)
+        public Size(Entity entity, Pose pose, EntityDimensions oldSize, EntityDimensions newSize, float oldEyeHeight, float newEyeHeight)
         {
             super(entity);
             this.pose = pose;
@@ -174,9 +174,9 @@ public class EntityEvent extends Event
 
 
         public Pose getPose() { return pose; }
-        public EntitySize getOldSize() { return oldSize; }
-        public EntitySize getNewSize() { return newSize; }
-        public void setNewSize(EntitySize size)
+        public EntityDimensions getOldSize() { return oldSize; }
+        public EntityDimensions getNewSize() { return newSize; }
+        public void setNewSize(EntityDimensions size)
         {
             setNewSize(size, false);
         }
@@ -184,7 +184,7 @@ public class EntityEvent extends Event
         /**
          * Set the new size of the entity. Set updateEyeHeight to true to also update the eye height according to the new size.
          */
-        public void setNewSize(EntitySize size, boolean updateEyeHeight)
+        public void setNewSize(EntityDimensions size, boolean updateEyeHeight)
         {
             this.newSize = size;
             if (updateEyeHeight)

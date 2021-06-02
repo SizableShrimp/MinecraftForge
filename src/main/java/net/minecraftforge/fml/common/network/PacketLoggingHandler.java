@@ -31,31 +31,31 @@ import java.util.Iterator;
 import java.util.List;
 
 
-import net.minecraft.network.PacketDirection;
-import net.minecraft.network.NettyVarint21FrameDecoder;
-import net.minecraft.network.NettyVarint21FrameEncoder;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.protocol.PacketFlow;
+import net.minecraft.network.Varint21FrameDecoder;
+import net.minecraft.network.Varint21LengthFieldPrepender;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.FriendlyByteBuf;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class PacketLoggingHandler
 {
     private static final Logger LOGGER = LogManager.getLogger();
-    public static void register(NetworkManager manager)
+    public static void register(Connection manager)
     {
         ChannelPipeline pipeline = manager.channel().pipeline();
-        final PacketDirection direction = manager.getDirection();
+        final PacketFlow direction = manager.getDirection();
         if (manager.isMemoryConnection())
         {
-            pipeline.addBefore("packet_handler", "splitter", new SimpleChannelInboundHandler<IPacket<?>>()
+            pipeline.addBefore("packet_handler", "splitter", new SimpleChannelInboundHandler<Packet<?>>()
             {
-                String prefix = (direction == PacketDirection.SERVERBOUND ? "SERVER: C->S" : "CLIENT: S->C");
+                String prefix = (direction == PacketFlow.SERVERBOUND ? "SERVER: C->S" : "CLIENT: S->C");
                 @Override
-                protected void channelRead0(ChannelHandlerContext ctx, IPacket<?> msg) throws Exception
+                protected void channelRead0(ChannelHandlerContext ctx, Packet<?> msg) throws Exception
                 {
-                    PacketBuffer buf = new PacketBuffer(Unpooled.buffer());
+                    FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
                     msg.write(buf);
                     LOGGER.debug("{} {}:\n{}", prefix, msg.getClass().getSimpleName(), ByteBufUtils.getContentDump(buf));
                     ctx.fireChannelRead(msg);
@@ -63,14 +63,14 @@ public class PacketLoggingHandler
             });
             pipeline.addBefore("splitter", "prepender", new ChannelOutboundHandlerAdapter()
             {
-                String prefix = (direction == PacketDirection.SERVERBOUND ? "SERVER: S->C" : "CLIENT: C->S");
+                String prefix = (direction == PacketFlow.SERVERBOUND ? "SERVER: S->C" : "CLIENT: C->S");
                 @Override
                 public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception
                 {
-                    if (msg instanceof IPacket<?>)
+                    if (msg instanceof Packet<?>)
                     {
-                        PacketBuffer buf = new PacketBuffer(Unpooled.buffer());
-                        ((IPacket<?>)msg).write(buf);
+                        FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+                        ((Packet<?>)msg).write(buf);
                         LOGGER.debug("{} {}:\n{}", prefix, msg.getClass().getSimpleName(), ByteBufUtils.getContentDump(buf));
                     }
                     ctx.write(msg, promise);
@@ -79,9 +79,9 @@ public class PacketLoggingHandler
         }
         else
         {
-            pipeline.replace("splitter", "splitter", new NettyVarint21FrameDecoder()
+            pipeline.replace("splitter", "splitter", new Varint21FrameDecoder()
             {
-                String prefix = (direction == PacketDirection.SERVERBOUND ? "SERVER: C->S" : "CLIENT: S->C");
+                String prefix = (direction == PacketFlow.SERVERBOUND ? "SERVER: C->S" : "CLIENT: S->C");
                 @Override
                 protected void decode(ChannelHandlerContext context, ByteBuf input, List<Object> output) throws Exception
                 {
@@ -96,9 +96,9 @@ public class PacketLoggingHandler
                     }
                 }
             });
-            pipeline.replace("prepender", "prepender", new NettyVarint21FrameEncoder()
+            pipeline.replace("prepender", "prepender", new Varint21LengthFieldPrepender()
             {
-                String prefix = (direction == PacketDirection.SERVERBOUND ? "SERVER: S->C" : "CLIENT: C->S");
+                String prefix = (direction == PacketFlow.SERVERBOUND ? "SERVER: S->C" : "CLIENT: C->S");
                 @Override
                 protected void encode(ChannelHandlerContext context, ByteBuf input, ByteBuf output) throws Exception
                 {

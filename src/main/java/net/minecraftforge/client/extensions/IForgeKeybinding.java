@@ -21,23 +21,23 @@ package net.minecraftforge.client.extensions;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.client.util.InputMappings;
+import net.minecraft.client.KeyMapping;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraftforge.client.settings.IKeyConflictContext;
 import net.minecraftforge.client.settings.KeyModifier;
 
 public interface IForgeKeybinding
 {
-    default KeyBinding getKeyBinding() { return (KeyBinding) this; }
+    default KeyMapping getKeyBinding() { return (KeyMapping) this; }
     
-    @Nonnull InputMappings.Input getKey();
+    @Nonnull InputConstants.Key getKey();
 
     /**
      * Checks that the key conflict context and modifier are active, and that the keyCode matches this binding.
      */
-    default boolean isActiveAndMatches(InputMappings.Input keyCode)
+    default boolean isActiveAndMatches(InputConstants.Key keyCode)
     {
-        return keyCode != InputMappings.UNKNOWN && keyCode.equals(getKey()) && getKeyConflictContext().isActive() && getKeyModifier().isActive(getKeyConflictContext());
+        return keyCode != InputConstants.UNKNOWN && keyCode.equals(getKey()) && getKeyConflictContext().isActive() && getKeyModifier().isActive(getKeyConflictContext());
     }
     
     default void setToDefault()
@@ -53,7 +53,7 @@ public interface IForgeKeybinding
 
     KeyModifier getKeyModifier();
 
-    void setKeyModifierAndCode(KeyModifier keyModifier, InputMappings.Input keyCode);
+    void setKeyModifierAndCode(KeyModifier keyModifier, InputConstants.Key keyCode);
 
     default boolean isConflictContextAndModifierActive()
     {
@@ -63,7 +63,7 @@ public interface IForgeKeybinding
     /**
      * Returns true when one of the bindings' key codes conflicts with the other's modifier.
      */
-    default boolean hasKeyCodeModifierConflict(KeyBinding other)
+    default boolean hasKeyCodeModifierConflict(KeyMapping other)
     {
         if (getKeyConflictContext().conflicts(other.getKeyConflictContext()) || other.getKeyConflictContext().conflicts(getKeyConflictContext()))
         {

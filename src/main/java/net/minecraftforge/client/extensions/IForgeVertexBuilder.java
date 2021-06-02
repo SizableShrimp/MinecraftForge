@@ -19,12 +19,12 @@
 
 package net.minecraftforge.client.extensions;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.client.renderer.model.BakedQuad;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import net.minecraft.util.math.vector.*;
 import net.minecraftforge.client.model.pipeline.LightUtil;
 
@@ -34,37 +34,43 @@ import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
+import com.mojang.math.Matrix3f;
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
+import com.mojang.math.Vector4f;
+import net.minecraft.core.Vec3i;
+
 public interface IForgeVertexBuilder
 {
-    default IVertexBuilder getVertexBuilder() { return (IVertexBuilder)this; }
+    default VertexConsumer getVertexBuilder() { return (VertexConsumer)this; }
 
     // Copy of addQuad, but enables tinting and per-vertex alpha
-    default void addVertexData(MatrixStack.Entry matrixStack, BakedQuad bakedQuad, float red, float green, float blue, int lightmapCoord, int overlayColor, boolean readExistingColor) {
+    default void addVertexData(PoseStack.Pose matrixStack, BakedQuad bakedQuad, float red, float green, float blue, int lightmapCoord, int overlayColor, boolean readExistingColor) {
         addVertexData(matrixStack, bakedQuad, red, green, blue, 1.0f, lightmapCoord, overlayColor, readExistingColor);
     }
 
     // Copy of addQuad with alpha support
-    default void addVertexData(MatrixStack.Entry matrixEntry, BakedQuad bakedQuad, float red, float green, float blue, float alpha, int lightmapCoord, int overlayColor) {
+    default void addVertexData(PoseStack.Pose matrixEntry, BakedQuad bakedQuad, float red, float green, float blue, float alpha, int lightmapCoord, int overlayColor) {
         addVertexData(matrixEntry, bakedQuad, new float[]{1.0F, 1.0F, 1.0F, 1.0F}, red, green, blue, alpha, new int[]{lightmapCoord, lightmapCoord, lightmapCoord, lightmapCoord}, overlayColor, false);
     }
 
     // Copy of addQuad with alpha support
-    default void addVertexData(MatrixStack.Entry matrixEntry, BakedQuad bakedQuad, float red, float green, float blue, float alpha, int lightmapCoord, int overlayColor, boolean readExistingColor) {
+    default void addVertexData(PoseStack.Pose matrixEntry, BakedQuad bakedQuad, float red, float green, float blue, float alpha, int lightmapCoord, int overlayColor, boolean readExistingColor) {
         addVertexData(matrixEntry, bakedQuad, new float[]{1.0F, 1.0F, 1.0F, 1.0F}, red, green, blue, alpha, new int[]{lightmapCoord, lightmapCoord, lightmapCoord, lightmapCoord}, overlayColor, readExistingColor);
     }
 
     // Copy of addQuad with alpha support
-    default void addVertexData(MatrixStack.Entry matrixEntry, BakedQuad bakedQuad, float[] baseBrightness, float red, float green, float blue, float alpha, int[] lightmapCoords, int overlayCoords, boolean readExistingColor) {
+    default void addVertexData(PoseStack.Pose matrixEntry, BakedQuad bakedQuad, float[] baseBrightness, float red, float green, float blue, float alpha, int[] lightmapCoords, int overlayCoords, boolean readExistingColor) {
         int[] aint = bakedQuad.getVertices();
-        Vector3i faceNormal = bakedQuad.getDirection().getNormal();
+        Vec3i faceNormal = bakedQuad.getDirection().getNormal();
         Vector3f normal = new Vector3f((float)faceNormal.getX(), (float)faceNormal.getY(), (float)faceNormal.getZ());
         Matrix4f matrix4f = matrixEntry.pose();
         normal.transform(matrixEntry.normal());
-        int intSize = DefaultVertexFormats.BLOCK.getIntegerSize();
+        int intSize = DefaultVertexFormat.BLOCK.getIntegerSize();
         int vertexCount = aint.length / intSize;
 
         try (MemoryStack memorystack = MemoryStack.stackPush()) {
-            ByteBuffer bytebuffer = memorystack.malloc(DefaultVertexFormats.BLOCK.getVertexSize());
+            ByteBuffer bytebuffer = memorystack.malloc(DefaultVertexFormat.BLOCK.getVertexSize());
             IntBuffer intbuffer = bytebuffer.asIntBuffer();
 
             for(int v = 0; v < vertexCount; ++v) {
@@ -99,7 +105,7 @@ public interface IForgeVertexBuilder
                 Vector4f pos = new Vector4f(f, f1, f2, 1.0F);
                 pos.transform(matrix4f);
                 applyBakedNormals(normal, bytebuffer, matrixEntry.normal());
-                ((IVertexBuilder)this).vertex(pos.x(), pos.y(), pos.z(), cr, cg, cb, ca, f9, f10, overlayCoords, lightmapCoord, normal.x(), normal.y(), normal.z());
+                ((VertexConsumer)this).vertex(pos.x(), pos.y(), pos.z(), cr, cg, cb, ca, f9, f10, overlayCoords, lightmapCoord, normal.x(), normal.y(), normal.z());
             }
         }
     }

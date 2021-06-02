@@ -24,13 +24,13 @@ import javax.annotation.Nullable;
 import io.netty.util.Attribute;
 import io.netty.util.AttributeKey;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.INetHandler;
-import net.minecraft.network.play.ServerPlayNetHandler;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.concurrent.ThreadTaskExecutor;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.PacketListener;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
+import net.minecraft.network.Connection;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.thread.BlockableEventLoop;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.LogicalSidedProvider;
 
@@ -40,7 +40,7 @@ import java.util.function.Supplier;
 
 public class NetworkEvent extends Event
 {
-    private final PacketBuffer payload;
+    private final FriendlyByteBuf payload;
     private final Supplier<Context> source;
     private final int loginIndex;
 
@@ -51,7 +51,7 @@ public class NetworkEvent extends Event
         this.loginIndex = payload.getIndex();
     }
 
-    private NetworkEvent(final PacketBuffer payload, final Supplier<Context> source, final int loginIndex)
+    private NetworkEvent(final FriendlyByteBuf payload, final Supplier<Context> source, final int loginIndex)
     {
         this.payload = payload;
         this.source = source;
@@ -64,7 +64,7 @@ public class NetworkEvent extends Event
         this.loginIndex = -1;
     }
 
-    public PacketBuffer getPayload()
+    public FriendlyByteBuf getPayload()
     {
         return payload;
     }
@@ -114,7 +114,7 @@ public class NetworkEvent extends Event
             this.isLocal = isLocal;
         }
 
-        public void add(PacketBuffer buffer, ResourceLocation channelName, String context) {
+        public void add(FriendlyByteBuf buffer, ResourceLocation channelName, String context) {
             collected.add(new NetworkRegistry.LoginPayload(buffer, channelName, context));
         }
 
@@ -124,7 +124,7 @@ public class NetworkEvent extends Event
     }
 
     public static class LoginPayloadEvent extends NetworkEvent {
-        LoginPayloadEvent(final PacketBuffer payload, final Supplier<Context> source, final int loginIndex) {
+        LoginPayloadEvent(final FriendlyByteBuf payload, final Supplier<Context> source, final int loginIndex) {
             super(payload, source, loginIndex);
         }
     }
@@ -160,7 +160,7 @@ public class NetworkEvent extends Event
         /**
          * The {@link NetworkManager} for this message.
          */
-        private final NetworkManager networkManager;
+        private final Connection networkManager;
 
         /**
          * The {@link NetworkDirection} this message has been received on.
@@ -173,12 +173,12 @@ public class NetworkEvent extends Event
         private final PacketDispatcher packetDispatcher;
         private boolean packetHandled;
 
-        Context(NetworkManager netHandler, NetworkDirection networkDirection, int index)
+        Context(Connection netHandler, NetworkDirection networkDirection, int index)
         {
             this(netHandler, networkDirection, new PacketDispatcher.NetworkManagerDispatcher(netHandler, index, networkDirection.reply()::buildPacket));
         }
 
-        Context(NetworkManager networkManager, NetworkDirection networkDirection, PacketDispatcher dispatcher) {
+        Context(Connection networkManager, NetworkDirection networkDirection, PacketDispatcher dispatcher) {
             this.networkManager = networkManager;
             this.networkDirection = networkDirection;
             this.packetDispatcher = dispatcher;
@@ -206,7 +206,7 @@ public class NetworkEvent extends Event
         }
 
         public CompletableFuture<Void> enqueueWork(Runnable runnable) {
-            ThreadTaskExecutor<?> executor = LogicalSidedProvider.WORKQUEUE.get(getDirection().getReceptionSide());
+            BlockableEventLoop<?> executor = LogicalSidedProvider.WORKQUEUE.get(getDirection().getReceptionSide());
             // Must check ourselves as Minecraft will sometimes delay tasks even when they are received on the client thread
             // Same logic as ThreadTaskExecutor#runImmediately without the join
             if (!executor.isSameThread()) {
@@ -221,18 +221,18 @@ public class NetworkEvent extends Event
          * When available, gets the sender for packets that are sent from a client to the server.
          */
         @Nullable
-        public ServerPlayerEntity getSender()
+        public ServerPlayer getSender()
         {
-            INetHandler netHandler = networkManager.getPacketListener();
-            if (netHandler instanceof ServerPlayNetHandler)
+            PacketListener netHandler = networkManager.getPacketListener();
+            if (netHandler instanceof ServerGamePacketListenerImpl)
             {
-                ServerPlayNetHandler netHandlerPlayServer = (ServerPlayNetHandler) netHandler;
+                ServerGamePacketListenerImpl netHandlerPlayServer = (ServerGamePacketListenerImpl) netHandler;
                 return netHandlerPlayServer.player;
             }
             return null;
         }
 
-        public NetworkManager getNetworkManager() {
+        public Connection getNetworkManager() {
             return networkManager;
         }
     }

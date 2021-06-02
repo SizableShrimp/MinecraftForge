@@ -19,8 +19,8 @@
 
 package net.minecraftforge.event.entity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event.HasResult;
@@ -30,7 +30,7 @@ import net.minecraftforge.eventbus.api.Event.HasResult;
  * <b>entityBeingMounted can be null</b>, be sure to check for that.
  * <br>
  * <br>
- * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
+ * This event is {@link Cancelable}.<br>
  * If this event is canceled, the entity does not mount/dismount the other entity.<br>
  * <br>
  * This event does not have a result. {@link HasResult}<br>
@@ -45,11 +45,11 @@ public class EntityMountEvent extends EntityEvent
 
     private final Entity entityMounting;
     private final Entity entityBeingMounted;
-    private final World worldObj;
+    private final Level worldObj;
 
     private final boolean isMounting;
 
-    public EntityMountEvent(Entity entityMounting, Entity entityBeingMounted, World entityWorld, boolean isMounting)
+    public EntityMountEvent(Entity entityMounting, Entity entityBeingMounted, Level entityWorld, boolean isMounting)
     {
         super(entityMounting);
         this.entityMounting = entityMounting;
@@ -78,7 +78,7 @@ public class EntityMountEvent extends EntityEvent
         return entityBeingMounted;
     }
 
-    public World getWorldObj()
+    public Level getWorldObj()
     {
         return worldObj;
     }

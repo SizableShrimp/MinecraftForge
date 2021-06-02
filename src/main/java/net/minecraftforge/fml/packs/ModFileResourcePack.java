@@ -19,11 +19,11 @@
 
 package net.minecraftforge.fml.packs;
 
-import net.minecraft.resources.ResourcePack;
-import net.minecraft.resources.ResourcePackFileNotFoundException;
-import net.minecraft.resources.ResourcePackInfo;
-import net.minecraft.resources.ResourcePackType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.server.packs.AbstractPackResources;
+import net.minecraft.server.packs.ResourcePackFileNotFoundException;
+import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.loading.moddiscovery.ModFile;
 
 import java.io.File;
@@ -40,10 +40,10 @@ import java.util.stream.Collectors;
 
 import com.google.common.base.Joiner;
 
-public class ModFileResourcePack extends ResourcePack
+public class ModFileResourcePack extends AbstractPackResources
 {
     private final ModFile modFile;
-    private ResourcePackInfo packInfo;
+    private Pack packInfo;
 
     public ModFileResourcePack(final ModFile modFile)
     {
@@ -78,7 +78,7 @@ public class ModFileResourcePack extends ResourcePack
 
 
     @Override
-    public Collection<ResourceLocation> getResources(ResourcePackType type, String resourceNamespace, String pathIn, int maxDepth, Predicate<String> filter)
+    public Collection<ResourceLocation> getResources(PackType type, String resourceNamespace, String pathIn, int maxDepth, Predicate<String> filter)
     {
         try
         {
@@ -104,7 +104,7 @@ public class ModFileResourcePack extends ResourcePack
     }
 
     @Override
-    public Set<String> getNamespaces(ResourcePackType type)
+    public Set<String> getNamespaces(PackType type)
     {
         try {
             Path root = modFile.getLocator().findPath(modFile, type.getDirectory()).toAbsolutePath();
@@ -117,9 +117,9 @@ public class ModFileResourcePack extends ResourcePack
         }
         catch (IOException e)
         {
-            if (type == ResourcePackType.SERVER_DATA) //We still have to add the resource namespace if client resources exist, as we load langs (which are in assets) on server
+            if (type == PackType.SERVER_DATA) //We still have to add the resource namespace if client resources exist, as we load langs (which are in assets) on server
             {
-                return this.getNamespaces(ResourcePackType.CLIENT_RESOURCES);
+                return this.getNamespaces(PackType.CLIENT_RESOURCES);
             }
             else
             {
@@ -128,17 +128,17 @@ public class ModFileResourcePack extends ResourcePack
         }
     }
 
-    public InputStream getResource(ResourcePackType type, ResourceLocation location) throws IOException {
+    public InputStream getResource(PackType type, ResourceLocation location) throws IOException {
         if (location.getPath().startsWith("lang/")) {
-            return super.getResource(ResourcePackType.CLIENT_RESOURCES, location);
+            return super.getResource(PackType.CLIENT_RESOURCES, location);
         } else {
             return super.getResource(type, location);
         }
     }
 
-    public boolean hasResource(ResourcePackType type, ResourceLocation location) {
+    public boolean hasResource(PackType type, ResourceLocation location) {
         if (location.getPath().startsWith("lang/")) {
-            return super.hasResource(ResourcePackType.CLIENT_RESOURCES, location);
+            return super.hasResource(PackType.CLIENT_RESOURCES, location);
         } else {
             return super.hasResource(type, location);
         }
@@ -150,11 +150,11 @@ public class ModFileResourcePack extends ResourcePack
 
     }
 
-    <T extends ResourcePackInfo> void setPackInfo(final T packInfo) {
+    <T extends Pack> void setPackInfo(final T packInfo) {
         this.packInfo = packInfo;
     }
 
-    <T extends ResourcePackInfo> T getPackInfo() {
+    <T extends Pack> T getPackInfo() {
         return (T)this.packInfo;
     }
 }

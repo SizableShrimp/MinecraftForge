@@ -22,9 +22,9 @@ package net.minecraftforge.logging;
 import com.google.common.base.Joiner;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.BlockModelShapes;
-import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -49,7 +49,7 @@ public class ModelLoaderErrorMessage extends SimpleMessage
         
         ForgeRegistries.BLOCKS.getValues().stream()
         	.flatMap(block -> block.getStateDefinition().getPossibleStates().stream())
-        	.forEach(state -> reverseBlockMap.put(BlockModelShapes.stateToModelLocation(state), state));
+        	.forEach(state -> reverseBlockMap.put(BlockModelShaper.stateToModelLocation(state), state));
 
         ForgeRegistries.ITEMS.forEach(item ->
         {

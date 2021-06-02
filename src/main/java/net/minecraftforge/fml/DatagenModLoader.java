@@ -20,7 +20,7 @@
 package net.minecraftforge.fml;
 
 import java.util.Collections;
-import net.minecraft.util.registry.Bootstrap;
+import net.minecraft.server.Bootstrap;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;

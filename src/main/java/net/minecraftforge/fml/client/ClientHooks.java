@@ -31,12 +31,12 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.screen.MultiplayerScreen;
-import net.minecraft.client.multiplayer.PlayerController;
-import net.minecraft.util.text.StringTextComponent;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.client.multiplayer.MultiPlayerGameMode;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ExtensionPoint;
@@ -56,14 +56,14 @@ import com.google.common.base.Strings;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.ServerStatusResponse;
-import net.minecraft.resources.ResourcePack;
-import net.minecraft.resources.FallbackResourceManager;
-import net.minecraft.resources.IResourcePack;
-import net.minecraft.resources.SimpleReloadableResourceManager;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.status.ServerStatus;
+import net.minecraft.server.packs.AbstractPackResources;
+import net.minecraft.server.packs.resources.FallbackResourceManager;
+import net.minecraft.server.packs.PackResources;
+import net.minecraft.server.packs.resources.SimpleReloadableResourceManager;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.forgespi.language.IModInfo;
 import net.minecraftforge.fml.packs.ModFileResourcePack;
@@ -77,7 +77,7 @@ public class ClientHooks
     private static final ResourceLocation iconSheet = new ResourceLocation(ForgeVersion.MOD_ID, "textures/gui/icons.png");
     @Nullable
 
-    public static void processForgeListPingData(ServerStatusResponse packet, ServerData target)
+    public static void processForgeListPingData(ServerStatus packet, ServerData target)
     {
         if (packet.getForgeData() != null) {
             final Map<String, String> mods = packet.getForgeData().getRemoteModData();
@@ -135,7 +135,7 @@ public class ClientHooks
 
     }
 
-    public static void drawForgePingInfo(MultiplayerScreen gui, ServerData target, MatrixStack mStack, int x, int y, int width, int relativeMouseX, int relativeMouseY) {
+    public static void drawForgePingInfo(JoinMultiplayerScreen gui, ServerData target, PoseStack mStack, int x, int y, int width, int relativeMouseX, int relativeMouseY) {
         int idx;
         String tooltip;
         if (target.forgeData == null)
@@ -170,12 +170,12 @@ public class ClientHooks
         }
 
         Minecraft.getInstance().getTextureManager().bind(iconSheet);
-        AbstractGui.blit(mStack, x + width - 18, y + 10, 16, 16, 0, idx, 16, 16, 256, 256);
+        GuiComponent.blit(mStack, x + width - 18, y + 10, 16, 16, 0, idx, 16, 16, 256, 256);
 
         if(relativeMouseX > width - 15 && relativeMouseX < width && relativeMouseY > 10 && relativeMouseY < 26) {
             //this is not the most proper way to do it,
             //but works best here and has the least maintenance overhead
-            gui.setToolTip(Arrays.stream(tooltip.split("\n")).map(StringTextComponent::new).collect(Collectors.toList()));
+            gui.setToolTip(Arrays.stream(tooltip.split("\n")).map(TextComponent::new).collect(Collectors.toList()));
         }
     }
 
@@ -190,14 +190,14 @@ public class ClientHooks
         return new File(Minecraft.getInstance().gameDirectory, "saves");
     }
 
-    private static NetworkManager getClientToServerNetworkManager()
+    private static Connection getClientToServerNetworkManager()
     {
         return Minecraft.getInstance().getConnection()!=null ? Minecraft.getInstance().getConnection().getConnection() : null;
     }
 
-    public static void handleClientWorldClosing(ClientWorld world)
+    public static void handleClientWorldClosing(ClientLevel world)
     {
-        NetworkManager client = getClientToServerNetworkManager();
+        Connection client = getClientToServerNetworkManager();
         // ONLY revert a non-local connection
         if (client != null && !client.isMemoryConnection())
         {
@@ -252,18 +252,18 @@ public class ClientHooks
             }
             else
             {
-                List<IResourcePack> resPacks = fallbackResourceManager.fallbacks;
+                List<PackResources> resPacks = fallbackResourceManager.fallbacks;
                 logger.error("    domain {} has {} location{}:",resourceDomain, resPacks.size(), resPacks.size() != 1 ? "s" :"");
-                for (IResourcePack resPack : resPacks)
+                for (PackResources resPack : resPacks)
                 {
                     if (resPack instanceof ModFileResourcePack) {
                         ModFileResourcePack modRP = (ModFileResourcePack) resPack;
                         List<IModInfo> mods = modRP.getModFile().getModInfos();
                         logger.error("      mod(s) {} resources at {}", mods.stream().map(IModInfo::getDisplayName).collect(Collectors.toList()), modRP.getModFile().getFilePath());
                     }
-                    else if (resPack instanceof ResourcePack)
+                    else if (resPack instanceof AbstractPackResources)
                     {
-                        logger.error("      resource pack at path {}", ((ResourcePack)resPack).file.getPath());
+                        logger.error("      resource pack at path {}", ((AbstractPackResources)resPack).file.getPath());
                     }
                     else
                     {
@@ -302,15 +302,15 @@ public class ClientHooks
         logger.error(Strings.repeat("+=", 25));
     }
 
-    public static void firePlayerLogin(PlayerController pc, ClientPlayerEntity player, NetworkManager networkManager) {
+    public static void firePlayerLogin(MultiPlayerGameMode pc, LocalPlayer player, Connection networkManager) {
         MinecraftForge.EVENT_BUS.post(new ClientPlayerNetworkEvent.LoggedInEvent(pc, player, networkManager));
     }
 
-    public static void firePlayerLogout(PlayerController pc, ClientPlayerEntity player) {
+    public static void firePlayerLogout(MultiPlayerGameMode pc, LocalPlayer player) {
         MinecraftForge.EVENT_BUS.post(new ClientPlayerNetworkEvent.LoggedOutEvent(pc, player, player != null ? player.connection != null ? player.connection.getConnection() : null : null));
     }
 
-    public static void firePlayerRespawn(PlayerController pc, ClientPlayerEntity oldPlayer, ClientPlayerEntity newPlayer, NetworkManager networkManager) {
+    public static void firePlayerRespawn(MultiPlayerGameMode pc, LocalPlayer oldPlayer, LocalPlayer newPlayer, Connection networkManager) {
         MinecraftForge.EVENT_BUS.post(new ClientPlayerNetworkEvent.RespawnEvent(pc, oldPlayer, newPlayer, networkManager));
     }
 

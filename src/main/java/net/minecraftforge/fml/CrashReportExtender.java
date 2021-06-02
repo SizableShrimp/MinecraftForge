@@ -21,8 +21,8 @@ package net.minecraftforge.fml;
 
 import cpw.mods.modlauncher.log.TransformingThrowablePatternConverter;
 import joptsimple.internal.Strings;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
+import net.minecraft.CrashReport;
+import net.minecraft.CrashReportCategory;
 import net.minecraftforge.fml.common.ICrashCallable;
 import net.minecraftforge.fml.loading.moddiscovery.ModFileInfo;
 import net.minecraftforge.forgespi.language.IModInfo;

@@ -21,9 +21,9 @@ package net.minecraftforge.fml.network.simple;
 
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fml.network.*;
 import org.apache.commons.lang3.tuple.Pair;
@@ -66,7 +66,7 @@ public class SimpleChannel
     private void networkLoginGather(final NetworkEvent.GatherLoginPayloadsEvent gatherEvent) {
         loginPackets.forEach(packetGenerator->{
             packetGenerator.apply(gatherEvent.isLocal()).forEach(p->{
-                PacketBuffer pb = new PacketBuffer(Unpooled.buffer());
+                FriendlyByteBuf pb = new FriendlyByteBuf(Unpooled.buffer());
                 this.indexedCodec.build(p.getRight(), pb);
                 gatherEvent.add(pb, this.instance.getChannelName(), p.getLeft());
             });
@@ -81,20 +81,20 @@ public class SimpleChannel
         }
     }
 
-    public <MSG> int encodeMessage(MSG message, final PacketBuffer target) {
+    public <MSG> int encodeMessage(MSG message, final FriendlyByteBuf target) {
         return this.indexedCodec.build(message, target);
     }
 
-    public <MSG> IndexedMessageCodec.MessageHandler<MSG> registerMessage(int index, Class<MSG> messageType, BiConsumer<MSG, PacketBuffer> encoder, Function<PacketBuffer, MSG> decoder, BiConsumer<MSG, Supplier<NetworkEvent.Context>> messageConsumer) {
+    public <MSG> IndexedMessageCodec.MessageHandler<MSG> registerMessage(int index, Class<MSG> messageType, BiConsumer<MSG, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, MSG> decoder, BiConsumer<MSG, Supplier<NetworkEvent.Context>> messageConsumer) {
         return registerMessage(index, messageType, encoder, decoder, messageConsumer, Optional.empty());
     }
 
-    public <MSG> IndexedMessageCodec.MessageHandler<MSG> registerMessage(int index, Class<MSG> messageType, BiConsumer<MSG, PacketBuffer> encoder, Function<PacketBuffer, MSG> decoder, BiConsumer<MSG, Supplier<NetworkEvent.Context>> messageConsumer, final Optional<NetworkDirection> networkDirection) {
+    public <MSG> IndexedMessageCodec.MessageHandler<MSG> registerMessage(int index, Class<MSG> messageType, BiConsumer<MSG, FriendlyByteBuf> encoder, Function<FriendlyByteBuf, MSG> decoder, BiConsumer<MSG, Supplier<NetworkEvent.Context>> messageConsumer, final Optional<NetworkDirection> networkDirection) {
         return this.indexedCodec.addCodecIndex(index, messageType, encoder, decoder, messageConsumer, networkDirection);
     }
 
-    private <MSG> Pair<PacketBuffer,Integer> toBuffer(MSG msg) {
-        final PacketBuffer bufIn = new PacketBuffer(Unpooled.buffer());
+    private <MSG> Pair<FriendlyByteBuf,Integer> toBuffer(MSG msg) {
+        final FriendlyByteBuf bufIn = new FriendlyByteBuf(Unpooled.buffer());
         int index = encodeMessage(msg, bufIn);
         return Pair.of(bufIn, index);
     }
@@ -104,7 +104,7 @@ public class SimpleChannel
         sendTo(message, Minecraft.getInstance().getConnection().getConnection(), NetworkDirection.PLAY_TO_SERVER);
     }
 
-    public <MSG> void sendTo(MSG message, NetworkManager manager, NetworkDirection direction)
+    public <MSG> void sendTo(MSG message, Connection manager, NetworkDirection direction)
     {
         manager.send(toVanillaPacket(message, direction));
     }
@@ -124,7 +124,7 @@ public class SimpleChannel
         target.send(toVanillaPacket(message, target.getDirection()));
     }
 
-    public <MSG> IPacket<?> toVanillaPacket(MSG message, NetworkDirection direction)
+    public <MSG> Packet<?> toVanillaPacket(MSG message, NetworkDirection direction)
     {
         return direction.buildPacket(toBuffer(message), instance.getChannelName()).getThis();
     }
@@ -137,12 +137,12 @@ public class SimpleChannel
     /**
      * Returns true if the channel is present in the given connection.
      */
-    public boolean isRemotePresent(NetworkManager manager) {
+    public boolean isRemotePresent(Connection manager) {
         return instance.isRemotePresent(manager);
     }
 
     /**
-     * Build a new MessageBuilder. The type should implement {@link java.util.function.IntSupplier} if it is a login
+     * Build a new MessageBuilder. The type should implement {@link IntSupplier} if it is a login
      * packet.
      * @param type Type of message
      * @param id id in the indexed codec
@@ -154,7 +154,7 @@ public class SimpleChannel
     }
 
     /**
-     * Build a new MessageBuilder. The type should implement {@link java.util.function.IntSupplier} if it is a login
+     * Build a new MessageBuilder. The type should implement {@link IntSupplier} if it is a login
      * packet.
      * @param type Type of message
      * @param id id in the indexed codec
@@ -171,8 +171,8 @@ public class SimpleChannel
         private SimpleChannel channel;
         private Class<MSG> type;
         private int id;
-        private BiConsumer<MSG, PacketBuffer> encoder;
-        private Function<PacketBuffer, MSG> decoder;
+        private BiConsumer<MSG, FriendlyByteBuf> encoder;
+        private Function<FriendlyByteBuf, MSG> decoder;
         private BiConsumer<MSG, Supplier<NetworkEvent.Context>> consumer;
         private Function<MSG, Integer> loginIndexGetter;
         private BiConsumer<MSG, Integer> loginIndexSetter;
@@ -188,12 +188,12 @@ public class SimpleChannel
             return builder;
         }
 
-        public MessageBuilder<MSG> encoder(BiConsumer<MSG, PacketBuffer> encoder) {
+        public MessageBuilder<MSG> encoder(BiConsumer<MSG, FriendlyByteBuf> encoder) {
             this.encoder = encoder;
             return this;
         }
 
-        public MessageBuilder<MSG> decoder(Function<PacketBuffer, MSG> decoder) {
+        public MessageBuilder<MSG> decoder(Function<FriendlyByteBuf, MSG> decoder) {
             this.decoder = decoder;
             return this;
         }

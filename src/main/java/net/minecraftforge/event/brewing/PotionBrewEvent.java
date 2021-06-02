@@ -19,9 +19,9 @@
 
 package net.minecraftforge.event.brewing;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.tileentity.BrewingStandTileEntity;
-import net.minecraft.util.NonNullList;
+import net.minecraft.core.NonNullList;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
@@ -67,7 +67,7 @@ public class PotionBrewEvent extends Event
      * <br>
      * {@link #stacks} contains the itemstack array from the TileEntityBrewer holding all items in Brewer.<br>
      * <br>
-     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
+     * This event is {@link Cancelable}.<br>
      * If the event is not canceled, the vanilla brewing will take place instead of modded brewing.
      * <br>
      * This event does not have a result. {@link HasResult}<br>
@@ -92,7 +92,7 @@ public class PotionBrewEvent extends Event
      * <br>
      * {@link #stacks} contains the itemstack array from the TileEntityBrewer holding all items in Brewer.<br>
      * <br>
-     * This event is not {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
+     * This event is not {@link Cancelable}.<br>
      * <br>
      * This event does not have a result. {@link HasResult}<br>
      * <br>

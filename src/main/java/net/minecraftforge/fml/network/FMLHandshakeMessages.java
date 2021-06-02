@@ -19,8 +19,8 @@
 
 package net.minecraftforge.fml.network;
 
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
 import net.minecraftforge.registries.ForgeRegistry;
@@ -80,7 +80,7 @@ public class FMLHandshakeMessages
             this.registries = registries;
         }
 
-        public static S2CModList decode(PacketBuffer input)
+        public static S2CModList decode(FriendlyByteBuf input)
         {
             List<String> mods = new ArrayList<>();
             int len = input.readVarInt();
@@ -100,7 +100,7 @@ public class FMLHandshakeMessages
             return new S2CModList(mods, channels, registries);
         }
 
-        public void encode(PacketBuffer output)
+        public void encode(FriendlyByteBuf output)
         {
             output.writeVarInt(mods.size());
             mods.forEach(m -> output.writeUtf(m, 0x100));
@@ -148,7 +148,7 @@ public class FMLHandshakeMessages
             this.registries = registries;
         }
 
-        public static C2SModListReply decode(PacketBuffer input)
+        public static C2SModListReply decode(FriendlyByteBuf input)
         {
             List<String> mods = new ArrayList<>();
             int len = input.readVarInt();
@@ -168,7 +168,7 @@ public class FMLHandshakeMessages
             return new C2SModListReply(mods, channels, registries);
         }
 
-        public void encode(PacketBuffer output)
+        public void encode(FriendlyByteBuf output)
         {
             output.writeVarInt(mods.size());
             mods.forEach(m -> output.writeUtf(m, 0x100));
@@ -200,11 +200,11 @@ public class FMLHandshakeMessages
     }
 
     public static class C2SAcknowledge extends LoginIndexedMessage {
-        public void encode(PacketBuffer buf) {
+        public void encode(FriendlyByteBuf buf) {
 
         }
 
-        public static C2SAcknowledge decode(PacketBuffer buf) {
+        public static C2SAcknowledge decode(FriendlyByteBuf buf) {
             return new C2SAcknowledge();
         }
     }
@@ -219,14 +219,14 @@ public class FMLHandshakeMessages
             this.snapshot = snapshot;
         }
 
-        void encode(final PacketBuffer buffer) {
+        void encode(final FriendlyByteBuf buffer) {
             buffer.writeResourceLocation(registryName);
             buffer.writeBoolean(hasSnapshot());
             if (hasSnapshot())
                 buffer.writeBytes(snapshot.getPacketData());
         }
 
-        public static S2CRegistry decode(final PacketBuffer buffer) {
+        public static S2CRegistry decode(final FriendlyByteBuf buffer) {
             ResourceLocation name = buffer.readResourceLocation();
             ForgeRegistry.Snapshot snapshot = null;
             if (buffer.readBoolean())
@@ -258,12 +258,12 @@ public class FMLHandshakeMessages
             this.fileData = configFileData;
         }
 
-        void encode(final PacketBuffer buffer) {
+        void encode(final FriendlyByteBuf buffer) {
             buffer.writeUtf(this.fileName);
             buffer.writeByteArray(this.fileData);
         }
 
-        public static S2CConfigData decode(final PacketBuffer buffer) {
+        public static S2CConfigData decode(final FriendlyByteBuf buffer) {
             return new S2CConfigData(buffer.readUtf(32767), buffer.readByteArray());
         }
 

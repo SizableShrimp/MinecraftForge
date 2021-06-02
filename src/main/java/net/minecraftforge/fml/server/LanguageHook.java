@@ -22,11 +22,11 @@ package net.minecraftforge.fml.server;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.minecraft.resources.IResource;
-import net.minecraft.resources.IResourceManager;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.ForgeI18n;
 import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
@@ -58,18 +58,18 @@ public class LanguageHook
     }
 
     // The below is based on client side net.minecraft.client.resources.Locale code
-    private static void loadLocaleData(final List<IResource> allResources) {
-        allResources.stream().map(IResource::getInputStream).forEach(LanguageHook::loadLocaleData);
+    private static void loadLocaleData(final List<Resource> allResources) {
+        allResources.stream().map(Resource::getInputStream).forEach(LanguageHook::loadLocaleData);
     }
 
     private static void loadLocaleData(final InputStream inputstream) {
         try
         {
             JsonElement jsonelement = GSON.fromJson(new InputStreamReader(inputstream, StandardCharsets.UTF_8), JsonElement.class);
-            JsonObject jsonobject = JSONUtils.convertToJsonObject(jsonelement, "strings");
+            JsonObject jsonobject = GsonHelper.convertToJsonObject(jsonelement, "strings");
 
             jsonobject.entrySet().forEach(entry -> {
-                String s = PATTERN.matcher(JSONUtils.convertToString(entry.getValue(), entry.getKey())).replaceAll("%$1s");
+                String s = PATTERN.matcher(GsonHelper.convertToString(entry.getValue(), entry.getKey())).replaceAll("%$1s");
                 modTable.put(entry.getKey(), s);
             });
         }
@@ -81,7 +81,7 @@ public class LanguageHook
 
     private static void loadLanguage(String langName, MinecraftServer server) {
         String langFile = String.format("lang/%s.json", langName);
-        IResourceManager resourceManager = server.getDataPackRegistries().getResourceManager();
+        ResourceManager resourceManager = server.getDataPackRegistries().getResourceManager();
         resourceManager.getNamespaces().forEach(namespace -> {
             try {
                 ResourceLocation langResource = new ResourceLocation(namespace, langFile);

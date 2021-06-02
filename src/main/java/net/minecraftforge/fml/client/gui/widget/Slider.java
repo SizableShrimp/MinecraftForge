@@ -19,15 +19,15 @@
 
 package net.minecraftforge.fml.client.gui.widget;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.client.gui.widget.button.Button.IPressable;
+import net.minecraft.client.gui.components.Button.OnPress;
 
 /**
  * This class is blatantly stolen from iChunUtils with permission.
@@ -39,7 +39,7 @@ public class Slider extends ExtendedButton
     /** The value of this slider control. */
     public double sliderValue = 1.0F;
 
-    public ITextComponent dispString;
+    public Component dispString;
 
     /** Is this slider control being dragged. */
     public boolean dragging = false;
@@ -52,16 +52,16 @@ public class Slider extends ExtendedButton
     @Nullable
     public ISlider parent = null;
 
-    public ITextComponent suffix;
+    public Component suffix;
 
     public boolean drawString = true;
 
-    public Slider(int xPos, int yPos, int width, int height, ITextComponent prefix, ITextComponent suf, double minVal, double maxVal, double currentVal, boolean showDec, boolean drawStr, IPressable handler)
+    public Slider(int xPos, int yPos, int width, int height, Component prefix, Component suf, double minVal, double maxVal, double currentVal, boolean showDec, boolean drawStr, OnPress handler)
     {
         this(xPos, yPos, width, height, prefix, suf, minVal, maxVal, currentVal, showDec, drawStr, handler, null);
     }
 
-    public Slider(int xPos, int yPos, int width, int height, ITextComponent prefix, ITextComponent suf, double minVal, double maxVal, double currentVal, boolean showDec, boolean drawStr, IPressable handler, @Nullable ISlider par)
+    public Slider(int xPos, int yPos, int width, int height, Component prefix, Component suf, double minVal, double maxVal, double currentVal, boolean showDec, boolean drawStr, OnPress handler, @Nullable ISlider par)
     {
         super(xPos, yPos, width, height, prefix, handler);
         minValue = minVal;
@@ -84,16 +84,16 @@ public class Slider extends ExtendedButton
             precision = 0;
         }
 
-        setMessage(new StringTextComponent("").append(dispString).append(val).append(suffix));
+        setMessage(new TextComponent("").append(dispString).append(val).append(suffix));
 
         drawString = drawStr;
         if(!drawString)
-            setMessage(new StringTextComponent(""));
+            setMessage(new TextComponent(""));
     }
 
-    public Slider(int xPos, int yPos, ITextComponent displayStr, double minVal, double maxVal, double currentVal, IPressable handler, ISlider par)
+    public Slider(int xPos, int yPos, Component displayStr, double minVal, double maxVal, double currentVal, OnPress handler, ISlider par)
     {
-        this(xPos, yPos, 150, 20, displayStr, new StringTextComponent(""), minVal, maxVal, currentVal, true, true, handler, par);
+        this(xPos, yPos, 150, 20, displayStr, new TextComponent(""), minVal, maxVal, currentVal, true, true, handler, par);
     }
 
     /**
@@ -110,7 +110,7 @@ public class Slider extends ExtendedButton
      * Fired when the mouse button is dragged. Equivalent of MouseListener.mouseDragged(MouseEvent e).
      */
     @Override
-    protected void renderBg(MatrixStack mStack, Minecraft par1Minecraft, int par2, int par3)
+    protected void renderBg(PoseStack mStack, Minecraft par1Minecraft, int par2, int par3)
     {
         if (this.visible)
         {
@@ -178,7 +178,7 @@ public class Slider extends ExtendedButton
 
         if(drawString)
         {
-            setMessage(new StringTextComponent("").append(dispString).append(val).append(suffix));
+            setMessage(new TextComponent("").append(dispString).append(val).append(suffix));
         }
 
         if (parent != null)

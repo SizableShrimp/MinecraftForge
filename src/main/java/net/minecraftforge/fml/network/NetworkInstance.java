@@ -21,8 +21,8 @@ package net.minecraftforge.fml.network;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.Connection;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.BusBuilder;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -80,7 +80,7 @@ public class NetworkInstance
         this.networkEventBus.unregister(object);
     }
 
-    boolean dispatch(final NetworkDirection side, final ICustomPacket<?> packet, final NetworkManager manager)
+    boolean dispatch(final NetworkDirection side, final ICustomPacket<?> packet, final Connection manager)
     {
         final NetworkEvent.Context context = new NetworkEvent.Context(manager, side, packet.getIndex());
         this.networkEventBus.post(side.getEvent(packet, () -> context));
@@ -111,7 +111,7 @@ public class NetworkInstance
         this.networkEventBus.post(networkEvent);
     }
 
-    public boolean isRemotePresent(NetworkManager manager) {
+    public boolean isRemotePresent(Connection manager) {
         FMLConnectionData connectionData = NetworkHooks.getConnectionData(manager);
         return connectionData != null && connectionData.getChannels().containsKey(channelName);
     }

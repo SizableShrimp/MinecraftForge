@@ -19,7 +19,7 @@
 
 package net.minecraftforge.fml.network.event;
 
-import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Connection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.NetworkInstance;
@@ -50,7 +50,7 @@ public class EventNetworkChannel
         instance.unregisterObject(object);
     }
 
-    public boolean isRemotePresent(NetworkManager manager) {
+    public boolean isRemotePresent(Connection manager) {
         return instance.isRemotePresent(manager);
     }
 }

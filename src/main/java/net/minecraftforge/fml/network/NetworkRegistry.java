@@ -20,8 +20,8 @@
 package net.minecraftforge.fml.network;
 
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.network.event.EventNetworkChannel;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import org.apache.commons.lang3.tuple.Pair;
@@ -259,7 +259,7 @@ public class NetworkRegistry
 
     /**
      * Retrieve the {@link LoginPayload} list for dispatch during {@link FMLHandshakeHandler#tickLogin(NetworkManager)} handling.
-     * Dispatches {@link net.minecraftforge.fml.network.NetworkEvent.GatherLoginPayloadsEvent} to each {@link NetworkInstance}.
+     * Dispatches {@link NetworkEvent.GatherLoginPayloadsEvent} to each {@link NetworkInstance}.
      *
      * @return The {@link LoginPayload} list
      * @param direction the network direction for the request - only gathers for LOGIN_TO_CLIENT
@@ -314,13 +314,13 @@ public class NetworkRegistry
 
     /**
      * Tracks individual outbound messages for dispatch to clients during login handling. Gathered by dispatching
-     * {@link net.minecraftforge.fml.network.NetworkEvent.GatherLoginPayloadsEvent} during early connection handling.
+     * {@link NetworkEvent.GatherLoginPayloadsEvent} during early connection handling.
      */
     public static class LoginPayload {
         /**
          * The data for sending
          */
-        private final PacketBuffer data;
+        private final FriendlyByteBuf data;
         /**
          * A channel which will receive a {@link NetworkEvent.LoginPayloadEvent} from the {@link FMLLoginWrapper}
          */
@@ -331,13 +331,13 @@ public class NetworkRegistry
          */
         private final String messageContext;
 
-        public LoginPayload(final PacketBuffer buffer, final ResourceLocation channelName, final String messageContext) {
+        public LoginPayload(final FriendlyByteBuf buffer, final ResourceLocation channelName, final String messageContext) {
             this.data = buffer;
             this.channelName = channelName;
             this.messageContext = messageContext;
         }
 
-        public PacketBuffer getData() {
+        public FriendlyByteBuf getData() {
             return data;
         }
 

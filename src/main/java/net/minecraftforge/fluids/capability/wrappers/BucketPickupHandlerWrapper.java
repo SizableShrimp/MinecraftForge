@@ -20,12 +20,12 @@
 package net.minecraftforge.fluids.capability.wrappers;
 
 import javax.annotation.Nonnull;
-import net.minecraft.block.IBucketPickupHandler;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.BucketPickup;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -38,11 +38,11 @@ public class BucketPickupHandlerWrapper implements IFluidHandler
 {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    protected final IBucketPickupHandler bucketPickupHandler;
-    protected final World world;
+    protected final BucketPickup bucketPickupHandler;
+    protected final Level world;
     protected final BlockPos blockPos;
 
-    public BucketPickupHandlerWrapper(IBucketPickupHandler bucketPickupHandler, World world, BlockPos blockPos)
+    public BucketPickupHandlerWrapper(BucketPickup bucketPickupHandler, Level world, BlockPos blockPos)
     {
         this.bucketPickupHandler = bucketPickupHandler;
         this.world = world;

@@ -26,8 +26,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSyntaxException;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.ModList;
 import org.apache.commons.lang3.tuple.Pair;
@@ -85,17 +85,17 @@ public class FMLStatusPing {
     public static class Serializer {
         public static FMLStatusPing deserialize(JsonObject forgeData, JsonDeserializationContext ctx) {
             try {
-                final Map<ResourceLocation, Pair<String, Boolean>> channels = StreamSupport.stream(JSONUtils.getAsJsonArray(forgeData, "channels").spliterator(), false).
+                final Map<ResourceLocation, Pair<String, Boolean>> channels = StreamSupport.stream(GsonHelper.getAsJsonArray(forgeData, "channels").spliterator(), false).
                         map(JsonElement::getAsJsonObject).
-                        collect(Collectors.toMap(jo -> new ResourceLocation(JSONUtils.getAsString(jo, "res")),
-                                jo -> Pair.of(JSONUtils.getAsString(jo, "version"), JSONUtils.getAsBoolean(jo, "required")))
+                        collect(Collectors.toMap(jo -> new ResourceLocation(GsonHelper.getAsString(jo, "res")),
+                                jo -> Pair.of(GsonHelper.getAsString(jo, "version"), GsonHelper.getAsBoolean(jo, "required")))
                         );
 
-                final Map<String, String> mods = StreamSupport.stream(JSONUtils.getAsJsonArray(forgeData, "mods").spliterator(), false).
+                final Map<String, String> mods = StreamSupport.stream(GsonHelper.getAsJsonArray(forgeData, "mods").spliterator(), false).
                         map(JsonElement::getAsJsonObject).
-                        collect(Collectors.toMap(jo -> JSONUtils.getAsString(jo, "modId"), jo->JSONUtils.getAsString(jo, "modmarker")));
+                        collect(Collectors.toMap(jo -> GsonHelper.getAsString(jo, "modId"), jo->GsonHelper.getAsString(jo, "modmarker")));
 
-                final int remoteFMLVersion = JSONUtils.getAsInt(forgeData, "fmlNetworkVersion");
+                final int remoteFMLVersion = GsonHelper.getAsInt(forgeData, "fmlNetworkVersion");
                 return new FMLStatusPing(channels, mods, remoteFMLVersion);
             } catch (JsonSyntaxException e) {
                 LOGGER.debug(NETWORK, "Encountered an error parsing status ping data", e);

@@ -20,23 +20,23 @@
 package net.minecraftforge.debug.fluid;
 
 import net.minecraft.block.*;
-import net.minecraft.block.material.Material;
-import net.minecraft.fluid.FluidState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.item.*;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.fluids.DispenseFluidContainer;
 import org.apache.commons.lang3.Validate;
 
-import net.minecraft.fluid.FlowingFluid;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.FluidStack;
@@ -48,7 +48,20 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 @Mod(NewFluidTest.MODID)
 public class NewFluidTest
@@ -77,19 +90,19 @@ public class NewFluidTest
             new ForgeFlowingFluid.Flowing(makeProperties())
     );
 
-    public static RegistryObject<FlowingFluidBlock> test_fluid_block = BLOCKS.register("test_fluid_block", () ->
-            new FlowingFluidBlock(test_fluid, Block.Properties.of(net.minecraft.block.material.Material.WATER).noCollission().strength(100.0F).noDrops())
+    public static RegistryObject<LiquidBlock> test_fluid_block = BLOCKS.register("test_fluid_block", () ->
+            new LiquidBlock(test_fluid, Properties.of(Material.WATER).noCollission().strength(100.0F).noDrops())
     );
     public static RegistryObject<Item> test_fluid_bucket = ITEMS.register("test_fluid_bucket", () ->
-            new BucketItem(test_fluid, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(ItemGroup.TAB_MISC))
+            new BucketItem(test_fluid, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(CreativeModeTab.TAB_MISC))
     );
 
     // WARNING: this doesn't allow "any fluid", only the fluid from this test mod!
     public static RegistryObject<Block> fluidloggable_block = BLOCKS.register("fluidloggable_block", () ->
-            new FluidloggableBlock(Block.Properties.of(Material.WOOD).noCollission().strength(100.0F).noDrops())
+            new FluidloggableBlock(Properties.of(Material.WOOD).noCollission().strength(100.0F).noDrops())
     );
     public static RegistryObject<Item> fluidloggable_blockitem = ITEMS.register("fluidloggable_block", () ->
-            new BlockItem(fluidloggable_block.get(), new Item.Properties().tab(ItemGroup.TAB_MISC))
+            new BlockItem(fluidloggable_block.get(), new Item.Properties().tab(CreativeModeTab.TAB_MISC))
     );
 
     public NewFluidTest()
@@ -115,7 +128,7 @@ public class NewFluidTest
     }
 
     // WARNING: this doesn't allow "any fluid", only the fluid from this test mod!
-    private static class FluidloggableBlock extends Block implements IWaterLoggable
+    private static class FluidloggableBlock extends Block implements SimpleWaterloggedBlock
     {
         public static final BooleanProperty FLUIDLOGGED = BooleanProperty.create("fluidlogged");
 
@@ -126,18 +139,18 @@ public class NewFluidTest
         }
 
         @Override
-        protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
+        protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
         {
             builder.add(FLUIDLOGGED);
         }
 
         @Override
-        public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+        public boolean canPlaceLiquid(BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
             return !state.getValue(FLUIDLOGGED) && fluidIn == test_fluid.get();
         }
 
         @Override
-        public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
+        public boolean placeLiquid(LevelAccessor worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
             if (canPlaceLiquid(worldIn, pos, state, fluidStateIn.getType())) {
                 if (!worldIn.isClientSide()) {
                     worldIn.setBlock(pos, state.setValue(FLUIDLOGGED, true), 3);
@@ -151,7 +164,7 @@ public class NewFluidTest
         }
 
         @Override
-        public Fluid takeLiquid(IWorld worldIn, BlockPos pos, BlockState state) {
+        public Fluid takeLiquid(LevelAccessor worldIn, BlockPos pos, BlockState state) {
             if (state.getValue(FLUIDLOGGED)) {
                 worldIn.setBlock(pos, state.setValue(FLUIDLOGGED, false), 3);
                 return test_fluid.get();

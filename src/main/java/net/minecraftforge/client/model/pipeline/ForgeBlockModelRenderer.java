@@ -22,21 +22,21 @@ package net.minecraftforge.client.model.pipeline;
 import java.util.List;
 import java.util.Random;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.BlockModelRenderer;
-import net.minecraft.client.renderer.model.BakedQuad;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockDisplayReader;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.renderer.block.ModelBlockRenderer;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.color.block.BlockColors;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraftforge.client.model.data.IModelData;
 import net.minecraftforge.common.ForgeConfig;
 
-public class ForgeBlockModelRenderer extends BlockModelRenderer
+public class ForgeBlockModelRenderer extends ModelBlockRenderer
 {
     private final ThreadLocal<VertexLighterFlat> lighterFlat;
     private final ThreadLocal<VertexLighterSmoothAo> lighterSmooth;
@@ -51,7 +51,7 @@ public class ForgeBlockModelRenderer extends BlockModelRenderer
     }
 
     @Override
-    public boolean renderModelFlat(IBlockDisplayReader world, IBakedModel model, BlockState state, BlockPos pos, MatrixStack matrixStack, IVertexBuilder buffer, boolean checkSides, Random rand, long seed, int combinedOverlayIn, IModelData modelData)
+    public boolean renderModelFlat(BlockAndTintGetter world, BakedModel model, BlockState state, BlockPos pos, PoseStack matrixStack, VertexConsumer buffer, boolean checkSides, Random rand, long seed, int combinedOverlayIn, IModelData modelData)
     {
         if(ForgeConfig.CLIENT.experimentalForgeLightPipelineEnabled.get())
         {
@@ -71,7 +71,7 @@ public class ForgeBlockModelRenderer extends BlockModelRenderer
     }
 
     @Override
-    public boolean renderModelSmooth(IBlockDisplayReader world, IBakedModel model, BlockState state, BlockPos pos, MatrixStack matrixStack, IVertexBuilder buffer, boolean checkSides, Random rand, long seed, int combinedOverlayIn, IModelData modelData)
+    public boolean renderModelSmooth(BlockAndTintGetter world, BakedModel model, BlockState state, BlockPos pos, PoseStack matrixStack, VertexConsumer buffer, boolean checkSides, Random rand, long seed, int combinedOverlayIn, IModelData modelData)
     {
         if(ForgeConfig.CLIENT.experimentalForgeLightPipelineEnabled.get())
         {
@@ -90,7 +90,7 @@ public class ForgeBlockModelRenderer extends BlockModelRenderer
         }
     }
 
-    public static boolean render(VertexLighterFlat lighter, IBlockDisplayReader world, IBakedModel model, BlockState state, BlockPos pos, MatrixStack matrixStack, boolean checkSides, Random rand, long seed, IModelData modelData)
+    public static boolean render(VertexLighterFlat lighter, BlockAndTintGetter world, BakedModel model, BlockState state, BlockPos pos, PoseStack matrixStack, boolean checkSides, Random rand, long seed, IModelData modelData)
     {
         lighter.setWorld(world);
         lighter.setState(state);

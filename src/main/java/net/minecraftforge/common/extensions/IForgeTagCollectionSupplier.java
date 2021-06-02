@@ -20,8 +20,8 @@
 package net.minecraftforge.common.extensions;
 
 import java.util.Map;
-import net.minecraft.tags.ITagCollection;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.tags.TagCollection;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeTagHandler;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -33,7 +33,7 @@ public interface IForgeTagCollectionSupplier
      *
      * @apiNote Prefer using one of the getCustomTypeCollection methods
      */
-    default Map<ResourceLocation, ITagCollection<?>> getCustomTagTypes()
+    default Map<ResourceLocation, TagCollection<?>> getCustomTagTypes()
     {
         return ForgeTagHandler.getCustomTagTypes();
     }
@@ -43,7 +43,7 @@ public interface IForgeTagCollectionSupplier
      * @param regName Name of the forge registry
      * @return The tag collection
      */
-    default ITagCollection<?> getCustomTypeCollection(ResourceLocation regName)
+    default TagCollection<?> getCustomTypeCollection(ResourceLocation regName)
     {
         if (!ForgeTagHandler.getCustomTagTypeNames().contains(regName)) throw new IllegalArgumentException("Registry " + regName + ", does not support custom tag types");
         return getCustomTagTypes().get(regName);
@@ -54,8 +54,8 @@ public interface IForgeTagCollectionSupplier
      * @param reg Forge registry
      * @return The tag collection
      */
-    default <T extends IForgeRegistryEntry<T>> ITagCollection<T> getCustomTypeCollection(IForgeRegistry<T> reg)
+    default <T extends IForgeRegistryEntry<T>> TagCollection<T> getCustomTypeCollection(IForgeRegistry<T> reg)
     {
-        return (ITagCollection<T>) getCustomTypeCollection(reg.getRegistryName());
+        return (TagCollection<T>) getCustomTypeCollection(reg.getRegistryName());
     }
 }

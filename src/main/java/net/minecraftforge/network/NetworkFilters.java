@@ -21,7 +21,7 @@ package net.minecraftforge.network;
 
 import java.util.Map;
 
-import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Connection;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,7 +38,7 @@ public class NetworkFilters
             "forge:forge_fixes", new ForgeConnectionNetworkFilter()
     );
 
-    public static void injectIfNecessary(NetworkManager manager)
+    public static void injectIfNecessary(Connection manager)
     {
         instances.forEach((key, filter) -> {
             if (filter.isNecessary(manager))

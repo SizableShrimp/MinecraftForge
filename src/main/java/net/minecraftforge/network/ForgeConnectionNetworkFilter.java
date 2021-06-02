@@ -22,12 +22,12 @@ package net.minecraftforge.network;
 import java.util.List;
 
 import io.netty.channel.ChannelHandler;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.PacketDirection;
-import net.minecraft.network.ProtocolType;
-import net.minecraft.network.play.server.STagsListPacket;
-import net.minecraft.network.play.server.SUpdateRecipesPacket;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.PacketFlow;
+import net.minecraft.network.ConnectionProtocol;
+import net.minecraft.network.protocol.game.ClientboundUpdateTagsPacket;
+import net.minecraft.network.protocol.game.ClientboundUpdateRecipesPacket;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import com.google.common.collect.ImmutableMap;
@@ -43,23 +43,23 @@ public class ForgeConnectionNetworkFilter extends VanillaPacketFilter
     {
         super(
                 ImmutableMap.of(
-                        SUpdateRecipesPacket.class, ForgeConnectionNetworkFilter::splitPacket,
-                        STagsListPacket.class, ForgeConnectionNetworkFilter::splitPacket
+                        ClientboundUpdateRecipesPacket.class, ForgeConnectionNetworkFilter::splitPacket,
+                        ClientboundUpdateTagsPacket.class, ForgeConnectionNetworkFilter::splitPacket
                 )
         );
     }
 
     @Override
-    protected boolean isNecessary(NetworkManager manager)
+    protected boolean isNecessary(Connection manager)
     {
         // not needed on local connections, because packets are not encoded to bytes there
         return !manager.isMemoryConnection() && !VanillaPacketSplitter.isRemoteCompatible(manager);
     }
 
-    private static void splitPacket(IPacket<?> packet, List<? super IPacket<?>> out)
+    private static void splitPacket(Packet<?> packet, List<? super Packet<?>> out)
     {
         VanillaPacketSplitter.appendPackets(
-                ProtocolType.PLAY, PacketDirection.CLIENTBOUND, packet, out
+                ConnectionProtocol.PLAY, PacketFlow.CLIENTBOUND, packet, out
         );
     }
 

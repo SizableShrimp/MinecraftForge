@@ -29,26 +29,26 @@ import java.util.stream.Collectors;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-import net.minecraft.tags.ITagCollection;
-import net.minecraft.tags.ITagCollectionSupplier;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.tags.TagCollection;
+import net.minecraft.tags.TagContainer;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.fml.common.thread.EffectiveSide;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import io.netty.buffer.Unpooled;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.handshake.client.CHandshakePacket;
-import net.minecraft.network.login.ServerLoginNetHandler;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.Connection;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.handshake.ClientIntentionPacket;
+import net.minecraft.server.network.ServerLoginPacketListenerImpl;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.fml.config.ConfigTracker;
@@ -64,7 +64,7 @@ public class NetworkHooks
         return ip.contains("\0") ? Objects.equals(ip.split("\0")[1], FMLNetworkConstants.NETVERSION) ? FMLNetworkConstants.NETVERSION : ip.split("\0")[1] : FMLNetworkConstants.NOVERSION;
     }
 
-    public static ConnectionType getConnectionType(final Supplier<NetworkManager> connection)
+    public static ConnectionType getConnectionType(final Supplier<Connection> connection)
     {
         return getConnectionType(connection.get().channel());
     }
@@ -79,44 +79,44 @@ public class NetworkHooks
         return ConnectionType.forVersionFlag(channel.attr(FMLNetworkConstants.FML_NETVERSION).get());
     }
 
-    public static IPacket<?> getEntitySpawningPacket(Entity entity)
+    public static Packet<?> getEntitySpawningPacket(Entity entity)
     {
         return FMLNetworkConstants.playChannel.toVanillaPacket(new FMLPlayMessages.SpawnEntity(entity), NetworkDirection.PLAY_TO_CLIENT);
     }
 
-    public static boolean onCustomPayload(final ICustomPacket<?> packet, final NetworkManager manager) {
+    public static boolean onCustomPayload(final ICustomPacket<?> packet, final Connection manager) {
         return NetworkRegistry.findTarget(packet.getName()).
                 filter(ni->validateSideForProcessing(packet, ni, manager)).
                 map(ni->ni.dispatch(packet.getDirection(), packet, manager)).orElse(Boolean.FALSE);
     }
 
-    private static boolean validateSideForProcessing(final ICustomPacket<?> packet, final NetworkInstance ni, final NetworkManager manager) {
+    private static boolean validateSideForProcessing(final ICustomPacket<?> packet, final NetworkInstance ni, final Connection manager) {
         if (packet.getDirection().getReceptionSide() != EffectiveSide.get()) {
-            manager.disconnect(new StringTextComponent("Illegal packet received, terminating connection"));
+            manager.disconnect(new TextComponent("Illegal packet received, terminating connection"));
             return false;
         }
         return true;
     }
 
-    public static void validatePacketDirection(final NetworkDirection packetDirection, final Optional<NetworkDirection> expectedDirection, final NetworkManager connection) {
+    public static void validatePacketDirection(final NetworkDirection packetDirection, final Optional<NetworkDirection> expectedDirection, final Connection connection) {
         if (packetDirection != expectedDirection.orElse(packetDirection)) {
-            connection.disconnect(new StringTextComponent("Illegal packet received, terminating connection"));
+            connection.disconnect(new TextComponent("Illegal packet received, terminating connection"));
             throw new IllegalStateException("Invalid packet received, aborting connection");
         }
     }
-    public static void registerServerLoginChannel(NetworkManager manager, CHandshakePacket packet)
+    public static void registerServerLoginChannel(Connection manager, ClientIntentionPacket packet)
     {
         manager.channel().attr(FMLNetworkConstants.FML_NETVERSION).set(packet.getFMLVersion());
         FMLHandshakeHandler.registerHandshake(manager, NetworkDirection.LOGIN_TO_CLIENT);
     }
 
-    public synchronized static void registerClientLoginChannel(NetworkManager manager)
+    public synchronized static void registerClientLoginChannel(Connection manager)
     {
         manager.channel().attr(FMLNetworkConstants.FML_NETVERSION).set(FMLNetworkConstants.NOVERSION);
         FMLHandshakeHandler.registerHandshake(manager, NetworkDirection.LOGIN_TO_SERVER);
     }
 
-    public synchronized static void sendMCRegistryPackets(NetworkManager manager, String direction) {
+    public synchronized static void sendMCRegistryPackets(Connection manager, String direction) {
         final Set<ResourceLocation> resourceLocations = NetworkRegistry.buildChannelVersions().keySet().stream().
                 filter(rl -> !Objects.equals(rl.getNamespace(), "minecraft")).
                 collect(Collectors.toSet());
@@ -133,13 +133,13 @@ public class NetworkHooks
         FMLNetworkConstants.playChannel.sendTo(new FMLPlayMessages.DimensionInfoMessage(player.dimension), manager, NetworkDirection.PLAY_TO_CLIENT);
     }*/
 
-    public static boolean isVanillaConnection(NetworkManager manager)
+    public static boolean isVanillaConnection(Connection manager)
     {
         if (manager == null || manager.channel() == null) throw new NullPointerException("ARGH! Network Manager is null (" + manager != null ? "CHANNEL" : "MANAGER"+")" );
         return getConnectionType(() -> manager) == ConnectionType.VANILLA;
     }
 
-    public static void handleClientLoginSuccess(NetworkManager manager) {
+    public static void handleClientLoginSuccess(Connection manager) {
         if (isVanillaConnection(manager)) {
             LOGGER.info("Connected to a vanilla server. Catching up missing behaviour.");
             ConfigTracker.INSTANCE.loadDefaultServerConfigs();
@@ -148,7 +148,7 @@ public class NetworkHooks
         }
     }
 
-    public static boolean tickNegotiation(ServerLoginNetHandler netHandlerLoginServer, NetworkManager networkManager, ServerPlayerEntity player)
+    public static boolean tickNegotiation(ServerLoginPacketListenerImpl netHandlerLoginServer, Connection networkManager, ServerPlayer player)
     {
         return FMLHandshakeHandler.tickLogin(networkManager);
     }
@@ -166,7 +166,7 @@ public class NetworkHooks
      * @param player The player to open the GUI for
      * @param containerSupplier A supplier of container properties including the registry name of the container
      */
-    public static void openGui(ServerPlayerEntity player, INamedContainerProvider containerSupplier)
+    public static void openGui(ServerPlayer player, MenuProvider containerSupplier)
     {
         openGui(player, containerSupplier, buf -> {});
     }
@@ -185,7 +185,7 @@ public class NetworkHooks
      * @param containerSupplier A supplier of container properties including the registry name of the container
      * @param pos A block pos, which will be encoded into the auxillary data for this request
      */
-    public static void openGui(ServerPlayerEntity player, INamedContainerProvider containerSupplier, BlockPos pos)
+    public static void openGui(ServerPlayer player, MenuProvider containerSupplier, BlockPos pos)
     {
         openGui(player, containerSupplier, buf -> buf.writeBlockPos(pos));
     }
@@ -204,25 +204,25 @@ public class NetworkHooks
      * @param containerSupplier A supplier of container properties including the registry name of the container
      * @param extraDataWriter Consumer to write any additional data the GUI needs
      */
-    public static void openGui(ServerPlayerEntity player, INamedContainerProvider containerSupplier, Consumer<PacketBuffer> extraDataWriter)
+    public static void openGui(ServerPlayer player, MenuProvider containerSupplier, Consumer<FriendlyByteBuf> extraDataWriter)
     {
         if (player.level.isClientSide) return;
         player.doCloseContainer();
         player.nextContainerCounter();
         int openContainerId = player.containerCounter;
-        PacketBuffer extraData = new PacketBuffer(Unpooled.buffer());
+        FriendlyByteBuf extraData = new FriendlyByteBuf(Unpooled.buffer());
         extraDataWriter.accept(extraData);
         extraData.readerIndex(0); // reset to beginning in case modders read for whatever reason
 
-        PacketBuffer output = new PacketBuffer(Unpooled.buffer());
+        FriendlyByteBuf output = new FriendlyByteBuf(Unpooled.buffer());
         output.writeVarInt(extraData.readableBytes());
         output.writeBytes(extraData);
 
         if (output.readableBytes() > 32600 || output.readableBytes() < 1) {
             throw new IllegalArgumentException("Invalid PacketBuffer for openGui, found "+ output.readableBytes()+ " bytes");
         }
-        Container c = containerSupplier.createMenu(openContainerId, player.inventory, player);
-        ContainerType<?> type = c.getType();
+        AbstractContainerMenu c = containerSupplier.createMenu(openContainerId, player.inventory, player);
+        MenuType<?> type = c.getType();
         FMLPlayMessages.OpenContainer msg = new FMLPlayMessages.OpenContainer(type, openContainerId, containerSupplier.getDisplayName(), output);
         FMLNetworkConstants.playChannel.sendTo(msg, player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
 
@@ -235,9 +235,9 @@ public class NetworkHooks
      * Syncs the custom tag types attached to a {@link ITagCollectionSupplier} to all connected players.
      * @param tagCollectionSupplier The tag collection supplier containing the custom tags
      */
-    public static void syncCustomTagTypes(ITagCollectionSupplier tagCollectionSupplier)
+    public static void syncCustomTagTypes(TagContainer tagCollectionSupplier)
     {
-        Map<ResourceLocation, ITagCollection<?>> customTagTypes = tagCollectionSupplier.getCustomTagTypes();
+        Map<ResourceLocation, TagCollection<?>> customTagTypes = tagCollectionSupplier.getCustomTagTypes();
         if (!customTagTypes.isEmpty())
         {
             FMLNetworkConstants.playChannel.send(PacketDistributor.ALL.noArg(), new FMLPlayMessages.SyncCustomTagTypes(customTagTypes));
@@ -249,9 +249,9 @@ public class NetworkHooks
      * @param player                The player to sync the custom tags to.
      * @param tagCollectionSupplier The tag collection supplier containing the custom tags
      */
-    public static void syncCustomTagTypes(ServerPlayerEntity player, ITagCollectionSupplier tagCollectionSupplier)
+    public static void syncCustomTagTypes(ServerPlayer player, TagContainer tagCollectionSupplier)
     {
-        Map<ResourceLocation, ITagCollection<?>> customTagTypes = tagCollectionSupplier.getCustomTagTypes();
+        Map<ResourceLocation, TagCollection<?>> customTagTypes = tagCollectionSupplier.getCustomTagTypes();
         if (!customTagTypes.isEmpty())
         {
             FMLNetworkConstants.playChannel.sendTo(new FMLPlayMessages.SyncCustomTagTypes(customTagTypes), player.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
@@ -259,7 +259,7 @@ public class NetworkHooks
     }
 
     @Nullable
-    public static FMLConnectionData getConnectionData(NetworkManager mgr)
+    public static FMLConnectionData getConnectionData(Connection mgr)
     {
         return mgr.channel().attr(FMLNetworkConstants.FML_CONNECTION_DATA).get();
     }

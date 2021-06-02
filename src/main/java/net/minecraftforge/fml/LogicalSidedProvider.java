@@ -21,7 +21,7 @@ package net.minecraftforge.fml;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -31,7 +31,7 @@ public enum LogicalSidedProvider
 {
     WORKQUEUE((c)->c.get(), (s)->s.get()),
     INSTANCE((c)->c.get(), (s)->s.get()),
-    CLIENTWORLD((c)-> Optional.<World>of(c.get().level), (s)->Optional.<World>empty())
+    CLIENTWORLD((c)-> Optional.<Level>of(c.get().level), (s)->Optional.<Level>empty())
     ;
     private static Supplier<Minecraft> client;
     private static Supplier<MinecraftServer> server;

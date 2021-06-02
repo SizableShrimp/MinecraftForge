@@ -19,16 +19,16 @@
 
 package net.minecraftforge.fml.client.registry;
 
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.lang3.ArrayUtils;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -43,10 +43,10 @@ public class ClientRegistry
      * Call this during {@link net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent}.
      * This method is safe to call during parallel mod loading.
      */
-    public static synchronized <T extends TileEntity> void bindTileEntityRenderer(TileEntityType<T> tileEntityType,
-            Function<? super TileEntityRendererDispatcher, ? extends TileEntityRenderer<? super T>> rendererFactory)
+    public static synchronized <T extends BlockEntity> void bindTileEntityRenderer(BlockEntityType<T> tileEntityType,
+            Function<? super BlockEntityRenderDispatcher, ? extends BlockEntityRenderer<? super T>> rendererFactory)
     {
-        TileEntityRendererDispatcher.instance.setSpecialRendererInternal(tileEntityType, rendererFactory.apply(TileEntityRendererDispatcher.instance));
+        BlockEntityRenderDispatcher.instance.setSpecialRendererInternal(tileEntityType, rendererFactory.apply(BlockEntityRenderDispatcher.instance));
     }
 
     /**
@@ -54,7 +54,7 @@ public class ClientRegistry
      * Call this during {@link net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent}.
      * This method is safe to call during parallel mod loading.
      */
-    public static synchronized void registerKeyBinding(KeyBinding key)
+    public static synchronized void registerKeyBinding(KeyMapping key)
     {
         Minecraft.getInstance().options.keyMappings = ArrayUtils.add(Minecraft.getInstance().options.keyMappings, key);
     }

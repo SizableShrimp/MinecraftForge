@@ -19,7 +19,7 @@
 
 package net.minecraftforge.event.entity;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event.HasResult;
 

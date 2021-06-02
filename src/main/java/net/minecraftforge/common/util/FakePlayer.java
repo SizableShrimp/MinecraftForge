@@ -24,39 +24,39 @@ import javax.annotation.Nullable;
 import com.mojang.authlib.GameProfile;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.play.client.CClientSettingsPacket;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.protocol.game.ServerboundClientInformationPacket;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.management.PlayerInteractionManager;
+import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.stats.Stat;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
 
 import java.util.UUID;
 
 //Preliminary, simple Fake Player class
-public class FakePlayer extends ServerPlayerEntity
+public class FakePlayer extends ServerPlayer
 {
-    public FakePlayer(ServerWorld world, GameProfile name)
+    public FakePlayer(ServerLevel world, GameProfile name)
     {
-        super(world.getServer(), world, name, new PlayerInteractionManager(world));
+        super(world.getServer(), world, name, new ServerPlayerGameMode(world));
     }
 
-    @Override public Vector3d position(){ return new Vector3d(0, 0, 0); }
+    @Override public Vec3 position(){ return new Vec3(0, 0, 0); }
     @Override public BlockPos blockPosition(){ return BlockPos.ZERO; }
-    @Override public void displayClientMessage(ITextComponent chatComponent, boolean actionBar){}
-    @Override public void sendMessage(ITextComponent component, UUID senderUUID) {}
+    @Override public void displayClientMessage(Component chatComponent, boolean actionBar){}
+    @Override public void sendMessage(Component component, UUID senderUUID) {}
     @Override public void awardStat(Stat par1StatBase, int par2){}
     //@Override public void openGui(Object mod, int modGuiId, World world, int x, int y, int z){}
     @Override public boolean isInvulnerableTo(DamageSource source){ return true; }
-    @Override public boolean canHarmPlayer(PlayerEntity player){ return false; }
+    @Override public boolean canHarmPlayer(Player player){ return false; }
     @Override public void die(DamageSource source){ return; }
     @Override public void tick(){ return; }
-    @Override public void updateOptions(CClientSettingsPacket pkt){ return; }
+    @Override public void updateOptions(ServerboundClientInformationPacket pkt){ return; }
     @Override @Nullable public MinecraftServer getServer() { return ServerLifecycleHooks.getCurrentServer(); }
 }

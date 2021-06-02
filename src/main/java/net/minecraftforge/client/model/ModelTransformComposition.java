@@ -20,24 +20,24 @@
 package net.minecraftforge.client.model;
 
 import com.google.common.base.Objects;
-import net.minecraft.util.math.vector.TransformationMatrix;
-import net.minecraft.client.renderer.model.IModelTransform;
+import com.mojang.math.Transformation;
+import net.minecraft.client.resources.model.ModelState;
 
 /**
  * An {@link IModelTransform} that combines the transforms from two child {@link IModelTransform}.
  */
-public class ModelTransformComposition implements IModelTransform
+public class ModelTransformComposition implements ModelState
 {
-    private final IModelTransform first;
-    private final IModelTransform second;
+    private final ModelState first;
+    private final ModelState second;
     private final boolean uvLock;
 
-    public ModelTransformComposition(IModelTransform first, IModelTransform second)
+    public ModelTransformComposition(ModelState first, ModelState second)
     {
         this(first, second, false);
     }
 
-    public ModelTransformComposition(IModelTransform first, IModelTransform second, boolean uvLock)
+    public ModelTransformComposition(ModelState first, ModelState second, boolean uvLock)
     {
         this.first = first;
         this.second = second;
@@ -51,13 +51,13 @@ public class ModelTransformComposition implements IModelTransform
     }
 
     @Override
-    public TransformationMatrix getRotation()
+    public Transformation getRotation()
     {
         return first.getRotation().compose(second.getRotation());
     }
 
     @Override
-    public TransformationMatrix getPartTransformation(Object part)
+    public Transformation getPartTransformation(Object part)
     {
         return first.getPartTransformation(part).compose(second.getPartTransformation(part));
     }

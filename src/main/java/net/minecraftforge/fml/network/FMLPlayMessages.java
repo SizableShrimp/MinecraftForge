@@ -27,30 +27,30 @@ import io.netty.buffer.Unpooled;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.IHasContainer;
-import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tags.ITag;
-import net.minecraft.tags.ITagCollection;
-import net.minecraft.tags.ITagCollectionSupplier;
-import net.minecraft.tags.TagRegistryManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagCollection;
+import net.minecraft.tags.TagContainer;
+import net.minecraft.tags.StaticTags;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeTagHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.fml.LogicalSidedProvider;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 import java.util.Optional;
@@ -80,7 +80,7 @@ public class FMLPlayMessages
         private final double posX, posY, posZ;
         private final byte pitch, yaw, headYaw;
         private final int velX, velY, velZ;
-        private final PacketBuffer buf;
+        private final FriendlyByteBuf buf;
 
         SpawnEntity(Entity e)
         {
@@ -91,13 +91,13 @@ public class FMLPlayMessages
             this.posX = e.getX();
             this.posY = e.getY();
             this.posZ = e.getZ();
-            this.pitch = (byte) MathHelper.floor(e.xRot * 256.0F / 360.0F);
-            this.yaw = (byte) MathHelper.floor(e.yRot * 256.0F / 360.0F);
+            this.pitch = (byte) Mth.floor(e.xRot * 256.0F / 360.0F);
+            this.yaw = (byte) Mth.floor(e.yRot * 256.0F / 360.0F);
             this.headYaw = (byte) (e.getYHeadRot() * 256.0F / 360.0F);
-            Vector3d vec3d = e.getDeltaMovement();
-            double d1 = MathHelper.clamp(vec3d.x, -3.9D, 3.9D);
-            double d2 = MathHelper.clamp(vec3d.y, -3.9D, 3.9D);
-            double d3 = MathHelper.clamp(vec3d.z, -3.9D, 3.9D);
+            Vec3 vec3d = e.getDeltaMovement();
+            double d1 = Mth.clamp(vec3d.x, -3.9D, 3.9D);
+            double d2 = Mth.clamp(vec3d.y, -3.9D, 3.9D);
+            double d3 = Mth.clamp(vec3d.z, -3.9D, 3.9D);
             this.velX = (int)(d1 * 8000.0D);
             this.velY = (int)(d2 * 8000.0D);
             this.velZ = (int)(d3 * 8000.0D);
@@ -105,7 +105,7 @@ public class FMLPlayMessages
         }
 
         private SpawnEntity(int typeId, int entityId, UUID uuid, double posX, double posY, double posZ,
-                byte pitch, byte yaw, byte headYaw, int velX, int velY, int velZ, PacketBuffer buf)
+                byte pitch, byte yaw, byte headYaw, int velX, int velY, int velZ, FriendlyByteBuf buf)
         {
             this.entity = null;
             this.typeId = typeId;
@@ -123,7 +123,7 @@ public class FMLPlayMessages
             this.buf = buf;
         }
 
-        public static void encode(SpawnEntity msg, PacketBuffer buf)
+        public static void encode(SpawnEntity msg, FriendlyByteBuf buf)
         {
             buf.writeVarInt(msg.typeId);
             buf.writeInt(msg.entityId);
@@ -144,7 +144,7 @@ public class FMLPlayMessages
             }
         }
 
-        public static SpawnEntity decode(PacketBuffer buf)
+        public static SpawnEntity decode(FriendlyByteBuf buf)
         {
             return new SpawnEntity(
                     buf.readVarInt(),
@@ -166,7 +166,7 @@ public class FMLPlayMessages
                     throw new RuntimeException(String.format("Could not spawn entity (id %d) with unknown type at (%f, %f, %f)", msg.entityId, msg.posX, msg.posY, msg.posZ));
                 }
 
-                Optional<World> world = LogicalSidedProvider.CLIENTWORLD.get(ctx.get().getDirection().getReceptionSide());
+                Optional<Level> world = LogicalSidedProvider.CLIENTWORLD.get(ctx.get().getDirection().getReceptionSide());
                 Entity e = world.map(w->type.customClientSpawn(msg, w)).orElse(null);
                 if (e == null)
                 {
@@ -180,7 +180,7 @@ public class FMLPlayMessages
 
                 e.setId(msg.entityId);
                 e.setUUID(msg.uuid);
-                world.filter(ClientWorld.class::isInstance).ifPresent(w->((ClientWorld)w).putNonPlayerEntity(msg.entityId, e));
+                world.filter(ClientLevel.class::isInstance).ifPresent(w->((ClientLevel)w).putNonPlayerEntity(msg.entityId, e));
                 e.lerpMotion(msg.velX / 8000.0, msg.velY / 8000.0, msg.velZ / 8000.0);
                 if (e instanceof IEntityAdditionalSpawnData)
                 {
@@ -255,7 +255,7 @@ public class FMLPlayMessages
             return velZ;
         }
 
-        public PacketBuffer getAdditionalData()
+        public FriendlyByteBuf getAdditionalData()
         {
             return buf;
         }
@@ -265,15 +265,15 @@ public class FMLPlayMessages
     {
         private final int id;
         private final int windowId;
-        private final ITextComponent name;
-        private final PacketBuffer additionalData;
+        private final Component name;
+        private final FriendlyByteBuf additionalData;
 
-        OpenContainer(ContainerType<?> id, int windowId, ITextComponent name, PacketBuffer additionalData)
+        OpenContainer(MenuType<?> id, int windowId, Component name, FriendlyByteBuf additionalData)
         {
             this(Registry.MENU.getId(id), windowId, name, additionalData);
         }
 
-        private OpenContainer(int id, int windowId, ITextComponent name, PacketBuffer additionalData)
+        private OpenContainer(int id, int windowId, Component name, FriendlyByteBuf additionalData)
         {
             this.id = id;
             this.windowId = windowId;
@@ -281,7 +281,7 @@ public class FMLPlayMessages
             this.additionalData = additionalData;
         }
 
-        public static void encode(OpenContainer msg, PacketBuffer buf)
+        public static void encode(OpenContainer msg, FriendlyByteBuf buf)
         {
             buf.writeVarInt(msg.id);
             buf.writeVarInt(msg.windowId);
@@ -289,27 +289,27 @@ public class FMLPlayMessages
             buf.writeByteArray(msg.additionalData.readByteArray());
         }
 
-        public static OpenContainer decode(PacketBuffer buf)
+        public static OpenContainer decode(FriendlyByteBuf buf)
         {
-            return new OpenContainer(buf.readVarInt(), buf.readVarInt(), buf.readComponent(), new PacketBuffer(Unpooled.wrappedBuffer(buf.readByteArray(32600))));
+            return new OpenContainer(buf.readVarInt(), buf.readVarInt(), buf.readComponent(), new FriendlyByteBuf(Unpooled.wrappedBuffer(buf.readByteArray(32600))));
         }
 
         public static void handle(OpenContainer msg, Supplier<NetworkEvent.Context> ctx)
         {
             ctx.get().enqueueWork(() -> {
-                ScreenManager.getScreenFactory(msg.getType(), Minecraft.getInstance(), msg.getWindowId(), msg.getName())
+                MenuScreens.getScreenFactory(msg.getType(), Minecraft.getInstance(), msg.getWindowId(), msg.getName())
                              .ifPresent(f -> {
-                                 Container c = msg.getType().create(msg.getWindowId(), Minecraft.getInstance().player.inventory, msg.getAdditionalData());
+                                 AbstractContainerMenu c = msg.getType().create(msg.getWindowId(), Minecraft.getInstance().player.inventory, msg.getAdditionalData());
                                  @SuppressWarnings("unchecked")
-                                 Screen s = ((ScreenManager.IScreenFactory<Container, ?>)f).create(c, Minecraft.getInstance().player.inventory, msg.getName());
-                                 Minecraft.getInstance().player.containerMenu = ((IHasContainer<?>)s).getMenu();
+                                 Screen s = ((MenuScreens.ScreenConstructor<AbstractContainerMenu, ?>)f).create(c, Minecraft.getInstance().player.inventory, msg.getName());
+                                 Minecraft.getInstance().player.containerMenu = ((MenuAccess<?>)s).getMenu();
                                  Minecraft.getInstance().setScreen(s);
                              });
             });
             ctx.get().setPacketHandled(true);
         }
 
-        public final ContainerType<?> getType() {
+        public final MenuType<?> getType() {
             return Registry.MENU.byId(this.id);
         }
 
@@ -317,11 +317,11 @@ public class FMLPlayMessages
             return windowId;
         }
 
-        public ITextComponent getName() {
+        public Component getName() {
             return name;
         }
 
-        public PacketBuffer getAdditionalData() {
+        public FriendlyByteBuf getAdditionalData() {
             return additionalData;
         }
     }
@@ -329,25 +329,25 @@ public class FMLPlayMessages
     public static class SyncCustomTagTypes
     {
         private static final Logger LOGGER = LogManager.getLogger();
-        private final Map<ResourceLocation, ITagCollection<?>> customTagTypeCollections;
+        private final Map<ResourceLocation, TagCollection<?>> customTagTypeCollections;
 
-        SyncCustomTagTypes(Map<ResourceLocation, ITagCollection<?>> customTagTypeCollections)
+        SyncCustomTagTypes(Map<ResourceLocation, TagCollection<?>> customTagTypeCollections)
         {
             this.customTagTypeCollections = customTagTypeCollections;
         }
 
-        public Map<ResourceLocation, ITagCollection<?>> getCustomTagTypes()
+        public Map<ResourceLocation, TagCollection<?>> getCustomTagTypes()
         {
             return customTagTypeCollections;
         }
 
-        public static void encode(SyncCustomTagTypes msg, PacketBuffer buf)
+        public static void encode(SyncCustomTagTypes msg, FriendlyByteBuf buf)
         {
             buf.writeVarInt(msg.customTagTypeCollections.size());
             msg.customTagTypeCollections.forEach((registryName, modded) -> forgeTagCollectionWrite(buf, registryName, modded.getAllTags()));
         }
 
-        private static <T> void forgeTagCollectionWrite(PacketBuffer buf, ResourceLocation registryName, Map<ResourceLocation, ITag<T>> tags)
+        private static <T> void forgeTagCollectionWrite(FriendlyByteBuf buf, ResourceLocation registryName, Map<ResourceLocation, Tag<T>> tags)
         {
             buf.writeResourceLocation(registryName);
             buf.writeVarInt(tags.size());
@@ -362,9 +362,9 @@ public class FMLPlayMessages
             });
         }
 
-        public static SyncCustomTagTypes decode(PacketBuffer buf)
+        public static SyncCustomTagTypes decode(FriendlyByteBuf buf)
         {
-            ImmutableMap.Builder<ResourceLocation, ITagCollection<?>> builder = ImmutableMap.builder();
+            ImmutableMap.Builder<ResourceLocation, TagCollection<?>> builder = ImmutableMap.builder();
             int size = buf.readVarInt();
             for (int i = 0; i < size; i++)
             {
@@ -378,9 +378,9 @@ public class FMLPlayMessages
             return new SyncCustomTagTypes(builder.build());
         }
 
-        private static <T extends IForgeRegistryEntry<T>> ITagCollection<T> readTagCollection(PacketBuffer buf, IForgeRegistry<T> registry)
+        private static <T extends IForgeRegistryEntry<T>> TagCollection<T> readTagCollection(FriendlyByteBuf buf, IForgeRegistry<T> registry)
         {
-            Map<ResourceLocation, ITag<T>> tags = Maps.newHashMap();
+            Map<ResourceLocation, Tag<T>> tags = Maps.newHashMap();
             int totalTags = buf.readVarInt();
             for (int i = 0; i < totalTags; i++)
             {
@@ -395,9 +395,9 @@ public class FMLPlayMessages
                         elementBuilder.add(element);
                     }
                 }
-                tags.put(name, ITag.fromSet(elementBuilder.build()));
+                tags.put(name, Tag.fromSet(elementBuilder.build()));
             }
-            return ITagCollection.of(tags);
+            return TagCollection.of(tags);
         }
 
         public static void handle(SyncCustomTagTypes msg, Supplier<NetworkEvent.Context> ctx)
@@ -405,14 +405,14 @@ public class FMLPlayMessages
             ctx.get().enqueueWork(() -> {
                 if (Minecraft.getInstance().level != null)
                 {
-                    ITagCollectionSupplier tagCollectionSupplier = Minecraft.getInstance().level.getTagManager();
+                    TagContainer tagCollectionSupplier = Minecraft.getInstance().level.getTagManager();
                     //Validate that all the tags exist using the tag type collections from the packet
                     // We mimic vanilla in that we validate before updating the actual stored tags so that it can gracefully fallback
                     // to the last working set of tags
                     //Note: We gracefully ignore any tag types the server may have that we don't as they won't be in our tag registry
                     // so they won't be validated
                     //Override and use the tags from the packet to test for validation before we actually set them
-                    Multimap<ResourceLocation, ResourceLocation> missingTags = TagRegistryManager.getAllMissingTags(ForgeTagHandler.withSpecificCustom(tagCollectionSupplier, msg.customTagTypeCollections));
+                    Multimap<ResourceLocation, ResourceLocation> missingTags = StaticTags.getAllMissingTags(ForgeTagHandler.withSpecificCustom(tagCollectionSupplier, msg.customTagTypeCollections));
                     if (missingTags.isEmpty())
                     {
                         //If we have no missing tags, update the custom tag types
@@ -422,12 +422,12 @@ public class FMLPlayMessages
                             //And if everything hasn't already been set due to being in single player
                             // Fetch and update the custom tag types. We skip vanilla tag types as they have already been fetched
                             // And fire an event that the custom tag types have been updated
-                            TagRegistryManager.fetchCustomTagTypes(tagCollectionSupplier);
+                            StaticTags.fetchCustomTagTypes(tagCollectionSupplier);
                             MinecraftForge.EVENT_BUS.post(new TagsUpdatedEvent.CustomTagTypes(tagCollectionSupplier));
                         }
                     } else {
                         LOGGER.warn("Incomplete server tags, disconnecting. Missing: {}", missingTags);
-                        ctx.get().getNetworkManager().disconnect(new TranslationTextComponent("multiplayer.disconnect.missing_tags"));
+                        ctx.get().getNetworkManager().disconnect(new TranslatableComponent("multiplayer.disconnect.missing_tags"));
                     }
                 }
             });

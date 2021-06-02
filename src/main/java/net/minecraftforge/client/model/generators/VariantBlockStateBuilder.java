@@ -42,9 +42,9 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.state.Property;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.client.model.generators.BlockStateProvider.ConfiguredModelList;
 
 /**
@@ -188,7 +188,7 @@ public class VariantBlockStateBuilder implements IGeneratedBlockstate {
         PartialBlockstate(Block owner, Map<Property<?>, Comparable<?>> setStates, @Nullable VariantBlockStateBuilder outerBuilder) {
             this.owner = owner;
             this.outerBuilder = outerBuilder;
-            for (Map.Entry<Property<?>, Comparable<?>> entry : setStates.entrySet()) {
+            for (Entry<Property<?>, Comparable<?>> entry : setStates.entrySet()) {
                 Property<?> prop = entry.getKey();
                 Comparable<?> value = entry.getValue();
                 Preconditions.checkArgument(owner.getStateDefinition().getProperties().contains(prop), "Property %s not found on block %s", entry, this.owner);
@@ -290,7 +290,7 @@ public class VariantBlockStateBuilder implements IGeneratedBlockstate {
             if (blockState.getBlock() != getOwner()) {
                 return false;
             }
-            for (Map.Entry<Property<?>, Comparable<?>> entry : setStates.entrySet()) {
+            for (Entry<Property<?>, Comparable<?>> entry : setStates.entrySet()) {
                 if (blockState.getValue(entry.getKey()) != entry.getValue()) {
                     return false;
                 }
@@ -301,7 +301,7 @@ public class VariantBlockStateBuilder implements IGeneratedBlockstate {
         @Override
         public String toString() {
             StringBuilder ret = new StringBuilder();
-            for (Map.Entry<Property<?>, Comparable<?>> entry : setStates.entrySet()) {
+            for (Entry<Property<?>, Comparable<?>> entry : setStates.entrySet()) {
                 if (ret.length() > 0) {
                     ret.append(',');
                 }

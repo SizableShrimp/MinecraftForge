@@ -19,9 +19,9 @@
 
 package net.minecraftforge.fml;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.world.storage.IServerConfiguration;
-import net.minecraft.world.storage.SaveFormat;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.WorldData;
+import net.minecraft.world.level.storage.LevelStorageSource;
 import net.minecraftforge.fml.common.thread.EffectiveSide;
 
 import java.util.ArrayList;
@@ -35,12 +35,12 @@ public class WorldPersistenceHooks
         worldPersistenceHooks.add(hook);
     }
 
-    public static void handleWorldDataSave(final SaveFormat.LevelSave levelSave, final IServerConfiguration serverInfo, final CompoundNBT tagCompound)
+    public static void handleWorldDataSave(final LevelStorageSource.LevelStorageAccess levelSave, final WorldData serverInfo, final CompoundTag tagCompound)
     {
         worldPersistenceHooks.forEach(wac->tagCompound.put(wac.getModId(), wac.getDataForWriting(levelSave, serverInfo)));
     }
 
-    public static void handleWorldDataLoad(SaveFormat.LevelSave levelSave, IServerConfiguration serverInfo, CompoundNBT tagCompound)
+    public static void handleWorldDataLoad(LevelStorageSource.LevelStorageAccess levelSave, WorldData serverInfo, CompoundTag tagCompound)
     {
         worldPersistenceHooks.forEach(wac->wac.readData(levelSave, serverInfo, tagCompound.getCompound(wac.getModId())));
     }
@@ -48,7 +48,7 @@ public class WorldPersistenceHooks
     public interface WorldPersistenceHook
     {
         String getModId();
-        CompoundNBT getDataForWriting(SaveFormat.LevelSave levelSave, IServerConfiguration serverInfo);
-        void readData(SaveFormat.LevelSave levelSave, IServerConfiguration serverInfo, CompoundNBT tag);
+        CompoundTag getDataForWriting(LevelStorageSource.LevelStorageAccess levelSave, WorldData serverInfo);
+        void readData(LevelStorageSource.LevelStorageAccess levelSave, WorldData serverInfo, CompoundTag tag);
     }
 }

@@ -1,4 +1,4 @@
-/*
+package net.minecraftforge.fml.client.gui.screen;/*
  * Minecraft Forge
  * Copyright (c) 2016-2021.
  *

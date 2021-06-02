@@ -19,16 +19,16 @@
 
 package net.minecraftforge.fml.client.gui.widget;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.widget.list.ExtendedList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.ITextProperties;
-import net.minecraft.util.text.LanguageMap;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.components.ObjectSelectionList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.FormattedText;
+import net.minecraft.locale.Language;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.fml.client.gui.screen.ModListScreen;
 import net.minecraftforge.versions.forge.ForgeVersion;
 import net.minecraftforge.fml.MavenVersionStringHelper;
@@ -37,9 +37,9 @@ import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-public class ModListWidget extends ExtendedList<ModListWidget.ModEntry>
+public class ModListWidget extends ObjectSelectionList<ModListWidget.ModEntry>
 {
-    private static String stripControlCodes(String value) { return net.minecraft.util.StringUtils.stripColor(value); }
+    private static String stripControlCodes(String value) { return net.minecraft.util.StringUtil.stripColor(value); }
     private static final ResourceLocation VERSION_CHECK_ICONS = new ResourceLocation(ForgeVersion.MOD_ID, "textures/gui/version_check_icons.png");
     private final int listWidth;
 
@@ -71,12 +71,12 @@ public class ModListWidget extends ExtendedList<ModListWidget.ModEntry>
     }
 
     @Override
-    protected void renderBackground(MatrixStack mStack)
+    protected void renderBackground(PoseStack mStack)
     {
         this.parent.renderBackground(mStack);
     }
 
-    public class ModEntry extends ExtendedList.AbstractListEntry<ModEntry> {
+    public class ModEntry extends Entry<ModEntry> {
         private final ModInfo modInfo;
         private final ModListScreen parent;
 
@@ -86,21 +86,21 @@ public class ModListWidget extends ExtendedList<ModListWidget.ModEntry>
         }
 
         @Override
-        public void render(MatrixStack mStack, int entryIdx, int top, int left, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean p_194999_5_, float partialTicks)
+        public void render(PoseStack mStack, int entryIdx, int top, int left, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean p_194999_5_, float partialTicks)
         {
-            ITextComponent name = new StringTextComponent(stripControlCodes(modInfo.getDisplayName()));
-            ITextComponent version = new StringTextComponent(stripControlCodes(MavenVersionStringHelper.artifactVersionToString(modInfo.getVersion())));
+            Component name = new TextComponent(stripControlCodes(modInfo.getDisplayName()));
+            Component version = new TextComponent(stripControlCodes(MavenVersionStringHelper.artifactVersionToString(modInfo.getVersion())));
             VersionChecker.CheckResult vercheck = VersionChecker.getResult(modInfo);
-            FontRenderer font = this.parent.getFontRenderer();
-            font.draw(mStack, LanguageMap.getInstance().getVisualOrder(ITextProperties.composite(font.substrByWidth(name,    listWidth))), left + 3, top + 2, 0xFFFFFF);
-            font.draw(mStack, LanguageMap.getInstance().getVisualOrder(ITextProperties.composite(font.substrByWidth(version, listWidth))), left + 3, top + 2 + font.lineHeight, 0xCCCCCC);
+            Font font = this.parent.getFontRenderer();
+            font.draw(mStack, Language.getInstance().getVisualOrder(FormattedText.composite(font.substrByWidth(name,    listWidth))), left + 3, top + 2, 0xFFFFFF);
+            font.draw(mStack, Language.getInstance().getVisualOrder(FormattedText.composite(font.substrByWidth(version, listWidth))), left + 3, top + 2 + font.lineHeight, 0xCCCCCC);
             if (vercheck.status.shouldDraw())
             {
                 //TODO: Consider adding more icons for visualization
                 Minecraft.getInstance().getTextureManager().bind(VERSION_CHECK_ICONS);
                 RenderSystem.color4f(1, 1, 1, 1);
                 RenderSystem.pushMatrix();
-                AbstractGui.blit(mStack, getLeft() + width - 12, top + entryHeight / 4, vercheck.status.getSheetOffset() * 8, (vercheck.status.isAnimated() && ((System.currentTimeMillis() / 800 & 1)) == 1) ? 8 : 0, 8, 8, 64, 16);
+                GuiComponent.blit(mStack, getLeft() + width - 12, top + entryHeight / 4, vercheck.status.getSheetOffset() * 8, (vercheck.status.isAnimated() && ((System.currentTimeMillis() / 800 & 1)) == 1) ? 8 : 0, 8, 8, 64, 16);
                 RenderSystem.popMatrix();
             }
         }

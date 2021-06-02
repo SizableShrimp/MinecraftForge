@@ -26,14 +26,14 @@ import java.util.function.Supplier;
 import org.apache.commons.lang3.tuple.Pair;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.resources.IResourcePack;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.server.packs.PackResources;
 import net.minecraftforge.fml.packs.ModFileResourcePack;
 
 public class ExtensionPoint<T>
 {
     public static final ExtensionPoint<BiFunction<Minecraft, Screen, Screen>> CONFIGGUIFACTORY = new ExtensionPoint<>();
-    public static final ExtensionPoint<BiFunction<Minecraft, ModFileResourcePack, IResourcePack>> RESOURCEPACK = new ExtensionPoint<>();
+    public static final ExtensionPoint<BiFunction<Minecraft, ModFileResourcePack, PackResources>> RESOURCEPACK = new ExtensionPoint<>();
     /**
      * Compatibility display test for the mod.
      * Used for displaying compatibility with remote servers with the same mod, and on disk saves.

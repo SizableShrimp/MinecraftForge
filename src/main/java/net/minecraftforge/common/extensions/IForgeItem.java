@@ -26,35 +26,35 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.monster.EndermanEntity;
-import net.minecraft.entity.monster.piglin.PiglinTasks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.Items;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.piglin.PiglinAi;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterials;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ToolType;
@@ -72,7 +72,7 @@ public interface IForgeItem
      * ItemStack sensitive version of getItemAttributeModifiers
      */
     @SuppressWarnings("deprecation")
-    default Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack)
+    default Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack)
     {
         return getItem().getDefaultAttributeModifiers(slot);
     }
@@ -85,7 +85,7 @@ public interface IForgeItem
      * @param player The player that dropped the item
      * @param item   The item stack, before the item is removed.
      */
-    default boolean onDroppedByPlayer(ItemStack item, PlayerEntity player)
+    default boolean onDroppedByPlayer(ItemStack item, Player player)
     {
         return true;
     }
@@ -99,7 +99,7 @@ public interface IForgeItem
      * @param displayName the name that will be displayed unless it is changed in
      *                    this method.
      */
-    default ITextComponent getHighlightTip(ItemStack item, ITextComponent displayName)
+    default Component getHighlightTip(ItemStack item, Component displayName)
     {
         return displayName;
     }
@@ -109,9 +109,9 @@ public interface IForgeItem
      *
      * @return Return PASS to allow vanilla handling, any other to skip normal code.
      */
-    default ActionResultType onItemUseFirst(ItemStack stack, ItemUseContext context)
+    default InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context)
     {
-        return ActionResultType.PASS;
+        return InteractionResult.PASS;
     }
 
     /**
@@ -121,7 +121,7 @@ public interface IForgeItem
      */
     default boolean isPiglinCurrency(ItemStack stack)
     {
-        return stack.getItem() == PiglinTasks.BARTERING_ITEM;
+        return stack.getItem() == PiglinAi.BARTERING_ITEM;
     }
 
     /**
@@ -134,7 +134,7 @@ public interface IForgeItem
      */
     default boolean makesPiglinsNeutral(ItemStack stack, LivingEntity wearer)
     {
-        return stack.getItem() instanceof ArmorItem && ((ArmorItem) stack.getItem()).getMaterial() == ArmorMaterial.GOLD;
+        return stack.getItem() instanceof ArmorItem && ((ArmorItem) stack.getItem()).getMaterial() == ArmorMaterials.GOLD;
     }
 
     /**
@@ -170,7 +170,7 @@ public interface IForgeItem
      * @return The NBT tag
      */
     @Nullable
-    default CompoundNBT getShareTag(ItemStack stack)
+    default CompoundTag getShareTag(ItemStack stack)
     {
         return stack.getTag();
     }
@@ -182,7 +182,7 @@ public interface IForgeItem
      * @param stack The stack that received NBT
      * @param nbt   Received NBT, can be null
      */
-    default void readShareTag(ItemStack stack, @Nullable CompoundNBT nbt)
+    default void readShareTag(ItemStack stack, @Nullable CompoundTag nbt)
     {
         stack.setTag(nbt);
     }
@@ -198,7 +198,7 @@ public interface IForgeItem
      * @param player    The Player that is wielding the item
      * @return True to prevent harvesting, false to continue as normal
      */
-    default boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, PlayerEntity player)
+    default boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, Player player)
     {
         return false;
     }
@@ -225,7 +225,7 @@ public interface IForgeItem
      * @param entity The entity being attacked
      * @return True to cancel the rest of the interaction.
      */
-    default boolean onLeftClickEntity(ItemStack stack, PlayerEntity player, Entity entity)
+    default boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity)
     {
         return false;
     }
@@ -267,7 +267,7 @@ public interface IForgeItem
      * @param world     The world the entity is in
      * @return The normal lifespan in ticks.
      */
-    default int getEntityLifespan(ItemStack itemStack, World world)
+    default int getEntityLifespan(ItemStack itemStack, Level world)
     {
         return 6000;
     }
@@ -299,7 +299,7 @@ public interface IForgeItem
      * @return A new Entity object to spawn or null
      */
     @Nullable
-    default Entity createEntity(World world, Entity location, ItemStack itemstack)
+    default Entity createEntity(Level world, Entity location, ItemStack itemstack)
     {
         return null;
     }
@@ -324,7 +324,7 @@ public interface IForgeItem
      *
      * @return A list of all tabs that this item could possibly be one.
      */
-    default java.util.Collection<ItemGroup> getCreativeTabs()
+    default java.util.Collection<CreativeModeTab> getCreativeTabs()
     {
         return java.util.Collections.singletonList(getItem().getItemCategory());
     }
@@ -352,7 +352,7 @@ public interface IForgeItem
      * @param player The Player that is wielding the item
      * @return
      */
-    default boolean doesSneakBypassUse(ItemStack stack, net.minecraft.world.IWorldReader world, BlockPos pos, PlayerEntity player)
+    default boolean doesSneakBypassUse(ItemStack stack, net.minecraft.world.level.LevelReader world, BlockPos pos, Player player)
     {
         return false;
     }
@@ -360,7 +360,7 @@ public interface IForgeItem
     /**
      * Called to tick armor in the armor slot. Override to do something
      */
-    default void onArmorTick(ItemStack stack, World world, PlayerEntity player)
+    default void onArmorTick(ItemStack stack, Level world, Player player)
     {
     }
 
@@ -373,9 +373,9 @@ public interface IForgeItem
      * @param entity    The entity trying to equip the armor
      * @return True if the given ItemStack can be inserted in the slot
      */
-    default boolean canEquip(ItemStack stack, EquipmentSlotType armorType, Entity entity)
+    default boolean canEquip(ItemStack stack, EquipmentSlot armorType, Entity entity)
     {
-        return MobEntity.getEquipmentSlotForItem(stack) == armorType;
+        return Mob.getEquipmentSlotForItem(stack) == armorType;
     }
 
     /**
@@ -389,7 +389,7 @@ public interface IForgeItem
      *         decide
      */
     @Nullable
-    default EquipmentSlotType getEquipmentSlot(ItemStack stack)
+    default EquipmentSlot getEquipmentSlot(ItemStack stack)
     {
         return null;
     }
@@ -420,7 +420,7 @@ public interface IForgeItem
      * @return Path of texture to bind, or null to use default
      */
     @Nullable
-    default String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlotType slot, String type)
+    default String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type)
     {
         return null;
     }
@@ -434,7 +434,7 @@ public interface IForgeItem
      */
     @OnlyIn(Dist.CLIENT)
     @Nullable
-    default net.minecraft.client.gui.FontRenderer getFontRenderer(ItemStack stack)
+    default net.minecraft.client.gui.Font getFontRenderer(ItemStack stack)
     {
         return null;
     }
@@ -450,7 +450,7 @@ public interface IForgeItem
      */
     @OnlyIn(Dist.CLIENT)
     @Nullable
-    default <A extends BipedModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlotType armorSlot, A _default)
+    default <A extends HumanoidModel<?>> A getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, A _default)
     {
         return null;
     }
@@ -477,7 +477,7 @@ public interface IForgeItem
      * @param partialTicks Partial ticks for the renderer, useful for interpolation
      */
     @OnlyIn(Dist.CLIENT)
-    default void renderHelmetOverlay(ItemStack stack, PlayerEntity player, int width, int height, float partialTicks)
+    default void renderHelmetOverlay(ItemStack stack, Player player, int width, int height, float partialTicks)
     {
     }
 
@@ -528,7 +528,7 @@ public interface IForgeItem
      */
     default int getRGBDurabilityForDisplay(ItemStack stack)
     {
-        return MathHelper.hsvToRgb(Math.max(0.0F, (float) (1.0F - getDurabilityForDisplay(stack))) / 3.0F, 1.0F, 1.0F);
+        return Mth.hsvToRgb(Math.max(0.0F, (float) (1.0F - getDurabilityForDisplay(stack))) / 3.0F, 1.0F, 1.0F);
     }
 
     /**
@@ -605,7 +605,7 @@ public interface IForgeItem
      * @param blockState The block to harvest
      * @return Harvest level, or -1 if not the specified tool type.
      */
-    int getHarvestLevel(ItemStack stack, ToolType tool, @Nullable PlayerEntity player, @Nullable BlockState blockState);
+    int getHarvestLevel(ItemStack stack, ToolType tool, @Nullable Player player, @Nullable BlockState blockState);
 
     /**
      * ItemStack sensitive version of getItemEnchantability
@@ -631,7 +631,7 @@ public interface IForgeItem
      * @param enchantment the enchantment to be applied
      * @return true if the enchantment can be applied to this item
      */
-    default boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment)
+    default boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.world.item.enchantment.Enchantment enchantment)
     {
         return enchantment.category.canEnchant(stack.getItem());
     }
@@ -715,7 +715,7 @@ public interface IForgeItem
      *         capabilities for the life of this item.
      */
     @Nullable
-    default net.minecraftforge.common.capabilities.ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt)
+    default net.minecraftforge.common.capabilities.ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt)
     {
         return null;
     }
@@ -772,7 +772,7 @@ public interface IForgeItem
      * @param world the world the horse is in
      * @param horse the horse wearing this armor
      */
-    default void onHorseArmorTick(ItemStack stack, World world, MobEntity horse)
+    default void onHorseArmorTick(ItemStack stack, Level world, Mob horse)
     {
     }
 
@@ -781,7 +781,7 @@ public interface IForgeItem
      *         one.
      */
     @OnlyIn(Dist.CLIENT)
-    ItemStackTileEntityRenderer getItemStackTileEntityRenderer();
+    BlockEntityWithoutLevelRenderer getItemStackTileEntityRenderer();
 
     /**
      * Retrieves a list of tags names this is known to be associated with.
@@ -811,7 +811,7 @@ public interface IForgeItem
      * @param endermanEntity The enderman that the player look
      * @return true if this Item can be used to hide player head for enderman
      */
-    default boolean isEnderMask(ItemStack stack, PlayerEntity player, EndermanEntity endermanEntity)
+    default boolean isEnderMask(ItemStack stack, Player player, EnderMan endermanEntity)
     {
         return stack.getItem() == Blocks.CARVED_PUMPKIN.asItem();
     }

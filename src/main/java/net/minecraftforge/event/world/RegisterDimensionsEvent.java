@@ -1,4 +1,4 @@
-/*
+package net.minecraftforge.event.world;/*
  * Minecraft Forge
  * Copyright (c) 2016-2021.
  *

@@ -22,9 +22,9 @@ package net.minecraftforge.fml.client;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import net.minecraft.client.MainWindow;
+import com.mojang.blaze3d.platform.Window;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 import net.minecraftforge.fml.loading.progress.StartupMessageManager;
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.opengl.GL11;
@@ -38,10 +38,10 @@ import java.nio.ByteBuffer;
 import java.util.List;
 
 public class EarlyLoaderGUI {
-    private final MainWindow window;
+    private final Window window;
     private boolean handledElsewhere;
 
-    public EarlyLoaderGUI(final MainWindow window) {
+    public EarlyLoaderGUI(final Window window) {
         this.window = window;
     }
 
@@ -95,7 +95,7 @@ public class EarlyLoaderGUI {
         for (int i = 0; i < messages.size(); i++) {
             boolean nofade = i == 0;
             final Pair<Integer, StartupMessageManager.Message> pair = messages.get(i);
-            final float fade = MathHelper.clamp((4000.0f - (float) pair.getLeft() - ( i - 4 ) * 1000.0f) / 5000.0f, 0.0f, 1.0f);
+            final float fade = Mth.clamp((4000.0f - (float) pair.getLeft() - ( i - 4 ) * 1000.0f) / 5000.0f, 0.0f, 1.0f);
             if (fade <0.01f && !nofade) continue;
             StartupMessageManager.Message msg = pair.getRight();
             renderMessage(msg.getText(), msg.getTypeColour(), ((window.getGuiScaledHeight() - 15) / 10) - i + 1, nofade ? 1.0f : fade);
@@ -111,7 +111,7 @@ public class EarlyLoaderGUI {
         final float pctmemory = (float) heapusage.getUsed() / heapusage.getMax();
         String memory = String.format("Memory Heap: %d / %d MB (%.1f%%)  OffHeap: %d MB", heapusage.getUsed() >> 20, heapusage.getMax() >> 20, pctmemory * 100.0, offheapusage.getUsed() >> 20);
 
-        final int i = MathHelper.hsvToRgb((1.0f - (float)Math.pow(pctmemory, 1.5f)) / 3f, 1.0f, 0.5f);
+        final int i = Mth.hsvToRgb((1.0f - (float)Math.pow(pctmemory, 1.5f)) / 3f, 1.0f, 0.5f);
         memorycolour[2] = ((i) & 0xFF) / 255.0f;
         memorycolour[1] = ((i >> 8 ) & 0xFF) / 255.0f;
         memorycolour[0] = ((i >> 16 ) & 0xFF) / 255.0f;

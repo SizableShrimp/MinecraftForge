@@ -21,21 +21,21 @@ package net.minecraftforge.common.extensions;
 
 import java.util.List;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.DisplayEffectsScreen;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.potion.EffectInstance;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public interface IForgeEffectInstance {
 
-    default EffectInstance getEffectInstance() {
-        return (EffectInstance)this;
+    default MobEffectInstance getEffectInstance() {
+        return (MobEffectInstance)this;
     }
 
     /**
@@ -73,7 +73,7 @@ public interface IForgeEffectInstance {
      * @param z the z level
      */
     @OnlyIn(Dist.CLIENT)
-    default void renderInventoryEffect(DisplayEffectsScreen<?> gui, MatrixStack mStack, int x, int y, float z) {
+    default void renderInventoryEffect(EffectRenderingInventoryScreen<?> gui, PoseStack mStack, int x, int y, float z) {
         getEffectInstance().getEffect().renderInventoryEffect(getEffectInstance(), gui, mStack, x, y, z);
     }
 
@@ -89,7 +89,7 @@ public interface IForgeEffectInstance {
      * @param alpha the alpha value, blinks when the potion is about to run out
      */
     @OnlyIn(Dist.CLIENT)
-    default void renderHUDEffect(AbstractGui gui, MatrixStack mStack, int x, int y, float z, float alpha) {
+    default void renderHUDEffect(GuiComponent gui, PoseStack mStack, int x, int y, float z, float alpha) {
         getEffectInstance().getEffect().renderHUDEffect(getEffectInstance(), gui, mStack, x, y, z, alpha);
     }
 
@@ -125,9 +125,9 @@ public interface IForgeEffectInstance {
           this.getCurativeItems().add(stack);
     }
 
-    default void writeCurativeItems(CompoundNBT nbt) {
-       ListNBT list = new ListNBT();
-       getCurativeItems().forEach(s -> list.add(s.save(new CompoundNBT())));
+    default void writeCurativeItems(CompoundTag nbt) {
+       ListTag list = new ListTag();
+       getCurativeItems().forEach(s -> list.add(s.save(new CompoundTag())));
        nbt.put("CurativeItems", list);
     }
 }

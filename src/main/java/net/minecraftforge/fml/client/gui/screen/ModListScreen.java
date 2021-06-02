@@ -30,7 +30,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import cpw.mods.modlauncher.Environment;
 import net.minecraft.util.text.*;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -42,18 +42,18 @@ import org.apache.maven.artifact.versioning.ComparableVersion;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.gui.widget.list.ExtendedList;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.ObjectSelectionList;
+import com.mojang.blaze3d.vertex.Tesselator;
 import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.client.renderer.texture.NativeImage;
+import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.util.IReorderingProcessor;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.Util;
 import net.minecraftforge.client.gui.ScrollPanel;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.Size2i;
@@ -72,9 +72,14 @@ import net.minecraftforge.fml.packs.ModFileResourcePack;
 import net.minecraftforge.fml.packs.ResourcePackLoader;
 import net.minecraftforge.forgespi.language.IModInfo;
 
+import net.minecraft.locale.Language;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TranslatableComponent;
+
 public class ModListScreen extends Screen
 {
-    private static String stripControlCodes(String value) { return net.minecraft.util.StringUtils.stripColor(value); }
+    private static String stripControlCodes(String value) { return net.minecraft.util.StringUtil.stripColor(value); }
     private static final Logger LOGGER = LogManager.getLogger();
     private enum SortType implements Comparator<ModInfo>
     {
@@ -91,8 +96,8 @@ public class ModListScreen extends Screen
             return compare(name1, name2);
         }
 
-        ITextComponent getButtonText() {
-            return new TranslationTextComponent("fml.menu.mods." + StringUtils.toLowerCase(name()));
+        Component getButtonText() {
+            return new TranslatableComponent("fml.menu.mods." + StringUtils.toLowerCase(name()));
         }
     }
 
@@ -112,7 +117,7 @@ public class ModListScreen extends Screen
     private int numButtons = SortType.values().length;
     private String lastFilterText = "";
 
-    private TextFieldWidget search;
+    private EditBox search;
 
     private boolean sorted = false;
     private SortType sortType = SortType.NORMAL;
@@ -122,7 +127,7 @@ public class ModListScreen extends Screen
      */
     public ModListScreen(Screen parentScreen)
     {
-        super(new TranslationTextComponent("fml.menu.mods.title"));
+        super(new TranslatableComponent("fml.menu.mods.title"));
         this.parentScreen = parentScreen;
         this.mods = Collections.unmodifiableList(ModList.get().getMods());
         this.unsortedMods = Collections.unmodifiableList(this.mods);
@@ -131,7 +136,7 @@ public class ModListScreen extends Screen
     class InfoPanel extends ScrollPanel {
         private ResourceLocation logoPath;
         private Size2i logoDims = new Size2i(0, 0);
-        private List<IReorderingProcessor> lines = Collections.emptyList();
+        private List<FormattedCharSequence> lines = Collections.emptyList();
 
         InfoPanel(Minecraft mcIn, int widthIn, int heightIn, int topIn)
         {
@@ -152,9 +157,9 @@ public class ModListScreen extends Screen
             this.lines = Collections.emptyList();
         }
 
-        private List<IReorderingProcessor> resizeContent(List<String> lines)
+        private List<FormattedCharSequence> resizeContent(List<String> lines)
         {
-            List<IReorderingProcessor> ret = new ArrayList<>();
+            List<FormattedCharSequence> ret = new ArrayList<>();
             for (String line : lines)
             {
                 if (line == null)
@@ -163,11 +168,11 @@ public class ModListScreen extends Screen
                     continue;
                 }
 
-                ITextComponent chat = ForgeHooks.newChatWithLinks(line, false);
+                Component chat = ForgeHooks.newChatWithLinks(line, false);
                 int maxTextLength = this.width - 12;
                 if (maxTextLength >= 0)
                 {
-                    ret.addAll(LanguageMap.getInstance().getVisualOrder(font.getSplitter().splitLines(chat, maxTextLength, Style.EMPTY)));
+                    ret.addAll(Language.getInstance().getVisualOrder(font.getSplitter().splitLines(chat, maxTextLength, Style.EMPTY)));
                 }
             }
             return ret;
@@ -190,7 +195,7 @@ public class ModListScreen extends Screen
         }
 
         @Override
-        protected void drawPanel(MatrixStack mStack, int entryRight, int relativeY, Tessellator tess, int mouseX, int mouseY)
+        protected void drawPanel(PoseStack mStack, int entryRight, int relativeY, Tesselator tess, int mouseX, int mouseY)
         {
             if (logoPath != null) {
                 Minecraft.getInstance().getTextureManager().bind(logoPath);
@@ -202,7 +207,7 @@ public class ModListScreen extends Screen
                 relativeY += headerHeight + PADDING;
             }
 
-            for (IReorderingProcessor line : lines)
+            for (FormattedCharSequence line : lines)
             {
                 if (line != null)
                 {
@@ -232,7 +237,7 @@ public class ModListScreen extends Screen
             if (lineIdx >= lines.size() || lineIdx < 1)
                 return null;
 
-            IReorderingProcessor line = lines.get(lineIdx-1);
+            FormattedCharSequence line = lines.get(lineIdx-1);
             if (line != null)
             {
                 return font.getSplitter().componentStyleAtWidth(line, mouseX);
@@ -270,16 +275,16 @@ public class ModListScreen extends Screen
         int doneButtonWidth = Math.min(modInfoWidth, 200);
         int y = this.height - 20 - PADDING;
         this.addButton(new Button(((listWidth + PADDING + this.width - doneButtonWidth) / 2), y, doneButtonWidth, 20,
-                new TranslationTextComponent("gui.done"), b -> ModListScreen.this.onClose()));
+                new TranslatableComponent("gui.done"), b -> ModListScreen.this.onClose()));
         this.addButton(this.openModsFolderButton = new Button(6, y, this.listWidth, 20,
-                new TranslationTextComponent("fml.menu.mods.openmodsfolder"), b -> Util.getPlatform().openFile(FMLPaths.MODSDIR.get().toFile())));
+                new TranslatableComponent("fml.menu.mods.openmodsfolder"), b -> Util.getPlatform().openFile(FMLPaths.MODSDIR.get().toFile())));
         y -= 20 + PADDING;
         this.addButton(this.configButton = new Button(6, y, this.listWidth, 20,
-                new TranslationTextComponent("fml.menu.mods.config"), b -> ModListScreen.this.displayModConfig()));
+                new TranslatableComponent("fml.menu.mods.config"), b -> ModListScreen.this.displayModConfig()));
         this.configButton.active = false;
 
         y -= 14 + PADDING + 1;
-        search = new TextFieldWidget(getFontRenderer(), PADDING + 1, y, listWidth - 2, 14, new TranslationTextComponent("fml.menu.mods.search"));
+        search = new EditBox(getFontRenderer(), PADDING + 1, y, listWidth - 2, 14, new TranslatableComponent("fml.menu.mods.search"));
 
         int fullButtonHeight = PADDING + 20 + PADDING;
         this.modList = new ModListWidget(this, listWidth, fullButtonHeight, search.y - getFontRenderer().lineHeight - PADDING);
@@ -343,7 +348,7 @@ public class ModListScreen extends Screen
         }
     }
 
-    public <T extends ExtendedList.AbstractListEntry<T>> void buildModList(Consumer<T> modListViewConsumer, Function<ModInfo, T> newEntry)
+    public <T extends ObjectSelectionList.Entry<T>> void buildModList(Consumer<T> modListViewConsumer, Function<ModInfo, T> newEntry)
     {
         mods.forEach(mod->modListViewConsumer.accept(newEntry.apply(mod)));
     }
@@ -368,13 +373,13 @@ public class ModListScreen extends Screen
     }
 
     @Override
-    public void render(MatrixStack mStack, int mouseX, int mouseY, float partialTicks)
+    public void render(PoseStack mStack, int mouseX, int mouseY, float partialTicks)
     {
         this.modList.render(mStack, mouseX, mouseY, partialTicks);
         if (this.modInfo != null)
             this.modInfo.render(mStack, mouseX, mouseY, partialTicks);
 
-        ITextComponent text = new TranslationTextComponent("fml.menu.mods.search");
+        Component text = new TranslatableComponent("fml.menu.mods.search");
         int x = modList.getLeft() + ((modList.getRight() - modList.getLeft()) / 2) - (getFontRenderer().width(text) / 2);
         getFontRenderer().draw(mStack, text.getVisualOrderText(), x, search.y - getFontRenderer().lineHeight, 0xFFFFFF);
         this.search.render(mStack, mouseX , mouseY, partialTicks);
@@ -386,7 +391,7 @@ public class ModListScreen extends Screen
         return minecraft;
     }
 
-    public FontRenderer getFontRenderer()
+    public Font getFontRenderer()
     {
         return font;
     }

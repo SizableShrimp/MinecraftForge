@@ -37,18 +37,18 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import net.minecraft.client.renderer.model.BlockFaceUV;
-import net.minecraft.client.renderer.model.BlockModel.GuiLight;
-import net.minecraft.client.renderer.model.BlockPart;
-import net.minecraft.client.renderer.model.BlockPartFace;
-import net.minecraft.client.renderer.model.BlockPartRotation;
-import net.minecraft.client.renderer.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.model.ItemTransformVec3f;
-import net.minecraft.client.renderer.texture.MissingTextureSprite;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.client.renderer.block.model.BlockFaceUV;
+import net.minecraft.client.renderer.block.model.BlockModel.GuiLight;
+import net.minecraft.client.renderer.block.model.BlockElement;
+import net.minecraft.client.renderer.block.model.BlockElementFace;
+import net.minecraft.client.renderer.block.model.BlockElementRotation;
+import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
+import net.minecraft.client.renderer.block.model.ItemTransform;
+import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import com.mojang.math.Vector3f;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 /**
@@ -229,20 +229,20 @@ public class ModelBuilder<T extends ModelBuilder<T>> extends ModelFile {
             root.addProperty("gui_light", this.guiLight.getSerializedName());
         }
 
-        Map<Perspective, ItemTransformVec3f> transforms = this.transforms.build();
+        Map<Perspective, ItemTransform> transforms = this.transforms.build();
         if (!transforms.isEmpty()) {
             JsonObject display = new JsonObject();
-            for (Entry<Perspective, ItemTransformVec3f> e : transforms.entrySet()) {
+            for (Entry<Perspective, ItemTransform> e : transforms.entrySet()) {
                 JsonObject transform = new JsonObject();
-                ItemTransformVec3f vec = e.getValue();
-                if (vec.equals(ItemTransformVec3f.NO_TRANSFORM)) continue;
-                if (!vec.rotation.equals(ItemTransformVec3f.Deserializer.DEFAULT_ROTATION)) {
+                ItemTransform vec = e.getValue();
+                if (vec.equals(ItemTransform.NO_TRANSFORM)) continue;
+                if (!vec.rotation.equals(ItemTransform.Deserializer.DEFAULT_ROTATION)) {
                     transform.add("rotation", serializeVector3f(vec.rotation));
                 }
-                if (!vec.translation.equals(ItemTransformVec3f.Deserializer.DEFAULT_TRANSLATION)) {
+                if (!vec.translation.equals(ItemTransform.Deserializer.DEFAULT_TRANSLATION)) {
                     transform.add("translation", serializeVector3f(e.getValue().translation));
                 }
-                if (!vec.scale.equals(ItemTransformVec3f.Deserializer.DEFAULT_SCALE)) {
+                if (!vec.scale.equals(ItemTransform.Deserializer.DEFAULT_SCALE)) {
                     transform.add("scale", serializeVector3f(e.getValue().scale));
                 }
                 display.add(e.getKey().name, transform);
@@ -282,7 +282,7 @@ public class ModelBuilder<T extends ModelBuilder<T>> extends ModelFile {
 
                 JsonObject faces = new JsonObject();
                 for (Direction dir : Direction.values()) {
-                    BlockPartFace face = part.faces.get(dir);
+                    BlockElementFace face = part.faces.get(dir);
                     if (face == null) continue;
 
                     JsonObject faceObj = new JsonObject();
@@ -480,10 +480,10 @@ public class ModelBuilder<T extends ModelBuilder<T>> extends ModelFile {
             return ($, f) -> f.texture(texture);
         }
 
-        BlockPart build() {
-            Map<Direction, BlockPartFace> faces = this.faces.entrySet().stream()
-                    .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().build(), (k1, k2) -> { throw new IllegalArgumentException(); }, LinkedHashMap::new));
-            return new BlockPart(from, to, faces, rotation == null ? null : rotation.build(), shade);
+        BlockElement build() {
+            Map<Direction, BlockElementFace> faces = this.faces.entrySet().stream()
+                    .collect(Collectors.toMap(Entry::getKey, e -> e.getValue().build(), (k1, k2) -> { throw new IllegalArgumentException(); }, LinkedHashMap::new));
+            return new BlockElement(from, to, faces, rotation == null ? null : rotation.build(), shade);
         }
 
         public T end() { return self(); }
@@ -492,7 +492,7 @@ public class ModelBuilder<T extends ModelBuilder<T>> extends ModelFile {
 
             private Direction cullface;
             private int tintindex = -1;
-            private String texture = MissingTextureSprite.getLocation().toString();
+            private String texture = MissingTextureAtlasSprite.getLocation().toString();
             private float[] uvs;
             private FaceRotation rotation = FaceRotation.ZERO;
 
@@ -541,11 +541,11 @@ public class ModelBuilder<T extends ModelBuilder<T>> extends ModelFile {
                 return this;
             }
 
-            BlockPartFace build() {
+            BlockElementFace build() {
                 if (this.texture == null) {
                     throw new IllegalStateException("A model face must have a texture");
                 }
-                return new BlockPartFace(cullface, tintindex, texture, new BlockFaceUV(uvs, rotation.rotation));
+                return new BlockElementFace(cullface, tintindex, texture, new BlockFaceUV(uvs, rotation.rotation));
             }
 
             public ElementBuilder end() { return ElementBuilder.this; }
@@ -581,7 +581,7 @@ public class ModelBuilder<T extends ModelBuilder<T>> extends ModelFile {
              */
             public RotationBuilder angle(float angle) {
                 // Same logic from BlockPart.Deserializer#parseAngle
-                Preconditions.checkArgument(angle == 0.0F || MathHelper.abs(angle) == 22.5F || MathHelper.abs(angle) == 45.0F, "Invalid rotation %f found, only -45/-22.5/0/22.5/45 allowed", angle);
+                Preconditions.checkArgument(angle == 0.0F || Mth.abs(angle) == 22.5F || Mth.abs(angle) == 45.0F, "Invalid rotation %f found, only -45/-22.5/0/22.5/45 allowed", angle);
                 this.angle = angle;
                 return this;
             }
@@ -591,8 +591,8 @@ public class ModelBuilder<T extends ModelBuilder<T>> extends ModelFile {
                 return this;
             }
 
-            BlockPartRotation build() {
-                return new BlockPartRotation(origin, axis, angle, rescale);
+            BlockElementRotation build() {
+                return new BlockElementRotation(origin, axis, angle, rescale);
             }
 
             public ElementBuilder end() { return ElementBuilder.this; }
@@ -651,9 +651,9 @@ public class ModelBuilder<T extends ModelBuilder<T>> extends ModelFile {
             return transforms.computeIfAbsent(type, TransformVecBuilder::new);
         }
 
-        Map<Perspective, ItemTransformVec3f> build() {
+        Map<Perspective, ItemTransform> build() {
             return this.transforms.entrySet().stream()
-                    .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().build(), (k1, k2) -> { throw new IllegalArgumentException(); }, LinkedHashMap::new));
+                    .collect(Collectors.toMap(Entry::getKey, e -> e.getValue().build(), (k1, k2) -> { throw new IllegalArgumentException(); }, LinkedHashMap::new));
         }
 
         public T end() { return self(); }
@@ -687,8 +687,8 @@ public class ModelBuilder<T extends ModelBuilder<T>> extends ModelFile {
                 return this;
             }
 
-            ItemTransformVec3f build() {
-                return new ItemTransformVec3f(rotation, translation, scale);
+            ItemTransform build() {
+                return new ItemTransform(rotation, translation, scale);
             }
 
             public TransformsBuilder end() { return TransformsBuilder.this; }

@@ -25,11 +25,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 import com.google.common.collect.Multimap;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.IServerConfiguration;
-import net.minecraft.world.storage.SaveFormat;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.WorldData;
+import net.minecraft.world.level.storage.LevelStorageSource;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.GameData;
 import net.minecraftforge.registries.RegistryManager;
@@ -56,20 +56,20 @@ public final class FMLWorldPersistenceHook implements WorldPersistenceHooks.Worl
     }
 
     @Override
-    public CompoundNBT getDataForWriting(SaveFormat.LevelSave levelSave, IServerConfiguration serverInfo)
+    public CompoundTag getDataForWriting(LevelStorageSource.LevelStorageAccess levelSave, WorldData serverInfo)
     {
-        CompoundNBT fmlData = new CompoundNBT();
-        ListNBT modList = new ListNBT();
+        CompoundTag fmlData = new CompoundTag();
+        ListTag modList = new ListTag();
         ModList.get().getMods().forEach(mi->
         {
-            final CompoundNBT mod = new CompoundNBT();
+            final CompoundTag mod = new CompoundTag();
             mod.putString("ModId", mi.getModId());
             mod.putString("ModVersion", MavenVersionStringHelper.artifactVersionToString(mi.getVersion()));
             modList.add(mod);
         });
         fmlData.put("LoadingModList", modList);
 
-        CompoundNBT registries = new CompoundNBT();
+        CompoundTag registries = new CompoundTag();
         fmlData.put("Registries", registries);
         LOGGER.debug(WORLDPERSISTENCE,"Gathering id map for writing to world save {}", serverInfo.getLevelName());
 
@@ -82,14 +82,14 @@ public final class FMLWorldPersistenceHook implements WorldPersistenceHooks.Worl
     }
 
     @Override
-    public void readData(SaveFormat.LevelSave levelSave, IServerConfiguration serverInfo, CompoundNBT tag)
+    public void readData(LevelStorageSource.LevelStorageAccess levelSave, WorldData serverInfo, CompoundTag tag)
     {
         if (tag.contains("LoadingModList"))
         {
-            ListNBT modList = tag.getList("LoadingModList", (byte)10);
+            ListTag modList = tag.getList("LoadingModList", (byte)10);
             for (int i = 0; i < modList.size(); i++)
             {
-                CompoundNBT mod = modList.getCompound(i);
+                CompoundTag mod = modList.getCompound(i);
                 String modId = mod.getString("ModId");
                 if (Objects.equals("minecraft",  modId)) {
                     continue;
@@ -113,7 +113,7 @@ public final class FMLWorldPersistenceHook implements WorldPersistenceHooks.Worl
         if (tag.contains("Registries")) // 1.8, genericed out the 'registries' list
         {
             Map<ResourceLocation, ForgeRegistry.Snapshot> snapshot = new HashMap<>();
-            CompoundNBT regs = tag.getCompound("Registries");
+            CompoundTag regs = tag.getCompound("Registries");
             for (String key : regs.getAllKeys())
             {
                 snapshot.put(new ResourceLocation(key), ForgeRegistry.Snapshot.read(regs.getCompound(key)));

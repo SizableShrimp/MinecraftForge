@@ -19,9 +19,9 @@
 
 package net.minecraftforge.fml.network;
 
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.Connection;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.function.BiConsumer;
@@ -32,9 +32,9 @@ import java.util.function.BiFunction;
  * and unwrapped packets.
  */
 public class PacketDispatcher {
-    BiConsumer<ResourceLocation, PacketBuffer> packetSink;
+    BiConsumer<ResourceLocation, FriendlyByteBuf> packetSink;
 
-    PacketDispatcher(final BiConsumer<ResourceLocation, PacketBuffer> packetSink) {
+    PacketDispatcher(final BiConsumer<ResourceLocation, FriendlyByteBuf> packetSink) {
         this.packetSink = packetSink;
     }
 
@@ -42,16 +42,16 @@ public class PacketDispatcher {
 
     }
 
-    public void sendPacket(ResourceLocation resourceLocation, PacketBuffer buffer) {
+    public void sendPacket(ResourceLocation resourceLocation, FriendlyByteBuf buffer) {
         packetSink.accept(resourceLocation, buffer);
     }
 
     static class NetworkManagerDispatcher extends PacketDispatcher {
-        private final NetworkManager manager;
+        private final Connection manager;
         private final int packetIndex;
-        private final BiFunction<Pair<PacketBuffer, Integer>, ResourceLocation, ICustomPacket<?>> customPacketSupplier;
+        private final BiFunction<Pair<FriendlyByteBuf, Integer>, ResourceLocation, ICustomPacket<?>> customPacketSupplier;
 
-        NetworkManagerDispatcher(NetworkManager manager, int packetIndex, BiFunction<Pair<PacketBuffer, Integer>, ResourceLocation, ICustomPacket<?>> customPacketSupplier) {
+        NetworkManagerDispatcher(Connection manager, int packetIndex, BiFunction<Pair<FriendlyByteBuf, Integer>, ResourceLocation, ICustomPacket<?>> customPacketSupplier) {
             super();
             this.packetSink = this::dispatchPacket;
             this.manager = manager;
@@ -59,7 +59,7 @@ public class PacketDispatcher {
             this.customPacketSupplier = customPacketSupplier;
         }
 
-        private void dispatchPacket(final ResourceLocation resourceLocation, final PacketBuffer buffer) {
+        private void dispatchPacket(final ResourceLocation resourceLocation, final FriendlyByteBuf buffer) {
             final ICustomPacket<?> packet = this.customPacketSupplier.apply(Pair.of(buffer, packetIndex), resourceLocation);
             this.manager.send(packet.getThis());
         }

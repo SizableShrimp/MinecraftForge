@@ -22,14 +22,14 @@ package net.minecraftforge.common.extensions;
 import javax.annotation.Nullable;
 
 import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.entity.Entity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.tags.Tag;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.tags.SetTag;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 
 public interface IForgeFluidState
 {
@@ -49,7 +49,7 @@ public interface IForgeFluidState
      * @param tag to test for.
      * @param testingHead when true, its testing the entities head for vision, breathing ect... otherwise its testing the body, for swimming and movement adjustment.
      */
-    default boolean isEntityInside(IWorldReader world, BlockPos pos, Entity entity, double yToTest, Tag<Fluid> tag, boolean testingHead)
+    default boolean isEntityInside(LevelReader world, BlockPos pos, Entity entity, double yToTest, SetTag<Fluid> tag, boolean testingHead)
     {
 //        return ifluidstate.isTagged(p_213290_1_) && d0 < (double)((float)blockpos.getY() + ifluidstate.getActualHeight(this.world, blockpos) + 0.11111111F);
         return getFluidState().getType().isEntityInside(getFluidState(), world, pos, entity, yToTest, tag, testingHead);
@@ -65,7 +65,7 @@ public interface IForgeFluidState
      * @param explosion The explosion
      * @return The amount of the explosion absorbed.
      */
-    default float getExplosionResistance(IBlockReader world, BlockPos pos, Explosion explosion)
+    default float getExplosionResistance(BlockGetter world, BlockPos pos, Explosion explosion)
     {
         return getFluidState().getType().getExplosionResistance(getFluidState(), world, pos, explosion);
     }

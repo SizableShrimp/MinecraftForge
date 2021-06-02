@@ -19,9 +19,9 @@
 
 package net.minecraftforge.common.extensions;
 
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.server.level.ServerLevel;
 
 public interface IForgeWorldServer extends IForgeWorld
 {
-    default ServerWorld getWorldServer() { return (ServerWorld) this; }
+    default ServerLevel getWorldServer() { return (ServerLevel) this; }
 }

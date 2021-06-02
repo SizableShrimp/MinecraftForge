@@ -19,46 +19,46 @@
 
 package net.minecraftforge.client.model;
 
-import net.minecraft.client.renderer.model.IModelTransform;
+import net.minecraft.client.resources.model.ModelState;
 
 import com.google.common.collect.ImmutableMap;
-import net.minecraft.util.math.vector.TransformationMatrix;
+import com.mojang.math.Transformation;
 
 /**
  * Simple implementation of IModelState via a map and a default value.
  */
-public final class SimpleModelTransform implements IModelTransform
+public final class SimpleModelTransform implements ModelState
 {
-    public static final SimpleModelTransform IDENTITY = new SimpleModelTransform(TransformationMatrix.identity());
+    public static final SimpleModelTransform IDENTITY = new SimpleModelTransform(Transformation.identity());
 
-    private final ImmutableMap<?, TransformationMatrix> map;
-    private final TransformationMatrix base;
+    private final ImmutableMap<?, Transformation> map;
+    private final Transformation base;
 
-    public SimpleModelTransform(ImmutableMap<?, TransformationMatrix> map)
+    public SimpleModelTransform(ImmutableMap<?, Transformation> map)
     {
-        this(map, TransformationMatrix.identity());
+        this(map, Transformation.identity());
     }
 
-    public SimpleModelTransform(TransformationMatrix base)
+    public SimpleModelTransform(Transformation base)
     {
         this(ImmutableMap.of(), base);
     }
 
-    public SimpleModelTransform(ImmutableMap<?, TransformationMatrix> map, TransformationMatrix base)
+    public SimpleModelTransform(ImmutableMap<?, Transformation> map, Transformation base)
     {
         this.map = map;
         this.base = base;
     }
 
     @Override
-    public TransformationMatrix getRotation()
+    public Transformation getRotation()
     {
         return base;
     }
 
     @Override
-    public TransformationMatrix getPartTransformation(Object part)
+    public Transformation getPartTransformation(Object part)
     {
-        return map.getOrDefault(part, TransformationMatrix.identity());
+        return map.getOrDefault(part, Transformation.identity());
     }
 }

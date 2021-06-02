@@ -32,8 +32,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import net.minecraft.block.Block;
-import net.minecraft.state.Property;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.Property;
 
 public final class MultiPartBlockStateBuilder implements IGeneratedBlockstate {
 
@@ -215,11 +215,11 @@ public final class MultiPartBlockStateBuilder implements IGeneratedBlockstate {
              * 
              * @throws IllegalStateException If this is a nested condition group
              */
-            public MultiPartBlockStateBuilder.PartBuilder end()
+            public PartBuilder end()
             {
                 if (this.parent != null)
                     throw new IllegalStateException("This is a nested condition group, use endNestedGroup() instead");
-                return MultiPartBlockStateBuilder.PartBuilder.this;
+                return PartBuilder.this;
             }
 
             /**

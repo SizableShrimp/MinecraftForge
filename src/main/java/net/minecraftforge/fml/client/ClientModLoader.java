@@ -31,13 +31,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-import net.minecraft.resources.IFutureReloadListener;
-import net.minecraft.resources.IPackNameDecorator;
-import net.minecraft.resources.IReloadableResourceManager;
-import net.minecraft.resources.IResourceManager;
-import net.minecraft.resources.ResourcePackInfo;
-import net.minecraft.resources.ResourcePackList;
-import net.minecraft.util.datafix.codec.DatapackCodec;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
+import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.server.packs.resources.ReloadableResourceManager;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.repository.PackRepository;
+import net.minecraft.world.level.DataPackConfig;
 import net.minecraftforge.fml.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,10 +45,10 @@ import org.apache.logging.log4j.Logger;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.DownloadingPackFinder;
-import net.minecraft.profiler.IProfiler;
-import net.minecraft.resources.data.PackMetadataSection;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.client.resources.ClientPackSource;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
@@ -91,7 +91,7 @@ public class ClientModLoader
             }
         }
     }
-    public static void begin(final Minecraft minecraft, final ResourcePackList defaultResourcePacks, final IReloadableResourceManager mcResourceManager, DownloadingPackFinder metadataSerializer)
+    public static void begin(final Minecraft minecraft, final PackRepository defaultResourcePacks, final ReloadableResourceManager mcResourceManager, ClientPackSource metadataSerializer)
     {
         // force log4j to shutdown logging in a shutdown hook. This is because we disable default shutdown hook so the server properly logs it's shutdown
         Runtime.getRuntime().addShutdownHook(new Thread(LogManager::shutdown));
@@ -103,14 +103,14 @@ public class ClientModLoader
         createRunnableWithCatch(()->ModLoader.get().gatherAndInitializeMods(ModWorkManager.syncExecutor(), ModWorkManager.parallelExecutor(), new SpacedRunnable(earlyLoaderGUI::renderTick))).run();
         if (error == null) {
             ResourcePackLoader.loadResourcePacks(defaultResourcePacks, ClientModLoader::buildPackFinder);
-            DatapackCodec.DEFAULT.addModPacks(ResourcePackLoader.getPackNames());
+            DataPackConfig.DEFAULT.addModPacks(ResourcePackLoader.getPackNames());
             mcResourceManager.registerReloadListener(ClientModLoader::onResourceReload);
             mcResourceManager.registerReloadListener(BrandingControl.resourceManagerReloadListener());
             ModelLoaderRegistry.init();
         }
     }
 
-    private static CompletableFuture<Void> onResourceReload(final IFutureReloadListener.IStage stage, final IResourceManager resourceManager, final IProfiler prepareProfiler, final IProfiler executeProfiler, final Executor asyncExecutor, final Executor syncExecutor) {
+    private static CompletableFuture<Void> onResourceReload(final PreparableReloadListener.PreparationBarrier stage, final ResourceManager resourceManager, final ProfilerFiller prepareProfiler, final ProfilerFiller executeProfiler, final Executor asyncExecutor, final Executor syncExecutor) {
         return CompletableFuture.runAsync(createRunnableWithCatch(() -> startModLoading(ModWorkManager.wrappedExecutor(syncExecutor), asyncExecutor)), ModWorkManager.parallelExecutor())
                 .thenCompose(stage::wait)
                 .thenRunAsync(() -> finishModLoading(ModWorkManager.wrappedExecutor(syncExecutor), asyncExecutor), ModWorkManager.parallelExecutor());
@@ -204,18 +204,18 @@ public class ClientModLoader
         return loading;
     }
 
-    private static ResourcePackLoader.IPackInfoFinder buildPackFinder(Map<ModFile, ? extends ModFileResourcePack> modResourcePacks, BiConsumer<? super ModFileResourcePack, ResourcePackInfo> packSetter) {
+    private static ResourcePackLoader.IPackInfoFinder buildPackFinder(Map<ModFile, ? extends ModFileResourcePack> modResourcePacks, BiConsumer<? super ModFileResourcePack, Pack> packSetter) {
         return (packList, factory) -> clientPackFinder(modResourcePacks, packSetter, packList, factory);
     }
 
-    private static void clientPackFinder(Map<ModFile, ? extends ModFileResourcePack> modResourcePacks, BiConsumer<? super ModFileResourcePack, ResourcePackInfo> packSetter, Consumer<ResourcePackInfo> consumer, ResourcePackInfo.IFactory factory) {
+    private static void clientPackFinder(Map<ModFile, ? extends ModFileResourcePack> modResourcePacks, BiConsumer<? super ModFileResourcePack, Pack> packSetter, Consumer<Pack> consumer, Pack.PackConstructor factory) {
         List<ModFileResourcePack> hiddenPacks = new ArrayList<>();
         for (Entry<ModFile, ? extends ModFileResourcePack> e : modResourcePacks.entrySet())
         {
             IModInfo mod = e.getKey().getModInfos().get(0);
             if (Objects.equals(mod.getModId(), "minecraft")) continue; // skip the minecraft "mod"
             final String name = "mod:" + mod.getModId();
-            final ResourcePackInfo packInfo = ResourcePackInfo.create(name, false, e::getValue, factory, ResourcePackInfo.Priority.BOTTOM, IPackNameDecorator.DEFAULT);
+            final Pack packInfo = Pack.create(name, false, e::getValue, factory, Pack.Position.BOTTOM, PackSource.DEFAULT);
             if (packInfo == null) {
                 // Vanilla only logs an error, instead of propagating, so handle null and warn that something went wrong
                 ModLoader.get().addWarning(new ModLoadingWarning(mod, ModLoadingStage.ERROR, "fml.modloading.brokenresources", e.getKey()));
@@ -229,9 +229,9 @@ public class ClientModLoader
                 hiddenPacks.add(e.getValue());
             }
         }
-        final ResourcePackInfo packInfo = ResourcePackInfo.create("mod_resources", true, () -> new DelegatingResourcePack("mod_resources", "Mod Resources",
-                new PackMetadataSection(new TranslationTextComponent("fml.resources.modresources", hiddenPacks.size()), 6),
-                hiddenPacks), factory, ResourcePackInfo.Priority.BOTTOM, IPackNameDecorator.DEFAULT);
+        final Pack packInfo = Pack.create("mod_resources", true, () -> new DelegatingResourcePack("mod_resources", "Mod Resources",
+                new PackMetadataSection(new TranslatableComponent("fml.resources.modresources", hiddenPacks.size()), 6),
+                hiddenPacks), factory, Pack.Position.BOTTOM, PackSource.DEFAULT);
         consumer.accept(packInfo);
     }
 }

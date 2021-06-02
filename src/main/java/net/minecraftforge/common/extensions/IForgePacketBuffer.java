@@ -20,8 +20,8 @@
 package net.minecraftforge.common.extensions;
 
 import com.google.common.base.Preconditions;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -36,9 +36,9 @@ import java.util.Objects;
  */
 public interface IForgePacketBuffer
 {
-    default PacketBuffer getBuffer()
+    default FriendlyByteBuf getBuffer()
     {
-        return (PacketBuffer) this;
+        return (FriendlyByteBuf) this;
     }
     /**
      * Writes the given entries integer id to the buffer. Notice however that this will only write the id of the given entry and will not check whether it actually exists

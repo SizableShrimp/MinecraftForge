@@ -25,8 +25,8 @@ import java.util.function.Function;
 import com.google.common.collect.ImmutableList;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.IResourceManager;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.resources.ResourceLocation;
 
 public interface IForgeTextureAtlasSprite
 {
@@ -37,7 +37,7 @@ public interface IForgeTextureAtlasSprite
      * @param location File resource location
      * @return True to use your own custom load code and bypass vanilla loading.
      */
-    default boolean hasCustomLoader(IResourceManager manager, ResourceLocation location)
+    default boolean hasCustomLoader(ResourceManager manager, ResourceLocation location)
     {
         return false;
     }
@@ -50,7 +50,7 @@ public interface IForgeTextureAtlasSprite
      * @param textureGetter accessor for dependencies. All of them will be loaded before this one
      * @return False to prevent this Icon from being stitched
      */
-    default boolean load(IResourceManager manager, ResourceLocation location, Function<ResourceLocation, TextureAtlasSprite> textureGetter)
+    default boolean load(ResourceManager manager, ResourceLocation location, Function<ResourceLocation, TextureAtlasSprite> textureGetter)
     {
         return true;
     }

@@ -19,22 +19,22 @@
 
 package net.minecraftforge.common.util;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.world.storage.WorldSavedData;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.saveddata.SavedData;
 
-public class DummyWorldSaveData extends WorldSavedData {
+public class DummyWorldSaveData extends SavedData {
     public static final DummyWorldSaveData DUMMY = new DummyWorldSaveData();
     private DummyWorldSaveData() {
         super("DUMMYDUMMY \uD83D\uDC4C\uD83D\uDC4C\uD83D\uDC4C");
     }
 
     @Override
-    public void load(final CompoundNBT nbt) {
+    public void load(final CompoundTag nbt) {
         // NOOP
     }
 
     @Override
-    public CompoundNBT save(final CompoundNBT compound) {
+    public CompoundTag save(final CompoundTag compound) {
         // NOOP
         return null;
     }

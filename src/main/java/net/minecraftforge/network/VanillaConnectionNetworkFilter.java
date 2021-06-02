@@ -27,13 +27,13 @@ import java.util.function.BiConsumer;
 import javax.annotation.Nonnull;
 
 import io.netty.channel.ChannelHandler;
-import net.minecraft.command.ISuggestionProvider;
-import net.minecraft.command.arguments.ArgumentTypes;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SCommandListPacket;
-import net.minecraft.network.play.server.SEntityPropertiesPacket;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.commands.synchronization.ArgumentTypes;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundCommandsPacket;
+import net.minecraft.network.protocol.game.ClientboundUpdateAttributesPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -56,15 +56,15 @@ public class VanillaConnectionNetworkFilter extends VanillaPacketFilter
     public VanillaConnectionNetworkFilter()
     {
         super(
-                ImmutableMap.<Class<? extends IPacket<?>>, BiConsumer<IPacket<?>, List<? super IPacket<?>>>>builder()
-                .put(handler(SEntityPropertiesPacket.class, VanillaConnectionNetworkFilter::filterEntityProperties))
-                .put(handler(SCommandListPacket.class, VanillaConnectionNetworkFilter::filterCommandList))
+                ImmutableMap.<Class<? extends Packet<?>>, BiConsumer<Packet<?>, List<? super Packet<?>>>>builder()
+                .put(handler(ClientboundUpdateAttributesPacket.class, VanillaConnectionNetworkFilter::filterEntityProperties))
+                .put(handler(ClientboundCommandsPacket.class, VanillaConnectionNetworkFilter::filterCommandList))
                 .build()
         );
     }
 
     @Override
-    protected boolean isNecessary(NetworkManager manager)
+    protected boolean isNecessary(Connection manager)
     {
         return NetworkHooks.isVanillaConnection(manager);
     }
@@ -74,9 +74,9 @@ public class VanillaConnectionNetworkFilter extends VanillaPacketFilter
      * A vanilla client would ignore these with an error log.
      */
     @Nonnull
-    private static SEntityPropertiesPacket filterEntityProperties(SEntityPropertiesPacket msg)
+    private static ClientboundUpdateAttributesPacket filterEntityProperties(ClientboundUpdateAttributesPacket msg)
     {
-        SEntityPropertiesPacket newPacket = new SEntityPropertiesPacket(msg.getEntityId(), Collections.emptyList());
+        ClientboundUpdateAttributesPacket newPacket = new ClientboundUpdateAttributesPacket(msg.getEntityId(), Collections.emptyList());
         msg.getValues().stream()
                 .filter(snapshot -> {
                     ResourceLocation key = ForgeRegistries.ATTRIBUTES.getKey(snapshot.getAttribute());
@@ -91,13 +91,13 @@ public class VanillaConnectionNetworkFilter extends VanillaPacketFilter
      * A vanilla client would fail to deserialize the packet and disconnect with an error message if these were sent.
      */
     @Nonnull
-    private static SCommandListPacket filterCommandList(SCommandListPacket packet)
+    private static ClientboundCommandsPacket filterCommandList(ClientboundCommandsPacket packet)
     {
-        RootCommandNode<ISuggestionProvider> root = packet.getRoot();
-        RootCommandNode<ISuggestionProvider> newRoot = CommandTreeCleaner.cleanArgumentTypes(root, argType -> {
+        RootCommandNode<SharedSuggestionProvider> root = packet.getRoot();
+        RootCommandNode<SharedSuggestionProvider> newRoot = CommandTreeCleaner.cleanArgumentTypes(root, argType -> {
             ResourceLocation id = ArgumentTypes.getId(argType);
             return id != null && (id.getNamespace().equals("minecraft") || id.getNamespace().equals("brigadier"));
         });
-        return new SCommandListPacket(newRoot);
+        return new ClientboundCommandsPacket(newRoot);
     }
 }

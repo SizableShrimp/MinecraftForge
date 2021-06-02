@@ -20,7 +20,7 @@
 package net.minecraftforge.fml.network;
 
 import io.netty.util.AttributeKey;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.network.event.EventNetworkChannel;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import org.apache.logging.log4j.Marker;

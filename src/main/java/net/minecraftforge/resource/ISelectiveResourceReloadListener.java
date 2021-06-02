@@ -21,20 +21,20 @@ package net.minecraftforge.resource;
 
 import java.util.function.Predicate;
 
-import net.minecraft.resources.IResourceManager;
-import net.minecraft.resources.IResourceManagerReloadListener;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 
-public interface ISelectiveResourceReloadListener extends IResourceManagerReloadListener
+public interface ISelectiveResourceReloadListener extends ResourceManagerReloadListener
 {
     @Override
-    default void onResourceManagerReload(IResourceManager resourceManager)
+    default void onResourceManagerReload(ResourceManager resourceManager)
     {
         // For compatibility, call the selective version from the non-selective function
         onResourceManagerReload(resourceManager, SelectiveReloadStateHandler.INSTANCE.get());
     }
 
     /**
-     * A version of onResourceManager that selectively chooses {@link net.minecraftforge.resource.IResourceType}s
+     * A version of onResourceManager that selectively chooses {@link IResourceType}s
      * to reload.
      * When using this, the given predicate should be called to ensure the relevant resources should
      * be reloaded at this time.
@@ -42,5 +42,5 @@ public interface ISelectiveResourceReloadListener extends IResourceManagerReload
      * @param resourceManager the resource manager being reloaded
      * @param resourcePredicate predicate to test whether any given resource type should be reloaded
      */
-    void onResourceManagerReload(IResourceManager resourceManager, Predicate<IResourceType> resourcePredicate);
+    void onResourceManagerReload(ResourceManager resourceManager, Predicate<IResourceType> resourcePredicate);
 }

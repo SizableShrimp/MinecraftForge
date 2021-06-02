@@ -20,8 +20,8 @@
 package net.minecraftforge.common.util;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 

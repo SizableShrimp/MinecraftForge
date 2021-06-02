@@ -21,9 +21,9 @@ package net.minecraftforge.event.entity.player;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Cancelable;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
 
@@ -35,7 +35,7 @@ import javax.annotation.Nonnull;
  * {@link #bow} contains the ItemBow ItemStack that was used in this event.<br>
  * {@link #charge} contains the value for how much the player had charged before stopping the shot.<br>
  * <br>
- * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
+ * This event is {@link Cancelable}.<br>
  * If this event is canceled, the player does not stop using the bow.<br>
  * <br>
  * This event does not have a result. {@link HasResult}<br>
@@ -46,11 +46,11 @@ import javax.annotation.Nonnull;
 public class ArrowLooseEvent extends PlayerEvent
 {
     private final ItemStack bow;
-    private final World world;
+    private final Level world;
     private final boolean hasAmmo;
     private int charge;
 
-    public ArrowLooseEvent(PlayerEntity player, @Nonnull ItemStack bow, World world, int charge, boolean hasAmmo)
+    public ArrowLooseEvent(Player player, @Nonnull ItemStack bow, Level world, int charge, boolean hasAmmo)
     {
         super(player);
         this.bow = bow;
@@ -61,7 +61,7 @@ public class ArrowLooseEvent extends PlayerEvent
 
     @Nonnull
     public ItemStack getBow() { return this.bow; }
-    public World getWorld() { return this.world; }
+    public Level getWorld() { return this.world; }
     public boolean hasAmmo() { return this.hasAmmo; }
     public int getCharge() { return this.charge; }
     public void setCharge(int charge) { this.charge = charge; }

@@ -20,15 +20,15 @@
 package net.minecraftforge.fml.network;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.IPacket;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.server.ServerChunkProvider;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.server.level.ServerChunkCache;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.LogicalSidedProvider;
 
@@ -50,13 +50,13 @@ public class PacketDistributor<T> {
      * <br/>
      * {@link #with(Supplier)} Player
      */
-    public static final PacketDistributor<ServerPlayerEntity> PLAYER = new PacketDistributor<>(PacketDistributor::playerConsumer, NetworkDirection.PLAY_TO_CLIENT);
+    public static final PacketDistributor<ServerPlayer> PLAYER = new PacketDistributor<>(PacketDistributor::playerConsumer, NetworkDirection.PLAY_TO_CLIENT);
     /**
      * Send to everyone in the dimension specified in the Supplier
      * <br/>
      * {@link #with(Supplier)} DimensionType
      */
-    public static final PacketDistributor<RegistryKey<World>> DIMENSION = new PacketDistributor<>(PacketDistributor::playerListDimConsumer, NetworkDirection.PLAY_TO_CLIENT);
+    public static final PacketDistributor<ResourceKey<Level>> DIMENSION = new PacketDistributor<>(PacketDistributor::playerListDimConsumer, NetworkDirection.PLAY_TO_CLIENT);
     /**
      * Send to everyone near the {@link TargetPoint} specified in the Supplier
      * <br/>
@@ -92,22 +92,22 @@ public class PacketDistributor<T> {
      * <br/>
      * {@link #with(Supplier)} Chunk
      */
-    public static final PacketDistributor<Chunk> TRACKING_CHUNK = new PacketDistributor<>(PacketDistributor::trackingChunk, NetworkDirection.PLAY_TO_CLIENT);
+    public static final PacketDistributor<LevelChunk> TRACKING_CHUNK = new PacketDistributor<>(PacketDistributor::trackingChunk, NetworkDirection.PLAY_TO_CLIENT);
     /**
      * Send to the supplied list of NetworkManager instances in the Supplier
      * <br/>
      * {@link #with(Supplier)} List of NetworkManager
      */
-    public static final PacketDistributor<List<NetworkManager>> NMLIST = new PacketDistributor<>(PacketDistributor::networkManagerList, NetworkDirection.PLAY_TO_CLIENT);
+    public static final PacketDistributor<List<Connection>> NMLIST = new PacketDistributor<>(PacketDistributor::networkManagerList, NetworkDirection.PLAY_TO_CLIENT);
 
     public static final class TargetPoint {
 
-        private final ServerPlayerEntity excluded;
+        private final ServerPlayer excluded;
         private final double x;
         private final double y;
         private final double z;
         private final double r2;
-        private final RegistryKey<World> dim;
+        private final ResourceKey<Level> dim;
 
         /**
          * A target point with excluded entity
@@ -119,7 +119,7 @@ public class PacketDistributor<T> {
          * @param r2 Radius
          * @param dim DimensionType
          */
-        public TargetPoint(final ServerPlayerEntity excluded, final double x, final double y, final double z, final double r2, final RegistryKey<World> dim) {
+        public TargetPoint(final ServerPlayer excluded, final double x, final double y, final double z, final double r2, final ResourceKey<Level> dim) {
             this.excluded = excluded;
             this.x = x;
             this.y = y;
@@ -136,7 +136,7 @@ public class PacketDistributor<T> {
          * @param r2 Radius
          * @param dim DimensionType
          */
-        public TargetPoint(final double x, final double y, final double z, final double r2, final RegistryKey<World> dim) {
+        public TargetPoint(final double x, final double y, final double z, final double r2, final ResourceKey<Level> dim) {
             this.excluded = null;
             this.x = x;
             this.y = y;
@@ -154,7 +154,7 @@ public class PacketDistributor<T> {
          * @param dim DimensionType
          * @return A TargetPoint supplier
          */
-        public static Supplier<TargetPoint> p(double x, double y, double z, double r2, RegistryKey<World> dim) {
+        public static Supplier<TargetPoint> p(double x, double y, double z, double r2, ResourceKey<Level> dim) {
             TargetPoint tp = new TargetPoint(x, y, z, r2, dim);
             return ()->tp;
         }
@@ -168,14 +168,14 @@ public class PacketDistributor<T> {
      *
      */
     public static class PacketTarget {
-        private final Consumer<IPacket<?>> packetConsumer;
+        private final Consumer<Packet<?>> packetConsumer;
         private final PacketDistributor<?> distributor;
-        PacketTarget(final Consumer<IPacket<?>> packetConsumer, final PacketDistributor<?> distributor) {
+        PacketTarget(final Consumer<Packet<?>> packetConsumer, final PacketDistributor<?> distributor) {
             this.packetConsumer = packetConsumer;
             this.distributor = distributor;
         }
 
-        public void send(IPacket<?> packet) {
+        public void send(Packet<?> packet) {
             packetConsumer.accept(packet);
         }
 
@@ -185,10 +185,10 @@ public class PacketDistributor<T> {
 
     }
 
-    private final BiFunction<PacketDistributor<T>, Supplier<T>, Consumer<IPacket<?>>> functor;
+    private final BiFunction<PacketDistributor<T>, Supplier<T>, Consumer<Packet<?>>> functor;
     private final NetworkDirection direction;
 
-    public PacketDistributor(BiFunction<PacketDistributor<T>, Supplier<T>, Consumer<IPacket<?>>> functor, NetworkDirection direction) {
+    public PacketDistributor(BiFunction<PacketDistributor<T>, Supplier<T>, Consumer<Packet<?>>> functor, NetworkDirection direction) {
         this.functor = functor;
         this.direction = direction;
     }
@@ -213,50 +213,50 @@ public class PacketDistributor<T> {
         return new PacketTarget(functor.apply(this, ()->null), this);
     }
 
-    private Consumer<IPacket<?>> playerConsumer(final Supplier<ServerPlayerEntity> entityPlayerMPSupplier) {
+    private Consumer<Packet<?>> playerConsumer(final Supplier<ServerPlayer> entityPlayerMPSupplier) {
         return p -> entityPlayerMPSupplier.get().connection.connection.send(p);
     }
-    private Consumer<IPacket<?>> playerListDimConsumer(final Supplier<RegistryKey<World>> dimensionTypeSupplier) {
+    private Consumer<Packet<?>> playerListDimConsumer(final Supplier<ResourceKey<Level>> dimensionTypeSupplier) {
         return p->getServer().getPlayerList().broadcastAll(p, dimensionTypeSupplier.get());
     }
 
-    private Consumer<IPacket<?>> playerListAll(final Supplier<Void> voidSupplier) {
+    private Consumer<Packet<?>> playerListAll(final Supplier<Void> voidSupplier) {
         return p -> getServer().getPlayerList().broadcastAll(p);
     }
 
-    private Consumer<IPacket<?>> clientToServer(final Supplier<Void> voidSupplier) {
+    private Consumer<Packet<?>> clientToServer(final Supplier<Void> voidSupplier) {
         return p -> Minecraft.getInstance().getConnection().send(p);
     }
 
-    private Consumer<IPacket<?>> playerListPointConsumer(final Supplier<TargetPoint> targetPointSupplier) {
+    private Consumer<Packet<?>> playerListPointConsumer(final Supplier<TargetPoint> targetPointSupplier) {
         return p -> {
             final TargetPoint tp = targetPointSupplier.get();
             getServer().getPlayerList().broadcast(tp.excluded, tp.x, tp.y, tp.z, tp.r2, tp.dim, p);
         };
     }
 
-    private Consumer<IPacket<?>> trackingEntity(final Supplier<Entity> entitySupplier) {
+    private Consumer<Packet<?>> trackingEntity(final Supplier<Entity> entitySupplier) {
         return p-> {
             final Entity entity = entitySupplier.get();
-            ((ServerChunkProvider)entity.getCommandSenderWorld().getChunkSource()).broadcast(entity, p);
+            ((ServerChunkCache)entity.getCommandSenderWorld().getChunkSource()).broadcast(entity, p);
         };
     }
 
-    private Consumer<IPacket<?>> trackingEntityAndSelf(final Supplier<Entity> entitySupplier) {
+    private Consumer<Packet<?>> trackingEntityAndSelf(final Supplier<Entity> entitySupplier) {
         return p-> {
             final Entity entity = entitySupplier.get();
-            ((ServerChunkProvider)entity.getCommandSenderWorld().getChunkSource()).broadcastAndSend(entity, p);
+            ((ServerChunkCache)entity.getCommandSenderWorld().getChunkSource()).broadcastAndSend(entity, p);
         };
     }
 
-    private Consumer<IPacket<?>> trackingChunk(final Supplier<Chunk> chunkPosSupplier) {
+    private Consumer<Packet<?>> trackingChunk(final Supplier<LevelChunk> chunkPosSupplier) {
         return p -> {
-            final Chunk chunk = chunkPosSupplier.get();
-            ((ServerChunkProvider)chunk.getLevel().getChunkSource()).chunkMap.getPlayers(chunk.getPos(), false).forEach(e -> e.connection.send(p));
+            final LevelChunk chunk = chunkPosSupplier.get();
+            ((ServerChunkCache)chunk.getLevel().getChunkSource()).chunkMap.getPlayers(chunk.getPos(), false).forEach(e -> e.connection.send(p));
         };
     }
 
-    private Consumer<IPacket<?>> networkManagerList(final Supplier<List<NetworkManager>> nmListSupplier) {
+    private Consumer<Packet<?>> networkManagerList(final Supplier<List<Connection>> nmListSupplier) {
         return p -> nmListSupplier.get().forEach(nm->nm.send(p));
     }
 

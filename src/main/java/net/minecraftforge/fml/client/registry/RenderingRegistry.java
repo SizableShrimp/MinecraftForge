@@ -23,9 +23,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 
 public class RenderingRegistry
 {
@@ -44,14 +44,14 @@ public class RenderingRegistry
         INSTANCE.entityRenderers.put(entityClass, renderFactory);
     }
 
-    public static void loadEntityRenderers(EntityRendererManager manager)
+    public static void loadEntityRenderers(EntityRenderDispatcher manager)
     {
         INSTANCE.entityRenderers.forEach((key, value) -> register(manager, key, value));
         manager.validateRendererExistence();
     }
 
     @SuppressWarnings("unchecked")
-    private static <T extends Entity> void register(EntityRendererManager manager, EntityType<T> entityType, IRenderFactory<?> renderFactory)
+    private static <T extends Entity> void register(EntityRenderDispatcher manager, EntityType<T> entityType, IRenderFactory<?> renderFactory)
     {
         manager.register(entityType, ((IRenderFactory<T>)renderFactory).createRenderFor(manager));
     }

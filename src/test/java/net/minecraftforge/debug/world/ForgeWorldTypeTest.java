@@ -20,14 +20,14 @@
 package net.minecraftforge.debug.world;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.DimensionSettings;
-import net.minecraft.world.gen.settings.DimensionGeneratorSettings;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.core.Registry;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+import net.minecraft.world.level.levelgen.WorldGenSettings;
 import net.minecraftforge.client.ForgeWorldTypeScreens;
 import net.minecraftforge.common.world.ForgeWorldType;
 import net.minecraftforge.event.RegistryEvent;
@@ -52,16 +52,16 @@ public class ForgeWorldTypeTest
     private void registerWorldTypes(RegistryEvent.Register<ForgeWorldType> event)
     {
         event.getRegistry().registerAll(
-                new ForgeWorldType(DimensionGeneratorSettings::makeDefaultOverworld).setRegistryName("test_world_type")
+                new ForgeWorldType(WorldGenSettings::makeDefaultOverworld).setRegistryName("test_world_type")
         );
         event.getRegistry().registerAll(
                 new ForgeWorldType(this::createChunkGenerator).setRegistryName("test_world_type2")
         );
     }
 
-    private ChunkGenerator createChunkGenerator(Registry<Biome> biomes, Registry<DimensionSettings> dimensionSettings, long seed, String settings)
+    private ChunkGenerator createChunkGenerator(Registry<Biome> biomes, Registry<NoiseGeneratorSettings> dimensionSettings, long seed, String settings)
     {
-        return DimensionGeneratorSettings.makeDefaultOverworld(biomes, dimensionSettings, seed);
+        return WorldGenSettings.makeDefaultOverworld(biomes, dimensionSettings, seed);
     }
 
     private void registerWorldTypeScreenFactories(FMLClientSetupEvent event)
@@ -73,7 +73,7 @@ public class ForgeWorldTypeTest
             {
                 super.init();
 
-                addButton(new Button(0, 0, 120, 20, new StringTextComponent("close"), btn -> {
+                addButton(new Button(0, 0, 120, 20, new TextComponent("close"), btn -> {
                     Minecraft.getInstance().setScreen(returnTo);
                 }));
             }

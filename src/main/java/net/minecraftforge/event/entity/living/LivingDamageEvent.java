@@ -21,8 +21,8 @@ package net.minecraftforge.event.entity.living;
 
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.eventbus.api.Cancelable;
-import net.minecraft.util.DamageSource;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 
 /**
  * LivingDamageEvent is fired just before damage is applied to entity.<br>
@@ -37,7 +37,7 @@ import net.minecraft.entity.LivingEntity;
  * {@link #source} contains the DamageSource that caused this Entity to be hurt. <br>
  * {@link #amount} contains the final amount of damage that will be dealt to entity. <br>
  * <br>
- * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
+ * This event is {@link Cancelable}.<br>
  * If this event is canceled, the Entity is not hurt. Used resources WILL NOT be restored.<br>
  * <br>
  * This event does not have a result. {@link HasResult}<br>

@@ -19,16 +19,16 @@
 
 package net.minecraftforge.fml;
 
-import net.minecraft.util.text.ITextProperties;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.FormattedText;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.List;
 
 public class TextComponentMessageFormatHandler {
-    public static int handle(final TranslationTextComponent parent, final List<ITextProperties> children, final Object[] formatArgs, final String format) {
+    public static int handle(final TranslatableComponent parent, final List<FormattedText> children, final Object[] formatArgs, final String format) {
         try {
-            StringTextComponent component = new StringTextComponent(ForgeI18n.parseFormat(format, formatArgs));
+            TextComponent component = new TextComponent(ForgeI18n.parseFormat(format, formatArgs));
             component.getStyle().applyTo(parent.getStyle());
             children.add(component);
             return format.length();

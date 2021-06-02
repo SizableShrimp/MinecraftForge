@@ -21,7 +21,7 @@ package net.minecraftforge.event.village;
 
 import java.util.List;
 
-import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
+import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
 import net.minecraftforge.common.BasicTrade;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
@@ -36,21 +36,21 @@ import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 public class WandererTradesEvent extends Event
 {
 
-    protected List<ITrade> generic;
-    protected List<ITrade> rare;
+    protected List<ItemListing> generic;
+    protected List<ItemListing> rare;
 
-    public WandererTradesEvent(List<ITrade> generic, List<ITrade> rare)
+    public WandererTradesEvent(List<ItemListing> generic, List<ItemListing> rare)
     {
         this.generic = generic;
         this.rare = rare;
     }
 
-    public List<ITrade> getGenericTrades()
+    public List<ItemListing> getGenericTrades()
     {
         return generic;
     }
 
-    public List<ITrade> getRareTrades()
+    public List<ItemListing> getRareTrades()
     {
         return rare;
     }

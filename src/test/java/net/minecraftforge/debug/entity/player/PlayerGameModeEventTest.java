@@ -19,7 +19,7 @@
 
 package net.minecraftforge.debug.entity.player;
 
-import net.minecraft.world.GameType;
+import net.minecraft.world.level.GameType;
 import net.minecraftforge.client.event.ClientPlayerChangeGameModeEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

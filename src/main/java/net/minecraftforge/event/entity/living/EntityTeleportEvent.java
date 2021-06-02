@@ -1,10 +1,10 @@
 package net.minecraftforge.event.entity.living;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.item.EnderPearlEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.ThrownEnderpearl;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.eventbus.api.Cancelable;
@@ -38,17 +38,17 @@ public class EntityTeleportEvent extends EntityEvent
     public void setTargetY(double targetY) { this.targetY = targetY; }
     public double getTargetZ() { return targetZ; }
     public void setTargetZ(double targetZ) { this.targetZ = targetZ; }
-    public Vector3d getTarget() { return new Vector3d(this.targetX, this.targetY, this.targetZ); }
+    public Vec3 getTarget() { return new Vec3(this.targetX, this.targetY, this.targetZ); }
     public double getPrevX() { return getEntity().getX(); }
     public double getPrevY() { return getEntity().getY(); }
     public double getPrevZ() { return getEntity().getZ(); }
-    public Vector3d getPrev() { return getEntity().position(); }
+    public Vec3 getPrev() { return getEntity().position(); }
 
     /**
      * EntityTeleportEvent.TeleportCommand is fired before a living entity is teleported
      * from use of {@link net.minecraft.command.impl.TeleportCommand}.
      * <br>
-     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
+     * This event is {@link Cancelable}.<br>
      * If the event is not canceled, the entity will be teleported.
      * <br>
      * This event does not have a result. {@link HasResult}<br>
@@ -72,7 +72,7 @@ public class EntityTeleportEvent extends EntityEvent
      * EntityTeleportEvent.SpreadPlayersCommand is fired before a living entity is teleported
      * from use of {@link net.minecraft.command.impl.SpreadPlayersCommand}.
      * <br>
-     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
+     * This event is {@link Cancelable}.<br>
      * If the event is not canceled, the entity will be teleported.
      * <br>
      * This event does not have a result. {@link HasResult}<br>
@@ -95,7 +95,7 @@ public class EntityTeleportEvent extends EntityEvent
     /**
      * EntityTeleportEvent.EnderEntity is fired before an Enderman or Shulker randomly teleports.
      * <br>
-     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
+     * This event is {@link Cancelable}.<br>
      * If the event is not canceled, the entity will be teleported.
      * <br>
      * This event does not have a result. {@link HasResult}<br>
@@ -126,7 +126,7 @@ public class EntityTeleportEvent extends EntityEvent
     /**
      * EntityTeleportEvent.EnderPearl is fired before an Entity is teleported from an EnderPearlEntity.
      * <br>
-     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
+     * This event is {@link Cancelable}.<br>
      * If the event is not canceled, the entity will be teleported.
      * <br>
      * This event does not have a result. {@link HasResult}<br>
@@ -140,11 +140,11 @@ public class EntityTeleportEvent extends EntityEvent
     @Cancelable
     public static class EnderPearl extends EntityTeleportEvent
     {
-        private final ServerPlayerEntity player;
-        private final EnderPearlEntity pearlEntity;
+        private final ServerPlayer player;
+        private final ThrownEnderpearl pearlEntity;
         private float attackDamage;
 
-        public EnderPearl(ServerPlayerEntity entity, double targetX, double targetY, double targetZ, EnderPearlEntity pearlEntity, float attackDamage)
+        public EnderPearl(ServerPlayer entity, double targetX, double targetY, double targetZ, ThrownEnderpearl pearlEntity, float attackDamage)
         {
             super(entity, targetX, targetY, targetZ);
             this.pearlEntity = pearlEntity;
@@ -152,12 +152,12 @@ public class EntityTeleportEvent extends EntityEvent
             this.attackDamage = attackDamage;
         }
 
-        public EnderPearlEntity getPearlEntity()
+        public ThrownEnderpearl getPearlEntity()
         {
             return pearlEntity;
         }
 
-        public ServerPlayerEntity getPlayer()
+        public ServerPlayer getPlayer()
         {
             return player;
         }
@@ -176,7 +176,7 @@ public class EntityTeleportEvent extends EntityEvent
     /**
      * EntityTeleportEvent.ChorusFruit is fired before a LivingEntity is teleported due to consuming Chorus Fruit.
      * <br>
-     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
+     * This event is {@link Cancelable}.<br>
      * If the event is not canceled, the entity will be teleported.
      * <br>
      * This event does not have a result. {@link HasResult}<br>

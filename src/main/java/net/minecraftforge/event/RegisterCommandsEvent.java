@@ -26,6 +26,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
 
 
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+
 /**
  * Commands are rebuilt whenever {@link DataPackRegistries} is recreated.
  * You can use this event to register your commands whenever the {@link net.minecraft.command.Commands} class in constructed.
@@ -34,21 +37,21 @@ import net.minecraftforge.eventbus.api.Event;
  */
 public class RegisterCommandsEvent extends Event
 {
-    private final CommandDispatcher<CommandSource> dispatcher;
-    private final Commands.EnvironmentType environment;
+    private final CommandDispatcher<CommandSourceStack> dispatcher;
+    private final Commands.CommandSelection environment;
     
-    public RegisterCommandsEvent(CommandDispatcher<CommandSource> dispatcher, Commands.EnvironmentType environment)
+    public RegisterCommandsEvent(CommandDispatcher<CommandSourceStack> dispatcher, Commands.CommandSelection environment)
     {
         this.dispatcher = dispatcher;
         this.environment = environment;
     }
     
-    public CommandDispatcher<CommandSource> getDispatcher()
+    public CommandDispatcher<CommandSourceStack> getDispatcher()
     {
         return dispatcher;
     }
     
-    public Commands.EnvironmentType getEnvironment()
+    public Commands.CommandSelection getEnvironment()
     {
         return environment;
     }

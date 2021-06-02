@@ -19,9 +19,14 @@
 
 package net.minecraftforge.client.extensions;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.util.Direction;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.core.Direction;
 import net.minecraft.util.math.vector.*;
+
+import com.mojang.math.Matrix4f;
+import com.mojang.math.Transformation;
+import com.mojang.math.Vector3f;
+import com.mojang.math.Vector4f;
 
 /*
  * Replacement interface for ModelRotation to allow custom transformations of vanilla models.
@@ -29,17 +34,17 @@ import net.minecraft.util.math.vector.*;
  */
 public interface IForgeTransformationMatrix
 {
-    default TransformationMatrix getTransformaion()
+    default Transformation getTransformaion()
     {
-        return (TransformationMatrix)this;
+        return (Transformation)this;
     }
 
     default boolean isIdentity()
     {
-        return getTransformaion().equals(TransformationMatrix.identity());
+        return getTransformaion().equals(Transformation.identity());
     }
 
-    default void push(MatrixStack stack)
+    default void push(PoseStack stack)
     {
         stack.pushPose();
 
@@ -55,21 +60,21 @@ public interface IForgeTransformationMatrix
 
     }
 
-    default TransformationMatrix compose(TransformationMatrix other)
+    default Transformation compose(Transformation other)
     {
         if (getTransformaion().isIdentity()) return other;
         if (other.isIdentity()) return getTransformaion();
         Matrix4f m = getTransformaion().getMatrix();
         m.multiply(other.getMatrix());
-        return new TransformationMatrix(m);
+        return new Transformation(m);
     }
 
-    default TransformationMatrix inverse()
+    default Transformation inverse()
     {
         if (isIdentity()) return getTransformaion();
         Matrix4f m = getTransformaion().getMatrix().copy();
         m.invert();
-        return new TransformationMatrix(m);
+        return new Transformation(m);
     }
 
     default void transformPosition(Vector4f position)
@@ -91,7 +96,7 @@ public interface IForgeTransformationMatrix
     /**
      * convert transformation from assuming center-block system to opposing-corner-block system
      */
-    default TransformationMatrix blockCenterToCorner()
+    default Transformation blockCenterToCorner()
     {
         return applyOrigin(new Vector3f(.5f, .5f, .5f));
     }
@@ -99,7 +104,7 @@ public interface IForgeTransformationMatrix
     /**
      * convert transformation from assuming opposing-corner-block system to center-block system
      */
-    default TransformationMatrix blockCornerToCenter()
+    default Transformation blockCornerToCenter()
     {
         return applyOrigin(new Vector3f(-.5f, -.5f, -.5f));
     }
@@ -109,9 +114,9 @@ public interface IForgeTransformationMatrix
      * Can be used for switching between coordinate systems.
      * Parameter is relative to the current origin.
      */
-    default TransformationMatrix applyOrigin(Vector3f origin) {
-        TransformationMatrix transform = getTransformaion();
-        if (transform.isIdentity()) return TransformationMatrix.identity();
+    default Transformation applyOrigin(Vector3f origin) {
+        Transformation transform = getTransformaion();
+        if (transform.isIdentity()) return Transformation.identity();
 
         Matrix4f ret = transform.getMatrix();
         Matrix4f tmp = Matrix4f.createTranslateMatrix(origin.x(), origin.y(), origin.z());
@@ -119,6 +124,6 @@ public interface IForgeTransformationMatrix
         tmp.setIdentity();
         tmp.setTranslation(-origin.x(), -origin.y(), -origin.z());
         ret.multiply(tmp);
-        return new TransformationMatrix(ret);
+        return new Transformation(ret);
     }
 }

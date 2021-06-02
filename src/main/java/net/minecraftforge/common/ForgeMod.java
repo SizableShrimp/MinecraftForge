@@ -19,17 +19,17 @@
 
 package net.minecraftforge.common;
 
-import net.minecraft.command.arguments.ArgumentSerializer;
-import net.minecraft.command.arguments.ArgumentTypes;
-import net.minecraft.command.arguments.IArgumentSerializer;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.RangedAttribute;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.Items;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.storage.IServerConfiguration;
-import net.minecraft.world.storage.SaveFormat;
+import net.minecraft.commands.synchronization.EmptyArgumentSerializer;
+import net.minecraft.commands.synchronization.ArgumentTypes;
+import net.minecraft.commands.synchronization.ArgumentSerializer;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.RangedAttribute;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.item.Items;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.storage.WorldData;
+import net.minecraft.world.level.storage.LevelStorageSource;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -60,10 +60,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -178,8 +178,8 @@ public class ForgeMod implements WorldPersistenceHooks.WorldPersistenceHook
     @SuppressWarnings({"unchecked", "rawtypes"})
     private void registerArgumentTypes()
     {
-        ArgumentTypes.register("forge:enum", EnumArgument.class, (IArgumentSerializer) new EnumArgument.Serializer());
-        ArgumentTypes.register("forge:modid", ModIdArgument.class, new ArgumentSerializer<>(ModIdArgument::modIdArgument));
+        ArgumentTypes.register("forge:enum", EnumArgument.class, (ArgumentSerializer) new EnumArgument.Serializer());
+        ArgumentTypes.register("forge:modid", ModIdArgument.class, new EmptyArgumentSerializer<>(ModIdArgument::modIdArgument));
     }
 
     public void loadComplete(FMLLoadCompleteEvent event)
@@ -194,10 +194,10 @@ public class ForgeMod implements WorldPersistenceHooks.WorldPersistenceHook
     }
 
     @Override
-    public CompoundNBT getDataForWriting(SaveFormat.LevelSave levelSave, IServerConfiguration serverInfo)
+    public CompoundTag getDataForWriting(LevelStorageSource.LevelStorageAccess levelSave, WorldData serverInfo)
     {
-        CompoundNBT forgeData = new CompoundNBT();
-        CompoundNBT dims = new CompoundNBT();
+        CompoundTag forgeData = new CompoundTag();
+        CompoundTag dims = new CompoundTag();
         //TODO Dimensions
 //        DimensionManager.writeRegistry(dims);
         if (!dims.isEmpty())
@@ -206,7 +206,7 @@ public class ForgeMod implements WorldPersistenceHooks.WorldPersistenceHook
     }
 
     @Override
-    public void readData(SaveFormat.LevelSave levelSave, IServerConfiguration serverInfo, CompoundNBT tag)
+    public void readData(LevelStorageSource.LevelStorageAccess levelSave, WorldData serverInfo, CompoundTag tag)
     {
         //TODO Dimensions
 //        if (tag.contains("dims", 10))
@@ -274,7 +274,7 @@ public class ForgeMod implements WorldPersistenceHooks.WorldPersistenceHook
     }
 
     @SubscribeEvent //ModBus, can't use addListener due to nested genetics.
-    public void registerRecipeSerialziers(RegistryEvent.Register<IRecipeSerializer<?>> event)
+    public void registerRecipeSerialziers(RegistryEvent.Register<RecipeSerializer<?>> event)
     {
         CraftingHelper.register(AndCondition.Serializer.INSTANCE);
         CraftingHelper.register(FalseCondition.Serializer.INSTANCE);
@@ -289,7 +289,7 @@ public class ForgeMod implements WorldPersistenceHooks.WorldPersistenceHook
         CraftingHelper.register(new ResourceLocation("forge", "nbt"), NBTIngredient.Serializer.INSTANCE);
         CraftingHelper.register(new ResourceLocation("minecraft", "item"), VanillaIngredientSerializer.INSTANCE);
 
-        event.getRegistry().register(new ConditionalRecipe.Serializer<IRecipe<?>>().setRegistryName(new ResourceLocation("forge", "conditional")));
+        event.getRegistry().register(new ConditionalRecipe.Serializer<Recipe<?>>().setRegistryName(new ResourceLocation("forge", "conditional")));
 
     }
 

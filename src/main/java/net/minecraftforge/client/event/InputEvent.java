@@ -19,9 +19,9 @@
 
 package net.minecraftforge.client.event;
 
-import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.util.InputMappings;
-import net.minecraft.util.Hand;
+import net.minecraft.world.InteractionHand;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 
@@ -267,10 +267,10 @@ public class InputEvent extends Event
     public static class ClickInputEvent extends InputEvent
     {
         private final int button;
-        private final KeyBinding keyBinding;
-        private final Hand hand;
+        private final KeyMapping keyBinding;
+        private final InteractionHand hand;
         private boolean handSwing = true;
-        public ClickInputEvent(int button, KeyBinding keyBinding, Hand hand)
+        public ClickInputEvent(int button, KeyMapping keyBinding, InteractionHand hand)
         {
             this.button = button;
             this.keyBinding = keyBinding;
@@ -297,7 +297,7 @@ public class InputEvent extends Event
          * of if either gets canceled.
          * Will always be MAIN_HAND if this is an attack or pick block input.
          */
-        public Hand getHand()
+        public InteractionHand getHand()
         {
             return hand;
         }
@@ -317,7 +317,7 @@ public class InputEvent extends Event
             return button == 2;
         }
 
-        public KeyBinding getKeyBinding()
+        public KeyMapping getKeyBinding()
         {
             return keyBinding;
         }

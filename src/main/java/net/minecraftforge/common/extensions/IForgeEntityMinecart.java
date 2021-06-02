@@ -19,12 +19,12 @@
 
 package net.minecraftforge.common.extensions;
 
-import net.minecraft.entity.item.minecart.AbstractMinecartEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraftforge.common.IMinecartCollisionHandler;
 
 public interface IForgeEntityMinecart
@@ -35,8 +35,8 @@ public interface IForgeEntityMinecart
     /** TODO: Remove 1.17 */
     public static IMinecartCollisionHandler COLLISIONS = null;
 
-    default AbstractMinecartEntity getMinecart() {
-        return (AbstractMinecartEntity)this;
+    default AbstractMinecart getMinecart() {
+        return (AbstractMinecart)this;
     }
 
     /**
@@ -54,9 +54,9 @@ public interface IForgeEntityMinecart
      */
     default BlockPos getCurrentRailPosition()
     {
-        int x = MathHelper.floor(getMinecart().getX());
-        int y = MathHelper.floor(getMinecart().getY());
-        int z = MathHelper.floor(getMinecart().getZ());
+        int x = Mth.floor(getMinecart().getX());
+        int y = Mth.floor(getMinecart().getY());
+        int z = Mth.floor(getMinecart().getZ());
         BlockPos pos = new BlockPos(x, y, z);
         if (getMinecart().level.getBlockState(pos.below()).is(BlockTags.RAILS)) pos = pos.below();
         return pos;
@@ -116,7 +116,7 @@ public interface IForgeEntityMinecart
      * @return True if powered.
      */
     default boolean isPoweredCart() {
-        return getMinecart().getMinecartType() == AbstractMinecartEntity.Type.FURNACE;
+        return getMinecart().getMinecartType() == AbstractMinecart.Type.FURNACE;
     }
 
     /**
@@ -124,7 +124,7 @@ public interface IForgeEntityMinecart
      * @return True if this cart can be ridden.
      */
     default boolean canBeRidden() {
-        return getMinecart().getMinecartType() == AbstractMinecartEntity.Type.RIDEABLE;
+        return getMinecart().getMinecartType() == AbstractMinecart.Type.RIDEABLE;
     }
 
     /**

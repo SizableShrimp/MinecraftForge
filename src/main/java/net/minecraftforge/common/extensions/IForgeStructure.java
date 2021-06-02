@@ -21,15 +21,15 @@ package net.minecraftforge.common.extensions;
 
 import java.util.Collections;
 import java.util.List;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.world.biome.MobSpawnInfo;
-import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
 
 public interface IForgeStructure
 {
-    default Structure<?> getStructure()
+    default StructureFeature<?> getStructure()
     {
-        return (Structure<?>) this;
+        return (StructureFeature<?>) this;
     }
 
     /**
@@ -37,7 +37,7 @@ public interface IForgeStructure
      *
      * @apiNote Implement this over {@link Structure#getSpawnList()}
      */
-    default List<MobSpawnInfo.Spawners> getDefaultSpawnList()
+    default List<MobSpawnSettings.SpawnerData> getDefaultSpawnList()
     {
         return Collections.emptyList();
     }
@@ -47,7 +47,7 @@ public interface IForgeStructure
      *
      * @apiNote Implement this over {@link Structure#getCreatureSpawnList()}
      */
-    default List<MobSpawnInfo.Spawners> getDefaultCreatureSpawnList()
+    default List<MobSpawnSettings.SpawnerData> getDefaultCreatureSpawnList()
     {
         return Collections.emptyList();
     }
@@ -60,7 +60,7 @@ public interface IForgeStructure
     default boolean getDefaultRestrictsSpawnsToInside()
     {
         //The Pillager Outpost and Ocean Monument check the full structure by default instead of limiting themselves to being within the structure's bounds
-        return getStructure() != Structure.PILLAGER_OUTPOST && getStructure() != Structure.OCEAN_MONUMENT;
+        return getStructure() != StructureFeature.PILLAGER_OUTPOST && getStructure() != StructureFeature.OCEAN_MONUMENT;
     }
 
     /**
@@ -69,5 +69,5 @@ public interface IForgeStructure
      * @apiNote This method is marked as final in {@link Structure} so as to not be overridden by modders and breaking support for
      * {@link net.minecraftforge.event.world.StructureSpawnListGatherEvent}.
      */
-    List<MobSpawnInfo.Spawners> getSpawnList(EntityClassification classification);
+    List<MobSpawnSettings.SpawnerData> getSpawnList(MobCategory classification);
 }

@@ -29,12 +29,12 @@ import java.util.function.Predicate;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.network.play.ClientPlayNetHandler;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.network.*;
-import net.minecraft.network.play.server.SCustomPayloadPlayPacket;
-import net.minecraft.network.play.server.STagsListPacket;
-import net.minecraft.network.play.server.SUpdateRecipesPacket;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
+import net.minecraft.network.protocol.game.ClientboundUpdateTagsPacket;
+import net.minecraft.network.protocol.game.ClientboundUpdateRecipesPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -45,6 +45,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.ImmutableSet;
+
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.PacketFlow;
 
 /**
  * A custom payload channel that allows sending vanilla server-to-client packets, even if they would normally
@@ -58,9 +61,9 @@ public class VanillaPacketSplitter
     private static final ResourceLocation CHANNEL = new ResourceLocation("forge", "split");
     private static final String VERSION = "1.0";
 
-    private static final Set<Class<? extends IPacket<?>>> ALLOWED_PACKETS = ImmutableSet.of(
-            SUpdateRecipesPacket.class,
-            STagsListPacket.class
+    private static final Set<Class<? extends Packet<?>>> ALLOWED_PACKETS = ImmutableSet.of(
+            ClientboundUpdateRecipesPacket.class,
+            ClientboundUpdateTagsPacket.class
     );
 
     private static final int PROTOCOL_MAX = 2097152;
@@ -85,7 +88,7 @@ public class VanillaPacketSplitter
      * Append the given packet to the given list. If the packet needs to be split, multiple packets will be appened.
      * Otherwise only the packet itself.
      */
-    public static void appendPackets(ProtocolType protocol, PacketDirection direction, IPacket<?> packet, List<? super IPacket<?>> out)
+    public static void appendPackets(ConnectionProtocol protocol, PacketFlow direction, Packet<?> packet, List<? super Packet<?>> out)
     {
         if (heuristicIsDefinitelySmallEnough(packet))
         {
@@ -93,7 +96,7 @@ public class VanillaPacketSplitter
         }
         else
         {
-            PacketBuffer buf = new PacketBuffer(Unpooled.buffer());
+            FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
             try
             {
                 packet.write(buf);
@@ -124,7 +127,7 @@ public class VanillaPacketSplitter
                         {
                             partPrefix = Unpooled.buffer(5);
                             partPrefix.writeByte(STATE_FIRST);
-                            new PacketBuffer(partPrefix).writeVarInt(protocol.getPacketId(direction, packet));
+                            new FriendlyByteBuf(partPrefix).writeVarInt(protocol.getPacketId(direction, packet));
                         }
                         else
                         {
@@ -137,7 +140,7 @@ public class VanillaPacketSplitter
                                 buf.retainedSlice(buf.readerIndex(), partSize)
                         );
                         buf.skipBytes(partSize);
-                        out.add(new SCustomPayloadPlayPacket(CHANNEL, new PacketBuffer(partBuf)));
+                        out.add(new ClientboundCustomPayloadPacket(CHANNEL, new FriendlyByteBuf(partBuf)));
                     }
                     // we retained all the slices, so we do not need this one anymore
                     buf.release();
@@ -146,23 +149,23 @@ public class VanillaPacketSplitter
         }
     }
 
-    private static boolean heuristicIsDefinitelySmallEnough(IPacket<?> packet)
+    private static boolean heuristicIsDefinitelySmallEnough(Packet<?> packet)
     {
         return false;
     }
 
-    private static final List<PacketBuffer> receivedBuffers = new ArrayList<>();
+    private static final List<FriendlyByteBuf> receivedBuffers = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
     private static void onClientPacket(NetworkEvent.ServerCustomPayloadEvent event)
     {
         NetworkEvent.Context ctx = event.getSource().get();
-        PacketDirection direction = ctx.getDirection() == NetworkDirection.PLAY_TO_CLIENT ? PacketDirection.CLIENTBOUND : PacketDirection.SERVERBOUND;
-        ProtocolType protocol = ProtocolType.PLAY;
+        PacketFlow direction = ctx.getDirection() == NetworkDirection.PLAY_TO_CLIENT ? PacketFlow.CLIENTBOUND : PacketFlow.SERVERBOUND;
+        ConnectionProtocol protocol = ConnectionProtocol.PLAY;
 
         ctx.setPacketHandled(true);
 
-        PacketBuffer buf = event.getPayload();
+        FriendlyByteBuf buf = event.getPayload();
 
         byte state = buf.readByte();
         if (state == STATE_FIRST)
@@ -177,9 +180,9 @@ public class VanillaPacketSplitter
         receivedBuffers.add(buf);
         if (state == STATE_LAST)
         {
-            PacketBuffer full = new PacketBuffer(Unpooled.wrappedBuffer(receivedBuffers.toArray(new PacketBuffer[0])));
+            FriendlyByteBuf full = new FriendlyByteBuf(Unpooled.wrappedBuffer(receivedBuffers.toArray(new FriendlyByteBuf[0])));
             int packetId = full.readVarInt();
-            IPacket<?> packet = protocol.createPacket(direction, packetId);
+            Packet<?> packet = protocol.createPacket(direction, packetId);
             if (packet == null)
             {
                 LOGGER.error("Received invalid packet ID {} in forge:split", packetId);
@@ -201,12 +204,12 @@ public class VanillaPacketSplitter
                     receivedBuffers.clear();
                     full.release();
                 }
-                ctx.enqueueWork(() -> ((IPacket<ClientPlayNetHandler>)packet).handle(Minecraft.getInstance().getConnection()));
+                ctx.enqueueWork(() -> ((Packet<ClientPacketListener>)packet).handle(Minecraft.getInstance().getConnection()));
             }
         }
     }
 
-    public static boolean isRemoteCompatible(NetworkManager manager)
+    public static boolean isRemoteCompatible(Connection manager)
     {
         return !NetworkHooks.isVanillaConnection(manager) && channel.isRemotePresent(manager);
     }

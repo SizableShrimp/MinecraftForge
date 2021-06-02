@@ -21,10 +21,10 @@ package net.minecraftforge.fml.network;
 
 import net.minecraft.network.login.ServerLoginNetHandler;
 import com.google.common.collect.Multimap;
-import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Connection;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.fml.config.ConfigTracker;
 import net.minecraftforge.fml.loading.AdvancedLogMessageAdapter;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -63,9 +63,9 @@ import static net.minecraftforge.registries.ForgeRegistry.REGISTRIES;
  *
  * <p>During client to server initiation, on the <em>server</em>, the {@link NetworkEvent.GatherLoginPayloadsEvent} is fired,
  * which solicits all registered channels at the {@link NetworkRegistry} for any
- * {@link net.minecraftforge.fml.network.NetworkRegistry.LoginPayload} they wish to supply.
+ * {@link NetworkRegistry.LoginPayload} they wish to supply.
  *
- * <p>The collected {@link net.minecraftforge.fml.network.NetworkRegistry.LoginPayload} are sent, one per tick, via
+ * <p>The collected {@link NetworkRegistry.LoginPayload} are sent, one per tick, via
  * the {@link FMLLoginWrapper#wrapPacket(ResourceLocation, PacketBuffer)} mechanism to the incoming client connection. Each
  * packet is indexed via {@link net.minecraft.network.login.client.CCustomPayloadLoginPacket#transaction}, which is
  * the only mechanism available for tracking request/response pairs.
@@ -93,11 +93,11 @@ public class FMLHandshakeHandler {
      * @param manager The network manager for this connection
      * @param direction The {@link NetworkDirection} for this connection: {@link NetworkDirection#LOGIN_TO_SERVER} or {@link NetworkDirection#LOGIN_TO_CLIENT}
      */
-    static void registerHandshake(NetworkManager manager, NetworkDirection direction) {
+    static void registerHandshake(Connection manager, NetworkDirection direction) {
         manager.channel().attr(FMLNetworkConstants.FML_HANDSHAKE_HANDLER).compareAndSet(null, new FMLHandshakeHandler(manager, direction));
     }
 
-    static boolean tickLogin(NetworkManager networkManager)
+    static boolean tickLogin(Connection networkManager)
     {
         return networkManager.channel().attr(FMLNetworkConstants.FML_HANDSHAKE_HANDLER).get().tickServer();
     }
@@ -107,13 +107,13 @@ public class FMLHandshakeHandler {
     private List<Integer> sentMessages = new ArrayList<>();
 
     private final NetworkDirection direction;
-    private final NetworkManager manager;
+    private final Connection manager;
     private int packetPosition;
     private Map<ResourceLocation, ForgeRegistry.Snapshot> registrySnapshots;
     private Set<ResourceLocation> registriesToReceive;
     private Map<ResourceLocation, String> registryHashes;
 
-    private FMLHandshakeHandler(NetworkManager networkManager, NetworkDirection side)
+    private FMLHandshakeHandler(Connection networkManager, NetworkDirection side)
     {
         this.direction = side;
         this.manager = networkManager;
@@ -176,7 +176,7 @@ public class FMLHandshakeHandler {
         c.get().setPacketHandled(true);
         if (!accepted) {
             LOGGER.error(FMLHSMARKER, "Terminating connection with server, mismatched mod list");
-            c.get().getNetworkManager().disconnect(new StringTextComponent("Connection closed - mismatched mod channel list"));
+            c.get().getNetworkManager().disconnect(new TextComponent("Connection closed - mismatched mod channel list"));
             return;
         }
         FMLNetworkConstants.handshakeChannel.reply(new FMLHandshakeMessages.C2SModListReply(), c.get());
@@ -210,7 +210,7 @@ public class FMLHandshakeHandler {
         c.get().setPacketHandled(true);
         if (!accepted) {
             LOGGER.error(FMLHSMARKER, "Terminating connection with client, mismatched mod list");
-            c.get().getNetworkManager().disconnect(new StringTextComponent("Connection closed - mismatched mod channel list"));
+            c.get().getNetworkManager().disconnect(new TextComponent("Connection closed - mismatched mod channel list"));
             return;
         }
         LOGGER.debug(FMLHSMARKER, "Accepted client connection mod list");
@@ -259,7 +259,7 @@ public class FMLHandshakeHandler {
             LOGGER.debug(FMLHSMARKER, "Registry load complete, continuing handshake.");
         } else {
             LOGGER.error(FMLHSMARKER, "Failed to load registry, closing connection.");
-            this.manager.disconnect(new StringTextComponent("Failed to synchronize registry data from server, closing connection"));
+            this.manager.disconnect(new TextComponent("Failed to synchronize registry data from server, closing connection"));
         }
         return successfulConnection.get();
     }
