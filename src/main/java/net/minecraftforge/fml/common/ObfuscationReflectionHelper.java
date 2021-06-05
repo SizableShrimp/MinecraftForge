@@ -138,7 +138,7 @@ public class ObfuscationReflectionHelper
      * Throws an exception if the method is not found.
      *
      * @param clazz          The class to find the method on.
-     * @param methodName     The SRG (unmapped) name of the method to find (e.g. "func_12820_D").
+     * @param methodName     The SRG (unmapped) name of the method to find (e.g. "m_5776_").
      * @param parameterTypes The parameter types of the method to find.
      * @return The method with the specified name and parameters in the given class.
      * @throws NullPointerException        If {@code clazz} is null.
@@ -216,7 +216,7 @@ public class ObfuscationReflectionHelper
      * Throws an exception if the field is not found.
      *
      * @param clazz     The class to find the field on.
-     * @param fieldName The SRG (unmapped) name of the field to find (e.g. "field_181725_a").
+     * @param fieldName The SRG (unmapped) name of the field to find (e.g. "f_46443_").
      * @param <T>       The type.
      * @return The constructor with the specified parameters in the given class.
      * @throws NullPointerException       If {@code clazz} is null.
