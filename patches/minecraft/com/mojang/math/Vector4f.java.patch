@@ -1,17 +1,6 @@
 --- a/com/mojang/math/Vector4f.java
 +++ b/com/mojang/math/Vector4f.java
-@@ -1,10 +_,7 @@
- package com.mojang.math;
- 
- import net.minecraft.util.Mth;
--import net.minecraftforge.api.distmarker.Dist;
--import net.minecraftforge.api.distmarker.OnlyIn;
- 
--@OnlyIn(Dist.CLIENT)
- public class Vector4f {
-    private float f_123589_;
-    private float f_123590_;
-@@ -128,4 +_,16 @@
+@@ -125,4 +_,16 @@
     public String toString() {
        return "[" + this.f_123589_ + ", " + this.f_123590_ + ", " + this.f_123591_ + ", " + this.f_123592_ + "]";
     }

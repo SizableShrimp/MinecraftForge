@@ -1,16 +1,5 @@
 --- a/net/minecraft/world/entity/monster/Zombie.java
 +++ b/net/minecraft/world/entity/monster/Zombie.java
-@@ -71,8 +_,8 @@
-    private static final EntityDataAccessor<Boolean> f_34268_ = SynchedEntityData.m_135353_(Zombie.class, EntityDataSerializers.f_135035_);
-    private static final EntityDataAccessor<Integer> f_34260_ = SynchedEntityData.m_135353_(Zombie.class, EntityDataSerializers.f_135028_);
-    private static final EntityDataAccessor<Boolean> f_34261_ = SynchedEntityData.m_135353_(Zombie.class, EntityDataSerializers.f_135035_);
--   private static final Predicate<Difficulty> f_34262_ = (p_34284_) -> {
--      return p_34284_ == Difficulty.HARD;
-+   private static final Predicate<Difficulty> f_34262_ = (p_213697_0_) -> {
-+      return p_213697_0_ == Difficulty.HARD;
-    };
-    private final BreakDoorGoal f_34263_ = new BreakDoorGoal(this, f_34262_);
-    private boolean f_34264_;
 @@ -186,7 +_,8 @@
        if (!this.f_19853_.f_46443_ && this.m_6084_() && !this.m_21525_()) {
           if (this.m_34329_()) {

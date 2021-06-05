@@ -1,23 +1,6 @@
 --- a/net/minecraft/world/level/block/SweetBerryBushBlock.java
 +++ b/net/minecraft/world/level/block/SweetBerryBushBlock.java
-@@ -25,8 +_,6 @@
- import net.minecraft.world.phys.Vec3;
- import net.minecraft.world.phys.shapes.CollisionContext;
- import net.minecraft.world.phys.shapes.VoxelShape;
--import net.minecraftforge.api.distmarker.Dist;
--import net.minecraftforge.api.distmarker.OnlyIn;
- 
- public class SweetBerryBushBlock extends BushBlock implements BonemealableBlock {
-    public static final IntegerProperty f_57244_ = BlockStateProperties.f_61407_;
-@@ -38,7 +_,6 @@
-       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_57244_, Integer.valueOf(0)));
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public ItemStack m_7397_(BlockGetter p_57256_, BlockPos p_57257_, BlockState p_57258_) {
-       return new ItemStack(Items.f_42780_);
-    }
-@@ -57,8 +_,9 @@
+@@ -54,8 +_,9 @@
  
     public void m_7455_(BlockState p_57286_, ServerLevel p_57287_, BlockPos p_57288_, Random p_57289_) {
        int i = p_57286_.m_61143_(f_57244_);

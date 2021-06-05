@@ -9,20 +9,19 @@
     }
  
     public int m_5759_() {
-@@ -94,14 +_,15 @@
+@@ -94,7 +_,7 @@
        private KeyEntry(final KeyMapping p_97451_, final Component p_97452_) {
           this.f_97445_ = p_97451_;
           this.f_97446_ = p_97452_;
 -         this.f_97447_ = new Button(0, 0, 75, 20, p_97452_, (p_97479_) -> {
-+         this.f_97447_ = new Button(0, 0, 75 + 20 /*Forge: add space*/, 20, p_97452_, (p_214386_2_) -> {
++         this.f_97447_ = new Button(0, 0, 75 + 20 /*Forge: add space*/, 20, p_97452_, (p_97479_) -> {
              ControlList.this.f_97396_.f_97514_ = p_97451_;
           }) {
              protected MutableComponent m_5646_() {
-                return p_97451_.m_90862_() ? new TranslatableComponent("narrator.controls.unbound", p_97452_) : new TranslatableComponent("narrator.controls.bound", p_97452_, super.m_5646_());
+@@ -102,6 +_,7 @@
              }
           };
--         this.f_97448_ = new Button(0, 0, 50, 20, new TranslatableComponent("controls.reset"), (p_97475_) -> {
-+         this.f_97448_ = new Button(0, 0, 50, 20, new TranslatableComponent("controls.reset"), (p_214387_2_) -> {
+          this.f_97448_ = new Button(0, 0, 50, 20, new TranslatableComponent("controls.reset"), (p_97475_) -> {
 +            f_97445_.setToDefault();
              ControlList.this.f_93386_.f_91066_.m_92159_(p_97451_, p_97451_.m_90861_());
              KeyMapping.m_90854_();

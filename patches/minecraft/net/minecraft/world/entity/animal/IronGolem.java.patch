@@ -1,16 +1,5 @@
 --- a/net/minecraft/world/entity/animal/IronGolem.java
 +++ b/net/minecraft/world/entity/animal/IronGolem.java
-@@ -79,8 +_,8 @@
-       this.f_21346_.m_25352_(1, new DefendVillageTargetGoal(this));
-       this.f_21346_.m_25352_(2, new HurtByTargetGoal(this));
-       this.f_21346_.m_25352_(3, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::m_21674_));
--      this.f_21346_.m_25352_(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (p_28879_) -> {
--         return p_28879_ instanceof Enemy && !(p_28879_ instanceof Creeper);
-+      this.f_21346_.m_25352_(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (p_234199_0_) -> {
-+         return p_234199_0_ instanceof Enemy && !(p_234199_0_ instanceof Creeper);
-       }));
-       this.f_21346_.m_25352_(4, new ResetUniversalAngerTargetGoal<>(this, false));
-    }
 @@ -120,9 +_,10 @@
           int i = Mth.m_14107_(this.m_20185_());
           int j = Mth.m_14107_(this.m_20186_() - (double)0.2F);

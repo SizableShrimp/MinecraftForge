@@ -8,24 +8,7 @@
        Container container = this.m_59406_();
        if (container == null) {
           return false;
-@@ -164,24 +_,26 @@
-    }
- 
-    private boolean m_59385_(Container p_59386_, Direction p_59387_) {
--      return m_59339_(p_59386_, p_59387_).allMatch((p_59379_) -> {
--         ItemStack itemstack = p_59386_.m_8020_(p_59379_);
-+      return m_59339_(p_59386_, p_59387_).allMatch((p_213970_1_) -> {
-+         ItemStack itemstack = p_59386_.m_8020_(p_213970_1_);
-          return itemstack.m_41613_() >= itemstack.m_41741_();
-       });
-    }
- 
-    private static boolean m_59397_(Container p_59398_, Direction p_59399_) {
--      return m_59339_(p_59398_, p_59399_).allMatch((p_59319_) -> {
--         return p_59398_.m_8020_(p_59319_).m_41619_();
-+      return m_59339_(p_59398_, p_59399_).allMatch((p_213973_1_) -> {
-+         return p_59398_.m_8020_(p_213973_1_).m_41619_();
-       });
+@@ -177,6 +_,8 @@
     }
  
     public static boolean m_59352_(Hopper p_59353_) {
@@ -34,24 +17,6 @@
        Container container = m_59393_(p_59353_);
        if (container != null) {
           Direction direction = Direction.DOWN;
--         return m_59397_(container, direction) ? false : m_59339_(container, direction).anyMatch((p_59363_) -> {
--            return m_59354_(p_59353_, container, p_59363_, direction);
-+         return m_59397_(container, direction) ? false : m_59339_(container, direction).anyMatch((p_213971_3_) -> {
-+            return m_59354_(p_59353_, container, p_213971_3_, direction);
-          });
-       } else {
-          for(ItemEntity itementity : m_59400_(p_59353_)) {
-@@ -307,8 +_,8 @@
-    }
- 
-    public static List<ItemEntity> m_59400_(Hopper p_59401_) {
--      return p_59401_.m_59300_().m_83299_().stream().flatMap((p_59366_) -> {
--         return p_59401_.m_7642_().m_6443_(ItemEntity.class, p_59366_.m_82386_(p_59401_.m_6343_() - 0.5D, p_59401_.m_6358_() - 0.5D, p_59401_.m_6446_() - 0.5D), EntitySelector.f_20402_).stream();
-+      return p_59401_.m_59300_().m_83299_().stream().flatMap((p_200110_1_) -> {
-+         return p_59401_.m_7642_().m_6443_(ItemEntity.class, p_200110_1_.m_82386_(p_59401_.m_6343_() - 0.5D, p_59401_.m_6358_() - 0.5D, p_59401_.m_6446_() - 0.5D), EntitySelector.f_20402_).stream();
-       }).collect(Collectors.toList());
-    }
- 
 @@ -325,7 +_,7 @@
        Block block = blockstate.m_60734_();
        if (block instanceof WorldlyContainerHolder) {

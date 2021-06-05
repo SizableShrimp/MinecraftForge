@@ -1,18 +1,5 @@
 --- a/net/minecraft/world/level/BaseSpawner.java
 +++ b/net/minecraft/world/level/BaseSpawner.java
-@@ -111,9 +_,9 @@
-                if (level.m_45772_(optional.get().m_20585_(d0, d1, d2))) {
-                   ServerLevel serverlevel = (ServerLevel)level;
-                   if (SpawnPlacements.m_21759_(optional.get(), serverlevel, MobSpawnType.SPAWNER, new BlockPos(d0, d1, d2), level.m_5822_())) {
--                     Entity entity = EntityType.m_20645_(compoundtag, level, (p_45460_) -> {
--                        p_45460_.m_7678_(d0, d1, d2, p_45460_.f_19857_, p_45460_.f_19858_);
--                        return p_45460_;
-+                     Entity entity = EntityType.m_20645_(compoundtag, level, (p_221408_6_) -> {
-+                        p_221408_6_.m_7678_(d0, d1, d2, p_221408_6_.f_19857_, p_221408_6_.f_19858_);
-+                        return p_221408_6_;
-                      });
-                      if (entity == null) {
-                         this.m_45477_();
 @@ -129,11 +_,12 @@
                       entity.m_7678_(entity.m_20185_(), entity.m_20186_(), entity.m_20189_(), level.f_46441_.nextFloat() * 360.0F, 0.0F);
                       if (entity instanceof Mob) {

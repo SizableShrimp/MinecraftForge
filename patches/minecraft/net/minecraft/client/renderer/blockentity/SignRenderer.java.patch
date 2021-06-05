@@ -1,16 +1,5 @@
 --- a/net/minecraft/client/renderer/blockentity/SignRenderer.java
 +++ b/net/minecraft/client/renderer/blockentity/SignRenderer.java
-@@ -68,8 +_,8 @@
-       int j1 = 20;
- 
-       for(int k1 = 0; k1 < 4; ++k1) {
--         FormattedCharSequence formattedcharsequence = p_112497_.m_59729_(k1, (p_112505_) -> {
--            List<FormattedCharSequence> list = font.m_92923_(p_112505_, 90);
-+         FormattedCharSequence formattedcharsequence = p_112497_.m_59729_(k1, (p_243502_1_) -> {
-+            List<FormattedCharSequence> list = font.m_92923_(p_243502_1_, 90);
-             return list.isEmpty() ? FormattedCharSequence.f_13691_ : list.get(0);
-          });
-          if (formattedcharsequence != null) {
 @@ -89,7 +_,7 @@
           woodtype = WoodType.f_61830_;
        }

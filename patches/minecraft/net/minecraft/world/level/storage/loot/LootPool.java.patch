@@ -35,20 +35,6 @@
     }
  
     private void m_79058_(Consumer<ItemStack> p_79059_, LootContext p_79060_) {
-@@ -53,10 +_,10 @@
-       MutableInt mutableint = new MutableInt();
- 
-       for(LootPoolEntryContainer lootpoolentrycontainer : this.f_79023_) {
--         lootpoolentrycontainer.m_6562_(p_79060_, (p_79048_) -> {
--            int k = p_79048_.m_7067_(p_79060_.m_78945_());
-+         lootpoolentrycontainer.m_6562_(p_79060_, (p_216097_3_) -> {
-+            int k = p_216097_3_.m_7067_(p_79060_.m_78945_());
-             if (k > 0) {
--               list.add(p_79048_);
-+               list.add(p_216097_3_);
-                mutableint.add(k);
-             }
- 
 @@ -96,19 +_,33 @@
     }
  

@@ -22,39 +22,6 @@
        this.f_49792_ = builder.m_61101_(Block::m_49966_, BlockState::new);
        this.m_49959_(this.f_49792_.m_61090_());
     }
-@@ -233,8 +_,8 @@
- 
-    public static void m_49950_(BlockState p_49951_, Level p_49952_, BlockPos p_49953_) {
-       if (p_49952_ instanceof ServerLevel) {
--         m_49869_(p_49951_, (ServerLevel)p_49952_, p_49953_, (BlockEntity)null).forEach((p_49944_) -> {
--            m_49840_(p_49952_, p_49953_, p_49944_);
-+         m_49869_(p_49951_, (ServerLevel)p_49952_, p_49953_, (BlockEntity)null).forEach((p_220079_2_) -> {
-+            m_49840_(p_49952_, p_49953_, p_220079_2_);
-          });
-          p_49951_.m_60612_((ServerLevel)p_49952_, p_49953_, ItemStack.f_41583_);
-       }
-@@ -243,8 +_,8 @@
- 
-    public static void m_49892_(BlockState p_49893_, LevelAccessor p_49894_, BlockPos p_49895_, @Nullable BlockEntity p_49896_) {
-       if (p_49894_ instanceof ServerLevel) {
--         m_49869_(p_49893_, (ServerLevel)p_49894_, p_49895_, p_49896_).forEach((p_49859_) -> {
--            m_49840_((ServerLevel)p_49894_, p_49895_, p_49859_);
-+         m_49869_(p_49893_, (ServerLevel)p_49894_, p_49895_, p_49896_).forEach((p_220061_2_) -> {
-+            m_49840_((ServerLevel)p_49894_, p_49895_, p_220061_2_);
-          });
-          p_49893_.m_60612_((ServerLevel)p_49894_, p_49895_, ItemStack.f_41583_);
-       }
-@@ -253,8 +_,8 @@
- 
-    public static void m_49881_(BlockState p_49882_, Level p_49883_, BlockPos p_49884_, @Nullable BlockEntity p_49885_, Entity p_49886_, ItemStack p_49887_) {
-       if (p_49883_ instanceof ServerLevel) {
--         m_49874_(p_49882_, (ServerLevel)p_49883_, p_49884_, p_49885_, p_49886_, p_49887_).forEach((p_49925_) -> {
--            m_49840_(p_49883_, p_49884_, p_49925_);
-+         m_49874_(p_49882_, (ServerLevel)p_49883_, p_49884_, p_49885_, p_49886_, p_49887_).forEach((p_220057_2_) -> {
-+            m_49840_(p_49883_, p_49884_, p_220057_2_);
-          });
-          p_49882_.m_60612_((ServerLevel)p_49883_, p_49884_, p_49887_);
-       }
 @@ -262,7 +_,7 @@
     }
  
@@ -81,16 +48,15 @@
     public float m_7325_() {
        return this.f_60444_;
     }
-@@ -333,7 +_,7 @@
+@@ -333,6 +_,7 @@
        p_49822_.m_20256_(p_49822_.m_20184_().m_82542_(1.0D, 0.0D, 1.0D));
     }
  
--   @OnlyIn(Dist.CLIENT)
 +   @Deprecated //Forge: Use more sensitive version
     public ItemStack m_7397_(BlockGetter p_49823_, BlockPos p_49824_, BlockState p_49825_) {
        return new ItemStack(this);
     }
-@@ -365,6 +_,7 @@
+@@ -364,6 +_,7 @@
     public void m_6273_(Level p_49939_, BlockPos p_49940_) {
     }
  
@@ -98,7 +64,7 @@
     public boolean m_6903_(Explosion p_49826_) {
        return true;
     }
-@@ -384,6 +_,7 @@
+@@ -383,6 +_,7 @@
        return this.f_49786_;
     }
  
@@ -106,7 +72,7 @@
     public SoundType m_49962_(BlockState p_49963_) {
        return this.f_60446_;
     }
-@@ -393,7 +_,7 @@
+@@ -392,7 +_,7 @@
           this.f_49788_ = Item.m_41439_(this);
        }
  
@@ -115,7 +81,7 @@
     }
  
     public boolean m_49967_() {
-@@ -401,7 +_,7 @@
+@@ -400,7 +_,7 @@
     }
  
     public String toString() {
@@ -124,7 +90,7 @@
     }
  
     @OnlyIn(Dist.CLIENT)
-@@ -411,6 +_,78 @@
+@@ -410,6 +_,78 @@
     protected Block m_7374_() {
        return this;
     }

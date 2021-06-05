@@ -9,34 +9,15 @@
        this.f_39769_.m_6836_(0, ItemStack.f_41583_);
        if (this.f_39000_ > 0) {
           ItemStack itemstack = this.f_39769_.m_8020_(1);
-@@ -60,19 +_,19 @@
-       }
- 
+@@ -62,7 +_,7 @@
        this.f_39002_.m_6422_(0);
--      this.f_39770_.m_39292_((p_39016_, p_39017_) -> {
--         BlockState blockstate = p_39016_.m_8055_(p_39017_);
+       this.f_39770_.m_39292_((p_39016_, p_39017_) -> {
+          BlockState blockstate = p_39016_.m_8055_(p_39017_);
 -         if (!p_39012_.f_36077_.f_35937_ && blockstate.m_60620_(BlockTags.f_13033_) && p_39012_.m_21187_().nextFloat() < 0.12F) {
-+      this.f_39770_.m_39292_((p_234633_1_, p_234633_2_) -> {
-+         BlockState blockstate = p_234633_1_.m_8055_(p_234633_2_);
 +         if (!p_39012_.f_36077_.f_35937_ && blockstate.m_60620_(BlockTags.f_13033_) && p_39012_.m_21187_().nextFloat() < breakChance) {
              BlockState blockstate1 = AnvilBlock.m_48824_(blockstate);
              if (blockstate1 == null) {
--               p_39016_.m_7471_(p_39017_, false);
--               p_39016_.m_46796_(1029, p_39017_, 0);
-+               p_234633_1_.m_7471_(p_234633_2_, false);
-+               p_234633_1_.m_46796_(1029, p_234633_2_, 0);
-             } else {
--               p_39016_.m_7731_(p_39017_, blockstate1, 2);
--               p_39016_.m_46796_(1030, p_39017_, 0);
-+               p_234633_1_.m_7731_(p_234633_2_, blockstate1, 2);
-+               p_234633_1_.m_46796_(1030, p_234633_2_, 0);
-             }
-          } else {
--            p_39016_.m_46796_(1030, p_39017_, 0);
-+            p_234633_1_.m_46796_(1030, p_234633_2_, 0);
-          }
- 
-       });
+                p_39016_.m_7471_(p_39017_, false);
 @@ -94,8 +_,11 @@
           Map<Enchantment, Integer> map = EnchantmentHelper.m_44831_(itemstack1);
           j = j + itemstack.m_41610_() + (itemstack2.m_41619_() ? 0 : itemstack2.m_41610_());

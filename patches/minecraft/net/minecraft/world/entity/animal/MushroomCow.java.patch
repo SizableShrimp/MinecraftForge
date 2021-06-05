@@ -9,7 +9,7 @@
     private static final EntityDataAccessor<String> f_28908_ = SynchedEntityData.m_135353_(MushroomCow.class, EntityDataSerializers.f_135030_);
     private MobEffect f_28909_;
     private int f_28910_;
-@@ -100,11 +_,11 @@
+@@ -100,7 +_,7 @@
  
           this.m_5496_(soundevent, 1.0F, 1.0F);
           return InteractionResult.m_19078_(this.f_19853_.f_46443_);
@@ -17,13 +17,7 @@
 +      } else if (false && itemstack.m_41720_() == Items.f_42574_ && this.m_6220_()) { //Forge: Moved to onSheared
           this.m_5851_(SoundSource.PLAYERS);
           if (!this.f_19853_.f_46443_) {
--            itemstack.m_41622_(1, p_28941_, (p_28927_) -> {
--               p_28927_.m_21190_(p_28942_);
-+            itemstack.m_41622_(1, p_28941_, (p_213442_1_) -> {
-+               p_213442_1_.m_21190_(p_28942_);
-             });
-          }
- 
+             itemstack.m_41622_(1, p_28941_, (p_28927_) -> {
 @@ -234,6 +_,45 @@
  
        return mushroomcow$mushroomtype2;

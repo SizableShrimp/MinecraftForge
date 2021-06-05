@@ -1,16 +1,5 @@
 --- a/net/minecraft/client/renderer/FogRenderer.java
 +++ b/net/minecraft/client/renderer/FogRenderer.java
-@@ -74,8 +_,8 @@
-          float f12 = Mth.m_14036_(Mth.m_14089_(p_109021_.m_46942_(p_109020_) * ((float)Math.PI * 2F)) * 2.0F + 0.5F, 0.0F, 1.0F);
-          BiomeManager biomemanager = p_109021_.m_7062_();
-          Vec3 vec31 = p_109019_.m_90583_().m_82492_(2.0D, 2.0D, 2.0D).m_82490_(0.25D);
--         Vec3 vec32 = CubicSampler.m_130038_(vec31, (p_109033_, p_109034_, p_109035_) -> {
--            return p_109021_.m_104583_().m_5927_(Vec3.m_82501_(biomemanager.m_47873_(p_109033_, p_109034_, p_109035_).m_47539_()), f12);
-+         Vec3 vec32 = CubicSampler.m_130038_(vec31, (p_239218_3_, p_239218_4_, p_239218_5_) -> {
-+            return p_109021_.m_104583_().m_5927_(Vec3.m_82501_(biomemanager.m_47873_(p_239218_3_, p_239218_4_, p_239218_5_).m_47539_()), f12);
-          });
-          f_109010_ = (float)vec32.m_7096_();
-          f_109011_ = (float)vec32.m_7098_();
 @@ -157,17 +_,28 @@
           }
  

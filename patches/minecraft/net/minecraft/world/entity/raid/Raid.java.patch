@@ -1,38 +1,5 @@
 --- a/net/minecraft/world/entity/raid/Raid.java
 +++ b/net/minecraft/world/entity/raid/Raid.java
-@@ -156,9 +_,9 @@
-    }
- 
-    private Predicate<ServerPlayer> m_37784_() {
--      return (p_37723_) -> {
--         BlockPos blockpos = p_37723_.m_20183_();
--         return p_37723_.m_6084_() && this.f_37675_.m_8832_(blockpos) == this;
-+      return (p_221302_1_) -> {
-+         BlockPos blockpos = p_221302_1_.m_20183_();
-+         return p_221302_1_.m_6084_() && this.f_37675_.m_8832_(blockpos) == this;
-       };
-    }
- 
-@@ -356,8 +_,8 @@
- 
-    private void m_37786_() {
-       Stream<SectionPos> stream = SectionPos.m_123201_(SectionPos.m_123199_(this.f_37674_), 2);
--      stream.filter(this.f_37675_::m_8762_).map(SectionPos::m_123250_).min(Comparator.comparingDouble((p_37766_) -> {
--         return p_37766_.m_123331_(this.f_37674_);
-+      stream.filter(this.f_37675_::m_8762_).map(SectionPos::m_123250_).min(Comparator.comparingDouble((p_223025_1_) -> {
-+         return p_223025_1_.m_123331_(this.f_37674_);
-       })).ifPresent(this::m_37760_);
-    }
- 
-@@ -599,7 +_,7 @@
-    }
- 
-    public boolean m_37718_(int p_37719_, Raider p_37720_, boolean p_37721_) {
--      this.f_37671_.computeIfAbsent(p_37719_, (p_37746_) -> {
-+      this.f_37671_.computeIfAbsent(p_37719_, (p_221323_0_) -> {
-          return Sets.newHashSet();
-       });
-       Set<Raider> set = this.f_37671_.get(p_37719_);
 @@ -768,7 +_,7 @@
        }
     }

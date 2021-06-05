@@ -18,17 +18,6 @@
        if (entry == null) {
           f_121582_.error("Could not serialize argument {} ({})!", p_121589_, p_121589_.getClass());
           p_121588_.addProperty("type", "unknown");
-@@ -235,8 +_,8 @@
-             p_121599_.add(((ArgumentCommandNode)p_121598_).getType());
-          }
- 
--         p_121598_.getChildren().forEach((p_121608_) -> {
--            m_121597_(p_121608_, p_121599_, p_121600_);
-+         p_121598_.getChildren().forEach((p_243513_2_) -> {
-+            m_121597_(p_243513_2_, p_121599_, p_121600_);
-          });
-          CommandNode<T> commandnode = p_121598_.getRedirect();
-          if (commandnode != null) {
 @@ -256,5 +_,9 @@
           this.f_121619_ = p_121623_;
           this.f_121620_ = p_121624_;

@@ -1,15 +1,6 @@
 --- a/net/minecraft/world/level/block/StemBlock.java
 +++ b/net/minecraft/world/level/block/StemBlock.java
-@@ -18,8 +_,6 @@
- import net.minecraft.world.level.block.state.properties.IntegerProperty;
- import net.minecraft.world.phys.shapes.CollisionContext;
- import net.minecraft.world.phys.shapes.VoxelShape;
--import net.minecraftforge.api.distmarker.Dist;
--import net.minecraftforge.api.distmarker.OnlyIn;
- 
- public class StemBlock extends BushBlock implements BonemealableBlock {
-    public static final IntegerProperty f_57013_ = BlockStateProperties.f_61409_;
-@@ -41,29 +_,30 @@
+@@ -39,22 +_,24 @@
     }
  
     public void m_7455_(BlockState p_57042_, ServerLevel p_57043_, BlockPos p_57044_, Random p_57045_) {
@@ -38,22 +29,7 @@
           }
  
        }
-    }
- 
-    @Nullable
--   @OnlyIn(Dist.CLIENT)
-    protected Item m_57051_() {
-       if (this.f_57015_ == Blocks.f_50133_) {
-          return Items.f_42577_;
-@@ -72,7 +_,6 @@
-       }
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public ItemStack m_7397_(BlockGetter p_57026_, BlockPos p_57027_, BlockState p_57028_) {
-       Item item = this.m_57051_();
-       return item == null ? ItemStack.f_41583_ : new ItemStack(item);
-@@ -102,5 +_,11 @@
+@@ -98,5 +_,11 @@
  
     public StemGrownBlock m_57056_() {
        return this.f_57015_;

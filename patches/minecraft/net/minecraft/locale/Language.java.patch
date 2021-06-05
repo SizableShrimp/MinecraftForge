@@ -10,16 +10,7 @@
        return new Language() {
           public String m_6834_(String p_128127_) {
              return map.getOrDefault(p_128127_, p_128127_);
-@@ -60,12 +_,17 @@
- 
-          @OnlyIn(Dist.CLIENT)
-          public FormattedCharSequence m_5536_(FormattedText p_128129_) {
--            return (p_128132_) -> {
--               return p_128129_.m_7451_((p_128124_, p_128125_) -> {
--                  return StringDecomposer.m_14346_(p_128125_, p_128124_, p_128132_) ? Optional.empty() : FormattedText.f_130759_;
-+            return (p_244262_1_) -> {
-+               return p_128129_.m_7451_((p_244261_1_, p_244261_2_) -> {
-+                  return StringDecomposer.m_14346_(p_244261_2_, p_244261_1_, p_244262_1_) ? Optional.empty() : FormattedText.f_130759_;
+@@ -66,6 +_,11 @@
                 }, Style.f_131099_).isPresent();
              };
           }

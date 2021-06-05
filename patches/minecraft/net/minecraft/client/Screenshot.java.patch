@@ -14,11 +14,10 @@
        Util.m_137579_().execute(() -> {
           try {
 -            nativeimage.m_85056_(file2);
--            Component component = (new TextComponent(file2.getName())).m_130940_(ChatFormatting.UNDERLINE).m_130938_((p_92304_) -> {
--               return p_92304_.m_131142_(new ClickEvent(ClickEvent.Action.OPEN_FILE, file2.getAbsolutePath()));
 +            nativeimage.m_85056_(target);
-+            Component component = (new TextComponent(file2.getName())).m_130940_(ChatFormatting.UNDERLINE).m_130938_((p_238335_1_) -> {
-+               return p_238335_1_.m_131142_(new ClickEvent(ClickEvent.Action.OPEN_FILE, target.getAbsolutePath()));
+             Component component = (new TextComponent(file2.getName())).m_130940_(ChatFormatting.UNDERLINE).m_130938_((p_92304_) -> {
+-               return p_92304_.m_131142_(new ClickEvent(ClickEvent.Action.OPEN_FILE, file2.getAbsolutePath()));
++               return p_92304_.m_131142_(new ClickEvent(ClickEvent.Action.OPEN_FILE, target.getAbsolutePath()));
              });
 -            p_92311_.accept(new TranslatableComponent("screenshot.success", component));
 +            if (event.getResultMessage() != null)

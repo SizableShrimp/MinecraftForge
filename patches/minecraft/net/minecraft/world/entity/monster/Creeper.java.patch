@@ -8,17 +8,6 @@
  import net.minecraft.world.level.Level;
  import net.minecraftforge.api.distmarker.Dist;
  import net.minecraftforge.api.distmarker.OnlyIn;
-@@ -203,8 +_,8 @@
-          this.f_19853_.m_6263_(p_32301_, this.m_20185_(), this.m_20186_(), this.m_20189_(), SoundEvents.f_11942_, this.m_5720_(), 1.0F, this.f_19796_.nextFloat() * 0.4F + 0.8F);
-          if (!this.f_19853_.f_46443_) {
-             this.m_32312_();
--            itemstack.m_41622_(1, p_32301_, (p_32290_) -> {
--               p_32290_.m_21190_(p_32302_);
-+            itemstack.m_41622_(1, p_32301_, (p_213625_1_) -> {
-+               p_213625_1_.m_21190_(p_32302_);
-             });
-          }
- 
 @@ -216,7 +_,7 @@
  
     private void m_32315_() {

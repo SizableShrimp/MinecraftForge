@@ -79,19 +79,6 @@
        if (this.m_20175_(Pose.SWIMMING)) {
           Pose pose;
           if (this.m_21255_()) {
-@@ -521,9 +_,9 @@
-    private void m_36367_(@Nullable CompoundTag p_36368_) {
-       if (p_36368_ != null && (!p_36368_.m_128441_("Silent") || !p_36368_.m_128471_("Silent")) && this.f_19853_.f_46441_.nextInt(200) == 0) {
-          String s = p_36368_.m_128461_("id");
--         EntityType.m_20632_(s).filter((p_36280_) -> {
--            return p_36280_ == EntityType.f_20508_;
--         }).ifPresent((p_36255_) -> {
-+         EntityType.m_20632_(s).filter((p_213830_0_) -> {
-+            return p_213830_0_ == EntityType.f_20508_;
-+         }).ifPresent((p_213834_1_) -> {
-             if (!Parrot.m_29382_(this.f_19853_, this)) {
-                this.f_19853_.m_6263_((Player)null, this.m_20185_(), this.m_20186_(), this.m_20189_(), Parrot.m_29385_(this.f_19853_, this.f_19853_.f_46441_), this.m_5720_(), 1.0F, Parrot.m_29399_(this.f_19853_.f_46441_));
-             }
 @@ -551,6 +_,7 @@
     }
  
@@ -170,14 +157,10 @@
           if (!this.f_19853_.f_46443_) {
              this.m_36246_(Stats.f_12982_.m_12902_(this.f_20935_.m_41720_()));
           }
-@@ -828,8 +_,9 @@
-          if (p_36383_ >= 3.0F) {
-             int i = 1 + Mth.m_14143_(p_36383_);
+@@ -830,6 +_,7 @@
              InteractionHand interactionhand = this.m_7655_();
--            this.f_20935_.m_41622_(i, this, (p_36149_) -> {
--               p_36149_.m_21190_(interactionhand);
-+            this.f_20935_.m_41622_(i, this, (p_213833_1_) -> {
-+               p_213833_1_.m_21190_(interactionhand);
+             this.f_20935_.m_41622_(i, this, (p_36149_) -> {
+                p_36149_.m_21190_(interactionhand);
 +               net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(this, this.f_20935_, interactionhand);
              });
              if (this.f_20935_.m_41619_()) {
@@ -349,26 +332,7 @@
        this.f_36078_ += p_36276_;
        if (this.f_36078_ < 0) {
           this.f_36078_ = 0;
-@@ -1680,13 +_,13 @@
- 
-    private void m_36370_(CompoundTag p_36371_) {
-       if (!this.f_19853_.f_46443_ && !p_36371_.m_128456_()) {
--         EntityType.m_20642_(p_36371_, this.f_19853_).ifPresent((p_36293_) -> {
--            if (p_36293_ instanceof TamableAnimal) {
--               ((TamableAnimal)p_36293_).m_21816_(this.f_19820_);
-+         EntityType.m_20642_(p_36371_, this.f_19853_).ifPresent((p_226562_1_) -> {
-+            if (p_226562_1_ instanceof TamableAnimal) {
-+               ((TamableAnimal)p_226562_1_).m_21816_(this.f_19820_);
-             }
- 
--            p_36293_.m_6034_(this.m_20185_(), this.m_20186_() + (double)0.7F, this.m_20189_());
--            ((ServerLevel)this.f_19853_).m_8847_(p_36293_);
-+            p_226562_1_.m_6034_(this.m_20185_(), this.m_20186_() + (double)0.7F, this.m_20189_());
-+            ((ServerLevel)this.f_19853_).m_8847_(p_226562_1_);
-          });
-       }
- 
-@@ -1709,14 +_,18 @@
+@@ -1709,7 +_,11 @@
     }
  
     public Component m_5446_() {
@@ -379,15 +343,6 @@
 +      mutablecomponent = mutablecomponent.m_7220_(PlayerTeam.m_83348_(this.m_5647_(), this.displayname));
 +      mutablecomponent = suffixes.stream().reduce(mutablecomponent, MutableComponent::m_7220_);
        return this.m_36218_(mutablecomponent);
-    }
- 
-    private MutableComponent m_36218_(MutableComponent p_36219_) {
-       String s = this.m_36316_().getName();
--      return p_36219_.m_130938_((p_36212_) -> {
--         return p_36212_.m_131142_(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tell " + s + " ")).m_131144_(this.m_20190_()).m_131138_(s);
-+      return p_36219_.m_130938_((p_234565_2_) -> {
-+         return p_234565_2_.m_131142_(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tell " + s + " ")).m_131144_(this.m_20190_()).m_131138_(s);
-       });
     }
  
 @@ -1987,5 +_,63 @@

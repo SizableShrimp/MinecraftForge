@@ -1,46 +1,5 @@
 --- a/net/minecraft/commands/arguments/blocks/BlockStateParser.java
 +++ b/net/minecraft/commands/arguments/blocks/BlockStateParser.java
-@@ -31,24 +_,24 @@
- 
- public class BlockStateParser {
-    public static final SimpleCommandExceptionType f_116741_ = new SimpleCommandExceptionType(new TranslatableComponent("argument.block.tag.disallowed"));
--   public static final DynamicCommandExceptionType f_116742_ = new DynamicCommandExceptionType((p_116790_) -> {
--      return new TranslatableComponent("argument.block.id.invalid", p_116790_);
--   });
--   public static final Dynamic2CommandExceptionType f_116743_ = new Dynamic2CommandExceptionType((p_116820_, p_116821_) -> {
--      return new TranslatableComponent("argument.block.property.unknown", p_116820_, p_116821_);
--   });
--   public static final Dynamic2CommandExceptionType f_116744_ = new Dynamic2CommandExceptionType((p_116813_, p_116814_) -> {
--      return new TranslatableComponent("argument.block.property.duplicate", p_116814_, p_116813_);
--   });
--   public static final Dynamic3CommandExceptionType f_116745_ = new Dynamic3CommandExceptionType((p_116795_, p_116796_, p_116797_) -> {
--      return new TranslatableComponent("argument.block.property.invalid", p_116795_, p_116797_, p_116796_);
--   });
--   public static final Dynamic2CommandExceptionType f_116746_ = new Dynamic2CommandExceptionType((p_116792_, p_116793_) -> {
--      return new TranslatableComponent("argument.block.property.novalue", p_116792_, p_116793_);
-+   public static final DynamicCommandExceptionType f_116742_ = new DynamicCommandExceptionType((p_208687_0_) -> {
-+      return new TranslatableComponent("argument.block.id.invalid", p_208687_0_);
-+   });
-+   public static final Dynamic2CommandExceptionType f_116743_ = new Dynamic2CommandExceptionType((p_208685_0_, p_208685_1_) -> {
-+      return new TranslatableComponent("argument.block.property.unknown", p_208685_0_, p_208685_1_);
-+   });
-+   public static final Dynamic2CommandExceptionType f_116744_ = new Dynamic2CommandExceptionType((p_208690_0_, p_208690_1_) -> {
-+      return new TranslatableComponent("argument.block.property.duplicate", p_208690_1_, p_208690_0_);
-+   });
-+   public static final Dynamic3CommandExceptionType f_116745_ = new Dynamic3CommandExceptionType((p_208684_0_, p_208684_1_, p_208684_2_) -> {
-+      return new TranslatableComponent("argument.block.property.invalid", p_208684_0_, p_208684_2_, p_208684_1_);
-+   });
-+   public static final Dynamic2CommandExceptionType f_116746_ = new Dynamic2CommandExceptionType((p_208689_0_, p_208689_1_) -> {
-+      return new TranslatableComponent("argument.block.property.novalue", p_208689_0_, p_208689_1_);
-    });
-    public static final SimpleCommandExceptionType f_116747_ = new SimpleCommandExceptionType(new TranslatableComponent("argument.block.property.unclosed"));
--   private static final BiFunction<SuggestionsBuilder, TagCollection<Block>, CompletableFuture<Suggestions>> f_116748_ = (p_116857_, p_116858_) -> {
--      return p_116857_.buildFuture();
-+   private static final BiFunction<SuggestionsBuilder, TagCollection<Block>, CompletableFuture<Suggestions>> f_116748_ = (p_239308_0_, p_239308_1_) -> {
-+      return p_239308_0_.buildFuture();
-    };
-    private final StringReader f_116749_;
-    private final boolean f_116750_;
 @@ -169,7 +_,7 @@
  
     private boolean m_116767_(TagCollection<Block> p_116768_) {
@@ -68,25 +27,3 @@
              p_116848_.suggest(String.valueOf('{'));
           }
        }
-@@ -355,8 +_,8 @@
- 
-             this.f_116749_.skip();
-             this.f_116749_.skipWhitespace();
--            this.f_116759_ = (p_116773_, p_116774_) -> {
--               return m_116786_(p_116773_, property).buildFuture();
-+            this.f_116759_ = (p_197251_1_, p_197251_2_) -> {
-+               return m_116786_(p_197251_1_, property).buildFuture();
-             };
-             int j = this.f_116749_.getCursor();
-             this.m_116775_(property, this.f_116749_.readString(), j);
-@@ -410,8 +_,8 @@
- 
-             this.f_116749_.skip();
-             this.f_116749_.skipWhitespace();
--            this.f_116759_ = (p_116800_, p_116801_) -> {
--               return this.m_116782_(p_116800_, p_116801_, s);
-+            this.f_116759_ = (p_200138_2_, p_200138_3_) -> {
-+               return this.m_116782_(p_200138_2_, p_200138_3_, s);
-             };
-             i = this.f_116749_.getCursor();
-             String s1 = this.f_116749_.readString();

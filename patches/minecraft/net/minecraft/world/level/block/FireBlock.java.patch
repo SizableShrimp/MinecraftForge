@@ -1,27 +1,5 @@
 --- a/net/minecraft/world/level/block/FireBlock.java
 +++ b/net/minecraft/world/level/block/FireBlock.java
-@@ -34,8 +_,8 @@
-    public static final BooleanProperty f_53411_ = PipeBlock.f_55150_;
-    public static final BooleanProperty f_53412_ = PipeBlock.f_55151_;
-    public static final BooleanProperty f_53413_ = PipeBlock.f_55152_;
--   private static final Map<Direction, BooleanProperty> f_53414_ = PipeBlock.f_55154_.entrySet().stream().filter((p_53467_) -> {
--      return p_53467_.getKey() != Direction.DOWN;
-+   private static final Map<Direction, BooleanProperty> f_53414_ = PipeBlock.f_55154_.entrySet().stream().filter((p_199776_0_) -> {
-+      return p_199776_0_.getKey() != Direction.DOWN;
-    }).collect(Util.m_137448_());
-    private static final VoxelShape f_53415_ = Block.m_49796_(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-    private static final VoxelShape f_53416_ = Block.m_49796_(0.0D, 0.0D, 0.0D, 1.0D, 16.0D, 16.0D);
-@@ -49,8 +_,8 @@
-    public FireBlock(BlockBehaviour.Properties p_53425_) {
-       super(p_53425_, 1.0F);
-       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_53408_, Integer.valueOf(0)).m_61124_(f_53409_, Boolean.valueOf(false)).m_61124_(f_53410_, Boolean.valueOf(false)).m_61124_(f_53411_, Boolean.valueOf(false)).m_61124_(f_53412_, Boolean.valueOf(false)).m_61124_(f_53413_, Boolean.valueOf(false)));
--      this.f_53420_ = ImmutableMap.copyOf(this.f_49792_.m_61056_().stream().filter((p_53497_) -> {
--         return p_53497_.m_61143_(f_53408_) == 0;
-+      this.f_53420_ = ImmutableMap.copyOf(this.f_49792_.m_61056_().stream().filter((p_242674_0_) -> {
-+         return p_242674_0_.m_61143_(f_53408_) == 0;
-       }).collect(Collectors.toMap(Function.identity(), FireBlock::m_53490_)));
-    }
- 
 @@ -94,13 +_,13 @@
     protected BlockState m_53470_(BlockGetter p_53471_, BlockPos p_53472_) {
        BlockPos blockpos = p_53472_.m_7495_();

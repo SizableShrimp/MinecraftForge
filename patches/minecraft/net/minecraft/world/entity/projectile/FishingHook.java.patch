@@ -18,17 +18,6 @@
                 serverlevel.m_8767_(ParticleTypes.f_123769_, d4, d5, d6, 2 + this.f_19796_.nextInt(2), (double)0.1F, 0.0D, (double)0.1F, 0.0D);
              }
           }
-@@ -378,8 +_,8 @@
-    }
- 
-    private FishingHook.OpenWaterType m_37147_(BlockPos p_37148_, BlockPos p_37149_) {
--      return BlockPos.m_121990_(p_37148_, p_37149_).map(this::m_37163_).reduce((p_37139_, p_37140_) -> {
--         return p_37139_ == p_37140_ ? p_37139_ : FishingHook.OpenWaterType.INVALID;
-+      return BlockPos.m_121990_(p_37148_, p_37149_).map(this::m_37163_).reduce((p_234601_0_, p_234601_1_) -> {
-+         return p_234601_0_ == p_234601_1_ ? p_234601_0_ : FishingHook.OpenWaterType.INVALID;
-       }).orElse(FishingHook.OpenWaterType.INVALID);
-    }
- 
 @@ -407,6 +_,7 @@
        Player player = this.m_37168_();
        if (!this.f_19853_.f_46443_ && player != null) {

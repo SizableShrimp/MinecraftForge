@@ -34,7 +34,7 @@
        this.f_62780_ = new ClassInstanceMultiMap[16];
        this.f_62776_ = p_62800_;
        this.f_62792_ = p_62801_;
-@@ -117,16 +_,16 @@
+@@ -117,7 +_,7 @@
              f_62771_.warn("Could not set level chunk sections, array length is {} instead of {}", p_62807_.length, this.f_62772_.length);
           }
        }
@@ -43,29 +43,6 @@
     }
  
     public LevelChunk(Level p_62810_, ProtoChunk p_62811_) {
-       this(p_62810_, p_62811_.m_7697_(), p_62811_.m_6221_(), p_62811_.m_7387_(), p_62811_.m_5782_(), p_62811_.m_5783_(), p_62811_.m_6319_(), p_62811_.m_7103_(), (Consumer<LevelChunk>)null);
- 
-       for(CompoundTag compoundtag : p_62811_.m_63293_()) {
--         EntityType.m_20645_(compoundtag, p_62810_, (p_62906_) -> {
--            this.m_6286_(p_62906_);
--            return p_62906_;
-+         EntityType.m_20645_(compoundtag, p_62810_, (p_217325_1_) -> {
-+            this.m_6286_(p_217325_1_);
-+            return p_217325_1_;
-          });
-       }
- 
-@@ -154,8 +_,8 @@
-    }
- 
-    public Heightmap m_6005_(Heightmap.Types p_62845_) {
--      return this.f_62777_.computeIfAbsent(p_62845_, (p_62908_) -> {
--         return new Heightmap(this, p_62908_);
-+      return this.f_62777_.computeIfAbsent(p_62845_, (p_217319_1_) -> {
-+         return new Heightmap(this, p_217319_1_);
-       });
-    }
- 
 @@ -262,28 +_,28 @@
  
           if (!this.f_62776_.f_46443_) {
@@ -224,17 +201,7 @@
        i = Mth.m_14045_(i, 0, this.f_62780_.length - 1);
        j = Mth.m_14045_(j, 0, this.f_62780_.length - 1);
  
-@@ -526,13 +_,18 @@
-    @OnlyIn(Dist.CLIENT)
-    public void m_62839_(@Nullable ChunkBiomeContainer p_62840_, FriendlyByteBuf p_62841_, CompoundTag p_62842_, int p_62843_) {
-       boolean flag = p_62840_ != null;
--      Predicate<BlockPos> predicate = flag ? (p_62947_) -> {
-+      Predicate<BlockPos> predicate = flag ? (p_217315_0_) -> {
-          return true;
--      } : (p_62820_) -> {
--         return (p_62843_ & 1 << (p_62820_.m_123342_() >> 4)) != 0;
-+      } : (p_217323_1_) -> {
-+         return (p_62843_ & 1 << (p_217323_1_.m_123342_() >> 4)) != 0;
+@@ -533,6 +_,11 @@
        };
        Sets.newHashSet(this.f_62779_.keySet()).stream().filter(predicate).forEach(this.f_62776_::m_46747_);
  
@@ -246,33 +213,15 @@
        for(int i = 0; i < this.f_62772_.length; ++i) {
           LevelChunkSection levelchunksection = this.f_62772_[i];
           if ((p_62843_ & 1 << i) == 0) {
-@@ -595,8 +_,8 @@
-    }
+@@ -596,7 +_,7 @@
  
     public Stream<BlockPos> m_6267_() {
--      return StreamSupport.stream(BlockPos.m_121976_(this.f_62792_.m_45604_(), 0, this.f_62792_.m_45605_(), this.f_62792_.m_45608_(), 255, this.f_62792_.m_45609_()).spliterator(), false).filter((p_62944_) -> {
+       return StreamSupport.stream(BlockPos.m_121976_(this.f_62792_.m_45604_(), 0, this.f_62792_.m_45605_(), this.f_62792_.m_45608_(), 255, this.f_62792_.m_45609_()).spliterator(), false).filter((p_62944_) -> {
 -         return this.m_8055_(p_62944_).m_60791_() != 0;
-+      return StreamSupport.stream(BlockPos.m_121976_(this.f_62792_.m_45604_(), 0, this.f_62792_.m_45605_(), this.f_62792_.m_45608_(), 255, this.f_62792_.m_45609_()).spliterator(), false).filter((p_217312_1_) -> {
-+         return this.m_8055_(p_217312_1_).getLightValue(m_62953_(), p_217312_1_) != 0;
++         return this.m_8055_(p_62944_).getLightValue(m_62953_(), p_62944_) != 0;
        });
     }
  
-@@ -643,13 +_,13 @@
-    }
- 
-    public LongSet m_6705_(StructureFeature<?> p_62893_) {
--      return this.f_62782_.computeIfAbsent(p_62893_, (p_62917_) -> {
-+      return this.f_62782_.computeIfAbsent(p_62893_, (p_235961_0_) -> {
-          return new LongOpenHashSet();
-       });
-    }
- 
-    public void m_6306_(StructureFeature<?> p_62856_, long p_62857_) {
--      this.f_62782_.computeIfAbsent(p_62856_, (p_62910_) -> {
-+      this.f_62782_.computeIfAbsent(p_62856_, (p_235960_0_) -> {
-          return new LongOpenHashSet();
-       }).add(p_62857_);
-    }
 @@ -702,9 +_,8 @@
        BlockState blockstate = this.m_8055_(p_62871_);
        BlockEntity blockentity;
@@ -285,14 +234,7 @@
           } else {
              blockentity = null;
              f_62771_.warn("Tried to load a DUMMY block entity @ {} but found not block entity block {} at location", p_62871_, blockstate);
-@@ -733,22 +_,22 @@
- 
-    public void m_62813_() {
-       if (this.f_62784_ instanceof ProtoTickList) {
--         ((ProtoTickList<Block>)this.f_62784_).m_63305_(this.f_62776_.m_6219_(), (p_62941_) -> {
--            return this.m_8055_(p_62941_).m_60734_();
-+         ((ProtoTickList<Block>)this.f_62784_).m_63305_(this.f_62776_.m_6219_(), (p_222881_1_) -> {
-+            return this.m_8055_(p_222881_1_).m_60734_();
+@@ -738,7 +_,7 @@
           });
           this.f_62784_ = EmptyTickList.m_45888_();
        } else if (this.f_62784_ instanceof ChunkTickList) {
@@ -301,11 +243,7 @@
           this.f_62784_ = EmptyTickList.m_45888_();
        }
  
-       if (this.f_62785_ instanceof ProtoTickList) {
--         ((ProtoTickList<Fluid>)this.f_62785_).m_63305_(this.f_62776_.m_6217_(), (p_62938_) -> {
--            return this.m_6425_(p_62938_).m_76152_();
-+         ((ProtoTickList<Fluid>)this.f_62785_).m_63305_(this.f_62776_.m_6217_(), (p_222878_1_) -> {
-+            return this.m_6425_(p_222878_1_).m_76152_();
+@@ -748,7 +_,7 @@
           });
           this.f_62785_ = EmptyTickList.m_45888_();
        } else if (this.f_62785_ instanceof ChunkTickList) {

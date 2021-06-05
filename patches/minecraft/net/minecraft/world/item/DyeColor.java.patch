@@ -1,35 +1,6 @@
 --- a/net/minecraft/world/item/DyeColor.java
 +++ b/net/minecraft/world/item/DyeColor.java
-@@ -7,8 +_,6 @@
- import javax.annotation.Nullable;
- import net.minecraft.util.StringRepresentable;
- import net.minecraft.world.level.material.MaterialColor;
--import net.minecraftforge.api.distmarker.Dist;
--import net.minecraftforge.api.distmarker.OnlyIn;
- 
- public enum DyeColor implements StringRepresentable {
-    WHITE(0, "white", 16383998, MaterialColor.f_76406_, 15790320, 16777215),
-@@ -28,13 +_,13 @@
-    RED(14, "red", 11546150, MaterialColor.f_76364_, 11743532, 16711680),
-    BLACK(15, "black", 1908001, MaterialColor.f_76365_, 1973019, 0);
- 
--   private static final DyeColor[] f_41032_ = Arrays.stream(values()).sorted(Comparator.comparingInt(DyeColor::m_41060_)).toArray((p_41067_) -> {
--      return new DyeColor[p_41067_];
-+   private static final DyeColor[] f_41032_ = Arrays.stream(values()).sorted(Comparator.comparingInt(DyeColor::m_41060_)).toArray((p_199795_0_) -> {
-+      return new DyeColor[p_199795_0_];
-    });
--   private static final Int2ObjectOpenHashMap<DyeColor> f_41033_ = new Int2ObjectOpenHashMap<>(Arrays.stream(values()).collect(Collectors.toMap((p_41064_) -> {
--      return p_41064_.f_41040_;
--   }, (p_41056_) -> {
--      return p_41056_;
-+   private static final Int2ObjectOpenHashMap<DyeColor> f_41033_ = new Int2ObjectOpenHashMap<>(Arrays.stream(values()).collect(Collectors.toMap((p_199793_0_) -> {
-+      return p_199793_0_.f_41040_;
-+   }, (p_199794_0_) -> {
-+      return p_199794_0_;
-    })));
-    private final int f_41034_;
-    private final String f_41035_;
-@@ -43,6 +_,7 @@
+@@ -41,6 +_,7 @@
     private final int f_41038_;
     private final float[] f_41039_;
     private final int f_41040_;
@@ -37,7 +8,7 @@
     private final int f_41041_;
  
     private DyeColor(int p_41046_, String p_41047_, int p_41048_, MaterialColor p_41049_, int p_41050_, int p_41051_) {
-@@ -55,6 +_,7 @@
+@@ -53,6 +_,7 @@
        int j = (p_41048_ & '\uff00') >> 8;
        int k = (p_41048_ & 255) >> 0;
        this.f_41038_ = k << 16 | j << 8 | i << 0;
@@ -45,23 +16,7 @@
        this.f_41039_ = new float[]{(float)i / 255.0F, (float)j / 255.0F, (float)k / 255.0F};
        this.f_41040_ = p_41050_;
     }
-@@ -79,7 +_,6 @@
-       return this.f_41040_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public int m_41071_() {
-       return this.f_41041_;
-    }
-@@ -103,7 +_,6 @@
-    }
- 
-    @Nullable
--   @OnlyIn(Dist.CLIENT)
-    public static DyeColor m_41061_(int p_41062_) {
-       return f_41033_.get(p_41062_);
-    }
-@@ -114,5 +_,26 @@
+@@ -110,5 +_,26 @@
  
     public String m_7912_() {
        return this.f_41035_;

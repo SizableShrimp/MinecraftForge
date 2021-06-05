@@ -64,17 +64,6 @@
     class ShulkerBodyRotationControl extends BodyRotationControl {
        public ShulkerBodyRotationControl(Mob p_33493_) {
           super(p_33493_);
-@@ -492,8 +_,8 @@
- 
-    static class ShulkerDefenseAttackGoal extends NearestAttackableTargetGoal<LivingEntity> {
-       public ShulkerDefenseAttackGoal(Shulker p_33496_) {
--         super(p_33496_, LivingEntity.class, 10, true, false, (p_33501_) -> {
--            return p_33501_ instanceof Enemy;
-+         super(p_33496_, LivingEntity.class, 10, true, false, (p_200826_0_) -> {
-+            return p_200826_0_ instanceof Enemy;
-          });
-       }
- 
 @@ -507,25 +_,6 @@
              return this.f_26135_.m_20191_().m_82377_(4.0D, p_33499_, p_33499_);
           } else {

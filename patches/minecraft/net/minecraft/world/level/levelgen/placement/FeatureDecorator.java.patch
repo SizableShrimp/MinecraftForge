@@ -9,14 +9,3 @@
     public static final FeatureDecorator<NoneDecoratorConfiguration> f_70681_ = m_70717_("nope", new NopePlacementDecorator(NoneDecoratorConfiguration.f_67810_));
     public static final FeatureDecorator<ChanceDecoratorConfiguration> f_70682_ = m_70717_("chance", new ChanceDecorator(ChanceDecoratorConfiguration.f_70464_));
     public static final FeatureDecorator<CountConfiguration> f_70683_ = m_70717_("count", new CountDecorator(CountConfiguration.f_67568_));
-@@ -52,8 +_,8 @@
-    }
- 
-    public FeatureDecorator(Codec<DC> p_70709_) {
--      this.f_70680_ = p_70709_.fieldOf("config").xmap((p_70712_) -> {
--         return new ConfiguredDecorator<DC>(this, p_70712_);
-+      this.f_70680_ = p_70709_.fieldOf("config").xmap((p_236966_1_) -> {
-+         return new ConfiguredDecorator<DC>(this, p_236966_1_);
-       }, ConfiguredDecorator::m_70484_).codec();
-    }
- 

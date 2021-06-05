@@ -8,29 +8,6 @@
  import javax.annotation.Nullable;
  import net.minecraft.Util;
  import net.minecraft.resources.RegistryDataPackCodec;
-@@ -57,14 +_,14 @@
-    }
- 
-    public static <T> MapCodec<MappedRegistry.RegistryEntry<T>> m_122727_(ResourceKey<? extends Registry<T>> p_122728_, MapCodec<T> p_122729_) {
--      return RecordCodecBuilder.mapCodec((p_122733_) -> {
--         return p_122733_.group(ResourceLocation.f_135803_.xmap(ResourceKey.m_135797_(p_122728_), ResourceKey::m_135782_).fieldOf("name").forGetter((p_122753_) -> {
--            return p_122753_.f_122766_;
--         }), Codec.INT.fieldOf("id").forGetter((p_122742_) -> {
--            return p_122742_.f_122767_;
--         }), p_122729_.forGetter((p_122697_) -> {
--            return p_122697_.f_122768_;
--         })).apply(p_122733_, MappedRegistry.RegistryEntry::new);
-+      return RecordCodecBuilder.mapCodec((p_243542_2_) -> {
-+         return p_243542_2_.group(ResourceLocation.f_135803_.xmap(ResourceKey.m_135797_(p_122728_), ResourceKey::m_135782_).fieldOf("name").forGetter((p_243545_0_) -> {
-+            return p_243545_0_.f_122766_;
-+         }), Codec.INT.fieldOf("id").forGetter((p_243543_0_) -> {
-+            return p_243543_0_.f_122767_;
-+         }), p_122729_.forGetter((p_243538_0_) -> {
-+            return p_243538_0_.f_122768_;
-+         })).apply(p_243542_2_, MappedRegistry.RegistryEntry::new);
-       });
-    }
- 
 @@ -166,7 +_,7 @@
        return Collections.unmodifiableSet(this.f_122674_.keySet());
     }
@@ -40,49 +17,13 @@
        return Collections.unmodifiableMap(this.f_122675_).entrySet();
     }
  
-@@ -190,19 +_,19 @@
-    }
- 
-    public static <T> Codec<MappedRegistry<T>> m_122715_(ResourceKey<? extends Registry<T>> p_122716_, Lifecycle p_122717_, Codec<T> p_122718_) {
--      return m_122727_(p_122716_, p_122718_.fieldOf("element")).codec().listOf().xmap((p_122722_) -> {
-+      return m_122727_(p_122716_, p_122718_.fieldOf("element")).codec().listOf().xmap((p_243540_2_) -> {
-          MappedRegistry<T> mappedregistry = new MappedRegistry<>(p_122716_, p_122717_);
- 
--         for(MappedRegistry.RegistryEntry<T> registryentry : p_122722_) {
-+         for(MappedRegistry.RegistryEntry<T> registryentry : p_243540_2_) {
-             mappedregistry.m_5748_(registryentry.f_122767_, registryentry.f_122766_, registryentry.f_122768_, p_122717_);
-          }
- 
-          return mappedregistry;
--      }, (p_122744_) -> {
-+      }, (p_243544_0_) -> {
-          Builder<MappedRegistry.RegistryEntry<T>> builder = ImmutableList.builder();
- 
--         for(T t : p_122744_) {
--            builder.add(new MappedRegistry.RegistryEntry<>(p_122744_.m_7854_(t).get(), p_122744_.m_7447_(t), t));
-+         for(T t : p_243544_0_) {
-+            builder.add(new MappedRegistry.RegistryEntry<>(p_243544_0_.m_7854_(t).get(), p_243544_0_.m_7447_(t), t));
-          }
- 
-          return builder.build();
-@@ -214,14 +_,15 @@
+@@ -214,7 +_,8 @@
     }
  
     public static <T> Codec<MappedRegistry<T>> m_122756_(ResourceKey<? extends Registry<T>> p_122757_, Lifecycle p_122758_, Codec<T> p_122759_) {
 -      return Codec.unboundedMap(ResourceLocation.f_135803_.xmap(ResourceKey.m_135797_(p_122757_), ResourceKey::m_135782_), p_122759_).xmap((p_122726_) -> {
 +      // FORGE: Fix MC-197860
-+      return new net.minecraftforge.common.LenientUnboundedMapCodec<>(ResourceLocation.f_135803_.xmap(ResourceKey.m_135797_(p_122757_), ResourceKey::m_135782_), p_122759_).xmap((p_239656_2_) -> {
++      return new net.minecraftforge.common.LenientUnboundedMapCodec<>(ResourceLocation.f_135803_.xmap(ResourceKey.m_135797_(p_122757_), ResourceKey::m_135782_), p_122759_).xmap((p_122726_) -> {
           MappedRegistry<T> mappedregistry = new MappedRegistry<>(p_122757_, p_122758_);
--         p_122726_.forEach((p_122703_, p_122704_) -> {
--            mappedregistry.m_7135_(p_122703_, p_122704_, p_122758_);
-+         p_239656_2_.forEach((p_239653_2_, p_239653_3_) -> {
-+            mappedregistry.m_7135_(p_239653_2_, p_239653_3_, p_122758_);
-          });
-          return mappedregistry;
--      }, (p_122699_) -> {
--         return ImmutableMap.copyOf(p_122699_.f_122675_);
-+      }, (p_239651_0_) -> {
-+         return ImmutableMap.copyOf(p_239651_0_.f_122675_);
-       });
-    }
- 
+          p_122726_.forEach((p_122703_, p_122704_) -> {
+             mappedregistry.m_7135_(p_122703_, p_122704_, p_122758_);

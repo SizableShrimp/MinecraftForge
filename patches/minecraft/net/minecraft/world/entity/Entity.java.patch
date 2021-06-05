@@ -98,9 +98,9 @@
           this.m_20256_(this.m_20184_().m_82542_((double)f2, 1.0D, (double)f2));
 -         if (this.f_19853_.m_46847_(this.m_20191_().m_82406_(0.001D)).noneMatch((p_20127_) -> {
 -            return p_20127_.m_60620_(BlockTags.f_13076_) || p_20127_.m_60713_(Blocks.f_49991_);
-+         if (BlockPos.m_121921_(this.m_20191_().m_82406_(0.001D)).noneMatch((p_233572_0_) -> {
-+            BlockState state = f_19853_.m_8055_(p_233572_0_);
-+            return state.m_60620_(BlockTags.f_13076_) || state.m_60713_(Blocks.f_49991_) || state.isBurning(f_19853_, p_233572_0_);
++         if (BlockPos.m_121921_(this.m_20191_().m_82406_(0.001D)).noneMatch((p_20127_) -> {
++            BlockState state = f_19853_.m_8055_(p_20127_);
++            return state.m_60620_(BlockTags.f_13076_) || state.m_60713_(Blocks.f_49991_) || state.isBurning(f_19853_, p_20127_);
           }) && this.f_19831_ <= 0) {
              this.m_7311_(-this.m_6101_());
           }
@@ -118,15 +118,6 @@
              return blockpos1;
           }
        }
-@@ -683,7 +_,7 @@
-       CollisionContext collisioncontext = CollisionContext.m_82750_(this);
-       VoxelShape voxelshape = this.f_19853_.m_6857_().m_61946_();
-       Stream<VoxelShape> stream = Shapes.m_83157_(voxelshape, Shapes.m_83064_(aabb.m_82406_(1.0E-7D)), BooleanOp.f_82689_) ? Stream.empty() : Stream.of(voxelshape);
--      Stream<VoxelShape> stream1 = this.f_19853_.m_5454_(this, aabb.m_82369_(p_20273_), (p_19949_) -> {
-+      Stream<VoxelShape> stream1 = this.f_19853_.m_5454_(this, aabb.m_82369_(p_20273_), (p_233561_0_) -> {
-          return true;
-       });
-       RewindableStream<VoxelShape> rewindablestream = new RewindableStream<>(Stream.concat(stream1, stream));
 @@ -799,6 +_,7 @@
     public void m_20100_() {
        AABB aabb = this.m_20191_();
@@ -194,17 +185,6 @@
           this.f_19853_.m_7967_(itementity);
           return itementity;
        }
-@@ -1560,8 +_,8 @@
-          float f = 0.1F;
-          float f1 = this.f_19815_.f_20377_ * 0.8F;
-          AABB aabb = AABB.m_82402_((double)f1, (double)0.1F, (double)f1).m_82386_(this.m_20185_(), this.m_20188_(), this.m_20189_());
--         return this.f_19853_.m_45764_(this, aabb, (p_20129_, p_20130_) -> {
--            return p_20129_.m_60828_(this.f_19853_, p_20130_);
-+         return this.f_19853_.m_45764_(this, aabb, (p_241338_1_, p_241338_2_) -> {
-+            return p_241338_1_.m_60828_(this.f_19853_, p_241338_2_);
-          }).findAny().isPresent();
-       }
-    }
 @@ -1580,6 +_,7 @@
  
     public void m_6083_() {
@@ -293,62 +273,6 @@
           }
        } else {
           return null;
-@@ -2137,14 +_,14 @@
-             double d3 = Math.min(2.9999872E7D, worldborder.m_61958_() - 16.0D);
-             double d4 = DimensionType.m_63908_(this.f_19853_.m_6042_(), p_19923_.m_6042_());
-             BlockPos blockpos1 = new BlockPos(Mth.m_14008_(this.m_20185_() * d4, d0, d2), this.m_20186_(), Mth.m_14008_(this.m_20189_() * d4, d1, d3));
--            return this.m_7436_(p_19923_, blockpos1, flag2).map((p_19936_) -> {
-+            return this.m_7436_(p_19923_, blockpos1, flag2).map((p_242275_2_) -> {
-                BlockState blockstate = this.f_19853_.m_8055_(this.f_19819_);
-                Direction.Axis direction$axis;
-                Vec3 vec3;
-                if (blockstate.m_61138_(BlockStateProperties.f_61364_)) {
-                   direction$axis = blockstate.m_61143_(BlockStateProperties.f_61364_);
--                  BlockUtil.FoundRectangle blockutil$foundrectangle = BlockUtil.m_124334_(this.f_19819_, direction$axis, 21, Direction.Axis.Y, 21, (p_20010_) -> {
--                     return this.f_19853_.m_8055_(p_20010_) == blockstate;
-+                  BlockUtil.FoundRectangle blockutil$foundrectangle = BlockUtil.m_124334_(this.f_19819_, direction$axis, 21, Direction.Axis.Y, 21, (p_242276_2_) -> {
-+                     return this.f_19853_.m_8055_(p_242276_2_) == blockstate;
-                   });
-                   vec3 = this.m_7643_(direction$axis, blockutil$foundrectangle);
-                } else {
-@@ -2152,7 +_,7 @@
-                   vec3 = new Vec3(0.5D, 0.0D, 0.0D);
-                }
- 
--               return PortalShape.m_77699_(p_19923_, p_19936_, direction$axis, vec3, this.m_6972_(this.m_20089_()), this.m_20184_(), this.f_19857_, this.f_19858_);
-+               return PortalShape.m_77699_(p_19923_, p_242275_2_, direction$axis, vec3, this.m_6972_(this.m_20089_()), this.m_20184_(), this.f_19857_, this.f_19858_);
-             }).orElse((PortalInfo)null);
-          }
-       } else {
-@@ -2252,8 +_,8 @@
-    }
- 
-    public Component m_5446_() {
--      return PlayerTeam.m_83348_(this.m_5647_(), this.m_7755_()).m_130938_((p_20058_) -> {
--         return p_20058_.m_131144_(this.m_20190_()).m_131138_(this.m_20149_());
-+      return PlayerTeam.m_83348_(this.m_5647_(), this.m_7755_()).m_130938_((p_211516_1_) -> {
-+         return p_211516_1_.m_131144_(this.m_20190_()).m_131138_(this.m_20149_());
-       });
-    }
- 
-@@ -2291,12 +_,12 @@
-       if (this.f_19853_ instanceof ServerLevel) {
-          ServerLevel serverlevel = (ServerLevel)this.f_19853_;
-          this.m_7678_(p_19887_, p_19888_, p_19889_, this.f_19857_, this.f_19858_);
--         this.m_20199_().forEach((p_19926_) -> {
--            serverlevel.m_8819_(p_19926_);
--            p_19926_.f_19842_ = true;
-+         this.m_20199_().forEach((p_233565_1_) -> {
-+            serverlevel.m_8819_(p_233565_1_);
-+            p_233565_1_.f_19842_ = true;
- 
--            for(Entity entity : p_19926_.f_19823_) {
--               p_19926_.m_19956_(entity, Entity::m_6027_);
-+            for(Entity entity : p_233565_1_.f_19823_) {
-+               p_233565_1_.m_19956_(entity, Entity::m_6027_);
-             }
- 
-          });
 @@ -2319,8 +_,10 @@
        EntityDimensions entitydimensions = this.f_19815_;
        Pose pose = this.m_20089_();

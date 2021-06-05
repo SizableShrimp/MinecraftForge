@@ -1,35 +1,5 @@
 --- a/net/minecraft/world/level/levelgen/feature/structures/SinglePoolElement.java
 +++ b/net/minecraft/world/level/levelgen/feature/structures/SinglePoolElement.java
-@@ -32,8 +_,8 @@
- 
- public class SinglePoolElement extends StructurePoolElement {
-    private static final Codec<Either<ResourceLocation, StructureTemplate>> f_69096_ = Codec.of(SinglePoolElement::m_69113_, ResourceLocation.f_135803_.map(Either::left));
--   public static final Codec<SinglePoolElement> f_69097_ = RecordCodecBuilder.create((p_69118_) -> {
--      return p_69118_.group(m_69149_(), m_69146_(), m_69229_()).apply(p_69118_, SinglePoolElement::new);
-+   public static final Codec<SinglePoolElement> f_69097_ = RecordCodecBuilder.create((p_236841_0_) -> {
-+      return p_236841_0_.group(m_69149_(), m_69146_(), m_69229_()).apply(p_236841_0_, SinglePoolElement::new);
-    });
-    protected final Either<ResourceLocation, StructureTemplate> f_69098_;
-    protected final Supplier<StructureProcessorList> f_69099_;
-@@ -44,14 +_,14 @@
-    }
- 
-    protected static <E extends SinglePoolElement> RecordCodecBuilder<E, Supplier<StructureProcessorList>> m_69146_() {
--      return StructureProcessorType.f_74468_.fieldOf("processors").forGetter((p_69148_) -> {
--         return p_69148_.f_69099_;
-+      return StructureProcessorType.f_74468_.fieldOf("processors").forGetter((p_236845_0_) -> {
-+         return p_236845_0_.f_69099_;
-       });
-    }
- 
-    protected static <E extends SinglePoolElement> RecordCodecBuilder<E, Either<ResourceLocation, StructureTemplate>> m_69149_() {
--      return f_69096_.fieldOf("location").forGetter((p_69112_) -> {
--         return p_69112_.f_69098_;
-+      return f_69096_.fieldOf("location").forGetter((p_236842_0_) -> {
-+         return p_236842_0_.f_69098_;
-       });
-    }
- 
 @@ -106,7 +_,7 @@
        if (!structuretemplate.m_74536_(p_69123_, p_69126_, p_69127_, structureplacesettings, p_69130_, 18)) {
           return false;

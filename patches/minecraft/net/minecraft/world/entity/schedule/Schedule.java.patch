@@ -9,22 +9,3 @@
     public static final Schedule f_38012_ = m_38029_("empty").m_38040_(0, Activity.f_37979_).m_38039_();
     public static final Schedule f_38013_ = m_38029_("simple").m_38040_(5000, Activity.f_37980_).m_38040_(11000, Activity.f_37982_).m_38039_();
     public static final Schedule f_38014_ = m_38029_("villager_baby").m_38040_(10, Activity.f_37979_).m_38040_(3000, Activity.f_37981_).m_38040_(6000, Activity.f_37979_).m_38040_(10000, Activity.f_37981_).m_38040_(12000, Activity.f_37982_).m_38039_();
-@@ -32,14 +_,14 @@
-    }
- 
-    protected List<Timeline> m_38033_(Activity p_38034_) {
--      return this.f_38016_.entrySet().stream().filter((p_38028_) -> {
--         return p_38028_.getKey() != p_38034_;
-+      return this.f_38016_.entrySet().stream().filter((p_221378_1_) -> {
-+         return p_221378_1_.getKey() != p_38034_;
-       }).map(Entry::getValue).collect(Collectors.toList());
-    }
- 
-    public Activity m_38019_(int p_38020_) {
--      return this.f_38016_.entrySet().stream().max(Comparator.comparingDouble((p_38023_) -> {
--         return (double)p_38023_.getValue().m_38058_(p_38020_);
-+      return this.f_38016_.entrySet().stream().max(Comparator.comparingDouble((p_221376_1_) -> {
-+         return (double)p_221376_1_.getValue().m_38058_(p_38020_);
-       })).map(Entry::getKey).orElse(Activity.f_37979_);
-    }
- }

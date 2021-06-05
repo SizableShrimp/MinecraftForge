@@ -8,22 +8,7 @@
     }
  
     public ServerFunctionLibrary m_136157_() {
-@@ -73,18 +_,19 @@
-    public static CompletableFuture<ServerResources> m_136158_(List<PackResources> p_136159_, Commands.CommandSelection p_136160_, int p_136161_, Executor p_136162_, Executor p_136163_) {
-       ServerResources serverresources = new ServerResources(p_136160_, p_136161_);
-       CompletableFuture<Unit> completablefuture = serverresources.f_136145_.m_10715_(p_136162_, p_136163_, p_136159_, f_136144_);
--      return completablefuture.whenComplete((p_136169_, p_136170_) -> {
--         if (p_136170_ != null) {
-+      return completablefuture.whenComplete((p_240963_1_, p_240963_2_) -> {
-+         if (p_240963_2_ != null) {
-             serverresources.close();
-          }
- 
--      }).thenApply((p_136166_) -> {
-+      }).thenApply((p_240962_1_) -> {
-          return serverresources;
-       });
-    }
+@@ -85,6 +_,7 @@
  
     public void m_136179_() {
        this.f_136148_.m_13480_().m_13431_();

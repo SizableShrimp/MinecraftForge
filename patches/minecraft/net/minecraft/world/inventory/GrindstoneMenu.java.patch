@@ -1,26 +1,5 @@
 --- a/net/minecraft/world/inventory/GrindstoneMenu.java
 +++ b/net/minecraft/world/inventory/GrindstoneMenu.java
-@@ -49,16 +_,16 @@
-          }
- 
-          public ItemStack m_7265_(Player p_39627_, ItemStack p_39628_) {
--            p_39568_.m_39292_((p_39634_, p_39635_) -> {
--               int l = this.m_39631_(p_39634_);
-+            p_39568_.m_39292_((p_216944_1_, p_216944_2_) -> {
-+               int l = this.m_39631_(p_216944_1_);
- 
-                while(l > 0) {
-                   int i1 = ExperienceOrb.m_20782_(l);
-                   l -= i1;
--                  p_39634_.m_7967_(new ExperienceOrb(p_39634_, (double)p_39635_.m_123341_(), (double)p_39635_.m_123342_() + 0.5D, (double)p_39635_.m_123343_() + 0.5D, i1));
-+                  p_216944_1_.m_7967_(new ExperienceOrb(p_216944_1_, (double)p_216944_2_.m_123341_(), (double)p_216944_2_.m_123342_() + 0.5D, (double)p_216944_2_.m_123343_() + 0.5D, i1));
-                }
- 
--               p_39634_.m_46796_(1042, p_39635_, 0);
-+               p_216944_1_.m_46796_(1042, p_216944_2_, 0);
-             });
-             GrindstoneMenu.this.f_39560_.m_6836_(0, ItemStack.f_41583_);
-             GrindstoneMenu.this.f_39560_.m_6836_(1, ItemStack.f_41583_);
 @@ -139,12 +_,13 @@
              }
  
@@ -40,25 +19,3 @@
                 if (!ItemStack.m_41728_(itemstack, itemstack1)) {
                    this.f_39559_.m_6836_(0, ItemStack.f_41583_);
                    this.m_38946_();
-@@ -190,8 +_,8 @@
-       }
- 
-       itemstack.m_41764_(p_39582_);
--      Map<Enchantment, Integer> map = EnchantmentHelper.m_44831_(p_39580_).entrySet().stream().filter((p_39584_) -> {
--         return p_39584_.getKey().m_6589_();
-+      Map<Enchantment, Integer> map = EnchantmentHelper.m_44831_(p_39580_).entrySet().stream().filter((p_217012_0_) -> {
-+         return p_217012_0_.getKey().m_6589_();
-       }).collect(Collectors.toMap(Entry::getKey, Entry::getValue));
-       EnchantmentHelper.m_44865_(map, itemstack);
-       itemstack.m_41742_(0);
-@@ -211,8 +_,8 @@
- 
-    public void m_6877_(Player p_39586_) {
-       super.m_6877_(p_39586_);
--      this.f_39561_.m_39292_((p_39575_, p_39576_) -> {
--         this.m_38877_(p_39586_, p_39575_, this.f_39560_);
-+      this.f_39561_.m_39292_((p_217009_2_, p_217009_3_) -> {
-+         this.m_38877_(p_39586_, p_217009_2_, this.f_39560_);
-       });
-    }
- 

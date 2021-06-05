@@ -1,15 +1,6 @@
 --- a/net/minecraft/world/item/crafting/RepairItemRecipe.java
 +++ b/net/minecraft/world/item/crafting/RepairItemRecipe.java
-@@ -12,8 +_,6 @@
- import net.minecraft.world.item.enchantment.Enchantment;
- import net.minecraft.world.item.enchantment.EnchantmentHelper;
- import net.minecraft.world.level.Level;
--import net.minecraftforge.api.distmarker.Dist;
--import net.minecraftforge.api.distmarker.OnlyIn;
- 
- public class RepairItemRecipe extends CustomRecipe {
-    public RepairItemRecipe(ResourceLocation p_44126_) {
-@@ -29,7 +_,7 @@
+@@ -27,7 +_,7 @@
              list.add(itemstack);
              if (list.size() > 1) {
                 ItemStack itemstack1 = list.get(0);
@@ -18,7 +9,7 @@
                    return false;
                 }
              }
-@@ -48,7 +_,7 @@
+@@ -46,7 +_,7 @@
              list.add(itemstack);
              if (list.size() > 1) {
                 ItemStack itemstack1 = list.get(0);
@@ -27,7 +18,7 @@
                    return ItemStack.f_41583_;
                 }
              }
-@@ -58,12 +_,12 @@
+@@ -56,12 +_,12 @@
        if (list.size() == 2) {
           ItemStack itemstack3 = list.get(0);
           ItemStack itemstack4 = list.get(1);
@@ -45,25 +36,3 @@
              if (i1 < 0) {
                 i1 = 0;
              }
-@@ -73,10 +_,10 @@
-             Map<Enchantment, Integer> map = Maps.newHashMap();
-             Map<Enchantment, Integer> map1 = EnchantmentHelper.m_44831_(itemstack3);
-             Map<Enchantment, Integer> map2 = EnchantmentHelper.m_44831_(itemstack4);
--            Registry.f_122825_.m_123024_().filter(Enchantment::m_6589_).forEach((p_44144_) -> {
--               int j1 = Math.max(map1.getOrDefault(p_44144_, 0), map2.getOrDefault(p_44144_, 0));
-+            Registry.f_122825_.m_123024_().filter(Enchantment::m_6589_).forEach((p_234828_3_) -> {
-+               int j1 = Math.max(map1.getOrDefault(p_234828_3_, 0), map2.getOrDefault(p_234828_3_, 0));
-                if (j1 > 0) {
--                  map.put(p_44144_, j1);
-+                  map.put(p_234828_3_, j1);
-                }
- 
-             });
-@@ -91,7 +_,6 @@
-       return ItemStack.f_41583_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public boolean m_8004_(int p_44128_, int p_44129_) {
-       return p_44128_ * p_44129_ >= 2;
-    }

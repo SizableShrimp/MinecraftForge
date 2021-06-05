@@ -47,7 +47,7 @@
     private static void m_57436_(Level p_57437_, BlockPos p_57438_, @Nullable LivingEntity p_57439_) {
        if (!p_57437_.f_46443_) {
           PrimedTnt primedtnt = new PrimedTnt(p_57437_, (double)p_57438_.m_123341_() + 0.5D, (double)p_57438_.m_123342_(), (double)p_57438_.m_123343_() + 0.5D, p_57439_);
-@@ -83,12 +_,12 @@
+@@ -83,7 +_,7 @@
        if (item != Items.f_42409_ && item != Items.f_42613_) {
           return super.m_6227_(p_57450_, p_57451_, p_57452_, p_57453_, p_57454_, p_57455_);
        } else {
@@ -56,13 +56,6 @@
           p_57451_.m_7731_(p_57452_, Blocks.f_50016_.m_49966_(), 11);
           if (!p_57453_.m_7500_()) {
              if (item == Items.f_42409_) {
--               itemstack.m_41622_(1, p_57453_, (p_57425_) -> {
--                  p_57425_.m_21190_(p_57454_);
-+               itemstack.m_41622_(1, p_57453_, (p_220287_1_) -> {
-+                  p_220287_1_.m_21190_(p_57454_);
-                });
-             } else {
-                itemstack.m_41774_(1);
 @@ -104,7 +_,7 @@
           Entity entity = p_57432_.m_37282_();
           if (p_57432_.m_6060_()) {

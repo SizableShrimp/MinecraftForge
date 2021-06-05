@@ -8,22 +8,6 @@
  import net.minecraft.world.level.block.entity.BlockEntity;
  import net.minecraft.world.level.block.state.BlockState;
  import net.minecraft.world.level.border.WorldBorder;
-@@ -60,11 +_,11 @@
-    private final LevelData f_9481_;
-    private final Random f_9482_;
-    private final DimensionType f_9483_;
--   private final TickList<Block> f_9484_ = new WorldGenTickList<>((p_9597_) -> {
--      return this.m_46865_(p_9597_).m_5782_();
-+   private final TickList<Block> f_9484_ = new WorldGenTickList<>((p_205335_1_) -> {
-+      return this.m_46865_(p_205335_1_).m_5782_();
-    });
--   private final TickList<Fluid> f_9485_ = new WorldGenTickList<>((p_9595_) -> {
--      return this.m_46865_(p_9595_).m_5783_();
-+   private final TickList<Fluid> f_9485_ = new WorldGenTickList<>((p_205334_1_) -> {
-+      return this.m_46865_(p_205334_1_).m_5783_();
-    });
-    private final BiomeManager f_9486_;
-    private final ChunkPos f_9487_;
 @@ -172,11 +_,11 @@
  
     public boolean m_7740_(BlockPos p_9550_, boolean p_9551_, @Nullable Entity p_9552_, int p_9553_) {

@@ -1,84 +1,25 @@
 --- a/net/minecraft/world/level/biome/Biome.java
 +++ b/net/minecraft/world/level/biome/Biome.java
-@@ -53,44 +_,46 @@
+@@ -53,7 +_,7 @@
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  
 -public final class Biome {
 +public final class Biome extends net.minecraftforge.registries.ForgeRegistryEntry.UncheckedRegistryEntry<Biome> {
     public static final Logger f_47428_ = LogManager.getLogger();
--   public static final Codec<Biome> f_47429_ = RecordCodecBuilder.create((p_47527_) -> {
--      return p_47527_.group(Biome.ClimateSettings.f_47679_.forGetter((p_47559_) -> {
--         return p_47559_.f_47437_;
--      }), Biome.BiomeCategory.f_47631_.fieldOf("category").forGetter((p_47556_) -> {
--         return p_47556_.f_47442_;
--      }), Codec.FLOAT.fieldOf("depth").forGetter((p_47553_) -> {
--         return p_47553_.f_47440_;
--      }), Codec.FLOAT.fieldOf("scale").forGetter((p_47550_) -> {
--         return p_47550_.f_47441_;
--      }), BiomeSpecialEffects.f_47926_.fieldOf("effects").forGetter((p_47547_) -> {
--         return p_47547_.f_47443_;
--      }), BiomeGenerationSettings.f_47778_.forGetter((p_47544_) -> {
--         return p_47544_.f_47438_;
--      }), MobSpawnSettings.f_48327_.forGetter((p_47541_) -> {
--         return p_47541_.f_47439_;
+    public static final Codec<Biome> f_47429_ = RecordCodecBuilder.create((p_47527_) -> {
+       return p_47527_.group(Biome.ClimateSettings.f_47679_.forGetter((p_47559_) -> {
+@@ -70,7 +_,9 @@
+          return p_47544_.f_47438_;
+       }), MobSpawnSettings.f_48327_.forGetter((p_47541_) -> {
+          return p_47541_.f_47439_;
 -      })).apply(p_47527_, Biome::new);
-+   public static final Codec<Biome> f_47429_ = RecordCodecBuilder.create((p_235064_0_) -> {
-+      return p_235064_0_.group(Biome.ClimateSettings.f_47679_.forGetter((p_242446_0_) -> {
-+         return p_242446_0_.f_47437_;
-+      }), Biome.BiomeCategory.f_47631_.fieldOf("category").forGetter((p_235087_0_) -> {
-+         return p_235087_0_.f_47442_;
-+      }), Codec.FLOAT.fieldOf("depth").forGetter((p_235086_0_) -> {
-+         return p_235086_0_.f_47440_;
-+      }), Codec.FLOAT.fieldOf("scale").forGetter((p_235085_0_) -> {
-+         return p_235085_0_.f_47441_;
-+      }), BiomeSpecialEffects.f_47926_.fieldOf("effects").forGetter((p_242444_0_) -> {
-+         return p_242444_0_.f_47443_;
-+      }), BiomeGenerationSettings.f_47778_.forGetter((p_242443_0_) -> {
-+         return p_242443_0_.f_47438_;
-+      }), MobSpawnSettings.f_48327_.forGetter((p_242442_0_) -> {
-+         return p_242442_0_.f_47439_;
 +      }), ResourceLocation.f_135803_.optionalFieldOf("forge:registry_name").forGetter(b -> Optional.ofNullable(b.getRegistryName())))
-+      .apply(p_235064_0_, (climate, category, depth, scale, effects, gen, spawns, name) ->
-+          net.minecraftforge.common.ForgeHooks.enhanceBiome(name.orElse(null), climate, category, depth, scale, effects, gen, spawns, p_235064_0_, Biome::new));
++      .apply(p_47527_, (climate, category, depth, scale, effects, gen, spawns, name) ->
++          net.minecraftforge.common.ForgeHooks.enhanceBiome(name.orElse(null), climate, category, depth, scale, effects, gen, spawns, p_47527_, Biome::new));
     });
--   public static final Codec<Biome> f_47430_ = RecordCodecBuilder.create((p_47504_) -> {
--      return p_47504_.group(Biome.ClimateSettings.f_47679_.forGetter((p_47538_) -> {
--         return p_47538_.f_47437_;
--      }), Biome.BiomeCategory.f_47631_.fieldOf("category").forGetter((p_47535_) -> {
--         return p_47535_.f_47442_;
--      }), Codec.FLOAT.fieldOf("depth").forGetter((p_47532_) -> {
--         return p_47532_.f_47440_;
--      }), Codec.FLOAT.fieldOf("scale").forGetter((p_47523_) -> {
--         return p_47523_.f_47441_;
--      }), BiomeSpecialEffects.f_47926_.fieldOf("effects").forGetter((p_47498_) -> {
--         return p_47498_.f_47443_;
--      })).apply(p_47504_, (p_47492_, p_47493_, p_47494_, p_47495_, p_47496_) -> {
--         return new Biome(p_47492_, p_47493_, p_47494_, p_47495_, p_47496_, BiomeGenerationSettings.f_47777_, MobSpawnSettings.f_48326_);
-+   public static final Codec<Biome> f_47430_ = RecordCodecBuilder.create((p_242432_0_) -> {
-+      return p_242432_0_.group(Biome.ClimateSettings.f_47679_.forGetter((p_242441_0_) -> {
-+         return p_242441_0_.f_47437_;
-+      }), Biome.BiomeCategory.f_47631_.fieldOf("category").forGetter((p_242439_0_) -> {
-+         return p_242439_0_.f_47442_;
-+      }), Codec.FLOAT.fieldOf("depth").forGetter((p_242438_0_) -> {
-+         return p_242438_0_.f_47440_;
-+      }), Codec.FLOAT.fieldOf("scale").forGetter((p_242434_0_) -> {
-+         return p_242434_0_.f_47441_;
-+      }), BiomeSpecialEffects.f_47926_.fieldOf("effects").forGetter((p_242429_0_) -> {
-+         return p_242429_0_.f_47443_;
-+      })).apply(p_242432_0_, (p_242428_0_, p_242428_1_, p_242428_2_, p_242428_3_, p_242428_4_) -> {
-+         return new Biome(p_242428_0_, p_242428_1_, p_242428_2_, p_242428_3_, p_242428_4_, BiomeGenerationSettings.f_47777_, MobSpawnSettings.f_48326_);
-       });
-    });
-    public static final Codec<Supplier<Biome>> f_47431_ = RegistryFileCodec.m_135589_(Registry.f_122885_, f_47429_);
-    public static final Codec<List<Supplier<Biome>>> f_47432_ = RegistryFileCodec.m_135600_(Registry.f_122885_, f_47429_);
--   private final Map<Integer, List<StructureFeature<?>>> f_47434_ = Registry.f_122841_.m_123024_().collect(Collectors.groupingBy((p_47525_) -> {
--      return p_47525_.m_67095_().ordinal();
-+   private final Map<Integer, List<StructureFeature<?>>> f_47434_ = Registry.f_122841_.m_123024_().collect(Collectors.groupingBy((p_242435_0_) -> {
-+      return p_242435_0_.m_67095_().ordinal();
-    }));
-    private static final PerlinSimplexNoise f_47435_ = new PerlinSimplexNoise(new WorldgenRandom(1234L), ImmutableList.of(0));
-    private static final PerlinSimplexNoise f_47436_ = new PerlinSimplexNoise(new WorldgenRandom(3456L), ImmutableList.of(-2, -1, 0));
+    public static final Codec<Biome> f_47430_ = RecordCodecBuilder.create((p_47504_) -> {
+       return p_47504_.group(Biome.ClimateSettings.f_47679_.forGetter((p_47538_) -> {
 @@ -200,7 +_,7 @@
        } else {
           if (p_47521_.m_123342_() >= 0 && p_47521_.m_123342_() < 256 && p_47520_.m_45517_(LightLayer.BLOCK, p_47521_) < 10) {
@@ -88,34 +29,23 @@
                 return true;
              }
           }
-@@ -228,8 +_,8 @@
-                int k1 = i1 << 4;
- 
-                try {
--                  p_47485_.m_47289_(SectionPos.m_123199_(p_47490_), structurefeature).forEach((p_47476_) -> {
--                     p_47476_.m_7129_(p_47487_, p_47485_, p_47486_, p_47489_, new BoundingBox(j1, k1, j1 + 15, k1 + 15), new ChunkPos(l, i1));
-+                  p_47485_.m_47289_(SectionPos.m_123199_(p_47490_), structurefeature).forEach((p_242426_8_) -> {
-+                     p_242426_8_.m_7129_(p_47487_, p_47485_, p_47486_, p_47489_, new BoundingBox(j1, k1, j1 + 15, k1 + 15), new ChunkPos(l, i1));
-                   });
-                } catch (Exception exception) {
-                   CrashReport crashreport = CrashReport.m_127521_(exception, "Feature placement");
 @@ -365,6 +_,65 @@
        return resourcelocation == null ? super.toString() : resourcelocation.toString();
     }
  
 +   public static class ClimateParameters {
-+      public static final Codec<Biome.ClimateParameters> f_47649_ = RecordCodecBuilder.create((p_235111_0_) -> {
-+         return p_235111_0_.group(Codec.floatRange(-2.0F, 2.0F).fieldOf("temperature").forGetter((p_235116_0_) -> {
-+            return p_235116_0_.f_47650_;
-+         }), Codec.floatRange(-2.0F, 2.0F).fieldOf("humidity").forGetter((p_235115_0_) -> {
-+            return p_235115_0_.f_47651_;
-+         }), Codec.floatRange(-2.0F, 2.0F).fieldOf("altitude").forGetter((p_235114_0_) -> {
-+            return p_235114_0_.f_47652_;
-+         }), Codec.floatRange(-2.0F, 2.0F).fieldOf("weirdness").forGetter((p_235113_0_) -> {
-+            return p_235113_0_.f_47653_;
-+         }), Codec.floatRange(0.0F, 1.0F).fieldOf("offset").forGetter((p_235112_0_) -> {
-+            return p_235112_0_.f_47654_;
-+         })).apply(p_235111_0_, Biome.ClimateParameters::new);
++      public static final Codec<Biome.ClimateParameters> f_47649_ = RecordCodecBuilder.create((p_47665_) -> {
++         return p_47665_.group(Codec.floatRange(-2.0F, 2.0F).fieldOf("temperature").forGetter((p_47677_) -> {
++            return p_47677_.f_47650_;
++         }), Codec.floatRange(-2.0F, 2.0F).fieldOf("humidity").forGetter((p_47673_) -> {
++            return p_47673_.f_47651_;
++         }), Codec.floatRange(-2.0F, 2.0F).fieldOf("altitude").forGetter((p_47671_) -> {
++            return p_47671_.f_47652_;
++         }), Codec.floatRange(-2.0F, 2.0F).fieldOf("weirdness").forGetter((p_47669_) -> {
++            return p_47669_.f_47653_;
++         }), Codec.floatRange(0.0F, 1.0F).fieldOf("offset").forGetter((p_47667_) -> {
++            return p_47667_.f_47654_;
++         })).apply(p_47665_, Biome.ClimateParameters::new);
 +      });
 +      private final float f_47650_;
 +      private final float f_47651_;
@@ -176,10 +106,13 @@
        }));
        private final String f_47633_;
  
-@@ -491,76 +_,17 @@
-       }
-    }
+@@ -488,65 +_,6 @@
  
+       public String m_7912_() {
+          return this.f_47633_;
+-      }
+-   }
+-
 -   public static class ClimateParameters {
 -      public static final Codec<Biome.ClimateParameters> f_47649_ = RecordCodecBuilder.create((p_47665_) -> {
 -         return p_47665_.group(Codec.floatRange(-2.0F, 2.0F).fieldOf("temperature").forGetter((p_47677_) -> {
@@ -236,52 +169,6 @@
 -
 -      public float m_47662_(Biome.ClimateParameters p_47663_) {
 -         return (this.f_47650_ - p_47663_.f_47650_) * (this.f_47650_ - p_47663_.f_47650_) + (this.f_47651_ - p_47663_.f_47651_) * (this.f_47651_ - p_47663_.f_47651_) + (this.f_47652_ - p_47663_.f_47652_) * (this.f_47652_ - p_47663_.f_47652_) + (this.f_47653_ - p_47663_.f_47653_) * (this.f_47653_ - p_47663_.f_47653_) + (this.f_47654_ - p_47663_.f_47654_) * (this.f_47654_ - p_47663_.f_47654_);
--      }
--   }
--
-    public static class ClimateSettings {
--      public static final MapCodec<Biome.ClimateSettings> f_47679_ = RecordCodecBuilder.mapCodec((p_47699_) -> {
--         return p_47699_.group(Biome.Precipitation.f_47717_.fieldOf("precipitation").forGetter((p_47713_) -> {
--            return p_47713_.f_47680_;
--         }), Codec.FLOAT.fieldOf("temperature").forGetter((p_47711_) -> {
--            return p_47711_.f_47681_;
--         }), Biome.TemperatureModifier.f_47737_.optionalFieldOf("temperature_modifier", Biome.TemperatureModifier.NONE).forGetter((p_47709_) -> {
--            return p_47709_.f_47682_;
--         }), Codec.FLOAT.fieldOf("downfall").forGetter((p_47707_) -> {
--            return p_47707_.f_47683_;
--         })).apply(p_47699_, Biome.ClimateSettings::new);
-+      public static final MapCodec<Biome.ClimateSettings> f_47679_ = RecordCodecBuilder.mapCodec((p_242465_0_) -> {
-+         return p_242465_0_.group(Biome.Precipitation.f_47717_.fieldOf("precipitation").forGetter((p_242472_0_) -> {
-+            return p_242472_0_.f_47680_;
-+         }), Codec.FLOAT.fieldOf("temperature").forGetter((p_242471_0_) -> {
-+            return p_242471_0_.f_47681_;
-+         }), Biome.TemperatureModifier.f_47737_.optionalFieldOf("temperature_modifier", Biome.TemperatureModifier.NONE).forGetter((p_242470_0_) -> {
-+            return p_242470_0_.f_47682_;
-+         }), Codec.FLOAT.fieldOf("downfall").forGetter((p_242469_0_) -> {
-+            return p_242469_0_.f_47683_;
-+         })).apply(p_242465_0_, Biome.ClimateSettings::new);
-       });
-       public final Biome.Precipitation f_47680_;
-       public final float f_47681_;
-@@ -581,8 +_,8 @@
-       SNOW("snow");
+       }
+    }
  
-       public static final Codec<Biome.Precipitation> f_47717_ = StringRepresentable.m_14350_(Biome.Precipitation::values, Biome.Precipitation::m_47729_);
--      private static final Map<String, Biome.Precipitation> f_47718_ = Arrays.stream(values()).collect(Collectors.toMap(Biome.Precipitation::m_47731_, (p_47728_) -> {
--         return p_47728_;
-+      private static final Map<String, Biome.Precipitation> f_47718_ = Arrays.stream(values()).collect(Collectors.toMap(Biome.Precipitation::m_47731_, (p_222360_0_) -> {
-+         return p_222360_0_;
-       }));
-       private final String f_47719_;
- 
-@@ -627,8 +_,8 @@
- 
-       private final String f_47738_;
-       public static final Codec<Biome.TemperatureModifier> f_47737_ = StringRepresentable.m_14350_(Biome.TemperatureModifier::values, Biome.TemperatureModifier::m_47756_);
--      private static final Map<String, Biome.TemperatureModifier> f_47739_ = Arrays.stream(values()).collect(Collectors.toMap(Biome.TemperatureModifier::m_47758_, (p_47753_) -> {
--         return p_47753_;
-+      private static final Map<String, Biome.TemperatureModifier> f_47739_ = Arrays.stream(values()).collect(Collectors.toMap(Biome.TemperatureModifier::m_47758_, (p_242476_0_) -> {
-+         return p_242476_0_;
-       }));
- 
-       public abstract float m_8117_(BlockPos p_47754_, float p_47755_);

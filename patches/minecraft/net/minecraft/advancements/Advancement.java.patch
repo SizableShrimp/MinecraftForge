@@ -1,25 +1,5 @@
 --- a/net/minecraft/advancements/Advancement.java
 +++ b/net/minecraft/advancements/Advancement.java
-@@ -56,8 +_,8 @@
-          Component component = p_138309_.m_14977_();
-          ChatFormatting chatformatting = p_138309_.m_14992_().m_15552_();
-          Component component1 = ComponentUtils.m_130750_(component.m_6881_(), Style.f_131099_.m_131140_(chatformatting)).m_130946_("\n").m_7220_(p_138309_.m_14985_());
--         Component component2 = component.m_6881_().m_130938_((p_138316_) -> {
--            return p_138316_.m_131144_(new HoverEvent(HoverEvent.Action.f_130831_, component1));
-+         Component component2 = component.m_6881_().m_130938_((p_211567_1_) -> {
-+            return p_211567_1_.m_131144_(new HoverEvent(HoverEvent.Action.f_130831_, component1));
-          });
-          this.f_138305_ = ComponentUtils.m_130748_(component2).m_130940_(chatformatting);
-       }
-@@ -217,7 +_,7 @@
-       }
- 
-       public Advancement m_138403_(ResourceLocation p_138404_) {
--         if (!this.m_138392_((p_138407_) -> {
-+         if (!this.m_138392_((p_199750_0_) -> {
-             return null;
-          })) {
-             throw new IllegalStateException("Tried to build incomplete advancement!");
 @@ -309,6 +_,7 @@
        }
  

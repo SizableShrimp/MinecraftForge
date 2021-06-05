@@ -9,17 +9,6 @@
     }
  
     public PackRepository(RepositorySource... p_10505_) {
-@@ -41,8 +_,8 @@
-       Map<String, Pack> map = Maps.newTreeMap();
- 
-       for(RepositorySource repositorysource : this.f_10497_) {
--         repositorysource.m_7686_((p_10513_) -> {
--            Pack pack = map.put(p_10513_.m_10446_(), p_10513_);
-+         repositorysource.m_7686_((p_232615_1_) -> {
-+            Pack pack = map.put(p_232615_1_.m_10446_(), p_232615_1_);
-          }, this.f_10500_);
-       }
- 
 @@ -88,6 +_,10 @@
     @Nullable
     public Pack m_10507_(String p_10508_) {

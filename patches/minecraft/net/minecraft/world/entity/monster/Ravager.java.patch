@@ -8,17 +8,6 @@
  import net.minecraft.world.level.Level;
  import net.minecraft.world.level.LevelReader;
  import net.minecraft.world.level.block.Block;
-@@ -46,8 +_,8 @@
- import net.minecraftforge.api.distmarker.OnlyIn;
- 
- public class Ravager extends Raider {
--   private static final Predicate<Entity> f_33319_ = (p_33346_) -> {
--      return p_33346_.m_6084_() && !(p_33346_ instanceof Ravager);
-+   private static final Predicate<Entity> f_33319_ = (p_213685_0_) -> {
-+      return p_213685_0_.m_6084_() && !(p_213685_0_ instanceof Ravager);
-    };
-    private int f_33320_;
-    private int f_33321_;
 @@ -135,7 +_,7 @@
              this.m_21051_(Attributes.f_22279_).m_22100_(Mth.m_14139_(0.1D, d1, d0));
           }

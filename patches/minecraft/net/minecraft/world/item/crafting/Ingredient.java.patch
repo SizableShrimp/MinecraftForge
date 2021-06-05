@@ -1,11 +1,7 @@
 --- a/net/minecraft/world/item/crafting/Ingredient.java
 +++ b/net/minecraft/world/item/crafting/Ingredient.java
-@@ -27,22 +_,28 @@
- import net.minecraft.world.item.Item;
- import net.minecraft.world.item.ItemStack;
+@@ -29,15 +_,24 @@
  import net.minecraft.world.level.ItemLike;
--import net.minecraftforge.api.distmarker.Dist;
--import net.minecraftforge.api.distmarker.OnlyIn;
  
  public class Ingredient implements Predicate<ItemStack> {
 +   //Because Mojang caches things... we need to invalidate them.. so... here we go..
@@ -21,35 +17,15 @@
 +   private final boolean isSimple;
  
     protected Ingredient(Stream<? extends Ingredient.Value> p_43907_) {
--      this.f_43902_ = p_43907_.toArray((p_43933_) -> {
--         return new Ingredient.Value[p_43933_];
-+      this.f_43902_ = p_43907_.toArray((p_209360_0_) -> {
-+         return new Ingredient.Value[p_209360_0_];
+       this.f_43902_ = p_43907_.toArray((p_43933_) -> {
+          return new Ingredient.Value[p_43933_];
        });
 +      this.isSimple = !net.minecraftforge.fml.DatagenModLoader.isRunningDataGen() && !Arrays.stream(f_43902_).anyMatch(list -> list.m_6223_().stream().anyMatch(stack -> stack.m_41720_().isDamageable(stack)));
 +      Ingredient.INSTANCES.add(this);
     }
  
--   @OnlyIn(Dist.CLIENT)
     public ItemStack[] m_43908_() {
-       this.m_43948_();
-       return this.f_43903_;
-@@ -50,10 +_,10 @@
- 
-    private void m_43948_() {
-       if (this.f_43903_ == null) {
--         this.f_43903_ = Arrays.stream(this.f_43902_).flatMap((p_43916_) -> {
--            return p_43916_.m_6223_().stream();
--         }).distinct().toArray((p_43910_) -> {
--            return new ItemStack[p_43910_];
-+         this.f_43903_ = Arrays.stream(this.f_43902_).flatMap((p_209359_0_) -> {
-+            return p_209359_0_.m_6223_().stream();
-+         }).distinct().toArray((p_209358_0_) -> {
-+            return new ItemStack[p_209358_0_];
-          });
-       }
- 
-@@ -95,6 +_,10 @@
+@@ -92,6 +_,10 @@
  
     public final void m_43923_(FriendlyByteBuf p_43924_) {
        this.m_43948_();
@@ -60,7 +36,7 @@
        p_43924_.m_130130_(this.f_43903_.length);
  
        for(int i = 0; i < this.f_43903_.length; ++i) {
-@@ -121,6 +_,25 @@
+@@ -118,6 +_,25 @@
        return this.f_43902_.length == 0 && (this.f_43903_ == null || this.f_43903_.length == 0) && (this.f_43904_ == null || this.f_43904_.isEmpty());
     }
  
@@ -86,28 +62,7 @@
     public static Ingredient m_43938_(Stream<? extends Ingredient.Value> p_43939_) {
        Ingredient ingredient = new Ingredient(p_43939_);
        return ingredient.f_43902_.length == 0 ? f_43901_ : ingredient;
-@@ -130,16 +_,15 @@
-       return m_43921_(Arrays.stream(p_43930_).map(ItemStack::new));
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public static Ingredient m_43927_(ItemStack... p_43928_) {
-       return m_43921_(Arrays.stream(p_43928_));
-    }
- 
-    public static Ingredient m_43921_(Stream<ItemStack> p_43922_) {
--      return m_43938_(p_43922_.filter((p_43944_) -> {
--         return !p_43944_.m_41619_();
--      }).map((p_43935_) -> {
--         return new Ingredient.ItemValue(p_43935_);
-+      return m_43938_(p_43922_.filter((p_234824_0_) -> {
-+         return !p_234824_0_.m_41619_();
-+      }).map((p_209356_0_) -> {
-+         return new Ingredient.ItemValue(p_209356_0_);
-       }));
-    }
- 
-@@ -149,6 +_,9 @@
+@@ -145,6 +_,9 @@
  
     public static Ingredient m_43940_(FriendlyByteBuf p_43941_) {
        int i = p_43941_.m_130242_();
@@ -117,7 +72,7 @@
        return m_43938_(Stream.generate(() -> {
           return new Ingredient.ItemValue(p_43941_.m_130267_());
        }).limit((long)i));
-@@ -156,6 +_,8 @@
+@@ -152,6 +_,8 @@
  
     public static Ingredient m_43917_(@Nullable JsonElement p_43918_) {
        if (p_43918_ != null && !p_43918_.isJsonNull()) {
@@ -126,18 +81,7 @@
           if (p_43918_.isJsonObject()) {
              return m_43938_(Stream.of(m_43919_(p_43918_.getAsJsonObject())));
           } else if (p_43918_.isJsonArray()) {
-@@ -163,8 +_,8 @@
-             if (jsonarray.size() == 0) {
-                throw new JsonSyntaxException("Item array cannot be empty, at least one item must be defined");
-             } else {
--               return m_43938_(StreamSupport.stream(jsonarray.spliterator(), false).map((p_43937_) -> {
--                  return m_43919_(GsonHelper.m_13918_(p_43937_, "item"));
-+               return m_43938_(StreamSupport.stream(jsonarray.spliterator(), false).map((p_209355_0_) -> {
-+                  return m_43919_(GsonHelper.m_13918_(p_209355_0_, "item"));
-                }));
-             }
-          } else {
-@@ -197,6 +_,18 @@
+@@ -193,6 +_,18 @@
        }
     }
  
@@ -156,7 +100,7 @@
     public static class ItemValue implements Ingredient.Value {
        private final ItemStack f_43951_;
  
-@@ -218,7 +_,7 @@
+@@ -214,7 +_,7 @@
     public static class TagValue implements Ingredient.Value {
        private final Tag<Item> f_43959_;
  
@@ -165,7 +109,7 @@
           this.f_43959_ = p_43961_;
        }
  
-@@ -229,6 +_,9 @@
+@@ -225,6 +_,9 @@
              list.add(new ItemStack(item));
           }
  
@@ -175,7 +119,7 @@
           return list;
        }
  
-@@ -237,11 +_,5 @@
+@@ -233,11 +_,5 @@
           jsonobject.addProperty("tag", SerializationTags.m_13199_().m_5881_().m_13407_(this.f_43959_).toString());
           return jsonobject;
        }

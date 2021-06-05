@@ -40,29 +40,6 @@
           return p_58895_;
        }
     }
-@@ -69,17 +_,17 @@
-    @Nullable
-    public static BlockEntity m_58891_(BlockState p_58892_, CompoundTag p_58893_) {
-       String s = p_58893_.m_128461_("id");
--      return Registry.f_122830_.m_6612_(new ResourceLocation(s)).map((p_58885_) -> {
-+      return Registry.f_122830_.m_6612_(new ResourceLocation(s)).map((p_213134_1_) -> {
-          try {
--            return p_58885_.m_58948_();
-+            return p_213134_1_.m_58948_();
-          } catch (Throwable throwable) {
-             f_58854_.error("Failed to create block entity {}", s, throwable);
-             return null;
-          }
--      }).map((p_58878_) -> {
-+      }).map((p_235656_3_) -> {
-          try {
--            p_58878_.m_8084_(p_58892_, p_58893_);
--            return p_58878_;
-+            p_235656_3_.m_8084_(p_58892_, p_58893_);
-+            return p_235656_3_;
-          } catch (Throwable throwable) {
-             f_58854_.error("Failed to load data for block entity {}", s, throwable);
-             return null;
 @@ -94,7 +_,7 @@
        if (this.f_58857_ != null) {
           this.f_58856_ = this.f_58857_.m_8055_(this.f_58858_);

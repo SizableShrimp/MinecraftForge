@@ -28,14 +28,3 @@
              crashreportcategory.m_128159_("Item ID", Item.m_41393_(p_36042_.m_41720_()));
              crashreportcategory.m_128159_("Item data", p_36042_.m_41773_());
              crashreportcategory.m_128165_("Item name", () -> {
-@@ -503,8 +_,8 @@
-             ItemStack itemstack = this.f_35975_.get(i);
-             if ((!p_36004_.m_19384_() || !itemstack.m_41720_().m_41475_()) && itemstack.m_41720_() instanceof ArmorItem) {
-                int j = i;
--               itemstack.m_41622_((int)p_36005_, this.f_35978_, (p_35997_) -> {
--                  p_35997_.m_21166_(EquipmentSlot.m_20744_(EquipmentSlot.Type.ARMOR, j));
-+               itemstack.m_41622_((int)p_36005_, this.f_35978_, (p_214023_1_) -> {
-+                  p_214023_1_.m_21166_(EquipmentSlot.m_20744_(EquipmentSlot.Type.ARMOR, j));
-                });
-             }
-          }

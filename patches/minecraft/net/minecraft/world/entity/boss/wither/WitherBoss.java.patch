@@ -8,17 +8,6 @@
  import net.minecraft.world.level.Level;
  import net.minecraft.world.level.block.state.BlockState;
  import net.minecraft.world.phys.Vec3;
-@@ -72,8 +_,8 @@
-    private final int[] f_31428_ = new int[2];
-    private int f_31429_;
-    private final ServerBossEvent f_31430_ = (ServerBossEvent)(new ServerBossEvent(this.m_5446_(), BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.PROGRESS)).m_7003_(true);
--   private static final Predicate<LivingEntity> f_31431_ = (p_31504_) -> {
--      return p_31504_.m_6336_() != MobType.f_21641_ && p_31504_.m_5789_();
-+   private static final Predicate<LivingEntity> f_31431_ = (p_213797_0_) -> {
-+      return p_213797_0_.m_6336_() != MobType.f_21641_ && p_213797_0_.m_5789_();
-    };
-    private static final TargetingConditions f_31432_ = (new TargetingConditions()).m_26883_(20.0D).m_26888_(f_31431_);
- 
 @@ -213,7 +_,7 @@
        if (this.m_31502_() > 0) {
           int j1 = this.m_31502_() - 1;

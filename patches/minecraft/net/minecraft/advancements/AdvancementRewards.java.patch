@@ -9,14 +9,3 @@
        boolean flag = false;
  
        for(ResourceLocation resourcelocation : this.f_9980_) {
-@@ -66,8 +_,8 @@
-       }
- 
-       MinecraftServer minecraftserver = p_9990_.f_8924_;
--      this.f_9982_.m_78002_(minecraftserver.m_129890_()).ifPresent((p_9996_) -> {
--         minecraftserver.m_129890_().m_136112_(p_9996_, p_9990_.m_20203_().m_81324_().m_81325_(2));
-+      this.f_9982_.m_78002_(minecraftserver.m_129890_()).ifPresent((p_215098_2_) -> {
-+         minecraftserver.m_129890_().m_136112_(p_215098_2_, p_9990_.m_20203_().m_81324_().m_81325_(2));
-       });
-    }
- 

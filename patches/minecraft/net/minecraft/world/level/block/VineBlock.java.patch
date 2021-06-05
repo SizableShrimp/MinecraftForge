@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/block/VineBlock.java
 +++ b/net/minecraft/world/level/block/VineBlock.java
-@@ -22,14 +_,14 @@
+@@ -22,7 +_,7 @@
  import net.minecraft.world.phys.shapes.Shapes;
  import net.minecraft.world.phys.shapes.VoxelShape;
  
@@ -9,15 +9,6 @@
     public static final BooleanProperty f_57833_ = PipeBlock.f_55152_;
     public static final BooleanProperty f_57834_ = PipeBlock.f_55148_;
     public static final BooleanProperty f_57835_ = PipeBlock.f_55149_;
-    public static final BooleanProperty f_57836_ = PipeBlock.f_55150_;
-    public static final BooleanProperty f_57837_ = PipeBlock.f_55151_;
--   public static final Map<Direction, BooleanProperty> f_57838_ = PipeBlock.f_55154_.entrySet().stream().filter((p_57886_) -> {
--      return p_57886_.getKey() != Direction.DOWN;
-+   public static final Map<Direction, BooleanProperty> f_57838_ = PipeBlock.f_55154_.entrySet().stream().filter((p_199782_0_) -> {
-+      return p_199782_0_.getKey() != Direction.DOWN;
-    }).collect(Util.m_137448_());
-    private static final VoxelShape f_57839_ = Block.m_49796_(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-    private static final VoxelShape f_57840_ = Block.m_49796_(0.0D, 0.0D, 0.0D, 1.0D, 16.0D, 16.0D);
 @@ -152,14 +_,14 @@
     }
  

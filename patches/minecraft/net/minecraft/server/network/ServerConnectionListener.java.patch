@@ -32,12 +32,3 @@
                 int i = ServerConnectionListener.this.f_9702_.m_7032_();
                 Connection connection = (Connection)(i > 0 ? new RateKickingConnection(i) : new Connection(PacketFlow.SERVERBOUND));
                 ServerConnectionListener.this.f_9704_.add(connection);
-@@ -142,7 +_,7 @@
- 
-                      f_9701_.warn("Failed to handle packet for {}", connection.m_129523_(), exception);
-                      Component component = new TextComponent("Internal server error");
--                     connection.m_129514_(new ClientboundDisconnectPacket(component), (p_9717_) -> {
-+                     connection.m_129514_(new ClientboundDisconnectPacket(component), (p_210474_2_) -> {
-                         connection.m_129507_(component);
-                      });
-                      connection.m_129540_();

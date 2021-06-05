@@ -16,13 +16,13 @@
     private TagContainer f_13478_ = TagContainer.f_13420_;
  
     public TagContainer m_13480_() {
-@@ -31,18 +_,22 @@
+@@ -31,11 +_,13 @@
        CompletableFuture<Map<ResourceLocation, Tag.Builder>> completablefuture1 = this.f_13475_.m_13458_(p_13483_, p_13486_);
        CompletableFuture<Map<ResourceLocation, Tag.Builder>> completablefuture2 = this.f_13476_.m_13458_(p_13483_, p_13486_);
        CompletableFuture<Map<ResourceLocation, Tag.Builder>> completablefuture3 = this.f_13477_.m_13458_(p_13483_, p_13486_);
 -      return CompletableFuture.allOf(completablefuture, completablefuture1, completablefuture2, completablefuture3).thenCompose(p_13482_::m_6769_).thenAcceptAsync((p_13495_) -> {
 +      CompletableFuture<java.util.List<net.minecraftforge.common.ForgeTagHandler.TagCollectionReaderInfo>> customTagTypeResults = net.minecraftforge.common.ForgeTagHandler.getCustomTagTypeReloadResults(p_13483_, p_13486_, customTagTypeReaders);
-+      return CompletableFuture.allOf(completablefuture, completablefuture1, completablefuture2, completablefuture3, customTagTypeResults).thenCompose(p_13482_::m_6769_).thenAcceptAsync((p_232979_5_) -> {
++      return CompletableFuture.allOf(completablefuture, completablefuture1, completablefuture2, completablefuture3, customTagTypeResults).thenCompose(p_13482_::m_6769_).thenAcceptAsync((p_13495_) -> {
           TagCollection<Block> tagcollection = this.f_13474_.m_13463_(completablefuture.join());
           TagCollection<Item> tagcollection1 = this.f_13475_.m_13463_(completablefuture1.join());
           TagCollection<Fluid> tagcollection2 = this.f_13476_.m_13463_(completablefuture2.join());
@@ -31,10 +31,8 @@
           TagContainer tagcontainer = TagContainer.m_13422_(tagcollection, tagcollection1, tagcollection2, tagcollection3);
           Multimap<ResourceLocation, ResourceLocation> multimap = StaticTags.m_13283_(tagcontainer);
           if (!multimap.isEmpty()) {
--            throw new IllegalStateException("Missing required tags: " + (String)multimap.entries().stream().map((p_13489_) -> {
--               return p_13489_.getKey() + ":" + p_13489_.getValue();
-+            throw new IllegalStateException("Missing required tags: " + (String)multimap.entries().stream().map((p_232978_0_) -> {
-+               return p_232978_0_.getKey() + ":" + p_232978_0_.getValue();
+@@ -43,6 +_,8 @@
+                return p_13489_.getKey() + ":" + p_13489_.getValue();
              }).sorted().collect(Collectors.joining(",")));
           } else {
 +            tagcontainer = TagContainer.reinjectOptionalTags(tagcontainer);

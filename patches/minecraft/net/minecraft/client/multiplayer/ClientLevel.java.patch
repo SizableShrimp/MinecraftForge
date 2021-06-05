@@ -1,20 +1,5 @@
 --- a/net/minecraft/client/multiplayer/ClientLevel.java
 +++ b/net/minecraft/client/multiplayer/ClientLevel.java
-@@ -86,10 +_,10 @@
-    private Scoreboard f_104555_ = new Scoreboard();
-    private final Map<String, MapItemSavedData> f_104556_ = Maps.newHashMap();
-    private int f_104557_;
--   private final Object2ObjectArrayMap<ColorResolver, BlockTintCache> f_104558_ = Util.m_137469_(new Object2ObjectArrayMap<>(3), (p_104723_) -> {
--      p_104723_.put(BiomeColors.f_108789_, new BlockTintCache());
--      p_104723_.put(BiomeColors.f_108790_, new BlockTintCache());
--      p_104723_.put(BiomeColors.f_108791_, new BlockTintCache());
-+   private final Object2ObjectArrayMap<ColorResolver, BlockTintCache> f_104558_ = Util.m_137469_(new Object2ObjectArrayMap<>(3), (p_228319_0_) -> {
-+      p_228319_0_.put(BiomeColors.f_108789_, new BlockTintCache());
-+      p_228319_0_.put(BiomeColors.f_108790_, new BlockTintCache());
-+      p_228319_0_.put(BiomeColors.f_108791_, new BlockTintCache());
-    });
-    private final ClientChunkCache f_104559_;
- 
 @@ -103,6 +_,8 @@
        this.m_104752_(new BlockPos(8, 64, 8), 0.0F);
        this.m_46465_();
@@ -32,25 +17,6 @@
              p_104640_.m_8119_();
              this.m_46473_().m_7238_();
           }
-@@ -255,14 +_,14 @@
-    }
- 
-    public void m_104799_(int p_104800_, int p_104801_) {
--      this.f_104558_.forEach((p_104625_, p_104626_) -> {
--         p_104626_.m_92655_(p_104800_, p_104801_);
-+      this.f_104558_.forEach((p_228316_2_, p_228316_3_) -> {
-+         p_228316_3_.m_92655_(p_104800_, p_104801_);
-       });
-    }
- 
-    public void m_104810_() {
--      this.f_104558_.forEach((p_104731_, p_104732_) -> {
--         p_104732_.m_92654_();
-+      this.f_104558_.forEach((p_228320_0_, p_228320_1_) -> {
-+         p_228320_1_.m_92654_();
-       });
-    }
- 
 @@ -284,9 +_,11 @@
     }
  
@@ -72,19 +38,6 @@
     }
  
     public void m_104750_(LevelChunk p_104751_) {
-@@ -377,9 +_,9 @@
-       }
- 
-       if (!blockstate.m_60838_(this, p_104621_)) {
--         this.m_46857_(p_104621_).m_47562_().ifPresent((p_104673_) -> {
--            if (p_104673_.m_47424_(this.f_46441_)) {
--               this.m_7106_(p_104673_.m_47419_(), (double)p_104621_.m_123341_() + this.f_46441_.nextDouble(), (double)p_104621_.m_123342_() + this.f_46441_.nextDouble(), (double)p_104621_.m_123343_() + this.f_46441_.nextDouble(), 0.0D, 0.0D, 0.0D);
-+         this.m_46857_(p_104621_).m_47562_().ifPresent((p_239135_2_) -> {
-+            if (p_239135_2_.m_47424_(this.f_46441_)) {
-+               this.m_7106_(p_239135_2_.m_47419_(), (double)p_104621_.m_123341_() + this.f_46441_.nextDouble(), (double)p_104621_.m_123342_() + this.f_46441_.nextDouble(), (double)p_104621_.m_123343_() + this.f_46441_.nextDouble(), 0.0D, 0.0D, 0.0D);
-             }
- 
-          });
 @@ -447,6 +_,11 @@
     }
  

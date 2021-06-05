@@ -26,7 +26,7 @@
        this.f_58317_ = this.m_7743_(this.f_58310_.get(1));
        CompoundTag compoundtag = p_58361_.m_128469_("RecipesUsed");
  
-@@ -202,13 +_,13 @@
+@@ -202,9 +_,9 @@
  
     public CompoundTag m_6945_(CompoundTag p_58379_) {
        super.m_6945_(p_58379_);
@@ -38,13 +38,7 @@
 +      p_58379_.m_128405_("CookTimeTotal", this.f_58319_);
        ContainerHelper.m_18973_(p_58379_, this.f_58310_);
        CompoundTag compoundtag = new CompoundTag();
--      this.f_58320_.forEach((p_58382_, p_58383_) -> {
--         compoundtag.m_128405_(p_58382_.toString(), p_58383_);
-+      this.f_58320_.forEach((p_235643_1_, p_235643_2_) -> {
-+         compoundtag.m_128405_(p_235643_1_.toString(), p_235643_2_);
-       });
-       p_58379_.m_128365_("RecipesUsed", compoundtag);
-       return p_58379_;
+       this.f_58320_.forEach((p_58382_, p_58383_) -> {
 @@ -224,18 +_,20 @@
        if (!this.f_58857_.f_46443_) {
           ItemStack itemstack = this.f_58310_.get(1);
@@ -109,19 +103,6 @@
     }
  
     public int[] m_7071_(Direction p_58363_) {
-@@ -444,9 +_,9 @@
-       List<Recipe<?>> list = Lists.newArrayList();
- 
-       for(Entry<ResourceLocation> entry : this.f_58320_.object2IntEntrySet()) {
--         p_58347_.m_7465_().m_44043_(entry.getKey()).ifPresent((p_58369_) -> {
--            list.add(p_58369_);
--            m_58349_(p_58347_, p_58348_, entry.getIntValue(), ((AbstractCookingRecipe)p_58369_).m_43750_());
-+         p_58347_.m_7465_().m_44043_(entry.getKey()).ifPresent((p_235642_4_) -> {
-+            list.add(p_235642_4_);
-+            m_58349_(p_58347_, p_58348_, entry.getIntValue(), ((AbstractCookingRecipe)p_235642_4_).m_43750_());
-          });
-       }
- 
 @@ -473,5 +_,28 @@
           p_58342_.m_36491_(itemstack);
        }

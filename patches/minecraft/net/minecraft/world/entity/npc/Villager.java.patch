@@ -8,29 +8,6 @@
  import net.minecraft.core.particles.ParticleTypes;
  import net.minecraft.nbt.CompoundTag;
  import net.minecraft.nbt.ListTag;
-@@ -105,14 +_,14 @@
-    private boolean f_35366_;
-    private static final ImmutableList<MemoryModuleType<?>> f_35367_ = ImmutableList.of(MemoryModuleType.f_26359_, MemoryModuleType.f_26360_, MemoryModuleType.f_26361_, MemoryModuleType.f_26362_, MemoryModuleType.f_26364_, MemoryModuleType.f_26365_, MemoryModuleType.f_26366_, MemoryModuleType.f_26367_, MemoryModuleType.f_26368_, MemoryModuleType.f_26369_, MemoryModuleType.f_26332_, MemoryModuleType.f_26370_, MemoryModuleType.f_26371_, MemoryModuleType.f_26374_, MemoryModuleType.f_26375_, MemoryModuleType.f_26377_, MemoryModuleType.f_26379_, MemoryModuleType.f_26380_, MemoryModuleType.f_26381_, MemoryModuleType.f_26382_, MemoryModuleType.f_26323_, MemoryModuleType.f_26363_, MemoryModuleType.f_26324_, MemoryModuleType.f_26325_, MemoryModuleType.f_26326_, MemoryModuleType.f_26328_, MemoryModuleType.f_26329_, MemoryModuleType.f_26330_, MemoryModuleType.f_26327_);
-    private static final ImmutableList<SensorType<? extends Sensor<? super Villager>>> f_35368_ = ImmutableList.of(SensorType.f_26811_, SensorType.f_26812_, SensorType.f_26810_, SensorType.f_26813_, SensorType.f_26814_, SensorType.f_26815_, SensorType.f_26816_, SensorType.f_26817_, SensorType.f_26818_);
--   public static final Map<MemoryModuleType<GlobalPos>, BiPredicate<Villager, PoiType>> f_35370_ = ImmutableMap.of(MemoryModuleType.f_26359_, (p_35493_, p_35494_) -> {
--      return p_35494_ == PoiType.f_27346_;
--   }, MemoryModuleType.f_26360_, (p_35486_, p_35487_) -> {
--      return p_35486_.m_7141_().m_35571_().m_35622_() == p_35487_;
--   }, MemoryModuleType.f_26361_, (p_35469_, p_35470_) -> {
--      return PoiType.f_27329_.test(p_35470_);
--   }, MemoryModuleType.f_26362_, (p_35434_, p_35435_) -> {
--      return p_35435_ == PoiType.f_27347_;
-+   public static final Map<MemoryModuleType<GlobalPos>, BiPredicate<Villager, PoiType>> f_35370_ = ImmutableMap.of(MemoryModuleType.f_26359_, (p_213769_0_, p_213769_1_) -> {
-+      return p_213769_1_ == PoiType.f_27346_;
-+   }, MemoryModuleType.f_26360_, (p_213771_0_, p_213771_1_) -> {
-+      return p_213771_0_.m_7141_().m_35571_().m_35622_() == p_213771_1_;
-+   }, MemoryModuleType.f_26361_, (p_213772_0_, p_213772_1_) -> {
-+      return PoiType.f_27329_.test(p_213772_1_);
-+   }, MemoryModuleType.f_26362_, (p_234546_0_, p_234546_1_) -> {
-+      return p_234546_1_ == PoiType.f_27347_;
-    });
- 
-    public Villager(EntityType<? extends Villager> p_35381_, Level p_35382_) {
 @@ -239,7 +_,7 @@
  
     public InteractionResult m_6071_(Player p_35472_, InteractionHand p_35473_) {
@@ -40,62 +17,6 @@
           if (this.m_6162_()) {
              this.m_35518_();
              return InteractionResult.m_19078_(this.f_19853_.f_46443_);
-@@ -401,8 +_,8 @@
- 
-    public void m_7380_(CompoundTag p_35481_) {
-       super.m_7380_(p_35481_);
--      VillagerData.f_35550_.encodeStart(NbtOps.f_128958_, this.m_7141_()).resultOrPartial(f_19849_::error).ifPresent((p_35454_) -> {
--         p_35481_.m_128365_("VillagerData", p_35454_);
-+      VillagerData.f_35550_.encodeStart(NbtOps.f_128958_, this.m_7141_()).resultOrPartial(f_19849_::error).ifPresent((p_234547_1_) -> {
-+         p_35481_.m_128365_("VillagerData", p_234547_1_);
-       });
-       p_35481_.m_128344_("FoodLevel", this.f_35376_);
-       p_35481_.m_128365_("Gossips", this.f_35377_.m_26179_(NbtOps.f_128958_).getValue());
-@@ -543,10 +_,10 @@
-          Optional<List<LivingEntity>> optional = this.f_20939_.m_21952_(MemoryModuleType.f_26365_);
-          if (optional.isPresent()) {
-             ServerLevel serverlevel = (ServerLevel)this.f_19853_;
--            optional.get().stream().filter((p_35539_) -> {
--               return p_35539_ instanceof ReputationEventHandler;
--            }).forEach((p_35407_) -> {
--               serverlevel.m_8670_(ReputationEventType.f_26988_, p_35421_, (ReputationEventHandler)p_35407_);
-+            optional.get().stream().filter((p_223349_0_) -> {
-+               return p_223349_0_ instanceof ReputationEventHandler;
-+            }).forEach((p_223342_2_) -> {
-+               serverlevel.m_8670_(ReputationEventType.f_26988_, p_35421_, (ReputationEventHandler)p_223342_2_);
-             });
-          }
-       }
-@@ -555,15 +_,15 @@
-    public void m_35428_(MemoryModuleType<GlobalPos> p_35429_) {
-       if (this.f_19853_ instanceof ServerLevel) {
-          MinecraftServer minecraftserver = ((ServerLevel)this.f_19853_).m_7654_();
--         this.f_20939_.m_21952_(p_35429_).ifPresent((p_35460_) -> {
--            ServerLevel serverlevel = minecraftserver.m_129880_(p_35460_.m_122640_());
-+         this.f_20939_.m_21952_(p_35429_).ifPresent((p_213752_3_) -> {
-+            ServerLevel serverlevel = minecraftserver.m_129880_(p_213752_3_.m_122640_());
-             if (serverlevel != null) {
-                PoiManager poimanager = serverlevel.m_8904_();
--               Optional<PoiType> optional = poimanager.m_27177_(p_35460_.m_122646_());
-+               Optional<PoiType> optional = poimanager.m_27177_(p_213752_3_.m_122646_());
-                BiPredicate<Villager, PoiType> bipredicate = f_35370_.get(p_35429_);
-                if (optional.isPresent() && bipredicate.test(this, optional.get())) {
--                  poimanager.m_27154_(p_35460_.m_122646_());
--                  DebugPackets.m_133719_(serverlevel, p_35460_.m_122646_());
-+                  poimanager.m_27154_(p_213752_3_.m_122646_());
-+                  DebugPackets.m_133719_(serverlevel, p_213752_3_.m_122646_());
-                }
- 
-             }
-@@ -603,7 +_,7 @@
-    }
- 
-    public int m_35532_(Player p_35533_) {
--      return this.f_35377_.m_26195_(p_35533_.m_20148_(), (p_35427_) -> {
-+      return this.f_35377_.m_26195_(p_35533_.m_20148_(), (p_223103_0_) -> {
-          return true;
-       });
-    }
 @@ -632,7 +_,8 @@
     }
  
@@ -123,25 +44,3 @@
           p_35409_.m_47205_(witch);
           this.m_35524_();
           this.m_6091_();
-@@ -742,8 +_,8 @@
- 
-    private int m_35529_() {
-       SimpleContainer simplecontainer = this.m_35311_();
--      return f_35369_.entrySet().stream().mapToInt((p_35417_) -> {
--         return simplecontainer.m_18947_(p_35417_.getKey()) * p_35417_.getValue();
-+      return f_35369_.entrySet().stream().mapToInt((p_226553_1_) -> {
-+         return simplecontainer.m_18947_(p_226553_1_.getKey()) * p_226553_1_.getValue();
-       }).sum();
-    }
- 
-@@ -786,8 +_,8 @@
-       if (this.m_35392_(p_35399_)) {
-          AABB aabb = this.m_20191_().m_82377_(10.0D, 10.0D, 10.0D);
-          List<Villager> list = p_35398_.m_45976_(Villager.class, aabb);
--         List<Villager> list1 = list.stream().filter((p_35396_) -> {
--            return p_35396_.m_35392_(p_35399_);
-+         List<Villager> list1 = list.stream().filter((p_226554_2_) -> {
-+            return p_226554_2_.m_35392_(p_35399_);
-          }).limit(5L).collect(Collectors.toList());
-          if (list1.size() >= p_35400_) {
-             IronGolem irongolem = this.m_35490_(p_35398_);

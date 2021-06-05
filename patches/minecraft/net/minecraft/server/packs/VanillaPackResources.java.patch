@@ -1,38 +1,5 @@
 --- a/net/minecraft/server/packs/VanillaPackResources.java
 +++ b/net/minecraft/server/packs/VanillaPackResources.java
-@@ -35,7 +_,7 @@
-    public static Path f_10312_;
-    private static final Logger f_10315_ = LogManager.getLogger();
-    public static Class<?> f_10313_;
--   private static final Map<PackType, FileSystem> f_10316_ = Util.m_137469_(Maps.newHashMap(), (p_10350_) -> {
-+   private static final Map<PackType, FileSystem> f_10316_ = Util.m_137469_(Maps.newHashMap(), (p_217809_0_) -> {
-       synchronized(VanillaPackResources.class) {
-          for(PackType packtype : PackType.values()) {
-             URL url = VanillaPackResources.class.getResource("/" + packtype.m_10305_() + "/.mcassetsroot");
-@@ -50,7 +_,7 @@
-                      filesystem = FileSystems.newFileSystem(uri, Collections.emptyMap());
-                   }
- 
--                  p_10350_.put(packtype, filesystem);
-+                  p_217809_0_.put(packtype, filesystem);
-                }
-             } catch (IOException | URISyntaxException urisyntaxexception) {
-                f_10315_.error("Couldn't get a list of all vanilla resources", (Throwable)urisyntaxexception);
-@@ -147,10 +_,10 @@
-       Path path = p_10346_.resolve(p_10345_);
- 
-       try (Stream<Path> stream = Files.walk(path.resolve(p_10347_), p_10344_)) {
--         stream.filter((p_10353_) -> {
--            return !p_10353_.endsWith(".mcmeta") && Files.isRegularFile(p_10353_) && p_10348_.test(p_10353_.getFileName().toString());
--         }).map((p_10341_) -> {
--            return new ResourceLocation(p_10345_, path.relativize(p_10341_).toString().replaceAll("\\\\", "/"));
-+         stream.filter((p_229868_1_) -> {
-+            return !p_229868_1_.endsWith(".mcmeta") && Files.isRegularFile(p_229868_1_) && p_10348_.test(p_229868_1_.getFileName().toString());
-+         }).map((p_229866_2_) -> {
-+            return new ResourceLocation(p_10345_, path.relativize(p_229866_2_).toString().replaceAll("\\\\", "/"));
-          }).forEach(p_10343_::add);
-       }
- 
 @@ -171,7 +_,7 @@
  
        try {

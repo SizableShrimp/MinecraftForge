@@ -32,8 +32,8 @@
        return this.f_111426_.isEmpty() ? ItemOverrides.f_111734_ : new ItemOverrides(p_111447_, p_111448_, p_111447_::m_119341_, this.f_111426_);
     }
  
-+   public ItemOverrides getOverrides(ModelBakery p_217646_1_, BlockModel p_217646_2_, Function<Material, TextureAtlasSprite> textureGetter) {
-+      return this.f_111426_.isEmpty() ? ItemOverrides.f_111734_ : new ItemOverrides(p_217646_1_, p_217646_2_, p_217646_1_::m_119341_, textureGetter, this.f_111426_);
++   public ItemOverrides getOverrides(ModelBakery p_111447_, BlockModel p_111448_, Function<Material, TextureAtlasSprite> textureGetter) {
++      return this.f_111426_.isEmpty() ? ItemOverrides.f_111734_ : new ItemOverrides(p_111447_, p_111448_, p_111447_::m_119341_, textureGetter, this.f_111426_);
 +   }
 +
     public Collection<ResourceLocation> m_7970_() {
@@ -49,26 +49,7 @@
        for(BlockElement blockelement : this.m_111436_()) {
           for(BlockElementFace blockelementface : blockelement.f_111310_.values()) {
              Material material = this.m_111480_(blockelementface.f_111356_);
-@@ -161,40 +_,46 @@
-          }
-       }
- 
--      this.f_111426_.forEach((p_111475_) -> {
--         UnbakedModel unbakedmodel1 = p_111469_.apply(p_111475_.m_111718_());
-+      this.f_111426_.forEach((p_228815_4_) -> {
-+         UnbakedModel unbakedmodel1 = p_111469_.apply(p_228815_4_.m_111718_());
-          if (!Objects.equals(unbakedmodel1, this)) {
-             set1.addAll(unbakedmodel1.m_5500_(p_111469_, p_111470_));
-          }
-       });
-       if (this.m_111490_() == ModelBakery.f_119232_) {
--         ItemModelGenerator.f_111635_.forEach((p_111467_) -> {
--            set1.add(this.m_111480_(p_111467_));
-+         ItemModelGenerator.f_111635_.forEach((p_228814_2_) -> {
-+            set1.add(this.m_111480_(p_228814_2_));
-          });
-       }
- 
+@@ -176,25 +_,31 @@
        return set1;
     }
  
@@ -110,8 +91,8 @@
        return f_111421_.m_111600_(p_111438_.f_111308_, p_111438_.f_111309_, p_111439_, p_111440_, p_111441_, p_111442_, p_111438_.f_111311_, p_111438_.f_111312_, p_111443_);
     }
  
-+   public static BakedQuad makeBakedQuad(BlockElement p_228812_0_, BlockElementFace p_228812_1_, TextureAtlasSprite p_228812_2_, Direction p_228812_3_, ModelState p_228812_4_, ResourceLocation p_228812_5_) {
-+      return m_111437_(p_228812_0_, p_228812_1_, p_228812_2_, p_228812_3_, p_228812_4_, p_228812_5_);
++   public static BakedQuad makeBakedQuad(BlockElement p_111438_, BlockElementFace p_111439_, TextureAtlasSprite p_111440_, Direction p_111441_, ModelState p_111442_, ResourceLocation p_111443_) {
++      return m_111437_(p_111438_, p_111439_, p_111440_, p_111441_, p_111442_, p_111443_);
 +   }
 +
     public boolean m_111477_(String p_111478_) {

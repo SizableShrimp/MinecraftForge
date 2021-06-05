@@ -9,39 +9,9 @@
     private static final EntityDataAccessor<Integer> f_38079_ = SynchedEntityData.m_135353_(AbstractMinecart.class, EntityDataSerializers.f_135028_);
     private static final EntityDataAccessor<Integer> f_38080_ = SynchedEntityData.m_135353_(AbstractMinecart.class, EntityDataSerializers.f_135028_);
     private static final EntityDataAccessor<Float> f_38081_ = SynchedEntityData.m_135353_(AbstractMinecart.class, EntityDataSerializers.f_135029_);
-@@ -55,7 +_,7 @@
-    private static final EntityDataAccessor<Boolean> f_38084_ = SynchedEntityData.m_135353_(AbstractMinecart.class, EntityDataSerializers.f_135035_);
-    private static final ImmutableMap<Pose, ImmutableList<Integer>> f_38067_ = ImmutableMap.of(Pose.STANDING, ImmutableList.of(0, 1, -1), Pose.CROUCHING, ImmutableList.of(0, 1, -1), Pose.SWIMMING, ImmutableList.of(0, 1));
-    private boolean f_38068_;
--   private static final Map<RailShape, Pair<Vec3i, Vec3i>> f_38069_ = Util.m_137469_(Maps.newEnumMap(RailShape.class), (p_38135_) -> {
-+   private static final Map<RailShape, Pair<Vec3i, Vec3i>> f_38069_ = Util.m_137469_(Maps.newEnumMap(RailShape.class), (p_226574_0_) -> {
-       Vec3i vec3i = Direction.WEST.m_122436_();
-       Vec3i vec3i1 = Direction.EAST.m_122436_();
-       Vec3i vec3i2 = Direction.NORTH.m_122436_();
-@@ -64,17 +_,18 @@
-       Vec3i vec3i5 = vec3i1.m_7495_();
-       Vec3i vec3i6 = vec3i2.m_7495_();
-       Vec3i vec3i7 = vec3i3.m_7495_();
--      p_38135_.put(RailShape.NORTH_SOUTH, Pair.of(vec3i2, vec3i3));
--      p_38135_.put(RailShape.EAST_WEST, Pair.of(vec3i, vec3i1));
--      p_38135_.put(RailShape.ASCENDING_EAST, Pair.of(vec3i4, vec3i1));
--      p_38135_.put(RailShape.ASCENDING_WEST, Pair.of(vec3i, vec3i5));
--      p_38135_.put(RailShape.ASCENDING_NORTH, Pair.of(vec3i2, vec3i7));
--      p_38135_.put(RailShape.ASCENDING_SOUTH, Pair.of(vec3i6, vec3i3));
--      p_38135_.put(RailShape.SOUTH_EAST, Pair.of(vec3i3, vec3i1));
--      p_38135_.put(RailShape.SOUTH_WEST, Pair.of(vec3i3, vec3i));
--      p_38135_.put(RailShape.NORTH_WEST, Pair.of(vec3i2, vec3i));
--      p_38135_.put(RailShape.NORTH_EAST, Pair.of(vec3i2, vec3i1));
-+      p_226574_0_.put(RailShape.NORTH_SOUTH, Pair.of(vec3i2, vec3i3));
-+      p_226574_0_.put(RailShape.EAST_WEST, Pair.of(vec3i, vec3i1));
-+      p_226574_0_.put(RailShape.ASCENDING_EAST, Pair.of(vec3i4, vec3i1));
-+      p_226574_0_.put(RailShape.ASCENDING_WEST, Pair.of(vec3i, vec3i5));
-+      p_226574_0_.put(RailShape.ASCENDING_NORTH, Pair.of(vec3i2, vec3i7));
-+      p_226574_0_.put(RailShape.ASCENDING_SOUTH, Pair.of(vec3i6, vec3i3));
-+      p_226574_0_.put(RailShape.SOUTH_EAST, Pair.of(vec3i3, vec3i1));
-+      p_226574_0_.put(RailShape.SOUTH_WEST, Pair.of(vec3i3, vec3i));
-+      p_226574_0_.put(RailShape.NORTH_WEST, Pair.of(vec3i2, vec3i));
-+      p_226574_0_.put(RailShape.NORTH_EAST, Pair.of(vec3i2, vec3i1));
+@@ -75,6 +_,7 @@
+       p_38135_.put(RailShape.NORTH_WEST, Pair.of(vec3i2, vec3i));
+       p_38135_.put(RailShape.NORTH_EAST, Pair.of(vec3i2, vec3i1));
     });
 +   private static net.minecraftforge.common.IMinecartCollisionHandler COLLISIONS = null;
     private int f_38070_;
@@ -79,17 +49,6 @@
     }
  
     protected Vec3 m_7643_(Direction.Axis p_38132_, BlockUtil.FoundRectangle p_38133_) {
-@@ -185,8 +_,8 @@
-          for(Pose pose1 : immutablelist) {
-             double d2 = (double)p_38145_.m_6972_(pose1).f_20378_;
-             int j = Mth.m_14165_(d1 - (double)blockpos$mutableblockpos.m_123342_() + d2);
--            double d3 = DismountHelper.m_38463_(blockpos$mutableblockpos, j, (p_38149_) -> {
--               return this.f_19853_.m_8055_(p_38149_).m_60812_(this.f_19853_, p_38149_);
-+            double d3 = DismountHelper.m_38463_(blockpos$mutableblockpos, j, (p_242377_1_) -> {
-+               return this.f_19853_.m_8055_(p_242377_1_).m_60812_(this.f_19853_, p_242377_1_);
-             });
-             if (d1 + d2 <= d3) {
-                p_38145_.m_20124_(pose1);
 @@ -305,9 +_,9 @@
  
           BlockPos blockpos = new BlockPos(i, j, k);

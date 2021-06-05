@@ -15,7 +15,7 @@
        this.f_43022_ = p_43028_;
 +   }
 +
-+   public static Rarity create(String name, ChatFormatting p_i48837_3_) {
++   public static Rarity create(String name, ChatFormatting p_43028_) {
 +      throw new IllegalStateException("Enum not extended");
     }
  }

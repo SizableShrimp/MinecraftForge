@@ -1,20 +1,6 @@
 --- a/net/minecraft/client/gui/screens/LanguageSelectScreen.java
 +++ b/net/minecraft/client/gui/screens/LanguageSelectScreen.java
-@@ -35,18 +_,18 @@
-    protected void m_7856_() {
-       this.f_96079_ = new LanguageSelectScreen.LanguageSelectionList(this.f_96541_);
-       this.f_96540_.add(this.f_96079_);
--      this.f_96081_ = this.m_7082_(new OptionButton(this.f_96543_ / 2 - 155, this.f_96544_ - 38, 150, 20, Option.f_91640_, Option.f_91640_.m_90547_(this.f_96282_), (p_96099_) -> {
-+      this.f_96081_ = this.m_7082_(new OptionButton(this.f_96543_ / 2 - 155, this.f_96544_ - 38, 150, 20, Option.f_91640_, Option.f_91640_.m_90547_(this.f_96282_), (p_213037_1_) -> {
-          Option.f_91640_.m_90529_(this.f_96282_);
-          this.f_96282_.m_92169_();
--         p_96099_.m_93666_(Option.f_91640_.m_90547_(this.f_96282_));
-+         p_213037_1_.m_93666_(Option.f_91640_.m_90547_(this.f_96282_));
-          this.f_96541_.m_5741_();
-       }));
--      this.f_96082_ = this.m_7082_(new Button(this.f_96543_ / 2 - 155 + 160, this.f_96544_ - 38, 150, 20, CommonComponents.f_130655_, (p_96094_) -> {
-+      this.f_96082_ = this.m_7082_(new Button(this.f_96543_ / 2 - 155 + 160, this.f_96544_ - 38, 150, 20, CommonComponents.f_130655_, (p_213036_1_) -> {
-          LanguageSelectScreen.LanguageSelectionList.Entry languageselectscreen$languageselectionlist$entry = this.f_96079_.m_93511_();
+@@ -46,7 +_,7 @@
           if (languageselectscreen$languageselectionlist$entry != null && !languageselectscreen$languageselectionlist$entry.f_96116_.getCode().equals(this.f_96080_.m_118983_().getCode())) {
              this.f_96080_.m_118974_(languageselectscreen$languageselectionlist$entry.f_96116_);
              this.f_96282_.f_92075_ = languageselectscreen$languageselectionlist$entry.f_96116_.getCode();

@@ -1,21 +1,5 @@
 --- a/net/minecraft/nbt/CompoundTag.java
 +++ b/net/minecraft/nbt/CompoundTag.java
-@@ -29,11 +_,11 @@
- import org.apache.logging.log4j.Logger;
- 
- public class CompoundTag implements Tag {
--   public static final Codec<CompoundTag> f_128325_ = Codec.PASSTHROUGH.comapFlatMap((p_128336_) -> {
--      Tag tag = p_128336_.convert(NbtOps.f_128958_).getValue();
-+   public static final Codec<CompoundTag> f_128325_ = Codec.PASSTHROUGH.comapFlatMap((p_240598_0_) -> {
-+      Tag tag = p_240598_0_.convert(NbtOps.f_128958_).getValue();
-       return tag instanceof CompoundTag ? DataResult.success((CompoundTag)tag) : DataResult.error("Not a compound tag: " + tag);
--   }, (p_128412_) -> {
--      return new Dynamic<>(NbtOps.f_128958_, p_128412_);
-+   }, (p_240599_0_) -> {
-+      return new Dynamic<>(NbtOps.f_128958_, p_240599_0_);
-    });
-    private static final Logger f_128327_ = LogManager.getLogger();
-    private static final Pattern f_128328_ = Pattern.compile("[A-Za-z0-9._+-]+");
 @@ -49,6 +_,7 @@
              while((b0 = CompoundTag.m_128420_(p_128485_, p_128487_)) != 0) {
                 String s = CompoundTag.m_128432_(p_128485_, p_128487_);

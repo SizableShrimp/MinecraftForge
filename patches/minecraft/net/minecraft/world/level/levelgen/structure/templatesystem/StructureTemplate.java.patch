@@ -1,35 +1,5 @@
 --- a/net/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplate.java
 +++ b/net/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplate.java
-@@ -120,12 +_,12 @@
-    }
- 
-    private static List<StructureTemplate.StructureBlockInfo> m_74614_(List<StructureTemplate.StructureBlockInfo> p_74615_, List<StructureTemplate.StructureBlockInfo> p_74616_, List<StructureTemplate.StructureBlockInfo> p_74617_) {
--      Comparator<StructureTemplate.StructureBlockInfo> comparator = Comparator.<StructureTemplate.StructureBlockInfo>comparingInt((p_74641_) -> {
--         return p_74641_.f_74675_.m_123342_();
--      }).thenComparingInt((p_74637_) -> {
--         return p_74637_.f_74675_.m_123341_();
--      }).thenComparingInt((p_74572_) -> {
--         return p_74572_.f_74675_.m_123343_();
-+      Comparator<StructureTemplate.StructureBlockInfo> comparator = Comparator.<StructureTemplate.StructureBlockInfo>comparingInt((p_237154_0_) -> {
-+         return p_237154_0_.f_74675_.m_123342_();
-+      }).thenComparingInt((p_237153_0_) -> {
-+         return p_237153_0_.f_74675_.m_123341_();
-+      }).thenComparingInt((p_237148_0_) -> {
-+         return p_237148_0_.f_74675_.m_123343_();
-       });
-       p_74615_.sort(comparator);
-       p_74617_.sort(comparator);
-@@ -138,8 +_,8 @@
-    }
- 
-    private void m_74500_(Level p_74501_, BlockPos p_74502_, BlockPos p_74503_) {
--      List<Entity> list = p_74501_.m_6443_(Entity.class, new AABB(p_74502_, p_74503_), (p_74499_) -> {
--         return !(p_74499_ instanceof Player);
-+      List<Entity> list = p_74501_.m_6443_(Entity.class, new AABB(p_74502_, p_74503_), (p_237142_0_) -> {
-+         return !(p_237142_0_ instanceof Player);
-       });
-       this.f_74483_.clear();
- 
 @@ -190,6 +_,10 @@
        return m_74593_(p_74565_, p_74564_.m_74401_(), p_74564_.m_74404_(), p_74564_.m_74407_());
     }
@@ -59,29 +29,6 @@
              }
  
              return true;
-@@ -341,17 +_,17 @@
-    }
- 
-    public static void m_74510_(LevelAccessor p_74511_, int p_74512_, DiscreteVoxelShape p_74513_, int p_74514_, int p_74515_, int p_74516_) {
--      p_74513_.m_82810_((p_74494_, p_74495_, p_74496_, p_74497_) -> {
--         BlockPos blockpos = new BlockPos(p_74514_ + p_74495_, p_74515_ + p_74496_, p_74516_ + p_74497_);
--         BlockPos blockpos1 = blockpos.m_121945_(p_74494_);
-+      p_74513_.m_82810_((p_237141_5_, p_237141_6_, p_237141_7_, p_237141_8_) -> {
-+         BlockPos blockpos = new BlockPos(p_74514_ + p_237141_6_, p_74515_ + p_237141_7_, p_74516_ + p_237141_8_);
-+         BlockPos blockpos1 = blockpos.m_121945_(p_237141_5_);
-          BlockState blockstate = p_74511_.m_8055_(blockpos);
-          BlockState blockstate1 = p_74511_.m_8055_(blockpos1);
--         BlockState blockstate2 = blockstate.m_60728_(p_74494_, blockstate1, p_74511_, blockpos, blockpos1);
-+         BlockState blockstate2 = blockstate.m_60728_(p_237141_5_, blockstate1, p_74511_, blockpos, blockpos1);
-          if (blockstate != blockstate2) {
-             p_74511_.m_7731_(blockpos, blockstate2, p_74512_ & -2);
-          }
- 
--         BlockState blockstate3 = blockstate1.m_60728_(p_74494_.m_122424_(), blockstate2, p_74511_, blockpos1, blockpos);
-+         BlockState blockstate3 = blockstate1.m_60728_(p_237141_5_.m_122424_(), blockstate2, p_74511_, blockpos1, blockpos);
-          if (blockstate1 != blockstate3) {
-             p_74511_.m_7731_(blockpos1, blockstate3, p_74512_ & -2);
-          }
 @@ -359,14 +_,19 @@
        });
     }
@@ -91,21 +38,19 @@
 +      return processBlockInfos(p_74518_, p_74519_, p_74520_, p_74521_, p_74522_, null);
 +   }
 +
-+   public static List<StructureTemplate.StructureBlockInfo> processBlockInfos(LevelAccessor p_237145_0_, BlockPos p_237145_1_, BlockPos p_237145_2_, StructurePlaceSettings p_237145_3_, List<StructureTemplate.StructureBlockInfo> p_237145_4_, @Nullable StructureTemplate template) {
++   public static List<StructureTemplate.StructureBlockInfo> processBlockInfos(LevelAccessor p_74518_, BlockPos p_74519_, BlockPos p_74520_, StructurePlaceSettings p_74521_, List<StructureTemplate.StructureBlockInfo> p_74522_, @Nullable StructureTemplate template) {
        List<StructureTemplate.StructureBlockInfo> list = Lists.newArrayList();
  
--      for(StructureTemplate.StructureBlockInfo structuretemplate$structureblockinfo : p_74522_) {
--         BlockPos blockpos = m_74563_(p_74521_, structuretemplate$structureblockinfo.f_74675_).m_121955_(p_74519_);
-+      for(StructureTemplate.StructureBlockInfo structuretemplate$structureblockinfo : p_237145_4_) {
-+         BlockPos blockpos = m_74563_(p_237145_3_, structuretemplate$structureblockinfo.f_74675_).m_121955_(p_237145_1_);
+       for(StructureTemplate.StructureBlockInfo structuretemplate$structureblockinfo : p_74522_) {
+          BlockPos blockpos = m_74563_(p_74521_, structuretemplate$structureblockinfo.f_74675_).m_121955_(p_74519_);
           StructureTemplate.StructureBlockInfo structuretemplate$structureblockinfo1 = new StructureTemplate.StructureBlockInfo(blockpos, structuretemplate$structureblockinfo.f_74676_, structuretemplate$structureblockinfo.f_74677_ != null ? structuretemplate$structureblockinfo.f_74677_.m_6426_() : null);
  
 -         for(Iterator<StructureProcessor> iterator = p_74521_.m_74411_().iterator(); structuretemplate$structureblockinfo1 != null && iterator.hasNext(); structuretemplate$structureblockinfo1 = iterator.next().m_7382_(p_74518_, p_74519_, p_74520_, structuretemplate$structureblockinfo, structuretemplate$structureblockinfo1, p_74521_)) {
-+         for(Iterator<StructureProcessor> iterator = p_237145_3_.m_74411_().iterator(); structuretemplate$structureblockinfo1 != null && iterator.hasNext(); structuretemplate$structureblockinfo1 = iterator.next().process(p_237145_0_, p_237145_1_, p_237145_2_, structuretemplate$structureblockinfo, structuretemplate$structureblockinfo1, p_237145_3_, template)) {
++         for(Iterator<StructureProcessor> iterator = p_74521_.m_74411_().iterator(); structuretemplate$structureblockinfo1 != null && iterator.hasNext(); structuretemplate$structureblockinfo1 = iterator.next().process(p_74518_, p_74519_, p_74520_, structuretemplate$structureblockinfo, structuretemplate$structureblockinfo1, p_74521_, template)) {
           }
  
           if (structuretemplate$structureblockinfo1 != null) {
-@@ -377,28 +_,45 @@
+@@ -377,13 +_,30 @@
        return list;
     }
  
@@ -130,9 +75,9 @@
 +      return list;
 +   }
 +
-+   private void addEntitiesToWorld(ServerLevelAccessor p_237143_1_, BlockPos p_237143_2_, StructurePlaceSettings placementIn) {
-+      for(StructureTemplate.StructureEntityInfo structuretemplate$structureentityinfo : processEntityInfos(this, p_237143_1_, p_237143_2_, placementIn, this.f_74483_)) {
-+         BlockPos blockpos = m_74593_(structuretemplate$structureentityinfo.f_74684_, placementIn.m_74401_(), placementIn.m_74404_(), placementIn.m_74407_()).m_121955_(p_237143_2_);
++   private void addEntitiesToWorld(ServerLevelAccessor p_74524_, BlockPos p_74525_, StructurePlaceSettings placementIn) {
++      for(StructureTemplate.StructureEntityInfo structuretemplate$structureentityinfo : processEntityInfos(this, p_74524_, p_74525_, placementIn, this.f_74483_)) {
++         BlockPos blockpos = m_74593_(structuretemplate$structureentityinfo.f_74684_, placementIn.m_74401_(), placementIn.m_74404_(), placementIn.m_74407_()).m_121955_(p_74525_);
 +         blockpos = structuretemplate$structureentityinfo.f_74684_; // FORGE: Position will have already been transformed by processEntityInfos
 +         if (placementIn.m_74409_() == null || placementIn.m_74409_().m_71051_(blockpos)) {
              CompoundTag compoundtag = structuretemplate$structureentityinfo.f_74685_.m_6426_();
@@ -142,28 +87,20 @@
              ListTag listtag = new ListTag();
              listtag.add(DoubleTag.m_128500_(vec31.f_82479_));
              listtag.add(DoubleTag.m_128500_(vec31.f_82480_));
-             listtag.add(DoubleTag.m_128500_(vec31.f_82481_));
+@@ -391,10 +_,10 @@
              compoundtag.m_128365_("Pos", listtag);
              compoundtag.m_128473_("UUID");
--            m_74543_(p_74524_, compoundtag).ifPresent((p_74553_) -> {
+             m_74543_(p_74524_, compoundtag).ifPresent((p_74553_) -> {
 -               float f = p_74553_.m_6961_(p_74526_);
 -               f = f + (p_74553_.f_19857_ - p_74553_.m_7890_(p_74527_));
--               p_74553_.m_7678_(vec31.f_82479_, vec31.f_82480_, vec31.f_82481_, f, p_74553_.f_19858_);
++               float f = p_74553_.m_6961_(placementIn.m_74401_());
++               f = f + (p_74553_.f_19857_ - p_74553_.m_7890_(placementIn.m_74404_()));
+                p_74553_.m_7678_(vec31.f_82479_, vec31.f_82480_, vec31.f_82481_, f, p_74553_.f_19858_);
 -               if (p_74530_ && p_74553_ instanceof Mob) {
--                  ((Mob)p_74553_).m_6518_(p_74524_, p_74524_.m_6436_(new BlockPos(vec31)), MobSpawnType.STRUCTURE, (SpawnGroupData)null, compoundtag);
-+            m_74543_(p_237143_1_, compoundtag).ifPresent((p_242927_6_) -> {
-+               float f = p_242927_6_.m_6961_(placementIn.m_74401_());
-+               f = f + (p_242927_6_.f_19857_ - p_242927_6_.m_7890_(placementIn.m_74404_()));
-+               p_242927_6_.m_7678_(vec31.f_82479_, vec31.f_82480_, vec31.f_82481_, f, p_242927_6_.f_19858_);
-+               if (placementIn.m_74414_() && p_242927_6_ instanceof Mob) {
-+                  ((Mob)p_242927_6_).m_6518_(p_237143_1_, p_237143_1_.m_6436_(new BlockPos(vec31)), MobSpawnType.STRUCTURE, (SpawnGroupData)null, compoundtag);
++               if (placementIn.m_74414_() && p_74553_ instanceof Mob) {
+                   ((Mob)p_74553_).m_6518_(p_74524_, p_74524_.m_6436_(new BlockPos(vec31)), MobSpawnType.STRUCTURE, (SpawnGroupData)null, compoundtag);
                 }
  
--               p_74524_.m_47205_(p_74553_);
-+               p_237143_1_.m_47205_(p_242927_6_);
-             });
-          }
-       }
 @@ -726,27 +_,6 @@
        return listtag;
     }
@@ -212,9 +149,9 @@
 +      }
 +
 +      public List<StructureTemplate.StructureBlockInfo> m_74653_(Block p_74654_) {
-+         return this.f_74646_.computeIfAbsent(p_74654_, (p_237160_1_) -> {
-+            return this.f_74645_.stream().filter((p_237159_1_) -> {
-+               return p_237159_1_.f_74676_.m_60713_(p_237160_1_);
++         return this.f_74646_.computeIfAbsent(p_74654_, (p_74659_) -> {
++            return this.f_74645_.stream().filter((p_74657_) -> {
++               return p_74657_.f_74676_.m_60713_(p_74659_);
 +            }).collect(Collectors.toList());
 +         });
        }

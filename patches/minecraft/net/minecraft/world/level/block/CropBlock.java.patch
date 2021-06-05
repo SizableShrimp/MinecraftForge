@@ -8,16 +8,7 @@
  import net.minecraft.world.level.ItemLike;
  import net.minecraft.world.level.Level;
  import net.minecraft.world.level.LevelReader;
-@@ -20,8 +_,6 @@
- import net.minecraft.world.level.block.state.properties.IntegerProperty;
- import net.minecraft.world.phys.shapes.CollisionContext;
- import net.minecraft.world.phys.shapes.VoxelShape;
--import net.minecraftforge.api.distmarker.Dist;
--import net.minecraftforge.api.distmarker.OnlyIn;
- 
- public class CropBlock extends BushBlock implements BonemealableBlock {
-    public static final IntegerProperty f_52244_ = BlockStateProperties.f_61409_;
-@@ -65,12 +_,14 @@
+@@ -63,12 +_,14 @@
     }
  
     public void m_7455_(BlockState p_52292_, ServerLevel p_52293_, BlockPos p_52294_, Random p_52295_) {
@@ -33,7 +24,7 @@
              }
           }
        }
-@@ -99,9 +_,9 @@
+@@ -97,9 +_,9 @@
           for(int j = -1; j <= 1; ++j) {
              float f1 = 0.0F;
              BlockState blockstate = p_52274_.m_8055_(blockpos.m_7918_(i, 0, j));
@@ -45,7 +36,7 @@
                    f1 = 3.0F;
                 }
              }
-@@ -137,19 +_,17 @@
+@@ -135,7 +_,7 @@
     }
  
     public void m_7892_(BlockState p_52277_, Level p_52278_, BlockPos p_52279_, Entity p_52280_) {
@@ -54,15 +45,3 @@
           p_52278_.m_46953_(p_52279_, true, p_52280_);
        }
  
-       super.m_7892_(p_52277_, p_52278_, p_52279_, p_52280_);
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    protected ItemLike m_6404_() {
-       return Items.f_42404_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public ItemStack m_7397_(BlockGetter p_52254_, BlockPos p_52255_, BlockState p_52256_) {
-       return new ItemStack(this.m_6404_());
-    }

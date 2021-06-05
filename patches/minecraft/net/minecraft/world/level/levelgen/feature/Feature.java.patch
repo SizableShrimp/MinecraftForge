@@ -17,22 +17,7 @@
     public static final Feature<NoneFeatureConfiguration> f_65759_ = m_65807_("no_op", new NoOpFeature(NoneFeatureConfiguration.f_67815_));
     public static final Feature<TreeConfiguration> f_65760_ = m_65807_("tree", new TreeFeature(TreeConfiguration.f_68184_));
     public static final AbstractFlowerFeature<RandomPatchConfiguration> f_65761_ = m_65807_("flower", new DefaultFlowerFeature(RandomPatchConfiguration.f_67902_));
-@@ -97,10 +_,10 @@
-    }
- 
-    public Feature(Codec<FC> p_65786_) {
--      this.f_65757_ = p_65786_.fieldOf("config").xmap((p_65806_) -> {
--         return new ConfiguredFeature<>(this, p_65806_);
--      }, (p_65804_) -> {
--         return p_65804_.f_65378_;
-+      this.f_65757_ = p_65786_.fieldOf("config").xmap((p_236296_1_) -> {
-+         return new ConfiguredFeature<>(this, p_236296_1_);
-+      }, (p_236295_0_) -> {
-+         return p_236295_0_.f_65378_;
-       }).codec();
-    }
- 
-@@ -119,16 +_,16 @@
+@@ -119,11 +_,11 @@
     public abstract boolean m_6957_(WorldGenLevel p_65794_, ChunkGenerator p_65795_, Random p_65796_, BlockPos p_65797_, FC p_65798_);
  
     protected static boolean m_65799_(Block p_65800_) {
@@ -46,10 +31,3 @@
     }
  
     public static boolean m_65788_(LevelSimulatedReader p_65789_, BlockPos p_65790_) {
--      return p_65789_.m_7433_(p_65790_, (p_65802_) -> {
--         return m_65813_(p_65802_.m_60734_());
-+      return p_65789_.m_7433_(p_65790_, (p_236294_0_) -> {
-+         return m_65813_(p_236294_0_.m_60734_());
-       });
-    }
- 

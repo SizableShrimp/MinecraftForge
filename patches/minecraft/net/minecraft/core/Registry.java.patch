@@ -175,32 +175,7 @@
        return TreeDecoratorType.f_70043_;
     });
     public static final Registry<FeatureSizeType<?>> f_122888_ = m_122999_(f_122851_, () -> {
-@@ -303,17 +_,17 @@
-    }
- 
-    public static <T extends WritableRegistry<?>> void m_122969_(WritableRegistry<T> p_122970_) {
--      p_122970_.forEach((p_122973_) -> {
--         if (p_122973_.m_6566_().isEmpty()) {
--            f_122894_.error("Registry '{}' was empty after loading", (Object)p_122970_.m_7981_(p_122973_));
-+      p_122970_.forEach((p_239739_1_) -> {
-+         if (p_239739_1_.m_6566_().isEmpty()) {
-+            f_122894_.error("Registry '{}' was empty after loading", (Object)p_122970_.m_7981_(p_239739_1_));
-             if (SharedConstants.f_136183_) {
--               throw new IllegalStateException("Registry: '" + p_122970_.m_7981_(p_122973_) + "' is empty, not allowed, fix me!");
-+               throw new IllegalStateException("Registry: '" + p_122970_.m_7981_(p_239739_1_) + "' is empty, not allowed, fix me!");
-             }
-          }
- 
--         if (p_122973_ instanceof DefaultedRegistry) {
--            ResourceLocation resourcelocation = ((DefaultedRegistry)p_122973_).m_122315_();
--            Validate.notNull(p_122973_.m_7745_(resourcelocation), "Missing default of DefaultedMappedRegistry: " + resourcelocation);
-+         if (p_239739_1_ instanceof DefaultedRegistry) {
-+            ResourceLocation resourcelocation = ((DefaultedRegistry)p_239739_1_).m_122315_();
-+            Validate.notNull(p_239739_1_.m_7745_(resourcelocation), "Missing default of DefaultedMappedRegistry: " + resourcelocation);
-          }
- 
-       });
-@@ -323,18 +_,34 @@
+@@ -323,16 +_,32 @@
        return m_122981_(p_123000_, Lifecycle.experimental(), p_123001_);
     }
  
@@ -226,59 +201,10 @@
 +
     private static <T> DefaultedRegistry<T> m_122990_(ResourceKey<? extends Registry<T>> p_122991_, String p_122992_, Lifecycle p_122993_, Supplier<T> p_122994_) {
        return m_122985_(p_122991_, new DefaultedRegistry<>(p_122992_, p_122991_, p_122993_), p_122994_, p_122993_);
-    }
- 
-+   private static <T extends net.minecraftforge.registries.IForgeRegistryEntry<T>> DefaultedRegistry<T> forge(ResourceKey<? extends Registry<T>> key, String defKey, Lifecycle cycle, Supplier<T> def) {
-+      return m_122985_(key, net.minecraftforge.registries.GameData.getWrapper(key, cycle, defKey), def, cycle);
 +   }
 +
++   private static <T extends net.minecraftforge.registries.IForgeRegistryEntry<T>> DefaultedRegistry<T> forge(ResourceKey<? extends Registry<T>> key, String defKey, Lifecycle cycle, Supplier<T> def) {
++      return m_122985_(key, net.minecraftforge.registries.GameData.getWrapper(key, cycle, defKey), def, cycle);
+    }
+ 
     private static <T, R extends WritableRegistry<T>> R m_122985_(ResourceKey<? extends Registry<T>> p_122986_, R p_122987_, Supplier<T> p_122988_, Lifecycle p_122989_) {
-       ResourceLocation resourcelocation = p_122986_.m_135782_();
-       f_122834_.put(resourcelocation, p_122988_);
-@@ -356,14 +_,14 @@
-    }
- 
-    public <U> DataResult<Pair<T, U>> decode(DynamicOps<U> p_123016_, U p_123017_) {
--      return p_123016_.compressMaps() ? p_123016_.getNumberValue(p_123017_).flatMap((p_122975_) -> {
--         T t = this.m_7942_(p_122975_.intValue());
--         return t == null ? DataResult.error("Unknown registry id: " + p_122975_) : DataResult.success(t, this.m_6228_(t));
--      }).map((p_122952_) -> {
--         return Pair.of((T)p_122952_, p_123016_.empty());
--      }) : ResourceLocation.f_135803_.decode(p_123016_, p_123017_).flatMap((p_122949_) -> {
--         T t = this.m_7745_(p_122949_.getFirst());
--         return t == null ? DataResult.error("Unknown registry key: " + p_122949_.getFirst()) : DataResult.success(Pair.of(t, p_122949_.getSecond()), this.m_6228_(t));
-+      return p_123016_.compressMaps() ? p_123016_.getNumberValue(p_123017_).flatMap((p_239740_1_) -> {
-+         T t = this.m_7942_(p_239740_1_.intValue());
-+         return t == null ? DataResult.error("Unknown registry id: " + p_239740_1_) : DataResult.success(t, this.m_6228_(t));
-+      }).map((p_239736_1_) -> {
-+         return Pair.of((T)p_239736_1_, p_123016_.empty());
-+      }) : ResourceLocation.f_135803_.decode(p_123016_, p_123017_).flatMap((p_239735_1_) -> {
-+         T t = this.m_7745_(p_239735_1_.getFirst());
-+         return t == null ? DataResult.error("Unknown registry key: " + p_239735_1_.getFirst()) : DataResult.success(Pair.of(t, p_239735_1_.getSecond()), this.m_6228_(t));
-       });
-    }
- 
-@@ -377,8 +_,8 @@
-    }
- 
-    public <U> Stream<U> keys(DynamicOps<U> p_123030_) {
--      return this.m_6566_().stream().map((p_122955_) -> {
--         return p_123030_.createString(p_122955_.toString());
-+      return this.m_6566_().stream().map((p_243574_1_) -> {
-+         return p_123030_.createString(p_243574_1_.toString());
-       });
-    }
- 
-@@ -442,9 +_,9 @@
- 
-    static {
-       BuiltinRegistries.m_123870_();
--      f_122834_.forEach((p_123004_, p_123005_) -> {
--         if (p_123005_.get() == null) {
--            f_122894_.error("Unable to bootstrap registry '{}'", (Object)p_123004_);
-+      f_122834_.forEach((p_239747_0_, p_239747_1_) -> {
-+         if (p_239747_1_.get() == null) {
-+            f_122894_.error("Unable to bootstrap registry '{}'", (Object)p_239747_0_);
-          }
- 
-       });

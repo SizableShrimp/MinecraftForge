@@ -1,15 +1,9 @@
 --- a/com/mojang/realmsclient/gui/screens/RealmsGenericErrorScreen.java
 +++ b/com/mojang/realmsclient/gui/screens/RealmsGenericErrorScreen.java
-@@ -58,10 +_,19 @@
- 
-    public void m_7856_() {
-       NarrationHelper.m_120670_(this.f_88666_.getString() + ": " + this.f_88667_.getString());
--      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 52, 200, 20, new TextComponent("Ok"), (p_88686_) -> {
-+      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 52, 200, 20, new TextComponent("Ok"), (p_237840_1_) -> {
-          this.f_96541_.m_91152_(this.f_88665_);
+@@ -63,6 +_,15 @@
        }));
     }
-+
+ 
 +    @Override
 +    public boolean m_7933_(int key, int scanCode, int modifiers) {
 +        if (key == org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE) {
@@ -18,6 +12,7 @@
 +        }
 +        return super.m_7933_(key, scanCode, modifiers);
 +    }
- 
++
     public void m_6305_(PoseStack p_88679_, int p_88680_, int p_88681_, float p_88682_) {
        this.m_7333_(p_88679_);
+       m_93215_(p_88679_, this.f_96547_, this.f_88666_, this.f_96543_ / 2, 80, 16777215);

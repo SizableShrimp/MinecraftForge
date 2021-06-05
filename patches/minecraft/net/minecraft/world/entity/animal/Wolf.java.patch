@@ -8,17 +8,6 @@
  import net.minecraft.world.entity.ai.goal.BegGoal;
  import net.minecraft.world.entity.ai.goal.BreedGoal;
  import net.minecraft.world.entity.ai.goal.FloatGoal;
-@@ -68,8 +_,8 @@
-    private static final EntityDataAccessor<Boolean> f_30358_ = SynchedEntityData.m_135353_(Wolf.class, EntityDataSerializers.f_135035_);
-    private static final EntityDataAccessor<Integer> f_30359_ = SynchedEntityData.m_135353_(Wolf.class, EntityDataSerializers.f_135028_);
-    private static final EntityDataAccessor<Integer> f_30360_ = SynchedEntityData.m_135353_(Wolf.class, EntityDataSerializers.f_135028_);
--   public static final Predicate<LivingEntity> f_30357_ = (p_30437_) -> {
--      EntityType<?> entitytype = p_30437_.m_6095_();
-+   public static final Predicate<LivingEntity> f_30357_ = (p_213440_0_) -> {
-+      EntityType<?> entitytype = p_213440_0_.m_6095_();
-       return entitytype == EntityType.f_20520_ || entitytype == EntityType.f_20517_ || entitytype == EntityType.f_20452_;
-    };
-    private float f_30361_;
 @@ -135,6 +_,7 @@
           this.m_30397_(DyeColor.m_41053_(p_30402_.m_128451_("CollarColor")));
        }

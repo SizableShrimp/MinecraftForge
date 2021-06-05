@@ -16,15 +16,6 @@
  
        try {
           this.m_129498_(ConnectionProtocol.HANDSHAKING);
-@@ -119,7 +_,7 @@
-                Component component = new TranslatableComponent("disconnect.genericReason", "Internal Exception: " + p_129534_);
-                if (flag) {
-                   f_129465_.debug("Failed to sent packet", p_129534_);
--                  this.m_129514_(new ClientboundDisconnectPacket(component), (p_129511_) -> {
-+                  this.m_129514_(new ClientboundDisconnectPacket(component), (p_211391_2_) -> {
-                      this.m_129507_(component);
-                   });
-                   this.m_129540_();
 @@ -174,7 +_,7 @@
        ++this.f_129475_;
        if (connectionprotocol1 != connectionprotocol) {

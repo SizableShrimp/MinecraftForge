@@ -1,52 +1,10 @@
 --- a/net/minecraft/server/level/ServerChunkCache.java
 +++ b/net/minecraft/server/level/ServerChunkCache.java
-@@ -127,11 +_,11 @@
-          profilerfiller.m_6174_("getChunkCacheMiss");
-          CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>> completablefuture = this.m_8456_(p_8360_, p_8361_, p_8362_, p_8363_);
-          this.f_8332_.m_18701_(completablefuture::isDone);
--         ChunkAccess chunkaccess1 = completablefuture.join().map((p_8406_) -> {
--            return p_8406_;
--         }, (p_8423_) -> {
-+         ChunkAccess chunkaccess1 = completablefuture.join().map((p_222874_0_) -> {
-+            return p_222874_0_;
-+         }, (p_222870_1_) -> {
-             if (p_8363_) {
--               throw (IllegalStateException)Util.m_137570_(new IllegalStateException("Chunk not there when requested: " + p_8423_));
-+               throw (IllegalStateException)Util.m_137570_(new IllegalStateException("Chunk not there when requested: " + p_222870_1_));
-             } else {
-                return null;
-             }
-@@ -194,8 +_,8 @@
-       } else {
-          completablefuture = CompletableFuture.supplyAsync(() -> {
-             return this.m_8456_(p_8432_, p_8433_, p_8434_, p_8435_);
--         }, this.f_8332_).thenCompose((p_8413_) -> {
--            return p_8413_;
-+         }, this.f_8332_).thenCompose((p_217211_0_) -> {
-+            return p_217211_0_;
-          });
-       }
- 
-@@ -342,17 +_,17 @@
-          this.f_8329_.m_46473_().m_7238_();
-          List<ChunkHolder> list = Lists.newArrayList(this.f_8325_.m_140416_());
-          Collections.shuffle(list);
--         list.forEach((p_8382_) -> {
--            Optional<LevelChunk> optional = p_8382_.m_140026_().getNow(ChunkHolder.f_139997_).left();
-+         list.forEach((p_241099_7_) -> {
-+            Optional<LevelChunk> optional = p_241099_7_.m_140026_().getNow(ChunkHolder.f_139997_).left();
-             if (optional.isPresent()) {
-                this.f_8329_.m_46473_().m_6180_("broadcast");
--               p_8382_.m_140054_(optional.get());
-+               p_241099_7_.m_140054_(optional.get());
-                this.f_8329_.m_46473_().m_7238_();
--               Optional<LevelChunk> optional1 = p_8382_.m_140073_().getNow(ChunkHolder.f_139997_).left();
-+               Optional<LevelChunk> optional1 = p_241099_7_.m_140073_().getNow(ChunkHolder.f_139997_).left();
+@@ -352,7 +_,7 @@
                 if (optional1.isPresent()) {
                    LevelChunk levelchunk = optional1.get();
--                  ChunkPos chunkpos = p_8382_.m_140092_();
+                   ChunkPos chunkpos = p_8382_.m_140092_();
 -                  if (!this.f_8325_.m_140397_(chunkpos)) {
-+                  ChunkPos chunkpos = p_241099_7_.m_140092_();
 +                  if (!this.f_8325_.m_140397_(chunkpos) || f_8325_.m_140408_().shouldForceTicks(chunkpos.m_45588_())) {
                       levelchunk.m_6141_(levelchunk.m_6319_() + j);
                       if (flag1 && (this.f_8335_ || this.f_8336_) && this.f_8329_.m_6857_().m_61927_(levelchunk.m_7697_())) {

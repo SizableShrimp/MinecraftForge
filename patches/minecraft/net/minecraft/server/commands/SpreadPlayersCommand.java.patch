@@ -1,36 +1,5 @@
 --- a/net/minecraft/server/commands/SpreadPlayersCommand.java
 +++ b/net/minecraft/server/commands/SpreadPlayersCommand.java
-@@ -31,20 +_,20 @@
- import net.minecraft.world.scores.Team;
- 
- public class SpreadPlayersCommand {
--   private static final Dynamic4CommandExceptionType f_138693_ = new Dynamic4CommandExceptionType((p_138745_, p_138746_, p_138747_, p_138748_) -> {
--      return new TranslatableComponent("commands.spreadplayers.failed.teams", p_138745_, p_138746_, p_138747_, p_138748_);
-+   private static final Dynamic4CommandExceptionType f_138693_ = new Dynamic4CommandExceptionType((p_208910_0_, p_208910_1_, p_208910_2_, p_208910_3_) -> {
-+      return new TranslatableComponent("commands.spreadplayers.failed.teams", p_208910_0_, p_208910_1_, p_208910_2_, p_208910_3_);
-    });
--   private static final Dynamic4CommandExceptionType f_138694_ = new Dynamic4CommandExceptionType((p_138723_, p_138724_, p_138725_, p_138726_) -> {
--      return new TranslatableComponent("commands.spreadplayers.failed.entities", p_138723_, p_138724_, p_138725_, p_138726_);
-+   private static final Dynamic4CommandExceptionType f_138694_ = new Dynamic4CommandExceptionType((p_208912_0_, p_208912_1_, p_208912_2_, p_208912_3_) -> {
-+      return new TranslatableComponent("commands.spreadplayers.failed.entities", p_208912_0_, p_208912_1_, p_208912_2_, p_208912_3_);
-    });
- 
-    public static void m_138696_(CommandDispatcher<CommandSourceStack> p_138697_) {
--      p_138697_.register(Commands.m_82127_("spreadplayers").requires((p_138701_) -> {
--         return p_138701_.m_6761_(2);
--      }).then(Commands.m_82129_("center", Vec2Argument.m_120822_()).then(Commands.m_82129_("spreadDistance", FloatArgumentType.floatArg(0.0F)).then(Commands.m_82129_("maxRange", FloatArgumentType.floatArg(1.0F)).then(Commands.m_82129_("respectTeams", BoolArgumentType.bool()).then(Commands.m_82129_("targets", EntityArgument.m_91460_()).executes((p_138743_) -> {
--         return m_138702_(p_138743_.getSource(), Vec2Argument.m_120825_(p_138743_, "center"), FloatArgumentType.getFloat(p_138743_, "spreadDistance"), FloatArgumentType.getFloat(p_138743_, "maxRange"), 256, BoolArgumentType.getBool(p_138743_, "respectTeams"), EntityArgument.m_91461_(p_138743_, "targets"));
--      }))).then(Commands.m_82127_("under").then(Commands.m_82129_("maxHeight", IntegerArgumentType.integer(0)).then(Commands.m_82129_("respectTeams", BoolArgumentType.bool()).then(Commands.m_82129_("targets", EntityArgument.m_91460_()).executes((p_138699_) -> {
--         return m_138702_(p_138699_.getSource(), Vec2Argument.m_120825_(p_138699_, "center"), FloatArgumentType.getFloat(p_138699_, "spreadDistance"), FloatArgumentType.getFloat(p_138699_, "maxRange"), IntegerArgumentType.getInteger(p_138699_, "maxHeight"), BoolArgumentType.getBool(p_138699_, "respectTeams"), EntityArgument.m_91461_(p_138699_, "targets"));
-+      p_138697_.register(Commands.m_82127_("spreadplayers").requires((p_198721_0_) -> {
-+         return p_198721_0_.m_6761_(2);
-+      }).then(Commands.m_82129_("center", Vec2Argument.m_120822_()).then(Commands.m_82129_("spreadDistance", FloatArgumentType.floatArg(0.0F)).then(Commands.m_82129_("maxRange", FloatArgumentType.floatArg(1.0F)).then(Commands.m_82129_("respectTeams", BoolArgumentType.bool()).then(Commands.m_82129_("targets", EntityArgument.m_91460_()).executes((p_198718_0_) -> {
-+         return m_138702_(p_198718_0_.getSource(), Vec2Argument.m_120825_(p_198718_0_, "center"), FloatArgumentType.getFloat(p_198718_0_, "spreadDistance"), FloatArgumentType.getFloat(p_198718_0_, "maxRange"), 256, BoolArgumentType.getBool(p_198718_0_, "respectTeams"), EntityArgument.m_91461_(p_198718_0_, "targets"));
-+      }))).then(Commands.m_82127_("under").then(Commands.m_82129_("maxHeight", IntegerArgumentType.integer(0)).then(Commands.m_82129_("respectTeams", BoolArgumentType.bool()).then(Commands.m_82129_("targets", EntityArgument.m_91460_()).executes((p_241069_0_) -> {
-+         return m_138702_(p_241069_0_.getSource(), Vec2Argument.m_120825_(p_241069_0_, "center"), FloatArgumentType.getFloat(p_241069_0_, "spreadDistance"), FloatArgumentType.getFloat(p_241069_0_, "maxRange"), IntegerArgumentType.getInteger(p_241069_0_, "maxHeight"), BoolArgumentType.getBool(p_241069_0_, "respectTeams"), EntityArgument.m_91461_(p_241069_0_, "targets"));
-       })))))))));
-    }
- 
 @@ -162,7 +_,8 @@
              spreadplayerscommand$position = p_138732_[i++];
           }

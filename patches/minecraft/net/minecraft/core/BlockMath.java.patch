@@ -1,29 +1,11 @@
 --- a/net/minecraft/core/BlockMath.java
 +++ b/net/minecraft/core/BlockMath.java
-@@ -16,17 +_,17 @@
- @OnlyIn(Dist.CLIENT)
- public class BlockMath {
-    private static final Logger f_121840_ = LogManager.getLogger();
--   public static final EnumMap<Direction, Transformation> f_121838_ = Util.m_137469_(Maps.newEnumMap(Direction.class), (p_121851_) -> {
--      p_121851_.put(Direction.SOUTH, Transformation.m_121093_());
--      p_121851_.put(Direction.EAST, new Transformation((Vector3f)null, new Quaternion(new Vector3f(0.0F, 1.0F, 0.0F), 90.0F, true), (Vector3f)null, (Quaternion)null));
--      p_121851_.put(Direction.WEST, new Transformation((Vector3f)null, new Quaternion(new Vector3f(0.0F, 1.0F, 0.0F), -90.0F, true), (Vector3f)null, (Quaternion)null));
--      p_121851_.put(Direction.NORTH, new Transformation((Vector3f)null, new Quaternion(new Vector3f(0.0F, 1.0F, 0.0F), 180.0F, true), (Vector3f)null, (Quaternion)null));
--      p_121851_.put(Direction.UP, new Transformation((Vector3f)null, new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), -90.0F, true), (Vector3f)null, (Quaternion)null));
--      p_121851_.put(Direction.DOWN, new Transformation((Vector3f)null, new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), 90.0F, true), (Vector3f)null, (Quaternion)null));
-+   public static final EnumMap<Direction, Transformation> f_121838_ = Util.m_137469_(Maps.newEnumMap(Direction.class), (p_229382_0_) -> {
-+      p_229382_0_.put(Direction.SOUTH, Transformation.m_121093_());
-+      p_229382_0_.put(Direction.EAST, new Transformation((Vector3f)null, new Quaternion(new Vector3f(0.0F, 1.0F, 0.0F), 90.0F, true), (Vector3f)null, (Quaternion)null));
-+      p_229382_0_.put(Direction.WEST, new Transformation((Vector3f)null, new Quaternion(new Vector3f(0.0F, 1.0F, 0.0F), -90.0F, true), (Vector3f)null, (Quaternion)null));
-+      p_229382_0_.put(Direction.NORTH, new Transformation((Vector3f)null, new Quaternion(new Vector3f(0.0F, 1.0F, 0.0F), 180.0F, true), (Vector3f)null, (Quaternion)null));
-+      p_229382_0_.put(Direction.UP, new Transformation((Vector3f)null, new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), -90.0F, true), (Vector3f)null, (Quaternion)null));
-+      p_229382_0_.put(Direction.DOWN, new Transformation((Vector3f)null, new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), 90.0F, true), (Vector3f)null, (Quaternion)null));
+@@ -26,7 +_,7 @@
     });
--   public static final EnumMap<Direction, Transformation> f_121839_ = Util.m_137469_(Maps.newEnumMap(Direction.class), (p_121849_) -> {
-+   public static final EnumMap<Direction, Transformation> f_121839_ = Util.m_137469_(Maps.newEnumMap(Direction.class), (p_229381_0_) -> {
+    public static final EnumMap<Direction, Transformation> f_121839_ = Util.m_137469_(Maps.newEnumMap(Direction.class), (p_121849_) -> {
        for(Direction direction : Direction.values()) {
 -         p_121849_.put(direction, f_121838_.get(direction).m_121103_());
-+         p_229381_0_.put(direction, f_121838_.get(direction).inverse());
++         p_121849_.put(direction, f_121838_.get(direction).inverse());
        }
  
     });

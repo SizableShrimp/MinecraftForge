@@ -1,31 +1,6 @@
 --- a/net/minecraft/world/item/crafting/UpgradeRecipe.java
 +++ b/net/minecraft/world/item/crafting/UpgradeRecipe.java
-@@ -9,8 +_,6 @@
- import net.minecraft.world.item.ItemStack;
- import net.minecraft.world.level.Level;
- import net.minecraft.world.level.block.Blocks;
--import net.minecraftforge.api.distmarker.Dist;
--import net.minecraftforge.api.distmarker.OnlyIn;
- 
- public class UpgradeRecipe implements Recipe<Container> {
-    private final Ingredient f_44518_;
-@@ -39,7 +_,6 @@
-       return itemstack;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public boolean m_8004_(int p_44528_, int p_44529_) {
-       return p_44528_ * p_44529_ >= 2;
-    }
-@@ -52,7 +_,6 @@
-       return this.f_44519_.test(p_44536_);
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public ItemStack m_8042_() {
-       return new ItemStack(Blocks.f_50625_);
-    }
-@@ -69,7 +_,7 @@
+@@ -65,7 +_,7 @@
        return RecipeType.f_44113_;
     }
  

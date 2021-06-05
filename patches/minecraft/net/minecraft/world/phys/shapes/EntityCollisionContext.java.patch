@@ -1,14 +1,5 @@
 --- a/net/minecraft/world/phys/shapes/EntityCollisionContext.java
 +++ b/net/minecraft/world/phys/shapes/EntityCollisionContext.java
-@@ -12,7 +_,7 @@
- import net.minecraft.world.level.material.FluidState;
- 
- public class EntityCollisionContext implements CollisionContext {
--   protected static final CollisionContext f_82865_ = new EntityCollisionContext(false, -Double.MAX_VALUE, Items.f_41852_, (p_82891_) -> {
-+   protected static final CollisionContext f_82865_ = new EntityCollisionContext(false, -Double.MAX_VALUE, Items.f_41852_, (p_237495_0_) -> {
-       return false;
-    }) {
-       public boolean m_6513_(VoxelShape p_82898_, BlockPos p_82899_, boolean p_82900_) {
 @@ -25,6 +_,11 @@
     private final Predicate<Fluid> f_82869_;
  
@@ -26,7 +17,7 @@
     @Deprecated
     protected EntityCollisionContext(Entity p_82872_) {
 -      this(p_82872_.m_20164_(), p_82872_.m_20186_(), p_82872_ instanceof LivingEntity ? ((LivingEntity)p_82872_).m_21205_().m_41720_() : Items.f_41852_, p_82872_ instanceof LivingEntity ? ((LivingEntity)p_82872_)::m_7479_ : (p_82881_) -> {
-+      this(p_82872_, p_82872_.m_20164_(), p_82872_.m_20186_(), p_82872_ instanceof LivingEntity ? ((LivingEntity)p_82872_).m_21205_().m_41720_() : Items.f_41852_, p_82872_ instanceof LivingEntity ? ((LivingEntity)p_82872_)::m_7479_ : (p_237494_0_) -> {
++      this(p_82872_, p_82872_.m_20164_(), p_82872_.m_20186_(), p_82872_ instanceof LivingEntity ? ((LivingEntity)p_82872_).m_21205_().m_41720_() : Items.f_41852_, p_82872_ instanceof LivingEntity ? ((LivingEntity)p_82872_)::m_7479_ : (p_82881_) -> {
           return false;
        });
     }

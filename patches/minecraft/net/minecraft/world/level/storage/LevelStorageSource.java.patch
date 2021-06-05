@@ -9,66 +9,29 @@
        DataResult<WorldGenSettings> dataresult = WorldGenSettings.f_64600_.parse(dynamic1);
        return Pair.of(dataresult.resultOrPartial(Util.m_137489_("WorldGenSettings: ", f_78191_::error)).orElseGet(() -> {
           Registry<DimensionType> registry = RegistryLookupCodec.m_135622_(Registry.f_122818_).codec().parse(dynamic1).resultOrPartial(Util.m_137489_("Dimension type registry: ", f_78191_::error)).orElseThrow(() -> {
-@@ -181,33 +_,40 @@
+@@ -181,6 +_,10 @@
     }
  
     private static BiFunction<File, DataFixer, PrimaryLevelData> m_78247_(DynamicOps<Tag> p_78248_, DataPackConfig p_78249_) {
--      return (p_78214_, p_78215_) -> {
 +       return getReader(p_78248_, p_78249_, null);
 +   }
 +
-+   private static BiFunction<File, DataFixer, PrimaryLevelData> getReader(DynamicOps<Tag> p_237270_0_, DataPackConfig p_237270_1_, @Nullable LevelStorageAccess levelSave) {
-+      return (p_242976_2_, p_242976_3_) -> {
++   private static BiFunction<File, DataFixer, PrimaryLevelData> getReader(DynamicOps<Tag> p_78248_, DataPackConfig p_78249_, @Nullable LevelStorageAccess levelSave) {
+       return (p_78214_, p_78215_) -> {
           try {
--            CompoundTag compoundtag = NbtIo.m_128937_(p_78214_);
-+            CompoundTag compoundtag = NbtIo.m_128937_(p_242976_2_);
-             CompoundTag compoundtag1 = compoundtag.m_128469_("Data");
-             CompoundTag compoundtag2 = compoundtag1.m_128425_("Player", 10) ? compoundtag1.m_128469_("Player") : null;
-             compoundtag1.m_128473_("Player");
-             int i = compoundtag1.m_128425_("DataVersion", 99) ? compoundtag1.m_128451_("DataVersion") : -1;
--            Dynamic<Tag> dynamic = p_78215_.update(DataFixTypes.LEVEL.m_14504_(), new Dynamic<>(p_78248_, compoundtag1), i, SharedConstants.m_136187_().getWorldVersion());
--            Pair<WorldGenSettings, Lifecycle> pair = m_78204_(dynamic, p_78215_, i);
-+            Dynamic<Tag> dynamic = p_242976_3_.update(DataFixTypes.LEVEL.m_14504_(), new Dynamic<>(p_237270_0_, compoundtag1), i, SharedConstants.m_136187_().getWorldVersion());
-+            Pair<WorldGenSettings, Lifecycle> pair = m_78204_(dynamic, p_242976_3_, i);
+             CompoundTag compoundtag = NbtIo.m_128937_(p_78214_);
+@@ -192,7 +_,10 @@
+             Pair<WorldGenSettings, Lifecycle> pair = m_78204_(dynamic, p_78215_, i);
              LevelVersion levelversion = LevelVersion.m_78390_(dynamic);
--            LevelSettings levelsettings = LevelSettings.m_46924_(dynamic, p_78249_);
+             LevelSettings levelsettings = LevelSettings.m_46924_(dynamic, p_78249_);
 -            return PrimaryLevelData.m_78530_(dynamic, p_78215_, i, compoundtag2, levelsettings, levelversion, pair.getFirst(), pair.getSecond());
-+            LevelSettings levelsettings = LevelSettings.m_46924_(dynamic, p_237270_1_);
-+            PrimaryLevelData info = PrimaryLevelData.m_78530_(dynamic, p_242976_3_, i, compoundtag2, levelsettings, levelversion, pair.getFirst(), pair.getSecond());
++            PrimaryLevelData info = PrimaryLevelData.m_78530_(dynamic, p_78215_, i, compoundtag2, levelsettings, levelversion, pair.getFirst(), pair.getSecond());
 +            if (levelSave != null)
 +                net.minecraftforge.fml.WorldPersistenceHooks.handleWorldDataLoad(levelSave, info, compoundtag);
 +            return info;
           } catch (Exception exception) {
--            f_78191_.error("Exception reading {}", p_78214_, exception);
-+            f_78191_.error("Exception reading {}", p_242976_2_, exception);
+             f_78191_.error("Exception reading {}", p_78214_, exception);
              return null;
-          }
-       };
-    }
- 
-    private BiFunction<File, DataFixer, LevelSummary> m_78232_(File p_78233_, boolean p_78234_) {
--      return (p_78238_, p_78239_) -> {
-+      return (p_242977_3_, p_242977_4_) -> {
-          try {
--            CompoundTag compoundtag = NbtIo.m_128937_(p_78238_);
-+            CompoundTag compoundtag = NbtIo.m_128937_(p_242977_3_);
-             CompoundTag compoundtag1 = compoundtag.m_128469_("Data");
-             compoundtag1.m_128473_("Player");
-             int i = compoundtag1.m_128425_("DataVersion", 99) ? compoundtag1.m_128451_("DataVersion") : -1;
--            Dynamic<Tag> dynamic = p_78239_.update(DataFixTypes.LEVEL.m_14504_(), new Dynamic<>(NbtOps.f_128958_, compoundtag1), i, SharedConstants.m_136187_().getWorldVersion());
-+            Dynamic<Tag> dynamic = p_242977_4_.update(DataFixTypes.LEVEL.m_14504_(), new Dynamic<>(NbtOps.f_128958_, compoundtag1), i, SharedConstants.m_136187_().getWorldVersion());
-             LevelVersion levelversion = LevelVersion.m_78390_(dynamic);
-             int j = levelversion.m_78389_();
-             if (j != 19132 && j != 19133) {
-@@ -220,7 +_,7 @@
-                return new LevelSummary(levelsettings, levelversion, p_78233_.getName(), flag, p_78234_, file1);
-             }
-          } catch (Exception exception) {
--            f_78191_.error("Exception reading {}", p_78238_, exception);
-+            f_78191_.error("Exception reading {}", p_242977_3_, exception);
-             return null;
-          }
-       };
 @@ -274,8 +_,8 @@
        }
  

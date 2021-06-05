@@ -9,14 +9,3 @@
              Iterator iterator = list.iterator();
  
              while(true) {
-@@ -185,8 +_,8 @@
-             AABB aabb = this.m_60362_(new AABB(0.0D, d0, 0.0D, 1.0D, 1.5000000999999998D, 1.0D));
-             double d1 = (double)(p_60396_ - this.f_60339_);
- 
--            for(Entity entity : this.f_58857_.m_6249_((Entity)null, aabb, (p_60384_) -> {
--               return m_60364_(aabb, p_60384_);
-+            for(Entity entity : this.f_58857_.m_6249_((Entity)null, aabb, (p_227023_1_) -> {
-+               return m_60364_(aabb, p_227023_1_);
-             })) {
-                m_60371_(direction, entity, d1, direction);
-             }

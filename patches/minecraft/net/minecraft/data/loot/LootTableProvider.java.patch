@@ -1,22 +1,15 @@
 --- a/net/minecraft/data/loot/LootTableProvider.java
 +++ b/net/minecraft/data/loot/LootTableProvider.java
-@@ -40,42 +_,51 @@
+@@ -40,7 +_,7 @@
     public void m_6865_(HashCache p_124444_) {
        Path path = this.f_124433_.m_123916_();
        Map<ResourceLocation, LootTable> map = Maps.newHashMap();
 -      this.f_124434_.forEach((p_124458_) -> {
--         p_124458_.getFirst().get().accept((p_124462_, p_124463_) -> {
--            if (map.put(p_124462_, p_124463_.m_79165_(p_124458_.getSecond()).m_79167_()) != null) {
--               throw new IllegalStateException("Duplicate loot table " + p_124462_);
-+      this.getTables().forEach((p_218438_1_) -> {
-+         p_218438_1_.getFirst().get().accept((p_218437_2_, p_218437_3_) -> {
-+            if (map.put(p_218437_2_, p_218437_3_.m_79165_(p_218438_1_.getSecond()).m_79167_()) != null) {
-+               throw new IllegalStateException("Duplicate loot table " + p_218437_2_);
-             }
-          });
-       });
--      ValidationContext validationcontext = new ValidationContext(LootContextParamSets.f_81420_, (p_124465_) -> {
-+      ValidationContext validationcontext = new ValidationContext(LootContextParamSets.f_81420_, (p_229442_0_) -> {
++      this.getTables().forEach((p_124458_) -> {
+          p_124458_.getFirst().get().accept((p_124462_, p_124463_) -> {
+             if (map.put(p_124462_, p_124463_.m_79165_(p_124458_.getSecond()).m_79167_()) != null) {
+                throw new IllegalStateException("Duplicate loot table " + p_124462_);
+@@ -51,13 +_,8 @@
           return null;
        }, map::get);
  
@@ -30,24 +23,8 @@
 -      });
        Multimap<String, String> multimap = validationcontext.m_79352_();
        if (!multimap.isEmpty()) {
--         multimap.forEach((p_124446_, p_124447_) -> {
--            f_124431_.warn("Found validation problem in " + p_124446_ + ": " + p_124447_);
-+         multimap.forEach((p_229440_0_, p_229440_1_) -> {
-+            f_124431_.warn("Found validation problem in " + p_229440_0_ + ": " + p_229440_1_);
-          });
-          throw new IllegalStateException("Failed to validate loot tables, see logs");
-       } else {
--         map.forEach((p_124451_, p_124452_) -> {
--            Path path1 = m_124453_(path, p_124451_);
-+         map.forEach((p_229441_2_, p_229441_3_) -> {
-+            Path path1 = m_124453_(path, p_229441_2_);
- 
-             try {
--               DataProvider.m_123920_(f_124432_, p_124444_, LootTables.m_79200_(p_124452_), path1);
-+               DataProvider.m_123920_(f_124432_, p_124444_, LootTables.m_79200_(p_229441_3_), path1);
-             } catch (IOException ioexception) {
-                f_124431_.error("Couldn't save loot table {}", path1, ioexception);
-             }
+          multimap.forEach((p_124446_, p_124447_) -> {
+@@ -76,6 +_,20 @@
  
           });
        }

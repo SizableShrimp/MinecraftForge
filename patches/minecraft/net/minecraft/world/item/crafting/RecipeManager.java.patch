@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/item/crafting/RecipeManager.java
 +++ b/net/minecraft/world/item/crafting/RecipeManager.java
-@@ -51,10 +_,19 @@
+@@ -51,9 +_,18 @@
  
        for(Entry<ResourceLocation, JsonElement> entry : p_44037_.entrySet()) {
           ResourceLocation resourcelocation = entry.getKey();
@@ -12,97 +12,19 @@
 +               continue;
 +            }
              Recipe<?> recipe = m_44045_(resourcelocation, GsonHelper.m_13918_(entry.getValue(), "top element"));
--            map.computeIfAbsent(recipe.m_6671_(), (p_44075_) -> {
 +            if (recipe == null) {
 +               f_44006_.info("Skipping loading recipe {} as it's serializer returned null", resourcelocation);
 +               continue;
 +            }
-+            map.computeIfAbsent(recipe.m_6671_(), (p_223391_0_) -> {
+             map.computeIfAbsent(recipe.m_6671_(), (p_44075_) -> {
                 return ImmutableMap.builder();
              }).put(resourcelocation, recipe);
-          } catch (IllegalArgumentException | JsonParseException jsonparseexception) {
-@@ -62,29 +_,29 @@
-          }
-       }
- 
--      this.f_44007_ = map.entrySet().stream().collect(ImmutableMap.toImmutableMap(Entry::getKey, (p_44033_) -> {
--         return p_44033_.getValue().build();
-+      this.f_44007_ = map.entrySet().stream().collect(ImmutableMap.toImmutableMap(Entry::getKey, (p_223400_0_) -> {
-+         return p_223400_0_.getValue().build();
-       }));
-       f_44006_.info("Loaded {} recipes", (int)map.size());
-    }
- 
-    public <C extends Container, T extends Recipe<C>> Optional<T> m_44015_(RecipeType<T> p_44016_, C p_44017_, Level p_44018_) {
--      return this.m_44054_(p_44016_).values().stream().flatMap((p_44064_) -> {
--         return Util.m_137519_(p_44016_.m_44115_(p_44064_, p_44018_, p_44017_));
-+      return this.m_44054_(p_44016_).values().stream().flatMap((p_215372_3_) -> {
-+         return Util.m_137519_(p_44016_.m_44115_(p_215372_3_, p_44018_, p_44017_));
-       }).findFirst();
-    }
+@@ -76,7 +_,7 @@
  
     public <C extends Container, T extends Recipe<C>> List<T> m_44013_(RecipeType<T> p_44014_) {
--      return this.m_44054_(p_44014_).values().stream().map((p_44053_) -> {
+       return this.m_44054_(p_44014_).values().stream().map((p_44053_) -> {
 -         return (T)p_44053_;
-+      return this.m_44054_(p_44014_).values().stream().map((p_241453_0_) -> {
-+         return (T) p_241453_0_;
++         return (T) p_44053_;
        }).collect(Collectors.toList());
     }
  
-    public <C extends Container, T extends Recipe<C>> List<T> m_44056_(RecipeType<T> p_44057_, C p_44058_, Level p_44059_) {
--      return this.m_44054_(p_44057_).values().stream().flatMap((p_44023_) -> {
--         return Util.m_137519_(p_44057_.m_44115_(p_44023_, p_44059_, p_44058_));
--      }).sorted(Comparator.comparing((p_44012_) -> {
--         return p_44012_.m_8043_().m_41778_();
-+      return this.m_44054_(p_44057_).values().stream().flatMap((p_215380_3_) -> {
-+         return Util.m_137519_(p_44057_.m_44115_(p_215380_3_, p_44059_, p_44058_));
-+      }).sorted(Comparator.comparing((p_215379_0_) -> {
-+         return p_215379_0_.m_8043_().m_41778_();
-       })).collect(Collectors.toList());
-    }
- 
-@@ -108,20 +_,20 @@
-    }
- 
-    public Optional<? extends Recipe<?>> m_44043_(ResourceLocation p_44044_) {
--      return this.f_44007_.values().stream().map((p_44050_) -> {
--         return p_44050_.get(p_44044_);
-+      return this.f_44007_.values().stream().map((p_215368_1_) -> {
-+         return p_215368_1_.get(p_44044_);
-       }).filter(Objects::nonNull).findFirst();
-    }
- 
-    public Collection<Recipe<?>> m_44051_() {
--      return this.f_44007_.values().stream().flatMap((p_44066_) -> {
--         return p_44066_.values().stream();
-+      return this.f_44007_.values().stream().flatMap((p_215376_0_) -> {
-+         return p_215376_0_.values().stream();
-       }).collect(Collectors.toSet());
-    }
- 
-    public Stream<ResourceLocation> m_44073_() {
--      return this.f_44007_.values().stream().flatMap((p_44035_) -> {
--         return p_44035_.keySet().stream();
-+      return this.f_44007_.values().stream().flatMap((p_215375_0_) -> {
-+         return p_215375_0_.keySet().stream();
-       });
-    }
- 
-@@ -136,13 +_,13 @@
-    public void m_44024_(Iterable<Recipe<?>> p_44025_) {
-       this.f_44008_ = false;
-       Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> map = Maps.newHashMap();
--      p_44025_.forEach((p_44042_) -> {
--         Map<ResourceLocation, Recipe<?>> map1 = map.computeIfAbsent(p_44042_.m_6671_(), (p_44068_) -> {
-+      p_44025_.forEach((p_223392_1_) -> {
-+         Map<ResourceLocation, Recipe<?>> map1 = map.computeIfAbsent(p_223392_1_.m_6671_(), (p_223390_0_) -> {
-             return Maps.newHashMap();
-          });
--         Recipe<?> recipe = map1.put(p_44042_.m_6423_(), p_44042_);
-+         Recipe<?> recipe = map1.put(p_223392_1_.m_6423_(), p_223392_1_);
-          if (recipe != null) {
--            throw new IllegalStateException("Duplicate recipe ignored with ID " + p_44042_.m_6423_());
-+            throw new IllegalStateException("Duplicate recipe ignored with ID " + p_223392_1_.m_6423_());
-          }
-       });
-       this.f_44007_ = ImmutableMap.copyOf(map);

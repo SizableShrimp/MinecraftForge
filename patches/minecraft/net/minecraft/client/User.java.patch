@@ -23,7 +23,7 @@
        this.f_92535_ = p_92540_;
        this.f_92536_ = p_92541_;
        this.f_92537_ = p_92542_;
-@@ -45,19 +_,31 @@
+@@ -45,10 +_,22 @@
     public GameProfile m_92548_() {
        try {
           UUID uuid = UUIDTypeAdapter.fromString(this.m_92545_());
@@ -34,8 +34,8 @@
        } catch (IllegalArgumentException illegalargumentexception) {
           return new GameProfile((UUID)null, this.m_92546_());
        }
-    }
- 
++   }
++
 +   //For internal use only. Modders should never need to use this.
 +   public void setProperties(com.mojang.authlib.properties.PropertyMap properties) {
 +       if (this.properties == null)
@@ -44,17 +44,6 @@
 +
 +   public boolean hasCachedProperties() {
 +       return properties != null;
-+   }
-+
+    }
+ 
     @OnlyIn(Dist.CLIENT)
-    public static enum Type {
-       LEGACY("legacy"),
-       MOJANG("mojang");
- 
--      private static final Map<String, User.Type> f_92551_ = Arrays.stream(values()).collect(Collectors.toMap((p_92560_) -> {
--         return p_92560_.f_92552_;
-+      private static final Map<String, User.Type> f_92551_ = Arrays.stream(values()).collect(Collectors.toMap((p_199876_0_) -> {
-+         return p_199876_0_.f_92552_;
-       }, Function.identity()));
-       private final String f_92552_;
- 

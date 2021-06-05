@@ -26,17 +26,6 @@
                    abstractarrow.m_37251_(player, player.f_19858_, player.f_19857_, 0.0F, f * 3.0F, 1.0F);
                    if (f == 1.0F) {
                       abstractarrow.m_36762_(true);
-@@ -54,8 +_,8 @@
-                      abstractarrow.m_20254_(100);
-                   }
- 
--                  p_40667_.m_41622_(1, player, (p_40665_) -> {
--                     p_40665_.m_21190_(player.m_7655_());
-+                  p_40667_.m_41622_(1, player, (p_220009_1_) -> {
-+                     p_220009_1_.m_21190_(player.m_7655_());
-                   });
-                   if (flag1 || player.f_36077_.f_35937_ && (itemstack.m_41720_() == Items.f_42737_ || itemstack.m_41720_() == Items.f_42738_)) {
-                      abstractarrow.f_36705_ = AbstractArrow.Pickup.CREATIVE_ONLY;
 @@ -99,6 +_,10 @@
     public InteractionResultHolder<ItemStack> m_7203_(Level p_40672_, Player p_40673_, InteractionHand p_40674_) {
        ItemStack itemstack = p_40673_.m_21120_(p_40674_);

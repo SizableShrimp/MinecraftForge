@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/item/HoeItem.java
 +++ b/net/minecraft/world/item/HoeItem.java
-@@ -22,22 +_,24 @@
+@@ -22,14 +_,16 @@
     protected static final Map<Block, BlockState> f_41332_ = Maps.newHashMap(ImmutableMap.of(Blocks.f_50440_, Blocks.f_50093_.m_49966_(), Blocks.f_50445_, Blocks.f_50093_.m_49966_(), Blocks.f_50493_, Blocks.f_50093_.m_49966_(), Blocks.f_50546_, Blocks.f_50493_.m_49966_()));
  
     public HoeItem(Tier p_41336_, int p_41337_, float p_41338_, Item.Properties p_41339_) {
@@ -20,16 +20,6 @@
           if (blockstate != null) {
              Player player = p_41341_.m_43723_();
              level.m_5594_(player, blockpos, SoundEvents.f_11955_, SoundSource.BLOCKS, 1.0F, 1.0F);
-             if (!level.f_46443_) {
-                level.m_7731_(blockpos, blockstate, 11);
-                if (player != null) {
--                  p_41341_.m_43722_().m_41622_(1, player, (p_41344_) -> {
--                     p_41344_.m_21190_(p_41341_.m_43724_());
-+                  p_41341_.m_43722_().m_41622_(1, player, (p_220043_1_) -> {
-+                     p_220043_1_.m_21190_(p_41341_.m_43724_());
-                   });
-                }
-             }
 @@ -47,5 +_,10 @@
        }
  

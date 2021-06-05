@@ -8,7 +8,7 @@
  
     public TitleScreen() {
        this(false);
-@@ -99,22 +_,27 @@
+@@ -99,11 +_,16 @@
        this.f_96728_ = this.f_96543_ - this.f_96727_ - 2;
        int i = 24;
        int j = this.f_96544_ / 4 + 48;
@@ -23,94 +23,18 @@
        }
 +      modUpdateNotification = net.minecraftforge.client.gui.NotificationModUpdateScreen.init(this, modButton);
  
--      this.m_7082_(new ImageButton(this.f_96543_ / 2 - 124, j + 72 + 12, 20, 20, 0, 106, 20, Button.f_93617_, 256, 256, (p_96791_) -> {
-+      this.m_7082_(new ImageButton(this.f_96543_ / 2 - 124, j + 72 + 12, 20, 20, 0, 106, 20, Button.f_93617_, 256, 256, (p_213090_1_) -> {
+       this.m_7082_(new ImageButton(this.f_96543_ / 2 - 124, j + 72 + 12, 20, 20, 0, 106, 20, Button.f_93617_, 256, 256, (p_96791_) -> {
           this.f_96541_.m_91152_(new LanguageSelectScreen(this, this.f_96541_.f_91066_, this.f_96541_.m_91102_()));
-       }, new TranslatableComponent("narrator.button.language")));
--      this.m_7082_(new Button(this.f_96543_ / 2 - 100, j + 72 + 12, 98, 20, new TranslatableComponent("menu.options"), (p_96788_) -> {
-+      this.m_7082_(new Button(this.f_96543_ / 2 - 100, j + 72 + 12, 98, 20, new TranslatableComponent("menu.options"), (p_213096_1_) -> {
-          this.f_96541_.m_91152_(new OptionsScreen(this, this.f_96541_.f_91066_));
-       }));
--      this.m_7082_(new Button(this.f_96543_ / 2 + 2, j + 72 + 12, 98, 20, new TranslatableComponent("menu.quit"), (p_96786_) -> {
-+      this.m_7082_(new Button(this.f_96543_ / 2 + 2, j + 72 + 12, 98, 20, new TranslatableComponent("menu.quit"), (p_213094_1_) -> {
-          this.f_96541_.m_91395_();
-       }));
--      this.m_7082_(new ImageButton(this.f_96543_ / 2 + 104, j + 72 + 12, 20, 20, 0, 0, 20, f_96719_, 32, 64, (p_96784_) -> {
-+      this.m_7082_(new ImageButton(this.f_96543_ / 2 + 104, j + 72 + 12, 20, 20, 0, 0, 20, f_96719_, 32, 64, (p_213088_1_) -> {
-          this.f_96541_.m_91152_(new AccessibilityOptionsScreen(this, this.f_96541_.f_91066_));
-       }, new TranslatableComponent("narrator.button.accessibility")));
-       this.f_96541_.m_91372_(false);
-@@ -131,28 +_,28 @@
-    }
- 
-    private void m_96763_(int p_96764_, int p_96765_) {
--      this.m_7082_(new Button(this.f_96543_ / 2 - 100, p_96764_, 200, 20, new TranslatableComponent("menu.singleplayer"), (p_96781_) -> {
-+      this.m_7082_(new Button(this.f_96543_ / 2 - 100, p_96764_, 200, 20, new TranslatableComponent("menu.singleplayer"), (p_213089_1_) -> {
-          this.f_96541_.m_91152_(new SelectWorldScreen(this));
-       }));
-       boolean flag = this.f_96541_.m_91400_();
--      Button.OnTooltip button$ontooltip = flag ? Button.f_93716_ : (p_96750_, p_96751_, p_96752_, p_96753_) -> {
--         if (!p_96750_.f_93623_) {
--            this.m_96617_(p_96751_, this.f_96541_.f_91062_.m_92923_(new TranslatableComponent("title.multiplayer.disabled"), Math.max(this.f_96543_ / 2 - 43, 170)), p_96752_, p_96753_);
-+      Button.OnTooltip button$ontooltip = flag ? Button.f_93716_ : (p_238659_1_, p_238659_2_, p_238659_3_, p_238659_4_) -> {
-+         if (!p_238659_1_.f_93623_) {
-+            this.m_96617_(p_238659_2_, this.f_96541_.f_91062_.m_92923_(new TranslatableComponent("title.multiplayer.disabled"), Math.max(this.f_96543_ / 2 - 43, 170)), p_238659_3_, p_238659_4_);
-          }
- 
-       };
--      (this.m_7082_(new Button(this.f_96543_ / 2 - 100, p_96764_ + p_96765_ * 1, 200, 20, new TranslatableComponent("menu.multiplayer"), (p_96776_) -> {
-+      (this.m_7082_(new Button(this.f_96543_ / 2 - 100, p_96764_ + p_96765_ * 1, 200, 20, new TranslatableComponent("menu.multiplayer"), (p_213095_1_) -> {
+@@ -145,7 +_,7 @@
           Screen screen = (Screen)(this.f_96541_.f_91066_.f_92083_ ? new JoinMultiplayerScreen(this) : new SafetyScreen(this));
           this.f_96541_.m_91152_(screen);
        }, button$ontooltip))).f_93623_ = flag;
 -      (this.m_7082_(new Button(this.f_96543_ / 2 - 100, p_96764_ + p_96765_ * 2, 200, 20, new TranslatableComponent("menu.online"), (p_96771_) -> {
-+      (this.m_7082_(new Button(this.f_96543_ / 2 + 2, p_96764_ + p_96765_ * 2, 98, 20, new TranslatableComponent("menu.online"), (p_238661_1_) -> {
++      (this.m_7082_(new Button(this.f_96543_ / 2 + 2, p_96764_ + p_96765_ * 2, 98, 20, new TranslatableComponent("menu.online"), (p_96771_) -> {
           this.m_96793_();
        }, button$ontooltip))).f_93623_ = flag;
     }
- 
-    private void m_96772_(int p_96773_, int p_96774_) {
-       boolean flag = this.m_96792_();
--      this.m_7082_(new Button(this.f_96543_ / 2 - 100, p_96773_, 200, 20, new TranslatableComponent("menu.playdemo"), (p_96759_) -> {
-+      this.m_7082_(new Button(this.f_96543_ / 2 - 100, p_96773_, 200, 20, new TranslatableComponent("menu.playdemo"), (p_213091_2_) -> {
-          if (flag) {
-             this.f_96541_.m_91200_("Demo_World");
-          } else {
-@@ -161,7 +_,7 @@
-          }
- 
-       }));
--      this.f_96722_ = this.m_7082_(new Button(this.f_96543_ / 2 - 100, p_96773_ + p_96774_ * 1, 200, 20, new TranslatableComponent("menu.resetdemo"), (p_96748_) -> {
-+      this.f_96722_ = this.m_7082_(new Button(this.f_96543_ / 2 - 100, p_96773_ + p_96774_ * 1, 200, 20, new TranslatableComponent("menu.resetdemo"), (p_238658_1_) -> {
-          LevelStorageSource levelstoragesource = this.f_96541_.m_91392_();
- 
-          try (LevelStorageSource.LevelStorageAccess levelstoragesource$levelstorageaccess = levelstoragesource.m_78260_("Demo_World")) {
-@@ -215,22 +_,23 @@
-          this.f_96541_.m_91097_().m_118493_(f_96723_);
-          RenderSystem.m_69439_(1.0F, 1.0F, 1.0F, f1);
-          if (this.f_96720_) {
--            this.m_93101_(j, 30, (p_96768_, p_96769_) -> {
--               this.m_93228_(p_96739_, p_96768_ + 0, p_96769_, 0, 0, 99, 44);
--               this.m_93228_(p_96739_, p_96768_ + 99, p_96769_, 129, 0, 27, 44);
--               this.m_93228_(p_96739_, p_96768_ + 99 + 26, p_96769_, 126, 0, 3, 44);
--               this.m_93228_(p_96739_, p_96768_ + 99 + 26 + 3, p_96769_, 99, 0, 26, 44);
--               this.m_93228_(p_96739_, p_96768_ + 155, p_96769_, 0, 45, 155, 44);
-+            this.m_93101_(j, 30, (p_238660_2_, p_238660_3_) -> {
-+               this.m_93228_(p_96739_, p_238660_2_ + 0, p_238660_3_, 0, 0, 99, 44);
-+               this.m_93228_(p_96739_, p_238660_2_ + 99, p_238660_3_, 129, 0, 27, 44);
-+               this.m_93228_(p_96739_, p_238660_2_ + 99 + 26, p_238660_3_, 126, 0, 3, 44);
-+               this.m_93228_(p_96739_, p_238660_2_ + 99 + 26 + 3, p_238660_3_, 99, 0, 26, 44);
-+               this.m_93228_(p_96739_, p_238660_2_ + 155, p_238660_3_, 0, 45, 155, 44);
-             });
-          } else {
--            this.m_93101_(j, 30, (p_96745_, p_96746_) -> {
--               this.m_93228_(p_96739_, p_96745_ + 0, p_96746_, 0, 0, 155, 44);
--               this.m_93228_(p_96739_, p_96745_ + 155, p_96746_, 0, 45, 155, 44);
-+            this.m_93101_(j, 30, (p_238657_2_, p_238657_3_) -> {
-+               this.m_93228_(p_96739_, p_238657_2_ + 0, p_238657_3_, 0, 0, 155, 44);
-+               this.m_93228_(p_96739_, p_238657_2_ + 155, p_238657_3_, 0, 45, 155, 44);
-             });
-          }
+@@ -231,6 +_,7 @@
  
           this.f_96541_.m_91097_().m_118493_(f_96724_);
           m_93133_(p_96739_, j + 88, 67, 0.0F, 0.0F, 98, 14, 128, 16);

@@ -1,14 +1,5 @@
 --- a/net/minecraft/client/multiplayer/ClientHandshakePacketListenerImpl.java
 +++ b/net/minecraft/client/multiplayer/ClientHandshakePacketListenerImpl.java
-@@ -85,7 +_,7 @@
-          }
- 
-          this.f_104521_.accept(new TranslatableComponent("connect.encrypting"));
--         this.f_104522_.m_129514_(serverboundkeypacket, (p_104541_) -> {
-+         this.f_104522_.m_129514_(serverboundkeypacket, (p_244776_3_) -> {
-             this.f_104522_.m_129495_(cipher, cipher1);
-          });
-       });
 @@ -115,6 +_,7 @@
        this.f_104521_.accept(new TranslatableComponent("connect.joining"));
        this.f_104523_ = p_104547_.m_134774_();

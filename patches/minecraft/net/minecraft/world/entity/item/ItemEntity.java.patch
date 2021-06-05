@@ -52,17 +52,6 @@
              this.m_6091_();
           }
  
-@@ -163,8 +_,8 @@
- 
-    private void m_32069_() {
-       if (this.m_32070_()) {
--         for(ItemEntity itementity : this.f_19853_.m_6443_(ItemEntity.class, this.m_20191_().m_82377_(0.5D, 0.0D, 0.5D), (p_32044_) -> {
--            return p_32044_ != this && p_32044_.m_32070_();
-+         for(ItemEntity itementity : this.f_19853_.m_6443_(ItemEntity.class, this.m_20191_().m_82377_(0.5D, 0.0D, 0.5D), (p_213859_1_) -> {
-+            return p_213859_1_ != this && p_213859_1_.m_32070_();
-          })) {
-             if (itementity.m_32070_()) {
-                this.m_32015_(itementity);
 @@ -202,6 +_,8 @@
           return false;
        } else if (p_32028_.m_41782_() ^ p_32027_.m_41782_()) {

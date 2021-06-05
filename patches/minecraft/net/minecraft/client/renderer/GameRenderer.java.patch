@@ -9,17 +9,6 @@
        }
  
     }
-@@ -252,8 +_,8 @@
-             Vec3 vec32 = vec3.m_82520_(vec31.f_82479_ * d0, vec31.f_82480_ * d0, vec31.f_82481_ * d0);
-             float f = 1.0F;
-             AABB aabb = entity.m_20191_().m_82369_(vec31.m_82490_(d0)).m_82377_(1.0D, 1.0D, 1.0D);
--            EntityHitResult entityhitresult = ProjectileUtil.m_37287_(entity, vec3, vec32, aabb, (p_109137_) -> {
--               return !p_109137_.m_5833_() && p_109137_.m_6087_();
-+            EntityHitResult entityhitresult = ProjectileUtil.m_37287_(entity, vec3, vec32, aabb, (p_215312_0_) -> {
-+               return !p_215312_0_.m_5833_() && p_215312_0_.m_6087_();
-             }, d1);
-             if (entityhitresult != null) {
-                Entity entity1 = entityhitresult.m_82443_();
 @@ -313,7 +_,7 @@
              d0 = d0 * 60.0D / 70.0D;
           }

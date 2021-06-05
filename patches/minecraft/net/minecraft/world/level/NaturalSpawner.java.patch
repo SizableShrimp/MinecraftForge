@@ -1,21 +1,6 @@
 --- a/net/minecraft/world/level/NaturalSpawner.java
 +++ b/net/minecraft/world/level/NaturalSpawner.java
-@@ -48,10 +_,10 @@
- public final class NaturalSpawner {
-    private static final Logger f_46977_ = LogManager.getLogger();
-    private static final int f_46978_ = (int)Math.pow(17.0D, 2.0D);
--   private static final MobCategory[] f_46979_ = Stream.of(MobCategory.values()).filter((p_47037_) -> {
--      return p_47037_ != MobCategory.MISC;
--   }).toArray((p_46983_) -> {
--      return new MobCategory[p_46983_];
-+   private static final MobCategory[] f_46979_ = Stream.of(MobCategory.values()).filter((p_234965_0_) -> {
-+      return p_234965_0_ != MobCategory.MISC;
-+   }).toArray((p_234963_0_) -> {
-+      return new MobCategory[p_234963_0_];
-    });
- 
-    public static NaturalSpawner.SpawnState m_46984_(int p_46985_, Iterable<Entity> p_46986_, NaturalSpawner.ChunkGetter p_46987_) {
-@@ -76,12 +_,12 @@
+@@ -76,7 +_,7 @@
           } while(mob.m_21532_() || mob.m_8023_());
  
           final Entity entity_f = entity;
@@ -24,28 +9,6 @@
           if (mobcategory != MobCategory.MISC) {
              BlockPos blockpos = entity.m_20183_();
              long i = ChunkPos.m_45589_(blockpos.m_123341_() >> 4, blockpos.m_123343_() >> 4);
--            p_46987_.m_47103_(i, (p_47091_) -> {
--               MobSpawnSettings.MobSpawnCost mobspawnsettings$mobspawncost = m_47095_(blockpos, p_47091_).m_47518_().m_48345_(entity_f.m_6095_());
-+            p_46987_.m_47103_(i, (p_234971_5_) -> {
-+               MobSpawnSettings.MobSpawnCost mobspawnsettings$mobspawncost = m_47095_(blockpos, p_234971_5_).m_47518_().m_48345_(entity_f.m_6095_());
-                if (mobspawnsettings$mobspawncost != null) {
-                   potentialcalculator.m_47192_(entity_f.m_20183_(), mobspawnsettings$mobspawncost.m_48400_());
-                }
-@@ -101,10 +_,10 @@
- 
-       for(MobCategory mobcategory : f_46979_) {
-          if ((p_47033_ || !mobcategory.m_21609_()) && (p_47034_ || mobcategory.m_21609_()) && (p_47035_ || !mobcategory.m_21610_()) && p_47032_.m_47134_(mobcategory)) {
--            m_47045_(mobcategory, p_47030_, p_47031_, (p_47072_, p_47073_, p_47074_) -> {
--               return p_47032_.m_47127_(p_47072_, p_47073_, p_47074_);
--            }, (p_47077_, p_47078_) -> {
--               p_47032_.m_47131_(p_47077_, p_47078_);
-+            m_47045_(mobcategory, p_47030_, p_47031_, (p_234969_1_, p_234969_2_, p_234969_3_) -> {
-+               return p_47032_.m_47127_(p_234969_1_, p_234969_2_, p_234969_3_);
-+            }, (p_234970_1_, p_234970_2_) -> {
-+               p_47032_.m_47131_(p_234970_1_, p_234970_2_);
-             });
-          }
-       }
 @@ -163,13 +_,15 @@
                          }
  
@@ -72,42 +35,29 @@
           return list.isEmpty() ? null : WeighedRandom.m_14475_(p_47022_, list);
        }
     }
-@@ -286,26 +_,31 @@
+@@ -286,6 +_,13 @@
        if (p_47052_ == SpawnPlacements.Type.NO_RESTRICTIONS) {
           return true;
        } else if (p_47055_ != null && p_47053_.m_6857_().m_61937_(p_47054_)) {
--         BlockState blockstate = p_47053_.m_8055_(p_47054_);
--         FluidState fluidstate = p_47053_.m_6425_(p_47054_);
--         BlockPos blockpos = p_47054_.m_7494_();
--         BlockPos blockpos1 = p_47054_.m_7495_();
--         switch(p_47052_) {
 +         return p_47052_.canSpawnAt(p_47053_, p_47054_, p_47055_);
 +      }
 +      return false;
 +   }
 +
-+   public static boolean canSpawnAtBody(SpawnPlacements.Type p_209382_0_, LevelReader p_209382_1_, BlockPos p_209382_2_, @Nullable EntityType<?> p_209382_3_) {
++   public static boolean canSpawnAtBody(SpawnPlacements.Type p_47052_, LevelReader p_47053_, BlockPos p_47054_, @Nullable EntityType<?> p_47055_) {
 +      {
-+         BlockState blockstate = p_209382_1_.m_8055_(p_209382_2_);
-+         FluidState fluidstate = p_209382_1_.m_6425_(p_209382_2_);
-+         BlockPos blockpos = p_209382_2_.m_7494_();
-+         BlockPos blockpos1 = p_209382_2_.m_7495_();
-+         switch(p_209382_0_) {
-          case IN_WATER:
--            return fluidstate.m_76153_(FluidTags.f_13131_) && p_47053_.m_6425_(blockpos1).m_76153_(FluidTags.f_13131_) && !p_47053_.m_8055_(blockpos).m_60796_(p_47053_, blockpos);
-+            return fluidstate.m_76153_(FluidTags.f_13131_) && p_209382_1_.m_6425_(blockpos1).m_76153_(FluidTags.f_13131_) && !p_209382_1_.m_8055_(blockpos).m_60796_(p_209382_1_, blockpos);
-          case IN_LAVA:
-             return fluidstate.m_76153_(FluidTags.f_13132_);
+          BlockState blockstate = p_47053_.m_8055_(p_47054_);
+          FluidState fluidstate = p_47053_.m_6425_(p_47054_);
+          BlockPos blockpos = p_47054_.m_7494_();
+@@ -298,14 +_,12 @@
           case ON_GROUND:
           default:
--            BlockState blockstate1 = p_47053_.m_8055_(blockpos1);
+             BlockState blockstate1 = p_47053_.m_8055_(blockpos1);
 -            if (!blockstate1.m_60643_(p_47053_, blockpos1, p_47055_)) {
-+            BlockState blockstate1 = p_209382_1_.m_8055_(blockpos1);
-+            if (!blockstate1.canCreatureSpawn(p_209382_1_, blockpos1, p_209382_0_, p_209382_3_)) {
++            if (!blockstate1.canCreatureSpawn(p_47053_, blockpos1, p_47052_, p_47055_)) {
                 return false;
              } else {
--               return m_47056_(p_47053_, p_47054_, blockstate, fluidstate, p_47055_) && m_47056_(p_47053_, blockpos, p_47053_.m_8055_(blockpos), p_47053_.m_6425_(blockpos), p_47055_);
-+               return m_47056_(p_209382_1_, p_209382_2_, blockstate, fluidstate, p_209382_3_) && m_47056_(p_209382_1_, blockpos, p_209382_1_.m_8055_(blockpos), p_209382_1_.m_6425_(blockpos), p_209382_3_);
+                return m_47056_(p_47053_, p_47054_, blockstate, fluidstate, p_47055_) && m_47056_(p_47053_, blockpos, p_47053_.m_8055_(blockpos), p_47053_.m_6425_(blockpos), p_47055_);
              }
           }
 -      } else {

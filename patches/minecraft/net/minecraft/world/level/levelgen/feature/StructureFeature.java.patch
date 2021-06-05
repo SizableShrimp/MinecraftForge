@@ -9,21 +9,6 @@
     public static final BiMap<String, StructureFeature<?>> f_67012_ = HashBiMap.create();
     private static final Map<StructureFeature<?>, GenerationStep.Decoration> f_67032_ = Maps.newHashMap();
     private static final Logger f_67033_ = LogManager.getLogger();
-@@ -80,10 +_,10 @@
-    }
- 
-    public StructureFeature(Codec<C> p_67039_) {
--      this.f_67036_ = p_67039_.fieldOf("config").xmap((p_67094_) -> {
--         return new ConfiguredStructureFeature<>(this, p_67094_);
--      }, (p_67064_) -> {
--         return p_67064_.f_65404_;
-+      this.f_67036_ = p_67039_.fieldOf("config").xmap((p_236395_1_) -> {
-+         return new ConfiguredStructureFeature<>(this, p_236395_1_);
-+      }, (p_236390_0_) -> {
-+         return p_236390_0_.f_65404_;
-       }).codec();
-    }
- 
 @@ -245,11 +_,16 @@
     }
  

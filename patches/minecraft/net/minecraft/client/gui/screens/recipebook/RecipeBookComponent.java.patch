@@ -1,58 +1,12 @@
 --- a/net/minecraft/client/gui/screens/recipebook/RecipeBookComponent.java
 +++ b/net/minecraft/client/gui/screens/recipebook/RecipeBookComponent.java
-@@ -95,13 +_,13 @@
+@@ -95,7 +_,7 @@
        this.m_5674_();
        this.f_100279_.clear();
  
 -      for(RecipeBookCategories recipebookcategories : RecipeBookCategories.m_92269_(this.f_100271_.m_5867_())) {
 +      for(RecipeBookCategories recipebookcategories : this.f_100271_.getRecipeBookCategories()) {
           this.f_100279_.add(new RecipeBookTabButton(recipebookcategories));
-       }
- 
-       if (this.f_100280_ != null) {
--         this.f_100280_ = this.f_100279_.stream().filter((p_100329_) -> {
--            return p_100329_.m_100455_().equals(this.f_100280_.m_100455_());
-+         this.f_100280_ = this.f_100279_.stream().filter((p_209505_1_) -> {
-+            return p_209505_1_.m_100455_().equals(this.f_100280_.m_100455_());
-          }).findFirst().orElse((RecipeBookTabButton)null);
-       }
- 
-@@ -168,27 +_,27 @@
- 
-    private void m_100382_(boolean p_100383_) {
-       List<RecipeCollection> list = this.f_100283_.m_90623_(this.f_100280_.m_100455_());
--      list.forEach((p_100381_) -> {
--         p_100381_.m_100501_(this.f_100285_, this.f_100271_.m_6635_(), this.f_100271_.m_6656_(), this.f_100283_);
-+      list.forEach((p_193944_1_) -> {
-+         p_193944_1_.m_100501_(this.f_100285_, this.f_100271_.m_6635_(), this.f_100271_.m_6656_(), this.f_100283_);
-       });
-       List<RecipeCollection> list1 = Lists.newArrayList(list);
--      list1.removeIf((p_100368_) -> {
--         return !p_100368_.m_100498_();
-+      list1.removeIf((p_193952_0_) -> {
-+         return !p_193952_0_.m_100498_();
-       });
--      list1.removeIf((p_100360_) -> {
--         return !p_100360_.m_100515_();
-+      list1.removeIf((p_193953_0_) -> {
-+         return !p_193953_0_.m_100515_();
-       });
-       String s = this.f_100281_.m_94155_();
-       if (!s.isEmpty()) {
-          ObjectSet<RecipeCollection> objectset = new ObjectLinkedOpenHashSet<>(this.f_100272_.m_91171_(SearchRegistry.f_119943_).m_6293_(s.toLowerCase(Locale.ROOT)));
--         list1.removeIf((p_100334_) -> {
--            return !objectset.contains(p_100334_);
-+         list1.removeIf((p_193947_1_) -> {
-+            return !objectset.contains(p_193947_1_);
-          });
-       }
- 
-       if (this.f_100283_.m_12689_(this.f_100271_)) {
--         list1.removeIf((p_100331_) -> {
--            return !p_100331_.m_100512_();
-+         list1.removeIf((p_193958_0_) -> {
-+            return !p_193958_0_.m_100512_();
-          });
        }
  
 @@ -434,7 +_,7 @@

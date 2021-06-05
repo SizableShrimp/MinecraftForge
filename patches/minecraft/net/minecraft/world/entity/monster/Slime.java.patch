@@ -1,16 +1,5 @@
 --- a/net/minecraft/world/entity/monster/Slime.java
 +++ b/net/minecraft/world/entity/monster/Slime.java
-@@ -62,8 +_,8 @@
-       this.f_21345_.m_25352_(2, new Slime.SlimeAttackGoal(this));
-       this.f_21345_.m_25352_(3, new Slime.SlimeRandomDirectionGoal(this));
-       this.f_21345_.m_25352_(5, new Slime.SlimeKeepOnJumpingGoal(this));
--      this.f_21346_.m_25352_(1, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, (p_33641_) -> {
--         return Math.abs(p_33641_.m_20186_() - this.m_20186_()) <= 4.0D;
-+      this.f_21346_.m_25352_(1, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, (p_213811_1_) -> {
-+         return Math.abs(p_213811_1_.m_20186_() - this.m_20186_()) <= 4.0D;
-       }));
-       this.f_21346_.m_25352_(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
-    }
 @@ -127,6 +_,7 @@
        if (this.f_19861_ && !this.f_33583_) {
           int i = this.m_33632_();

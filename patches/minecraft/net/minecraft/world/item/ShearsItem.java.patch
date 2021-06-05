@@ -1,21 +1,9 @@
 --- a/net/minecraft/world/item/ShearsItem.java
 +++ b/net/minecraft/world/item/ShearsItem.java
-@@ -15,8 +_,8 @@
- 
-    public boolean m_6813_(ItemStack p_43078_, Level p_43079_, BlockState p_43080_, BlockPos p_43081_, LivingEntity p_43082_) {
-       if (!p_43079_.f_46443_ && !p_43080_.m_60734_().m_49809_(BlockTags.f_13076_)) {
--         p_43078_.m_41622_(1, p_43082_, (p_43076_) -> {
--            p_43076_.m_21166_(EquipmentSlot.MAINHAND);
-+         p_43078_.m_41622_(1, p_43082_, (p_220036_0_) -> {
-+            p_220036_0_.m_21166_(EquipmentSlot.MAINHAND);
-          });
-       }
- 
-@@ -33,5 +_,26 @@
-       } else {
+@@ -34,4 +_,25 @@
           return 15.0F;
        }
-+   }
+    }
 +
 +   @Override
 +   public net.minecraft.world.InteractionResult m_6880_(ItemStack stack, net.minecraft.world.entity.player.Player playerIn, LivingEntity entity, net.minecraft.world.InteractionHand hand) {
@@ -36,5 +24,5 @@
 +         return net.minecraft.world.InteractionResult.SUCCESS;
 +      }
 +      return net.minecraft.world.InteractionResult.PASS;
-    }
++   }
  }

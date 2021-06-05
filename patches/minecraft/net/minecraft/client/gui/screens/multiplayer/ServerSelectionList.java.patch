@@ -1,16 +1,5 @@
 --- a/net/minecraft/client/gui/screens/multiplayer/ServerSelectionList.java
 +++ b/net/minecraft/client/gui/screens/multiplayer/ServerSelectionList.java
-@@ -82,8 +_,8 @@
-    }
- 
-    protected void m_6778_(AbstractSelectionList.SelectionDirection p_99788_) {
--      this.m_93464_(p_99788_, (p_99803_) -> {
--         return !(p_99803_ instanceof ServerSelectionList.LANHeader);
-+      this.m_93464_(p_99788_, (p_241612_0_) -> {
-+         return !(p_241612_0_ instanceof ServerSelectionList.LANHeader);
-       });
-    }
- 
 @@ -124,31 +_,6 @@
     }
  

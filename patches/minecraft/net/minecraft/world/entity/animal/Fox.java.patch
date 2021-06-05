@@ -16,85 +16,6 @@
  import net.minecraft.world.entity.ai.goal.StrollThroughVillageGoal;
  import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
  import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-@@ -90,22 +_,22 @@
-    private static final EntityDataAccessor<Byte> f_28438_ = SynchedEntityData.m_135353_(Fox.class, EntityDataSerializers.f_135027_);
-    private static final EntityDataAccessor<Optional<UUID>> f_28439_ = SynchedEntityData.m_135353_(Fox.class, EntityDataSerializers.f_135041_);
-    private static final EntityDataAccessor<Optional<UUID>> f_28440_ = SynchedEntityData.m_135353_(Fox.class, EntityDataSerializers.f_135041_);
--   private static final Predicate<ItemEntity> f_28441_ = (p_28528_) -> {
--      return !p_28528_.m_32063_() && p_28528_.m_6084_();
-+   private static final Predicate<ItemEntity> f_28441_ = (p_213489_0_) -> {
-+      return !p_213489_0_.m_32063_() && p_213489_0_.m_6084_();
-    };
--   private static final Predicate<Entity> f_28442_ = (p_28521_) -> {
--      if (!(p_28521_ instanceof LivingEntity)) {
-+   private static final Predicate<Entity> f_28442_ = (p_213470_0_) -> {
-+      if (!(p_213470_0_ instanceof LivingEntity)) {
-          return false;
-       } else {
--         LivingEntity livingentity = (LivingEntity)p_28521_;
-+         LivingEntity livingentity = (LivingEntity)p_213470_0_;
-          return livingentity.m_21214_() != null && livingentity.m_21215_() < livingentity.f_19797_ + 600;
-       }
-    };
--   private static final Predicate<Entity> f_28443_ = (p_28498_) -> {
--      return p_28498_ instanceof Chicken || p_28498_ instanceof Rabbit;
-+   private static final Predicate<Entity> f_28443_ = (p_213498_0_) -> {
-+      return p_213498_0_ instanceof Chicken || p_213498_0_ instanceof Rabbit;
-    };
--   private static final Predicate<Entity> f_28444_ = (p_28463_) -> {
--      return !p_28463_.m_20163_() && EntitySelector.f_20406_.test(p_28463_);
-+   private static final Predicate<Entity> f_28444_ = (p_213463_0_) -> {
-+      return !p_213463_0_.m_20163_() && EntitySelector.f_20406_.test(p_213463_0_);
-    };
-    private Goal f_28445_;
-    private Goal f_28446_;
-@@ -134,24 +_,24 @@
-    }
- 
-    protected void m_8099_() {
--      this.f_28445_ = new NearestAttackableTargetGoal<>(this, Animal.class, 10, false, false, (p_28604_) -> {
--         return p_28604_ instanceof Chicken || p_28604_ instanceof Rabbit;
-+      this.f_28445_ = new NearestAttackableTargetGoal<>(this, Animal.class, 10, false, false, (p_213487_0_) -> {
-+         return p_213487_0_ instanceof Chicken || p_213487_0_ instanceof Rabbit;
-       });
-       this.f_28446_ = new NearestAttackableTargetGoal<>(this, Turtle.class, 10, false, false, Turtle.f_30122_);
--      this.f_28447_ = new NearestAttackableTargetGoal<>(this, AbstractFish.class, 20, false, false, (p_28600_) -> {
--         return p_28600_ instanceof AbstractSchoolingFish;
-+      this.f_28447_ = new NearestAttackableTargetGoal<>(this, AbstractFish.class, 20, false, false, (p_213456_0_) -> {
-+         return p_213456_0_ instanceof AbstractSchoolingFish;
-       });
-       this.f_21345_.m_25352_(0, new Fox.FoxFloatGoal());
-       this.f_21345_.m_25352_(1, new Fox.FaceplantGoal());
-       this.f_21345_.m_25352_(2, new Fox.FoxPanicGoal(2.2D));
-       this.f_21345_.m_25352_(3, new Fox.FoxBreedGoal(1.0D));
--      this.f_21345_.m_25352_(4, new AvoidEntityGoal<>(this, Player.class, 16.0F, 1.6D, 1.4D, (p_28596_) -> {
--         return f_28444_.test(p_28596_) && !this.m_28529_(p_28596_.m_20148_()) && !this.m_28567_();
--      }));
--      this.f_21345_.m_25352_(4, new AvoidEntityGoal<>(this, Wolf.class, 8.0F, 1.6D, 1.4D, (p_28590_) -> {
--         return !((Wolf)p_28590_).m_21824_() && !this.m_28567_();
--      }));
--      this.f_21345_.m_25352_(4, new AvoidEntityGoal<>(this, PolarBear.class, 8.0F, 1.6D, 1.4D, (p_28585_) -> {
-+      this.f_21345_.m_25352_(4, new AvoidEntityGoal<>(this, Player.class, 16.0F, 1.6D, 1.4D, (p_213497_1_) -> {
-+         return f_28444_.test(p_213497_1_) && !this.m_28529_(p_213497_1_.m_20148_()) && !this.m_28567_();
-+      }));
-+      this.f_21345_.m_25352_(4, new AvoidEntityGoal<>(this, Wolf.class, 8.0F, 1.6D, 1.4D, (p_213469_1_) -> {
-+         return !((Wolf)p_213469_1_).m_21824_() && !this.m_28567_();
-+      }));
-+      this.f_21345_.m_25352_(4, new AvoidEntityGoal<>(this, PolarBear.class, 8.0F, 1.6D, 1.4D, (p_213493_1_) -> {
-          return !this.m_28567_();
-       }));
-       this.f_21345_.m_25352_(5, new Fox.StalkPreyGoal());
-@@ -167,8 +_,8 @@
-       this.f_21345_.m_25352_(11, new Fox.FoxSearchForItemsGoal());
-       this.f_21345_.m_25352_(12, new Fox.FoxLookAtPlayerGoal(this, Player.class, 24.0F));
-       this.f_21345_.m_25352_(13, new Fox.PerchAndSearchGoal());
--      this.f_21346_.m_25352_(3, new Fox.DefendTrustedTargetGoal(LivingEntity.class, false, false, (p_28580_) -> {
--         return f_28442_.test(p_28580_) && !this.m_28529_(p_28580_.m_20148_());
-+      this.f_21346_.m_25352_(3, new Fox.DefendTrustedTargetGoal(LivingEntity.class, false, false, (p_234193_1_) -> {
-+         return f_28442_.test(p_234193_1_) && !this.m_28529_(p_234193_1_.m_20148_());
-       }));
-    }
- 
 @@ -665,79 +_,6 @@
        return new Vec3(0.0D, (double)(0.55F * this.m_20192_()), (double)(this.m_20205_() * 0.4F));
     }
@@ -749,22 +670,6 @@
        }
     }
  
-@@ -1339,11 +_,11 @@
-       RED(0, "red", Biomes.f_48206_, Biomes.f_48220_, Biomes.f_48180_, Biomes.f_48154_, Biomes.f_48189_, Biomes.f_48155_, Biomes.f_48190_),
-       SNOW(1, "snow", Biomes.f_48152_, Biomes.f_48153_, Biomes.f_48188_);
- 
--      private static final Fox.Type[] f_28798_ = Arrays.stream(values()).sorted(Comparator.comparingInt(Fox.Type::m_28820_)).toArray((p_28822_) -> {
--         return new Fox.Type[p_28822_];
-+      private static final Fox.Type[] f_28798_ = Arrays.stream(values()).sorted(Comparator.comparingInt(Fox.Type::m_28820_)).toArray((p_221084_0_) -> {
-+         return new Fox.Type[p_221084_0_];
-       });
--      private static final Map<String, Fox.Type> f_28799_ = Arrays.stream(values()).collect(Collectors.toMap(Fox.Type::m_28811_, (p_28815_) -> {
--         return p_28815_;
-+      private static final Map<String, Fox.Type> f_28799_ = Arrays.stream(values()).collect(Collectors.toMap(Fox.Type::m_28811_, (p_221081_0_) -> {
-+         return p_221081_0_;
-       }));
-       private final int f_28800_;
-       private final String f_28801_;
 @@ -1377,6 +_,20 @@
  
        public static Fox.Type m_28818_(Optional<ResourceKey<Biome>> p_28819_) {

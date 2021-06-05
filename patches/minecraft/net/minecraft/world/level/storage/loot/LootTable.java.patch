@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/storage/loot/LootTable.java
 +++ b/net/minecraft/world/level/storage/loot/LootTable.java
-@@ -34,27 +_,27 @@
+@@ -34,13 +_,13 @@
     public static final LootTable f_79105_ = new LootTable(LootContextParamSets.f_81410_, new LootPool[0], new LootItemFunction[0]);
     public static final LootContextParamSet f_79106_ = LootContextParamSets.f_81420_;
     private final LootContextParamSet f_79108_;
@@ -16,26 +16,6 @@
        this.f_79110_ = p_79116_;
        this.f_79111_ = LootItemFunctions.m_80770_(p_79116_);
     }
- 
-    public static Consumer<ItemStack> m_79142_(Consumer<ItemStack> p_79143_) {
--      return (p_79146_) -> {
--         if (p_79146_.m_41613_() < p_79146_.m_41741_()) {
--            p_79143_.accept(p_79146_);
-+      return (p_216125_1_) -> {
-+         if (p_216125_1_.m_41613_() < p_216125_1_.m_41741_()) {
-+            p_79143_.accept(p_216125_1_);
-          } else {
--            int i = p_79146_.m_41613_();
-+            int i = p_216125_1_.m_41613_();
- 
-             while(i > 0) {
--               ItemStack itemstack = p_79146_.m_41777_();
--               itemstack.m_41764_(Math.min(p_79146_.m_41741_(), i));
-+               ItemStack itemstack = p_216125_1_.m_41777_();
-+               itemstack.m_41764_(Math.min(p_216125_1_.m_41741_(), i));
-                i -= itemstack.m_41613_();
-                p_79143_.accept(itemstack);
-             }
 @@ -78,6 +_,7 @@
  
     }

@@ -1,24 +1,6 @@
 --- a/net/minecraft/data/recipes/RecipeProvider.java
 +++ b/net/minecraft/data/recipes/RecipeProvider.java
-@@ -50,18 +_,19 @@
-    public void m_6865_(HashCache p_125982_) throws IOException {
-       Path path = this.f_125970_.m_123916_();
-       Set<ResourceLocation> set = Sets.newHashSet();
--      m_125992_((p_125991_) -> {
--         if (!set.add(p_125991_.m_6445_())) {
--            throw new IllegalStateException("Duplicate recipe " + p_125991_.m_6445_());
-+      m_125992_((p_200410_3_) -> {
-+         if (!set.add(p_200410_3_.m_6445_())) {
-+            throw new IllegalStateException("Duplicate recipe " + p_200410_3_.m_6445_());
-          } else {
--            m_125983_(p_125982_, p_125991_.m_125966_(), path.resolve("data/" + p_125991_.m_6445_().m_135827_() + "/recipes/" + p_125991_.m_6445_().m_135815_() + ".json"));
--            JsonObject jsonobject = p_125991_.m_5860_();
-+            m_125983_(p_125982_, p_200410_3_.m_125966_(), path.resolve("data/" + p_200410_3_.m_6445_().m_135827_() + "/recipes/" + p_200410_3_.m_6445_().m_135815_() + ".json"));
-+            JsonObject jsonobject = p_200410_3_.m_5860_();
-             if (jsonobject != null) {
--               m_126013_(p_125982_, jsonobject, path.resolve("data/" + p_125991_.m_6445_().m_135827_() + "/advancements/" + p_125991_.m_6448_().m_135815_() + ".json"));
-+               m_126013_(p_125982_, jsonobject, path.resolve("data/" + p_200410_3_.m_6445_().m_135827_() + "/advancements/" + p_200410_3_.m_6448_().m_135815_() + ".json"));
-             }
+@@ -62,6 +_,7 @@
  
           }
        });

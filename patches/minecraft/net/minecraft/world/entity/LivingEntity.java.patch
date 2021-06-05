@@ -58,17 +58,6 @@
                 this.m_8127_();
              }
           } else if (this.m_20146_() < this.m_6062_()) {
-@@ -430,8 +_,8 @@
-             attributeinstance.m_22118_(new AttributeModifier(f_20959_, "Soul speed boost", (double)(0.03F * (1.0F + (float)i * 0.35F)), AttributeModifier.Operation.ADDITION));
-             if (this.m_21187_().nextFloat() < 0.04F) {
-                ItemStack itemstack = this.m_6844_(EquipmentSlot.FEET);
--               itemstack.m_41622_(1, this, (p_21301_) -> {
--                  p_21301_.m_21166_(EquipmentSlot.FEET);
-+               itemstack.m_41622_(1, this, (p_233654_0_) -> {
-+                  p_233654_0_.m_21166_(EquipmentSlot.FEET);
-                });
-             }
-          }
 @@ -471,7 +_,7 @@
     protected void m_6153_() {
        ++this.f_20919_;
@@ -78,27 +67,6 @@
  
           for(int i = 0; i < 20; ++i) {
              double d0 = this.f_19796_.nextGaussian() * 0.02D;
-@@ -590,14 +_,14 @@
-       }
- 
-       p_21145_.m_128379_("FallFlying", this.m_21255_());
--      this.m_21257_().ifPresent((p_21099_) -> {
--         p_21145_.m_128405_("SleepingX", p_21099_.m_123341_());
--         p_21145_.m_128405_("SleepingY", p_21099_.m_123342_());
--         p_21145_.m_128405_("SleepingZ", p_21099_.m_123343_());
-+      this.m_21257_().ifPresent((p_213338_1_) -> {
-+         p_21145_.m_128405_("SleepingX", p_213338_1_.m_123341_());
-+         p_21145_.m_128405_("SleepingY", p_213338_1_.m_123342_());
-+         p_21145_.m_128405_("SleepingZ", p_213338_1_.m_123343_());
-       });
-       DataResult<Tag> dataresult = this.f_20939_.m_21914_(NbtOps.f_128958_);
--      dataresult.resultOrPartial(f_19849_::error).ifPresent((p_21102_) -> {
--         p_21145_.m_128365_("Brain", p_21102_);
-+      dataresult.resultOrPartial(f_19849_::error).ifPresent((p_233636_1_) -> {
-+         p_21145_.m_128365_("Brain", p_233636_1_);
-       });
-    }
- 
 @@ -664,7 +_,7 @@
              if (!mobeffectinstance.m_19552_(this, () -> {
                 this.m_8013_(mobeffectinstance, true);
@@ -184,17 +152,6 @@
        if (this.m_6673_(p_21016_)) {
           return false;
        } else if (this.f_19853_.f_46443_) {
-@@ -927,8 +_,8 @@
-          this.f_20891_ = 0;
-          float f = p_21017_;
-          if ((p_21016_ == DamageSource.f_19321_ || p_21016_ == DamageSource.f_19322_) && !this.m_6844_(EquipmentSlot.HEAD).m_41619_()) {
--            this.m_6844_(EquipmentSlot.HEAD).m_41622_((int)(p_21017_ * 4.0F + this.f_19796_.nextFloat() * p_21017_ * 2.0F), this, (p_21296_) -> {
--               p_21296_.m_21166_(EquipmentSlot.HEAD);
-+            this.m_6844_(EquipmentSlot.HEAD).m_41622_((int)(p_21017_ * 4.0F + this.f_19796_.nextFloat() * p_21017_ * 2.0F), this, (p_233653_0_) -> {
-+               p_233653_0_.m_21166_(EquipmentSlot.HEAD);
-             });
-             p_21017_ *= 0.75F;
-          }
 @@ -977,11 +_,11 @@
              if (entity1 instanceof Player) {
                 this.f_20889_ = 100;
@@ -364,17 +321,6 @@
        if (!this.f_20911_ || this.f_20913_ >= this.m_21304_() / 2 || this.f_20913_ < 0) {
           this.f_20913_ = -1;
           this.f_20911_ = true;
-@@ -1720,8 +_,8 @@
-    }
- 
-    public boolean m_21055_(Item p_21056_) {
--      return this.m_21093_((p_21059_) -> {
--         return p_21059_ == p_21056_;
-+      return this.m_21093_((p_233632_1_) -> {
-+         return p_233632_1_ == p_21056_;
-       });
-    }
- 
 @@ -1844,15 +_,16 @@
        }
  
@@ -453,29 +399,7 @@
              if (map == null) {
                 map = Maps.newEnumMap(EquipmentSlot.class);
              }
-@@ -2261,15 +_,15 @@
- 
-    private void m_21142_(Map<EquipmentSlot, ItemStack> p_21143_) {
-       List<Pair<EquipmentSlot, ItemStack>> list = Lists.newArrayListWithCapacity(p_21143_.size());
--      p_21143_.forEach((p_21089_, p_21090_) -> {
--         ItemStack itemstack = p_21090_.m_41777_();
--         list.add(Pair.of(p_21089_, itemstack));
--         switch(p_21089_.m_20743_()) {
-+      p_21143_.forEach((p_241341_2_, p_241341_3_) -> {
-+         ItemStack itemstack = p_241341_3_.m_41777_();
-+         list.add(Pair.of(p_241341_2_, itemstack));
-+         switch(p_241341_2_.m_20743_()) {
-          case HAND:
--            this.m_21168_(p_21089_, itemstack);
-+            this.m_21168_(p_241341_2_, itemstack);
-             break;
-          case ARMOR:
--            this.m_21128_(p_21089_, itemstack);
-+            this.m_21128_(p_241341_2_, itemstack);
-          }
- 
-       });
-@@ -2432,11 +_,13 @@
+@@ -2432,6 +_,8 @@
        boolean flag = this.m_20291_(7);
        if (flag && !this.f_19861_ && !this.m_20159_() && !this.m_21023_(MobEffects.f_19620_)) {
           ItemStack itemstack = this.m_6844_(EquipmentSlot.CHEST);
@@ -484,13 +408,6 @@
           if (itemstack.m_41720_() == Items.f_42741_ && ElytraItem.m_41140_(itemstack)) {
              flag = true;
              if (!this.f_19853_.f_46443_ && (this.f_20937_ + 1) % 20 == 0) {
--               itemstack.m_41622_(1, this, (p_21288_) -> {
--                  p_21288_.m_21166_(EquipmentSlot.CHEST);
-+               itemstack.m_41622_(1, this, (p_233652_0_) -> {
-+                  p_233652_0_.m_21166_(EquipmentSlot.CHEST);
-                });
-             }
-          } else {
 @@ -2664,8 +_,16 @@
  
     private void m_21329_() {
@@ -565,37 +482,25 @@
        }
  
        this.m_20124_(Pose.SLEEPING);
-@@ -2976,21 +_,21 @@
-    }
+@@ -2977,15 +_,15 @@
  
     private boolean m_21334_() {
--      return this.m_21257_().map((p_21292_) -> {
+       return this.m_21257_().map((p_21292_) -> {
 -         return this.f_19853_.m_8055_(p_21292_).m_60734_() instanceof BedBlock;
-+      return this.m_21257_().map((p_241350_1_) -> {
-+         return net.minecraftforge.event.ForgeEventFactory.fireSleepingLocationCheck(this, p_241350_1_);
++         return net.minecraftforge.event.ForgeEventFactory.fireSleepingLocationCheck(this, p_21292_);
        }).orElse(false);
     }
  
     public void m_5796_() {
--      this.m_21257_().filter(this.f_19853_::m_46805_).ifPresent((p_21274_) -> {
--         BlockState blockstate = this.f_19853_.m_8055_(p_21274_);
+       this.m_21257_().filter(this.f_19853_::m_46805_).ifPresent((p_21274_) -> {
+          BlockState blockstate = this.f_19853_.m_8055_(p_21274_);
 -         if (blockstate.m_60734_() instanceof BedBlock) {
 -            this.f_19853_.m_7731_(p_21274_, blockstate.m_61124_(BedBlock.f_49441_, Boolean.valueOf(false)), 3);
--            Vec3 vec31 = BedBlock.m_49458_(this.m_6095_(), this.f_19853_, p_21274_, this.f_19857_).orElseGet(() -> {
--               BlockPos blockpos = p_21274_.m_7494_();
-+      this.m_21257_().filter(this.f_19853_::m_46805_).ifPresent((p_241348_1_) -> {
-+         BlockState blockstate = this.f_19853_.m_8055_(p_241348_1_);
-+         if (blockstate.isBed(f_19853_, p_241348_1_, this)) {
-+            blockstate.setBedOccupied(f_19853_, p_241348_1_, this, false);
-+            Vec3 vec31 = BedBlock.m_49458_(this.m_6095_(), this.f_19853_, p_241348_1_, this.f_19857_).orElseGet(() -> {
-+               BlockPos blockpos = p_241348_1_.m_7494_();
++         if (blockstate.isBed(f_19853_, p_21274_, this)) {
++            blockstate.setBedOccupied(f_19853_, p_21274_, this, false);
+             Vec3 vec31 = BedBlock.m_49458_(this.m_6095_(), this.f_19853_, p_21274_, this.f_19857_).orElseGet(() -> {
+                BlockPos blockpos = p_21274_.m_7494_();
                 return new Vec3((double)blockpos.m_123341_() + 0.5D, (double)blockpos.m_123342_() + 0.1D, (double)blockpos.m_123343_() + 0.5D);
-             });
--            Vec3 vec32 = Vec3.m_82539_(p_21274_).m_82546_(vec31).m_82541_();
-+            Vec3 vec32 = Vec3.m_82539_(p_241348_1_).m_82546_(vec31).m_82541_();
-             float f = (float)Mth.m_14175_(Mth.m_14136_(vec32.f_82481_, vec32.f_82479_) * (double)(180F / (float)Math.PI) - 90.0D);
-             this.m_6034_(vec31.f_82479_, vec31.f_82480_, vec31.f_82481_);
-             this.f_19857_ = f;
 @@ -3008,7 +_,9 @@
     @OnlyIn(Dist.CLIENT)
     public Direction m_21259_() {

@@ -1,35 +1,11 @@
 --- a/net/minecraft/world/level/portal/PortalShape.java
 +++ b/net/minecraft/world/level/portal/PortalShape.java
-@@ -19,8 +_,8 @@
- import net.minecraft.world.phys.Vec3;
+@@ -20,7 +_,7 @@
  
  public class PortalShape {
--   private static final BlockBehaviour.StatePredicate f_77685_ = (p_77720_, p_77721_, p_77722_) -> {
+    private static final BlockBehaviour.StatePredicate f_77685_ = (p_77720_, p_77721_, p_77722_) -> {
 -      return p_77720_.m_60713_(Blocks.f_50080_);
-+   private static final BlockBehaviour.StatePredicate f_77685_ = (p_242966_0_, p_242966_1_, p_242966_2_) -> {
-+      return p_242966_0_.isPortalFrame(p_242966_1_, p_242966_2_);
++      return p_77720_.isPortalFrame(p_77721_, p_77722_);
     };
     private final LevelAccessor f_77686_;
     private final Direction.Axis f_77687_;
-@@ -32,8 +_,8 @@
-    private int f_77692_;
- 
-    public static Optional<PortalShape> m_77708_(LevelAccessor p_77709_, BlockPos p_77710_, Direction.Axis p_77711_) {
--      return m_77712_(p_77709_, p_77710_, (p_77727_) -> {
--         return p_77727_.m_77698_() && p_77727_.f_77689_ == 0;
-+      return m_77712_(p_77709_, p_77710_, (p_242968_0_) -> {
-+         return p_242968_0_.m_77698_() && p_242968_0_.f_77689_ == 0;
-       }, p_77711_);
-    }
- 
-@@ -157,8 +_,8 @@
- 
-    public void m_77743_() {
-       BlockState blockstate = Blocks.f_50142_.m_49966_().m_61124_(NetherPortalBlock.f_54904_, this.f_77687_);
--      BlockPos.m_121940_(this.f_77690_, this.f_77690_.m_5484_(Direction.UP, this.f_77691_ - 1).m_5484_(this.f_77688_, this.f_77692_ - 1)).forEach((p_77725_) -> {
--         this.f_77686_.m_7731_(p_77725_, blockstate, 18);
-+      BlockPos.m_121940_(this.f_77690_, this.f_77690_.m_5484_(Direction.UP, this.f_77691_ - 1).m_5484_(this.f_77688_, this.f_77692_ - 1)).forEach((p_242967_2_) -> {
-+         this.f_77686_.m_7731_(p_242967_2_, blockstate, 18);
-       });
-    }
- 

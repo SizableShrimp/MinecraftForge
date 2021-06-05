@@ -34,20 +34,18 @@
              }
  
           }
-@@ -88,8 +_,11 @@
+@@ -88,7 +_,10 @@
     }
  
     private void m_117106_(PoseStack p_117107_, MultiBufferSource p_117108_, int p_117109_, ArmorItem p_117110_, boolean p_117111_, A p_117112_, boolean p_117113_, float p_117114_, float p_117115_, float p_117116_, @Nullable String p_117117_) {
 -      VertexConsumer vertexconsumer = ItemRenderer.m_115184_(p_117108_, RenderType.m_110431_(this.m_117080_(p_117110_, p_117113_, p_117117_)), false, p_117111_);
--      p_117112_.m_7695_(p_117107_, vertexconsumer, p_117109_, OverlayTexture.f_118083_, p_117114_, p_117115_, p_117116_, 1.0F);
 +       renderModel(p_117107_, p_117108_, p_117109_, p_117111_, p_117112_, p_117114_, p_117115_, p_117116_, this.m_117080_(p_117110_, p_117113_, p_117117_));
 +   }
-+   private void renderModel(PoseStack p_241738_1_, MultiBufferSource p_241738_2_, int p_241738_3_, boolean p_241738_5_, A p_241738_6_, float p_241738_8_, float p_241738_9_, float p_241738_10_, ResourceLocation armorResource) {
-+      VertexConsumer vertexconsumer = ItemRenderer.m_115184_(p_241738_2_, RenderType.m_110431_(armorResource), false, p_241738_5_);
-+      p_241738_6_.m_7695_(p_241738_1_, vertexconsumer, p_241738_3_, OverlayTexture.f_118083_, p_241738_8_, p_241738_9_, p_241738_10_, 1.0F);
++   private void renderModel(PoseStack p_117107_, MultiBufferSource p_117108_, int p_117109_, boolean p_117111_, A p_117112_, float p_117114_, float p_117115_, float p_117116_, ResourceLocation armorResource) {
++      VertexConsumer vertexconsumer = ItemRenderer.m_115184_(p_117108_, RenderType.m_110431_(armorResource), false, p_117111_);
+       p_117112_.m_7695_(p_117107_, vertexconsumer, p_117109_, OverlayTexture.f_118083_, p_117114_, p_117115_, p_117116_, 1.0F);
     }
  
-    private A m_117078_(EquipmentSlot p_117079_) {
 @@ -100,8 +_,50 @@
        return p_117129_ == EquipmentSlot.LEGS;
     }

@@ -8,15 +8,6 @@
  import java.util.Collection;
  import java.util.List;
  import java.util.Objects;
-@@ -370,7 +_,7 @@
-    }
- 
-    protected void m_6778_(AbstractSelectionList.SelectionDirection p_93463_) {
--      this.m_93464_(p_93463_, (p_93510_) -> {
-+      this.m_93464_(p_93463_, (p_241573_0_) -> {
-          return true;
-       });
-    }
 @@ -492,6 +_,13 @@
        p_93506_.f_93521_ = this;
     }

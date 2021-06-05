@@ -13,8 +13,8 @@
     protected abstract StructureProcessorType<?> m_6953_();
 +
 +   @Nullable
-+   public StructureTemplate.StructureBlockInfo process(LevelReader p_230386_1_, BlockPos p_230386_2_, BlockPos p_230386_3_, StructureTemplate.StructureBlockInfo p_230386_4_, StructureTemplate.StructureBlockInfo p_230386_5_, StructurePlaceSettings p_230386_6_, @Nullable StructureTemplate template) {
-+      return m_7382_(p_230386_1_, p_230386_2_, p_230386_3_, p_230386_4_, p_230386_5_, p_230386_6_);
++   public StructureTemplate.StructureBlockInfo process(LevelReader p_74140_, BlockPos p_74141_, BlockPos p_74142_, StructureTemplate.StructureBlockInfo p_74143_, StructureTemplate.StructureBlockInfo p_74144_, StructurePlaceSettings p_74145_, @Nullable StructureTemplate template) {
++      return m_7382_(p_74140_, p_74141_, p_74142_, p_74143_, p_74144_, p_74145_);
 +   }
 +
 +   /**

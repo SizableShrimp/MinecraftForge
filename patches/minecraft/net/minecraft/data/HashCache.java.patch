@@ -1,62 +1,13 @@
 --- a/net/minecraft/data/HashCache.java
 +++ b/net/minecraft/data/HashCache.java
-@@ -31,13 +_,13 @@
-       Path path = p_123935_.resolve(".cache");
-       Files.createDirectories(path);
-       this.f_123928_ = path.resolve(p_123936_);
--      this.m_123951_().forEach((p_123959_) -> {
--         String s = this.f_123930_.put(p_123959_, "");
-+      this.m_123951_().forEach((p_209395_1_) -> {
-+         String s = this.f_123930_.put(p_209395_1_, "");
-       });
-       if (Files.isReadable(this.f_123928_)) {
--         IOUtils.readLines(Files.newInputStream(this.f_123928_), Charsets.UTF_8).forEach((p_123950_) -> {
--            int i = p_123950_.indexOf(32);
--            this.f_123930_.put(p_123935_.resolve(p_123950_.substring(i + 1)), p_123950_.substring(0, i));
-+         IOUtils.readLines(Files.newInputStream(this.f_123928_), Charsets.UTF_8).forEach((p_208315_2_) -> {
-+            int i = p_208315_2_.indexOf(32);
-+            this.f_123930_.put(p_123935_.resolve(p_208315_2_.substring(i + 1)), p_208315_2_.substring(0, i));
-          });
+@@ -55,8 +_,8 @@
        }
  
-@@ -54,9 +_,9 @@
-          return;
-       }
- 
--      IOUtils.writeLines(this.f_123931_.entrySet().stream().map((p_123944_) -> {
+       IOUtils.writeLines(this.f_123931_.entrySet().stream().map((p_123944_) -> {
 -         return (String)p_123944_.getValue() + ' ' + this.f_123927_.relativize(p_123944_.getKey());
 -      }).collect(Collectors.toList()), System.lineSeparator(), writer);
-+      IOUtils.writeLines(this.f_123931_.entrySet().stream().map((p_208319_1_) -> {
-+         return (String)p_208319_1_.getValue() + ' ' + this.f_123927_.relativize(p_208319_1_.getKey()).toString().replace('\\', '/'); //Forge: Standardize file paths.
++         return (String)p_123944_.getValue() + ' ' + this.f_123927_.relativize(p_123944_.getKey()).toString().replace('\\', '/'); //Forge: Standardize file paths.
 +      }).sorted(java.util.Comparator.comparing(a -> a.split(" ")[1])).collect(Collectors.toList()), System.lineSeparator(), writer);
        writer.close();
        f_123926_.debug("Caching: cache hits: {}, created: {} removed: {}", this.f_123929_, this.f_123931_.size() - this.f_123929_, this.f_123930_.size());
     }
-@@ -83,12 +_,12 @@
-    }
- 
-    private void m_123945_() throws IOException {
--      this.m_123951_().forEach((p_123957_) -> {
--         if (this.m_123946_(p_123957_) && !this.f_123932_.contains(p_123957_)) {
-+      this.m_123951_().forEach((p_208322_1_) -> {
-+         if (this.m_123946_(p_208322_1_) && !this.f_123932_.contains(p_208322_1_)) {
-             try {
--               Files.delete(p_123957_);
-+               Files.delete(p_208322_1_);
-             } catch (IOException ioexception) {
--               f_123926_.debug("Unable to delete: {} ({})", p_123957_, ioexception.toString());
-+               f_123926_.debug("Unable to delete: {} ({})", p_208322_1_, ioexception.toString());
-             }
-          }
- 
-@@ -96,8 +_,8 @@
-    }
- 
-    private Stream<Path> m_123951_() throws IOException {
--      return Files.walk(this.f_123927_).filter((p_123955_) -> {
--         return !Objects.equals(this.f_123928_, p_123955_) && !Files.isDirectory(p_123955_);
-+      return Files.walk(this.f_123927_).filter((p_209397_1_) -> {
-+         return !Objects.equals(this.f_123928_, p_209397_1_) && !Files.isDirectory(p_209397_1_);
-       });
-    }
- }

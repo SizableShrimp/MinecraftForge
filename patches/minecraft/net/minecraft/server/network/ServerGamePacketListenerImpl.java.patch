@@ -16,38 +16,6 @@
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
  
-@@ -290,7 +_,7 @@
-    }
- 
-    public void m_9942_(Component p_9943_) {
--      this.f_9742_.m_129514_(new ClientboundDisconnectPacket(p_9943_), (p_9828_) -> {
-+      this.f_9742_.m_129514_(new ClientboundDisconnectPacket(p_9943_), (p_210161_2_) -> {
-          this.f_9742_.m_129507_(p_9943_);
-       });
-       this.f_9742_.m_129540_();
-@@ -299,9 +_,9 @@
- 
-    private <T> void m_9801_(T p_9802_, Consumer<T> p_9803_, BiFunction<TextFilter, T, CompletableFuture<Optional<T>>> p_9804_) {
-       BlockableEventLoop<?> blockableeventloop = this.f_9743_.m_9236_().m_7654_();
--      Consumer<T> consumer = (p_9941_) -> {
-+      Consumer<T> consumer = (p_244545_2_) -> {
-          if (this.m_6198_().m_129536_()) {
--            p_9803_.accept(p_9941_);
-+            p_9803_.accept(p_244545_2_);
-          } else {
-             f_9744_.debug("Ignoring packet due to disconnection");
-          }
-@@ -309,8 +_,8 @@
-       };
-       TextFilter textfilter = this.f_9743_.m_8967_();
-       if (textfilter != null) {
--         p_9804_.apply(textfilter, p_9802_).thenAcceptAsync((p_9823_) -> {
--            p_9823_.ifPresent(consumer);
-+         p_9804_.apply(textfilter, p_9802_).thenAcceptAsync((p_244539_1_) -> {
-+            p_244539_1_.ifPresent(consumer);
-          }, blockableeventloop);
-       } else {
-          blockableeventloop.execute(() -> {
 @@ -392,9 +_,11 @@
              }
  
@@ -69,48 +37,6 @@
     }
  
     public void m_7376_(ServerboundAcceptTeleportationPacket p_9835_) {
-@@ -460,8 +_,8 @@
-       }
- 
-       ParseResults<CommandSourceStack> parseresults = this.f_9745_.m_129892_().m_82094_().parse(stringreader, this.f_9743_.m_20203_());
--      this.f_9745_.m_129892_().m_82094_().getCompletionSuggestions(parseresults).thenAccept((p_9850_) -> {
--         this.f_9742_.m_129512_(new ClientboundCommandSuggestionsPacket(p_9847_.m_133901_(), p_9850_));
-+      this.f_9745_.m_129892_().m_82094_().getCompletionSuggestions(parseresults).thenAccept((p_195519_2_) -> {
-+         this.f_9742_.m_129512_(new ClientboundCommandSuggestionsPacket(p_9847_.m_133901_(), p_195519_2_));
-       });
-    }
- 
-@@ -691,10 +_,10 @@
- 
-             int j = p_9862_.m_134013_();
-             if (Inventory.m_36045_(j) || j == 40) {
--               this.m_9815_(list, flag ? (p_9936_) -> {
--                  this.m_9805_(p_9936_.get(0), p_9936_.subList(1, p_9936_.size()), j);
--               } : (p_9789_) -> {
--                  this.m_9812_(p_9789_, j);
-+               this.m_9815_(list, flag ? (p_244543_2_) -> {
-+                  this.m_9805_(p_244543_2_.get(0), p_244543_2_.subList(1, p_244543_2_.size()), j);
-+               } : (p_244531_2_) -> {
-+                  this.m_9812_(p_244531_2_, j);
-                });
-             }
-          }
-@@ -863,12 +_,12 @@
-    }
- 
-    private boolean m_9795_(LevelReader p_9796_, AABB p_9797_) {
--      Stream<VoxelShape> stream = p_9796_.m_7786_(this.f_9743_, this.f_9743_.m_20191_().m_82406_((double)1.0E-5F), (p_9938_) -> {
-+      Stream<VoxelShape> stream = p_9796_.m_7786_(this.f_9743_, this.f_9743_.m_20191_().m_82406_((double)1.0E-5F), (p_241167_0_) -> {
-          return true;
-       });
-       VoxelShape voxelshape = Shapes.m_83064_(p_9797_.m_82406_((double)1.0E-5F));
--      return stream.anyMatch((p_9800_) -> {
--         return !Shapes.m_83157_(p_9800_, voxelshape, BooleanOp.f_82689_);
-+      return stream.anyMatch((p_241164_1_) -> {
-+         return !Shapes.m_83157_(p_241164_1_, voxelshape, BooleanOp.f_82689_);
-       });
-    }
- 
 @@ -951,7 +_,9 @@
        Direction direction = blockhitresult.m_82434_();
        this.f_9743_.m_9243_();
@@ -150,28 +76,6 @@
                 optional = Optional.of(entity.m_7111_(this.f_9743_, p_9866_.m_134060_(), interactionhand));
              } else if (p_9866_.m_134056_() == ServerboundInteractPacket.Action.ATTACK) {
                 if (entity instanceof ItemEntity || entity instanceof ExperienceOrb || entity instanceof AbstractArrow || entity == this.f_9743_) {
-@@ -1285,8 +_,8 @@
-       PacketUtils.m_131359_(p_9882_, this, this.f_9743_.m_9236_());
-       this.f_9743_.m_9243_();
-       if (!this.f_9743_.m_5833_() && this.f_9743_.f_36096_.f_38840_ == p_9882_.m_134249_() && this.f_9743_.f_36096_.m_38949_(this.f_9743_) && this.f_9743_.f_36096_ instanceof RecipeBookMenu) {
--         this.f_9745_.m_129894_().m_44043_(p_9882_.m_134252_()).ifPresent((p_9885_) -> {
--            ((RecipeBookMenu)this.f_9743_.f_36096_).m_6951_(p_9882_.m_134253_(), p_9885_, this.f_9743_);
-+         this.f_9745_.m_129894_().m_44043_(p_9882_.m_134252_()).ifPresent((p_241165_2_) -> {
-+            ((RecipeBookMenu)this.f_9743_.f_36096_).m_6951_(p_9882_.m_134253_(), p_241165_2_, this.f_9743_);
-          });
-       }
-    }
-@@ -1349,8 +_,8 @@
- 
-    public void m_5527_(ServerboundSignUpdatePacket p_9921_) {
-       List<String> list = Stream.of(p_9921_.m_134663_()).map(ChatFormatting::m_126649_).collect(Collectors.toList());
--      this.m_9815_(list, (p_9952_) -> {
--         this.m_9922_(p_9921_, p_9952_);
-+      this.m_9815_(list, (p_244547_2_) -> {
-+         this.m_9922_(p_9921_, p_244547_2_);
-       });
-    }
- 
 @@ -1403,6 +_,8 @@
     }
  

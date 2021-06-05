@@ -51,17 +51,6 @@
              RenderSystem.m_69461_();
              RenderSystem.m_69867_();
           }
-@@ -622,8 +_,8 @@
-    protected void m_93036_(PoseStack p_93037_, Objective p_93038_) {
-       Scoreboard scoreboard = p_93038_.m_83313_();
-       Collection<Score> collection = scoreboard.m_83498_(p_93038_);
--      List<Score> list = collection.stream().filter((p_93027_) -> {
--         return p_93027_.m_83405_() != null && !p_93027_.m_83405_().startsWith("#");
-+      List<Score> list = collection.stream().filter((p_212911_0_) -> {
-+         return p_212911_0_.m_83405_() != null && !p_212911_0_.m_83405_().startsWith("#");
-       }).collect(Collectors.toList());
-       if (list.size() > 15) {
-          collection = Lists.newArrayList(Iterables.skip(list, collection.size() - 15));
 @@ -1059,7 +_,7 @@
           ItemStack itemstack = this.f_92986_.f_91074_.f_36093_.m_36056_();
           if (itemstack.m_41619_()) {

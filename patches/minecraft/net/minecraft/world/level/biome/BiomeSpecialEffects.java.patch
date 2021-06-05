@@ -1,128 +1,6 @@
 --- a/net/minecraft/world/level/biome/BiomeSpecialEffects.java
 +++ b/net/minecraft/world/level/biome/BiomeSpecialEffects.java
-@@ -14,32 +_,32 @@
- import net.minecraftforge.api.distmarker.OnlyIn;
- 
- public class BiomeSpecialEffects {
--   public static final Codec<BiomeSpecialEffects> f_47926_ = RecordCodecBuilder.create((p_47971_) -> {
--      return p_47971_.group(Codec.INT.fieldOf("fog_color").forGetter((p_48004_) -> {
--         return p_48004_.f_47927_;
--      }), Codec.INT.fieldOf("water_color").forGetter((p_48001_) -> {
--         return p_48001_.f_47928_;
--      }), Codec.INT.fieldOf("water_fog_color").forGetter((p_47998_) -> {
--         return p_47998_.f_47929_;
--      }), Codec.INT.fieldOf("sky_color").forGetter((p_47995_) -> {
--         return p_47995_.f_47930_;
--      }), Codec.INT.optionalFieldOf("foliage_color").forGetter((p_47992_) -> {
--         return p_47992_.f_47931_;
--      }), Codec.INT.optionalFieldOf("grass_color").forGetter((p_47989_) -> {
--         return p_47989_.f_47932_;
--      }), BiomeSpecialEffects.GrassColorModifier.f_48050_.optionalFieldOf("grass_color_modifier", BiomeSpecialEffects.GrassColorModifier.NONE).forGetter((p_47986_) -> {
--         return p_47986_.f_47933_;
--      }), AmbientParticleSettings.f_47412_.optionalFieldOf("particle").forGetter((p_47983_) -> {
--         return p_47983_.f_47934_;
--      }), SoundEvent.f_11655_.optionalFieldOf("ambient_sound").forGetter((p_47980_) -> {
--         return p_47980_.f_47935_;
--      }), AmbientMoodSettings.f_47386_.optionalFieldOf("mood_sound").forGetter((p_47977_) -> {
--         return p_47977_.f_47936_;
--      }), AmbientAdditionsSettings.f_47371_.optionalFieldOf("additions_sound").forGetter((p_47974_) -> {
--         return p_47974_.f_47937_;
--      }), Music.f_11620_.optionalFieldOf("music").forGetter((p_47969_) -> {
--         return p_47969_.f_47938_;
--      })).apply(p_47971_, BiomeSpecialEffects::new);
-+   public static final Codec<BiomeSpecialEffects> f_47926_ = RecordCodecBuilder.create((p_235215_0_) -> {
-+      return p_235215_0_.group(Codec.INT.fieldOf("fog_color").forGetter((p_235229_0_) -> {
-+         return p_235229_0_.f_47927_;
-+      }), Codec.INT.fieldOf("water_color").forGetter((p_235227_0_) -> {
-+         return p_235227_0_.f_47928_;
-+      }), Codec.INT.fieldOf("water_fog_color").forGetter((p_235225_0_) -> {
-+         return p_235225_0_.f_47929_;
-+      }), Codec.INT.fieldOf("sky_color").forGetter((p_242532_0_) -> {
-+         return p_242532_0_.f_47930_;
-+      }), Codec.INT.optionalFieldOf("foliage_color").forGetter((p_244421_0_) -> {
-+         return p_244421_0_.f_47931_;
-+      }), Codec.INT.optionalFieldOf("grass_color").forGetter((p_244426_0_) -> {
-+         return p_244426_0_.f_47932_;
-+      }), BiomeSpecialEffects.GrassColorModifier.f_48050_.optionalFieldOf("grass_color_modifier", BiomeSpecialEffects.GrassColorModifier.NONE).forGetter((p_242530_0_) -> {
-+         return p_242530_0_.f_47933_;
-+      }), AmbientParticleSettings.f_47412_.optionalFieldOf("particle").forGetter((p_235223_0_) -> {
-+         return p_235223_0_.f_47934_;
-+      }), SoundEvent.f_11655_.optionalFieldOf("ambient_sound").forGetter((p_235221_0_) -> {
-+         return p_235221_0_.f_47935_;
-+      }), AmbientMoodSettings.f_47386_.optionalFieldOf("mood_sound").forGetter((p_235219_0_) -> {
-+         return p_235219_0_.f_47936_;
-+      }), AmbientAdditionsSettings.f_47371_.optionalFieldOf("additions_sound").forGetter((p_235217_0_) -> {
-+         return p_235217_0_.f_47937_;
-+      }), Music.f_11620_.optionalFieldOf("music").forGetter((p_244420_0_) -> {
-+         return p_244420_0_.f_47938_;
-+      })).apply(p_235215_0_, BiomeSpecialEffects::new);
-    });
-    private final int f_47927_;
-    private final int f_47928_;
-@@ -69,62 +_,50 @@
-       this.f_47938_ = p_47952_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public int m_47967_() {
-       return this.f_47927_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public int m_47972_() {
-       return this.f_47928_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public int m_47975_() {
-       return this.f_47929_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public int m_47978_() {
-       return this.f_47930_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public Optional<Integer> m_47981_() {
-       return this.f_47931_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public Optional<Integer> m_47984_() {
-       return this.f_47932_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public BiomeSpecialEffects.GrassColorModifier m_47987_() {
-       return this.f_47933_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public Optional<AmbientParticleSettings> m_47990_() {
-       return this.f_47934_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public Optional<SoundEvent> m_47993_() {
-       return this.f_47935_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public Optional<AmbientMoodSettings> m_47996_() {
-       return this.f_47936_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public Optional<AmbientAdditionsSettings> m_47999_() {
-       return this.f_47937_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public Optional<Music> m_48002_() {
-       return this.f_47938_;
-    }
-@@ -216,7 +_,7 @@
+@@ -204,7 +_,7 @@
        }
     }
  
@@ -131,16 +9,14 @@
        NONE("none") {
           @OnlyIn(Dist.CLIENT)
           public int m_6583_(double p_48081_, double p_48082_, int p_48083_) {
-@@ -238,18 +_,36 @@
+@@ -226,18 +_,36 @@
        };
  
        private final String f_48051_;
 -      public static final Codec<BiomeSpecialEffects.GrassColorModifier> f_48050_ = StringRepresentable.m_14350_(BiomeSpecialEffects.GrassColorModifier::values, BiomeSpecialEffects.GrassColorModifier::m_48070_);
--      private static final Map<String, BiomeSpecialEffects.GrassColorModifier> f_48052_ = Arrays.stream(values()).collect(Collectors.toMap(BiomeSpecialEffects.GrassColorModifier::m_48072_, (p_48069_) -> {
--         return p_48069_;
 +      public static final Codec<BiomeSpecialEffects.GrassColorModifier> f_48050_ = net.minecraftforge.common.IExtensibleEnum.createCodecForExtensibleEnum(BiomeSpecialEffects.GrassColorModifier::values, BiomeSpecialEffects.GrassColorModifier::m_48070_);
-+      private static final Map<String, BiomeSpecialEffects.GrassColorModifier> f_48052_ = Arrays.stream(values()).collect(Collectors.toMap(BiomeSpecialEffects.GrassColorModifier::m_48072_, (p_242545_0_) -> {
-+         return p_242545_0_;
+       private static final Map<String, BiomeSpecialEffects.GrassColorModifier> f_48052_ = Arrays.stream(values()).collect(Collectors.toMap(BiomeSpecialEffects.GrassColorModifier::m_48072_, (p_48069_) -> {
+          return p_48069_;
        }));
  
        @OnlyIn(Dist.CLIENT)

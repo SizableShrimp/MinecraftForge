@@ -1,25 +1,6 @@
 --- a/net/minecraft/server/level/ServerPlayer.java
 +++ b/net/minecraft/server/level/ServerPlayer.java
-@@ -299,8 +_,8 @@
-          p_9197_.m_128405_("SpawnZ", this.f_8936_.m_123343_());
-          p_9197_.m_128379_("SpawnForced", this.f_8937_);
-          p_9197_.m_128350_("SpawnAngle", this.f_8938_);
--         ResourceLocation.f_135803_.encodeStart(NbtOps.f_128958_, this.f_8935_.m_135782_()).resultOrPartial(f_8907_::error).ifPresent((p_9134_) -> {
--            p_9197_.m_128365_("SpawnDimension", p_9134_);
-+         ResourceLocation.f_135803_.encodeStart(NbtOps.f_128958_, this.f_8935_.m_135782_()).resultOrPartial(f_8907_::error).ifPresent((p_241148_1_) -> {
-+            p_9197_.m_128365_("SpawnDimension", p_241148_1_);
-          });
-       }
- 
-@@ -469,22 +_,23 @@
-    }
- 
-    private void m_9104_(ObjectiveCriteria p_9105_, int p_9106_) {
--      this.m_36329_().m_83427_(p_9105_, this.m_6302_(), (p_9178_) -> {
--         p_9178_.m_83402_(p_9106_);
-+      this.m_36329_().m_83427_(p_9105_, this.m_6302_(), (p_195397_1_) -> {
-+         p_195397_1_.m_83402_(p_9106_);
-       });
+@@ -475,6 +_,7 @@
     }
  
     public void m_6667_(DamageSource p_9035_) {
@@ -27,35 +8,6 @@
        boolean flag = this.f_19853_.m_46469_().m_46207_(GameRules.f_46142_);
        if (flag) {
           Component component = this.m_21231_().m_19293_();
--         this.f_8906_.m_9831_(new ClientboundPlayerCombatPacket(this.m_21231_(), ClientboundPlayerCombatPacket.Event.ENTITY_DIED, component), (p_9142_) -> {
--            if (!p_9142_.isSuccess()) {
-+         this.f_8906_.m_9831_(new ClientboundPlayerCombatPacket(this.m_21231_(), ClientboundPlayerCombatPacket.Event.ENTITY_DIED, component), (p_212356_2_) -> {
-+            if (!p_212356_2_.isSuccess()) {
-                int i = 256;
-                String s = component.m_130668_(256);
-                Component component1 = new TranslatableComponent("death.attack.message_too_long", (new TextComponent(s)).m_130940_(ChatFormatting.YELLOW));
--               Component component2 = (new TranslatableComponent("death.attack.even_more_magic", this.m_5446_())).m_130938_((p_9152_) -> {
--                  return p_9152_.m_131144_(new HoverEvent(HoverEvent.Action.f_130831_, component1));
-+               Component component2 = (new TranslatableComponent("death.attack.even_more_magic", this.m_5446_())).m_130938_((p_212357_1_) -> {
-+                  return p_212357_1_.m_131144_(new HoverEvent(HoverEvent.Action.f_130831_, component1));
-                });
-                this.f_8906_.m_9829_(new ClientboundPlayerCombatPacket(this.m_21231_(), ClientboundPlayerCombatPacket.Event.ENTITY_DIED, component2));
-             }
-@@ -532,10 +_,10 @@
- 
-    private void m_9215_() {
-       AABB aabb = (new AABB(this.m_20183_())).m_82377_(32.0D, 10.0D, 32.0D);
--      this.f_19853_.m_45997_(Mob.class, aabb).stream().filter((p_9188_) -> {
--         return p_9188_ instanceof NeutralMob;
--      }).forEach((p_9057_) -> {
--         ((NeutralMob)p_9057_).m_21676_(this);
-+      this.f_19853_.m_45997_(Mob.class, aabb).stream().filter((p_241155_0_) -> {
-+         return p_241155_0_ instanceof NeutralMob;
-+      }).forEach((p_241145_1_) -> {
-+         ((NeutralMob)p_241145_1_).m_21676_(this);
-       });
-    }
- 
 @@ -618,13 +_,14 @@
     }
  
@@ -146,7 +98,7 @@
        Direction direction = this.f_19853_.m_8055_(p_9115_).m_61143_(HorizontalDirectionalBlock.f_54117_);
        if (!this.m_5803_() && this.m_6084_()) {
           if (!this.f_19853_.m_6042_().m_63956_()) {
-@@ -753,22 +_,22 @@
+@@ -753,7 +_,7 @@
              return Either.left(Player.BedSleepingProblem.OBSTRUCTED);
           } else {
              this.m_9158_(this.f_19853_.m_46472_(), p_9115_, this.f_19857_, false, true);
@@ -155,24 +107,6 @@
                 return Either.left(Player.BedSleepingProblem.NOT_POSSIBLE_NOW);
              } else {
                 if (!this.m_7500_()) {
-                   double d0 = 8.0D;
-                   double d1 = 5.0D;
-                   Vec3 vec3 = Vec3.m_82539_(p_9115_);
--                  List<Monster> list = this.f_19853_.m_6443_(Monster.class, new AABB(vec3.m_7096_() - 8.0D, vec3.m_7098_() - 5.0D, vec3.m_7094_() - 8.0D, vec3.m_7096_() + 8.0D, vec3.m_7098_() + 5.0D, vec3.m_7094_() + 8.0D), (p_9062_) -> {
--                     return p_9062_.m_6935_(this);
-+                  List<Monster> list = this.f_19853_.m_6443_(Monster.class, new AABB(vec3.m_7096_() - 8.0D, vec3.m_7098_() - 5.0D, vec3.m_7094_() - 8.0D, vec3.m_7096_() + 8.0D, vec3.m_7098_() + 5.0D, vec3.m_7094_() + 8.0D), (p_241146_1_) -> {
-+                     return p_241146_1_.m_6935_(this);
-                   });
-                   if (!list.isEmpty()) {
-                      return Either.left(Player.BedSleepingProblem.NOT_SAFE);
-                   }
-                }
- 
--               Either<Player.BedSleepingProblem, Unit> either = super.m_7720_(p_9115_).ifRight((p_9029_) -> {
-+               Either<Player.BedSleepingProblem, Unit> either = super.m_7720_(p_9115_).ifRight((p_241144_1_) -> {
-                   this.m_36220_(Stats.f_12969_);
-                   CriteriaTriggers.f_10583_.m_53645_(this);
-                });
 @@ -787,6 +_,7 @@
     }
  
@@ -205,17 +139,6 @@
        this.f_36096_ = this.f_36095_;
     }
  
-@@ -982,8 +_,8 @@
- 
-    public void m_6278_(Stat<?> p_9026_, int p_9027_) {
-       this.f_8910_.m_13023_(this, p_9026_, p_9027_);
--      this.m_36329_().m_83427_(p_9026_, this.m_6302_(), (p_8996_) -> {
--         p_8996_.m_83393_(p_9027_);
-+      this.m_36329_().m_83427_(p_9026_, this.m_6302_(), (p_195396_1_) -> {
-+         p_195396_1_.m_83393_(p_9027_);
-       });
-    }
- 
 @@ -1085,6 +_,13 @@
        this.f_8933_ = p_9016_.f_8933_;
        this.m_36362_(p_9016_.m_36331_());
@@ -238,17 +161,6 @@
        this.f_8941_.m_9271_(p_9095_);
        this.f_8906_.m_9829_(new ClientboundGameEventPacket(ClientboundGameEventPacket.f_132156_, (float)p_9095_.m_46392_()));
        if (p_9095_ == GameType.SPECTATOR) {
-@@ -1169,8 +_,8 @@
-    }
- 
-    public void m_9146_(Component p_9147_, ChatType p_9148_, UUID p_9149_) {
--      this.f_8906_.m_9831_(new ClientboundChatPacket(p_9147_, p_9148_, p_9149_), (p_9139_) -> {
--         if (!p_9139_.isSuccess() && (p_9148_ == ChatType.GAME_INFO || p_9148_ == ChatType.SYSTEM)) {
-+      this.f_8906_.m_9831_(new ClientboundChatPacket(p_9147_, p_9148_, p_9149_), (p_241149_4_) -> {
-+         if (!p_241149_4_.isSuccess() && (p_9148_ == ChatType.GAME_INFO || p_9148_ == ChatType.SYSTEM)) {
-             int i = 256;
-             String s = p_9147_.m_130668_(256);
-             Component component = (new TextComponent(s)).m_130940_(ChatFormatting.YELLOW);
 @@ -1191,6 +_,7 @@
        this.f_8923_ = p_9157_.m_133886_();
        this.m_20088_().m_135381_(f_36089_, (byte)p_9157_.m_133887_());

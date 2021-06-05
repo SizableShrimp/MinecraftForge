@@ -1,25 +1,5 @@
 --- a/net/minecraft/world/level/chunk/PalettedContainer.java
 +++ b/net/minecraft/world/level/chunk/PalettedContainer.java
-@@ -22,7 +_,7 @@
- 
- public class PalettedContainer<T> implements PaletteResize<T> {
-    private final Palette<T> f_63069_;
--   private final PaletteResize<T> f_63070_ = (p_63139_, p_63140_) -> {
-+   private final PaletteResize<T> f_63070_ = (p_205517_0_, p_205517_1_) -> {
-       return 0;
-    };
-    private final IdMapper<T> f_63071_;
-@@ -36,8 +_,8 @@
- 
-    public void m_63084_() {
-       if (this.f_63077_.isLocked() && !this.f_63077_.isHeldByCurrentThread()) {
--         String s = Thread.getAllStackTraces().keySet().stream().filter(Objects::nonNull).map((p_63108_) -> {
--            return p_63108_.getName() + ": \n\tat " + (String)Arrays.stream(p_63108_.getStackTrace()).map(Object::toString).collect(Collectors.joining("\n\tat "));
-+         String s = Thread.getAllStackTraces().keySet().stream().filter(Objects::nonNull).map((p_210458_0_) -> {
-+            return p_210458_0_.getName() + ": \n\tat " + (String)Arrays.stream(p_210458_0_.getStackTrace()).map(Object::toString).collect(Collectors.joining("\n\tat "));
-          }).collect(Collectors.joining("\n"));
-          CrashReport crashreport = new CrashReport("Writing into PalettedContainer from multiple threads", new IllegalStateException());
-          CrashReportCategory crashreportcategory = crashreport.m_127514_("Thread dumps");
 @@ -66,8 +_,11 @@
     }
  
@@ -61,19 +41,3 @@
     }
  
     public void m_63135_(FriendlyByteBuf p_63136_) {
-@@ -225,11 +_,11 @@
- 
-    public void m_63099_(PalettedContainer.CountConsumer<T> p_63100_) {
-       Int2IntMap int2intmap = new Int2IntOpenHashMap();
--      this.f_63068_.m_13519_((p_63106_) -> {
--         int2intmap.put(p_63106_, int2intmap.get(p_63106_) + 1);
-+      this.f_63068_.m_13519_((p_225498_1_) -> {
-+         int2intmap.put(p_225498_1_, int2intmap.get(p_225498_1_) + 1);
-       });
--      int2intmap.int2IntEntrySet().forEach((p_63103_) -> {
--         p_63100_.m_63144_(this.f_63075_.m_5795_(p_63103_.getIntKey()), p_63103_.getIntValue());
-+      int2intmap.int2IntEntrySet().forEach((p_225499_2_) -> {
-+         p_63100_.m_63144_(this.f_63075_.m_5795_(p_225499_2_.getIntKey()), p_225499_2_.getIntValue());
-       });
-    }
- 

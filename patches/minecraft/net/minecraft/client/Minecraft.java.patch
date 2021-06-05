@@ -80,7 +80,7 @@
        this.f_91064_ = new DebugRenderer(this);
        RenderSystem.m_69900_(this::m_91113_);
        if (this.f_91066_.f_92052_ && !this.f_90990_.m_85440_()) {
-@@ -489,20 +_,22 @@
+@@ -489,11 +_,6 @@
        this.f_90990_.m_85424_(this.f_91066_.f_92034_);
        this.f_90990_.m_85426_();
        this.m_5741_();
@@ -92,10 +92,7 @@
  
        LoadingOverlay.m_96189_(this);
        List<PackResources> list = this.f_91038_.m_10525_();
--      this.m_91150_(new LoadingOverlay(this, this.f_91036_.m_6285_(Util.m_137578_(), this, f_90983_, list), (p_91245_) -> {
--         Util.m_137521_(p_91245_, this::m_91239_, () -> {
-+      this.m_91150_(new LoadingOverlay(this, this.f_91036_.m_6285_(Util.m_137578_(), this, f_90983_, list), (p_238197_1_) -> {
-+         Util.m_137521_(p_238197_1_, this::m_91239_, () -> {
+@@ -502,7 +_,14 @@
              if (SharedConstants.f_136183_) {
                 this.m_91273_();
              }
@@ -120,68 +117,15 @@
           Component component;
           if (p_91240_ instanceof SimpleReloadableResourceManager.ResourcePackLoadingFailure) {
              component = new TextComponent(((SimpleReloadableResourceManager.ResourcePackLoadingFailure)p_91240_).m_10921_().m_8017_());
-@@ -628,17 +_,17 @@
-    }
- 
-    public void m_91271_() {
--      ReloadableSearchTree<ItemStack> reloadablesearchtree = new ReloadableSearchTree<>((p_91345_) -> {
--         return p_91345_.m_41651_((Player)null, TooltipFlag.Default.NORMAL).stream().map((p_91371_) -> {
--            return ChatFormatting.m_126649_(p_91371_.getString()).trim();
--         }).filter((p_91378_) -> {
--            return !p_91378_.isEmpty();
-+      ReloadableSearchTree<ItemStack> reloadablesearchtree = new ReloadableSearchTree<>((p_213242_0_) -> {
-+         return p_213242_0_.m_41651_((Player)null, TooltipFlag.Default.NORMAL).stream().map((p_213230_0_) -> {
-+            return ChatFormatting.m_126649_(p_213230_0_.getString()).trim();
-+         }).filter((p_213267_0_) -> {
-+            return !p_213267_0_.isEmpty();
-          });
--      }, (p_91317_) -> {
--         return Stream.of(Registry.f_122827_.m_7981_(p_91317_.m_41720_()));
-+      }, (p_213251_0_) -> {
-+         return Stream.of(Registry.f_122827_.m_7981_(p_213251_0_.m_41720_()));
+@@ -638,7 +_,7 @@
+          return Stream.of(Registry.f_122827_.m_7981_(p_91317_.m_41720_()));
        });
--      ReloadableIdSearchTree<ItemStack> reloadableidsearchtree = new ReloadableIdSearchTree<>((p_91121_) -> {
+       ReloadableIdSearchTree<ItemStack> reloadableidsearchtree = new ReloadableIdSearchTree<>((p_91121_) -> {
 -         return ItemTags.m_13193_().m_13394_(p_91121_.m_41720_()).stream();
-+      ReloadableIdSearchTree<ItemStack> reloadableidsearchtree = new ReloadableIdSearchTree<>((p_213235_0_) -> {
-+         return p_213235_0_.m_41720_().getTags().stream();
++         return p_91121_.m_41720_().getTags().stream();
        });
        NonNullList<ItemStack> nonnulllist = NonNullList.m_122779_();
  
-@@ -646,21 +_,21 @@
-          item.m_6787_(CreativeModeTab.f_40754_, nonnulllist);
-       }
- 
--      nonnulllist.forEach((p_91170_) -> {
--         reloadablesearchtree.m_8080_(p_91170_);
--         reloadableidsearchtree.m_8080_(p_91170_);
-+      nonnulllist.forEach((p_213232_2_) -> {
-+         reloadablesearchtree.m_8080_(p_213232_2_);
-+         reloadableidsearchtree.m_8080_(p_213232_2_);
-       });
--      ReloadableSearchTree<RecipeCollection> reloadablesearchtree1 = new ReloadableSearchTree<>((p_91323_) -> {
--         return p_91323_.m_100516_().stream().flatMap((p_91319_) -> {
--            return p_91319_.m_8043_().m_41651_((Player)null, TooltipFlag.Default.NORMAL).stream();
--         }).map((p_91357_) -> {
--            return ChatFormatting.m_126649_(p_91357_.getString()).trim();
--         }).filter((p_91367_) -> {
--            return !p_91367_.isEmpty();
-+      ReloadableSearchTree<RecipeCollection> reloadablesearchtree1 = new ReloadableSearchTree<>((p_213252_0_) -> {
-+         return p_213252_0_.m_100516_().stream().flatMap((p_213234_0_) -> {
-+            return p_213234_0_.m_8043_().m_41651_((Player)null, TooltipFlag.Default.NORMAL).stream();
-+         }).map((p_213264_0_) -> {
-+            return ChatFormatting.m_126649_(p_213264_0_.getString()).trim();
-+         }).filter((p_213238_0_) -> {
-+            return !p_213238_0_.isEmpty();
-          });
--      }, (p_91155_) -> {
--         return p_91155_.m_100516_().stream().map((p_91126_) -> {
--            return Registry.f_122827_.m_7981_(p_91126_.m_8043_().m_41720_());
-+      }, (p_213258_0_) -> {
-+         return p_213258_0_.m_100516_().stream().map((p_213244_0_) -> {
-+            return Registry.f_122827_.m_7981_(p_213244_0_.m_8043_().m_41720_());
-          });
-       });
-       this.f_90997_.m_119951_(SearchRegistry.f_119941_, reloadablesearchtree);
 @@ -708,13 +_,13 @@
        Bootstrap.m_135875_(p_91333_.m_127526_());
        if (p_91333_.m_127527_() != null) {
@@ -207,17 +151,6 @@
     public CompletableFuture<Void> m_91391_() {
        if (this.f_91024_ != null) {
           return this.f_91024_;
-@@ -734,8 +_,8 @@
-          } else {
-             this.f_91038_.m_10506_();
-             List<PackResources> list = this.f_91038_.m_10525_();
--            this.m_91150_(new LoadingOverlay(this, this.f_91036_.m_6285_(Util.m_137578_(), this, f_90983_, list), (p_91252_) -> {
--               Util.m_137521_(p_91252_, this::m_91239_, () -> {
-+            this.m_91150_(new LoadingOverlay(this, this.f_91036_.m_6285_(Util.m_137578_(), this, f_90983_, list), (p_238200_2_) -> {
-+               Util.m_137521_(p_238200_2_, this::m_91239_, () -> {
-                   this.f_91060_.m_109818_();
-                   completablefuture.complete((Void)null);
-                });
 @@ -811,10 +_,6 @@
     }
  
@@ -375,7 +308,7 @@
     }
  
     private boolean m_91278_() {
-@@ -1632,24 +_,24 @@
+@@ -1632,11 +_,11 @@
     }
  
     public void m_91200_(String p_91201_) {
@@ -385,17 +318,11 @@
  
     public void m_91202_(String p_91203_, LevelSettings p_91204_, RegistryAccess.RegistryHolder p_91205_, WorldGenSettings p_91206_) {
 -      this.m_91219_(p_91203_, p_91205_, (p_91129_) -> {
-+      this.loadWorld(p_91203_, p_91205_, (p_238179_1_) -> {
++      this.loadWorld(p_91203_, p_91205_, (p_91129_) -> {
           return p_91204_.m_46934_();
--      }, (p_91177_, p_91178_, p_91179_, p_91180_) -> {
-+      }, (p_238187_3_, p_238187_4_, p_238187_5_, p_238187_6_) -> {
+       }, (p_91177_, p_91178_, p_91179_, p_91180_) -> {
           RegistryWriteOps<JsonElement> registrywriteops = RegistryWriteOps.m_135767_(JsonOps.INSTANCE, p_91205_);
--         RegistryReadOps<JsonElement> registryreadops = RegistryReadOps.m_135651_(JsonOps.INSTANCE, p_91179_, p_91205_);
--         DataResult<WorldGenSettings> dataresult = WorldGenSettings.f_64600_.encodeStart(registrywriteops, p_91206_).setLifecycle(Lifecycle.stable()).flatMap((p_91257_) -> {
--            return WorldGenSettings.f_64600_.parse(registryreadops, p_91257_);
-+         RegistryReadOps<JsonElement> registryreadops = RegistryReadOps.m_135651_(JsonOps.INSTANCE, p_238187_5_, p_91205_);
-+         DataResult<WorldGenSettings> dataresult = WorldGenSettings.f_64600_.encodeStart(registrywriteops, p_91206_).setLifecycle(Lifecycle.stable()).flatMap((p_243209_1_) -> {
-+            return WorldGenSettings.f_64600_.parse(registryreadops, p_243209_1_);
+@@ -1646,10 +_,10 @@
           });
           WorldGenSettings worldgensettings = dataresult.resultOrPartial(Util.m_137489_("Error reading worldgen settings after loading data packs: ", f_90982_::error)).orElse(p_91206_);
           return new PrimaryLevelData(p_91204_, worldgensettings, dataresult.lifecycle());
@@ -437,25 +364,17 @@
              minecraft$serverstem.m_91433_().m_136179_();
              YggdrasilAuthenticationService yggdrasilauthenticationservice = new YggdrasilAuthenticationService(this.f_91030_);
              MinecraftSessionService minecraftsessionservice = yggdrasilauthenticationservice.createMinecraftSessionService();
-@@ -1695,9 +_,9 @@
-             SkullBlockEntity.m_59764_(gameprofilecache);
+@@ -1696,7 +_,7 @@
              SkullBlockEntity.m_59771_(minecraftsessionservice);
              GameProfileCache.m_11004_(false);
--            this.f_91007_ = MinecraftServer.m_129872_((p_91189_) -> {
+             this.f_91007_ = MinecraftServer.m_129872_((p_91189_) -> {
 -               return new IntegratedServer(p_91189_, this, p_91221_, levelstoragesource$levelstorageaccess, minecraft$serverstem.m_91432_(), minecraft$serverstem.m_91433_(), worlddata, minecraftsessionservice, gameprofilerepository, gameprofilecache, (p_91343_) -> {
--                  StoringChunkProgressListener storingchunkprogresslistener = new StoringChunkProgressListener(p_91343_ + 0);
-+            this.f_91007_ = MinecraftServer.m_129872_((p_238188_8_) -> {
-+               return new IntegratedServer(p_238188_8_, this, dyn_f, levelstoragesource$levelstorageaccess, minecraft$serverstem.m_91432_(), minecraft$serverstem.m_91433_(), worlddata, minecraftsessionservice, gameprofilerepository, gameprofilecache, (p_238211_1_) -> {
-+                  StoringChunkProgressListener storingchunkprogresslistener = new StoringChunkProgressListener(p_238211_1_ + 0);
++               return new IntegratedServer(p_91189_, this, dyn_f, levelstoragesource$levelstorageaccess, minecraft$serverstem.m_91432_(), minecraft$serverstem.m_91433_(), worlddata, minecraftsessionservice, gameprofilerepository, gameprofilecache, (p_91343_) -> {
+                   StoringChunkProgressListener storingchunkprogresslistener = new StoringChunkProgressListener(p_91343_ + 0);
                    storingchunkprogresslistener.m_9662_();
                    this.f_90999_.set(storingchunkprogresslistener);
-                   return new ProcessorChunkProgressListener(storingchunkprogresslistener, this.f_91023_::add);
-@@ -1738,14 +_,19 @@
-          this.f_91026_.m_7238_();
-          SocketAddress socketaddress = this.f_91007_.m_129919_().m_9708_();
-          Connection connection = Connection.m_129493_(socketaddress);
--         connection.m_129505_(new ClientHandshakePacketListenerImpl(connection, this, (Screen)null, (p_91335_) -> {
-+         connection.m_129505_(new ClientHandshakePacketListenerImpl(connection, this, (Screen)null, (p_229998_0_) -> {
+@@ -1741,11 +_,16 @@
+          connection.m_129505_(new ClientHandshakePacketListenerImpl(connection, this, (Screen)null, (p_91335_) -> {
           }));
           connection.m_129512_(new ClientIntentionPacket(socketaddress.toString(), 0, ConnectionProtocol.LOGIN));
 -         connection.m_129512_(new ServerboundHelloPacket(this.m_91094_().m_92548_()));
@@ -473,27 +392,6 @@
           });
           minecraft$serverstem.close();
  
-@@ -1770,16 +_,16 @@
-             component1 = new TranslatableComponent("selectWorld.backupWarning.experimental");
-          }
- 
--         this.m_91152_(new BackupConfirmScreen((Screen)null, (p_91229_, p_91230_) -> {
--            if (p_91229_) {
-+         this.m_91152_(new BackupConfirmScreen((Screen)null, (p_241561_3_, p_241561_4_) -> {
-+            if (p_241561_3_) {
-                EditWorldScreen.m_101260_(this.f_91031_, p_91145_);
-             }
- 
-             p_91147_.run();
-          }, component, component1, false));
-       } else {
--         this.m_91152_(new ConfirmScreen((p_91199_) -> {
--            if (p_91199_) {
-+         this.m_91152_(new ConfirmScreen((p_241560_3_) -> {
-+            if (p_241560_3_) {
-                p_91147_.run();
-             } else {
-                this.m_91152_((Screen)null);
 @@ -1815,6 +_,7 @@
     }
  
@@ -647,19 +545,14 @@
        }
     }
  
-@@ -2134,9 +_,10 @@
+@@ -2134,6 +_,7 @@
        return f_90981_;
     }
  
 +   @Deprecated // Forge: Use selective scheduleResourceRefresh method in FMLClientHandler
     public CompletableFuture<Void> m_91088_() {
--      return this.m_18691_(this::m_91391_).thenCompose((p_91249_) -> {
--         return p_91249_;
-+      return this.m_18691_(this::m_91391_).thenCompose((p_229993_0_) -> {
-+         return p_229993_0_;
-       });
-    }
- 
+       return this.m_18691_(this::m_91391_).thenCompose((p_91249_) -> {
+          return p_91249_;
 @@ -2445,7 +_,7 @@
           supplier = m_91352_(supplier);
        }

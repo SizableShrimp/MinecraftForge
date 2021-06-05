@@ -1,6 +1,6 @@
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -224,11 +_,11 @@
+@@ -224,7 +_,7 @@
  
     public static <S extends MinecraftServer> S m_129872_(Function<Thread, S> p_129873_) {
        AtomicReference<S> atomicreference = new AtomicReference<>();
@@ -8,13 +8,7 @@
 +      Thread thread = new Thread(net.minecraftforge.fml.common.thread.SidedThreadGroups.SERVER, () -> {
           atomicreference.get().m_130011_();
        }, "Server thread");
--      thread.setUncaughtExceptionHandler((p_129857_, p_129858_) -> {
--         f_129750_.error(p_129858_);
-+      thread.setUncaughtExceptionHandler((p_240779_0_, p_240779_1_) -> {
-+         f_129750_.error(p_240779_1_);
-       });
-       S s = p_129873_.apply(thread);
-       atomicreference.set(s);
+       thread.setUncaughtExceptionHandler((p_129857_, p_129858_) -> {
 @@ -372,6 +_,7 @@
              worldborder.m_61929_(new BorderChangeListener.DelegateBorderChangeListener(serverlevel1.m_6857_()));
              this.f_129762_.put(resourcekey1, serverlevel1);
@@ -23,20 +17,14 @@
        }
  
     }
-@@ -383,10 +_,11 @@
+@@ -383,6 +_,7 @@
        } else if (p_129809_) {
           p_129807_.m_7250_(BlockPos.f_121853_.m_7494_(), 0.0F);
        } else {
 +         if (net.minecraftforge.event.ForgeEventFactory.onCreateWorldSpawn(p_129806_, p_129807_)) return;
           BiomeSource biomesource = chunkgenerator.m_62218_();
           Random random = new Random(p_129806_.m_7328_());
--         BlockPos blockpos = biomesource.m_47909_(0, p_129806_.m_5736_(), 0, 256, (p_129837_) -> {
--            return p_129837_.m_47518_().m_48353_();
-+         BlockPos blockpos = biomesource.m_47909_(0, p_129806_.m_5736_(), 0, 256, (p_244265_0_) -> {
-+            return p_244265_0_.m_47518_().m_48353_();
-          }, random);
-          ChunkPos chunkpos = blockpos == null ? new ChunkPos(0, 0) : new ChunkPos(blockpos);
-          if (blockpos == null) {
+          BlockPos blockpos = biomesource.m_47909_(0, p_129806_.m_5736_(), 0, 256, (p_129837_) -> {
 @@ -448,6 +_,7 @@
     }
  
@@ -167,24 +155,7 @@
           for(Pack pack : this.f_129730_.m_10524_()) {
              if (stringbuilder.length() > 0) {
                 stringbuilder.append(", ");
-@@ -1264,18 +_,19 @@
-    public CompletableFuture<Void> m_129861_(Collection<String> p_129862_) {
-       CompletableFuture<Void> completablefuture = CompletableFuture.supplyAsync(() -> {
-          return p_129862_.stream().map(this.f_129730_::m_10507_).filter(Objects::nonNull).map(Pack::m_10445_).collect(ImmutableList.toImmutableList());
--      }, this).thenCompose((p_129839_) -> {
--         return ServerResources.m_136158_(p_129839_, this.m_6982_() ? Commands.CommandSelection.DEDICATED : Commands.CommandSelection.INTEGRATED, this.m_7034_(), this.f_129738_, this);
--      }).thenAcceptAsync((p_129868_) -> {
-+      }, this).thenCompose((p_240775_1_) -> {
-+         return ServerResources.m_136158_(p_240775_1_, this.m_6982_() ? Commands.CommandSelection.DEDICATED : Commands.CommandSelection.INTEGRATED, this.m_7034_(), this.f_129738_, this);
-+      }).thenAcceptAsync((p_240782_2_) -> {
-          this.f_129740_.close();
--         this.f_129740_ = p_129868_;
-+         this.f_129740_ = p_240782_2_;
-          this.f_129730_.m_10509_(p_129862_);
-          this.f_129749_.m_6645_(m_129817_(this.f_129730_));
--         p_129868_.m_136179_();
-+         p_240782_2_.m_136179_();
-          this.m_6846_().m_11302_();
+@@ -1276,6 +_,7 @@
           this.m_6846_().m_11315_();
           this.f_129734_.m_136120_(this.f_129740_.m_136157_());
           this.f_129741_.m_74335_(this.f_129740_.m_136178_());
@@ -208,17 +179,6 @@
        } else {
           Set<String> set = Sets.newLinkedHashSet();
  
-@@ -1321,8 +_,8 @@
-    private static DataPackConfig m_129817_(PackRepository p_129818_) {
-       Collection<String> collection = p_129818_.m_10523_();
-       List<String> list = ImmutableList.copyOf(collection);
--      List<String> list1 = p_129818_.m_10514_().stream().filter((p_129865_) -> {
--         return !collection.contains(p_129865_);
-+      List<String> list1 = p_129818_.m_10514_().stream().filter((p_240781_1_) -> {
-+         return !collection.contains(p_240781_1_);
-       }).collect(ImmutableList.toImmutableList());
-       return new DataPackConfig(list, list1);
-    }
 @@ -1438,6 +_,31 @@
  
     public abstract boolean m_7779_(GameProfile p_129840_);

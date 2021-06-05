@@ -51,53 +51,6 @@
           p_20601_.m_47205_(t);
        }
  
-@@ -346,7 +_,7 @@
-          aabb = aabb.m_82363_(0.0D, -1.0D, 0.0D);
-       }
- 
--      Stream<VoxelShape> stream = p_20626_.m_7786_((Entity)null, aabb, (p_20612_) -> {
-+      Stream<VoxelShape> stream = p_20626_.m_7786_((Entity)null, aabb, (p_233596_0_) -> {
-          return true;
-       });
-       return 1.0D + Shapes.m_83134_(Direction.Axis.Y, p_20629_, stream, p_20628_ ? -2.0D : -1.0D);
-@@ -436,10 +_,10 @@
-    }
- 
-    public static Optional<Entity> m_20642_(CompoundTag p_20643_, Level p_20644_) {
--      return Util.m_137521_(m_20637_(p_20643_).map((p_20666_) -> {
--         return p_20666_.m_20615_(p_20644_);
--      }), (p_20641_) -> {
--         p_20641_.m_20258_(p_20643_);
-+      return Util.m_137521_(m_20637_(p_20643_).map((p_220337_1_) -> {
-+         return p_220337_1_.m_20615_(p_20644_);
-+      }), (p_220329_1_) -> {
-+         p_220329_1_.m_20258_(p_20643_);
-       }, () -> {
-          f_20534_.warn("Skipping Entity with id {}", (Object)p_20643_.m_128461_("id"));
-       });
-@@ -476,19 +_,19 @@
- 
-    @Nullable
-    public static Entity m_20645_(CompoundTag p_20646_, Level p_20647_, Function<Entity, Entity> p_20648_) {
--      return m_20669_(p_20646_, p_20647_).map(p_20648_).map((p_20653_) -> {
-+      return m_20669_(p_20646_, p_20647_).map(p_20648_).map((p_220346_3_) -> {
-          if (p_20646_.m_128425_("Passengers", 9)) {
-             ListTag listtag = p_20646_.m_128437_("Passengers", 10);
- 
-             for(int i = 0; i < listtag.size(); ++i) {
-                Entity entity = m_20645_(listtag.m_128728_(i), p_20647_, p_20648_);
-                if (entity != null) {
--                  entity.m_7998_(p_20653_, true);
-+                  entity.m_7998_(p_220346_3_, true);
-                }
-             }
-          }
- 
--         return p_20653_;
-+         return p_220346_3_;
-       }).orElse((Entity)null);
-    }
- 
 @@ -502,14 +_,23 @@
     }
  
@@ -154,13 +107,11 @@
        private Builder(EntityType.EntityFactory<T> p_20696_, MobCategory p_20697_) {
           this.f_20685_ = p_20696_;
           this.f_20686_ = p_20697_;
-@@ -540,8 +_,8 @@
-       }
+@@ -541,7 +_,7 @@
  
        public static <T extends Entity> EntityType.Builder<T> m_20710_(MobCategory p_20711_) {
--         return new EntityType.Builder<>((p_20708_, p_20709_) -> {
+          return new EntityType.Builder<>((p_20708_, p_20709_) -> {
 -            return null;
-+         return new EntityType.Builder<>((p_220323_0_, p_220323_1_) -> {
 +            return (T)null;
           }, p_20711_);
        }

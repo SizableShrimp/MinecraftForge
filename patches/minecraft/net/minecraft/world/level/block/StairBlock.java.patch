@@ -1,20 +1,5 @@
 --- a/net/minecraft/world/level/block/StairBlock.java
 +++ b/net/minecraft/world/level/block/StairBlock.java
-@@ -55,10 +_,10 @@
-    private final BlockState f_56859_;
- 
-    private static VoxelShape[] m_56933_(VoxelShape p_56934_, VoxelShape p_56935_, VoxelShape p_56936_, VoxelShape p_56937_, VoxelShape p_56938_) {
--      return IntStream.range(0, 16).mapToObj((p_56945_) -> {
--         return m_56864_(p_56945_, p_56934_, p_56935_, p_56936_, p_56937_, p_56938_);
--      }).toArray((p_56949_) -> {
--         return new VoxelShape[p_56949_];
-+      return IntStream.range(0, 16).mapToObj((p_199780_5_) -> {
-+         return m_56864_(p_199780_5_, p_56934_, p_56935_, p_56936_, p_56937_, p_56938_);
-+      }).toArray((p_199778_0_) -> {
-+         return new VoxelShape[p_199778_0_];
-       });
-    }
- 
 @@ -83,11 +_,21 @@
        return voxelshape;
     }

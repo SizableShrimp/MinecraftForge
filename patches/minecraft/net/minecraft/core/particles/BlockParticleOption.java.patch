@@ -1,25 +1,9 @@
 --- a/net/minecraft/core/particles/BlockParticleOption.java
 +++ b/net/minecraft/core/particles/BlockParticleOption.java
-@@ -26,10 +_,10 @@
-    private final BlockState f_123626_;
- 
-    public static Codec<BlockParticleOption> m_123634_(ParticleType<BlockParticleOption> p_123635_) {
--      return BlockState.f_61039_.xmap((p_123638_) -> {
--         return new BlockParticleOption(p_123635_, p_123638_);
--      }, (p_123633_) -> {
--         return p_123633_.f_123626_;
-+      return BlockState.f_61039_.xmap((p_239801_1_) -> {
-+         return new BlockParticleOption(p_123635_, p_239801_1_);
-+      }, (p_239799_0_) -> {
-+         return p_239799_0_.f_123626_;
-       });
-    }
- 
-@@ -53,5 +_,16 @@
-    @OnlyIn(Dist.CLIENT)
+@@ -54,4 +_,15 @@
     public BlockState m_123642_() {
        return this.f_123626_;
-+   }
+    }
 +
 +   //FORGE: Add a source pos property, so we can provide models with additional model data
 +   private net.minecraft.core.BlockPos pos;
@@ -30,5 +14,5 @@
 +
 +   public net.minecraft.core.BlockPos getPos() {
 +      return pos;
-    }
++   }
  }

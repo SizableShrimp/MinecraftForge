@@ -1,23 +1,5 @@
 --- a/net/minecraft/client/renderer/DimensionSpecialEffects.java
 +++ b/net/minecraft/client/renderer/DimensionSpecialEffects.java
-@@ -13,12 +_,12 @@
- 
- @OnlyIn(Dist.CLIENT)
- public abstract class DimensionSpecialEffects {
--   private static final Object2ObjectMap<ResourceLocation, DimensionSpecialEffects> f_108857_ = Util.m_137469_(new Object2ObjectArrayMap<>(), (p_108881_) -> {
-+   private static final Object2ObjectMap<ResourceLocation, DimensionSpecialEffects> f_108857_ = Util.m_137469_(new Object2ObjectArrayMap<>(), (p_239214_0_) -> {
-       DimensionSpecialEffects.OverworldEffects dimensionspecialeffects$overworldeffects = new DimensionSpecialEffects.OverworldEffects();
--      p_108881_.defaultReturnValue(dimensionspecialeffects$overworldeffects);
--      p_108881_.put(DimensionType.f_63840_, dimensionspecialeffects$overworldeffects);
--      p_108881_.put(DimensionType.f_63841_, new DimensionSpecialEffects.NetherEffects());
--      p_108881_.put(DimensionType.f_63842_, new DimensionSpecialEffects.EndEffects());
-+      p_239214_0_.defaultReturnValue(dimensionspecialeffects$overworldeffects);
-+      p_239214_0_.put(DimensionType.f_63840_, dimensionspecialeffects$overworldeffects);
-+      p_239214_0_.put(DimensionType.f_63841_, new DimensionSpecialEffects.NetherEffects());
-+      p_239214_0_.put(DimensionType.f_63842_, new DimensionSpecialEffects.EndEffects());
-    });
-    private final float[] f_108858_ = new float[4];
-    private final float f_108859_;
 @@ -26,6 +_,10 @@
     private final DimensionSpecialEffects.SkyType f_108861_;
     private final boolean f_108862_;

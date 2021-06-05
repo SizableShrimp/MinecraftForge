@@ -26,14 +26,3 @@
           if (flag) {
              BlockState blockstate1 = p_51249_.m_8055_(blockpos.m_7495_());
              return m_51319_(blockstate1);
-@@ -247,8 +_,8 @@
-    }
- 
-    public static boolean m_51321_(BlockState p_51322_) {
--      return p_51322_.m_60622_(BlockTags.f_13087_, (p_51262_) -> {
--         return p_51262_.m_61138_(BlockStateProperties.f_61362_) && p_51262_.m_61138_(BlockStateProperties.f_61443_);
-+      return p_51322_.m_60622_(BlockTags.f_13087_, (p_241469_0_) -> {
-+         return p_241469_0_.m_61138_(BlockStateProperties.f_61362_) && p_241469_0_.m_61138_(BlockStateProperties.f_61443_);
-       }) && !p_51322_.m_61143_(BlockStateProperties.f_61362_) && !p_51322_.m_61143_(BlockStateProperties.f_61443_);
-    }
- }

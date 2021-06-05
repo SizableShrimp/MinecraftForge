@@ -8,34 +8,8 @@
  import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
  import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
  import net.minecraft.world.entity.item.ItemEntity;
-@@ -76,21 +_,21 @@
-    private static final EntityDataAccessor<Boolean> f_28105_ = SynchedEntityData.m_135353_(Cat.class, EntityDataSerializers.f_135035_);
-    private static final EntityDataAccessor<Boolean> f_28106_ = SynchedEntityData.m_135353_(Cat.class, EntityDataSerializers.f_135035_);
-    private static final EntityDataAccessor<Integer> f_28107_ = SynchedEntityData.m_135353_(Cat.class, EntityDataSerializers.f_135028_);
--   public static final Map<Integer, ResourceLocation> f_28102_ = Util.m_137469_(Maps.newHashMap(), (p_28140_) -> {
--      p_28140_.put(0, new ResourceLocation("textures/entity/cat/tabby.png"));
--      p_28140_.put(1, new ResourceLocation("textures/entity/cat/black.png"));
--      p_28140_.put(2, new ResourceLocation("textures/entity/cat/red.png"));
--      p_28140_.put(3, new ResourceLocation("textures/entity/cat/siamese.png"));
--      p_28140_.put(4, new ResourceLocation("textures/entity/cat/british_shorthair.png"));
--      p_28140_.put(5, new ResourceLocation("textures/entity/cat/calico.png"));
--      p_28140_.put(6, new ResourceLocation("textures/entity/cat/persian.png"));
--      p_28140_.put(7, new ResourceLocation("textures/entity/cat/ragdoll.png"));
--      p_28140_.put(8, new ResourceLocation("textures/entity/cat/white.png"));
--      p_28140_.put(9, new ResourceLocation("textures/entity/cat/jellie.png"));
--      p_28140_.put(10, new ResourceLocation("textures/entity/cat/all_black.png"));
-+   public static final Map<Integer, ResourceLocation> f_28102_ = Util.m_137469_(Maps.newHashMap(), (p_213410_0_) -> {
-+      p_213410_0_.put(0, new ResourceLocation("textures/entity/cat/tabby.png"));
-+      p_213410_0_.put(1, new ResourceLocation("textures/entity/cat/black.png"));
-+      p_213410_0_.put(2, new ResourceLocation("textures/entity/cat/red.png"));
-+      p_213410_0_.put(3, new ResourceLocation("textures/entity/cat/siamese.png"));
-+      p_213410_0_.put(4, new ResourceLocation("textures/entity/cat/british_shorthair.png"));
-+      p_213410_0_.put(5, new ResourceLocation("textures/entity/cat/calico.png"));
-+      p_213410_0_.put(6, new ResourceLocation("textures/entity/cat/persian.png"));
-+      p_213410_0_.put(7, new ResourceLocation("textures/entity/cat/ragdoll.png"));
-+      p_213410_0_.put(8, new ResourceLocation("textures/entity/cat/white.png"));
-+      p_213410_0_.put(9, new ResourceLocation("textures/entity/cat/jellie.png"));
-+      p_213410_0_.put(10, new ResourceLocation("textures/entity/cat/all_black.png"));
+@@ -90,7 +_,7 @@
+       p_28140_.put(10, new ResourceLocation("textures/entity/cat/all_black.png"));
     });
     private Cat.CatAvoidEntityGoal<Player> f_28108_;
 -   private TemptGoal f_28109_;

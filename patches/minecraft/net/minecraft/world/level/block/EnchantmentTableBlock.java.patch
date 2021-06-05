@@ -9,14 +9,3 @@
                       if (!p_52982_.m_46859_(p_52983_.m_7918_(i / 2, 0, j / 2))) {
                          break;
                       }
-@@ -92,8 +_,8 @@
-       BlockEntity blockentity = p_52994_.m_7702_(p_52995_);
-       if (blockentity instanceof EnchantmentTableBlockEntity) {
-          Component component = ((Nameable)blockentity).m_5446_();
--         return new SimpleMenuProvider((p_52959_, p_52960_, p_52961_) -> {
--            return new EnchantmentMenu(p_52959_, p_52960_, ContainerLevelAccess.m_39289_(p_52994_, p_52995_));
-+         return new SimpleMenuProvider((p_220147_2_, p_220147_3_, p_220147_4_) -> {
-+            return new EnchantmentMenu(p_220147_2_, p_220147_3_, ContainerLevelAccess.m_39289_(p_52994_, p_52995_));
-          }, component);
-       } else {
-          return null;

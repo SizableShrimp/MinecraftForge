@@ -24,17 +24,6 @@
        float f = this.f_109461_.f_91073_.m_46722_(1.0F) / (Minecraft.m_91405_() ? 1.0F : 2.0F);
        if (!(f <= 0.0F)) {
           Random random = new Random((long)this.f_109477_ * 312987231L);
-@@ -797,8 +_,8 @@
-                }
-             }
- 
--            list.sort(Comparator.comparingDouble((p_109727_) -> {
--               return blockpos.m_123331_(p_109727_.f_109839_.m_112839_().m_7918_(8, 8, 8));
-+            list.sort(Comparator.comparingDouble((p_230016_1_) -> {
-+               return blockpos.m_123331_(p_230016_1_.f_109839_.m_112839_().m_7918_(8, 8, 8));
-             }));
-             queue.addAll(list);
-          }
 @@ -834,7 +_,7 @@
              this.f_109448_ = true;
              BlockPos blockpos2 = chunkrenderdispatcher$renderchunk4.m_112839_().m_7918_(8, 8, 8);
@@ -87,19 +76,6 @@
                 BlockPos blockpos3 = blockentity1.m_58899_();
                 MultiBufferSource multibuffersource1 = multibuffersource$buffersource;
                 p_109600_.m_85836_();
-@@ -1024,9 +_,9 @@
-                   if (j3 >= 0) {
-                      PoseStack.Pose posestack$pose = p_109600_.m_85850_();
-                      VertexConsumer vertexconsumer = new SheetedDecalTextureGenerator(this.f_109464_.m_110108_().m_6299_(ModelBakery.f_119229_.get(j3)), posestack$pose.m_85861_(), posestack$pose.m_85864_());
--                     multibuffersource1 = (p_109712_) -> {
--                        VertexConsumer vertexconsumer3 = multibuffersource$buffersource.m_6299_(p_109712_);
--                        return p_109712_.m_110405_() ? VertexMultiConsumer.m_86168_(vertexconsumer, vertexconsumer3) : vertexconsumer3;
-+                     multibuffersource1 = (p_230014_2_) -> {
-+                        VertexConsumer vertexconsumer3 = multibuffersource$buffersource.m_6299_(p_230014_2_);
-+                        return p_230014_2_.m_110405_() ? VertexMultiConsumer.m_86168_(vertexconsumer, vertexconsumer3) : vertexconsumer3;
-                      };
-                   }
-                }
 @@ -1039,6 +_,7 @@
  
        synchronized(this.f_109468_) {
@@ -174,19 +150,6 @@
                 this.f_109436_.m_112715_(chunkrenderdispatcher$renderchunk);
              } else {
                 chunkrenderdispatcher$renderchunk.m_112820_(this.f_109436_);
-@@ -1947,9 +_,9 @@
- 
-    private static void m_109782_(PoseStack p_109783_, VertexConsumer p_109784_, VoxelShape p_109785_, double p_109786_, double p_109787_, double p_109788_, float p_109789_, float p_109790_, float p_109791_, float p_109792_) {
-       Matrix4f matrix4f = p_109783_.m_85850_().m_85861_();
--      p_109785_.m_83224_((p_109687_, p_109688_, p_109689_, p_109690_, p_109691_, p_109692_) -> {
--         p_109784_.m_85982_(matrix4f, (float)(p_109687_ + p_109786_), (float)(p_109688_ + p_109787_), (float)(p_109689_ + p_109788_)).m_85950_(p_109789_, p_109790_, p_109791_, p_109792_).m_5752_();
--         p_109784_.m_85982_(matrix4f, (float)(p_109690_ + p_109786_), (float)(p_109691_ + p_109787_), (float)(p_109692_ + p_109788_)).m_85950_(p_109789_, p_109790_, p_109791_, p_109792_).m_5752_();
-+      p_109785_.m_83224_((p_230013_12_, p_230013_14_, p_230013_16_, p_230013_18_, p_230013_20_, p_230013_22_) -> {
-+         p_109784_.m_85982_(matrix4f, (float)(p_230013_12_ + p_109786_), (float)(p_230013_14_ + p_109787_), (float)(p_230013_16_ + p_109788_)).m_85950_(p_109789_, p_109790_, p_109791_, p_109792_).m_5752_();
-+         p_109784_.m_85982_(matrix4f, (float)(p_230013_18_ + p_109786_), (float)(p_230013_20_ + p_109787_), (float)(p_230013_22_ + p_109788_)).m_85950_(p_109789_, p_109790_, p_109791_, p_109792_).m_5752_();
-       });
-    }
- 
 @@ -2080,7 +_,12 @@
        this.f_109469_.m_110859_(p_109502_, p_109503_, p_109504_, p_109505_);
     }
@@ -239,15 +202,6 @@
              this.f_109465_.m_104677_(p_109535_, soundtype.m_56775_(), SoundSource.BLOCKS, (soundtype.m_56773_() + 1.0F) / 2.0F, soundtype.m_56774_() * 0.8F, false);
           }
  
-@@ -2497,7 +_,7 @@
- 
-          blockdestructionprogress1.m_139981_(p_109777_);
-          blockdestructionprogress1.m_139986_(this.f_109477_);
--         this.f_109409_.computeIfAbsent(blockdestructionprogress1.m_139985_().m_121878_(), (p_109779_) -> {
-+         this.f_109409_.computeIfAbsent(blockdestructionprogress1.m_139985_().m_121878_(), (p_230017_0_) -> {
-             return Sets.newTreeSet();
-          }).add(blockdestructionprogress1);
-       } else {
 @@ -2535,7 +_,7 @@
        } else {
           int i = p_109538_.m_45517_(LightLayer.SKY, p_109540_);

@@ -107,19 +107,19 @@
     public void m_111067_(PoseStack.Pose p_111068_, VertexConsumer p_111069_, @Nullable BlockState p_111070_, BakedModel p_111071_, float p_111072_, float p_111073_, float p_111074_, int p_111075_, int p_111076_) {
 +      renderModel(p_111068_, p_111069_, p_111070_, p_111071_, p_111072_, p_111073_, p_111074_, p_111075_, p_111076_, net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
 +   }
-+   public void renderModel(PoseStack.Pose p_228804_1_, VertexConsumer p_228804_2_, @Nullable BlockState p_228804_3_, BakedModel p_228804_4_, float p_228804_5_, float p_228804_6_, float p_228804_7_, int p_228804_8_, int p_228804_9_, net.minecraftforge.client.model.data.IModelData modelData) {
++   public void renderModel(PoseStack.Pose p_111068_, VertexConsumer p_111069_, @Nullable BlockState p_111070_, BakedModel p_111071_, float p_111072_, float p_111073_, float p_111074_, int p_111075_, int p_111076_, net.minecraftforge.client.model.data.IModelData modelData) {
        Random random = new Random();
        long i = 42L;
  
        for(Direction direction : Direction.values()) {
           random.setSeed(42L);
 -         m_111058_(p_111068_, p_111069_, p_111072_, p_111073_, p_111074_, p_111071_.m_6840_(p_111070_, direction, random), p_111075_, p_111076_);
-+         m_111058_(p_228804_1_, p_228804_2_, p_228804_5_, p_228804_6_, p_228804_7_, p_228804_4_.getQuads(p_228804_3_, direction, random, modelData), p_228804_8_, p_228804_9_);
++         m_111058_(p_111068_, p_111069_, p_111072_, p_111073_, p_111074_, p_111071_.getQuads(p_111070_, direction, random, modelData), p_111075_, p_111076_);
        }
  
        random.setSeed(42L);
 -      m_111058_(p_111068_, p_111069_, p_111072_, p_111073_, p_111074_, p_111071_.m_6840_(p_111070_, (Direction)null, random), p_111075_, p_111076_);
-+      m_111058_(p_228804_1_, p_228804_2_, p_228804_5_, p_228804_6_, p_228804_7_, p_228804_4_.getQuads(p_228804_3_, (Direction)null, random, modelData), p_228804_8_, p_228804_9_);
++      m_111058_(p_111068_, p_111069_, p_111072_, p_111073_, p_111074_, p_111071_.getQuads(p_111070_, (Direction)null, random, modelData), p_111075_, p_111076_);
     }
  
     private static void m_111058_(PoseStack.Pose p_111059_, VertexConsumer p_111060_, float p_111061_, float p_111062_, float p_111063_, List<BakedQuad> p_111064_, int p_111065_, int p_111066_) {

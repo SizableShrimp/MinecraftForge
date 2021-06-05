@@ -33,17 +33,6 @@
        this.f_11197_.put(p_11263_.m_20148_(), p_11263_);
        this.m_11268_(new ClientboundPlayerInfoPacket(ClientboundPlayerInfoPacket.Action.ADD_PLAYER, p_11263_));
  
-@@ -193,8 +_,8 @@
- 
-       if (compoundtag != null && compoundtag.m_128425_("RootVehicle", 10)) {
-          CompoundTag compoundtag1 = compoundtag.m_128469_("RootVehicle");
--         Entity entity1 = EntityType.m_20645_(compoundtag1.m_128469_("Entity"), serverlevel1, (p_11223_) -> {
--            return !serverlevel1.m_8847_(p_11223_) ? null : p_11223_;
-+         Entity entity1 = EntityType.m_20645_(compoundtag1.m_128469_("Entity"), serverlevel1, (p_217885_1_) -> {
-+            return !serverlevel1.m_8847_(p_217885_1_) ? null : p_217885_1_;
-          });
-          if (entity1 != null) {
-             UUID uuid;
 @@ -227,6 +_,7 @@
        }
  

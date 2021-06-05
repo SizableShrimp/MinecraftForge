@@ -8,22 +8,6 @@
        this.f_92060_ = p_92138_;
        this.f_92110_ = new File(p_92139_, "options.txt");
        if (p_92138_.m_91103_() && Runtime.getRuntime().maxMemory() >= 1000000000L) {
-@@ -201,12 +_,12 @@
-          CompoundTag compoundtag = new CompoundTag();
- 
-          try (BufferedReader bufferedreader = Files.newReader(this.f_92110_, Charsets.UTF_8)) {
--            bufferedreader.lines().forEach((p_92168_) -> {
-+            bufferedreader.lines().forEach((p_230004_1_) -> {
-                try {
--                  Iterator<String> iterator = f_92107_.split(p_92168_).iterator();
-+                  Iterator<String> iterator = f_92107_.split(p_230004_1_).iterator();
-                   compoundtag.m_128359_(iterator.next(), iterator.next());
-                } catch (Exception exception2) {
--                  f_92077_.warn("Skipping bad option: {}", (Object)p_92168_);
-+                  f_92077_.warn("Skipping bad option: {}", (Object)p_230004_1_);
-                }
- 
-             });
 @@ -520,7 +_,11 @@
  
                 for(KeyMapping keymapping : this.f_92059_) {

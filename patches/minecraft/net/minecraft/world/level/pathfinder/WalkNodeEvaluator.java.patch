@@ -1,23 +1,5 @@
 --- a/net/minecraft/world/level/pathfinder/WalkNodeEvaluator.java
 +++ b/net/minecraft/world/level/pathfinder/WalkNodeEvaluator.java
-@@ -309,7 +_,7 @@
-    }
- 
-    private boolean m_77634_(AABB p_77635_) {
--      return this.f_77546_.computeIfAbsent(p_77635_, (p_77638_) -> {
-+      return this.f_77546_.computeIfAbsent(p_77635_, (p_237237_2_) -> {
-          return !this.f_77312_.m_45756_(this.f_77313_, p_77635_);
-       });
-    }
-@@ -386,7 +_,7 @@
-    }
- 
-    private BlockPathTypes m_77567_(Mob p_77568_, int p_77569_, int p_77570_, int p_77571_) {
--      return this.f_77545_.computeIfAbsent(BlockPos.m_121882_(p_77569_, p_77570_, p_77571_), (p_77566_) -> {
-+      return this.f_77545_.computeIfAbsent(BlockPos.m_121882_(p_77569_, p_77570_, p_77571_), (p_237229_5_) -> {
-          return this.m_7209_(this.f_77312_, p_77569_, p_77570_, p_77571_, p_77568_, this.f_77315_, this.f_77316_, this.f_77317_, this.m_77360_(), this.m_77357_());
-       });
-    }
 @@ -463,9 +_,11 @@
  
     protected static BlockPathTypes m_77643_(BlockGetter p_77644_, BlockPos p_77645_) {

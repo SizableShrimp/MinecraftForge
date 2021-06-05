@@ -9,17 +9,6 @@
     BASE("base", "b", false),
     SQUARE_BOTTOM_LEFT("square_bottom_left", "bl"),
     SQUARE_BOTTOM_RIGHT("square_bottom_right", "br"),
-@@ -57,8 +_,8 @@
- 
-    private static final BannerPattern[] f_58529_ = values();
-    public static final int f_58526_ = f_58529_.length;
--   public static final int f_58527_ = (int)Arrays.stream(f_58529_).filter((p_58581_) -> {
--      return p_58581_.f_58530_;
-+   public static final int f_58527_ = (int)Arrays.stream(f_58529_).filter((p_235649_0_) -> {
-+      return p_235649_0_.f_58530_;
-    }).count();
-    public static final int f_58528_ = f_58526_ - f_58527_ - 1;
-    private final boolean f_58530_;
 @@ -100,6 +_,14 @@
        }
  

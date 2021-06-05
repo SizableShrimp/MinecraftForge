@@ -1,16 +1,5 @@
 --- a/net/minecraft/world/entity/decoration/HangingEntity.java
 +++ b/net/minecraft/world/entity/decoration/HangingEntity.java
-@@ -25,8 +_,8 @@
- import org.apache.commons.lang3.Validate;
- 
- public abstract class HangingEntity extends Entity {
--   protected static final Predicate<Entity> f_31697_ = (p_31734_) -> {
--      return p_31734_ instanceof HangingEntity;
-+   protected static final Predicate<Entity> f_31697_ = (p_210144_0_) -> {
-+      return p_210144_0_ instanceof HangingEntity;
-    };
-    private int f_31700_;
-    protected BlockPos f_31698_;
 @@ -121,6 +_,8 @@
                 int j1 = (j - 1) / -2;
                 blockpos$mutableblockpos.m_122190_(blockpos).m_122175_(direction, k + i1).m_122175_(Direction.UP, l + j1);

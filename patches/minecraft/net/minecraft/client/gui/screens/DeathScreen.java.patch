@@ -1,16 +1,8 @@
 --- a/net/minecraft/client/gui/screens/DeathScreen.java
 +++ b/net/minecraft/client/gui/screens/DeathScreen.java
-@@ -29,12 +_,13 @@
- 
-    protected void m_7856_() {
-       this.f_95906_ = 0;
--      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 72, 200, 20, this.f_95908_ ? new TranslatableComponent("deathScreen.spectate") : new TranslatableComponent("deathScreen.respawn"), (p_95930_) -> {
-+      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 72, 200, 20, this.f_95908_ ? new TranslatableComponent("deathScreen.spectate") : new TranslatableComponent("deathScreen.respawn"), (p_213021_1_) -> {
-          this.f_96541_.f_91074_.m_7583_();
-          this.f_96541_.m_91152_((Screen)null);
+@@ -35,6 +_,7 @@
        }));
--      Button button = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 96, 200, 20, new TranslatableComponent("deathScreen.titleScreen"), (p_95925_) -> {
-+      Button button = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 96, 200, 20, new TranslatableComponent("deathScreen.titleScreen"), (p_213020_1_) -> {
+       Button button = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 96, 200, 20, new TranslatableComponent("deathScreen.titleScreen"), (p_95925_) -> {
           if (this.f_95908_) {
 +            m_95931_(true);
              this.m_95934_();

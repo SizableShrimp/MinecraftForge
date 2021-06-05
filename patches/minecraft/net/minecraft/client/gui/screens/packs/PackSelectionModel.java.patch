@@ -1,24 +1,5 @@
 --- a/net/minecraft/client/gui/screens/packs/PackSelectionModel.java
 +++ b/net/minecraft/client/gui/screens/packs/PackSelectionModel.java
-@@ -37,14 +_,14 @@
-    }
- 
-    public Stream<PackSelectionModel.Entry> m_99913_() {
--      return this.f_99904_.stream().map((p_99920_) -> {
--         return new PackSelectionModel.UnselectedPackEntry(p_99920_);
-+      return this.f_99904_.stream().map((p_238870_1_) -> {
-+         return new PackSelectionModel.UnselectedPackEntry(p_238870_1_);
-       });
-    }
- 
-    public Stream<PackSelectionModel.Entry> m_99918_() {
--      return this.f_99903_.stream().map((p_99915_) -> {
--         return new PackSelectionModel.SelectedPackEntry(p_99915_);
-+      return this.f_99903_.stream().map((p_238866_1_) -> {
-+         return new PackSelectionModel.SelectedPackEntry(p_238866_1_);
-       });
-    }
- 
 @@ -62,49 +_,6 @@
     }
  

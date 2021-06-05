@@ -1,32 +1,14 @@
 --- a/net/minecraft/world/level/block/state/properties/WoodType.java
 +++ b/net/minecraft/world/level/block/state/properties/WoodType.java
-@@ -3,8 +_,6 @@
- import it.unimi.dsi.fastutil.objects.ObjectArraySet;
- import java.util.Set;
- import java.util.stream.Stream;
--import net.minecraftforge.api.distmarker.Dist;
--import net.minecraftforge.api.distmarker.OnlyIn;
- 
- public class WoodType {
-    private static final Set<WoodType> f_61838_ = new ObjectArraySet<>();
-@@ -27,13 +_,18 @@
-       return p_61845_;
-    }
- 
--   @OnlyIn(Dist.CLIENT)
-    public static Stream<WoodType> m_61843_() {
-       return f_61838_.stream();
-    }
- 
--   @OnlyIn(Dist.CLIENT)
+@@ -32,4 +_,11 @@
     public String m_61846_() {
        return this.f_61839_;
-+   }
+    }
 +
 +   /**
 +    * Use this to create a new {@link WoodType}. Make sure to register its rendering by enqueuing Atlases.addWoodType(...) during client setup..
 +    */
 +   public static WoodType create(String name) {
 +      return new WoodType(name);
-    }
++   }
  }

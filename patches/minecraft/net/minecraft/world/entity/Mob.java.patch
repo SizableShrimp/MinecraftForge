@@ -25,21 +25,6 @@
           for(ItemEntity itementity : this.f_19853_.m_45976_(ItemEntity.class, this.m_20191_().m_82377_(1.0D, 0.0D, 1.0D))) {
              if (!itementity.f_19866_ && !itementity.m_32055_().m_41619_() && !itementity.m_32063_() && this.m_7243_(itementity.m_32055_())) {
                 this.m_7581_(itementity);
-@@ -599,10 +_,10 @@
-    public boolean m_21477_(ItemStack p_21478_, ItemStack p_21479_) {
-       if (p_21478_.m_41773_() >= p_21479_.m_41773_() && (!p_21478_.m_41782_() || p_21479_.m_41782_())) {
-          if (p_21478_.m_41782_() && p_21479_.m_41782_()) {
--            return p_21478_.m_41783_().m_128431_().stream().anyMatch((p_21513_) -> {
--               return !p_21513_.equals("Damage");
--            }) && !p_21479_.m_41783_().m_128431_().stream().anyMatch((p_21503_) -> {
--               return !p_21503_.equals("Damage");
-+            return p_21478_.m_41783_().m_128431_().stream().anyMatch((p_233664_0_) -> {
-+               return !p_233664_0_.equals("Damage");
-+            }) && !p_21479_.m_41783_().m_128431_().stream().anyMatch((p_233662_0_) -> {
-+               return !p_233662_0_.equals("Damage");
-             });
-          } else {
-             return false;
 @@ -637,6 +_,14 @@
           this.m_6091_();
        } else if (!this.m_21532_() && !this.m_8023_()) {
@@ -73,14 +58,3 @@
           }
        } else {
           return EquipmentSlot.HEAD;
-@@ -1057,8 +_,8 @@
-             if (this.f_19853_ instanceof ServerLevel) {
-                SpawnEggItem spawneggitem = (SpawnEggItem)itemstack.m_41720_();
-                Optional<Mob> optional = spawneggitem.m_43215_(p_21500_, this, (EntityType)this.m_6095_(), (ServerLevel)this.f_19853_, this.m_20182_(), itemstack);
--               optional.ifPresent((p_21476_) -> {
--                  this.m_5502_(p_21500_, p_21476_);
-+               optional.ifPresent((p_233658_2_) -> {
-+                  this.m_5502_(p_21500_, p_233658_2_);
-                });
-                return optional.isPresent() ? InteractionResult.SUCCESS : InteractionResult.PASS;
-             } else {

@@ -73,32 +73,7 @@
        String s = this.f_98510_.m_94155_();
        if (s.isEmpty()) {
           for(Item item : Registry.f_122827_) {
-@@ -355,28 +_,28 @@
-       int i = p_98620_.indexOf(58);
-       Predicate<ResourceLocation> predicate;
-       if (i == -1) {
--         predicate = (p_98609_) -> {
--            return p_98609_.m_135815_().contains(p_98620_);
-+         predicate = (p_214084_1_) -> {
-+            return p_214084_1_.m_135815_().contains(p_98620_);
-          };
-       } else {
-          String s = p_98620_.substring(0, i).trim();
-          String s1 = p_98620_.substring(i + 1).trim();
--         predicate = (p_98606_) -> {
--            return p_98606_.m_135827_().contains(s) && p_98606_.m_135815_().contains(s1);
-+         predicate = (p_214081_2_) -> {
-+            return p_214081_2_.m_135827_().contains(s) && p_214081_2_.m_135815_().contains(s1);
-          };
-       }
- 
-       TagCollection<Item> tagcollection = ItemTags.m_13193_();
--      tagcollection.m_13406_().stream().filter(predicate).forEach((p_98552_) -> {
--         Tag tag = this.f_98516_.put(p_98552_, tagcollection.m_13404_(p_98552_));
-+      tagcollection.m_13406_().stream().filter(predicate).forEach((p_214082_2_) -> {
-+         Tag tag = this.f_98516_.put(p_214082_2_, tagcollection.m_13404_(p_214082_2_));
-       });
-    }
+@@ -374,9 +_,9 @@
  
     protected void m_7027_(PoseStack p_98616_, int p_98617_, int p_98618_) {
        CreativeModeTab creativemodetab = CreativeModeTab.f_40748_[f_98507_];
@@ -199,19 +174,6 @@
        RenderSystem.m_69439_(1.0F, 1.0F, 1.0F, 1.0F);
        this.m_7025_(p_98577_, p_98578_, p_98579_);
     }
-@@ -601,9 +_,9 @@
-             }
-          }
- 
--         this.f_98516_.forEach((p_98569_, p_98570_) -> {
--            if (p_98570_.m_8110_(item)) {
--               list1.add(1, (new TextComponent("#" + p_98569_)).m_130940_(ChatFormatting.DARK_PURPLE));
-+         this.f_98516_.forEach((p_214083_2_, p_214083_3_) -> {
-+            if (p_214083_3_.m_8110_(item)) {
-+               list1.add(1, (new TextComponent("#" + p_214083_2_)).m_130940_(ChatFormatting.DARK_PURPLE));
-             }
- 
-          });
 @@ -611,7 +_,10 @@
              list1.add(1, creativemodetab.m_40786_().m_6881_().m_130940_(ChatFormatting.BLUE));
           }
