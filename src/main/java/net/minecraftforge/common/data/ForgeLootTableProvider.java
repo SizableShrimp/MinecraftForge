@@ -79,11 +79,11 @@ public class ForgeLootTableProvider extends LootTableProvider {
     }
 
     private boolean findAndReplaceInLootTableBuilder(LootTable.Builder builder, Item from, Tag.Named<Item> to) {
-        List<LootPool> lootPools = ObfuscationReflectionHelper.getPrivateValue(LootTable.Builder.class, builder, "field_216041" + "_a");
+        List<LootPool> lootPools = ObfuscationReflectionHelper.getPrivateValue(LootTable.Builder.class, builder, "f_7915" + "6_");
         boolean found = false;
 
         if (lootPools == null) {
-            throw new IllegalStateException(LootTable.Builder.class.getName() + " is missing field field_216041" + "_a");
+            throw new IllegalStateException(LootTable.Builder.class.getName() + " is missing field f_7915" + "6_");
         }
 
         for (LootPool lootPool : lootPools) {
@@ -96,12 +96,12 @@ public class ForgeLootTableProvider extends LootTableProvider {
     }
 
     private boolean findAndReplaceInLootPool(LootPool lootPool, Item from, Tag.Named<Item> to) {
-        List<LootPoolEntryContainer> lootEntries = ObfuscationReflectionHelper.getPrivateValue(LootPool.class, lootPool, "field_186453" +"_a");
-        List<LootItemCondition> lootConditions = ObfuscationReflectionHelper.getPrivateValue(LootPool.class, lootPool, "field_186454" + "_b");
+        List<LootPoolEntryContainer> lootEntries = ObfuscationReflectionHelper.getPrivateValue(LootPool.class, lootPool, "f_7902" +"3_");
+        List<LootItemCondition> lootConditions = ObfuscationReflectionHelper.getPrivateValue(LootPool.class, lootPool, "f_7902" + "4_");
         boolean found = false;
 
         if (lootEntries == null) {
-            throw new IllegalStateException(LootPool.class.getName() + " is missing field field_186453" + "_a");
+            throw new IllegalStateException(LootPool.class.getName() + " is missing field f_7902" + "3_");
         }
 
         for (LootPoolEntryContainer lootEntry : lootEntries) {
@@ -113,7 +113,7 @@ public class ForgeLootTableProvider extends LootTableProvider {
         }
 
         if (lootConditions == null) {
-            throw new IllegalStateException(LootPool.class.getName() + " is missing field field_186454" + "_b");
+            throw new IllegalStateException(LootPool.class.getName() + " is missing field f_7902" + "4_");
         }
 
         for (int i = 0; i < lootConditions.size(); i++) {
@@ -122,7 +122,7 @@ public class ForgeLootTableProvider extends LootTableProvider {
                 lootConditions.set(i, MatchTool.toolMatches(ItemPredicate.Builder.item().of(to)).build());
                 found = true;
             } else if (lootCondition instanceof InvertedLootItemCondition) {
-                LootItemCondition invLootCondition = ObfuscationReflectionHelper.getPrivateValue(InvertedLootItemCondition.class, (InvertedLootItemCondition) lootCondition, "field_215981" + "_a");
+                LootItemCondition invLootCondition = ObfuscationReflectionHelper.getPrivateValue(InvertedLootItemCondition.class, (InvertedLootItemCondition) lootCondition, "f_8168" + "1_");
 
                 if (invLootCondition instanceof MatchTool && checkMatchTool((MatchTool) invLootCondition, from)) {
                     lootConditions.set(i, InvertedLootItemCondition.invert(MatchTool.toolMatches(ItemPredicate.Builder.item().of(to))).build());
@@ -137,11 +137,11 @@ public class ForgeLootTableProvider extends LootTableProvider {
     }
 
     private boolean findAndReplaceInParentedLootEntry(CompositeEntryBase entry, Item from, Tag.Named<Item> to) {
-        LootPoolEntryContainer[] lootEntries = ObfuscationReflectionHelper.getPrivateValue(CompositeEntryBase.class, entry, "field_216147" + "_c");
+        LootPoolEntryContainer[] lootEntries = ObfuscationReflectionHelper.getPrivateValue(CompositeEntryBase.class, entry, "f_7942" + "8_");
         boolean found = false;
 
         if (lootEntries == null) {
-            throw new IllegalStateException(CompositeEntryBase.class.getName() + " is missing field field_216147" + "_c");
+            throw new IllegalStateException(CompositeEntryBase.class.getName() + " is missing field f_7942" + "8_");
         }
 
         for (LootPoolEntryContainer lootEntry : lootEntries) {
@@ -154,11 +154,11 @@ public class ForgeLootTableProvider extends LootTableProvider {
     }
 
     private boolean findAndReplaceInLootEntry(LootPoolEntryContainer entry, Item from, Tag.Named<Item> to) {
-        LootItemCondition[] lootConditions = ObfuscationReflectionHelper.getPrivateValue(LootPoolEntryContainer.class, entry, "field_216144" + "_d");
+        LootItemCondition[] lootConditions = ObfuscationReflectionHelper.getPrivateValue(LootPoolEntryContainer.class, entry, "f_7963" + "6_");
         boolean found = false;
 
         if (lootConditions == null) {
-            throw new IllegalStateException(LootPoolEntryContainer.class.getName() + " is missing field field_216144" + "_d");
+            throw new IllegalStateException(LootPoolEntryContainer.class.getName() + " is missing field f_7963" + "6_");
         }
 
         for (int i = 0; i < lootConditions.length; i++) {
@@ -174,11 +174,11 @@ public class ForgeLootTableProvider extends LootTableProvider {
     }
 
     private boolean findAndReplaceInAlternative(AlternativeLootItemCondition alternative, Item from, Tag.Named<Item> to) {
-        LootItemCondition[] lootConditions = ObfuscationReflectionHelper.getPrivateValue(AlternativeLootItemCondition.class, alternative, "field_215962" + "_a");
+        LootItemCondition[] lootConditions = ObfuscationReflectionHelper.getPrivateValue(AlternativeLootItemCondition.class, alternative, "f_8146" + "8_");
         boolean found = false;
 
         if (lootConditions == null) {
-            throw new IllegalStateException(AlternativeLootItemCondition.class.getName() + " is missing field field_215962" + "_a");
+            throw new IllegalStateException(AlternativeLootItemCondition.class.getName() + " is missing field f_8146" + "8_");
         }
 
         for (int i = 0; i < lootConditions.length; i++) {
@@ -192,8 +192,8 @@ public class ForgeLootTableProvider extends LootTableProvider {
     }
 
     private boolean checkMatchTool(MatchTool lootCondition, Item expected) {
-        ItemPredicate predicate = ObfuscationReflectionHelper.getPrivateValue(MatchTool.class, lootCondition, "field_216014" + "_a");
-        Item item = ObfuscationReflectionHelper.getPrivateValue(ItemPredicate.class, predicate, "field_192496" + "_b");
+        ItemPredicate predicate = ObfuscationReflectionHelper.getPrivateValue(MatchTool.class, lootCondition, "f_8199" + "3_");
+        Item item = ObfuscationReflectionHelper.getPrivateValue(ItemPredicate.class, predicate, "f_4503" + "0_");
         return item != null && item.equals(expected);
     }
 }

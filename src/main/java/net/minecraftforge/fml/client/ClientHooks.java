@@ -237,7 +237,7 @@ public class ClientHooks
         Logger logger = LogManager.getLogger("FML.TEXTURE_ERRORS");
         logger.error(Strings.repeat("+=", 25));
         logger.error("The following texture errors were found.");
-        Map<String, FallbackResourceManager> resManagers = ObfuscationReflectionHelper.getPrivateValue(SimpleReloadableResourceManager.class, (SimpleReloadableResourceManager)Minecraft.getInstance().getResourceManager(), "field_199014"+"_c");
+        Map<String, FallbackResourceManager> resManagers = ObfuscationReflectionHelper.getPrivateValue(SimpleReloadableResourceManager.class, (SimpleReloadableResourceManager)Minecraft.getInstance().getResourceManager(), "f_1087"+"0_");
         for (String resourceDomain : badTextureDomains)
         {
             Set<ResourceLocation> missing = missingTextures.get(resourceDomain);

@@ -72,7 +72,7 @@ public class ObfuscationReflectionHelper
      *
      * @param classToAccess The class to find the field on.
      * @param instance      The instance of the {@code classToAccess}.
-     * @param fieldName     The SRG (unmapped) name of the field to find (e.g. "field_181725_a").
+     * @param fieldName     The SRG (unmapped) name of the field to find (e.g. "f_46443_").
      * @param <T>           The type of the value.
      * @param <E>           The type of the {@code classToAccess}.
      * @return The value of the field with the specified name in the {@code classToAccess}.

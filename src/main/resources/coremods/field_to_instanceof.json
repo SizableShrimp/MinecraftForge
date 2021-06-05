@@ -1,181 +1,181 @@
 {
     "bows": {
-        "cls": "net/minecraft/item/Items",
-        "name": "field_151031_f",
-        "replacement": "net/minecraft/item/BowItem",
+        "cls": "net/minecraft/world/item/Items",
+        "name": "f_42411_",
+        "replacement": "net/minecraft/world/item/BowItem",
         "targets": [
             {
-                "owner": "net/minecraft/client/entity/player/AbstractClientPlayerEntity",
-                "name": "func_175156_o",
+                "owner": "net/minecraft/client/player/AbstractClientPlayer",
+                "name": "m_108565_",
                 "desc": "()F"
             },
             {
-                "owner": "net/minecraft/client/renderer/FirstPersonRenderer",
-                "name": "func_228396_a_",
-                "desc": "(FLcom/mojang/blaze3d/matrix/MatrixStack;Lnet/minecraft/client/renderer/IRenderTypeBuffer$Impl;Lnet/minecraft/client/entity/player/ClientPlayerEntity;I)V"
+                "owner": "net/minecraft/client/renderer/ItemInHandRenderer",
+                "name": "m_109314_",
+                "desc": "(FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;Lnet/minecraft/client/player/LocalPlayer;I)V"
             },
             {
-                "owner": "net/minecraft/client/renderer/entity/model/SkeletonModel",
-                "name": "func_212843_a_",
-                "desc": "(Lnet/minecraft/entity/MobEntity;FFF)V"
+                "owner": "net/minecraft/client/model/SkeletonModel",
+                "name": "m_6839_",
+                "desc": "(Lnet/minecraft/world/entity/Mob;FFF)V"
             },
             {
-                "owner": "net/minecraft/client/renderer/entity/model/SkeletonModel",
-                "name": "func_225597_a_",
-                "desc": "(Lnet/minecraft/entity/MobEntity;FFFFF)V"
+                "owner": "net/minecraft/client/model/SkeletonModel",
+                "name": "m_6973_",
+                "desc": "(Lnet/minecraft/world/entity/Mob;FFFFF)V"
             },
             {
-                "owner": "net/minecraft/entity/monster/AbstractSkeletonEntity",
-                "name": "func_230280_a_",
-                "desc": "(Lnet/minecraft/item/ShootableItem;)Z"
+                "owner": "net/minecraft/world/entity/monster/AbstractSkeleton",
+                "name": "m_5886_",
+                "desc": "(Lnet/minecraft/world/item/ProjectileWeaponItem;)Z"
             },
             {
-                "owner": "net/minecraft/entity/monster/AbstractSkeletonEntity",
-                "name": "func_85036_m",
+                "owner": "net/minecraft/world/entity/monster/AbstractSkeleton",
+                "name": "m_32164_",
                 "desc": "()V"
             }
         ]
     },
     "crossbows": {
-        "cls": "net/minecraft/item/Items",
-        "name": "field_222114_py",
-        "replacement": "net/minecraft/item/CrossbowItem",
+        "cls": "net/minecraft/world/item/Items",
+        "name": "f_42717_",
+        "replacement": "net/minecraft/world/item/CrossbowItem",
         "targets": [
             {
-                "owner": "net/minecraft/client/renderer/FirstPersonRenderer",
-                "name": "func_228396_a_",
-                "desc": "(FLcom/mojang/blaze3d/matrix/MatrixStack;Lnet/minecraft/client/renderer/IRenderTypeBuffer$Impl;Lnet/minecraft/client/entity/player/ClientPlayerEntity;I)V"
+                "owner": "net/minecraft/client/renderer/ItemInHandRenderer",
+                "name": "m_109314_",
+                "desc": "(FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;Lnet/minecraft/client/player/LocalPlayer;I)V"
             },
             {
-                "owner": "net/minecraft/client/renderer/FirstPersonRenderer",
-                "name": "func_228405_a_",
-                "desc": "(Lnet/minecraft/client/entity/player/AbstractClientPlayerEntity;FFLnet/minecraft/util/Hand;FLnet/minecraft/item/ItemStack;FLcom/mojang/blaze3d/matrix/MatrixStack;Lnet/minecraft/client/renderer/IRenderTypeBuffer;I)V"
+                "owner": "net/minecraft/client/renderer/ItemInHandRenderer",
+                "name": "m_109371_",
+                "desc": "(Lnet/minecraft/client/player/AbstractClientPlayer;FFLnet/minecraft/world/InteractionHand;FLnet/minecraft/world/item/ItemStack;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
             },
             {
-                "owner": "net/minecraft/client/renderer/entity/PlayerRenderer",
-                "name": "func_241741_a_",
-                "desc": "(Lnet/minecraft/client/entity/player/AbstractClientPlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/client/renderer/entity/model/BipedModel$ArmPose;"
+                "owner": "net/minecraft/client/renderer/entity/player/PlayerRenderer",
+                "name": "m_117794_",
+                "desc": "(Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/client/model/HumanoidModel$ArmPose;"
             },
             {
-                "owner": "net/minecraft/entity/monster/PillagerEntity",
-                "name": "func_230280_a_",
-                "desc": "(Lnet/minecraft/item/ShootableItem;)Z"
+                "owner": "net/minecraft/world/entity/monster/Pillager",
+                "name": "m_5886_",
+                "desc": "(Lnet/minecraft/world/item/ProjectileWeaponItem;)Z"
             },
             {
-                "owner": "net/minecraft/entity/monster/PillagerEntity",
-                "name": "func_241844_w",
+                "owner": "net/minecraft/world/entity/monster/Pillager",
+                "name": "m_7908_",
                 "desc": "(F)V"
             },
             {
-                "owner": "net/minecraft/entity/monster/piglin/PiglinEntity",
-                "name": "func_208003_a",
-                "desc": "(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)Z"
+                "owner": "net/minecraft/world/entity/monster/piglin/Piglin",
+                "name": "m_7808_",
+                "desc": "(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Z"
             },
             {
-                "owner": "net/minecraft/entity/monster/piglin/PiglinEntity",
-                "name": "func_230280_a_",
-                "desc": "(Lnet/minecraft/item/ShootableItem;)Z"
+                "owner": "net/minecraft/world/entity/monster/piglin/Piglin",
+                "name": "m_5886_",
+                "desc": "(Lnet/minecraft/world/item/ProjectileWeaponItem;)Z"
             },
             {
-                "owner": "net/minecraft/item/CrossbowItem",
-                "name": "func_220013_l",
-                "desc": "(Lnet/minecraft/item/ItemStack;)F"
+                "owner": "net/minecraft/world/item/CrossbowItem",
+                "name": "m_40945_",
+                "desc": "(Lnet/minecraft/world/item/ItemStack;)F"
             },
             {
-                "owner": "net/minecraft/item/Item",
-                "name": "func_219970_i",
-                "desc": "(Lnet/minecraft/item/ItemStack;)Z"
+                "owner": "net/minecraft/world/item/Item",
+                "name": "m_41463_",
+                "desc": "(Lnet/minecraft/world/item/ItemStack;)Z"
             }
         ]
     },
     "filled_map": {
-        "cls": "net/minecraft/item/Items",
-        "name": "field_151098_aY",
-        "replacement": "net/minecraft/item/FilledMapItem",
+        "cls": "net/minecraft/world/item/Items",
+        "name": "f_42573_",
+        "replacement": "net/minecraft/world/item/MapItem",
         "targets": [
             {
-                "owner": "net/minecraft/client/renderer/FirstPersonRenderer",
-                "name": "func_228405_a_",
-                "desc": "(Lnet/minecraft/client/entity/player/AbstractClientPlayerEntity;FFLnet/minecraft/util/Hand;FLnet/minecraft/item/ItemStack;FLcom/mojang/blaze3d/matrix/MatrixStack;Lnet/minecraft/client/renderer/IRenderTypeBuffer;I)V"
+                "owner": "net/minecraft/client/renderer/ItemInHandRenderer",
+                "name": "m_109371_",
+                "desc": "(Lnet/minecraft/client/player/AbstractClientPlayer;FFLnet/minecraft/world/InteractionHand;FLnet/minecraft/world/item/ItemStack;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
             },
             {
-                "owner": "net/minecraft/entity/item/ItemFrameEntity",
-                "name": "func_110131_b",
-                "desc": "(Lnet/minecraft/item/ItemStack;)V"
+                "owner": "net/minecraft/world/entity/decoration/ItemFrame",
+                "name": "m_31810_",
+                "desc": "(Lnet/minecraft/world/item/ItemStack;)V"
             },
             {
-                "owner": "net/minecraft/inventory/container/CartographyContainer$3",
-                "name": "func_75214_a",
-                "desc": "(Lnet/minecraft/item/ItemStack;)Z"
+                "owner": "net/minecraft/world/inventory/CartographyTableMenu$3",
+                "name": "m_5857_",
+                "desc": "(Lnet/minecraft/world/item/ItemStack;)Z"
             },
             {
-                "owner": "net/minecraft/inventory/container/CartographyContainer",
-                "name": "func_82846_b",
-                "desc": "(Lnet/minecraft/entity/player/PlayerEntity;I)Lnet/minecraft/item/ItemStack;"
+                "owner": "net/minecraft/world/inventory/CartographyTableMenu",
+                "name": "m_7648_",
+                "desc": "(Lnet/minecraft/world/entity/player/Player;I)Lnet/minecraft/world/item/ItemStack;"
             },
             {
-                "owner": "net/minecraft/item/ItemStack",
-                "name": "func_82840_a",
-                "desc": "(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/client/util/ITooltipFlag;)Ljava/util/List;"
+                "owner": "net/minecraft/world/item/ItemStack",
+                "name": "m_41651_",
+                "desc": "(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/TooltipFlag;)Ljava/util/List;"
             }
         ]
     },
     "fishing_rod": {
-        "cls": "net/minecraft/item/Items",
-        "name": "field_151112_aM",
-        "replacement": "net/minecraft/item/FishingRodItem",
+        "cls": "net/minecraft/world/item/Items",
+        "name": "f_42523_",
+        "replacement": "net/minecraft/world/item/FishingRodItem",
         "targets": [
             {
-                "owner": "net/minecraft/client/renderer/entity/FishRenderer",
-                "name": "func_225623_a_",
-                "desc": "(Lnet/minecraft/entity/projectile/FishingBobberEntity;FFLcom/mojang/blaze3d/matrix/MatrixStack;Lnet/minecraft/client/renderer/IRenderTypeBuffer;I)V"
+                "owner": "net/minecraft/client/renderer/entity/FishingHookRenderer",
+                "name": "m_7392_",
+                "desc": "(Lnet/minecraft/world/entity/projectile/FishingHook;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"
             },
             {
-                "owner": "net/minecraft/entity/projectile/FishingBobberEntity",
-                "name": "func_234600_a_",
-                "desc": "(Lnet/minecraft/entity/player/PlayerEntity;)Z"
+                "owner": "net/minecraft/world/entity/projectile/FishingHook",
+                "name": "m_37136_",
+                "desc": "(Lnet/minecraft/world/entity/player/Player;)Z"
             }
         ]
     },
     "shears": {
-        "cls": "net/minecraft/item/Items",
-        "name": "field_151097_aZ",
-        "replacement": "net/minecraft/item/ShearsItem",
+        "cls": "net/minecraft/world/item/Items",
+        "name": "f_42574_",
+        "replacement": "net/minecraft/world/item/ShearsItem",
         "targets": [
             {
-                "owner": "net/minecraft/block/BeehiveBlock",
-                "name": "func_225533_a_",
-                "desc": "(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/util/math/BlockRayTraceResult;)Lnet/minecraft/util/ActionResultType;"
+                "owner": "net/minecraft/world/level/block/BeehiveBlock",
+                "name": "m_6227_",
+                "desc": "(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/InteractionResult;"
             },
             {
-                "owner": "net/minecraft/block/PumpkinBlock",
-                "name": "func_225533_a_",
-                "desc": "(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/util/math/BlockRayTraceResult;)Lnet/minecraft/util/ActionResultType;"
+                "owner": "net/minecraft/world/level/block/PumpkinBlock",
+                "name": "m_6227_",
+                "desc": "(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/InteractionResult;"
             },
             {
-                "owner": "net/minecraft/block/TripWireBlock",
-                "name": "func_176208_a",
-                "desc": "(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;)V"
+                "owner": "net/minecraft/world/level/block/TripWireBlock",
+                "name": "m_5707_",
+                "desc": "(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/player/Player;)V"
             },
             {
-                "owner": "net/minecraft/enchantment/EfficiencyEnchantment",
-                "name": "func_92089_a",
-                "desc": "(Lnet/minecraft/item/ItemStack;)Z"
+                "owner": "net/minecraft/world/item/enchantment/DiggingEnchantment",
+                "name": "m_6081_",
+                "desc": "(Lnet/minecraft/world/item/ItemStack;)Z"
             },
             {
-                "owner": "net/minecraft/entity/passive/MooshroomEntity",
-                "name": "func_230254_b_",
-                "desc": "(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResultType;"
+                "owner": "net/minecraft/world/entity/animal/MushroomCow",
+                "name": "m_6071_",
+                "desc": "(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
             },
             {
-                "owner": "net/minecraft/entity/passive/SheepEntity",
-                "name": "func_230254_b_",
-                "desc": "(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResultType;"
+                "owner": "net/minecraft/world/entity/animal/Sheep",
+                "name": "m_6071_",
+                "desc": "(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
             },
             {
-                "owner": "net/minecraft/entity/passive/SnowGolemEntity",
-                "name": "func_230254_b_",
-                "desc": "(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResultType;"
+                "owner": "net/minecraft/world/entity/animal/SnowGolem",
+                "name": "m_6071_",
+                "desc": "(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
             }
         ]
     }

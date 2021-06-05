@@ -496,33 +496,33 @@ project(':forge') {
         output = rootProject.file('src/main/resources/coremods/field_to_instanceof.json')
         fields {
             bows {
-                cls = 'net/minecraft/item/Items'
-                name = 'field_151031_f'
-                replacement = 'net/minecraft/item/BowItem'
+                cls = 'net/minecraft/world/item/Items'
+                name = 'f_42411_'
+                replacement = 'net/minecraft/world/item/BowItem'
             }
             crossbows {
-                cls = 'net/minecraft/item/Items'
-                name = 'field_222114_py'
-                replacement = 'net/minecraft/item/CrossbowItem'
+                cls = 'net/minecraft/world/item/Items'
+                name = 'f_42717_'
+                replacement = 'net/minecraft/world/item/CrossbowItem'
             }
             filled_map {
-                cls = 'net/minecraft/item/Items'
-                name = 'field_151098_aY'
-                replacement = 'net/minecraft/item/FilledMapItem'
-                blacklist 'net/minecraft/client/gui/screen/inventory/CartographyTableScreen', 'func_230450_a_', '(Lcom/mojang/blaze3d/matrix/MatrixStack;FII)V'
-                blacklist 'net/minecraft/client/renderer/entity/ItemFrameRenderer', 'func_225623_a_', '(Lnet/minecraft/entity/item/ItemFrameEntity;FFLcom/mojang/blaze3d/matrix/MatrixStack;Lnet/minecraft/client/renderer/IRenderTypeBuffer;I)V'
-                blacklist 'net/minecraft/item/crafting/MapCloningRecipe'
-                blacklist 'net/minecraft/item/crafting/MapExtendingRecipe'
+                cls = 'net/minecraft/world/item/Items'
+                name = 'f_42573_'
+                replacement = 'net/minecraft/world/item/MapItem'
+                blacklist 'net/minecraft/client/gui/screens/inventory/CartographyTableScreen', 'm_7286_', '(Lcom/mojang/blaze3d/vertex/PoseStack;FII)V'
+                blacklist 'net/minecraft/client/renderer/entity/ItemFrameRenderer', 'm_7392_', '(Lnet/minecraft/world/entity/decoration/ItemFrame;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V'
+                blacklist 'net/minecraft/world/item/crafting/MapCloningRecipe'
+                blacklist 'net/minecraft/world/item/crafting/MapExtendingRecipe'
             }
             fishing_rod {
-                cls = 'net/minecraft/item/Items'
-                name = 'field_151112_aM'
-                replacement = 'net/minecraft/item/FishingRodItem'
+                cls = 'net/minecraft/world/item/Items'
+                name = 'f_42523_'
+                replacement = 'net/minecraft/world/item/FishingRodItem'
             }
             shears {
-                cls = 'net/minecraft/item/Items'
-                name = 'field_151097_aZ'
-                replacement = 'net/minecraft/item/ShearsItem'
+                cls = 'net/minecraft/world/item/Items'
+                name = 'f_42574_'
+                replacement = 'net/minecraft/world/item/ShearsItem'
             }
         }
     }

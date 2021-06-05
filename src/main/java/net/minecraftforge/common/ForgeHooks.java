@@ -1385,7 +1385,7 @@ public class ForgeHooks
             if (!currentDimNames.containsAll(VANILLA_DIMS))
             {
                 LOGGER.warn("Detected missing vanilla dimensions from the world!");
-                RegistryAccess regs = ObfuscationReflectionHelper.getPrivateValue(RegistryReadOps.class, ops, "field_240872_" + "d_");
+                RegistryAccess regs = ObfuscationReflectionHelper.getPrivateValue(RegistryReadOps.class, ops, "f_13563" + "6_");
                 if (regs == null) // should not happen, but it could after a MC version update.
                     throw new RuntimeException("Could not access dynamic registries using reflection. " +
                             "The world was detected to have missing vanilla dimensions and the attempted fix did not work.");
