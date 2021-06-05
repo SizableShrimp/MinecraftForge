@@ -1,6 +1,5 @@
 package net.minecraftforge.debug.block;
 
-import net.minecraft.block.*;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.blockentity.SignRenderer;

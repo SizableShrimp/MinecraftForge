@@ -26,14 +26,12 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormatElement;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.item.*;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -48,7 +46,9 @@ import net.minecraftforge.client.model.IModelBuilder;
 import net.minecraftforge.client.model.IModelConfiguration;
 import net.minecraftforge.client.model.IModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.loaders.ItemLayersModelBuilder;
 import net.minecraftforge.client.model.generators.loaders.OBJLoaderBuilder;
@@ -71,7 +71,6 @@ import java.util.Set;
 import java.util.function.Function;
 
 import net.minecraft.client.renderer.block.model.ItemTransforms;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelState;
 import net.minecraft.client.resources.model.UnbakedModel;
@@ -176,7 +175,7 @@ public class NewModelLoaderTest
     static class TestModel implements ISimpleModelGeometry<TestModel>
     {
         @Override
-        public void addQuads(IModelConfiguration owner, IModelBuilder<?> modelBuilder, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform, ResourceLocation modelLocation)
+        public void addQuads(IModelConfiguration owner, IModelBuilder<?> modelBuilder, ModelBakery bakery, Function< net.minecraft.client.resources.model.Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform, ResourceLocation modelLocation)
         {
             TextureAtlasSprite texture = spriteGetter.apply(owner.resolveTexture("particle"));
 
@@ -220,7 +219,7 @@ public class NewModelLoaderTest
         }
 
         @Override
-        public Collection<Material> getTextures(IModelConfiguration owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors)
+        public Collection< net.minecraft.client.resources.model.Material> getTextures(IModelConfiguration owner, Function<ResourceLocation, UnbakedModel> modelGetter, Set<Pair<String, String>> missingTextureErrors)
         {
             return Collections.singleton(owner.resolveTexture("particle"));
         }
@@ -274,15 +273,28 @@ public class NewModelLoaderTest
         @Override
         protected void registerStatesAndModels()
         {
-            simpleBlock(NewModelLoaderTest.obj_block.get(), models()
+            BlockModelBuilder model = models()
                     .getBuilder(NewModelLoaderTest.obj_block.getId().getPath())
                     .customLoader(OBJLoaderBuilder::begin)
                             .modelLocation(new ResourceLocation("new_model_loader_test:models/item/sugar_glider.obj"))
                             .flipV(true)
                     .end()
                     .texture("qr", "minecraft:block/oak_planks")
-                    .texture("particle", "#qr")
-            );
+                    .texture("particle", "#qr");
+            getVariantBuilder(NewModelLoaderTest.obj_block.get())
+                    .partialState()
+                            .with(BlockStateProperties.HORIZONTAL_FACING, Direction.EAST)
+                            .addModels(new ConfiguredModel(model, 0, 90, false))
+                    .partialState()
+                            .with(BlockStateProperties.HORIZONTAL_FACING, Direction.WEST)
+                            .addModels(new ConfiguredModel(model, 0, 270, false))
+                    .partialState()
+                            .with(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
+                            .addModels(new ConfiguredModel(model))
+                    .partialState()
+                            .with(BlockStateProperties.HORIZONTAL_FACING, Direction.SOUTH)
+                            .addModels(new ConfiguredModel(model, 0, 180, false))
+                    .partialState();
         }
     }
 }

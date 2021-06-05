@@ -828,7 +828,7 @@ project(':forge') {
     }
     
     task installerJar(type: Zip, dependsOn: [downloadInstaller, installerJson, launcherJson, genClientBinPatches, genServerBinPatches, 'signUniversalJar', 'signLauncherJar']) {
-        classifier = 'installer'
+        archiveClassifier = 'installer'
         archiveExtension = 'jar' //Needs to be Zip task to not override Manifest, so set extension
         destinationDirectory = file('build/libs')
         from(extraTxts)
@@ -877,7 +877,7 @@ project(':forge') {
     
     task makeMdk(type: Zip) {
         archiveBaseName = project.name
-        classifier = 'mdk'
+        archiveClassifier = 'mdk'
         archiveVersion = project.version
         destinationDirectory = file('build/libs')
 
