@@ -79,15 +79,6 @@
        if (this.m_20175_(Pose.SWIMMING)) {
           Pose pose;
           if (this.m_21255_()) {
-@@ -427,7 +_,7 @@
- 
-    }
- 
--   protected void m_6915_() {
-+   public void m_6915_() {
-       this.f_36096_ = this.f_36095_;
-    }
- 
 @@ -521,9 +_,9 @@
     private void m_36367_(@Nullable CompoundTag p_36368_) {
        if (p_36368_ != null && (!p_36368_.m_128441_("Silent") || !p_36368_.m_128471_("Silent")) && this.f_19853_.f_46441_.nextInt(200) == 0) {
@@ -126,26 +117,24 @@
     }
  
     @Nullable
-@@ -647,8 +_,13 @@
+@@ -647,7 +_,12 @@
        }
     }
  
 +   @Deprecated //Use location sensitive version below
     public float m_36281_(BlockState p_36282_) {
--      float f = this.f_36093_.m_36020_(p_36282_);
 +      return getDigSpeed(p_36282_, null);
 +   }
 +
-+   public float getDigSpeed(BlockState p_184813_1_, @Nullable BlockPos pos) {
-+      float f = this.f_36093_.m_36020_(p_184813_1_);
++   public float getDigSpeed(BlockState p_36282_, @Nullable BlockPos pos) {
+       float f = this.f_36093_.m_36020_(p_36282_);
        if (f > 1.0F) {
           int i = EnchantmentHelper.m_44926_(this);
-          ItemStack itemstack = this.m_21205_();
 @@ -689,11 +_,12 @@
           f /= 5.0F;
        }
  
-+      f = net.minecraftforge.event.ForgeEventFactory.getBreakSpeed(this, p_184813_1_, f, pos);
++      f = net.minecraftforge.event.ForgeEventFactory.getBreakSpeed(this, p_36282_, f, pos);
        return f;
     }
  

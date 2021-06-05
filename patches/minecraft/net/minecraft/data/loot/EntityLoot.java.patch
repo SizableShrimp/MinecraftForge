@@ -1,14 +1,5 @@
 --- a/net/minecraft/data/loot/EntityLoot.java
 +++ b/net/minecraft/data/loot/EntityLoot.java
-@@ -42,7 +_,7 @@
- import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithLootingCondition;
- 
- public class EntityLoot implements Consumer<BiConsumer<ResourceLocation, LootTable.Builder>> {
--   private static final EntityPredicate.Builder f_124366_ = EntityPredicate.Builder.m_36633_().m_36642_(EntityFlagsPredicate.Builder.m_33713_().m_33714_(true).m_33716_());
-+   protected static final EntityPredicate.Builder f_124366_ = EntityPredicate.Builder.m_36633_().m_36642_(EntityFlagsPredicate.Builder.m_33713_().m_33714_(true).m_33716_());
-    private static final Set<EntityType<?>> f_124367_ = ImmutableSet.of(EntityType.f_20532_, EntityType.f_20529_, EntityType.f_20460_, EntityType.f_20528_, EntityType.f_20492_);
-    private final Map<ResourceLocation, LootTable.Builder> f_124368_ = Maps.newHashMap();
- 
 @@ -50,7 +_,7 @@
        return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124375_))).m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootTableReference.m_79776_(EntityType.f_20520_.m_20677_())));
     }
@@ -47,25 +38,18 @@
              if (resourcelocation != BuiltInLootTables.f_78712_ && this.f_124368_.remove(resourcelocation) != null) {
                 throw new IllegalStateException(String.format("Weird loottable '%s' for '%s', not a LivingEntity so should not have loot", resourcelocation, Registry.f_122826_.m_7981_(entitytype)));
              }
-@@ -162,11 +_,19 @@
-       this.f_124368_.forEach(p_124377_::accept);
-    }
+@@ -160,6 +_,14 @@
+       }
  
--   private void m_124371_(EntityType<?> p_124372_, LootTable.Builder p_124373_) {
+       this.f_124368_.forEach(p_124377_::accept);
++   }
++
 +   protected Iterable<EntityType<?>> getKnownEntities() {
 +      return Registry.f_122826_;
 +   }
 +
 +   protected boolean isNonLiving(EntityType<?> entitytype) {
 +      return !f_124367_.contains(entitytype) && entitytype.m_20674_() == MobCategory.MISC;
-+   }
-+
-+   protected void m_124371_(EntityType<?> p_124372_, LootTable.Builder p_124373_) {
-       this.m_124380_(p_124372_.m_20677_(), p_124373_);
     }
  
--   private void m_124380_(ResourceLocation p_124381_, LootTable.Builder p_124382_) {
-+   protected void m_124380_(ResourceLocation p_124381_, LootTable.Builder p_124382_) {
-       this.f_124368_.put(p_124381_, p_124382_);
-    }
- }
+    protected void m_124371_(EntityType<?> p_124372_, LootTable.Builder p_124373_) {

@@ -47,57 +47,23 @@
 -
 +   @Deprecated // FORGE: Pass in partialTicks
     public static void m_109024_(Camera p_109025_, FogRenderer.FogMode p_109026_, float p_109027_, boolean p_109028_) {
--      FluidState fluidstate = p_109025_.m_90595_();
--      Entity entity = p_109025_.m_90592_();
 +      setupFog(p_109025_, p_109026_, p_109027_, p_109028_, 0);
 +   }
 +
-+   public static void setupFog(Camera p_228372_0_, FogRenderer.FogMode p_228372_1_, float p_228372_2_, boolean p_228372_3_, float partialTicks) {
-+      FluidState fluidstate = p_228372_0_.m_90595_();
-+      Entity entity = p_228372_0_.m_90592_();
-+      float hook = net.minecraftforge.client.ForgeHooksClient.getFogDensity(p_228372_1_, p_228372_0_, partialTicks, 0.1F);
++   public static void setupFog(Camera p_109025_, FogRenderer.FogMode p_109026_, float p_109027_, boolean p_109028_, float partialTicks) {
+       FluidState fluidstate = p_109025_.m_90595_();
+       Entity entity = p_109025_.m_90592_();
++      float hook = net.minecraftforge.client.ForgeHooksClient.getFogDensity(p_109026_, p_109025_, partialTicks, 0.1F);
 +      if (hook >= 0) RenderSystem.m_69503_(hook);
 +      else
        if (fluidstate.m_76153_(FluidTags.f_13131_)) {
           float f = 1.0F;
           f = 0.05F;
-@@ -206,29 +_,30 @@
-             }
-          } else if (entity instanceof LivingEntity && ((LivingEntity)entity).m_21023_(MobEffects.f_19610_)) {
-             int i = ((LivingEntity)entity).m_21124_(MobEffects.f_19610_).m_19557_();
--            float f1 = Mth.m_14179_(Math.min(1.0F, (float)i / 20.0F), p_109027_, 5.0F);
--            if (p_109026_ == FogRenderer.FogMode.FOG_SKY) {
-+            float f1 = Mth.m_14179_(Math.min(1.0F, (float)i / 20.0F), p_228372_2_, 5.0F);
-+            if (p_228372_1_ == FogRenderer.FogMode.FOG_SKY) {
-                f2 = 0.0F;
-                f3 = f1 * 0.8F;
-             } else {
-                f2 = f1 * 0.25F;
-                f3 = f1;
-             }
--         } else if (p_109028_) {
--            f2 = p_109027_ * 0.05F;
--            f3 = Math.min(p_109027_, 192.0F) * 0.5F;
--         } else if (p_109026_ == FogRenderer.FogMode.FOG_SKY) {
-+         } else if (p_228372_3_) {
-+            f2 = p_228372_2_ * 0.05F;
-+            f3 = Math.min(p_228372_2_, 192.0F) * 0.5F;
-+         } else if (p_228372_1_ == FogRenderer.FogMode.FOG_SKY) {
-             f2 = 0.0F;
--            f3 = p_109027_;
-+            f3 = p_228372_2_;
-          } else {
--            f2 = p_109027_ * 0.75F;
--            f3 = p_109027_;
-+            f2 = p_228372_2_ * 0.75F;
-+            f3 = p_228372_2_;
-          }
- 
-          RenderSystem.m_69511_(f2);
+@@ -229,6 +_,7 @@
           RenderSystem.m_69505_(f3);
           RenderSystem.m_69509_(GlStateManager.FogMode.LINEAR);
           RenderSystem.m_69918_();
-+         net.minecraftforge.client.ForgeHooksClient.onFogRender(p_228372_1_, p_228372_0_, partialTicks, f3);
++         net.minecraftforge.client.ForgeHooksClient.onFogRender(p_109026_, p_109025_, partialTicks, f3);
        }
  
     }

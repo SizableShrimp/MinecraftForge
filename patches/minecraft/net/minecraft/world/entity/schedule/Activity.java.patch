@@ -9,12 +9,3 @@
     public static final Activity f_37978_ = m_37999_("core");
     public static final Activity f_37979_ = m_37999_("idle");
     public static final Activity f_37980_ = m_37999_("work");
-@@ -21,7 +_,7 @@
-    private final String f_37993_;
-    private final int f_37994_;
- 
--   private Activity(String p_37997_) {
-+   public Activity(String p_37997_) {
-       this.f_37993_ = p_37997_;
-       this.f_37994_ = p_37997_.hashCode();
-    }

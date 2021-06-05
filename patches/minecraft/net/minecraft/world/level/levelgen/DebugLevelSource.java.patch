@@ -1,21 +1,16 @@
 --- a/net/minecraft/world/level/levelgen/DebugLevelSource.java
 +++ b/net/minecraft/world/level/levelgen/DebugLevelSource.java
-@@ -26,11 +_,11 @@
+@@ -26,8 +_,8 @@
  
  public class DebugLevelSource extends ChunkGenerator {
     public static final Codec<DebugLevelSource> f_64111_ = RegistryLookupCodec.m_135622_(Registry.f_122885_).xmap(DebugLevelSource::new, DebugLevelSource::m_64151_).stable().codec();
--   private static final List<BlockState> f_64114_ = StreamSupport.stream(Registry.f_122824_.spliterator(), false).flatMap((p_64147_) -> {
+-   private static List<BlockState> f_64114_ = StreamSupport.stream(Registry.f_122824_.spliterator(), false).flatMap((p_64147_) -> {
 -      return p_64147_.m_49965_().m_61056_().stream();
 +   private static List<BlockState> f_64114_ = StreamSupport.stream(Registry.f_122824_.spliterator(), false).flatMap((p_236067_0_) -> {
 +      return p_236067_0_.m_49965_().m_61056_().stream();
     }).collect(Collectors.toList());
--   private static final int f_64115_ = Mth.m_14167_(Mth.m_14116_((float)f_64114_.size()));
--   private static final int f_64116_ = Mth.m_14167_((float)f_64114_.size() / (float)f_64115_);
-+   private static int f_64115_ = Mth.m_14167_(Mth.m_14116_((float)f_64114_.size()));
-+   private static int f_64116_ = Mth.m_14167_((float)f_64114_.size() / (float)f_64115_);
-    protected static final BlockState f_64112_ = Blocks.f_50016_.m_49966_();
-    protected static final BlockState f_64113_ = Blocks.f_50375_.m_49966_();
-    private final Registry<Biome> f_64117_;
+    private static int f_64115_ = Mth.m_14167_(Mth.m_14116_((float)f_64114_.size()));
+    private static int f_64116_ = Mth.m_14167_((float)f_64114_.size() / (float)f_64115_);
 @@ -103,5 +_,11 @@
        }
  

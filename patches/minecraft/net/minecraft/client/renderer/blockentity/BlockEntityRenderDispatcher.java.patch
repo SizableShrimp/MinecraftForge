@@ -1,22 +1,12 @@
 --- a/net/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher.java
 +++ b/net/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher.java
-@@ -28,7 +_,7 @@
-    private final Map<BlockEntityType<?>, BlockEntityRenderer<?>> f_112251_ = Maps.newHashMap();
-    public static final BlockEntityRenderDispatcher f_112246_ = new BlockEntityRenderDispatcher();
-    private final BufferBuilder f_112252_ = new BufferBuilder(256);
--   private Font f_112253_;
-+   public Font f_112253_;
-    public TextureManager f_112247_;
-    public Level f_112248_;
-    public Camera f_112249_;
-@@ -134,5 +_,10 @@
- 
+@@ -135,4 +_,9 @@
     public Font m_112256_() {
        return this.f_112253_;
-+   }
+    }
 +
 +   //Internal, Do not call Use ClientRegistry.
 +   public synchronized <T extends BlockEntity> void setSpecialRendererInternal(BlockEntityType<T> tileEntityType, BlockEntityRenderer<? super T> specialRenderer) {
 +      this.f_112251_.put(tileEntityType, specialRenderer);
-    }
++   }
  }

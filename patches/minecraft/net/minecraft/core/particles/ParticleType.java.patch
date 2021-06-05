@@ -1,6 +1,6 @@
 --- a/net/minecraft/core/particles/ParticleType.java
 +++ b/net/minecraft/core/particles/ParticleType.java
-@@ -4,11 +_,11 @@
+@@ -4,7 +_,7 @@
  import net.minecraftforge.api.distmarker.Dist;
  import net.minecraftforge.api.distmarker.OnlyIn;
  
@@ -9,8 +9,3 @@
     private final boolean f_123737_;
     private final ParticleOptions.Deserializer<T> f_123738_;
  
--   protected ParticleType(boolean p_123740_, ParticleOptions.Deserializer<T> p_123741_) {
-+   public ParticleType(boolean p_123740_, ParticleOptions.Deserializer<T> p_123741_) {
-       this.f_123737_ = p_123740_;
-       this.f_123738_ = p_123741_;
-    }

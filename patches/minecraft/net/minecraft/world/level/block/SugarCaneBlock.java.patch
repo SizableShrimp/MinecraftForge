@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/block/SugarCaneBlock.java
 +++ b/net/minecraft/world/level/block/SugarCaneBlock.java
-@@ -17,11 +_,11 @@
+@@ -17,7 +_,7 @@
  import net.minecraft.world.phys.shapes.CollisionContext;
  import net.minecraft.world.phys.shapes.VoxelShape;
  
@@ -9,11 +9,6 @@
     public static final IntegerProperty f_57164_ = BlockStateProperties.f_61410_;
     protected static final VoxelShape f_57165_ = Block.m_49796_(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
  
--   protected SugarCaneBlock(BlockBehaviour.Properties p_57168_) {
-+   public SugarCaneBlock(BlockBehaviour.Properties p_57168_) {
-       super(p_57168_);
-       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_57164_, Integer.valueOf(0)));
-    }
 @@ -45,12 +_,14 @@
  
           if (i < 3) {

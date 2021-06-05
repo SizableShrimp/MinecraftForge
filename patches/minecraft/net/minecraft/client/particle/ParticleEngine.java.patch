@@ -18,18 +18,15 @@
     private final Queue<Particle> f_107294_ = Queues.newArrayDeque();
     private final Map<ResourceLocation, ParticleEngine.MutableSpriteSet> f_107295_ = Maps.newHashMap();
     private final TextureAtlas f_107296_ = new TextureAtlas(TextureAtlas.f_118260_);
-@@ -152,42 +_,42 @@
-       this.m_107378_(ParticleTypes.f_123790_, WhiteAshParticle.Provider::new);
+@@ -153,41 +_,41 @@
     }
  
--   private <T extends ParticleOptions> void m_107381_(ParticleType<T> p_107382_, ParticleProvider<T> p_107383_) {
+    public <T extends ParticleOptions> void m_107381_(ParticleType<T> p_107382_, ParticleProvider<T> p_107383_) {
 -      this.f_107293_.put(Registry.f_122829_.m_7447_(p_107382_), p_107383_);
-+   public <T extends ParticleOptions> void m_107381_(ParticleType<T> p_107382_, ParticleProvider<T> p_107383_) {
 +      this.f_107293_.put(Registry.f_122829_.m_7981_(p_107382_), p_107383_);
     }
  
--   private <T extends ParticleOptions> void m_107378_(ParticleType<T> p_107379_, ParticleEngine.SpriteParticleRegistration<T> p_107380_) {
-+   public <T extends ParticleOptions> void m_107378_(ParticleType<T> p_107379_, ParticleEngine.SpriteParticleRegistration<T> p_107380_) {
+    public <T extends ParticleOptions> void m_107378_(ParticleType<T> p_107379_, ParticleEngine.SpriteParticleRegistration<T> p_107380_) {
        ParticleEngine.MutableSpriteSet particleengine$mutablespriteset = new ParticleEngine.MutableSpriteSet();
        this.f_107295_.put(Registry.f_122829_.m_7981_(p_107379_), particleengine$mutablespriteset);
 -      this.f_107293_.put(Registry.f_122829_.m_7447_(p_107379_), p_107380_.m_107419_(particleengine$mutablespriteset));
@@ -124,12 +121,11 @@
 +   /**@deprecated Forge: use {@link #renderParticles(MatrixStack, IRenderTypeBuffer.Impl, LightTexture, ActiveRenderInfo, float, net.minecraft.client.renderer.culling.ClippingHelper)} with ClippingHelper as additional parameter*/
 +   @Deprecated
     public void m_107336_(PoseStack p_107337_, MultiBufferSource.BufferSource p_107338_, LightTexture p_107339_, Camera p_107340_, float p_107341_) {
--      p_107339_.m_109896_();
 +      renderParticles(p_107337_, p_107338_, p_107339_, p_107340_, p_107341_, null);
 +   }
 +
-+   public void renderParticles(PoseStack p_228345_1_, MultiBufferSource.BufferSource p_228345_2_, LightTexture p_228345_3_, Camera p_228345_4_, float p_228345_5_, @Nullable net.minecraft.client.renderer.culling.Frustum clippingHelper) {
-+      p_228345_3_.m_109896_();
++   public void renderParticles(PoseStack p_107337_, MultiBufferSource.BufferSource p_107338_, LightTexture p_107339_, Camera p_107340_, float p_107341_, @Nullable net.minecraft.client.renderer.culling.Frustum clippingHelper) {
+       p_107339_.m_109896_();
 +      Runnable enable = () -> {
        RenderSystem.m_69477_();
        RenderSystem.m_69452_();
@@ -140,8 +136,7 @@
 +         RenderSystem.m_69388_(org.lwjgl.opengl.GL13.GL_TEXTURE0);
 +      };
        RenderSystem.m_69869_();
--      RenderSystem.m_69841_(p_107337_.m_85850_().m_85861_());
-+      RenderSystem.m_69841_(p_228345_1_.m_85850_().m_85861_());
+       RenderSystem.m_69841_(p_107337_.m_85850_().m_85861_());
  
 -      for(ParticleRenderType particlerendertype : f_107288_) {
 +      for(ParticleRenderType particlerendertype : this.f_107289_.keySet()) { // Forge: allow custom IParticleRenderType's
@@ -150,26 +145,14 @@
           Iterable<Particle> iterable = this.f_107289_.get(particlerendertype);
           if (iterable != null) {
              RenderSystem.m_69439_(1.0F, 1.0F, 1.0F, 1.0F);
-@@ -331,8 +_,9 @@
+@@ -331,6 +_,7 @@
              particlerendertype.m_6505_(bufferbuilder, this.f_107291_);
  
              for(Particle particle : iterable) {
 +               if (clippingHelper != null && particle.shouldCull() && !clippingHelper.m_113029_(particle.m_107277_())) continue;
                 try {
--                  particle.m_5744_(bufferbuilder, p_107340_, p_107341_);
-+                  particle.m_5744_(bufferbuilder, p_228345_4_, p_228345_5_);
+                   particle.m_5744_(bufferbuilder, p_107340_, p_107341_);
                 } catch (Throwable throwable) {
-                   CrashReport crashreport = CrashReport.m_127521_(throwable, "Rendering Particle");
-                   CrashReportCategory crashreportcategory = crashreport.m_127514_("Particle being rendered");
-@@ -351,7 +_,7 @@
-       RenderSystem.m_69456_(515);
-       RenderSystem.m_69461_();
-       RenderSystem.m_69452_();
--      p_107339_.m_109891_();
-+      p_228345_3_.m_109891_();
-       RenderSystem.m_69466_();
-    }
- 
 @@ -362,13 +_,13 @@
     }
  
@@ -202,25 +185,16 @@
                       this.m_107344_((new TerrainParticle(this.f_107287_, (double)p_107356_.m_123341_() + d7, (double)p_107356_.m_123342_() + d8, (double)p_107356_.m_123343_() + d9, d4 - 0.5D, d5 - 0.5D, d6 - 0.5D, p_107357_)).m_108292_(p_107356_));
                    }
                 }
-@@ -434,6 +_,12 @@
-       return String.valueOf(this.f_107289_.values().stream().mapToInt(Collection::size).sum());
-    }
+@@ -432,6 +_,12 @@
  
+    public String m_107403_() {
+       return String.valueOf(this.f_107289_.values().stream().mapToInt(Collection::size).sum());
++   }
++
 +   public void addBlockHitEffects(BlockPos pos, net.minecraft.world.phys.BlockHitResult target) {
 +      BlockState state = f_107287_.m_8055_(pos);
 +      if (!state.addHitEffects(f_107287_, target, this))
 +         m_107367_(pos, target.m_82434_());
-+   }
-+
-    @OnlyIn(Dist.CLIENT)
-    class MutableSpriteSet implements SpriteSet {
-       private List<TextureAtlasSprite> f_107406_;
-@@ -456,7 +_,7 @@
- 
-    @FunctionalInterface
-    @OnlyIn(Dist.CLIENT)
--   interface SpriteParticleRegistration<T extends ParticleOptions> {
-+   public interface SpriteParticleRegistration<T extends ParticleOptions> {
-       ParticleProvider<T> m_107419_(SpriteSet p_107420_);
     }
- }
+ 
+    @OnlyIn(Dist.CLIENT)

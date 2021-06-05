@@ -1,14 +1,5 @@
 --- a/net/minecraft/world/level/block/RailBlock.java
 +++ b/net/minecraft/world/level/block/RailBlock.java
-@@ -13,7 +_,7 @@
- public class RailBlock extends BaseRailBlock {
-    public static final EnumProperty<RailShape> f_55392_ = BlockStateProperties.f_61403_;
- 
--   protected RailBlock(BlockBehaviour.Properties p_55395_) {
-+   public RailBlock(BlockBehaviour.Properties p_55395_) {
-       super(false, p_55395_);
-       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_55392_, RailShape.NORTH_SOUTH));
-    }
 @@ -49,6 +_,9 @@
              return p_55405_.m_61124_(f_55392_, RailShape.SOUTH_EAST);
           case NORTH_EAST:

@@ -17,7 +17,7 @@
     protected static final Logger f_46426_ = LogManager.getLogger();
     public static final Codec<ResourceKey<Level>> f_46427_ = ResourceLocation.f_135803_.xmap(ResourceKey.m_135797_(Registry.f_122819_), ResourceKey::m_135782_);
     public static final ResourceKey<Level> f_46428_ = ResourceKey.m_135785_(Registry.f_122819_, new ResourceLocation("overworld"));
-@@ -75,16 +_,16 @@
+@@ -75,7 +_,7 @@
     public final List<BlockEntity> f_46431_ = Lists.newArrayList();
     public final List<BlockEntity> f_46432_ = Lists.newArrayList();
     protected final List<BlockEntity> f_46433_ = Lists.newArrayList();
@@ -26,19 +26,6 @@
     private final Thread f_46423_;
     private final boolean f_46424_;
     private int f_46425_;
-    protected int f_46435_ = (new Random()).nextInt();
-    protected final int f_46436_ = 1013904223;
--   protected float f_46437_;
--   protected float f_46438_;
--   protected float f_46439_;
--   protected float f_46440_;
-+   public float f_46437_;
-+   public float f_46438_;
-+   public float f_46439_;
-+   public float f_46440_;
-    public final Random f_46441_ = new Random();
-    private final DimensionType f_46445_;
-    protected final WritableLevelData f_46442_;
 @@ -94,8 +_,12 @@
     private final WorldBorder f_46447_;
     private final BiomeManager f_46420_;
@@ -115,36 +102,36 @@
     }
  
 +   // Split off from original setBlockState(BlockPos, BlockState, int, int) method in order to directly send client and physic updates
-+   public void markAndNotifyBlock(BlockPos p_241211_1_, @Nullable LevelChunk chunk, BlockState blockstate, BlockState p_241211_2_, int p_241211_3_, int p_241211_4_)
++   public void markAndNotifyBlock(BlockPos p_9539_, @Nullable LevelChunk chunk, BlockState blockstate, BlockState p_9540_, int p_9541_, int p_9542_)
 +   {
-+       Block block = p_241211_2_.m_60734_();
-+       BlockState blockstate1 = m_8055_(p_241211_1_);
++       Block block = p_9540_.m_60734_();
++       BlockState blockstate1 = m_8055_(p_9539_);
 +       {
 +           {
-+            if (blockstate1 == p_241211_2_) {
++            if (blockstate1 == p_9540_) {
 +               if (blockstate != blockstate1) {
-+                  this.m_6550_(p_241211_1_, blockstate, blockstate1);
++                  this.m_6550_(p_9539_, blockstate, blockstate1);
 +               }
 +
-+               if ((p_241211_3_ & 2) != 0 && (!this.f_46443_ || (p_241211_3_ & 4) == 0) && (this.f_46443_ || chunk.m_6708_() != null && chunk.m_6708_().m_140114_(ChunkHolder.FullChunkStatus.TICKING))) {
-+                  this.m_7260_(p_241211_1_, blockstate, p_241211_2_, p_241211_3_);
++               if ((p_9541_ & 2) != 0 && (!this.f_46443_ || (p_9541_ & 4) == 0) && (this.f_46443_ || chunk.m_6708_() != null && chunk.m_6708_().m_140114_(ChunkHolder.FullChunkStatus.TICKING))) {
++                  this.m_7260_(p_9539_, blockstate, p_9540_, p_9541_);
 +               }
 +
-+               if ((p_241211_3_ & 1) != 0) {
-+                  this.m_6289_(p_241211_1_, blockstate.m_60734_());
-+                  if (!this.f_46443_ && p_241211_2_.m_60807_()) {
-+                     this.m_46717_(p_241211_1_, block);
++               if ((p_9541_ & 1) != 0) {
++                  this.m_6289_(p_9539_, blockstate.m_60734_());
++                  if (!this.f_46443_ && p_9540_.m_60807_()) {
++                     this.m_46717_(p_9539_, block);
 +                  }
 +               }
 +
-+               if ((p_241211_3_ & 16) == 0 && p_241211_4_ > 0) {
-+                  int i = p_241211_3_ & -34;
-+                  blockstate.m_60762_(this, p_241211_1_, i, p_241211_4_ - 1);
-+                  p_241211_2_.m_60705_(this, p_241211_1_, i, p_241211_4_ - 1);
-+                  p_241211_2_.m_60762_(this, p_241211_1_, i, p_241211_4_ - 1);
++               if ((p_9541_ & 16) == 0 && p_9542_ > 0) {
++                  int i = p_9541_ & -34;
++                  blockstate.m_60762_(this, p_9539_, i, p_9542_ - 1);
++                  p_9540_.m_60705_(this, p_9539_, i, p_9542_ - 1);
++                  p_9540_.m_60762_(this, p_9539_, i, p_9542_ - 1);
 +               }
 +
-+               this.m_6559_(p_241211_1_, blockstate, blockstate1);
++               this.m_6559_(p_9539_, blockstate, blockstate1);
 +            }
 +         }
 +      }

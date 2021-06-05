@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/block/CactusBlock.java
 +++ b/net/minecraft/world/level/block/CactusBlock.java
-@@ -21,17 +_,18 @@
+@@ -21,7 +_,7 @@
  import net.minecraft.world.phys.shapes.CollisionContext;
  import net.minecraft.world.phys.shapes.VoxelShape;
  
@@ -9,11 +9,7 @@
     public static final IntegerProperty f_51131_ = BlockStateProperties.f_61410_;
     protected static final VoxelShape f_51132_ = Block.m_49796_(1.0D, 0.0D, 1.0D, 15.0D, 15.0D, 15.0D);
     protected static final VoxelShape f_51133_ = Block.m_49796_(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
- 
--   protected CactusBlock(BlockBehaviour.Properties p_51136_) {
-+   public CactusBlock(BlockBehaviour.Properties p_51136_) {
-       super(p_51136_);
-       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_51131_, Integer.valueOf(0)));
+@@ -32,6 +_,7 @@
     }
  
     public void m_7458_(BlockState p_51138_, ServerLevel p_51139_, BlockPos p_51140_, Random p_51141_) {

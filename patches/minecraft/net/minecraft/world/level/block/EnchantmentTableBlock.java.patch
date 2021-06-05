@@ -1,14 +1,5 @@
 --- a/net/minecraft/world/level/block/EnchantmentTableBlock.java
 +++ b/net/minecraft/world/level/block/EnchantmentTableBlock.java
-@@ -31,7 +_,7 @@
- public class EnchantmentTableBlock extends BaseEntityBlock {
-    protected static final VoxelShape f_52950_ = Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
- 
--   protected EnchantmentTableBlock(BlockBehaviour.Properties p_52953_) {
-+   public EnchantmentTableBlock(BlockBehaviour.Properties p_52953_) {
-       super(p_52953_);
-    }
- 
 @@ -56,7 +_,7 @@
              if (p_52984_.nextInt(16) == 0) {
                 for(int k = 0; k <= 1; ++k) {

@@ -60,12 +60,12 @@
 -      this.f_41587_ = p_41602_;
 -      if (this.f_41589_ != null && this.f_41589_.m_41465_()) {
 +   public ItemStack(ItemLike p_41601_, int p_41602_) { this(p_41601_, p_41602_, (CompoundTag) null); }
-+   public ItemStack(ItemLike p_i48204_1_, int p_i48204_2_, @Nullable CompoundTag capNBT) {
++   public ItemStack(ItemLike p_41604_, int p_41605_, @Nullable CompoundTag p_41606_) {
 +      super(ItemStack.class);
-+      this.capNBT = capNBT;
-+      this.f_41589_ = p_i48204_1_ == null ? null : p_i48204_1_.m_5456_();
-+      this.delegate = p_i48204_1_ == null ? null : p_i48204_1_.m_5456_().delegate;
-+      this.f_41587_ = p_i48204_2_;
++      this.capNBT = p_41606_;
++      this.f_41589_ = p_41604_ == null ? null : p_41604_.m_5456_();
++      this.delegate = p_41604_ == null ? null : p_41604_.m_5456_().delegate;
++      this.f_41587_ = p_41605_;
 +      if (this.f_41589_ != null && this.f_41589_.isDamageable(this)) {
           this.m_41721_(this.m_41773_());
        }
@@ -100,7 +100,7 @@
     }
  
     public static ItemStack m_41712_(CompoundTag p_41713_) {
-@@ -166,18 +_,27 @@
+@@ -166,10 +_,19 @@
     }
  
     public Item m_41720_() {
@@ -109,28 +109,24 @@
     }
  
     public InteractionResult m_41661_(UseOnContext p_41662_) {
--      Player player = p_41662_.m_43723_();
--      BlockPos blockpos = p_41662_.m_8083_();
--      BlockInWorld blockinworld = new BlockInWorld(p_41662_.m_43725_(), blockpos, false);
--      if (player != null && !player.f_36077_.f_35938_ && !this.m_41723_(p_41662_.m_43725_().m_5999_(), blockinworld)) {
 +      if (!p_41662_.m_43725_().f_46443_) return net.minecraftforge.common.ForgeHooks.onPlaceItemIntoWorld(p_41662_);
 +      return onItemUse(p_41662_, (c) -> m_41720_().m_6225_(p_41662_));
 +   }
 +
-+   public InteractionResult onItemUseFirst(UseOnContext p_196084_1_) {
-+      return onItemUse(p_196084_1_, (c) -> m_41720_().onItemUseFirst(this, p_196084_1_));
++   public InteractionResult onItemUseFirst(UseOnContext p_41662_) {
++      return onItemUse(p_41662_, (c) -> m_41720_().onItemUseFirst(this, p_41662_));
 +   }
 +
-+   private InteractionResult onItemUse(UseOnContext p_196084_1_, java.util.function.Function<UseOnContext, InteractionResult> callback) {
-+      Player player = p_196084_1_.m_43723_();
-+      BlockPos blockpos = p_196084_1_.m_8083_();
-+      BlockInWorld blockinworld = new BlockInWorld(p_196084_1_.m_43725_(), blockpos, false);
-+      if (player != null && !player.f_36077_.f_35938_ && !this.m_41723_(p_196084_1_.m_43725_().m_5999_(), blockinworld)) {
++   private InteractionResult onItemUse(UseOnContext p_41662_, java.util.function.Function<UseOnContext, InteractionResult> callback) {
+       Player player = p_41662_.m_43723_();
+       BlockPos blockpos = p_41662_.m_8083_();
+       BlockInWorld blockinworld = new BlockInWorld(p_41662_.m_43725_(), blockpos, false);
+@@ -177,7 +_,7 @@
           return InteractionResult.PASS;
        } else {
           Item item = this.m_41720_();
 -         InteractionResult interactionresult = item.m_6225_(p_41662_);
-+         InteractionResult interactionresult = callback.apply(p_196084_1_);
++         InteractionResult interactionresult = callback.apply(p_41662_);
           if (player != null && interactionresult.m_19077_()) {
              player.m_36246_(Stats.f_12982_.m_12902_(item));
           }

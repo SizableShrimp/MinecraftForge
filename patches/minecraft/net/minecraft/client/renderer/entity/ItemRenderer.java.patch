@@ -17,15 +17,6 @@
  
        for(Item item : Registry.f_122827_) {
           if (!f_115094_.contains(item)) {
-@@ -82,7 +_,7 @@
-       return this.f_115095_;
-    }
- 
--   private void m_115189_(BakedModel p_115190_, ItemStack p_115191_, int p_115192_, int p_115193_, PoseStack p_115194_, VertexConsumer p_115195_) {
-+   public void m_115189_(BakedModel p_115190_, ItemStack p_115191_, int p_115192_, int p_115193_, PoseStack p_115194_, VertexConsumer p_115195_) {
-       Random random = new Random();
-       long i = 42L;
- 
 @@ -103,7 +_,7 @@
              p_115151_ = this.f_115095_.m_109393_().m_119422_(new ModelResourceLocation("minecraft:trident#inventory"));
           }
@@ -56,15 +47,6 @@
           }
  
           p_115147_.m_85849_();
-@@ -171,7 +_,7 @@
-       return p_115226_ ? VertexMultiConsumer.m_86168_(p_115223_.m_6299_(p_115225_ ? RenderType.m_110493_() : RenderType.m_110499_()), p_115223_.m_6299_(p_115224_)) : p_115223_.m_6299_(p_115224_);
-    }
- 
--   private void m_115162_(PoseStack p_115163_, VertexConsumer p_115164_, List<BakedQuad> p_115165_, ItemStack p_115166_, int p_115167_, int p_115168_) {
-+   public void m_115162_(PoseStack p_115163_, VertexConsumer p_115164_, List<BakedQuad> p_115165_, ItemStack p_115166_, int p_115167_, int p_115168_) {
-       boolean flag = !p_115166_.m_41619_();
-       PoseStack.Pose posestack$pose = p_115163_.m_85850_();
- 
 @@ -184,7 +_,7 @@
           float f = (float)(i >> 16 & 255) / 255.0F;
           float f1 = (float)(i >> 8 & 255) / 255.0F;

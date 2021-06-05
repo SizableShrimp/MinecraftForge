@@ -4,16 +4,13 @@
     private long f_9423_;
  
     protected Ticket(TicketType<T> p_9425_, int p_9426_, T p_9427_) {
--      this.f_9420_ = p_9425_;
--      this.f_9421_ = p_9426_;
--      this.f_9422_ = p_9427_;
 +      this(p_9425_, p_9426_, p_9427_, false);
 +   }
 +
-+   public Ticket(TicketType<T> p_i226095_1_, int p_i226095_2_, T p_i226095_3_, boolean forceTicks) {
-+      this.f_9420_ = p_i226095_1_;
-+      this.f_9421_ = p_i226095_2_;
-+      this.f_9422_ = p_i226095_3_;
++   public Ticket(TicketType<T> p_9425_, int p_9426_, T p_9427_, boolean forceTicks) {
+       this.f_9420_ = p_9425_;
+       this.f_9421_ = p_9426_;
+       this.f_9422_ = p_9427_;
 +      this.forceTicks = forceTicks;
     }
  

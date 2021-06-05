@@ -70,21 +70,6 @@
        }).findAny(), p_47804_);
     }
  
-@@ -98,10 +_,10 @@
-    }
- 
-    public static class Builder {
--      private Optional<Supplier<ConfiguredSurfaceBuilder<?>>> f_47826_ = Optional.empty();
--      private final Map<GenerationStep.Carving, List<Supplier<ConfiguredWorldCarver<?>>>> f_47827_ = Maps.newLinkedHashMap();
--      private final List<List<Supplier<ConfiguredFeature<?, ?>>>> f_47828_ = Lists.newArrayList();
--      private final List<Supplier<ConfiguredStructureFeature<?, ?>>> f_47829_ = Lists.newArrayList();
-+      protected Optional<Supplier<ConfiguredSurfaceBuilder<?>>> f_47826_ = Optional.empty();
-+      protected final Map<GenerationStep.Carving, List<Supplier<ConfiguredWorldCarver<?>>>> f_47827_ = Maps.newLinkedHashMap();
-+      protected final List<List<Supplier<ConfiguredFeature<?, ?>>>> f_47828_ = Lists.newArrayList();
-+      protected final List<Supplier<ConfiguredStructureFeature<?, ?>>> f_47829_ = Lists.newArrayList();
- 
-       public BiomeGenerationSettings.Builder m_47851_(ConfiguredSurfaceBuilder<?> p_47852_) {
-          return this.m_47855_(() -> {
 @@ -127,7 +_,7 @@
        }
  
@@ -94,15 +79,6 @@
              return Lists.newArrayList();
           }).add(() -> {
              return p_47841_;
-@@ -142,7 +_,7 @@
-          return this;
-       }
- 
--      private void m_47832_(int p_47833_) {
-+      protected void m_47832_(int p_47833_) {
-          while(this.f_47828_.size() <= p_47833_) {
-             this.f_47828_.add(Lists.newArrayList());
-          }
 @@ -152,8 +_,8 @@
        public BiomeGenerationSettings m_47831_() {
           return new BiomeGenerationSettings(this.f_47826_.orElseThrow(() -> {

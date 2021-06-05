@@ -89,15 +89,6 @@
                 } else if (lifecycle == Lifecycle.experimental()) {
                    p_101431_.m_91152_(new ConfirmScreen(booleanconsumer, new TranslatableComponent("selectWorld.import_worldgen_settings.experimental.title"), new TranslatableComponent("selectWorld.import_worldgen_settings.experimental.question")));
                 } else {
-@@ -243,7 +_,7 @@
- 
-    }
- 
--   protected void m_101404_(WorldGenSettings p_101405_) {
-+   public void m_101404_(WorldGenSettings p_101405_) {
-       this.f_101394_ = p_101405_;
-    }
- 
 @@ -295,7 +_,7 @@
        } else {
           this.f_101389_.f_93624_ = p_101467_;

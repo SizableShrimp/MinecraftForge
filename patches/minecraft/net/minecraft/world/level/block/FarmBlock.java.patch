@@ -12,15 +12,6 @@
  import net.minecraft.world.level.Level;
  import net.minecraft.world.level.LevelAccessor;
  import net.minecraft.world.level.LevelReader;
-@@ -28,7 +_,7 @@
-    public static final IntegerProperty f_53243_ = BlockStateProperties.f_61423_;
-    protected static final VoxelShape f_53244_ = Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
- 
--   protected FarmBlock(BlockBehaviour.Properties p_53247_) {
-+   public FarmBlock(BlockBehaviour.Properties p_53247_) {
-       super(p_53247_);
-       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_53243_, Integer.valueOf(0)));
-    }
 @@ -80,7 +_,7 @@
     }
  

@@ -1,14 +1,5 @@
 --- a/net/minecraft/world/level/block/SpongeBlock.java
 +++ b/net/minecraft/world/level/block/SpongeBlock.java
-@@ -15,7 +_,7 @@
- import net.minecraft.world.level.material.Material;
- 
- public class SpongeBlock extends Block {
--   protected SpongeBlock(BlockBehaviour.Properties p_56796_) {
-+   public SpongeBlock(BlockBehaviour.Properties p_56796_) {
-       super(p_56796_);
-    }
- 
 @@ -66,7 +_,7 @@
                       queue.add(new Tuple<>(blockpos1, j + 1));
                    }

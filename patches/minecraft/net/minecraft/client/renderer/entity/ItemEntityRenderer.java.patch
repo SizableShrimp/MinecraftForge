@@ -1,6 +1,6 @@
 --- a/net/minecraft/client/renderer/entity/ItemEntityRenderer.java
 +++ b/net/minecraft/client/renderer/entity/ItemEntityRenderer.java
-@@ -19,17 +_,17 @@
+@@ -19,10 +_,10 @@
  
  @OnlyIn(Dist.CLIENT)
  public class ItemEntityRenderer extends EntityRenderer<ItemEntity> {
@@ -13,14 +13,6 @@
        super(p_115022_);
        this.f_115019_ = p_115023_;
        this.f_114477_ = 0.15F;
-       this.f_114478_ = 0.75F;
-    }
- 
--   private int m_115042_(ItemStack p_115043_) {
-+   protected int m_115042_(ItemStack p_115043_) {
-       int i = 1;
-       if (p_115043_.m_41613_() > 48) {
-          i = 5;
 @@ -54,17 +_,14 @@
        int j = this.m_115042_(itemstack);
        float f = 0.25F;

@@ -11,9 +11,8 @@
     private final SoundEvent f_43034_;
 +   private final java.util.function.Supplier<SoundEvent> soundSupplier;
  
--   protected RecordItem(int p_43037_, SoundEvent p_43038_, Item.Properties p_43039_) {
 +   @Deprecated // Forge: Use the constructor that takes a supplier instead
-+   public RecordItem(int p_43037_, SoundEvent p_43038_, Item.Properties p_43039_) {
+    public RecordItem(int p_43037_, SoundEvent p_43038_, Item.Properties p_43039_) {
        super(p_43039_);
        this.f_43033_ = p_43037_;
        this.f_43034_ = p_43038_;

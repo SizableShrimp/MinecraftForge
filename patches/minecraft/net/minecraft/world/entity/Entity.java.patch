@@ -185,15 +185,6 @@
                 if (p_20259_.m_128425_("Tags", 9)) {
                    this.f_19841_.clear();
                    ListTag listtag3 = p_20259_.m_128437_("Tags", 8);
-@@ -1490,7 +_,7 @@
-    }
- 
-    @Nullable
--   protected final String m_20078_() {
-+   public final String m_20078_() {
-       EntityType<?> entitytype = this.m_6095_();
-       ResourceLocation resourcelocation = EntityType.m_20613_(entitytype);
-       return entitytype.m_20584_() && resourcelocation != null ? resourcelocation.toString() : null;
 @@ -1544,6 +_,8 @@
        } else {
           ItemEntity itementity = new ItemEntity(this.f_19853_, this.m_20185_(), this.m_20186_() + (double)p_19986_, this.m_20189_(), p_19985_);
@@ -262,20 +253,20 @@
 +      return this.changeDimension(p_20118_, p_20118_.m_8871_());
 +   }
 +   @Nullable
-+   public Entity changeDimension(ServerLevel p_241206_1_, net.minecraftforge.common.util.ITeleporter teleporter) {
++   public Entity changeDimension(ServerLevel p_38246_, net.minecraftforge.common.util.ITeleporter teleporter) {
        if (this.f_19853_ instanceof ServerLevel && !this.f_19866_) {
           this.f_19853_.m_46473_().m_6180_("changeDimension");
           this.m_19877_();
           this.f_19853_.m_46473_().m_6180_("reposition");
 -         PortalInfo portalinfo = this.m_7937_(p_20118_);
-+         PortalInfo portalinfo = teleporter.getPortalInfo(this, p_241206_1_, this::m_7937_);
++         PortalInfo portalinfo = teleporter.getPortalInfo(this, p_38246_, this::m_7937_);
           if (portalinfo == null) {
              return null;
           } else {
-+            Entity transportedEntity = teleporter.placeEntity(this, (ServerLevel) this.f_19853_, p_241206_1_, this.f_19857_, spawnPortal -> { //Forge: Start vanilla logic
++            Entity transportedEntity = teleporter.placeEntity(this, (ServerLevel) this.f_19853_, p_38246_, this.f_19857_, spawnPortal -> { //Forge: Start vanilla logic
              this.f_19853_.m_46473_().m_6182_("reloading");
 -            Entity entity = this.m_6095_().m_20615_(p_20118_);
-+            Entity entity = this.m_6095_().m_20615_(p_241206_1_);
++            Entity entity = this.m_6095_().m_20615_(p_38246_);
              if (entity != null) {
                 entity.m_20361_(this);
                 entity.m_7678_(portalinfo.f_77676_.f_82479_, portalinfo.f_77676_.f_82480_, portalinfo.f_77676_.f_82481_, portalinfo.f_77678_, entity.f_19858_);
@@ -283,9 +274,9 @@
 -               p_20118_.m_8851_(entity);
 -               if (p_20118_.m_46472_() == Level.f_46430_) {
 -                  ServerLevel.m_8617_(p_20118_);
-+               p_241206_1_.m_8851_(entity);
-+               if (spawnPortal && p_241206_1_.m_46472_() == Level.f_46430_) {
-+                  ServerLevel.m_8617_(p_241206_1_);
++               p_38246_.m_8851_(entity);
++               if (spawnPortal && p_38246_.m_46472_() == Level.f_46430_) {
++                  ServerLevel.m_8617_(p_38246_);
                 }
              }
 +            return entity;
@@ -295,7 +286,7 @@
              this.f_19853_.m_46473_().m_7238_();
              ((ServerLevel)this.f_19853_).m_8886_();
 -            p_20118_.m_8886_();
-+            p_241206_1_.m_8886_();
++            p_38246_.m_8886_();
              this.f_19853_.m_46473_().m_7238_();
 -            return entity;
 +            return transportedEntity;

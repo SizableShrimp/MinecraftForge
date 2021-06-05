@@ -176,7 +176,7 @@
        }));
        private final String f_47633_;
  
-@@ -491,83 +_,24 @@
+@@ -491,76 +_,17 @@
        }
     }
  
@@ -239,7 +239,7 @@
 -      }
 -   }
 -
--   static class ClimateSettings {
+    public static class ClimateSettings {
 -      public static final MapCodec<Biome.ClimateSettings> f_47679_ = RecordCodecBuilder.mapCodec((p_47699_) -> {
 -         return p_47699_.group(Biome.Precipitation.f_47717_.fieldOf("precipitation").forGetter((p_47713_) -> {
 -            return p_47713_.f_47680_;
@@ -250,14 +250,6 @@
 -         }), Codec.FLOAT.fieldOf("downfall").forGetter((p_47707_) -> {
 -            return p_47707_.f_47683_;
 -         })).apply(p_47699_, Biome.ClimateSettings::new);
--      });
--      private final Biome.Precipitation f_47680_;
--      private final float f_47681_;
--      private final Biome.TemperatureModifier f_47682_;
--      private final float f_47683_;
--
--      private ClimateSettings(Biome.Precipitation p_47686_, float p_47687_, Biome.TemperatureModifier p_47688_, float p_47689_) {
-+   public static class ClimateSettings {
 +      public static final MapCodec<Biome.ClimateSettings> f_47679_ = RecordCodecBuilder.mapCodec((p_242465_0_) -> {
 +         return p_242465_0_.group(Biome.Precipitation.f_47717_.fieldOf("precipitation").forGetter((p_242472_0_) -> {
 +            return p_242472_0_.f_47680_;
@@ -268,16 +260,9 @@
 +         }), Codec.FLOAT.fieldOf("downfall").forGetter((p_242469_0_) -> {
 +            return p_242469_0_.f_47683_;
 +         })).apply(p_242465_0_, Biome.ClimateSettings::new);
-+      });
-+      public final Biome.Precipitation f_47680_;
-+      public final float f_47681_;
-+      public final Biome.TemperatureModifier f_47682_;
-+      public final float f_47683_;
-+
-+      public ClimateSettings(Biome.Precipitation p_47686_, float p_47687_, Biome.TemperatureModifier p_47688_, float p_47689_) {
-          this.f_47680_ = p_47686_;
-          this.f_47681_ = p_47687_;
-          this.f_47682_ = p_47688_;
+       });
+       public final Biome.Precipitation f_47680_;
+       public final float f_47681_;
 @@ -581,8 +_,8 @@
        SNOW("snow");
  

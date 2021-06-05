@@ -1,14 +1,5 @@
 --- a/net/minecraft/world/inventory/AnvilMenu.java
 +++ b/net/minecraft/world/inventory/AnvilMenu.java
-@@ -20,7 +_,7 @@
- 
- public class AnvilMenu extends ItemCombinerMenu {
-    private static final Logger f_38999_ = LogManager.getLogger();
--   private int f_39000_;
-+   public int f_39000_;
-    private String f_39001_;
-    private final DataSlot f_39002_ = DataSlot.m_39401_();
- 
 @@ -46,6 +_,8 @@
           p_39012_.m_6749_(-this.f_39002_.m_6501_());
        }

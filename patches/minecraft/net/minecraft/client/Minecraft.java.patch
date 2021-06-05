@@ -31,15 +31,6 @@
  import net.minecraft.world.item.TooltipFlag;
  import net.minecraft.world.level.DataPackConfig;
  import net.minecraft.world.level.Level;
-@@ -246,7 +_,7 @@
-    private static final Component f_90984_ = new TranslatableComponent("multiplayer.socialInteractions.not_available");
-    private final File f_90985_;
-    private final PropertyMap f_90986_;
--   private final TextureManager f_90987_;
-+   public final TextureManager f_90987_;
-    private final DataFixer f_90988_;
-    private final VirtualScreen f_90989_;
-    private final Window f_90990_;
 @@ -362,6 +_,7 @@
     public Minecraft(GameConfig p_91084_) {
        super("Client");
@@ -129,17 +120,15 @@
           Component component;
           if (p_91240_ instanceof SimpleReloadableResourceManager.ResourcePackLoadingFailure) {
              component = new TextComponent(((SimpleReloadableResourceManager.ResourcePackLoadingFailure)p_91240_).m_10921_().m_8017_());
-@@ -627,18 +_,18 @@
-       this.f_91045_.m_95011_(p_91337_ ? ImmutableMap.of(f_91055_, f_91058_) : ImmutableMap.of());
+@@ -628,17 +_,17 @@
     }
  
--   private void m_91271_() {
+    public void m_91271_() {
 -      ReloadableSearchTree<ItemStack> reloadablesearchtree = new ReloadableSearchTree<>((p_91345_) -> {
 -         return p_91345_.m_41651_((Player)null, TooltipFlag.Default.NORMAL).stream().map((p_91371_) -> {
 -            return ChatFormatting.m_126649_(p_91371_.getString()).trim();
 -         }).filter((p_91378_) -> {
 -            return !p_91378_.isEmpty();
-+   public void m_91271_() {
 +      ReloadableSearchTree<ItemStack> reloadablesearchtree = new ReloadableSearchTree<>((p_213242_0_) -> {
 +         return p_213242_0_.m_41651_((Player)null, TooltipFlag.Default.NORMAL).stream().map((p_213230_0_) -> {
 +            return ChatFormatting.m_126649_(p_213230_0_.getString()).trim();
@@ -386,7 +375,7 @@
     }
  
     private boolean m_91278_() {
-@@ -1632,47 +_,52 @@
+@@ -1632,24 +_,24 @@
     }
  
     public void m_91200_(String p_91201_) {
@@ -415,51 +404,31 @@
     }
  
 -   private void m_91219_(String p_91220_, RegistryAccess.RegistryHolder p_91221_, Function<LevelStorageSource.LevelStorageAccess, DataPackConfig> p_91222_, Function4<LevelStorageSource.LevelStorageAccess, RegistryAccess.RegistryHolder, ResourceManager, DataPackConfig, WorldData> p_91223_, boolean p_91224_, Minecraft.ExperimentalDialogType p_91225_) {
-+   private void loadWorld(String p_238195_1_, RegistryAccess.RegistryHolder p_238195_2_, Function<LevelStorageSource.LevelStorageAccess, DataPackConfig> p_238195_3_, Function4<LevelStorageSource.LevelStorageAccess, RegistryAccess.RegistryHolder, ResourceManager, DataPackConfig, WorldData> p_238195_4_, boolean p_238195_5_, Minecraft.ExperimentalDialogType p_238195_6_, boolean creating) {
++   private void loadWorld(String p_91220_, RegistryAccess.RegistryHolder p_91221_, Function<LevelStorageSource.LevelStorageAccess, DataPackConfig> p_91222_, Function4<LevelStorageSource.LevelStorageAccess, RegistryAccess.RegistryHolder, ResourceManager, DataPackConfig, WorldData> p_91223_, boolean p_91224_, Minecraft.ExperimentalDialogType p_91225_, boolean creating) {
        LevelStorageSource.LevelStorageAccess levelstoragesource$levelstorageaccess;
        try {
--         levelstoragesource$levelstorageaccess = this.f_91031_.m_78260_(p_91220_);
-+         levelstoragesource$levelstorageaccess = this.f_91031_.m_78260_(p_238195_1_);
-       } catch (IOException ioexception2) {
--         f_90982_.warn("Failed to read level {} data", p_91220_, ioexception2);
--         SystemToast.m_94852_(this, p_91220_);
-+         f_90982_.warn("Failed to read level {} data", p_238195_1_, ioexception2);
-+         SystemToast.m_94852_(this, p_238195_1_);
-          this.m_91152_((Screen)null);
-          return;
+          levelstoragesource$levelstorageaccess = this.f_91031_.m_78260_(p_91220_);
+@@ -1661,12 +_,17 @@
        }
  
        Minecraft.ServerStem minecraft$serverstem;
 +      final RegistryAccess.RegistryHolder dyn_f;
        try {
 -         minecraft$serverstem = this.m_91190_(p_91221_, p_91222_, p_91223_, p_91224_, levelstoragesource$levelstorageaccess);
-+         Minecraft.ServerStem mgr = this.m_91190_(p_238195_2_, p_238195_3_, p_238195_4_, p_238195_5_, levelstoragesource$levelstorageaccess);
++         Minecraft.ServerStem mgr = this.m_91190_(p_91221_, p_91222_, p_91223_, p_91224_, levelstoragesource$levelstorageaccess);
 +         // We need to rebuild this if we're loading world, so that it gets all the information from AFTER we inject our mappings from the save.
-+         dyn_f = creating ? p_238195_2_ : RegistryAccess.m_123086_();
-+         minecraft$serverstem = creating ? mgr : this.m_91190_(dyn_f, p_238195_3_, p_238195_4_, p_238195_5_, levelstoragesource$levelstorageaccess); //Note this runs the injection again... which isn't good.. but hey.. we need a better spot to hook in.
++         dyn_f = creating ? p_91221_ : RegistryAccess.m_123086_();
++         minecraft$serverstem = creating ? mgr : this.m_91190_(dyn_f, p_91222_, p_91223_, p_91224_, levelstoragesource$levelstorageaccess); //Note this runs the injection again... which isn't good.. but hey.. we need a better spot to hook in.
 +
        } catch (Exception exception) {
           f_90982_.warn("Failed to load datapacks, can't proceed with server load", (Throwable)exception);
           this.m_91152_(new DatapackLoadFailureScreen(() -> {
 -            this.m_91219_(p_91220_, p_91221_, p_91222_, p_91223_, true, p_91225_);
-+            this.loadWorld(p_238195_1_, p_238195_2_, p_238195_3_, p_238195_4_, true, p_238195_6_, creating);
++            this.loadWorld(p_91220_, p_91221_, p_91222_, p_91223_, true, p_91225_, creating);
           }));
  
           try {
-             levelstoragesource$levelstorageaccess.close();
-          } catch (IOException ioexception) {
--            f_90982_.warn("Failed to unlock access to level {}", p_91220_, ioexception);
-+            f_90982_.warn("Failed to unlock access to level {}", p_238195_1_, ioexception);
-          }
- 
-          return;
-@@ -1681,12 +_,12 @@
-       WorldData worlddata = minecraft$serverstem.m_91434_();
-       boolean flag = worlddata.m_5961_().m_64670_();
-       boolean flag1 = worlddata.m_5754_() != Lifecycle.stable();
--      if (p_91225_ == Minecraft.ExperimentalDialogType.NONE || !flag && !flag1) {
-+      if (p_238195_6_ == Minecraft.ExperimentalDialogType.NONE || !flag && !flag1) {
-          this.m_91399_();
+@@ -1686,7 +_,7 @@
           this.f_90999_.set((StoringChunkProgressListener)null);
  
           try {
@@ -481,16 +450,7 @@
                    storingchunkprogresslistener.m_9662_();
                    this.f_90999_.set(storingchunkprogresslistener);
                    return new ProcessorChunkProgressListener(storingchunkprogresslistener, this.f_91023_::add);
-@@ -1707,7 +_,7 @@
-          } catch (Throwable throwable) {
-             CrashReport crashreport = CrashReport.m_127521_(throwable, "Starting integrated server");
-             CrashReportCategory crashreportcategory = crashreport.m_127514_("Starting integrated server");
--            crashreportcategory.m_128159_("Level ID", p_91220_);
-+            crashreportcategory.m_128159_("Level ID", p_238195_1_);
-             crashreportcategory.m_128159_("Level Name", worlddata.m_5462_());
-             throw new ReportedException(crashreport);
-          }
-@@ -1738,21 +_,26 @@
+@@ -1738,14 +_,19 @@
           this.f_91026_.m_7238_();
           SocketAddress socketaddress = this.f_91007_.m_129919_().m_9708_();
           Connection connection = Connection.m_129493_(socketaddress);
@@ -507,21 +467,12 @@
 +         connection.m_129512_(new ServerboundHelloPacket(gameProfile));
           this.f_91009_ = connection;
        } else {
--         this.m_91143_(p_91225_, p_91220_, flag, () -> {
+          this.m_91143_(p_91225_, p_91220_, flag, () -> {
 -            this.m_91219_(p_91220_, p_91221_, p_91222_, p_91223_, p_91224_, Minecraft.ExperimentalDialogType.NONE);
-+         this.m_91143_(p_238195_6_, p_238195_1_, flag, () -> {
-+            this.loadWorld(p_238195_1_, dyn_f, p_238195_3_, p_238195_4_, p_238195_5_, Minecraft.ExperimentalDialogType.NONE, creating);
++            this.loadWorld(p_91220_, dyn_f, p_91222_, p_91223_, p_91224_, Minecraft.ExperimentalDialogType.NONE, creating);
           });
           minecraft$serverstem.close();
  
-          try {
-             levelstoragesource$levelstorageaccess.close();
-          } catch (IOException ioexception1) {
--            f_90982_.warn("Failed to unlock access to level {}", p_91220_, ioexception1);
-+            f_90982_.warn("Failed to unlock access to level {}", p_238195_1_, ioexception1);
-          }
- 
-       }
 @@ -1770,16 +_,16 @@
              component1 = new TranslatableComponent("selectWorld.backupWarning.experimental");
           }
@@ -580,7 +531,7 @@
     }
  
     public boolean m_91400_() {
-@@ -1939,116 +_,13 @@
+@@ -1939,112 +_,9 @@
  
     private void m_91280_() {
        if (this.f_91077_ != null && this.f_91077_.m_6662_() != HitResult.Type.MISS) {
@@ -696,11 +647,6 @@
        }
     }
  
--   private ItemStack m_91122_(ItemStack p_91123_, BlockEntity p_91124_) {
-+   public ItemStack m_91122_(ItemStack p_91123_, BlockEntity p_91124_) {
-       CompoundTag compoundtag = p_91124_.m_6945_(new CompoundTag());
-       if (p_91123_.m_41720_() instanceof PlayerHeadItem && compoundtag.m_128441_("SkullOwner")) {
-          CompoundTag compoundtag2 = compoundtag.m_128469_("SkullOwner");
 @@ -2134,9 +_,10 @@
        return f_90981_;
     }

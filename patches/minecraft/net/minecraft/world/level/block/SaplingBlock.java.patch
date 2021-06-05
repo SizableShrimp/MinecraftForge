@@ -1,14 +1,5 @@
 --- a/net/minecraft/world/level/block/SaplingBlock.java
 +++ b/net/minecraft/world/level/block/SaplingBlock.java
-@@ -19,7 +_,7 @@
-    protected static final VoxelShape f_55974_ = Block.m_49796_(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D);
-    private final AbstractTreeGrower f_55975_;
- 
--   protected SaplingBlock(AbstractTreeGrower p_55978_, BlockBehaviour.Properties p_55979_) {
-+   public SaplingBlock(AbstractTreeGrower p_55978_, BlockBehaviour.Properties p_55979_) {
-       super(p_55979_);
-       this.f_55975_ = p_55978_;
-       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_55973_, Integer.valueOf(0)));
 @@ -31,6 +_,7 @@
  
     public void m_7455_(BlockState p_56003_, ServerLevel p_56004_, BlockPos p_56005_, Random p_56006_) {

@@ -122,8 +122,8 @@
     @Nullable
 -   public Entity m_5489_(ServerLevel p_32042_) {
 -      Entity entity = super.m_5489_(p_32042_);
-+   public Entity changeDimension(ServerLevel p_241206_1_, net.minecraftforge.common.util.ITeleporter teleporter) {
-+      Entity entity = super.changeDimension(p_241206_1_, teleporter);
++   public Entity changeDimension(ServerLevel p_38246_, net.minecraftforge.common.util.ITeleporter teleporter) {
++      Entity entity = super.changeDimension(p_38246_, teleporter);
        if (!this.f_19853_.f_46443_ && entity instanceof ItemEntity) {
           ((ItemEntity)entity).m_32069_();
        }

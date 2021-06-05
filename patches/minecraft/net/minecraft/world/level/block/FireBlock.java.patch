@@ -75,39 +75,29 @@
              BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
  
              for(int l = -1; l <= 1; ++l) {
-@@ -195,30 +_,28 @@
+@@ -195,16 +_,18 @@
        return p_53429_.m_46758_(p_53430_) || p_53429_.m_46758_(p_53430_.m_122024_()) || p_53429_.m_46758_(p_53430_.m_122029_()) || p_53429_.m_46758_(p_53430_.m_122012_()) || p_53429_.m_46758_(p_53430_.m_122019_());
     }
  
--   private int m_53492_(BlockState p_53493_) {
 +   @Deprecated //Forge: Use IForgeBlockState.getFlammability, Public for default implementation only.
-+   public int m_53492_(BlockState p_53493_) {
+    public int m_53492_(BlockState p_53493_) {
        return p_53493_.m_61138_(BlockStateProperties.f_61362_) && p_53493_.m_61143_(BlockStateProperties.f_61362_) ? 0 : this.f_53422_.getInt(p_53493_.m_60734_());
     }
  
--   private int m_53494_(BlockState p_53495_) {
 +   @Deprecated //Forge: Use IForgeBlockState.getFireSpreadSpeed
-+   public int m_53494_(BlockState p_53495_) {
+    public int m_53494_(BlockState p_53495_) {
        return p_53495_.m_61138_(BlockStateProperties.f_61362_) && p_53495_.m_61143_(BlockStateProperties.f_61362_) ? 0 : this.f_53421_.getInt(p_53495_.m_60734_());
     }
  
 -   private void m_53431_(Level p_53432_, BlockPos p_53433_, int p_53434_, Random p_53435_, int p_53436_) {
 -      int i = this.m_53492_(p_53432_.m_8055_(p_53433_));
--      if (p_53435_.nextInt(p_53434_) < i) {
--         BlockState blockstate = p_53432_.m_8055_(p_53433_);
--         if (p_53435_.nextInt(p_53436_ + 10) < 5 && !p_53432_.m_46758_(p_53433_)) {
--            int j = Math.min(p_53436_ + p_53435_.nextInt(5) / 4, 15);
--            p_53432_.m_7731_(p_53433_, this.m_53437_(p_53432_, p_53433_, j), 3);
-+   private void tryCatchFire(Level p_176536_1_, BlockPos p_176536_2_, int p_176536_3_, Random p_176536_4_, int p_176536_5_, Direction face) {
-+      int i = p_176536_1_.m_8055_(p_176536_2_).getFlammability(p_176536_1_, p_176536_2_, face);
-+      if (p_176536_4_.nextInt(p_176536_3_) < i) {
-+         BlockState blockstate = p_176536_1_.m_8055_(p_176536_2_);
-+         if (p_176536_4_.nextInt(p_176536_5_ + 10) < 5 && !p_176536_1_.m_46758_(p_176536_2_)) {
-+            int j = Math.min(p_176536_5_ + p_176536_4_.nextInt(5) / 4, 15);
-+            p_176536_1_.m_7731_(p_176536_2_, this.m_53437_(p_176536_1_, p_176536_2_, j), 3);
-          } else {
--            p_53432_.m_7471_(p_53433_, false);
-+            p_176536_1_.m_7471_(p_176536_2_, false);
++   private void tryCatchFire(Level p_53432_, BlockPos p_53433_, int p_53434_, Random p_53435_, int p_53436_, Direction face) {
++      int i = p_53432_.m_8055_(p_53433_).getFlammability(p_53432_, p_53433_, face);
+       if (p_53435_.nextInt(p_53434_) < i) {
+          BlockState blockstate = p_53432_.m_8055_(p_53433_);
+          if (p_53435_.nextInt(p_53436_ + 10) < 5 && !p_53432_.m_46758_(p_53433_)) {
+@@ -214,11 +_,7 @@
+             p_53432_.m_7471_(p_53433_, false);
           }
  
 -         Block block = blockstate.m_60734_();
@@ -115,7 +105,7 @@
 -            TntBlock tntblock = (TntBlock)block;
 -            TntBlock.m_57433_(p_53432_, p_53433_);
 -         }
-+         blockstate.catchFire(p_176536_1_, p_176536_2_, face, null);
++         blockstate.catchFire(p_53432_, p_53433_, face, null);
        }
  
     }

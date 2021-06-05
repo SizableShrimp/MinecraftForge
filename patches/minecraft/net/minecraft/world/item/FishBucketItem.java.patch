@@ -11,10 +11,10 @@
 +      this.fishTypeSupplier = () -> p_41264_;
 +   }
 +
-+   public FishBucketItem(java.util.function.Supplier<? extends EntityType<?>> fishTypeIn, java.util.function.Supplier<? extends Fluid> p_i49022_2_, Item.Properties builder) {
-+      super(p_i49022_2_, builder);
++   public FishBucketItem(java.util.function.Supplier<? extends EntityType<?>> p_41264_, java.util.function.Supplier<? extends Fluid> p_41265_, Item.Properties p_41266_) {
++      super(p_41265_, p_41266_);
 +      this.f_41262_ = null;
-+      this.fishTypeSupplier = fishTypeIn;
++      this.fishTypeSupplier = p_41264_;
     }
  
     public void m_6660_(Level p_41281_, ItemStack p_41282_, BlockPos p_41283_) {

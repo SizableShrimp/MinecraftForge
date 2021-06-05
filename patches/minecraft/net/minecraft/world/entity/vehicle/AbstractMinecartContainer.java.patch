@@ -5,10 +5,10 @@
  
     @Nullable
 -   public Entity m_5489_(ServerLevel p_38246_) {
-+   public Entity changeDimension(ServerLevel p_241206_1_, net.minecraftforge.common.util.ITeleporter teleporter) {
++   public Entity changeDimension(ServerLevel p_38246_, net.minecraftforge.common.util.ITeleporter teleporter) {
        this.f_38203_ = false;
 -      return super.m_5489_(p_38246_);
-+      return super.changeDimension(p_241206_1_, teleporter);
++      return super.changeDimension(p_38246_, teleporter);
     }
  
 -   public void m_6091_() {

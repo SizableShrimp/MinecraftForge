@@ -1,14 +1,5 @@
 --- a/net/minecraft/world/item/CreativeModeTab.java
 +++ b/net/minecraft/world/item/CreativeModeTab.java
-@@ -13,7 +_,7 @@
- import net.minecraftforge.api.distmarker.OnlyIn;
- 
- public abstract class CreativeModeTab {
--   public static final CreativeModeTab[] f_40748_ = new CreativeModeTab[12];
-+   public static CreativeModeTab[] f_40748_ = new CreativeModeTab[12];
-    public static final CreativeModeTab f_40749_ = (new CreativeModeTab(0, "buildingBlocks") {
-       @OnlyIn(Dist.CLIENT)
-       public ItemStack m_6976_() {
 @@ -101,18 +_,23 @@
     private final String f_40763_;
     private final Component f_40764_;

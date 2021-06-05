@@ -64,13 +64,11 @@
           float f = 0.5F;
           double d0 = (double)(p_49841_.f_46441_.nextFloat() * 0.5F) + 0.25D;
           double d1 = (double)(p_49841_.f_46441_.nextFloat() * 0.5F) + 0.25D;
-@@ -273,8 +_,8 @@
-       }
+@@ -274,7 +_,7 @@
     }
  
--   protected void m_49805_(ServerLevel p_49806_, BlockPos p_49807_, int p_49808_) {
+    public void m_49805_(ServerLevel p_49806_, BlockPos p_49807_, int p_49808_) {
 -      if (p_49806_.m_46469_().m_46207_(GameRules.f_46136_)) {
-+   public void m_49805_(ServerLevel p_49806_, BlockPos p_49807_, int p_49808_) {
 +      if (p_49806_.m_46469_().m_46207_(GameRules.f_46136_) && !p_49806_.restoringBlockSnapshots) {
           while(p_49808_ > 0) {
              int i = ExperienceOrb.m_20782_(p_49808_);

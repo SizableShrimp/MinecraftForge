@@ -1,16 +1,5 @@
 --- a/net/minecraft/server/level/ServerChunkCache.java
 +++ b/net/minecraft/server/level/ServerChunkCache.java
-@@ -48,8 +_,8 @@
- public class ServerChunkCache extends ChunkSource {
-    private static final List<ChunkStatus> f_8326_ = ChunkStatus.m_62349_();
-    private final DistanceManager f_8327_;
--   private final ChunkGenerator f_8328_;
--   private final ServerLevel f_8329_;
-+   public final ChunkGenerator f_8328_;
-+   public final ServerLevel f_8329_;
-    private final Thread f_8330_;
-    private final ThreadedLevelLightEngine f_8331_;
-    private final ServerChunkCache.MainThreadExecutor f_8332_;
 @@ -127,11 +_,11 @@
           profilerfiller.m_6174_("getChunkCacheMiss");
           CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>> completablefuture = this.m_8456_(p_8360_, p_8361_, p_8362_, p_8363_);

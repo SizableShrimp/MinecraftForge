@@ -8,12 +8,7 @@
  import net.minecraft.client.resources.model.ModelBakery;
  import net.minecraft.client.resources.model.UnbakedModel;
  import net.minecraft.resources.ResourceLocation;
-@@ -24,19 +_,23 @@
-    private final List<ItemOverride> f_111735_ = Lists.newArrayList();
-    private final List<BakedModel> f_111736_;
- 
--   private ItemOverrides() {
-+   protected ItemOverrides() {
+@@ -28,15 +_,19 @@
        this.f_111736_ = Collections.emptyList();
     }
  

@@ -12,10 +12,8 @@
     private final Predicate<LootContext> f_79025_;
     private final LootItemFunction[] f_79026_;
     private final BiFunction<ItemStack, LootContext, ItemStack> f_79027_;
--   private final RandomIntGenerator f_79028_;
--   private final RandomValueBounds f_79029_;
-+   private RandomIntGenerator f_79028_;
-+   private RandomValueBounds f_79029_;
+    private RandomIntGenerator f_79028_;
+    private RandomValueBounds f_79029_;
  
 -   private LootPool(LootPoolEntryContainer[] p_79031_, LootItemCondition[] p_79032_, LootItemFunction[] p_79033_, RandomIntGenerator p_79034_, RandomValueBounds p_79035_) {
 -      this.f_79023_ = p_79031_;

@@ -1,16 +1,14 @@
 --- a/net/minecraft/world/level/portal/PortalForcer.java
 +++ b/net/minecraft/world/level/portal/PortalForcer.java
-@@ -19,8 +_,8 @@
+@@ -19,7 +_,7 @@
  import net.minecraft.world.level.border.WorldBorder;
  import net.minecraft.world.level.levelgen.Heightmap;
  
 -public class PortalForcer {
--   private final ServerLevel f_77648_;
 +public class PortalForcer implements net.minecraftforge.common.util.ITeleporter {
-+   protected final ServerLevel f_77648_;
+    protected final ServerLevel f_77648_;
  
     public PortalForcer(ServerLevel p_77650_) {
-       this.f_77648_ = p_77650_;
 @@ -30,21 +_,21 @@
        PoiManager poimanager = this.f_77648_.m_8904_();
        int i = p_77671_ ? 16 : 128;

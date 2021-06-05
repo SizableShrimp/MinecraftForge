@@ -9,21 +9,7 @@
  import net.minecraft.world.level.Level;
  import net.minecraft.world.level.LevelReader;
  import net.minecraft.world.level.block.RenderShape;
-@@ -50,7 +_,7 @@
- @OnlyIn(Dist.CLIENT)
- public class EntityRenderDispatcher {
-    private static final RenderType f_114361_ = RenderType.m_110485_(new ResourceLocation("textures/misc/shadow.png"));
--   private final Map<EntityType<?>, EntityRenderer<?>> f_114362_ = Maps.newHashMap();
-+   public final Map<EntityType<?>, EntityRenderer<?>> f_114362_ = Maps.newHashMap();
-    private final Map<String, PlayerRenderer> f_114363_ = Maps.newHashMap();
-    private final PlayerRenderer f_114364_;
-    private final Font f_114365_;
-@@ -67,11 +_,11 @@
-       return this.m_114382_(p_114395_).m_114505_(p_114395_, p_114396_);
-    }
- 
--   private <T extends Entity> void m_114403_(EntityType<T> p_114404_, EntityRenderer<? super T> p_114405_) {
-+   public <T extends Entity> void m_114403_(EntityType<T> p_114404_, EntityRenderer<? super T> p_114405_) {
+@@ -71,7 +_,7 @@
        this.f_114362_.put(p_114404_, p_114405_);
     }
  

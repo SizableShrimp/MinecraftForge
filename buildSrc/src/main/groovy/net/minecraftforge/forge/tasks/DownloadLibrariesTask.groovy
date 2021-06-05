@@ -2,6 +2,7 @@ package net.minecraftforge.forge.tasks
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.OutputFiles
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.OutputDirectory
 
@@ -13,7 +14,7 @@ import java.net.URL
 public class DownloadLibrariesTask extends DefaultTask {
     @InputFile File input
 	@OutputDirectory File output = project.file("build/${name}/")
-	Set<File> libraries = new HashSet<>()
+	@OutputFiles Set<File> libraries = new HashSet<>()
 
     @TaskAction
     def run() {

@@ -1,6 +1,6 @@
 --- a/net/minecraft/client/KeyMapping.java
 +++ b/net/minecraft/client/KeyMapping.java
-@@ -14,28 +_,28 @@
+@@ -14,18 +_,18 @@
  import net.minecraftforge.api.distmarker.OnlyIn;
  
  @OnlyIn(Dist.CLIENT)
@@ -29,10 +29,7 @@
     });
     private final String f_90813_;
     private final InputConstants.Key f_90814_;
-    private final String f_90815_;
-    private InputConstants.Key f_90816_;
--   private boolean f_90817_;
-+   boolean f_90817_;
+@@ -35,7 +_,7 @@
     private int f_90818_;
  
     public static void m_90835_(InputConstants.Key p_90836_) {

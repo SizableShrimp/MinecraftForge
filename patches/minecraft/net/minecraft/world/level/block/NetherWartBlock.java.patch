@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/block/NetherWartBlock.java
 +++ b/net/minecraft/world/level/block/NetherWartBlock.java
-@@ -13,14 +_,12 @@
+@@ -13,8 +_,6 @@
  import net.minecraft.world.level.block.state.properties.IntegerProperty;
  import net.minecraft.world.phys.shapes.CollisionContext;
  import net.minecraft.world.phys.shapes.VoxelShape;
@@ -9,13 +9,6 @@
  
  public class NetherWartBlock extends BushBlock {
     public static final IntegerProperty f_54967_ = BlockStateProperties.f_61407_;
-    private static final VoxelShape[] f_54968_ = new VoxelShape[]{Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 5.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D)};
- 
--   protected NetherWartBlock(BlockBehaviour.Properties p_54971_) {
-+   public NetherWartBlock(BlockBehaviour.Properties p_54971_) {
-       super(p_54971_);
-       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_54967_, Integer.valueOf(0)));
-    }
 @@ -39,14 +_,14 @@
  
     public void m_7455_(BlockState p_54981_, ServerLevel p_54982_, BlockPos p_54983_, Random p_54984_) {

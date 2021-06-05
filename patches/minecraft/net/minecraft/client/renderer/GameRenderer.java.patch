@@ -1,6 +1,6 @@
 --- a/net/minecraft/client/renderer/GameRenderer.java
 +++ b/net/minecraft/client/renderer/GameRenderer.java
-@@ -138,11 +_,13 @@
+@@ -138,6 +_,8 @@
           this.m_109128_(new ResourceLocation("shaders/post/spider.json"));
        } else if (p_109107_ instanceof EnderMan) {
           this.m_109128_(new ResourceLocation("shaders/post/invert.json"));
@@ -9,12 +9,6 @@
        }
  
     }
- 
--   private void m_109128_(ResourceLocation p_109129_) {
-+   public void m_109128_(ResourceLocation p_109129_) {
-       if (this.f_109050_ != null) {
-          this.f_109050_.close();
-       }
 @@ -252,8 +_,8 @@
              Vec3 vec32 = vec3.m_82520_(vec31.f_82479_ * d0, vec31.f_82480_ * d0, vec31.f_82481_ * d0);
              float f = 1.0F;

@@ -1,11 +1,9 @@
 --- a/net/minecraft/data/tags/TagsProvider.java
 +++ b/net/minecraft/data/tags/TagsProvider.java
-@@ -30,11 +_,29 @@
-    private static final Gson f_126542_ = (new GsonBuilder()).setPrettyPrinting().create();
+@@ -31,10 +_,28 @@
     protected final DataGenerator f_126539_;
     protected final Registry<T> f_126540_;
--   private final Map<ResourceLocation, Tag.Builder> f_126543_ = Maps.newLinkedHashMap();
-+   protected final Map<ResourceLocation, Tag.Builder> f_126543_ = Maps.newLinkedHashMap();
+    protected final Map<ResourceLocation, Tag.Builder> f_126543_ = Maps.newLinkedHashMap();
 +   protected final String modId;
 +   protected final String folder;
 +   protected final net.minecraftforge.common.data.ExistingFileHelper existingFileHelper;
@@ -13,16 +11,14 @@
  
 +   @Deprecated//Forge, Use ModID version.
     protected TagsProvider(DataGenerator p_126546_, Registry<T> p_126547_) {
--      this.f_126539_ = p_126546_;
--      this.f_126540_ = p_126547_;
 +      this(p_126546_, p_126547_, "vanilla", null);
 +   }
-+   protected TagsProvider(DataGenerator p_i49827_1_, Registry<T> p_i49827_2_, String modId, @javax.annotation.Nullable net.minecraftforge.common.data.ExistingFileHelper existingFileHelper) {
-+      this(p_i49827_1_, p_i49827_2_, modId, existingFileHelper, null);
++   protected TagsProvider(DataGenerator p_126546_, Registry<T> p_126547_, String modId, @javax.annotation.Nullable net.minecraftforge.common.data.ExistingFileHelper existingFileHelper) {
++      this(p_126546_, p_126547_, modId, existingFileHelper, null);
 +   }
-+   protected TagsProvider(DataGenerator p_i49827_1_, Registry<T> p_i49827_2_, String modId, @javax.annotation.Nullable net.minecraftforge.common.data.ExistingFileHelper existingFileHelper, @javax.annotation.Nullable String folder) {
-+      this.f_126539_ = p_i49827_1_;
-+      this.f_126540_ = p_i49827_2_;
++   protected TagsProvider(DataGenerator p_126546_, Registry<T> p_126547_, String modId, @javax.annotation.Nullable net.minecraftforge.common.data.ExistingFileHelper existingFileHelper, @javax.annotation.Nullable String folder) {
+       this.f_126539_ = p_126546_;
+       this.f_126540_ = p_126547_;
 +      this.modId = modId;
 +      this.existingFileHelper = existingFileHelper;
 +      if (folder == null) {//TODO - 1.17: Remove getTagFolder as a method, and inline the default implementation here

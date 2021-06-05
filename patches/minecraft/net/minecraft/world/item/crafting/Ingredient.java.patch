@@ -6,10 +6,8 @@
  import net.minecraft.world.level.ItemLike;
 -import net.minecraftforge.api.distmarker.Dist;
 -import net.minecraftforge.api.distmarker.OnlyIn;
--
--public final class Ingredient implements Predicate<ItemStack> {
-+
-+public class Ingredient implements Predicate<ItemStack> {
+ 
+ public class Ingredient implements Predicate<ItemStack> {
 +   //Because Mojang caches things... we need to invalidate them.. so... here we go..
 +   private static final java.util.Set<Ingredient> INSTANCES = java.util.Collections.newSetFromMap(new java.util.WeakHashMap<Ingredient, Boolean>());
 +   public static void invalidateAll() {
@@ -22,10 +20,9 @@
     private IntList f_43904_;
 +   private final boolean isSimple;
  
--   private Ingredient(Stream<? extends Ingredient.Value> p_43907_) {
+    protected Ingredient(Stream<? extends Ingredient.Value> p_43907_) {
 -      this.f_43902_ = p_43907_.toArray((p_43933_) -> {
 -         return new Ingredient.Value[p_43933_];
-+   protected Ingredient(Stream<? extends Ingredient.Value> p_43907_) {
 +      this.f_43902_ = p_43907_.toArray((p_209360_0_) -> {
 +         return new Ingredient.Value[p_209360_0_];
        });
@@ -52,12 +49,9 @@
           });
        }
  
-@@ -93,8 +_,12 @@
-       return this.f_43904_;
-    }
+@@ -95,6 +_,10 @@
  
--   public void m_43923_(FriendlyByteBuf p_43924_) {
-+   public final void m_43923_(FriendlyByteBuf p_43924_) {
+    public final void m_43923_(FriendlyByteBuf p_43924_) {
        this.m_43948_();
 +      if (!this.isVanilla()) {
 +         net.minecraftforge.common.crafting.CraftingHelper.write(p_43924_, this);
@@ -66,11 +60,10 @@
        p_43924_.m_130130_(this.f_43903_.length);
  
        for(int i = 0; i < this.f_43903_.length; ++i) {
-@@ -121,7 +_,26 @@
+@@ -121,6 +_,25 @@
        return this.f_43902_.length == 0 && (this.f_43903_ == null || this.f_43903_.length == 0) && (this.f_43904_ == null || this.f_43904_.isEmpty());
     }
  
--   private static Ingredient m_43938_(Stream<? extends Ingredient.Value> p_43939_) {
 +   protected void invalidate() {
 +      this.f_43903_ = null;
 +      this.f_43904_ = null;
@@ -90,10 +83,9 @@
 +      return net.minecraftforge.common.crafting.VanillaIngredientSerializer.INSTANCE;
 +   }
 +
-+   public static Ingredient m_43938_(Stream<? extends Ingredient.Value> p_43939_) {
+    public static Ingredient m_43938_(Stream<? extends Ingredient.Value> p_43939_) {
        Ingredient ingredient = new Ingredient(p_43939_);
        return ingredient.f_43902_.length == 0 ? f_43901_ : ingredient;
-    }
 @@ -130,16 +_,15 @@
        return m_43921_(Arrays.stream(p_43930_).map(ItemStack::new));
     }
@@ -145,20 +137,10 @@
                 }));
              }
           } else {
-@@ -175,7 +_,7 @@
+@@ -197,6 +_,18 @@
        }
     }
  
--   private static Ingredient.Value m_43919_(JsonObject p_43920_) {
-+   public static Ingredient.Value m_43919_(JsonObject p_43920_) {
-       if (p_43920_.has("item") && p_43920_.has("tag")) {
-          throw new JsonParseException("An ingredient entry is either a tag or an item, not both");
-       } else if (p_43920_.has("item")) {
-@@ -197,10 +_,22 @@
-       }
-    }
- 
--   static class ItemValue implements Ingredient.Value {
 +   //Merges several vanilla Ingredients together. As a quirk of how the json is structured, we can't tell if its a single Ingredient type or multiple so we split per item and re-merge here.
 +   //Only public for internal use, so we can access a private field in here.
 +   public static Ingredient merge(Collection<Ingredient> parts) {
@@ -171,20 +153,11 @@
 +      JsonObject m_6544_();
 +   }
 +
-+   public static class ItemValue implements Ingredient.Value {
+    public static class ItemValue implements Ingredient.Value {
        private final ItemStack f_43951_;
  
--      private ItemValue(ItemStack p_43953_) {
-+      public ItemValue(ItemStack p_43953_) {
-          this.f_43951_ = p_43953_;
-       }
- 
-@@ -215,10 +_,10 @@
-       }
-    }
- 
--   static class TagValue implements Ingredient.Value {
-+   public static class TagValue implements Ingredient.Value {
+@@ -218,7 +_,7 @@
+    public static class TagValue implements Ingredient.Value {
        private final Tag<Item> f_43959_;
  
 -      private TagValue(Tag<Item> p_43961_) {
@@ -208,7 +181,7 @@
        }
 -   }
 -
--   interface Value {
+-   public interface Value {
 -      Collection<ItemStack> m_6223_();
 -
 -      JsonObject m_6544_();

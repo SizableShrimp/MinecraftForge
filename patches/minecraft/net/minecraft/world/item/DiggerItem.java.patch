@@ -1,14 +1,5 @@
 --- a/net/minecraft/world/item/DiggerItem.java
 +++ b/net/minecraft/world/item/DiggerItem.java
-@@ -20,7 +_,7 @@
-    private final float f_40981_;
-    private final Multimap<Attribute, AttributeModifier> f_40982_;
- 
--   protected DiggerItem(float p_40984_, float p_40985_, Tier p_40986_, Set<Block> p_40987_, Item.Properties p_40988_) {
-+   public DiggerItem(float p_40984_, float p_40985_, Tier p_40986_, Set<Block> p_40987_, Item.Properties p_40988_) {
-       super(p_40986_, p_40988_);
-       this.f_40979_ = p_40987_;
-       this.f_40980_ = p_40986_.m_6624_();
 @@ -32,20 +_,21 @@
     }
  

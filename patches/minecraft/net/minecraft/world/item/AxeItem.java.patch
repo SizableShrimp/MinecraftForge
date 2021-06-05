@@ -1,12 +1,10 @@
 --- a/net/minecraft/world/item/AxeItem.java
 +++ b/net/minecraft/world/item/AxeItem.java
-@@ -22,8 +_,8 @@
-    private static final Set<Block> f_40518_ = Sets.newHashSet(Blocks.f_50155_, Blocks.f_50616_, Blocks.f_50251_, Blocks.f_50252_, Blocks.f_50253_, Blocks.f_50254_, Blocks.f_50309_, Blocks.f_50308_, Blocks.f_50669_, Blocks.f_50670_);
+@@ -23,7 +_,7 @@
     protected static final Map<Block, Block> f_40516_ = (new Builder<Block, Block>()).put(Blocks.f_50011_, Blocks.f_50044_).put(Blocks.f_49999_, Blocks.f_50010_).put(Blocks.f_50043_, Blocks.f_50049_).put(Blocks.f_50004_, Blocks.f_50009_).put(Blocks.f_50015_, Blocks.f_50048_).put(Blocks.f_50003_, Blocks.f_50008_).put(Blocks.f_50013_, Blocks.f_50046_).put(Blocks.f_50001_, Blocks.f_50006_).put(Blocks.f_50014_, Blocks.f_50047_).put(Blocks.f_50002_, Blocks.f_50007_).put(Blocks.f_50012_, Blocks.f_50045_).put(Blocks.f_50000_, Blocks.f_50005_).put(Blocks.f_50686_, Blocks.f_50687_).put(Blocks.f_50688_, Blocks.f_50689_).put(Blocks.f_50695_, Blocks.f_50696_).put(Blocks.f_50697_, Blocks.f_50698_).build();
  
--   protected AxeItem(Tier p_40521_, float p_40522_, float p_40523_, Item.Properties p_40524_) {
+    public AxeItem(Tier p_40521_, float p_40522_, float p_40523_, Item.Properties p_40524_) {
 -      super(p_40522_, p_40523_, p_40521_, f_40518_, p_40524_);
-+   public AxeItem(Tier p_40521_, float p_40522_, float p_40523_, Item.Properties p_40524_) {
 +      super(p_40522_, p_40523_, p_40521_, f_40518_, p_40524_.addToolType(net.minecraftforge.common.ToolType.AXE, p_40521_.m_6604_()));
     }
  

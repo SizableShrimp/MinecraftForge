@@ -48,26 +48,7 @@
     public static final PoiType f_27331_ = m_27379_("unemployed", ImmutableSet.of(), 1, f_27329_, 1);
     public static final PoiType f_27332_ = m_27374_("armorer", m_27372_(Blocks.f_50620_), 1, 1);
     public static final PoiType f_27333_ = m_27374_("butcher", m_27372_(Blocks.f_50619_), 1, 1);
-@@ -65,11 +_,11 @@
-    private final Predicate<PoiType> f_27327_;
-    private final int f_27328_;
- 
--   private static Set<BlockState> m_27372_(Block p_27373_) {
-+   public static Set<BlockState> m_27372_(Block p_27373_) {
-       return ImmutableSet.copyOf(p_27373_.m_49965_().m_61056_());
-    }
- 
--   private PoiType(String p_27362_, Set<BlockState> p_27363_, int p_27364_, Predicate<PoiType> p_27365_, int p_27366_) {
-+   public PoiType(String p_27362_, Set<BlockState> p_27363_, int p_27364_, Predicate<PoiType> p_27365_, int p_27366_) {
-       this.f_27324_ = p_27362_;
-       this.f_27325_ = ImmutableSet.copyOf(p_27363_);
-       this.f_27326_ = p_27364_;
-@@ -77,12 +_,12 @@
-       this.f_27328_ = p_27366_;
-    }
- 
--   private PoiType(String p_27357_, Set<BlockState> p_27358_, int p_27359_, int p_27360_) {
-+   public PoiType(String p_27357_, Set<BlockState> p_27358_, int p_27359_, int p_27360_) {
+@@ -81,8 +_,8 @@
        this.f_27324_ = p_27357_;
        this.f_27325_ = ImmutableSet.copyOf(p_27358_);
        this.f_27326_ = p_27359_;

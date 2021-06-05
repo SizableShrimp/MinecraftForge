@@ -8,7 +8,7 @@
  import net.minecraft.world.level.ItemLike;
  import net.minecraft.world.level.Level;
  import net.minecraft.world.level.LevelReader;
-@@ -20,14 +_,12 @@
+@@ -20,8 +_,6 @@
  import net.minecraft.world.level.block.state.properties.IntegerProperty;
  import net.minecraft.world.phys.shapes.CollisionContext;
  import net.minecraft.world.phys.shapes.VoxelShape;
@@ -17,13 +17,6 @@
  
  public class CropBlock extends BushBlock implements BonemealableBlock {
     public static final IntegerProperty f_52244_ = BlockStateProperties.f_61409_;
-    private static final VoxelShape[] f_52243_ = new VoxelShape[]{Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
- 
--   protected CropBlock(BlockBehaviour.Properties p_52247_) {
-+   public CropBlock(BlockBehaviour.Properties p_52247_) {
-       super(p_52247_);
-       this.m_49959_(this.f_49792_.m_61090_().m_61124_(this.m_7959_(), Integer.valueOf(0)));
-    }
 @@ -65,12 +_,14 @@
     }
  

@@ -80,12 +80,9 @@
           };
        }
  
-@@ -154,22 +_,22 @@
-       return new AABB(d0, d1, d2, d3, d4, d5);
-    }
+@@ -156,20 +_,20 @@
  
--   private void m_121229_() {
-+   public void m_121229_() {
+    public void m_121229_() {
        if (this.f_121214_ != WrappedMinMaxBounds.f_75350_) {
 -         this.f_121170_ = this.f_121170_.and(this.m_121254_(this.f_121214_, (p_121308_) -> {
 -            return (double)p_121308_.f_19858_;
@@ -121,15 +118,6 @@
           if (d0 > d1) {
              return d2 >= d0 || d2 <= d1;
           } else {
-@@ -261,7 +_,7 @@
-       this.f_121203_ = 1;
-    }
- 
--   protected void m_121317_() throws CommandSyntaxException {
-+   public void m_121317_() throws CommandSyntaxException {
-       this.f_121176_ = this::m_121347_;
-       this.f_121201_.skipWhitespace();
- 
 @@ -449,6 +_,9 @@
           }
  

@@ -8,17 +8,6 @@
  import net.minecraft.world.level.Level;
  import net.minecraft.world.level.LevelAccessor;
  import net.minecraft.world.level.LevelReader;
-@@ -81,8 +_,8 @@
-    protected JumpControl f_21343_;
-    private final BodyRotationControl f_21361_;
-    protected PathNavigation f_21344_;
--   protected final GoalSelector f_21345_;
--   protected final GoalSelector f_21346_;
-+   public final GoalSelector f_21345_;
-+   public final GoalSelector f_21346_;
-    private LivingEntity f_21362_;
-    private final Sensing f_21349_;
-    private final NonNullList<ItemStack> f_21350_ = NonNullList.m_122780_(2, ItemStack.f_41583_);
 @@ -196,6 +_,7 @@
  
     public void m_6710_(@Nullable LivingEntity p_21544_) {

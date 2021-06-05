@@ -1,14 +1,5 @@
 --- a/net/minecraft/world/entity/ExperienceOrb.java
 +++ b/net/minecraft/world/entity/ExperienceOrb.java
-@@ -22,7 +_,7 @@
-    public int f_20767_;
-    public int f_20768_;
-    private int f_20769_ = 5;
--   private int f_20770_;
-+   public int f_20770_;
-    private Player f_20771_;
-    private int f_20765_;
- 
 @@ -94,7 +_,8 @@
        this.m_6478_(MoverType.SELF, this.m_20184_());
        float f = 0.98F;

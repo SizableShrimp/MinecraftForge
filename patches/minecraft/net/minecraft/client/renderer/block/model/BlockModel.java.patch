@@ -1,20 +1,7 @@
 --- a/net/minecraft/client/renderer/block/model/BlockModel.java
 +++ b/net/minecraft/client/renderer/block/model/BlockModel.java
-@@ -54,19 +_,20 @@
-    private final List<BlockElement> f_111422_;
-    @Nullable
-    private final BlockModel.GuiLight f_111423_;
--   private final boolean f_111424_;
-+   public final boolean f_111424_;
-    private final ItemTransforms f_111425_;
-    private final List<ItemOverride> f_111426_;
-    public String f_111416_ = "";
-    @VisibleForTesting
--   protected final Map<String, Either<Material, String>> f_111417_;
-+   public final Map<String, Either<Material, String>> f_111417_;
-    @Nullable
--   protected BlockModel f_111418_;
-+   public BlockModel f_111418_;
+@@ -64,9 +_,10 @@
+    public BlockModel f_111418_;
     @Nullable
     protected ResourceLocation f_111419_;
 +   public final net.minecraftforge.client.model.BlockModelConfiguration customData = new net.minecraftforge.client.model.BlockModelConfiguration(this);

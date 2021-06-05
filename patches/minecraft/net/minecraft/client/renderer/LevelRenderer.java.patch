@@ -187,27 +187,24 @@
        });
     }
  
-@@ -2080,25 +_,30 @@
+@@ -2080,7 +_,12 @@
        this.f_109469_.m_110859_(p_109502_, p_109503_, p_109504_, p_109505_);
     }
  
 +   @Deprecated // Forge: use item aware function below
     public void m_109514_(@Nullable SoundEvent p_109515_, BlockPos p_109516_) {
--      SoundInstance soundinstance = this.f_109410_.get(p_109516_);
 +      this.playRecord(p_109515_, p_109516_, p_109515_ == null? null : RecordItem.m_43040_(p_109515_));
 +   }
 +
-+   public void playRecord(@Nullable SoundEvent p_184377_1_, BlockPos p_184377_2_, @Nullable RecordItem musicDiscItem) {
-+      SoundInstance soundinstance = this.f_109410_.get(p_184377_2_);
++   public void playRecord(@Nullable SoundEvent p_109515_, BlockPos p_109516_, @Nullable RecordItem musicDiscItem) {
+       SoundInstance soundinstance = this.f_109410_.get(p_109516_);
        if (soundinstance != null) {
           this.f_109461_.m_91106_().m_120399_(soundinstance);
--         this.f_109410_.remove(p_109516_);
-+         this.f_109410_.remove(p_184377_2_);
+@@ -2088,14 +_,14 @@
        }
  
--      if (p_109515_ != null) {
+       if (p_109515_ != null) {
 -         RecordItem recorditem = RecordItem.m_43040_(p_109515_);
-+      if (p_184377_1_ != null) {
 +         RecordItem recorditem = musicDiscItem;
           if (recorditem != null) {
              this.f_109461_.f_91065_.m_93055_(recorditem.m_43050_());
@@ -216,16 +213,12 @@
 -         SoundInstance simplesoundinstance = SimpleSoundInstance.m_119747_(p_109515_, (double)p_109516_.m_123341_(), (double)p_109516_.m_123342_(), (double)p_109516_.m_123343_());
 -         this.f_109410_.put(p_109516_, simplesoundinstance);
 -         this.f_109461_.m_91106_().m_120367_(simplesoundinstance);
-+         SoundInstance simplesound = SimpleSoundInstance.m_119747_(p_184377_1_, (double)p_184377_2_.m_123341_(), (double)p_184377_2_.m_123342_(), (double)p_184377_2_.m_123343_());
-+         this.f_109410_.put(p_184377_2_, simplesound);
++         SoundInstance simplesound = SimpleSoundInstance.m_119747_(p_109515_, (double)p_109516_.m_123341_(), (double)p_109516_.m_123342_(), (double)p_109516_.m_123343_());
++         this.f_109410_.put(p_109516_, simplesound);
 +         this.f_109461_.m_91106_().m_120367_(simplesound);
        }
  
--      this.m_109550_(this.f_109465_, p_109516_, p_109515_ != null);
-+      this.m_109550_(this.f_109465_, p_184377_2_, p_184377_1_ != null);
-    }
- 
-    private void m_109550_(Level p_109551_, BlockPos p_109552_, boolean p_109553_) {
+       this.m_109550_(this.f_109465_, p_109516_, p_109515_ != null);
 @@ -2236,7 +_,7 @@
           break;
        case 1010:

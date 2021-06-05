@@ -1,14 +1,5 @@
 --- a/net/minecraft/data/recipes/RecipeProvider.java
 +++ b/net/minecraft/data/recipes/RecipeProvider.java
-@@ -41,7 +_,7 @@
- public class RecipeProvider implements DataProvider {
-    private static final Logger f_125968_ = LogManager.getLogger();
-    private static final Gson f_125969_ = (new GsonBuilder()).setPrettyPrinting().create();
--   private final DataGenerator f_125970_;
-+   protected final DataGenerator f_125970_;
- 
-    public RecipeProvider(DataGenerator p_125973_) {
-       this.f_125970_ = p_125973_;
 @@ -50,18 +_,19 @@
     public void m_6865_(HashCache p_125982_) throws IOException {
        Path path = this.f_125970_.m_123916_();
@@ -39,7 +30,7 @@
  
     }
  
--   private static void m_126013_(HashCache p_126014_, JsonObject p_126015_, Path p_126016_) {
+-   protected static void m_126013_(HashCache p_126014_, JsonObject p_126015_, Path p_126016_) {
 +   protected void m_126013_(HashCache p_126014_, JsonObject p_126015_, Path p_126016_) {
        try {
           String s = f_125969_.toJson((JsonElement)p_126015_);
@@ -48,32 +39,17 @@
  
     }
  
--   private static void m_125992_(Consumer<FinishedRecipe> p_125993_) {
+-   protected static void m_125992_(Consumer<FinishedRecipe> p_125993_) {
 +   protected void m_125992_(Consumer<FinishedRecipe> p_125993_) {
        m_125998_(p_125993_, Blocks.f_50744_, ItemTags.f_13186_);
        m_126017_(p_125993_, Blocks.f_50742_, ItemTags.f_13185_);
        m_126017_(p_125993_, Blocks.f_50655_, ItemTags.f_13189_);
-@@ -1070,19 +_,19 @@
-       SimpleCookingRecipeBuilder.m_126248_(Ingredient.m_43929_(Items.f_42697_), Items.f_42698_, 0.35F, p_126010_, p_126009_).m_126254_("has_rabbit", m_125977_(Items.f_42697_)).m_126259_(p_126007_, "cooked_rabbit_from_" + p_126008_);
-    }
- 
--   private static EnterBlockTrigger.TriggerInstance m_125979_(Block p_125980_) {
-+   protected static EnterBlockTrigger.TriggerInstance m_125979_(Block p_125980_) {
-       return new EnterBlockTrigger.TriggerInstance(EntityPredicate.Composite.f_36667_, p_125980_, StatePropertiesPredicate.f_67658_);
-    }
- 
--   private static InventoryChangeTrigger.TriggerInstance m_125977_(ItemLike p_125978_) {
-+   protected static InventoryChangeTrigger.TriggerInstance m_125977_(ItemLike p_125978_) {
+@@ -1078,7 +_,7 @@
        return m_126011_(ItemPredicate.Builder.m_45068_().m_45073_(p_125978_).m_45077_());
     }
  
 -   private static InventoryChangeTrigger.TriggerInstance m_125975_(Tag<Item> p_125976_) {
 +   protected static InventoryChangeTrigger.TriggerInstance m_125975_(Tag<Item> p_125976_) {
        return m_126011_(ItemPredicate.Builder.m_45068_().m_45069_(p_125976_).m_45077_());
-    }
- 
--   private static InventoryChangeTrigger.TriggerInstance m_126011_(ItemPredicate... p_126012_) {
-+   protected static InventoryChangeTrigger.TriggerInstance m_126011_(ItemPredicate... p_126012_) {
-       return new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.f_36667_, MinMaxBounds.Ints.f_55364_, MinMaxBounds.Ints.f_55364_, MinMaxBounds.Ints.f_55364_, p_126012_);
     }
  

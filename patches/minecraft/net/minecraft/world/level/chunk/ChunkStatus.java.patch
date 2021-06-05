@@ -157,15 +157,6 @@
        }
  
     });
-@@ -170,7 +_,7 @@
-       return f_62331_.getInt(p_62371_.m_62445_());
-    }
- 
--   ChunkStatus(String p_62342_, @Nullable ChunkStatus p_62343_, int p_62344_, EnumSet<Heightmap.Types> p_62345_, ChunkStatus.ChunkType p_62346_, ChunkStatus.GenerationTask p_62347_, ChunkStatus.LoadingTask p_62348_) {
-+   public ChunkStatus(String p_62342_, @Nullable ChunkStatus p_62343_, int p_62344_, EnumSet<Heightmap.Types> p_62345_, ChunkStatus.ChunkType p_62346_, ChunkStatus.GenerationTask p_62347_, ChunkStatus.LoadingTask p_62348_) {
-       this.f_62332_ = p_62342_;
-       this.f_62334_ = p_62343_ == null ? this : p_62343_;
-       this.f_62335_ = p_62347_;
 @@ -225,11 +_,6 @@
        return Registry.f_122833_.m_7981_(this).toString();
     }

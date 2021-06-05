@@ -17,7 +17,7 @@
           return true;
        });
     }
-@@ -492,10 +_,17 @@
+@@ -492,6 +_,13 @@
        p_93506_.f_93521_ = this;
     }
  
@@ -31,11 +31,6 @@
     @OnlyIn(Dist.CLIENT)
     public abstract static class Entry<E extends AbstractSelectionList.Entry<E>> implements GuiEventListener {
        @Deprecated
--      private AbstractSelectionList<E> f_93521_;
-+      protected AbstractSelectionList<E> f_93521_;
- 
-       public abstract void m_6311_(PoseStack p_93523_, int p_93524_, int p_93525_, int p_93526_, int p_93527_, int p_93528_, int p_93529_, int p_93530_, boolean p_93531_, float p_93532_);
- 
 @@ -511,7 +_,7 @@
     }
  

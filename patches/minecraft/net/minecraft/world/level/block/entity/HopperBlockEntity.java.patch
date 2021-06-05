@@ -61,24 +61,6 @@
           BlockEntity blockentity = p_59348_.m_7702_(blockpos);
           if (blockentity instanceof Container) {
              container = (Container)blockentity;
-@@ -369,7 +_,7 @@
-       return (double)this.f_58858_.m_123343_() + 0.5D;
-    }
- 
--   private void m_59395_(int p_59396_) {
-+   public void m_59395_(int p_59396_) {
-       this.f_59302_ = p_59396_;
-    }
- 
-@@ -377,7 +_,7 @@
-       return this.f_59302_ > 0;
-    }
- 
--   private boolean m_59409_() {
-+   public boolean m_59409_() {
-       return this.f_59302_ > 8;
-    }
- 
 @@ -403,5 +_,14 @@
  
     protected AbstractContainerMenu m_6555_(int p_59312_, Inventory p_59313_) {

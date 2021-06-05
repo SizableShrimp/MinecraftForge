@@ -1,14 +1,5 @@
 --- a/net/minecraft/client/sounds/SoundEngine.java
 +++ b/net/minecraft/client/sounds/SoundEngine.java
-@@ -40,7 +_,7 @@
-    private static final Marker f_120214_ = MarkerManager.getMarker("SOUNDS");
-    private static final Logger f_120215_ = LogManager.getLogger();
-    private static final Set<ResourceLocation> f_120216_ = Sets.newHashSet();
--   private final SoundManager f_120217_;
-+   public final SoundManager f_120217_;
-    private final Options f_120218_;
-    private boolean f_120219_;
-    private final Library f_120220_ = new Library();
 @@ -62,6 +_,7 @@
        this.f_120217_ = p_120236_;
        this.f_120218_ = p_120237_;

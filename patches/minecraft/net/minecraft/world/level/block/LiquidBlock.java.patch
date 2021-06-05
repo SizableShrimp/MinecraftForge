@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/block/LiquidBlock.java
 +++ b/net/minecraft/world/level/block/LiquidBlock.java
-@@ -31,11 +_,12 @@
+@@ -31,10 +_,11 @@
  
  public class LiquidBlock extends Block implements BucketPickup {
     public static final IntegerProperty f_54688_ = BlockStateProperties.f_61422_;
@@ -9,12 +9,10 @@
     private final List<FluidState> f_54691_;
     public static final VoxelShape f_54690_ = Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
  
--   protected LiquidBlock(FlowingFluid p_54694_, BlockBehaviour.Properties p_54695_) {
 +   @Deprecated  // Forge: Use the constructor that takes a supplier
-+   public LiquidBlock(FlowingFluid p_54694_, BlockBehaviour.Properties p_54695_) {
+    public LiquidBlock(FlowingFluid p_54694_, BlockBehaviour.Properties p_54695_) {
        super(p_54695_);
        this.f_54689_ = p_54694_;
-       this.f_54691_ = Lists.newArrayList();
 @@ -47,6 +_,19 @@
  
        this.f_54691_.add(p_54694_.m_75953_(8, true));
@@ -26,12 +24,12 @@
 +   /**
 +    * @param supplier A fluid supplier such as {@link net.minecraftforge.fml.RegistryObject<Fluid>}
 +    */
-+   public LiquidBlock(java.util.function.Supplier<? extends FlowingFluid> supplier, BlockBehaviour.Properties p_i48368_1_) {
-+      super(p_i48368_1_);
++   public LiquidBlock(java.util.function.Supplier<? extends FlowingFluid> p_54694_, BlockBehaviour.Properties p_54695_) {
++      super(p_54695_);
 +      this.f_54689_ = null;
 +      this.f_54691_ = Lists.newArrayList();
 +      this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_54688_, Integer.valueOf(0)));
-+      this.supplier = supplier;
++      this.supplier = p_54694_;
     }
  
     public VoxelShape m_5939_(BlockState p_54760_, BlockGetter p_54761_, BlockPos p_54762_, CollisionContext p_54763_) {

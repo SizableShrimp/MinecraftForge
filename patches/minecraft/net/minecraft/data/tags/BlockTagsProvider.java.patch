@@ -8,8 +8,8 @@
     public BlockTagsProvider(DataGenerator p_126511_) {
        super(p_126511_, Registry.f_122824_);
 +   }
-+   public BlockTagsProvider(DataGenerator p_i48256_1_, String modId, @javax.annotation.Nullable net.minecraftforge.common.data.ExistingFileHelper existingFileHelper) {
-+      super(p_i48256_1_, Registry.f_122824_, modId, existingFileHelper);
++   public BlockTagsProvider(DataGenerator p_126511_, String modId, @javax.annotation.Nullable net.minecraftforge.common.data.ExistingFileHelper existingFileHelper) {
++      super(p_126511_, Registry.f_122824_, modId, existingFileHelper);
     }
  
     protected void m_6577_() {

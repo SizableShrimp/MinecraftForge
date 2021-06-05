@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/block/SpawnerBlock.java
 +++ b/net/minecraft/world/level/block/SpawnerBlock.java
-@@ -8,11 +_,9 @@
+@@ -8,8 +_,6 @@
  import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
  import net.minecraft.world.level.block.state.BlockBehaviour;
  import net.minecraft.world.level.block.state.BlockState;
@@ -8,11 +8,7 @@
 -import net.minecraftforge.api.distmarker.OnlyIn;
  
  public class SpawnerBlock extends BaseEntityBlock {
--   protected SpawnerBlock(BlockBehaviour.Properties p_56781_) {
-+   public SpawnerBlock(BlockBehaviour.Properties p_56781_) {
-       super(p_56781_);
-    }
- 
+    public SpawnerBlock(BlockBehaviour.Properties p_56781_) {
 @@ -22,15 +_,17 @@
  
     public void m_8101_(BlockState p_56789_, ServerLevel p_56790_, BlockPos p_56791_, ItemStack p_56792_) {

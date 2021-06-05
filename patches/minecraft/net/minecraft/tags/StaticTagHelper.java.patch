@@ -93,7 +93,7 @@
     }
  
     public TagCollection<T> m_13246_() {
-@@ -56,14 +_,14 @@
+@@ -56,7 +_,7 @@
  
     public Set<ResourceLocation> m_13247_(TagContainer p_13248_) {
        TagCollection<T> tagcollection = this.f_13229_.apply(p_13248_);
@@ -102,14 +102,6 @@
        ImmutableSet<ResourceLocation> immutableset = ImmutableSet.copyOf(tagcollection.m_13406_());
        return Sets.difference(set, immutableset);
     }
- 
-    static class Wrapper<T> implements Tag.Named<T> {
-       @Nullable
--      private Tag<T> f_13251_;
-+      protected Tag<T> f_13251_;
-       protected final ResourceLocation f_13250_;
- 
-       private Wrapper(ResourceLocation p_13253_) {
 @@ -92,6 +_,41 @@
  
        public List<T> m_6497_() {

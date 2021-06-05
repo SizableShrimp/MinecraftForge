@@ -9,13 +9,7 @@
  
  public class WoodType {
     private static final Set<WoodType> f_61838_ = new ObjectArraySet<>();
-@@ -22,18 +_,23 @@
-       this.f_61839_ = p_61842_;
-    }
- 
--   private static WoodType m_61844_(WoodType p_61845_) {
-+   public static WoodType m_61844_(WoodType p_61845_) {
-       f_61838_.add(p_61845_);
+@@ -27,13 +_,18 @@
        return p_61845_;
     }
  

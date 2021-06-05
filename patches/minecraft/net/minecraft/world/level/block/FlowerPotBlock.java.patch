@@ -31,10 +31,10 @@
 +    * @param block The flower block.
 +    * @param properties
 +    */
-+   public FlowerPotBlock(@javax.annotation.Nullable java.util.function.Supplier<FlowerPotBlock> emptyPot, java.util.function.Supplier<? extends Block> p_i48395_1_, BlockBehaviour.Properties properties) {
++   public FlowerPotBlock(@javax.annotation.Nullable java.util.function.Supplier<FlowerPotBlock> emptyPot, java.util.function.Supplier<? extends Block> p_53528_, BlockBehaviour.Properties properties) {
 +      super(properties);
 +      this.f_53525_ = null; // Unused, redirected by coremod
-+      this.flowerDelegate = p_i48395_1_;
++      this.flowerDelegate = p_53528_;
 +      if (emptyPot == null) {
 +         this.fullPots = Maps.newHashMap();
 +         this.emptyPot = null;

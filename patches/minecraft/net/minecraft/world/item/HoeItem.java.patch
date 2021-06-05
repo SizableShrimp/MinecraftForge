@@ -1,12 +1,10 @@
 --- a/net/minecraft/world/item/HoeItem.java
 +++ b/net/minecraft/world/item/HoeItem.java
-@@ -21,23 +_,25 @@
-    private static final Set<Block> f_41333_ = ImmutableSet.of(Blocks.f_50451_, Blocks.f_50692_, Blocks.f_50335_, Blocks.f_50577_, Blocks.f_50716_, Blocks.f_50701_, Blocks.f_50056_, Blocks.f_50057_, Blocks.f_50053_, Blocks.f_50050_, Blocks.f_50051_, Blocks.f_50055_, Blocks.f_50054_, Blocks.f_50052_);
+@@ -22,22 +_,24 @@
     protected static final Map<Block, BlockState> f_41332_ = Maps.newHashMap(ImmutableMap.of(Blocks.f_50440_, Blocks.f_50093_.m_49966_(), Blocks.f_50445_, Blocks.f_50093_.m_49966_(), Blocks.f_50493_, Blocks.f_50093_.m_49966_(), Blocks.f_50546_, Blocks.f_50493_.m_49966_()));
  
--   protected HoeItem(Tier p_41336_, int p_41337_, float p_41338_, Item.Properties p_41339_) {
+    public HoeItem(Tier p_41336_, int p_41337_, float p_41338_, Item.Properties p_41339_) {
 -      super((float)p_41337_, p_41338_, p_41336_, f_41333_, p_41339_);
-+   public HoeItem(Tier p_41336_, int p_41337_, float p_41338_, Item.Properties p_41339_) {
 +      super((float)p_41337_, p_41338_, p_41336_, f_41333_, p_41339_.addToolType(net.minecraftforge.common.ToolType.HOE, p_41336_.m_6604_()));
     }
  

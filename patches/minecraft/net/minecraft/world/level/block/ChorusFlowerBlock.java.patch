@@ -1,14 +1,5 @@
 --- a/net/minecraft/world/level/block/ChorusFlowerBlock.java
 +++ b/net/minecraft/world/level/block/ChorusFlowerBlock.java
-@@ -21,7 +_,7 @@
-    public static final IntegerProperty f_51647_ = BlockStateProperties.f_61408_;
-    private final ChorusPlantBlock f_51648_;
- 
--   protected ChorusFlowerBlock(ChorusPlantBlock p_51651_, BlockBehaviour.Properties p_51652_) {
-+   public ChorusFlowerBlock(ChorusPlantBlock p_51651_, BlockBehaviour.Properties p_51652_) {
-       super(p_51652_);
-       this.f_51648_ = p_51651_;
-       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_51647_, Integer.valueOf(0)));
 @@ -42,7 +_,7 @@
        BlockPos blockpos = p_51704_.m_7494_();
        if (p_51703_.m_46859_(blockpos) && blockpos.m_123342_() < 256) {

@@ -1,14 +1,5 @@
 --- a/net/minecraft/client/renderer/entity/LivingEntityRenderer.java
 +++ b/net/minecraft/client/renderer/entity/LivingEntityRenderer.java
-@@ -39,7 +_,7 @@
-       this.f_114477_ = p_115296_;
-    }
- 
--   protected final boolean m_115326_(RenderLayer<T, M> p_115327_) {
-+   public final boolean m_115326_(RenderLayer<T, M> p_115327_) {
-       return this.f_115291_.add(p_115327_);
-    }
- 
 @@ -48,14 +_,17 @@
     }
  

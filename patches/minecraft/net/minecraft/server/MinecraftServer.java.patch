@@ -1,14 +1,5 @@
 --- a/net/minecraft/server/MinecraftServer.java
 +++ b/net/minecraft/server/MinecraftServer.java
-@@ -201,7 +_,7 @@
-    private final GameProfileCache f_129723_;
-    private long f_129724_;
-    private final Thread f_129725_;
--   private long f_129726_ = Util.m_137550_();
-+   protected long f_129726_ = Util.m_137550_();
-    private long f_129727_;
-    private boolean f_129728_;
-    @OnlyIn(Dist.CLIENT)
 @@ -224,11 +_,11 @@
  
     public static <S extends MinecraftServer> S m_129872_(Function<Thread, S> p_129873_) {

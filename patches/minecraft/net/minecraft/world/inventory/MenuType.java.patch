@@ -20,19 +20,11 @@
     });
     public static final MenuType<LoomMenu> f_39974_ = m_39988_("loom", LoomMenu::new);
     public static final MenuType<MerchantMenu> f_39975_ = m_39988_("merchant", MerchantMenu::new);
-@@ -38,7 +_,7 @@
-       return Registry.m_122961_(Registry.f_122863_, p_39989_, new MenuType<>(p_39990_));
-    }
- 
--   private MenuType(MenuType.MenuSupplier<T> p_39984_) {
-+   public MenuType(MenuType.MenuSupplier<T> p_39984_) {
-       this.f_39981_ = p_39984_;
-    }
- 
-@@ -46,8 +_,16 @@
+@@ -45,6 +_,14 @@
+    @OnlyIn(Dist.CLIENT)
     public T m_39985_(int p_39986_, Inventory p_39987_) {
        return this.f_39981_.m_39994_(p_39986_, p_39987_);
-    }
++   }
 +   
 +   @Override
 +   public T create(int windowId, Inventory playerInv, net.minecraft.network.FriendlyByteBuf extraData) {
@@ -40,10 +32,6 @@
 +         return ((net.minecraftforge.fml.network.IContainerFactory<T>) this.f_39981_).create(windowId, playerInv, extraData);
 +      }
 +      return m_39985_(windowId, playerInv);
-+   }
- 
--   interface MenuSupplier<T extends AbstractContainerMenu> {
-+   public interface MenuSupplier<T extends AbstractContainerMenu> {
-       @OnlyIn(Dist.CLIENT)
-       T m_39994_(int p_39995_, Inventory p_39996_);
     }
+ 
+    public interface MenuSupplier<T extends AbstractContainerMenu> {

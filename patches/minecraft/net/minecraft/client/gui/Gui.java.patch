@@ -1,6 +1,6 @@
 --- a/net/minecraft/client/gui/Gui.java
 +++ b/net/minecraft/client/gui/Gui.java
-@@ -75,46 +_,45 @@
+@@ -75,7 +_,6 @@
  import net.minecraft.world.scores.Scoreboard;
  import net.minecraftforge.api.distmarker.Dist;
  import net.minecraftforge.api.distmarker.OnlyIn;
@@ -8,96 +8,6 @@
  
  @OnlyIn(Dist.CLIENT)
  public class Gui extends GuiComponent {
--   private static final ResourceLocation f_92981_ = new ResourceLocation("textures/misc/vignette.png");
--   private static final ResourceLocation f_92982_ = new ResourceLocation("textures/gui/widgets.png");
--   private static final ResourceLocation f_92983_ = new ResourceLocation("textures/misc/pumpkinblur.png");
-+   protected static final ResourceLocation f_92981_ = new ResourceLocation("textures/misc/vignette.png");
-+   protected static final ResourceLocation f_92982_ = new ResourceLocation("textures/gui/widgets.png");
-+   protected static final ResourceLocation f_92983_ = new ResourceLocation("textures/misc/pumpkinblur.png");
-    private static final Component f_92984_ = new TranslatableComponent("demo.demoExpired");
--   private final Random f_92985_ = new Random();
--   private final Minecraft f_92986_;
--   private final ItemRenderer f_92987_;
--   private final ChatComponent f_92988_;
--   private int f_92989_;
-+   protected final Random f_92985_ = new Random();
-+   protected final Minecraft f_92986_;
-+   protected final ItemRenderer f_92987_;
-+   protected final ChatComponent f_92988_;
-+   protected int f_92989_;
-    @Nullable
--   private Component f_92990_;
--   private int f_92991_;
--   private boolean f_92992_;
-+   protected Component f_92990_;
-+   protected int f_92991_;
-+   protected boolean f_92992_;
-    public float f_92980_ = 1.0F;
--   private int f_92993_;
--   private ItemStack f_92994_ = ItemStack.f_41583_;
--   private final DebugScreenOverlay f_92995_;
--   private final SubtitleOverlay f_92996_;
--   private final SpectatorGui f_92997_;
--   private final PlayerTabOverlay f_92998_;
--   private final BossHealthOverlay f_92999_;
--   private int f_93000_;
--   @Nullable
--   private Component f_93001_;
--   @Nullable
--   private Component f_93002_;
--   private int f_92970_;
--   private int f_92971_;
--   private int f_92972_;
--   private int f_92973_;
--   private int f_92974_;
--   private long f_92975_;
--   private long f_92976_;
--   private int f_92977_;
--   private int f_92978_;
--   private final Map<ChatType, List<ChatListener>> f_92979_ = Maps.newHashMap();
-+   protected int f_92993_;
-+   protected ItemStack f_92994_ = ItemStack.f_41583_;
-+   protected final DebugScreenOverlay f_92995_;
-+   protected final SubtitleOverlay f_92996_;
-+   protected final SpectatorGui f_92997_;
-+   protected final PlayerTabOverlay f_92998_;
-+   protected final BossHealthOverlay f_92999_;
-+   protected int f_93000_;
-+   @Nullable
-+   protected Component f_93001_;
-+   @Nullable
-+   protected Component f_93002_;
-+   protected int f_92970_;
-+   protected int f_92971_;
-+   protected int f_92972_;
-+   protected int f_92973_;
-+   protected int f_92974_;
-+   protected long f_92975_;
-+   protected long f_92976_;
-+   protected int f_92977_;
-+   protected int f_92978_;
-+   protected final Map<ChatType, List<ChatListener>> f_92979_ = Maps.newHashMap();
- 
-    public Gui(Minecraft p_93005_) {
-       this.f_92986_ = p_93005_;
-@@ -342,7 +_,7 @@
-       RenderSystem.m_69477_();
-    }
- 
--   private void m_93039_(PoseStack p_93040_, Font p_93041_, int p_93042_, int p_93043_, int p_93044_) {
-+   protected void m_93039_(PoseStack p_93040_, Font p_93041_, int p_93042_, int p_93043_, int p_93044_) {
-       int i = this.f_92986_.f_91066_.m_92170_(0.0F);
-       if (i != 0) {
-          int j = -p_93043_ / 2;
-@@ -351,7 +_,7 @@
- 
-    }
- 
--   private void m_93080_(PoseStack p_93081_) {
-+   protected void m_93080_(PoseStack p_93081_) {
-       Options options = this.f_92986_.f_91066_;
-       if (options.m_92176_().m_90612_()) {
-          if (this.f_92986_.f_91072_.m_105295_() != GameType.SPECTATOR || this.m_93024_(this.f_92986_.f_91077_)) {
 @@ -418,6 +_,9 @@
  
           for(MobEffectInstance mobeffectinstance : Ordering.natural().reverse().sortedCopy(collection)) {
@@ -141,12 +51,8 @@
              RenderSystem.m_69461_();
              RenderSystem.m_69867_();
           }
-@@ -619,11 +_,11 @@
-       this.f_92986_.m_91307_().m_7238_();
-    }
- 
--   private void m_93036_(PoseStack p_93037_, Objective p_93038_) {
-+   protected void m_93036_(PoseStack p_93037_, Objective p_93038_) {
+@@ -622,8 +_,8 @@
+    protected void m_93036_(PoseStack p_93037_, Objective p_93038_) {
        Scoreboard scoreboard = p_93038_.m_83313_();
        Collection<Score> collection = scoreboard.m_83498_(p_93038_);
 -      List<Score> list = collection.stream().filter((p_93027_) -> {
@@ -156,33 +62,6 @@
        }).collect(Collectors.toList());
        if (list.size() > 15) {
           collection = Lists.newArrayList(Iterables.skip(list, collection.size() - 15));
-@@ -921,7 +_,7 @@
-       }
-    }
- 
--   private void m_93094_() {
-+   protected void m_93094_() {
-       RenderSystem.m_69465_();
-       RenderSystem.m_69458_(false);
-       RenderSystem.m_69453_();
-@@ -949,7 +_,7 @@
-       }
-    }
- 
--   private void m_93067_(Entity p_93068_) {
-+   protected void m_93067_(Entity p_93068_) {
-       WorldBorder worldborder = this.f_92986_.f_91073_.m_6857_();
-       float f = (float)worldborder.m_61925_(p_93068_);
-       double d0 = Math.min(worldborder.m_61966_() * (double)worldborder.m_61967_() * 1000.0D, Math.abs(worldborder.m_61961_() - worldborder.m_61959_()));
-@@ -984,7 +_,7 @@
-       RenderSystem.m_69453_();
-    }
- 
--   private void m_93007_(float p_93008_) {
-+   protected void m_93007_(float p_93008_) {
-       if (p_93008_ < 1.0F) {
-          p_93008_ = p_93008_ * p_93008_;
-          p_93008_ = p_93008_ * p_93008_;
 @@ -1059,7 +_,7 @@
           ItemStack itemstack = this.f_92986_.f_91074_.f_36093_.m_36056_();
           if (itemstack.m_41619_()) {

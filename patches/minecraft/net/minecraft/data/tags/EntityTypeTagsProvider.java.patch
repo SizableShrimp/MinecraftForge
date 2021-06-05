@@ -8,8 +8,8 @@
     public EntityTypeTagsProvider(DataGenerator p_126517_) {
        super(p_126517_, Registry.f_122826_);
 +   }
-+   public EntityTypeTagsProvider(DataGenerator p_i50784_1_, String modId, @javax.annotation.Nullable net.minecraftforge.common.data.ExistingFileHelper existingFileHelper) {
-+      super(p_i50784_1_, Registry.f_122826_, modId, existingFileHelper);
++   public EntityTypeTagsProvider(DataGenerator p_126517_, String modId, @javax.annotation.Nullable net.minecraftforge.common.data.ExistingFileHelper existingFileHelper) {
++      super(p_126517_, Registry.f_122826_, modId, existingFileHelper);
     }
  
     protected void m_6577_() {

@@ -4,12 +4,10 @@
  public class PoweredRailBlock extends BaseRailBlock {
     public static final EnumProperty<RailShape> f_55214_ = BlockStateProperties.f_61404_;
     public static final BooleanProperty f_55215_ = BlockStateProperties.f_61448_;
--
--   protected PoweredRailBlock(BlockBehaviour.Properties p_55218_) {
--      super(true, p_55218_);
 +   private final boolean isActivator;  // TRUE for an Activator Rail, FALSE for Powered Rail
-+
-+   public PoweredRailBlock(BlockBehaviour.Properties p_55218_) {
+ 
+    public PoweredRailBlock(BlockBehaviour.Properties p_55218_) {
+-      super(true, p_55218_);
 +      this(p_55218_, false);
 +   }
 +

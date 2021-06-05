@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/block/Seagrass.java
 +++ b/net/minecraft/world/level/block/Seagrass.java
-@@ -19,10 +_,10 @@
+@@ -19,7 +_,7 @@
  import net.minecraft.world.phys.shapes.CollisionContext;
  import net.minecraft.world.phys.shapes.VoxelShape;
  
@@ -8,8 +8,4 @@
 +public class Seagrass extends BushBlock implements BonemealableBlock, LiquidBlockContainer, net.minecraftforge.common.IForgeShearable {
     protected static final VoxelShape f_56134_ = Block.m_49796_(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D);
  
--   protected Seagrass(BlockBehaviour.Properties p_56137_) {
-+   public Seagrass(BlockBehaviour.Properties p_56137_) {
-       super(p_56137_);
-    }
- 
+    public Seagrass(BlockBehaviour.Properties p_56137_) {

@@ -15,7 +15,7 @@
 +      return new ResourceLocation("textures/" + p_229351_0_.m_135815_() + ".png");
     }).collect(Collectors.toList());
     public static final List<RenderType> f_119229_ = f_119228_.stream().map(RenderType::m_110494_).collect(Collectors.toList());
--   private static final Set<Material> f_119234_ = Util.m_137469_(Sets.newHashSet(), (p_119313_) -> {
+-   protected static final Set<Material> f_119234_ = Util.m_137469_(Sets.newHashSet(), (p_119313_) -> {
 -      p_119313_.add(f_119222_);
 -      p_119313_.add(f_119221_);
 -      p_119313_.add(f_119223_);
@@ -70,7 +70,7 @@
     });
     private static final Logger f_119235_ = LogManager.getLogger();
     public static final ModelResourceLocation f_119230_ = new ModelResourceLocation("builtin/missing", "missing");
-@@ -123,16 +_,16 @@
+@@ -123,11 +_,11 @@
     private static final Map<String, String> f_119237_ = Maps.newHashMap(ImmutableMap.of("missing", f_119231_));
     private static final Splitter f_119238_ = Splitter.on(',');
     private static final Splitter f_119239_ = Splitter.on('=').limit(2);
@@ -86,18 +86,9 @@
     });
     private static final StateDefinition<Block, BlockState> f_119240_ = (new StateDefinition.Builder<Block, BlockState>(Blocks.f_50016_)).m_61104_(BooleanProperty.m_61465_("map")).m_61101_(Block::m_49966_, BlockState::new);
     private static final ItemModelGenerator f_119241_ = new ItemModelGenerator();
-    private static final Map<ResourceLocation, StateDefinition<Block, BlockState>> f_119242_ = ImmutableMap.of(new ResourceLocation("item_frame"), f_119240_);
--   private final ResourceManager f_119243_;
-+   protected final ResourceManager f_119243_;
-    @Nullable
-    private AtlasSet f_119244_;
-    private final BlockColors f_119209_;
-@@ -142,16 +_,25 @@
-    private final Map<Triple<ResourceLocation, Transformation, Boolean>, BakedModel> f_119213_ = Maps.newHashMap();
-    private final Map<ResourceLocation, UnbakedModel> f_119214_ = Maps.newHashMap();
+@@ -144,14 +_,23 @@
     private final Map<ResourceLocation, BakedModel> f_119215_ = Maps.newHashMap();
--   private final Map<ResourceLocation, Pair<TextureAtlas, TextureAtlas.Preparations>> f_119216_;
-+   private Map<ResourceLocation, Pair<TextureAtlas, TextureAtlas.Preparations>> f_119216_;
+    private Map<ResourceLocation, Pair<TextureAtlas, TextureAtlas.Preparations>> f_119216_;
     private int f_119217_ = 1;
 -   private final Object2IntMap<BlockState> f_119218_ = Util.m_137469_(new Object2IntOpenHashMap<>(), (p_119309_) -> {
 -      p_119309_.defaultReturnValue(-1);
@@ -366,7 +357,7 @@
     private void m_119306_(ModelResourceLocation p_119307_) {
        UnbakedModel unbakedmodel = this.m_119341_(p_119307_);
        this.f_119212_.put(p_119307_, unbakedmodel);
-@@ -453,34 +_,40 @@
+@@ -453,28 +_,34 @@
  
     private void m_119310_(Iterable<BlockState> p_119311_) {
        int i = this.f_119217_++;
@@ -407,13 +398,6 @@
           this.f_119213_.put(triple, bakedmodel);
           return bakedmodel;
        }
-    }
- 
--   private BlockModel m_119364_(ResourceLocation p_119365_) throws IOException {
-+   protected BlockModel m_119364_(ResourceLocation p_119365_) throws IOException {
-       Reader reader = null;
-       Resource resource = null;
- 
 @@ -527,6 +_,10 @@
        return this.f_119218_;
     }

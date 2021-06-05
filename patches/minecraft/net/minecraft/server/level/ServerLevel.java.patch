@@ -188,7 +188,7 @@
           this.m_8880_(p_8856_);
           return true;
        }
-@@ -879,25 +_,32 @@
+@@ -879,12 +_,17 @@
  
     }
  
@@ -199,35 +199,22 @@
 -            enderdragonpart.m_6091_();
 +      removeEntityComplete(p_8865_, false);
 +   }
-+   public void removeEntityComplete(Entity p_217484_1_, boolean keepData) {
-+      if (p_217484_1_.isMultipartEntity()) {
-+         for(net.minecraftforge.entity.PartEntity<?> enderdragonpartentity : p_217484_1_.getParts()) {
++   public void removeEntityComplete(Entity p_8865_, boolean keepData) {
++      if (p_8865_.isMultipartEntity()) {
++         for(net.minecraftforge.entity.PartEntity<?> enderdragonpartentity : p_8865_.getParts()) {
 +            enderdragonpartentity.remove(keepData);
           }
        }
-+      p_217484_1_.remove(keepData);
++      p_8865_.remove(keepData);
  
--      this.f_8568_.remove(p_8865_.m_20148_());
--      this.m_7726_().m_8443_(p_8865_);
--      if (p_8865_ instanceof ServerPlayer) {
--         ServerPlayer serverplayer = (ServerPlayer)p_8865_;
-+      this.f_8568_.remove(p_217484_1_.m_20148_());
-+      this.m_7726_().m_8443_(p_217484_1_);
-+      if (p_217484_1_ instanceof ServerPlayer) {
-+         ServerPlayer serverplayer = (ServerPlayer)p_217484_1_;
-          this.f_8546_.remove(serverplayer);
+       this.f_8568_.remove(p_8865_.m_20148_());
+       this.m_7726_().m_8443_(p_8865_);
+@@ -898,6 +_,8 @@
+          this.f_8555_.remove(((Mob)p_8865_).m_21573_());
        }
  
--      this.m_6188_().m_83420_(p_8865_);
--      if (p_8865_ instanceof Mob) {
--         this.f_8555_.remove(((Mob)p_8865_).m_21573_());
-+      this.m_6188_().m_83420_(p_217484_1_);
-+      if (p_217484_1_ instanceof Mob) {
-+         this.f_8555_.remove(((Mob)p_217484_1_).m_21573_());
-       }
- 
-+      p_217484_1_.onRemovedFromWorld();
-+      net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.EntityLeaveWorldEvent(p_217484_1_, this));
++      p_8865_.onRemovedFromWorld();
++      net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.EntityLeaveWorldEvent(p_8865_, this));
     }
  
     private void m_8880_(Entity p_8881_) {
@@ -254,16 +241,14 @@
     public void m_8867_(Entity p_8868_) {
 +      removeEntity(p_8868_, false);
 +   }
-+   public void removeEntity(Entity p_217467_1_, boolean keepData) {
++   public void removeEntity(Entity p_8868_, boolean keepData) {
        if (this.f_8563_) {
           throw (IllegalStateException)Util.m_137570_(new IllegalStateException("Removing entity while ticking!"));
        } else {
--         this.m_8884_(p_8868_);
--         this.f_8567_.remove(p_8868_.m_19879_());
+          this.m_8884_(p_8868_);
+          this.f_8567_.remove(p_8868_.m_19879_());
 -         this.m_8864_(p_8868_);
-+         this.m_8884_(p_217467_1_);
-+         this.f_8567_.remove(p_217467_1_.m_19879_());
-+         this.removeEntityComplete(p_217467_1_, keepData);
++         this.removeEntityComplete(p_8868_, keepData);
        }
     }
  
@@ -275,9 +260,9 @@
 -      this.m_8867_(p_8850_);
 +      removePlayer(p_8850_, false);
 +   }
-+   public void removePlayer(ServerPlayer p_217434_1_, boolean keepData) {
-+      p_217434_1_.remove(keepData);
-+      this.removeEntity(p_217434_1_, keepData);
++   public void removePlayer(ServerPlayer p_8850_, boolean keepData) {
++      p_8850_.remove(keepData);
++      this.removeEntity(p_8850_, keepData);
        this.m_8878_();
     }
  

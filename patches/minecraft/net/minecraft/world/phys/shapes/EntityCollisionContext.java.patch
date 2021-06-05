@@ -9,24 +9,19 @@
        return false;
     }) {
        public boolean m_6513_(VoxelShape p_82898_, BlockPos p_82899_, boolean p_82900_) {
-@@ -25,15 +_,20 @@
+@@ -25,6 +_,11 @@
     private final Predicate<Fluid> f_82869_;
  
     protected EntityCollisionContext(boolean p_82874_, double p_82875_, Item p_82876_, Predicate<Fluid> p_82877_) {
--      this.f_82866_ = p_82874_;
--      this.f_82867_ = p_82875_;
--      this.f_82868_ = p_82876_;
--      this.f_82869_ = p_82877_;
 +       this(null, p_82874_, p_82875_, p_82876_, p_82877_);
 +   }
 +
-+   protected EntityCollisionContext(@javax.annotation.Nullable Entity entity, boolean p_i232177_1_, double p_i232177_2_, Item p_i232177_4_, Predicate<Fluid> p_i232177_5_) {
++   protected EntityCollisionContext(@javax.annotation.Nullable Entity entity, boolean p_82874_, double p_82875_, Item p_82876_, Predicate<Fluid> p_82877_) {
 +      this.entity = entity;
-+      this.f_82866_ = p_i232177_1_;
-+      this.f_82867_ = p_i232177_2_;
-+      this.f_82868_ = p_i232177_4_;
-+      this.f_82869_ = p_i232177_5_;
-    }
+       this.f_82866_ = p_82874_;
+       this.f_82867_ = p_82875_;
+       this.f_82868_ = p_82876_;
+@@ -33,7 +_,7 @@
  
     @Deprecated
     protected EntityCollisionContext(Entity p_82872_) {

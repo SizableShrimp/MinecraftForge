@@ -1,14 +1,5 @@
 --- a/net/minecraft/server/level/ServerPlayer.java
 +++ b/net/minecraft/server/level/ServerPlayer.java
-@@ -170,7 +_,7 @@
-    private float f_8938_;
-    @Nullable
-    private final TextFilter f_8939_;
--   private int f_8940_;
-+   public int f_8940_;
-    public boolean f_8942_;
-    public int f_8943_;
-    public boolean f_8944_;
 @@ -299,8 +_,8 @@
           p_9197_.m_128405_("SpawnZ", this.f_8936_.m_123343_());
           p_9197_.m_128379_("SpawnForced", this.f_8937_);
@@ -70,13 +61,13 @@
  
     @Nullable
 -   public Entity m_5489_(ServerLevel p_9180_) {
-+   public Entity changeDimension(ServerLevel p_241206_1_, net.minecraftforge.common.util.ITeleporter teleporter) {
-+      if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(this, p_241206_1_.m_46472_())) return null;
++   public Entity changeDimension(ServerLevel p_38246_, net.minecraftforge.common.util.ITeleporter teleporter) {
++      if (!net.minecraftforge.common.ForgeHooks.onTravelToDimension(this, p_38246_.m_46472_())) return null;
        this.f_8927_ = true;
        ServerLevel serverlevel = this.m_9236_();
        ResourceKey<Level> resourcekey = serverlevel.m_46472_();
 -      if (resourcekey == Level.f_46430_ && p_9180_.m_46472_() == Level.f_46428_) {
-+      if (resourcekey == Level.f_46430_ && p_241206_1_.m_46472_() == Level.f_46428_ && teleporter.isVanilla()) { //Forge: Fix non-vanilla teleporters triggering end credits
++      if (resourcekey == Level.f_46430_ && p_38246_.m_46472_() == Level.f_46428_ && teleporter.isVanilla()) { //Forge: Fix non-vanilla teleporters triggering end credits
           this.m_19877_();
 -         this.m_9236_().m_8849_(this);
 +         this.m_9236_().removePlayer(this, true); //Forge: The player entity is cloned so keep the data until after cloning calls copyFrom
@@ -89,8 +80,8 @@
        } else {
 -         LevelData leveldata = p_9180_.m_6106_();
 -         this.f_8906_.m_9829_(new ClientboundRespawnPacket(p_9180_.m_6042_(), p_9180_.m_46472_(), BiomeManager.m_47877_(p_9180_.m_7328_()), this.f_8941_.m_9290_(), this.f_8941_.m_9293_(), p_9180_.m_46659_(), p_9180_.m_8584_(), true));
-+         LevelData leveldata = p_241206_1_.m_6106_();
-+         this.f_8906_.m_9829_(new ClientboundRespawnPacket(p_241206_1_.m_6042_(), p_241206_1_.m_46472_(), BiomeManager.m_47877_(p_241206_1_.m_7328_()), this.f_8941_.m_9290_(), this.f_8941_.m_9293_(), p_241206_1_.m_46659_(), p_241206_1_.m_8584_(), true));
++         LevelData leveldata = p_38246_.m_6106_();
++         this.f_8906_.m_9829_(new ClientboundRespawnPacket(p_38246_.m_6042_(), p_38246_.m_46472_(), BiomeManager.m_47877_(p_38246_.m_7328_()), this.f_8941_.m_9290_(), this.f_8941_.m_9293_(), p_38246_.m_46659_(), p_38246_.m_8584_(), true));
           this.f_8906_.m_9829_(new ClientboundChangeDifficultyPacket(leveldata.m_5472_(), leveldata.m_5474_()));
           PlayerList playerlist = this.f_8924_.m_6846_();
           playerlist.m_11289_(this);
@@ -99,25 +90,25 @@
 -         PortalInfo portalinfo = this.m_7937_(p_9180_);
 +         serverlevel.removeEntity(this, true); //Forge: the player entity is moved to the new world, NOT cloned. So keep the data alive with no matching invalidate call.
 +         this.revive();
-+         PortalInfo portalinfo = teleporter.getPortalInfo(this, p_241206_1_, this::m_7937_);
++         PortalInfo portalinfo = teleporter.getPortalInfo(this, p_38246_, this::m_7937_);
           if (portalinfo != null) {
-+            Entity e = teleporter.placeEntity(this, serverlevel, p_241206_1_, this.f_19857_, spawnPortal -> {//Forge: Start vanilla logic
++            Entity e = teleporter.placeEntity(this, serverlevel, p_38246_, this.f_19857_, spawnPortal -> {//Forge: Start vanilla logic
              serverlevel.m_46473_().m_6180_("moving");
 -            if (resourcekey == Level.f_46428_ && p_9180_.m_46472_() == Level.f_46429_) {
-+            if (resourcekey == Level.f_46428_ && p_241206_1_.m_46472_() == Level.f_46429_) {
++            if (resourcekey == Level.f_46428_ && p_38246_.m_46472_() == Level.f_46429_) {
                 this.f_8933_ = this.m_20182_();
 -            } else if (p_9180_.m_46472_() == Level.f_46430_) {
 -               this.m_9006_(p_9180_, new BlockPos(portalinfo.f_77676_));
-+            } else if (spawnPortal && p_241206_1_.m_46472_() == Level.f_46430_) {
-+               this.m_9006_(p_241206_1_, new BlockPos(portalinfo.f_77676_));
++            } else if (spawnPortal && p_38246_.m_46472_() == Level.f_46430_) {
++               this.m_9006_(p_38246_, new BlockPos(portalinfo.f_77676_));
              }
  
              serverlevel.m_46473_().m_7238_();
              serverlevel.m_46473_().m_6180_("placing");
 -            this.m_20082_(p_9180_);
 -            p_9180_.m_8817_(this);
-+            this.m_20082_(p_241206_1_);
-+            p_241206_1_.m_8817_(this);
++            this.m_20082_(p_38246_);
++            p_38246_.m_8817_(this);
              this.m_19915_(portalinfo.f_77678_, portalinfo.f_77679_);
              this.m_6027_(portalinfo.f_77676_.f_82479_, portalinfo.f_77676_.f_82480_, portalinfo.f_77676_.f_82481_);
              serverlevel.m_46473_().m_7238_();
@@ -126,22 +117,22 @@
 +            return this;//forge: this is part of the ITeleporter patch
 +            });//Forge: End vanilla logic
 +            if (e != this) throw new java.lang.IllegalArgumentException(String.format("Teleporter %s returned not the player entity but instead %s, expected PlayerEntity %s", teleporter, e, this));
-+            this.f_8941_.m_9260_(p_241206_1_);
++            this.f_8941_.m_9260_(p_38246_);
              this.f_8906_.m_9829_(new ClientboundPlayerAbilitiesPacket(this.f_36077_));
 -            playerlist.m_11229_(this, p_9180_);
-+            playerlist.m_11229_(this, p_241206_1_);
++            playerlist.m_11229_(this, p_38246_);
              playerlist.m_11292_(this);
  
              for(MobEffectInstance mobeffectinstance : this.m_21220_()) {
                 this.f_8906_.m_9829_(new ClientboundUpdateMobEffectPacket(this.m_19879_(), mobeffectinstance));
              }
  
-+            if (teleporter.playTeleportSound(this, serverlevel, p_241206_1_))
++            if (teleporter.playTeleportSound(this, serverlevel, p_38246_))
              this.f_8906_.m_9829_(new ClientboundLevelEventPacket(1032, BlockPos.f_121853_, 0, false));
              this.f_8920_ = -1;
              this.f_8917_ = -1.0F;
              this.f_8918_ = -1;
-+            net.minecraftforge.fml.hooks.BasicEventHooks.firePlayerChangedDimensionEvent(this, resourcekey, p_241206_1_.m_46472_());
++            net.minecraftforge.fml.hooks.BasicEventHooks.firePlayerChangedDimensionEvent(this, resourcekey, p_38246_.m_46472_());
           }
  
           return this;
@@ -188,15 +179,6 @@
     private boolean m_9116_(BlockPos p_9117_, Direction p_9118_) {
 +      if (p_9118_ == null) return false;
        return this.m_9222_(p_9117_) || this.m_9222_(p_9117_.m_121945_(p_9118_.m_122424_()));
-    }
- 
-@@ -862,7 +_,7 @@
-       this.f_8906_.m_9829_(new ClientboundOpenSignEditorPacket(p_9101_.m_58899_()));
-    }
- 
--   private void m_9217_() {
-+   public void m_9217_() {
-       this.f_8940_ = this.f_8940_ % 100 + 1;
     }
  
 @@ -886,6 +_,7 @@

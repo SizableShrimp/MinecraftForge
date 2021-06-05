@@ -1,14 +1,5 @@
 --- a/net/minecraft/client/renderer/blockentity/PistonHeadRenderer.java
 +++ b/net/minecraft/client/renderer/blockentity/PistonHeadRenderer.java
-@@ -22,7 +_,7 @@
- 
- @OnlyIn(Dist.CLIENT)
- public class PistonHeadRenderer extends BlockEntityRenderer<PistonMovingBlockEntity> {
--   private final BlockRenderDispatcher f_112441_ = Minecraft.m_91087_().m_91289_();
-+   private BlockRenderDispatcher f_112441_ = Minecraft.m_91087_().m_91289_();
- 
-    public PistonHeadRenderer(BlockEntityRenderDispatcher p_112443_) {
-       super(p_112443_);
 @@ -61,8 +_,11 @@
     }
  

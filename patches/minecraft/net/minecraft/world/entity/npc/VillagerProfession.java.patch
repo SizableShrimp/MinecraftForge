@@ -9,12 +9,3 @@
     public static final VillagerProfession f_35585_ = m_35612_("none", PoiType.f_27331_, (SoundEvent)null);
     public static final VillagerProfession f_35586_ = m_35612_("armorer", PoiType.f_27332_, SoundEvents.f_12510_);
     public static final VillagerProfession f_35587_ = m_35612_("butcher", PoiType.f_27333_, SoundEvents.f_12564_);
-@@ -35,7 +_,7 @@
-    @Nullable
-    private final SoundEvent f_35604_;
- 
--   private VillagerProfession(String p_35607_, PoiType p_35608_, ImmutableSet<Item> p_35609_, ImmutableSet<Block> p_35610_, @Nullable SoundEvent p_35611_) {
-+   public VillagerProfession(String p_35607_, PoiType p_35608_, ImmutableSet<Item> p_35609_, ImmutableSet<Block> p_35610_, @Nullable SoundEvent p_35611_) {
-       this.f_35600_ = p_35607_;
-       this.f_35601_ = p_35608_;
-       this.f_35602_ = p_35609_;

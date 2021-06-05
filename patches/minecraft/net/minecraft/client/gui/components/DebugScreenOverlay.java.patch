@@ -1,6 +1,6 @@
 --- a/net/minecraft/client/gui/components/DebugScreenOverlay.java
 +++ b/net/minecraft/client/gui/components/DebugScreenOverlay.java
-@@ -64,18 +_,18 @@
+@@ -64,13 +_,13 @@
  
  @OnlyIn(Dist.CLIENT)
  public class DebugScreenOverlay extends GuiComponent {
@@ -21,13 +21,6 @@
     });
     private final Minecraft f_94030_;
     private final Font f_94031_;
--   private HitResult f_94032_;
--   private HitResult f_94033_;
-+   protected HitResult f_94032_;
-+   protected HitResult f_94033_;
-    @Nullable
-    private ChunkPos f_94034_;
-    @Nullable
 @@ -276,8 +_,8 @@
              if (naturalspawner$spawnstate != null) {
                 Object2IntMap<MobCategory> object2intmap = naturalspawner$spawnstate.m_47148_();
