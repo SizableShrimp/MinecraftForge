@@ -1,0 +1,348 @@
+--- a/net/minecraft/world/level/chunk/LevelChunk.java
++++ b/net/minecraft/world/level/chunk/LevelChunk.java
+@@ -30,8 +_,6 @@
+ import net.minecraft.util.Mth;
+ import net.minecraft.world.entity.Entity;
+ import net.minecraft.world.entity.EntityType;
+-import net.minecraft.world.entity.boss.EnderDragonPart;
+-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+ import net.minecraft.world.level.ChunkPos;
+ import net.minecraft.world.level.ChunkTickList;
+ import net.minecraft.world.level.EmptyTickList;
+@@ -39,7 +_,6 @@
+ import net.minecraft.world.level.TickList;
+ import net.minecraft.world.level.block.Block;
+ import net.minecraft.world.level.block.Blocks;
+-import net.minecraft.world.level.block.EntityBlock;
+ import net.minecraft.world.level.block.entity.BlockEntity;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.level.levelgen.DebugLevelSource;
+@@ -56,7 +_,7 @@
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ 
+-public class LevelChunk implements ChunkAccess {
++public class LevelChunk extends net.minecraftforge.common.capabilities.CapabilityProvider<LevelChunk> implements ChunkAccess, net.minecraftforge.common.extensions.IForgeChunk {
+    private static final Logger f_62771_ = LogManager.getLogger();
+    @Nullable
+    public static final LevelChunkSection f_62770_ = null;
+@@ -90,6 +_,7 @@
+    }
+ 
+    public LevelChunk(Level p_62800_, ChunkPos p_62801_, ChunkBiomeContainer p_62802_, UpgradeData p_62803_, TickList<Block> p_62804_, TickList<Fluid> p_62805_, long p_62806_, @Nullable LevelChunkSection[] p_62807_, @Nullable Consumer<LevelChunk> p_62808_) {
++      super(LevelChunk.class);
+       this.f_62780_ = new ClassInstanceMultiMap[16];
+       this.f_62776_ = p_62800_;
+       this.f_62792_ = p_62801_;
+@@ -117,16 +_,16 @@
+             f_62771_.warn("Could not set level chunk sections, array length is {} instead of {}", p_62807_.length, this.f_62772_.length);
+          }
+       }
+-
++      this.gatherCapabilities();
+    }
+ 
+    public LevelChunk(Level p_62810_, ProtoChunk p_62811_) {
+       this(p_62810_, p_62811_.m_7697_(), p_62811_.m_6221_(), p_62811_.m_7387_(), p_62811_.m_5782_(), p_62811_.m_5783_(), p_62811_.m_6319_(), p_62811_.m_7103_(), (Consumer<LevelChunk>)null);
+ 
+       for(CompoundTag compoundtag : p_62811_.m_63293_()) {
+-         EntityType.m_20645_(compoundtag, p_62810_, (p_62906_) -> {
+-            this.m_6286_(p_62906_);
+-            return p_62906_;
++         EntityType.m_20645_(compoundtag, p_62810_, (p_217325_1_) -> {
++            this.m_6286_(p_217325_1_);
++            return p_217325_1_;
+          });
+       }
+ 
+@@ -154,8 +_,8 @@
+    }
+ 
+    public Heightmap m_6005_(Heightmap.Types p_62845_) {
+-      return this.f_62777_.computeIfAbsent(p_62845_, (p_62908_) -> {
+-         return new Heightmap(this, p_62908_);
++      return this.f_62777_.computeIfAbsent(p_62845_, (p_217319_1_) -> {
++         return new Heightmap(this, p_217319_1_);
+       });
+    }
+ 
+@@ -262,28 +_,28 @@
+ 
+          if (!this.f_62776_.f_46443_) {
+             blockstate.m_60753_(this.f_62776_, p_62865_, p_62866_, p_62867_);
+-         } else if (block1 != block && block1 instanceof EntityBlock) {
++         } else if ((block1 != block || !p_62866_.hasTileEntity()) && blockstate.hasTileEntity()) {
+             this.f_62776_.m_46747_(p_62865_);
+          }
+ 
+          if (!levelchunksection.m_62982_(i, j & 15, k).m_60713_(block)) {
+             return null;
+          } else {
+-            if (block1 instanceof EntityBlock) {
++            if (blockstate.hasTileEntity()) {
+                BlockEntity blockentity = this.m_5685_(p_62865_, LevelChunk.EntityCreationType.CHECK);
+                if (blockentity != null) {
+                   blockentity.m_58902_();
+                }
+             }
+ 
+-            if (!this.f_62776_.f_46443_) {
++            if (!this.f_62776_.f_46443_ && !this.f_62776_.captureBlockSnapshots) {
+                p_62866_.m_60696_(this.f_62776_, p_62865_, blockstate, p_62867_);
+             }
+ 
+-            if (block instanceof EntityBlock) {
++            if (p_62866_.hasTileEntity()) {
+                BlockEntity blockentity1 = this.m_5685_(p_62865_, LevelChunk.EntityCreationType.CHECK);
+                if (blockentity1 == null) {
+-                  blockentity1 = ((EntityBlock)block).m_6194_(this.f_62776_);
++                  blockentity1 = p_62866_.createTileEntity(this.f_62776_);
+                   this.f_62776_.m_46594_(p_62865_, blockentity1);
+                } else {
+                   blockentity1.m_58902_();
+@@ -319,11 +_,13 @@
+          k = this.f_62780_.length - 1;
+       }
+ 
++      net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.EntityEvent.EnteringChunk(p_62826_, this.f_62792_.f_45578_, this.f_62792_.f_45579_, p_62826_.f_19808_, p_62826_.f_19810_));
+       p_62826_.f_19807_ = true;
+       p_62826_.f_19808_ = this.f_62792_.f_45578_;
+       p_62826_.f_19809_ = k;
+       p_62826_.f_19810_ = this.f_62792_.f_45579_;
+       this.f_62780_[k].add(p_62826_);
++      this.m_6427_(); // Forge - ensure chunks are marked to save after an entity add
+    }
+ 
+    public void m_6511_(Heightmap.Types p_62851_, long[] p_62852_) {
+@@ -344,6 +_,7 @@
+       }
+ 
+       this.f_62780_[p_62828_].remove(p_62827_);
++      this.m_6427_(); // Forge - ensure chunks are marked to save after entity removals
+    }
+ 
+    public int m_5885_(Heightmap.Types p_62847_, int p_62848_, int p_62849_) {
+@@ -354,7 +_,7 @@
+    private BlockEntity m_62934_(BlockPos p_62935_) {
+       BlockState blockstate = this.m_8055_(p_62935_);
+       Block block = blockstate.m_60734_();
+-      return !block.m_60588_() ? null : ((EntityBlock)block).m_6194_(this.f_62776_);
++      return !blockstate.hasTileEntity() ? null : blockstate.createTileEntity(this.f_62776_);
+    }
+ 
+    @Nullable
+@@ -365,6 +_,10 @@
+    @Nullable
+    public BlockEntity m_5685_(BlockPos p_62868_, LevelChunk.EntityCreationType p_62869_) {
+       BlockEntity blockentity = this.f_62779_.get(p_62868_);
++      if (blockentity != null && blockentity.m_58901_()) {
++         f_62779_.remove(p_62868_);
++         blockentity = null;
++      }
+       if (blockentity == null) {
+          CompoundTag compoundtag = this.f_62774_.remove(p_62868_);
+          if (compoundtag != null) {
+@@ -380,9 +_,6 @@
+             blockentity = this.m_62934_(p_62868_);
+             this.f_62776_.m_46594_(p_62868_, blockentity);
+          }
+-      } else if (blockentity.m_58901_()) {
+-         this.f_62779_.remove(p_62868_);
+-         return null;
+       }
+ 
+       return blockentity;
+@@ -397,7 +_,7 @@
+    }
+ 
+    public void m_7460_(BlockPos p_62862_, BlockEntity p_62863_) {
+-      if (this.m_8055_(p_62862_).m_60734_() instanceof EntityBlock) {
++      if (this.m_8055_(p_62862_).hasTileEntity()) {
+          p_62863_.m_58865_(this.f_62776_, p_62862_);
+          p_62863_.m_6339_();
+          BlockEntity blockentity = this.f_62779_.put(p_62862_.m_7949_(), p_62863_);
+@@ -416,9 +_,14 @@
+    public CompoundTag m_8051_(BlockPos p_62932_) {
+       BlockEntity blockentity = this.m_7702_(p_62932_);
+       if (blockentity != null && !blockentity.m_58901_()) {
++         try {
+          CompoundTag compoundtag1 = blockentity.m_6945_(new CompoundTag());
+          compoundtag1.m_128379_("keepPacked", false);
+          return compoundtag1;
++         } catch (Exception e) {
++            LogManager.getLogger().error("A TileEntity type {} has thrown an exception trying to write state. It will not persist, Report this to the mod author", blockentity.getClass().getName(), e);
++            return null;
++         }
+       } else {
+          CompoundTag compoundtag = this.f_62774_.get(p_62932_);
+          if (compoundtag != null) {
+@@ -453,8 +_,8 @@
+    }
+ 
+    public void m_7439_(@Nullable Entity p_62829_, AABB p_62830_, List<Entity> p_62831_, @Nullable Predicate<? super Entity> p_62832_) {
+-      int i = Mth.m_14107_((p_62830_.f_82289_ - 2.0D) / 16.0D);
+-      int j = Mth.m_14107_((p_62830_.f_82292_ + 2.0D) / 16.0D);
++      int i = Mth.m_14107_((p_62830_.f_82289_ - this.f_62776_.getMaxEntityRadius()) / 16.0D);
++      int j = Mth.m_14107_((p_62830_.f_82292_ + this.f_62776_.getMaxEntityRadius()) / 16.0D);
+       i = Mth.m_14045_(i, 0, this.f_62780_.length - 1);
+       j = Mth.m_14045_(j, 0, this.f_62780_.length - 1);
+ 
+@@ -470,10 +_,10 @@
+                   p_62831_.add(entity);
+                }
+ 
+-               if (entity instanceof EnderDragon) {
+-                  for(EnderDragonPart enderdragonpart : ((EnderDragon)entity).m_31156_()) {
+-                     if (enderdragonpart != p_62829_ && enderdragonpart.m_20191_().m_82381_(p_62830_) && (p_62832_ == null || p_62832_.test(enderdragonpart))) {
+-                        p_62831_.add(enderdragonpart);
++               if (entity.isMultipartEntity()) {
++                  for(net.minecraftforge.entity.PartEntity<?> enderdragonpartentity : entity.getParts()) {
++                     if (enderdragonpartentity != p_62829_ && enderdragonpartentity.m_20191_().m_82381_(p_62830_) && (p_62832_ == null || p_62832_.test(enderdragonpartentity))) {
++                        p_62831_.add(enderdragonpartentity);
+                      }
+                   }
+                }
+@@ -484,8 +_,8 @@
+    }
+ 
+    public <T extends Entity> void m_62833_(@Nullable EntityType<?> p_62834_, AABB p_62835_, List<? super T> p_62836_, Predicate<? super T> p_62837_) {
+-      int i = Mth.m_14107_((p_62835_.f_82289_ - 2.0D) / 16.0D);
+-      int j = Mth.m_14107_((p_62835_.f_82292_ + 2.0D) / 16.0D);
++      int i = Mth.m_14107_((p_62835_.f_82289_ - this.f_62776_.getMaxEntityRadius()) / 16.0D);
++      int j = Mth.m_14107_((p_62835_.f_82292_ + this.f_62776_.getMaxEntityRadius()) / 16.0D);
+       i = Mth.m_14045_(i, 0, this.f_62780_.length - 1);
+       j = Mth.m_14045_(j, 0, this.f_62780_.length - 1);
+ 
+@@ -500,8 +_,8 @@
+    }
+ 
+    public <T extends Entity> void m_6969_(Class<? extends T> p_62873_, AABB p_62874_, List<T> p_62875_, @Nullable Predicate<? super T> p_62876_) {
+-      int i = Mth.m_14107_((p_62874_.f_82289_ - 2.0D) / 16.0D);
+-      int j = Mth.m_14107_((p_62874_.f_82292_ + 2.0D) / 16.0D);
++      int i = Mth.m_14107_((p_62874_.f_82289_ - this.f_62776_.getMaxEntityRadius()) / 16.0D);
++      int j = Mth.m_14107_((p_62874_.f_82292_ + this.f_62776_.getMaxEntityRadius()) / 16.0D);
+       i = Mth.m_14045_(i, 0, this.f_62780_.length - 1);
+       j = Mth.m_14045_(j, 0, this.f_62780_.length - 1);
+ 
+@@ -526,13 +_,18 @@
+    @OnlyIn(Dist.CLIENT)
+    public void m_62839_(@Nullable ChunkBiomeContainer p_62840_, FriendlyByteBuf p_62841_, CompoundTag p_62842_, int p_62843_) {
+       boolean flag = p_62840_ != null;
+-      Predicate<BlockPos> predicate = flag ? (p_62947_) -> {
++      Predicate<BlockPos> predicate = flag ? (p_217315_0_) -> {
+          return true;
+-      } : (p_62820_) -> {
+-         return (p_62843_ & 1 << (p_62820_.m_123342_() >> 4)) != 0;
++      } : (p_217323_1_) -> {
++         return (p_62843_ & 1 << (p_217323_1_.m_123342_() >> 4)) != 0;
+       };
+       Sets.newHashSet(this.f_62779_.keySet()).stream().filter(predicate).forEach(this.f_62776_::m_46747_);
+ 
++      for (BlockEntity tileEntity : f_62779_.values()) {
++         tileEntity.m_58902_();
++         tileEntity.m_58900_();
++      }
++
+       for(int i = 0; i < this.f_62772_.length; ++i) {
+          LevelChunkSection levelchunksection = this.f_62772_[i];
+          if ((p_62843_ & 1 << i) == 0) {
+@@ -595,8 +_,8 @@
+    }
+ 
+    public Stream<BlockPos> m_6267_() {
+-      return StreamSupport.stream(BlockPos.m_121976_(this.f_62792_.m_45604_(), 0, this.f_62792_.m_45605_(), this.f_62792_.m_45608_(), 255, this.f_62792_.m_45609_()).spliterator(), false).filter((p_62944_) -> {
+-         return this.m_8055_(p_62944_).m_60791_() != 0;
++      return StreamSupport.stream(BlockPos.m_121976_(this.f_62792_.m_45604_(), 0, this.f_62792_.m_45605_(), this.f_62792_.m_45608_(), 255, this.f_62792_.m_45609_()).spliterator(), false).filter((p_217312_1_) -> {
++         return this.m_8055_(p_217312_1_).getLightValue(m_62953_(), p_217312_1_) != 0;
+       });
+    }
+ 
+@@ -643,13 +_,13 @@
+    }
+ 
+    public LongSet m_6705_(StructureFeature<?> p_62893_) {
+-      return this.f_62782_.computeIfAbsent(p_62893_, (p_62917_) -> {
++      return this.f_62782_.computeIfAbsent(p_62893_, (p_235961_0_) -> {
+          return new LongOpenHashSet();
+       });
+    }
+ 
+    public void m_6306_(StructureFeature<?> p_62856_, long p_62857_) {
+-      this.f_62782_.computeIfAbsent(p_62856_, (p_62910_) -> {
++      this.f_62782_.computeIfAbsent(p_62856_, (p_235960_0_) -> {
+          return new LongOpenHashSet();
+       }).add(p_62857_);
+    }
+@@ -702,9 +_,8 @@
+       BlockState blockstate = this.m_8055_(p_62871_);
+       BlockEntity blockentity;
+       if ("DUMMY".equals(p_62872_.m_128461_("id"))) {
+-         Block block = blockstate.m_60734_();
+-         if (block instanceof EntityBlock) {
+-            blockentity = ((EntityBlock)block).m_6194_(this.f_62776_);
++         if (blockstate.hasTileEntity()) {
++            blockentity = blockstate.createTileEntity(this.f_62776_);
+          } else {
+             blockentity = null;
+             f_62771_.warn("Tried to load a DUMMY block entity @ {} but found not block entity block {} at location", p_62871_, blockstate);
+@@ -733,22 +_,22 @@
+ 
+    public void m_62813_() {
+       if (this.f_62784_ instanceof ProtoTickList) {
+-         ((ProtoTickList<Block>)this.f_62784_).m_63305_(this.f_62776_.m_6219_(), (p_62941_) -> {
+-            return this.m_8055_(p_62941_).m_60734_();
++         ((ProtoTickList<Block>)this.f_62784_).m_63305_(this.f_62776_.m_6219_(), (p_222881_1_) -> {
++            return this.m_8055_(p_222881_1_).m_60734_();
+          });
+          this.f_62784_ = EmptyTickList.m_45888_();
+       } else if (this.f_62784_ instanceof ChunkTickList) {
+-         ((ChunkTickList<Block>)this.f_62784_).m_45643_(this.f_62776_.m_6219_());
++         ((ChunkTickList)this.f_62784_).m_45643_(this.f_62776_.m_6219_());
+          this.f_62784_ = EmptyTickList.m_45888_();
+       }
+ 
+       if (this.f_62785_ instanceof ProtoTickList) {
+-         ((ProtoTickList<Fluid>)this.f_62785_).m_63305_(this.f_62776_.m_6217_(), (p_62938_) -> {
+-            return this.m_6425_(p_62938_).m_76152_();
++         ((ProtoTickList<Fluid>)this.f_62785_).m_63305_(this.f_62776_.m_6217_(), (p_222878_1_) -> {
++            return this.m_6425_(p_222878_1_).m_76152_();
+          });
+          this.f_62785_ = EmptyTickList.m_45888_();
+       } else if (this.f_62785_ instanceof ChunkTickList) {
+-         ((ChunkTickList<Fluid>)this.f_62785_).m_45643_(this.f_62776_.m_6217_());
++         ((ChunkTickList)this.f_62785_).m_45643_(this.f_62776_.m_6217_());
+          this.f_62785_ = EmptyTickList.m_45888_();
+       }
+ 
+@@ -792,5 +_,31 @@
+       IMMEDIATE,
+       QUEUED,
+       CHECK;
++   }
++
++   /**
++    * <strong>FOR INTERNAL USE ONLY</strong>
++    * <p>
++    * Only public for use in {@link AnvilChunkLoader}.
++    */
++   @java.lang.Deprecated
++   @javax.annotation.Nullable
++   public final CompoundTag writeCapsToNBT() {
++      return this.serializeCaps();
++   }
++
++   /**
++    * <strong>FOR INTERNAL USE ONLY</strong>
++    * <p>
++    * Only public for use in {@link AnvilChunkLoader}.
++    */
++   @java.lang.Deprecated
++   public final void readCapsFromNBT(CompoundTag tag) {
++      this.deserializeCaps(tag);
++   }
++
++   @Override
++   public Level getWorldForge() {
++      return m_62953_();
+    }
+ }

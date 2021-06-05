@@ -1,0 +1,29 @@
+--- a/net/minecraft/server/level/ServerEntity.java
++++ b/net/minecraft/server/level/ServerEntity.java
+@@ -79,9 +_,8 @@
+       if (this.f_8510_ instanceof ItemFrame && this.f_8521_ % 10 == 0) {
+          ItemFrame itemframe = (ItemFrame)this.f_8510_;
+          ItemStack itemstack = itemframe.m_31822_();
+-         if (itemstack.m_41720_() instanceof MapItem) {
+-            MapItemSavedData mapitemsaveddata = MapItem.m_42909_(itemstack, this.f_8509_);
+-
++         MapItemSavedData mapitemsaveddata = MapItem.m_42909_(itemstack, this.f_8509_);
++         if (mapitemsaveddata != null) {
+             for(ServerPlayer serverplayer : this.f_8509_.m_6907_()) {
+                mapitemsaveddata.m_77918_(serverplayer, itemstack);
+                Packet<?> packet = ((MapItem)itemstack.m_41720_()).m_7233_(itemstack, this.f_8509_, serverplayer);
+@@ -185,12 +_,14 @@
+    public void m_8534_(ServerPlayer p_8535_) {
+       this.f_8510_.m_6452_(p_8535_);
+       p_8535_.m_9203_(this.f_8510_);
++      net.minecraftforge.event.ForgeEventFactory.onStopEntityTracking(this.f_8510_, p_8535_);
+    }
+ 
+    public void m_8541_(ServerPlayer p_8542_) {
+       this.m_8536_(p_8542_.f_8906_::m_9829_);
+       this.f_8510_.m_6457_(p_8542_);
+       p_8542_.m_9211_(this.f_8510_);
++      net.minecraftforge.event.ForgeEventFactory.onStartEntityTracking(this.f_8510_, p_8542_);
+    }
+ 
+    public void m_8536_(Consumer<Packet<?>> p_8537_) {

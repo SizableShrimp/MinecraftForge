@@ -1,0 +1,21 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/LayerConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/LayerConfiguration.java
+@@ -5,12 +_,12 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class LayerConfiguration implements FeatureConfiguration {
+-   public static final Codec<LayerConfiguration> f_67767_ = RecordCodecBuilder.create((p_67777_) -> {
+-      return p_67777_.group(Codec.intRange(0, 255).fieldOf("height").forGetter((p_67779_) -> {
+-         return p_67779_.f_67768_;
+-      }), BlockState.f_61039_.fieldOf("state").forGetter((p_67775_) -> {
+-         return p_67775_.f_67769_;
+-      })).apply(p_67777_, LayerConfiguration::new);
++   public static final Codec<LayerConfiguration> f_67767_ = RecordCodecBuilder.create((p_236539_0_) -> {
++      return p_236539_0_.group(Codec.intRange(0, 255).fieldOf("height").forGetter((p_236540_0_) -> {
++         return p_236540_0_.f_67768_;
++      }), BlockState.f_61039_.fieldOf("state").forGetter((p_236538_0_) -> {
++         return p_236538_0_.f_67769_;
++      })).apply(p_236539_0_, LayerConfiguration::new);
+    });
+    public final int f_67768_;
+    public final BlockState f_67769_;

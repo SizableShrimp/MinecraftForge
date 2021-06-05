@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/foliageplacers/AcaciaFoliagePlacer.java
++++ b/net/minecraft/world/level/levelgen/feature/foliageplacers/AcaciaFoliagePlacer.java
+@@ -11,8 +_,8 @@
+ import net.minecraft.world.level.levelgen.structure.BoundingBox;
+ 
+ public class AcaciaFoliagePlacer extends FoliagePlacer {
+-   public static final Codec<AcaciaFoliagePlacer> f_68362_ = RecordCodecBuilder.create((p_68380_) -> {
+-      return m_68573_(p_68380_).apply(p_68380_, AcaciaFoliagePlacer::new);
++   public static final Codec<AcaciaFoliagePlacer> f_68362_ = RecordCodecBuilder.create((p_236737_0_) -> {
++      return m_68573_(p_236737_0_).apply(p_236737_0_, AcaciaFoliagePlacer::new);
+    });
+ 
+    public AcaciaFoliagePlacer(UniformInt p_68365_, UniformInt p_68366_) {

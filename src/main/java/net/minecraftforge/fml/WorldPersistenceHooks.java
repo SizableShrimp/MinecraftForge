@@ -22,7 +22,6 @@ package net.minecraftforge.fml;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.storage.WorldData;
 import net.minecraft.world.level.storage.LevelStorageSource;
-import net.minecraftforge.fml.common.thread.EffectiveSide;
 
 import java.util.ArrayList;
 import java.util.List;

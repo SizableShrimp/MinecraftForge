@@ -1,0 +1,13 @@
+--- a/net/minecraft/client/AttackIndicatorStatus.java
++++ b/net/minecraft/client/AttackIndicatorStatus.java
+@@ -12,8 +_,8 @@
+    CROSSHAIR(1, "options.attack.crosshair"),
+    HOTBAR(2, "options.attack.hotbar");
+ 
+-   private static final AttackIndicatorStatus[] f_90498_ = Arrays.stream(values()).sorted(Comparator.comparingInt(AttackIndicatorStatus::m_90508_)).toArray((p_90513_) -> {
+-      return new AttackIndicatorStatus[p_90513_];
++   private static final AttackIndicatorStatus[] f_90498_ = Arrays.stream(values()).sorted(Comparator.comparingInt(AttackIndicatorStatus::m_90508_)).toArray((p_216750_0_) -> {
++      return new AttackIndicatorStatus[p_216750_0_];
+    });
+    private final int f_90499_;
+    private final String f_90500_;

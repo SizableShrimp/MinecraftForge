@@ -1,0 +1,38 @@
+--- a/net/minecraft/client/ClientRecipeBook.java
++++ b/net/minecraft/client/ClientRecipeBook.java
+@@ -33,12 +_,12 @@
+       Map<RecipeBookCategories, List<List<Recipe<?>>>> map = m_90642_(p_90626_);
+       Map<RecipeBookCategories, List<RecipeCollection>> map1 = Maps.newHashMap();
+       Builder<RecipeCollection> builder = ImmutableList.builder();
+-      map.forEach((p_90630_, p_90631_) -> {
+-         List list = map1.put(p_90630_, p_90631_.stream().map(RecipeCollection::new).peek(builder::add).collect(ImmutableList.toImmutableList()));
++      map.forEach((p_243197_2_, p_243197_3_) -> {
++         List list = map1.put(p_243197_2_, p_243197_3_.stream().map(RecipeCollection::new).peek(builder::add).collect(ImmutableList.toImmutableList()));
+       });
+-      RecipeBookCategories.f_92260_.forEach((p_90637_, p_90638_) -> {
+-         List list = map1.put(p_90637_, p_90638_.stream().flatMap((p_90634_) -> {
+-            return map1.getOrDefault(p_90634_, ImmutableList.of()).stream();
++      RecipeBookCategories.f_92260_.forEach((p_243199_1_, p_243199_2_) -> {
++         List list = map1.put(p_243199_1_, p_243199_2_.stream().flatMap((p_243198_1_) -> {
++            return map1.getOrDefault(p_243198_1_, ImmutableList.of()).stream();
+          }).collect(ImmutableList.toImmutableList()));
+       });
+       this.f_90619_ = ImmutableMap.copyOf(map1);
+@@ -54,7 +_,7 @@
+             RecipeBookCategories recipebookcategories = m_90646_(recipe);
+             String s = recipe.m_6076_();
+             if (s.isEmpty()) {
+-               map.computeIfAbsent(recipebookcategories, (p_90645_) -> {
++               map.computeIfAbsent(recipebookcategories, (p_243202_0_) -> {
+                   return Lists.newArrayList();
+                }).add(ImmutableList.of(recipe));
+             } else {
+@@ -62,7 +_,7 @@
+                if (list == null) {
+                   list = Lists.newArrayList();
+                   table.put(recipebookcategories, s, list);
+-                  map.computeIfAbsent(recipebookcategories, (p_90641_) -> {
++                  map.computeIfAbsent(recipebookcategories, (p_202890_0_) -> {
+                      return Lists.newArrayList();
+                   }).add(list);
+                }

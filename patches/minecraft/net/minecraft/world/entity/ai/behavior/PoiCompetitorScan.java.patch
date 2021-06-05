@@ -1,0 +1,15 @@
+--- a/net/minecraft/world/entity/ai/behavior/PoiCompetitorScan.java
++++ b/net/minecraft/world/entity/ai/behavior/PoiCompetitorScan.java
+@@ -19,9 +_,9 @@
+ 
+    protected void m_6735_(ServerLevel p_23716_, Villager p_23717_, long p_23718_) {
+       GlobalPos globalpos = p_23717_.m_6274_().m_21952_(MemoryModuleType.f_26360_).get();
+-      p_23716_.m_8904_().m_27177_(globalpos.m_122646_()).ifPresent((p_23730_) -> {
+-         BehaviorUtils.m_22650_(p_23717_, (p_23738_) -> {
+-            return this.m_23731_(globalpos, p_23730_, p_23738_);
++      p_23716_.m_8904_().m_27177_(globalpos.m_122646_()).ifPresent((p_233933_3_) -> {
++         BehaviorUtils.m_22650_(p_23717_, (p_233935_3_) -> {
++            return this.m_23731_(globalpos, p_233933_3_, p_233935_3_);
+          }).reduce(p_23717_, PoiCompetitorScan::m_23724_);
+       });
+    }

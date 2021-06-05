@@ -1,0 +1,21 @@
+--- a/net/minecraft/world/level/levelgen/feature/blockplacers/ColumnPlacer.java
++++ b/net/minecraft/world/level/levelgen/feature/blockplacers/ColumnPlacer.java
+@@ -9,12 +_,12 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class ColumnPlacer extends BlockPlacer {
+-   public static final Codec<ColumnPlacer> f_67498_ = RecordCodecBuilder.create((p_67514_) -> {
+-      return p_67514_.group(Codec.INT.fieldOf("min_size").forGetter((p_67516_) -> {
+-         return p_67516_.f_67499_;
+-      }), Codec.INT.fieldOf("extra_size").forGetter((p_67512_) -> {
+-         return p_67512_.f_67500_;
+-      })).apply(p_67514_, ColumnPlacer::new);
++   public static final Codec<ColumnPlacer> f_67498_ = RecordCodecBuilder.create((p_236441_0_) -> {
++      return p_236441_0_.group(Codec.INT.fieldOf("min_size").forGetter((p_236442_0_) -> {
++         return p_236442_0_.f_67499_;
++      }), Codec.INT.fieldOf("extra_size").forGetter((p_236440_0_) -> {
++         return p_236440_0_.f_67500_;
++      })).apply(p_236441_0_, ColumnPlacer::new);
+    });
+    private final int f_67499_;
+    private final int f_67500_;

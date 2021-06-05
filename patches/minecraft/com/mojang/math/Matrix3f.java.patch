@@ -1,0 +1,14 @@
+--- a/com/mojang/math/Matrix3f.java
++++ b/com/mojang/math/Matrix3f.java
+@@ -444,4 +_,11 @@
+    public Matrix3f m_8183_() {
+       return new Matrix3f(this);
+    }
++
++    // Forge start
++    public void multiplyBackward(Matrix3f other) {
++        Matrix3f copy = other.m_8183_();
++        copy.m_8178_(this);
++        this.m_8169_(copy);
++    }
+ }

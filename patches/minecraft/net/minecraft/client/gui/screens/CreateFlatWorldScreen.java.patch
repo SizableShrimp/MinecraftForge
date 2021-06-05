@@ -1,0 +1,32 @@
+--- a/net/minecraft/client/gui/screens/CreateFlatWorldScreen.java
++++ b/net/minecraft/client/gui/screens/CreateFlatWorldScreen.java
+@@ -54,7 +_,7 @@
+       this.f_95818_ = new TranslatableComponent("createWorld.customize.flat.height");
+       this.f_95819_ = new CreateFlatWorldScreen.DetailsList();
+       this.f_96540_.add(this.f_95819_);
+-      this.f_95820_ = this.m_7082_(new Button(this.f_96543_ / 2 - 155, this.f_96544_ - 52, 150, 20, new TranslatableComponent("createWorld.customize.flat.removeLayer"), (p_95845_) -> {
++      this.f_95820_ = this.m_7082_(new Button(this.f_96543_ / 2 - 155, this.f_96544_ - 52, 150, 20, new TranslatableComponent("createWorld.customize.flat.removeLayer"), (p_213007_1_) -> {
+          if (this.m_95848_()) {
+             List<FlatLayerInfo> list = this.f_95816_.m_70401_();
+             int i = this.f_95819_.m_6702_().indexOf(this.f_95819_.m_93511_());
+@@ -66,17 +_,17 @@
+             this.m_95847_();
+          }
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 5, this.f_96544_ - 52, 150, 20, new TranslatableComponent("createWorld.customize.presets"), (p_95843_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 5, this.f_96544_ - 52, 150, 20, new TranslatableComponent("createWorld.customize.presets"), (p_213011_1_) -> {
+          this.f_96541_.m_91152_(new PresetFlatWorldScreen(this));
+          this.f_95816_.m_70403_();
+          this.m_95847_();
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 155, this.f_96544_ - 28, 150, 20, CommonComponents.f_130655_, (p_95839_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 155, this.f_96544_ - 28, 150, 20, CommonComponents.f_130655_, (p_213010_1_) -> {
+          this.f_95815_.accept(this.f_95816_);
+          this.f_96541_.m_91152_(this.f_95814_);
+          this.f_95816_.m_70403_();
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 5, this.f_96544_ - 28, 150, 20, CommonComponents.f_130656_, (p_95833_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 5, this.f_96544_ - 28, 150, 20, CommonComponents.f_130656_, (p_213009_1_) -> {
+          this.f_96541_.m_91152_(this.f_95814_);
+          this.f_95816_.m_70403_();
+       }));

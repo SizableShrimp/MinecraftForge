@@ -1,0 +1,31 @@
+--- a/net/minecraft/server/packs/resources/ResourceManager.java
++++ b/net/minecraft/server/packs/resources/ResourceManager.java
+@@ -15,12 +_,10 @@
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public interface ResourceManager {
+-   @OnlyIn(Dist.CLIENT)
+    Set<String> m_7187_();
+ 
+    Resource m_6296_(ResourceLocation p_10728_) throws IOException;
+ 
+-   @OnlyIn(Dist.CLIENT)
+    boolean m_7165_(ResourceLocation p_10729_);
+ 
+    List<Resource> m_7396_(ResourceLocation p_10730_) throws IOException;
+@@ -33,7 +_,6 @@
+    public static enum Empty implements ResourceManager {
+       INSTANCE;
+ 
+-      @OnlyIn(Dist.CLIENT)
+       public Set<String> m_7187_() {
+          return ImmutableSet.of();
+       }
+@@ -42,7 +_,6 @@
+          throw new FileNotFoundException(p_10742_.toString());
+       }
+ 
+-      @OnlyIn(Dist.CLIENT)
+       public boolean m_7165_(ResourceLocation p_10745_) {
+          return false;
+       }

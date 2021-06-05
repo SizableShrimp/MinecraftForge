@@ -1,0 +1,13 @@
+--- a/net/minecraft/client/GraphicsStatus.java
++++ b/net/minecraft/client/GraphicsStatus.java
+@@ -12,8 +_,8 @@
+    FANCY(1, "options.graphics.fancy"),
+    FABULOUS(2, "options.graphics.fabulous");
+ 
+-   private static final GraphicsStatus[] f_90763_ = Arrays.stream(values()).sorted(Comparator.comparingInt(GraphicsStatus::m_90773_)).toArray((p_90778_) -> {
+-      return new GraphicsStatus[p_90778_];
++   private static final GraphicsStatus[] f_90763_ = Arrays.stream(values()).sorted(Comparator.comparingInt(GraphicsStatus::m_90773_)).toArray((p_238165_0_) -> {
++      return new GraphicsStatus[p_238165_0_];
+    });
+    private final int f_90764_;
+    private final String f_90765_;

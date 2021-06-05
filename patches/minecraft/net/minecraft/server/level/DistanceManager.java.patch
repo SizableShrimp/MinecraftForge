@@ -1,0 +1,132 @@
+--- a/net/minecraft/server/level/DistanceManager.java
++++ b/net/minecraft/server/level/DistanceManager.java
+@@ -46,6 +_,8 @@
+    private final Executor f_140770_;
+    private long f_140771_;
+ 
++   private final Long2ObjectOpenHashMap<SortedArraySet<Ticket<?>>> forcedTickets = new Long2ObjectOpenHashMap<>();
++
+    protected DistanceManager(Executor p_140774_, Executor p_140775_) {
+       ProcessorHandle<Runnable> processorhandle = ProcessorHandle.m_18714_("player ticket throttler", p_140775_::execute);
+       ChunkTaskPriorityQueueSorter chunktaskpriorityqueuesorter = new ChunkTaskPriorityQueueSorter(ImmutableList.of(processorhandle), p_140774_, 4);
+@@ -61,8 +_,8 @@
+ 
+       while(objectiterator.hasNext()) {
+          Entry<SortedArraySet<Ticket<?>>> entry = objectiterator.next();
+-         if (entry.getValue().removeIf((p_140822_) -> {
+-            return p_140822_.m_9434_(this.f_140771_);
++         if (entry.getValue().removeIf((p_219370_1_) -> {
++            return p_219370_1_.m_9434_(this.f_140771_);
+          })) {
+             this.f_140762_.m_140715_(entry.getLongKey(), m_140797_(entry.getValue()), false);
+          }
+@@ -95,8 +_,8 @@
+       }
+ 
+       if (!this.f_140765_.isEmpty()) {
+-         this.f_140765_.forEach((p_140809_) -> {
+-            p_140809_.m_140068_(p_140806_);
++         this.f_140765_.forEach((p_219343_1_) -> {
++            p_219343_1_.m_140068_(p_140806_);
+          });
+          this.f_140765_.clear();
+          return true;
+@@ -106,8 +_,8 @@
+ 
+             while(longiterator.hasNext()) {
+                long j = longiterator.nextLong();
+-               if (this.m_140857_(j).stream().anyMatch((p_140791_) -> {
+-                  return p_140791_.m_9428_() == TicketType.f_9444_;
++               if (this.m_140857_(j).stream().anyMatch((p_219369_0_) -> {
++                  return p_219369_0_.m_9428_() == TicketType.f_9444_;
+                })) {
+                   ChunkHolder chunkholder = p_140806_.m_140174_(j);
+                   if (chunkholder == null) {
+@@ -115,7 +_,7 @@
+                   }
+ 
+                   CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> completablefuture = chunkholder.m_140073_();
+-                  completablefuture.thenAccept((p_140789_) -> {
++                  completablefuture.thenAccept((p_219363_3_) -> {
+                      this.f_140770_.execute(() -> {
+                         this.f_140768_.m_6937_(ChunkTaskPriorityQueueSorter.m_140628_(() -> {
+                         }, j, false));
+@@ -140,6 +_,10 @@
+          this.f_140762_.m_140715_(p_140785_, p_140786_.m_9433_(), true);
+       }
+ 
++      if (p_140786_.isForceTicks()) {
++          SortedArraySet<Ticket<?>> tickets = forcedTickets.computeIfAbsent(p_140785_, e -> SortedArraySet.m_14246_(4));
++          tickets.m_14253_(ticket);
++      }
+    }
+ 
+    private void m_140818_(long p_140819_, Ticket<?> p_140820_) {
+@@ -152,6 +_,13 @@
+       }
+ 
+       this.f_140762_.m_140715_(p_140819_, m_140797_(sortedarrayset), false);
++
++      if (p_140820_.isForceTicks()) {
++          SortedArraySet<Ticket<?>> tickets = forcedTickets.get(p_140819_);
++          if (tickets != null) {
++              tickets.remove(p_140820_);
++          }
++      }
+    }
+ 
+    public <T> void m_140792_(TicketType<T> p_140793_, ChunkPos p_140794_, int p_140795_, T p_140796_) {
+@@ -172,8 +_,16 @@
+       this.m_140818_(p_140851_.m_45588_(), ticket);
+    }
+ 
++   public <T> void registerTicking(TicketType<T> type, ChunkPos pos, int distance, T value) {
++      this.m_140784_(pos.m_45588_(), new Ticket<>(type, 33 - distance, value, true));
++   }
++
++   public <T> void releaseTicking(TicketType<T> type, ChunkPos pos, int distance, T value) {
++      this.m_140818_(pos.m_45588_(), new Ticket<>(type, 33 - distance, value, true));
++   }
++
+    private SortedArraySet<Ticket<?>> m_140857_(long p_140858_) {
+-      return this.f_140761_.computeIfAbsent(p_140858_, (p_140867_) -> {
++      return this.f_140761_.computeIfAbsent(p_140858_, (p_229851_0_) -> {
+          return SortedArraySet.m_14246_(4);
+       });
+    }
+@@ -190,7 +_,7 @@
+ 
+    public void m_140802_(SectionPos p_140803_, ServerPlayer p_140804_) {
+       long i = p_140803_.m_123251_().m_45588_();
+-      this.f_140760_.computeIfAbsent(i, (p_140863_) -> {
++      this.f_140760_.computeIfAbsent(i, (p_219361_0_) -> {
+          return new ObjectOpenHashSet();
+       }).add(p_140804_);
+       this.f_140763_.m_140715_(i, 0, true);
+@@ -239,6 +_,11 @@
+       return this.f_140766_.m_140558_();
+    }
+ 
++   public boolean shouldForceTicks(long chunkPos) {
++       SortedArraySet<Ticket<?>> tickets = forcedTickets.get(chunkPos);
++       return tickets != null && !tickets.isEmpty();
++   }
++
+    class ChunkTicketTracker extends ChunkTracker {
+       public ChunkTicketTracker() {
+          super(ChunkMap.f_140127_ + 2, 16, 256);
+@@ -389,11 +_,11 @@
+                if (j != k) {
+                   DistanceManager.this.f_140766_.m_6250_(new ChunkPos(i), () -> {
+                      return this.f_140906_.get(i);
+-                  }, k, (p_140928_) -> {
+-                     if (p_140928_ >= this.f_140906_.defaultReturnValue()) {
++                  }, k, (p_215506_3_) -> {
++                     if (p_215506_3_ >= this.f_140906_.defaultReturnValue()) {
+                         this.f_140906_.remove(i);
+                      } else {
+-                        this.f_140906_.put(i, p_140928_);
++                        this.f_140906_.put(i, p_215506_3_);
+                      }
+ 
+                   });

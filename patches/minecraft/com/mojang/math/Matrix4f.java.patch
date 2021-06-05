@@ -1,0 +1,81 @@
+--- a/com/mojang/math/Matrix4f.java
++++ b/com/mojang/math/Matrix4f.java
+@@ -386,4 +_,78 @@
+       matrix4f.f_27614_ = p_27656_;
+       return matrix4f;
+    }
++
++    // Forge start
++    public Matrix4f(float[] values) {
++        f_27603_ = values[0];
++        f_27604_ = values[1];
++        f_27605_ = values[2];
++        f_27606_ = values[3];
++        f_27607_ = values[4];
++        f_27608_ = values[5];
++        f_27609_ = values[6];
++        f_27610_ = values[7];
++        f_27611_ = values[8];
++        f_27612_ = values[9];
++        f_27613_ = values[10];
++        f_27614_ = values[11];
++        f_27615_ = values[12];
++        f_27616_ = values[13];
++        f_27617_ = values[14];
++        f_27618_ = values[15];
++    }
++
++    public void set(Matrix4f mat) {
++        this.f_27603_ = mat.f_27603_;
++        this.f_27604_ = mat.f_27604_;
++        this.f_27605_ = mat.f_27605_;
++        this.f_27606_ = mat.f_27606_;
++        this.f_27607_ = mat.f_27607_;
++        this.f_27608_ = mat.f_27608_;
++        this.f_27609_ = mat.f_27609_;
++        this.f_27610_ = mat.f_27610_;
++        this.f_27611_ = mat.f_27611_;
++        this.f_27612_ = mat.f_27612_;
++        this.f_27613_ = mat.f_27613_;
++        this.f_27614_ = mat.f_27614_;
++        this.f_27615_ = mat.f_27615_;
++        this.f_27616_ = mat.f_27616_;
++        this.f_27617_ = mat.f_27617_;
++        this.f_27618_ = mat.f_27618_;
++    }
++
++    public void add(Matrix4f other) {
++        f_27603_ += other.f_27603_;
++        f_27604_ += other.f_27604_;
++        f_27605_ += other.f_27605_;
++        f_27606_ += other.f_27606_;
++        f_27607_ += other.f_27607_;
++        f_27608_ += other.f_27608_;
++        f_27609_ += other.f_27609_;
++        f_27610_ += other.f_27610_;
++        f_27611_ += other.f_27611_;
++        f_27612_ += other.f_27612_;
++        f_27613_ += other.f_27613_;
++        f_27614_ += other.f_27614_;
++        f_27615_ += other.f_27615_;
++        f_27616_ += other.f_27616_;
++        f_27617_ += other.f_27617_;
++        f_27618_ += other.f_27618_;
++    }
++
++    public void multiplyBackward(Matrix4f other) {
++        Matrix4f copy = other.m_27658_();
++        copy.m_27644_(this);
++        this.set(copy);
++    }
++
++    public void setTranslation(float x, float y, float z) {
++        this.f_27603_ = 1.0F;
++        this.f_27608_ = 1.0F;
++        this.f_27613_ = 1.0F;
++        this.f_27618_ = 1.0F;
++        this.f_27606_ = x;
++        this.f_27610_ = y;
++        this.f_27614_ = z;
++    }
+ }

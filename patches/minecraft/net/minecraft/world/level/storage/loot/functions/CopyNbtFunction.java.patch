@@ -1,0 +1,210 @@
+--- a/net/minecraft/world/level/storage/loot/functions/CopyNbtFunction.java
++++ b/net/minecraft/world/level/storage/loot/functions/CopyNbtFunction.java
+@@ -33,8 +_,8 @@
+    private final CopyNbtFunction.DataSource f_80234_;
+    private final List<CopyNbtFunction.CopyOperation> f_80235_;
+    private static final Function<Entity, Tag> f_80236_ = NbtPredicate::m_57485_;
+-   private static final Function<BlockEntity, Tag> f_80237_ = (p_80257_) -> {
+-      return p_80257_.m_6945_(new CompoundTag());
++   private static final Function<BlockEntity, Tag> f_80237_ = (p_215882_0_) -> {
++      return p_215882_0_.m_6945_(new CompoundTag());
+    };
+ 
+    private CopyNbtFunction(LootItemCondition[] p_80240_, CopyNbtFunction.DataSource p_80241_, List<CopyNbtFunction.CopyOperation> p_80242_) {
+@@ -62,8 +_,8 @@
+    public ItemStack m_7372_(ItemStack p_80250_, LootContext p_80251_) {
+       Tag tag = this.f_80234_.f_80314_.apply(p_80251_);
+       if (tag != null) {
+-         this.f_80235_.forEach((p_80255_) -> {
+-            p_80255_.m_80305_(p_80250_::m_41784_, tag);
++         this.f_80235_.forEach((p_215885_2_) -> {
++            p_215885_2_.m_80305_(p_80250_::m_41784_, tag);
+          });
+       }
+ 
+@@ -74,6 +_,61 @@
+       return new CopyNbtFunction.Builder(p_80259_);
+    }
+ 
++   public static enum MergeStrategy {
++      REPLACE("replace") {
++         public void m_6706_(Tag p_80362_, NbtPathArgument.NbtPath p_80363_, List<Tag> p_80364_) throws CommandSyntaxException {
++            p_80363_.m_99645_(p_80362_, Iterables.getLast(p_80364_)::m_6426_);
++         }
++      },
++      APPEND("append") {
++         public void m_6706_(Tag p_80373_, NbtPathArgument.NbtPath p_80374_, List<Tag> p_80375_) throws CommandSyntaxException {
++            List<Tag> list = p_80374_.m_99640_(p_80373_, ListTag::new);
++            list.forEach((p_216232_1_) -> {
++               if (p_216232_1_ instanceof ListTag) {
++                  p_80375_.forEach((p_216231_1_) -> {
++                     ((ListTag)p_216232_1_).add(p_216231_1_.m_6426_());
++                  });
++               }
++
++            });
++         }
++      },
++      MERGE("merge") {
++         public void m_6706_(Tag p_80387_, NbtPathArgument.NbtPath p_80388_, List<Tag> p_80389_) throws CommandSyntaxException {
++            List<Tag> list = p_80388_.m_99640_(p_80387_, CompoundTag::new);
++            list.forEach((p_216234_1_) -> {
++               if (p_216234_1_ instanceof CompoundTag) {
++                  p_80389_.forEach((p_216233_1_) -> {
++                     if (p_216233_1_ instanceof CompoundTag) {
++                        ((CompoundTag)p_216234_1_).m_128391_((CompoundTag)p_216233_1_);
++                     }
++
++                  });
++               }
++
++            });
++         }
++      };
++
++      private final String f_80335_;
++
++      public abstract void m_6706_(Tag p_80351_, NbtPathArgument.NbtPath p_80352_, List<Tag> p_80353_) throws CommandSyntaxException;
++
++      private MergeStrategy(String p_80341_) {
++         this.f_80335_ = p_80341_;
++      }
++
++      public static CopyNbtFunction.MergeStrategy m_80349_(String p_80350_) {
++         for(CopyNbtFunction.MergeStrategy copynbtfunction$mergestrategy : values()) {
++            if (copynbtfunction$mergestrategy.f_80335_.equals(p_80350_)) {
++               return copynbtfunction$mergestrategy;
++            }
++         }
++
++         throw new IllegalArgumentException("Invalid merge strategy" + p_80350_);
++      }
++   }
++
+    public static class Builder extends LootItemConditionalFunction.Builder<CopyNbtFunction.Builder> {
+       private final CopyNbtFunction.DataSource f_80271_;
+       private final List<CopyNbtFunction.CopyOperation> f_80272_ = Lists.newArrayList();
+@@ -142,6 +_,28 @@
+       }
+    }
+ 
++   public static class Serializer extends LootItemConditionalFunction.Serializer<CopyNbtFunction> {
++      public void m_6170_(JsonObject p_80399_, CopyNbtFunction p_80400_, JsonSerializationContext p_80401_) {
++         super.m_6170_(p_80399_, p_80400_, p_80401_);
++         p_80399_.addProperty("source", p_80400_.f_80234_.f_80312_);
++         JsonArray jsonarray = new JsonArray();
++         p_80400_.f_80235_.stream().map(CopyNbtFunction.CopyOperation::m_80302_).forEach(jsonarray::add);
++         p_80399_.add("ops", jsonarray);
++      }
++
++      public CopyNbtFunction m_6821_(JsonObject p_80395_, JsonDeserializationContext p_80396_, LootItemCondition[] p_80397_) {
++         CopyNbtFunction.DataSource copynbtfunction$datasource = CopyNbtFunction.DataSource.m_80327_(GsonHelper.m_13906_(p_80395_, "source"));
++         List<CopyNbtFunction.CopyOperation> list = Lists.newArrayList();
++
++         for(JsonElement jsonelement : GsonHelper.m_13933_(p_80395_, "ops")) {
++            JsonObject jsonobject = GsonHelper.m_13918_(jsonelement, "op");
++            list.add(CopyNbtFunction.CopyOperation.m_80303_(jsonobject));
++         }
++
++         return new CopyNbtFunction(p_80397_, copynbtfunction$datasource, list);
++      }
++   }
++
+    public static enum DataSource {
+       THIS("this", LootContextParams.f_81455_, CopyNbtFunction.f_80236_),
+       KILLER("killer", LootContextParams.f_81458_, CopyNbtFunction.f_80236_),
+@@ -155,8 +_,8 @@
+       private <T> DataSource(String p_80320_, LootContextParam<T> p_80321_, Function<? super T, Tag> p_80322_) {
+          this.f_80312_ = p_80320_;
+          this.f_80313_ = p_80321_;
+-         this.f_80314_ = (p_80326_) -> {
+-            T t = p_80326_.m_78953_(p_80321_);
++         this.f_80314_ = (p_216222_2_) -> {
++            T t = p_216222_2_.m_78953_(p_80321_);
+             return t != null ? p_80322_.apply(t) : null;
+          };
+       }
+@@ -169,83 +_,6 @@
+          }
+ 
+          throw new IllegalArgumentException("Invalid tag source " + p_80328_);
+-      }
+-   }
+-
+-   public static enum MergeStrategy {
+-      REPLACE("replace") {
+-         public void m_6706_(Tag p_80362_, NbtPathArgument.NbtPath p_80363_, List<Tag> p_80364_) throws CommandSyntaxException {
+-            p_80363_.m_99645_(p_80362_, Iterables.getLast(p_80364_)::m_6426_);
+-         }
+-      },
+-      APPEND("append") {
+-         public void m_6706_(Tag p_80373_, NbtPathArgument.NbtPath p_80374_, List<Tag> p_80375_) throws CommandSyntaxException {
+-            List<Tag> list = p_80374_.m_99640_(p_80373_, ListTag::new);
+-            list.forEach((p_80371_) -> {
+-               if (p_80371_ instanceof ListTag) {
+-                  p_80375_.forEach((p_80378_) -> {
+-                     ((ListTag)p_80371_).add(p_80378_.m_6426_());
+-                  });
+-               }
+-
+-            });
+-         }
+-      },
+-      MERGE("merge") {
+-         public void m_6706_(Tag p_80387_, NbtPathArgument.NbtPath p_80388_, List<Tag> p_80389_) throws CommandSyntaxException {
+-            List<Tag> list = p_80388_.m_99640_(p_80387_, CompoundTag::new);
+-            list.forEach((p_80385_) -> {
+-               if (p_80385_ instanceof CompoundTag) {
+-                  p_80389_.forEach((p_80392_) -> {
+-                     if (p_80392_ instanceof CompoundTag) {
+-                        ((CompoundTag)p_80385_).m_128391_((CompoundTag)p_80392_);
+-                     }
+-
+-                  });
+-               }
+-
+-            });
+-         }
+-      };
+-
+-      private final String f_80335_;
+-
+-      public abstract void m_6706_(Tag p_80351_, NbtPathArgument.NbtPath p_80352_, List<Tag> p_80353_) throws CommandSyntaxException;
+-
+-      private MergeStrategy(String p_80341_) {
+-         this.f_80335_ = p_80341_;
+-      }
+-
+-      public static CopyNbtFunction.MergeStrategy m_80349_(String p_80350_) {
+-         for(CopyNbtFunction.MergeStrategy copynbtfunction$mergestrategy : values()) {
+-            if (copynbtfunction$mergestrategy.f_80335_.equals(p_80350_)) {
+-               return copynbtfunction$mergestrategy;
+-            }
+-         }
+-
+-         throw new IllegalArgumentException("Invalid merge strategy" + p_80350_);
+-      }
+-   }
+-
+-   public static class Serializer extends LootItemConditionalFunction.Serializer<CopyNbtFunction> {
+-      public void m_6170_(JsonObject p_80399_, CopyNbtFunction p_80400_, JsonSerializationContext p_80401_) {
+-         super.m_6170_(p_80399_, p_80400_, p_80401_);
+-         p_80399_.addProperty("source", p_80400_.f_80234_.f_80312_);
+-         JsonArray jsonarray = new JsonArray();
+-         p_80400_.f_80235_.stream().map(CopyNbtFunction.CopyOperation::m_80302_).forEach(jsonarray::add);
+-         p_80399_.add("ops", jsonarray);
+-      }
+-
+-      public CopyNbtFunction m_6821_(JsonObject p_80395_, JsonDeserializationContext p_80396_, LootItemCondition[] p_80397_) {
+-         CopyNbtFunction.DataSource copynbtfunction$datasource = CopyNbtFunction.DataSource.m_80327_(GsonHelper.m_13906_(p_80395_, "source"));
+-         List<CopyNbtFunction.CopyOperation> list = Lists.newArrayList();
+-
+-         for(JsonElement jsonelement : GsonHelper.m_13933_(p_80395_, "ops")) {
+-            JsonObject jsonobject = GsonHelper.m_13918_(jsonelement, "op");
+-            list.add(CopyNbtFunction.CopyOperation.m_80303_(jsonobject));
+-         }
+-
+-         return new CopyNbtFunction(p_80397_, copynbtfunction$datasource, list);
+       }
+    }
+ }

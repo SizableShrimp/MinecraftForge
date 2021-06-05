@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/entity/monster/ElderGuardian.java
++++ b/net/minecraft/world/entity/monster/ElderGuardian.java
+@@ -56,8 +_,8 @@
+       int i = 1200;
+       if ((this.f_19797_ + this.m_19879_()) % 1200 == 0) {
+          MobEffect mobeffect = MobEffects.f_19599_;
+-         List<ServerPlayer> list = ((ServerLevel)this.f_19853_).m_8795_((p_32465_) -> {
+-            return this.m_20280_(p_32465_) < 2500.0D && p_32465_.f_8941_.m_9294_();
++         List<ServerPlayer> list = ((ServerLevel)this.f_19853_).m_8795_((p_210138_1_) -> {
++            return this.m_20280_(p_210138_1_) < 2500.0D && p_210138_1_.f_8941_.m_9294_();
+          });
+          int j = 2;
+          int k = 6000;

@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/storage/loot/parameters/LootContextParamSet.java
++++ b/net/minecraft/world/level/storage/loot/parameters/LootContextParamSet.java
+@@ -25,8 +_,8 @@
+    }
+ 
+    public String toString() {
+-      return "[" + Joiner.on(", ").join(this.f_81386_.stream().map((p_81400_) -> {
+-         return (this.f_81385_.contains(p_81400_) ? "!" : "") + p_81400_.m_81284_();
++      return "[" + Joiner.on(", ").join(this.f_81386_.stream().map((p_216275_1_) -> {
++         return (this.f_81385_.contains(p_216275_1_) ? "!" : "") + p_216275_1_.m_81284_();
+       }).iterator()) + "]";
+    }
+ 

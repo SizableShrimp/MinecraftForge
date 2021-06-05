@@ -1,0 +1,35 @@
+--- a/net/minecraft/world/level/storage/loot/LootTables.java
++++ b/net/minecraft/world/level/storage/loot/LootTables.java
+@@ -36,23 +_,23 @@
+          f_79188_.warn("Datapack tried to redefine {} loot table, ignoring", (Object)BuiltInLootTables.f_78712_);
+       }
+ 
+-      p_79214_.forEach((p_79198_, p_79199_) -> {
+-         try {
+-            LootTable loottable = f_79189_.fromJson(p_79199_, LootTable.class);
+-            builder.put(p_79198_, loottable);
++      p_79214_.forEach((p_237403_1_, p_237403_2_) -> {
++         try (net.minecraft.server.packs.resources.Resource res = p_79215_.m_6296_(getPreparedPath(p_237403_1_));){
++            LootTable loottable = net.minecraftforge.common.ForgeHooks.loadLootTable(f_79189_, p_237403_1_, p_237403_2_, res == null || !res.m_7816_().equals("Default"), this);
++            builder.put(p_237403_1_, loottable);
+          } catch (Exception exception) {
+-            f_79188_.error("Couldn't parse loot table {}", p_79198_, exception);
++            f_79188_.error("Couldn't parse loot table {}", p_237403_1_, exception);
+          }
+ 
+       });
+       builder.put(BuiltInLootTables.f_78712_, LootTable.f_79105_);
+       ImmutableMap<ResourceLocation, LootTable> immutablemap = builder.build();
+       ValidationContext validationcontext = new ValidationContext(LootContextParamSets.f_81420_, this.f_79191_::m_79252_, immutablemap::get);
+-      immutablemap.forEach((p_79221_, p_79222_) -> {
+-         m_79202_(validationcontext, p_79221_, p_79222_);
++      immutablemap.forEach((p_227509_1_, p_227509_2_) -> {
++         m_79202_(validationcontext, p_227509_1_, p_227509_2_);
+       });
+-      validationcontext.m_79352_().forEach((p_79211_, p_79212_) -> {
+-         f_79188_.warn("Found validation problem in " + p_79211_ + ": " + p_79212_);
++      validationcontext.m_79352_().forEach((p_215303_0_, p_215303_1_) -> {
++         f_79188_.warn("Found validation problem in " + p_215303_0_ + ": " + p_215303_1_);
+       });
+       this.f_79190_ = immutablemap;
+    }

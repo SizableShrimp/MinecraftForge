@@ -1,0 +1,11 @@
+--- a/net/minecraft/network/protocol/login/ClientboundCustomQueryPacket.java
++++ b/net/minecraft/network/protocol/login/ClientboundCustomQueryPacket.java
+@@ -7,7 +_,7 @@
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+-public class ClientboundCustomQueryPacket implements Packet<ClientLoginPacketListener> {
++public class ClientboundCustomQueryPacket implements Packet<ClientLoginPacketListener>, net.minecraftforge.fml.network.ICustomPacket<ClientboundCustomQueryPacket> {
+    private int f_134745_;
+    private ResourceLocation f_134746_;
+    private FriendlyByteBuf f_134747_;

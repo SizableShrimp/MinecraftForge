@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/FilledBucketTrigger.java
++++ b/net/minecraft/advancements/critereon/FilledBucketTrigger.java
+@@ -18,8 +_,8 @@
+    }
+ 
+    public void m_38772_(ServerPlayer p_38773_, ItemStack p_38774_) {
+-      this.m_66234_(p_38773_, (p_38777_) -> {
+-         return p_38777_.m_38791_(p_38774_);
++      this.m_66234_(p_38773_, (p_226627_1_) -> {
++         return p_226627_1_.m_38791_(p_38774_);
+       });
+    }
+ 

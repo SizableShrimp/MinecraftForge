@@ -25,7 +25,6 @@ import javax.annotation.Nullable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.resources.I18n;
 import com.mojang.blaze3d.platform.InputConstants;
 
 import net.minecraft.network.chat.Component;

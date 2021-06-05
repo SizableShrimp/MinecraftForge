@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/structure/OceanRuinFeature.java
++++ b/net/minecraft/world/level/levelgen/structure/OceanRuinFeature.java
+@@ -44,8 +_,8 @@
+       COLD("cold");
+ 
+       public static final Codec<OceanRuinFeature.Type> f_72501_ = StringRepresentable.m_14350_(OceanRuinFeature.Type::values, OceanRuinFeature.Type::m_72513_);
+-      private static final Map<String, OceanRuinFeature.Type> f_72502_ = Arrays.stream(values()).collect(Collectors.toMap(OceanRuinFeature.Type::m_72515_, (p_72512_) -> {
+-         return p_72512_;
++      private static final Map<String, OceanRuinFeature.Type> f_72502_ = Arrays.stream(values()).collect(Collectors.toMap(OceanRuinFeature.Type::m_72515_, (p_215134_0_) -> {
++         return p_215134_0_;
+       }));
+       private final String f_72503_;
+ 

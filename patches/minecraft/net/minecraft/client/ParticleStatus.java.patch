@@ -1,0 +1,13 @@
+--- a/net/minecraft/client/ParticleStatus.java
++++ b/net/minecraft/client/ParticleStatus.java
+@@ -12,8 +_,8 @@
+    DECREASED(1, "options.particles.decreased"),
+    MINIMAL(2, "options.particles.minimal");
+ 
+-   private static final ParticleStatus[] f_92185_ = Arrays.stream(values()).sorted(Comparator.comparingInt(ParticleStatus::m_92198_)).toArray((p_92200_) -> {
+-      return new ParticleStatus[p_92200_];
++   private static final ParticleStatus[] f_92185_ = Arrays.stream(values()).sorted(Comparator.comparingInt(ParticleStatus::m_92198_)).toArray((p_216834_0_) -> {
++      return new ParticleStatus[p_216834_0_];
+    });
+    private final int f_92186_;
+    private final String f_92187_;

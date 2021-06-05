@@ -1,0 +1,135 @@
+--- a/net/minecraft/core/dispenser/DispenseItemBehavior.java
++++ b/net/minecraft/core/dispenser/DispenseItemBehavior.java
+@@ -71,8 +_,8 @@
+ import net.minecraft.world.phys.BlockHitResult;
+ 
+ public interface DispenseItemBehavior {
+-   DispenseItemBehavior f_123393_ = (p_123400_, p_123401_) -> {
+-      return p_123401_;
++   DispenseItemBehavior f_123393_ = (p_210297_0_, p_210297_1_) -> {
++      return p_210297_1_;
+    };
+ 
+    ItemStack m_6115_(BlockSource p_123403_, ItemStack p_123404_);
+@@ -102,22 +_,22 @@
+       });
+       DispenserBlock.m_52672_(Items.f_42521_, new AbstractProjectileDispenseBehavior() {
+          protected Projectile m_6895_(Level p_123468_, Position p_123469_, ItemStack p_123470_) {
+-            return Util.m_137469_(new ThrownEgg(p_123468_, p_123469_.m_7096_(), p_123469_.m_7098_(), p_123469_.m_7094_()), (p_123466_) -> {
+-               p_123466_.m_37446_(p_123470_);
++            return Util.m_137469_(new ThrownEgg(p_123468_, p_123469_.m_7096_(), p_123469_.m_7098_(), p_123469_.m_7094_()), (p_218408_1_) -> {
++               p_218408_1_.m_37446_(p_123470_);
+             });
+          }
+       });
+       DispenserBlock.m_52672_(Items.f_42452_, new AbstractProjectileDispenseBehavior() {
+          protected Projectile m_6895_(Level p_123476_, Position p_123477_, ItemStack p_123478_) {
+-            return Util.m_137469_(new Snowball(p_123476_, p_123477_.m_7096_(), p_123477_.m_7098_(), p_123477_.m_7094_()), (p_123474_) -> {
+-               p_123474_.m_37446_(p_123478_);
++            return Util.m_137469_(new Snowball(p_123476_, p_123477_.m_7096_(), p_123477_.m_7098_(), p_123477_.m_7094_()), (p_218409_1_) -> {
++               p_218409_1_.m_37446_(p_123478_);
+             });
+          }
+       });
+       DispenserBlock.m_52672_(Items.f_42612_, new AbstractProjectileDispenseBehavior() {
+          protected Projectile m_6895_(Level p_123485_, Position p_123486_, ItemStack p_123487_) {
+-            return Util.m_137469_(new ThrownExperienceBottle(p_123485_, p_123486_.m_7096_(), p_123486_.m_7098_(), p_123486_.m_7094_()), (p_123483_) -> {
+-               p_123483_.m_37446_(p_123487_);
++            return Util.m_137469_(new ThrownExperienceBottle(p_123485_, p_123486_.m_7096_(), p_123486_.m_7098_(), p_123486_.m_7094_()), (p_218410_1_) -> {
++               p_218410_1_.m_37446_(p_123487_);
+             });
+          }
+ 
+@@ -133,8 +_,8 @@
+          public ItemStack m_6115_(BlockSource p_123491_, ItemStack p_123492_) {
+             return (new AbstractProjectileDispenseBehavior() {
+                protected Projectile m_6895_(Level p_123501_, Position p_123502_, ItemStack p_123503_) {
+-                  return Util.m_137469_(new ThrownPotion(p_123501_, p_123502_.m_7096_(), p_123502_.m_7098_(), p_123502_.m_7094_()), (p_123499_) -> {
+-                     p_123499_.m_37446_(p_123503_);
++                  return Util.m_137469_(new ThrownPotion(p_123501_, p_123502_.m_7096_(), p_123502_.m_7098_(), p_123502_.m_7094_()), (p_218411_1_) -> {
++                     p_218411_1_.m_37446_(p_123503_);
+                   });
+                }
+ 
+@@ -152,8 +_,8 @@
+          public ItemStack m_6115_(BlockSource p_123507_, ItemStack p_123508_) {
+             return (new AbstractProjectileDispenseBehavior() {
+                protected Projectile m_6895_(Level p_123517_, Position p_123518_, ItemStack p_123519_) {
+-                  return Util.m_137469_(new ThrownPotion(p_123517_, p_123518_.m_7096_(), p_123518_.m_7098_(), p_123518_.m_7094_()), (p_123515_) -> {
+-                     p_123515_.m_37446_(p_123519_);
++                  return Util.m_137469_(new ThrownPotion(p_123517_, p_123518_.m_7096_(), p_123518_.m_7098_(), p_123518_.m_7094_()), (p_218413_1_) -> {
++                     p_218413_1_.m_37446_(p_123519_);
+                   });
+                }
+ 
+@@ -197,11 +_,11 @@
+       DispenserBlock.m_52672_(Items.f_42450_, new OptionalDispenseItemBehavior() {
+          public ItemStack m_7498_(BlockSource p_123529_, ItemStack p_123530_) {
+             BlockPos blockpos = p_123529_.m_7961_().m_121945_(p_123529_.m_6414_().m_61143_(DispenserBlock.f_52659_));
+-            List<LivingEntity> list = p_123529_.m_7727_().m_6443_(LivingEntity.class, new AABB(blockpos), (p_123527_) -> {
+-               if (!(p_123527_ instanceof Saddleable)) {
++            List<LivingEntity> list = p_123529_.m_7727_().m_6443_(LivingEntity.class, new AABB(blockpos), (p_239789_0_) -> {
++               if (!(p_239789_0_ instanceof Saddleable)) {
+                   return false;
+                } else {
+-                  Saddleable saddleable = (Saddleable)p_123527_;
++                  Saddleable saddleable = (Saddleable)p_239789_0_;
+                   return !saddleable.m_6254_() && saddleable.m_6741_();
+                }
+             });
+@@ -219,8 +_,8 @@
+          protected ItemStack m_7498_(BlockSource p_123535_, ItemStack p_123536_) {
+             BlockPos blockpos = p_123535_.m_7961_().m_121945_(p_123535_.m_6414_().m_61143_(DispenserBlock.f_52659_));
+ 
+-            for(AbstractHorse abstracthorse : p_123535_.m_7727_().m_6443_(AbstractHorse.class, new AABB(blockpos), (p_123533_) -> {
+-               return p_123533_.m_6084_() && p_123533_.m_7482_();
++            for(AbstractHorse abstracthorse : p_123535_.m_7727_().m_6443_(AbstractHorse.class, new AABB(blockpos), (p_239790_0_) -> {
++               return p_239790_0_.m_6084_() && p_239790_0_.m_7482_();
+             })) {
+                if (abstracthorse.m_6010_(p_123536_) && !abstracthorse.m_7481_() && abstracthorse.m_30614_()) {
+                   abstracthorse.m_6245_(401, p_123536_.m_41620_(1));
+@@ -256,8 +_,8 @@
+          public ItemStack m_7498_(BlockSource p_123541_, ItemStack p_123542_) {
+             BlockPos blockpos = p_123541_.m_7961_().m_121945_(p_123541_.m_6414_().m_61143_(DispenserBlock.f_52659_));
+ 
+-            for(AbstractChestedHorse abstractchestedhorse : p_123541_.m_7727_().m_6443_(AbstractChestedHorse.class, new AABB(blockpos), (p_123539_) -> {
+-               return p_123539_.m_6084_() && !p_123539_.m_30502_();
++            for(AbstractChestedHorse abstractchestedhorse : p_123541_.m_7727_().m_6443_(AbstractChestedHorse.class, new AABB(blockpos), (p_239791_0_) -> {
++               return p_239791_0_.m_6084_() && !p_239791_0_.m_30502_();
+             })) {
+                if (abstractchestedhorse.m_30614_() && abstractchestedhorse.m_6245_(499, p_123542_)) {
+                   p_123542_.m_41774_(1);
+@@ -296,8 +_,8 @@
+             double d3 = random.nextGaussian() * 0.05D + (double)direction.m_122429_();
+             double d4 = random.nextGaussian() * 0.05D + (double)direction.m_122430_();
+             double d5 = random.nextGaussian() * 0.05D + (double)direction.m_122431_();
+-            level.m_7967_(Util.m_137469_(new SmallFireball(level, d0, d1, d2, d3, d4, d5), (p_123552_) -> {
+-               p_123552_.m_37010_(p_123557_);
++            level.m_7967_(Util.m_137469_(new SmallFireball(level, d0, d1, d2, d3, d4, d5), (p_229425_1_) -> {
++               p_229425_1_.m_37010_(p_123557_);
+             }));
+             p_123557_.m_41774_(1);
+             return p_123557_;
+@@ -375,8 +_,9 @@
+                level.m_46597_(blockpos, BaseFireBlock.m_49245_(level, blockpos));
+             } else if (CampfireBlock.m_51321_(blockstate)) {
+                level.m_46597_(blockpos, blockstate.m_61124_(BlockStateProperties.f_61443_, Boolean.valueOf(true)));
+-            } else if (blockstate.m_60734_() instanceof TntBlock) {
+-               TntBlock.m_57433_(level, blockpos);
++            } else if (blockstate.isFlammable(level, blockpos, p_123412_.m_6414_().m_61143_(DispenserBlock.f_52659_).m_122424_())) {
++               blockstate.catchFire(level, blockpos, p_123412_.m_6414_().m_61143_(DispenserBlock.f_52659_).m_122424_(), null);
++               if (blockstate.m_60734_() instanceof TntBlock)
+                level.m_7471_(blockpos, false);
+             } else {
+                this.m_123573_(false);
+@@ -492,8 +_,8 @@
+             ServerLevel serverlevel = p_123444_.m_7727_();
+             BlockPos blockpos = p_123444_.m_7961_().m_121945_(p_123444_.m_6414_().m_61143_(DispenserBlock.f_52659_));
+             BlockState blockstate = serverlevel.m_8055_(blockpos);
+-            if (blockstate.m_60622_(BlockTags.f_13072_, (p_123442_) -> {
+-               return p_123442_.m_61138_(BeehiveBlock.f_49564_);
++            if (blockstate.m_60622_(BlockTags.f_13072_, (p_239787_0_) -> {
++               return p_239787_0_.m_61138_(BeehiveBlock.f_49564_);
+             }) && blockstate.m_61143_(BeehiveBlock.f_49564_) >= 5) {
+                ((BeehiveBlock)blockstate.m_60734_()).m_49594_(serverlevel, blockstate, blockpos, (Player)null, BeehiveBlockEntity.BeeReleaseStatus.BEE_RELEASED);
+                this.m_123573_(true);

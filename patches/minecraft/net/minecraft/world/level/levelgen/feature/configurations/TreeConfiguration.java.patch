@@ -1,0 +1,51 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/TreeConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/TreeConfiguration.java
+@@ -12,27 +_,28 @@
+ import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
+ 
+ public class TreeConfiguration implements FeatureConfiguration {
+-   public static final Codec<TreeConfiguration> f_68184_ = RecordCodecBuilder.create((p_68209_) -> {
+-      return p_68209_.group(BlockStateProvider.f_68747_.fieldOf("trunk_provider").forGetter((p_68228_) -> {
+-         return p_68228_.f_68185_;
+-      }), BlockStateProvider.f_68747_.fieldOf("leaves_provider").forGetter((p_68226_) -> {
+-         return p_68226_.f_68186_;
+-      }), FoliagePlacer.f_68519_.fieldOf("foliage_placer").forGetter((p_68224_) -> {
+-         return p_68224_.f_68189_;
+-      }), TrunkPlacer.f_70262_.fieldOf("trunk_placer").forGetter((p_68222_) -> {
+-         return p_68222_.f_68190_;
+-      }), FeatureSize.f_68281_.fieldOf("minimum_size").forGetter((p_68220_) -> {
+-         return p_68220_.f_68191_;
+-      }), TreeDecorator.f_70021_.listOf().fieldOf("decorators").forGetter((p_68218_) -> {
+-         return p_68218_.f_68187_;
+-      }), Codec.INT.fieldOf("max_water_depth").orElse(0).forGetter((p_68216_) -> {
+-         return p_68216_.f_68192_;
+-      }), Codec.BOOL.fieldOf("ignore_vines").orElse(false).forGetter((p_68214_) -> {
+-         return p_68214_.f_68193_;
+-      }), Heightmap.Types.f_64274_.fieldOf("heightmap").forGetter((p_68207_) -> {
+-         return p_68207_.f_68194_;
+-      })).apply(p_68209_, TreeConfiguration::new);
++   public static final Codec<TreeConfiguration> f_68184_ = RecordCodecBuilder.create((p_236683_0_) -> {
++      return p_236683_0_.group(BlockStateProvider.f_68747_.fieldOf("trunk_provider").forGetter((p_236693_0_) -> {
++         return p_236693_0_.f_68185_;
++      }), BlockStateProvider.f_68747_.fieldOf("leaves_provider").forGetter((p_236692_0_) -> {
++         return p_236692_0_.f_68186_;
++      }), FoliagePlacer.f_68519_.fieldOf("foliage_placer").forGetter((p_236691_0_) -> {
++         return p_236691_0_.f_68189_;
++      }), TrunkPlacer.f_70262_.fieldOf("trunk_placer").forGetter((p_236690_0_) -> {
++         return p_236690_0_.f_68190_;
++      }), FeatureSize.f_68281_.fieldOf("minimum_size").forGetter((p_236689_0_) -> {
++         return p_236689_0_.f_68191_;
++      }), TreeDecorator.f_70021_.listOf().fieldOf("decorators").forGetter((p_236688_0_) -> {
++         return p_236688_0_.f_68187_;
++      }), Codec.INT.fieldOf("max_water_depth").orElse(0).forGetter((p_236687_0_) -> {
++         return p_236687_0_.f_68192_;
++      }), Codec.BOOL.fieldOf("ignore_vines").orElse(false).forGetter((p_236686_0_) -> {
++         return p_236686_0_.f_68193_;
++      }), Heightmap.Types.f_64274_.fieldOf("heightmap").forGetter((p_236684_0_) -> {
++         return p_236684_0_.f_68194_;
++      })).apply(p_236683_0_, TreeConfiguration::new);
+    });
++   //TODO: Review this, see if we can hook in the sapling into the Codec
+    public final BlockStateProvider f_68185_;
+    public final BlockStateProvider f_68186_;
+    public final List<TreeDecorator> f_68187_;

@@ -1,0 +1,106 @@
+--- a/com/mojang/blaze3d/audio/OggAudioStream.java
++++ b/com/mojang/blaze3d/audio/OggAudioStream.java
+@@ -3,7 +_,6 @@
+ import com.google.common.collect.Lists;
+ import java.io.IOException;
+ import java.io.InputStream;
+-import java.nio.Buffer;
+ import java.nio.ByteBuffer;
+ import java.nio.FloatBuffer;
+ import java.nio.IntBuffer;
+@@ -30,7 +_,7 @@
+ 
+    public OggAudioStream(InputStream p_83751_) throws IOException {
+       this.f_83748_ = p_83751_;
+-      ((Buffer)this.f_83749_).limit(0);
++      ((java.nio.Buffer)this.f_83749_).limit(0);
+ 
+       try (MemoryStack memorystack = MemoryStack.stackPush()) {
+          IntBuffer intbuffer = memorystack.mallocInt(1);
+@@ -42,9 +_,9 @@
+             }
+ 
+             int i = this.f_83749_.position();
+-            ((Buffer)this.f_83749_).position(0);
++            ((java.nio.Buffer)this.f_83749_).position(0);
+             this.f_83746_ = STBVorbis.stb_vorbis_open_pushdata(this.f_83749_, intbuffer, intbuffer1, (STBVorbisAlloc)null);
+-            ((Buffer)this.f_83749_).position(i);
++            ((java.nio.Buffer)this.f_83749_).position(i);
+             int j = intbuffer1.get(0);
+             if (j == 1) {
+                this.m_83767_();
+@@ -53,7 +_,7 @@
+             }
+          }
+ 
+-         ((Buffer)this.f_83749_).position(this.f_83749_.position() + intbuffer.get(0));
++         ((java.nio.Buffer)this.f_83749_).position(this.f_83749_.position() + intbuffer.get(0));
+          STBVorbisInfo stbvorbisinfo = STBVorbisInfo.mallocStack(memorystack);
+          STBVorbis.stb_vorbis_get_info(this.f_83746_, stbvorbisinfo);
+          this.f_83747_ = new AudioFormat((float)stbvorbisinfo.sample_rate(), 16, stbvorbisinfo.channels(), true, false);
+@@ -73,10 +_,10 @@
+             return false;
+          } else {
+             int l = this.f_83749_.position();
+-            ((Buffer)this.f_83749_).limit(i + k);
+-            ((Buffer)this.f_83749_).position(i);
++            ((java.nio.Buffer)this.f_83749_).limit(i + k);
++            ((java.nio.Buffer)this.f_83749_).position(i);
+             this.f_83749_.put(abyte, 0, k);
+-            ((Buffer)this.f_83749_).position(l);
++            ((java.nio.Buffer)this.f_83749_).position(l);
+             return true;
+          }
+       }
+@@ -86,13 +_,13 @@
+       boolean flag = this.f_83749_.position() == 0;
+       boolean flag1 = this.f_83749_.position() == this.f_83749_.limit();
+       if (flag1 && !flag) {
+-         ((Buffer)this.f_83749_).position(0);
+-         ((Buffer)this.f_83749_).limit(0);
++         ((java.nio.Buffer)this.f_83749_).position(0);
++         ((java.nio.Buffer)this.f_83749_).limit(0);
+       } else {
+          ByteBuffer bytebuffer = MemoryUtil.memAlloc(flag ? 2 * this.f_83749_.capacity() : this.f_83749_.capacity());
+          bytebuffer.put(this.f_83749_);
+          MemoryUtil.memFree(this.f_83749_);
+-         ((Buffer)bytebuffer).flip();
++         ((java.nio.Buffer)bytebuffer).flip();
+          this.f_83749_ = bytebuffer;
+       }
+ 
+@@ -109,7 +_,7 @@
+ 
+             while(true) {
+                int i = STBVorbis.stb_vorbis_decode_frame_pushdata(this.f_83746_, this.f_83749_, intbuffer, pointerbuffer, intbuffer1);
+-               ((Buffer)this.f_83749_).position(this.f_83749_.position() + i);
++               ((java.nio.Buffer)this.f_83749_).position(this.f_83749_.position() + i);
+                int j = STBVorbis.stb_vorbis_get_error(this.f_83746_);
+                if (j == 1) {
+                   this.m_83767_();
+@@ -208,7 +_,7 @@
+ 
+       public void m_83775_(float p_83776_) {
+          if (this.f_83771_.remaining() == 0) {
+-            ((Buffer)this.f_83771_).flip();
++            ((java.nio.Buffer)this.f_83771_).flip();
+             this.f_83768_.add(this.f_83771_);
+             this.m_83779_();
+          }
+@@ -219,14 +_,14 @@
+       }
+ 
+       public ByteBuffer m_83774_() {
+-         ((Buffer)this.f_83771_).flip();
++         ((java.nio.Buffer)this.f_83771_).flip();
+          if (this.f_83768_.isEmpty()) {
+             return this.f_83771_;
+          } else {
+             ByteBuffer bytebuffer = BufferUtils.createByteBuffer(this.f_83770_);
+             this.f_83768_.forEach(bytebuffer::put);
+             bytebuffer.put(this.f_83771_);
+-            ((Buffer)bytebuffer).flip();
++            ((java.nio.Buffer)bytebuffer).flip();
+             return bytebuffer;
+          }
+       }

@@ -1,0 +1,74 @@
+--- a/net/minecraft/client/gui/screens/worldselection/WorldSelectionList.java
++++ b/net/minecraft/client/gui/screens/worldselection/WorldSelectionList.java
+@@ -136,8 +_,8 @@
+    }
+ 
+    protected void m_6778_(AbstractSelectionList.SelectionDirection p_101673_) {
+-      this.m_93464_(p_101673_, (p_101681_) -> {
+-         return !p_101681_.f_101695_.m_78375_();
++      this.m_93464_(p_101673_, (p_241652_0_) -> {
++         return !p_241652_0_.f_101695_.m_78375_();
+       });
+    }
+ 
+@@ -246,8 +_,8 @@
+             if (this.f_101695_.m_78374_()) {
+                Component component = new TranslatableComponent("selectWorld.backupQuestion");
+                Component component1 = new TranslatableComponent("selectWorld.backupWarning", this.f_101695_.m_78370_(), SharedConstants.m_136187_().getName());
+-               this.f_101693_.m_91152_(new BackupConfirmScreen(this.f_101694_, (p_101736_, p_101737_) -> {
+-                  if (p_101736_) {
++               this.f_101693_.m_91152_(new BackupConfirmScreen(this.f_101694_, (p_214436_1_, p_214436_2_) -> {
++                  if (p_214436_1_) {
+                      String s = this.f_101695_.m_78358_();
+ 
+                      try (LevelStorageSource.LevelStorageAccess levelstoragesource$levelstorageaccess = this.f_101693_.m_91392_().m_78260_(s)) {
+@@ -261,8 +_,8 @@
+                   this.m_101744_();
+                }, component, component1, false));
+             } else if (this.f_101695_.m_78373_()) {
+-               this.f_101693_.m_91152_(new ConfirmScreen((p_101741_) -> {
+-                  if (p_101741_) {
++               this.f_101693_.m_91152_(new ConfirmScreen((p_214434_1_) -> {
++                  if (p_214434_1_) {
+                      try {
+                         this.m_101744_();
+                      } catch (Exception exception) {
+@@ -284,8 +_,8 @@
+       }
+ 
+       public void m_101738_() {
+-         this.f_101693_.m_91152_(new ConfirmScreen((p_101734_) -> {
+-            if (p_101734_) {
++         this.f_101693_.m_91152_(new ConfirmScreen((p_214440_1_) -> {
++            if (p_214440_1_) {
+                this.f_101693_.m_91152_(new ProgressScreen());
+                LevelStorageSource levelstoragesource = this.f_101693_.m_91392_();
+                String s = this.f_101695_.m_78358_();
+@@ -311,14 +_,14 @@
+ 
+          try {
+             LevelStorageSource.LevelStorageAccess levelstoragesource$levelstorageaccess = this.f_101693_.m_91392_().m_78260_(s);
+-            this.f_101693_.m_91152_(new EditWorldScreen((p_101719_) -> {
++            this.f_101693_.m_91152_(new EditWorldScreen((p_239096_3_) -> {
+                try {
+                   levelstoragesource$levelstorageaccess.close();
+                } catch (IOException ioexception1) {
+                   WorldSelectionList.f_101645_.error("Failed to unlock level {}", s, ioexception1);
+                }
+ 
+-               if (p_101719_) {
++               if (p_239096_3_) {
+                   WorldSelectionList.this.m_101676_(() -> {
+                      return this.f_101694_.f_101330_.m_94155_();
+                   }, true);
+@@ -349,8 +_,8 @@
+             WorldGenSettings worldgensettings = minecraft$serverstem.m_91434_().m_5961_();
+             Path path = CreateWorldScreen.m_100906_(levelstoragesource$levelstorageaccess.m_78283_(LevelResource.f_78180_), this.f_101693_);
+             if (worldgensettings.m_64670_()) {
+-               this.f_101693_.m_91152_(new ConfirmScreen((p_101715_) -> {
+-                  this.f_101693_.m_91152_((Screen)(p_101715_ ? new CreateWorldScreen(this.f_101694_, levelsettings, worldgensettings, path, datapackconfig, registryaccess$registryholder) : this.f_101694_));
++               this.f_101693_.m_91152_(new ConfirmScreen((p_239095_6_) -> {
++                  this.f_101693_.m_91152_((Screen)(p_239095_6_ ? new CreateWorldScreen(this.f_101694_, levelsettings, worldgensettings, path, datapackconfig, registryaccess$registryholder) : this.f_101694_));
+                }, new TranslatableComponent("selectWorld.recreate.customized.title"), new TranslatableComponent("selectWorld.recreate.customized.text"), CommonComponents.f_130659_, CommonComponents.f_130656_));
+             } else {
+                this.f_101693_.m_91152_(new CreateWorldScreen(this.f_101694_, levelsettings, worldgensettings, path, datapackconfig, registryaccess$registryholder));

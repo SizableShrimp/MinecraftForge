@@ -1,0 +1,101 @@
+--- a/net/minecraft/client/renderer/entity/EntityRenderDispatcher.java
++++ b/net/minecraft/client/renderer/entity/EntityRenderDispatcher.java
+@@ -35,8 +_,6 @@
+ import net.minecraft.world.entity.EntityType;
+ import net.minecraft.world.entity.LivingEntity;
+ import net.minecraft.world.entity.Mob;
+-import net.minecraft.world.entity.boss.EnderDragonPart;
+-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.LevelReader;
+ import net.minecraft.world.level.block.RenderShape;
+@@ -50,7 +_,7 @@
+ @OnlyIn(Dist.CLIENT)
+ public class EntityRenderDispatcher {
+    private static final RenderType f_114361_ = RenderType.m_110485_(new ResourceLocation("textures/misc/shadow.png"));
+-   private final Map<EntityType<?>, EntityRenderer<?>> f_114362_ = Maps.newHashMap();
++   public final Map<EntityType<?>, EntityRenderer<?>> f_114362_ = Maps.newHashMap();
+    private final Map<String, PlayerRenderer> f_114363_ = Maps.newHashMap();
+    private final PlayerRenderer f_114364_;
+    private final Font f_114365_;
+@@ -67,11 +_,11 @@
+       return this.m_114382_(p_114395_).m_114505_(p_114395_, p_114396_);
+    }
+ 
+-   private <T extends Entity> void m_114403_(EntityType<T> p_114404_, EntityRenderer<? super T> p_114405_) {
++   public <T extends Entity> void m_114403_(EntityType<T> p_114404_, EntityRenderer<? super T> p_114405_) {
+       this.f_114362_.put(p_114404_, p_114405_);
+    }
+ 
+-   private void m_114465_(ItemRenderer p_114466_, ReloadableResourceManager p_114467_) {
++   private void m_114465_(net.minecraft.client.renderer.entity.ItemRenderer p_114466_, ReloadableResourceManager p_114467_) {
+       this.m_114403_(EntityType.f_20476_, new AreaEffectCloudRenderer(this));
+       this.m_114403_(EntityType.f_20529_, new ArmorStandRenderer(this));
+       this.m_114403_(EntityType.f_20548_, new TippableArrowRenderer(this));
+@@ -181,7 +_,7 @@
+       this.m_114403_(EntityType.f_20482_, new StriderRenderer(this));
+    }
+ 
+-   public EntityRenderDispatcher(TextureManager p_114372_, ItemRenderer p_114373_, ReloadableResourceManager p_114374_, Font p_114375_, Options p_114376_) {
++   public EntityRenderDispatcher(TextureManager p_114372_, net.minecraft.client.renderer.entity.ItemRenderer p_114373_, ReloadableResourceManager p_114374_, Font p_114375_, Options p_114376_) {
+       this.f_114357_ = p_114372_;
+       this.f_114365_ = p_114375_;
+       this.f_114360_ = p_114376_;
+@@ -189,7 +_,10 @@
+       this.f_114364_ = new PlayerRenderer(this);
+       this.f_114363_.put("default", this.f_114364_);
+       this.f_114363_.put("slim", new PlayerRenderer(this, true));
++   }
+ 
++   //FORGE: Validate the existence of a renderer for each entity type after modded entity renderers have been added
++   public void validateRendererExistence() {
+       for(EntityType<?> entitytype : Registry.f_122826_) {
+          if (entitytype != EntityType.f_20532_ && !this.f_114362_.containsKey(entitytype)) {
+             throw new IllegalStateException("No renderer registered for " + Registry.f_122826_.m_7981_(entitytype));
+@@ -202,9 +_,9 @@
+       if (p_114383_ instanceof AbstractClientPlayer) {
+          String s = ((AbstractClientPlayer)p_114383_).m_108564_();
+          PlayerRenderer playerrenderer = this.f_114363_.get(s);
+-         return (EntityRenderer<? super T>)(playerrenderer != null ? playerrenderer : this.f_114364_);
++         return (EntityRenderer<? super T>) (playerrenderer != null ? playerrenderer : this.f_114364_);
+       } else {
+-         return (EntityRenderer<? super T>)this.f_114362_.get(p_114383_.m_6095_());
++         return (EntityRenderer<? super T>) this.f_114362_.get(p_114383_.m_6095_());
+       }
+    }
+ 
+@@ -281,18 +_,18 @@
+    private void m_114441_(PoseStack p_114442_, VertexConsumer p_114443_, Entity p_114444_, float p_114445_) {
+       float f = p_114444_.m_20205_() / 2.0F;
+       this.m_114446_(p_114442_, p_114443_, p_114444_, 1.0F, 1.0F, 1.0F);
+-      if (p_114444_ instanceof EnderDragon) {
++      if (p_114444_.isMultipartEntity()) {
+          double d0 = -Mth.m_14139_((double)p_114445_, p_114444_.f_19790_, p_114444_.m_20185_());
+          double d1 = -Mth.m_14139_((double)p_114445_, p_114444_.f_19791_, p_114444_.m_20186_());
+          double d2 = -Mth.m_14139_((double)p_114445_, p_114444_.f_19792_, p_114444_.m_20189_());
+ 
+-         for(EnderDragonPart enderdragonpart : ((EnderDragon)p_114444_).m_31156_()) {
++         for(net.minecraftforge.entity.PartEntity<?> enderdragonpartentity : p_114444_.getParts()) {
+             p_114442_.m_85836_();
+-            double d3 = d0 + Mth.m_14139_((double)p_114445_, enderdragonpart.f_19790_, enderdragonpart.m_20185_());
+-            double d4 = d1 + Mth.m_14139_((double)p_114445_, enderdragonpart.f_19791_, enderdragonpart.m_20186_());
+-            double d5 = d2 + Mth.m_14139_((double)p_114445_, enderdragonpart.f_19792_, enderdragonpart.m_20189_());
++            double d3 = d0 + Mth.m_14139_((double)p_114445_, enderdragonpartentity.f_19790_, enderdragonpartentity.m_20185_());
++            double d4 = d1 + Mth.m_14139_((double)p_114445_, enderdragonpartentity.f_19791_, enderdragonpartentity.m_20186_());
++            double d5 = d2 + Mth.m_14139_((double)p_114445_, enderdragonpartentity.f_19792_, enderdragonpartentity.m_20189_());
+             p_114442_.m_85837_(d3, d4, d5);
+-            this.m_114446_(p_114442_, p_114443_, enderdragonpart, 0.25F, 1.0F, 0.0F);
++            this.m_114446_(p_114442_, p_114443_, enderdragonpartentity, 0.25F, 1.0F, 0.0F);
+             p_114442_.m_85849_();
+          }
+       }
+@@ -450,5 +_,9 @@
+ 
+    public Font m_114475_() {
+       return this.f_114365_;
++   }
++
++   public Map<String, PlayerRenderer> getSkinMap() {
++      return (Map<String, PlayerRenderer>) java.util.Collections.unmodifiableMap(f_114363_);
+    }
+ }

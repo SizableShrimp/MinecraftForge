@@ -19,9 +19,6 @@
 
 package net.minecraftforge.common.extensions;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;

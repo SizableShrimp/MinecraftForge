@@ -1,0 +1,19 @@
+--- a/net/minecraft/util/datafix/fixes/ChunkStatusFix2.java
++++ b/net/minecraft/util/datafix/fixes/ChunkStatusFix2.java
+@@ -22,12 +_,12 @@
+       Type<?> type = this.getInputSchema().getType(References.f_16773_);
+       Type<?> type1 = type.findFieldType("Level");
+       OpticFinder<?> opticfinder = DSL.fieldFinder("Level", type1);
+-      return this.fixTypeEverywhereTyped("ChunkStatusFix2", type, this.getOutputSchema().getType(References.f_16773_), (p_15262_) -> {
+-         return p_15262_.updateTyped(opticfinder, (p_15264_) -> {
+-            Dynamic<?> dynamic = p_15264_.get(DSL.remainderFinder());
++      return this.fixTypeEverywhereTyped("ChunkStatusFix2", type, this.getOutputSchema().getType(References.f_16773_), (p_219823_1_) -> {
++         return p_219823_1_.updateTyped(opticfinder, (p_219824_0_) -> {
++            Dynamic<?> dynamic = p_219824_0_.get(DSL.remainderFinder());
+             String s = dynamic.get("Status").asString("empty");
+             String s1 = f_15255_.getOrDefault(s, "empty");
+-            return Objects.equals(s, s1) ? p_15264_ : p_15264_.set(DSL.remainderFinder(), dynamic.set("Status", dynamic.createString(s1)));
++            return Objects.equals(s, s1) ? p_219824_0_ : p_219824_0_.set(DSL.remainderFinder(), dynamic.set("Status", dynamic.createString(s1)));
+          });
+       });
+    }

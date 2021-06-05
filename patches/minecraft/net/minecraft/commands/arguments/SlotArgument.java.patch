@@ -1,0 +1,66 @@
+--- a/net/minecraft/commands/arguments/SlotArgument.java
++++ b/net/minecraft/commands/arguments/SlotArgument.java
+@@ -20,44 +_,44 @@
+ 
+ public class SlotArgument implements ArgumentType<Integer> {
+    private static final Collection<String> f_111271_ = Arrays.asList("container.5", "12", "weapon");
+-   private static final DynamicCommandExceptionType f_111272_ = new DynamicCommandExceptionType((p_111283_) -> {
+-      return new TranslatableComponent("slot.unknown", p_111283_);
++   private static final DynamicCommandExceptionType f_111272_ = new DynamicCommandExceptionType((p_208679_0_) -> {
++      return new TranslatableComponent("slot.unknown", p_208679_0_);
+    });
+-   private static final Map<String, Integer> f_111273_ = Util.m_137469_(Maps.newHashMap(), (p_111285_) -> {
++   private static final Map<String, Integer> f_111273_ = Util.m_137469_(Maps.newHashMap(), (p_209386_0_) -> {
+       for(int i = 0; i < 54; ++i) {
+-         p_111285_.put("container." + i, i);
++         p_209386_0_.put("container." + i, i);
+       }
+ 
+       for(int j = 0; j < 9; ++j) {
+-         p_111285_.put("hotbar." + j, j);
++         p_209386_0_.put("hotbar." + j, j);
+       }
+ 
+       for(int k = 0; k < 27; ++k) {
+-         p_111285_.put("inventory." + k, 9 + k);
++         p_209386_0_.put("inventory." + k, 9 + k);
+       }
+ 
+       for(int l = 0; l < 27; ++l) {
+-         p_111285_.put("enderchest." + l, 200 + l);
++         p_209386_0_.put("enderchest." + l, 200 + l);
+       }
+ 
+       for(int i1 = 0; i1 < 8; ++i1) {
+-         p_111285_.put("villager." + i1, 300 + i1);
++         p_209386_0_.put("villager." + i1, 300 + i1);
+       }
+ 
+       for(int j1 = 0; j1 < 15; ++j1) {
+-         p_111285_.put("horse." + j1, 500 + j1);
++         p_209386_0_.put("horse." + j1, 500 + j1);
+       }
+ 
+-      p_111285_.put("weapon", 98);
+-      p_111285_.put("weapon.mainhand", 98);
+-      p_111285_.put("weapon.offhand", 99);
+-      p_111285_.put("armor.head", 100 + EquipmentSlot.HEAD.m_20749_());
+-      p_111285_.put("armor.chest", 100 + EquipmentSlot.CHEST.m_20749_());
+-      p_111285_.put("armor.legs", 100 + EquipmentSlot.LEGS.m_20749_());
+-      p_111285_.put("armor.feet", 100 + EquipmentSlot.FEET.m_20749_());
+-      p_111285_.put("horse.saddle", 400);
+-      p_111285_.put("horse.armor", 401);
+-      p_111285_.put("horse.chest", 499);
++      p_209386_0_.put("weapon", 98);
++      p_209386_0_.put("weapon.mainhand", 98);
++      p_209386_0_.put("weapon.offhand", 99);
++      p_209386_0_.put("armor.head", 100 + EquipmentSlot.HEAD.m_20749_());
++      p_209386_0_.put("armor.chest", 100 + EquipmentSlot.CHEST.m_20749_());
++      p_209386_0_.put("armor.legs", 100 + EquipmentSlot.LEGS.m_20749_());
++      p_209386_0_.put("armor.feet", 100 + EquipmentSlot.FEET.m_20749_());
++      p_209386_0_.put("horse.saddle", 400);
++      p_209386_0_.put("horse.armor", 401);
++      p_209386_0_.put("horse.chest", 499);
+    });
+ 
+    public static SlotArgument m_111276_() {

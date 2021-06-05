@@ -1,0 +1,20 @@
+--- a/net/minecraft/world/entity/ai/goal/FollowFlockLeaderGoal.java
++++ b/net/minecraft/world/entity/ai/goal/FollowFlockLeaderGoal.java
+@@ -28,13 +_,13 @@
+          return false;
+       } else {
+          this.f_25247_ = this.m_25251_(this.f_25245_);
+-         Predicate<AbstractSchoolingFish> predicate = (p_25258_) -> {
+-            return p_25258_.m_27542_() || !p_25258_.m_27540_();
++         Predicate<AbstractSchoolingFish> predicate = (p_212824_0_) -> {
++            return p_212824_0_.m_27542_() || !p_212824_0_.m_27540_();
+          };
+          List<AbstractSchoolingFish> list = this.f_25245_.f_19853_.m_6443_(this.f_25245_.getClass(), this.f_25245_.m_20191_().m_82377_(8.0D, 8.0D, 8.0D), predicate);
+          AbstractSchoolingFish abstractschoolingfish = list.stream().filter(AbstractSchoolingFish::m_27542_).findAny().orElse(this.f_25245_);
+-         abstractschoolingfish.m_27533_(list.stream().filter((p_25255_) -> {
+-            return !p_25255_.m_27540_();
++         abstractschoolingfish.m_27533_(list.stream().filter((p_212823_0_) -> {
++            return !p_212823_0_.m_27540_();
+          }));
+          return this.f_25245_.m_27540_();
+       }

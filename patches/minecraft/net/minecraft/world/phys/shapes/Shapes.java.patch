@@ -1,0 +1,28 @@
+--- a/net/minecraft/world/phys/shapes/Shapes.java
++++ b/net/minecraft/world/phys/shapes/Shapes.java
+@@ -163,10 +_,10 @@
+    }
+ 
+    private static boolean m_83103_(IndexMerger p_83104_, IndexMerger p_83105_, IndexMerger p_83106_, DiscreteVoxelShape p_83107_, DiscreteVoxelShape p_83108_, BooleanOp p_83109_) {
+-      return !p_83104_.m_6200_((p_83100_, p_83101_, p_83102_) -> {
+-         return p_83105_.m_6200_((p_83091_, p_83092_, p_83093_) -> {
+-            return p_83106_.m_6200_((p_83081_, p_83082_, p_83083_) -> {
+-               return !p_83109_.m_82701_(p_83107_.m_82846_(p_83100_, p_83091_, p_83081_), p_83108_.m_82846_(p_83101_, p_83092_, p_83082_));
++      return !p_83104_.m_6200_((p_199861_5_, p_199861_6_, p_199861_7_) -> {
++         return p_83105_.m_6200_((p_199860_6_, p_199860_7_, p_199860_8_) -> {
++            return p_83106_.m_6200_((p_199862_7_, p_199862_8_, p_199862_9_) -> {
++               return !p_83109_.m_82701_(p_83107_.m_82846_(p_199861_5_, p_199860_6_, p_199862_7_), p_83108_.m_82846_(p_199861_6_, p_199860_7_, p_199862_8_));
+             });
+          });
+       });
+@@ -251,8 +_,8 @@
+             }
+ 
+             double[] adouble = new double[]{p_83069_};
+-            p_83072_.forEach((p_83143_) -> {
+-               adouble[0] = p_83143_.m_83259_(direction$axis2, p_83067_, adouble[0]);
++            p_83072_.forEach((p_216388_3_) -> {
++               adouble[0] = p_216388_3_.m_83259_(direction$axis2, p_83067_, adouble[0]);
+             });
+             return adouble[0];
+          }

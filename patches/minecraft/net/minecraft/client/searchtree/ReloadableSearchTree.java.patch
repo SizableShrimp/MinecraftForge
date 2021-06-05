@@ -1,0 +1,13 @@
+--- a/net/minecraft/client/searchtree/ReloadableSearchTree.java
++++ b/net/minecraft/client/searchtree/ReloadableSearchTree.java
+@@ -32,8 +_,8 @@
+ 
+    protected void m_8074_(T p_119932_) {
+       super.m_8074_(p_119932_);
+-      this.f_119921_.apply(p_119932_).forEach((p_119927_) -> {
+-         this.f_119920_.m_119970_(p_119932_, p_119927_.toLowerCase(Locale.ROOT));
++      this.f_119921_.apply(p_119932_).forEach((p_217880_2_) -> {
++         this.f_119920_.m_119970_(p_119932_, p_217880_2_.toLowerCase(Locale.ROOT));
+       });
+    }
+ 

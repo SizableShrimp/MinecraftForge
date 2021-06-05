@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/LootTableTrigger.java
++++ b/net/minecraft/advancements/critereon/LootTableTrigger.java
+@@ -18,8 +_,8 @@
+    }
+ 
+    public void m_54597_(ServerPlayer p_54598_, ResourceLocation p_54599_) {
+-      this.m_66234_(p_54598_, (p_54606_) -> {
+-         return p_54606_.m_54620_(p_54599_);
++      this.m_66234_(p_54598_, (p_235477_1_) -> {
++         return p_235477_1_.m_54620_(p_54599_);
+       });
+    }
+ 

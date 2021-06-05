@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/RuinedPortalConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/RuinedPortalConfiguration.java
+@@ -4,8 +_,8 @@
+ import net.minecraft.world.level.levelgen.feature.RuinedPortalFeature;
+ 
+ public class RuinedPortalConfiguration implements FeatureConfiguration {
+-   public static final Codec<RuinedPortalConfiguration> f_68054_ = RuinedPortalFeature.Type.f_66735_.fieldOf("portal_type").xmap(RuinedPortalConfiguration::new, (p_68060_) -> {
+-      return p_68060_.f_68055_;
++   public static final Codec<RuinedPortalConfiguration> f_68054_ = RuinedPortalFeature.Type.f_66735_.fieldOf("portal_type").xmap(RuinedPortalConfiguration::new, (p_236629_0_) -> {
++      return p_236629_0_.f_68055_;
+    }).codec();
+    public final RuinedPortalFeature.Type f_68055_;
+ 

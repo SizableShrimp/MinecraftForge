@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:4.1.+'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:5.+'
     }
 }
 
@@ -29,6 +29,10 @@ plugins {
     id 'eclipse'
 }
 
+repositories {
+    mavenLocal()
+}
+
 Util.init() //Init all our extension methods!
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
@@ -43,7 +47,7 @@ ext {
         ]
     }
     MAPPING_CHANNEL = 'official'
-    MAPPING_VERSION = '1.16.5'
+    MAPPING_VERSION = '1.16.5-20210303.130956'
     MC_VERSION = '1.16.5'
     MCP_VERSION = '20210303.130956'
     SPI_VERSION = '3.2.0'
@@ -993,7 +997,7 @@ project(':forge') {
     task userdevExtrasReobf(type:TaskReobfuscateJar) {
         dependsOn userdevExtras, createMcp2Srg
         input = tasks.userdevExtras.archivePath
-        classpath = project.configurations.compile
+        classpath = project.configurations.implementation
         srg = tasks.createMcp2Srg.output
         tool = SPECIAL_SOURCE + ':shaded'
     }

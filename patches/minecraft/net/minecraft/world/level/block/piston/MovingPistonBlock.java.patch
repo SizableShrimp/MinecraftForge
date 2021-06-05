@@ -1,0 +1,19 @@
+--- a/net/minecraft/world/level/block/piston/MovingPistonBlock.java
++++ b/net/minecraft/world/level/block/piston/MovingPistonBlock.java
+@@ -30,8 +_,6 @@
+ import net.minecraft.world.phys.shapes.CollisionContext;
+ import net.minecraft.world.phys.shapes.Shapes;
+ import net.minecraft.world.phys.shapes.VoxelShape;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public class MovingPistonBlock extends BaseEntityBlock {
+    public static final DirectionProperty f_60046_ = PistonHeadBlock.f_52588_;
+@@ -99,7 +_,6 @@
+       return blockentity instanceof PistonMovingBlockEntity ? (PistonMovingBlockEntity)blockentity : null;
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public ItemStack m_7397_(BlockGetter p_60057_, BlockPos p_60058_, BlockState p_60059_) {
+       return ItemStack.f_41583_;
+    }

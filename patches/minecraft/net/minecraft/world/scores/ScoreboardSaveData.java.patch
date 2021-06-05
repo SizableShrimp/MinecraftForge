@@ -1,0 +1,20 @@
+--- a/net/minecraft/world/scores/ScoreboardSaveData.java
++++ b/net/minecraft/world/scores/ScoreboardSaveData.java
+@@ -131,7 +_,7 @@
+    protected void m_83528_(ListTag p_83529_) {
+       for(int i = 0; i < p_83529_.size(); ++i) {
+          CompoundTag compoundtag = p_83529_.m_128728_(i);
+-         ObjectiveCriteria.m_83614_(compoundtag.m_128461_("CriteriaName")).ifPresent((p_83523_) -> {
++         ObjectiveCriteria.m_83614_(compoundtag.m_128461_("CriteriaName")).ifPresent((p_215164_2_) -> {
+             String s = compoundtag.m_128461_("Name");
+             if (s.length() > 16) {
+                s = s.substring(0, 16);
+@@ -139,7 +_,7 @@
+ 
+             Component component = Component.Serializer.m_130701_(compoundtag.m_128461_("DisplayName"));
+             ObjectiveCriteria.RenderType objectivecriteria$rendertype = ObjectiveCriteria.RenderType.m_83634_(compoundtag.m_128461_("RenderType"));
+-            this.f_83509_.m_83436_(s, p_83523_, component, objectivecriteria$rendertype);
++            this.f_83509_.m_83436_(s, p_215164_2_, component, objectivecriteria$rendertype);
+          });
+       }
+ 

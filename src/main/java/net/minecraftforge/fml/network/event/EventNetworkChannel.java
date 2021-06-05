@@ -21,7 +21,6 @@ package net.minecraftforge.fml.network.event;
 
 import net.minecraft.network.Connection;
 import net.minecraftforge.fml.network.NetworkEvent;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.NetworkInstance;
 
 import java.util.function.Consumer;

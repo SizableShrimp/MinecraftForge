@@ -1,0 +1,15 @@
+--- a/net/minecraft/client/renderer/texture/MipmapGenerator.java
++++ b/net/minecraft/client/renderer/texture/MipmapGenerator.java
+@@ -7,9 +_,9 @@
+ 
+ @OnlyIn(Dist.CLIENT)
+ public class MipmapGenerator {
+-   private static final float[] f_118038_ = Util.m_137469_(new float[256], (p_118058_) -> {
+-      for(int i = 0; i < p_118058_.length; ++i) {
+-         p_118058_[i] = (float)Math.pow((double)((float)i / 255.0F), 2.2D);
++   private static final float[] f_118038_ = Util.m_137469_(new float[256], (p_229174_0_) -> {
++      for(int i = 0; i < p_229174_0_.length; ++i) {
++         p_229174_0_[i] = (float)Math.pow((double)((float)i / 255.0F), 2.2D);
+       }
+ 
+    });

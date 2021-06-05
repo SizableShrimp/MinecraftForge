@@ -20,7 +20,6 @@
 package net.minecraftforge.fml.event.server;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 
 /**
  * Called before the server begins loading anything. Called after {@link InterModProcessEvent} on the dedicated

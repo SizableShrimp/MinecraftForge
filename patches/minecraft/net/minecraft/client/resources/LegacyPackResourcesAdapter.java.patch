@@ -1,0 +1,15 @@
+--- a/net/minecraft/client/resources/LegacyPackResourcesAdapter.java
++++ b/net/minecraft/client/resources/LegacyPackResourcesAdapter.java
+@@ -25,9 +_,9 @@
+    private final Map<ResourceLocation, ResourceLocation> f_118692_;
+    public static final Map<ResourceLocation, ResourceLocation> f_118690_ = Util.m_137537_(() -> {
+       Builder<ResourceLocation, ResourceLocation> builder = ImmutableMap.builder();
+-      BiConsumer<String, String> biconsumer = (p_118713_, p_118714_) -> {
+-         ResourceLocation resourcelocation = new ResourceLocation(p_118713_);
+-         ResourceLocation resourcelocation1 = new ResourceLocation(p_118714_);
++      BiConsumer<String, String> biconsumer = (p_239468_1_, p_239468_2_) -> {
++         ResourceLocation resourcelocation = new ResourceLocation(p_239468_1_);
++         ResourceLocation resourcelocation1 = new ResourceLocation(p_239468_2_);
+          builder.put(resourcelocation, resourcelocation1);
+          builder.put(m_118715_(resourcelocation), m_118715_(resourcelocation1));
+       };

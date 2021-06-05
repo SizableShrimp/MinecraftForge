@@ -28,7 +28,6 @@ import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.ConnectionProtocol;
 import net.minecraft.network.protocol.game.ClientboundUpdateTagsPacket;
 import net.minecraft.network.protocol.game.ClientboundUpdateRecipesPacket;
-import net.minecraftforge.fml.network.NetworkHooks;
 
 import com.google.common.collect.ImmutableMap;
 

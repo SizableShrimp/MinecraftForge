@@ -1,0 +1,103 @@
+--- a/net/minecraft/world/item/enchantment/EnchantmentHelper.java
++++ b/net/minecraft/world/item/enchantment/EnchantmentHelper.java
+@@ -60,8 +_,8 @@
+ 
+       for(int i = 0; i < p_44883_.size(); ++i) {
+          CompoundTag compoundtag = p_44883_.m_128728_(i);
+-         Registry.f_122825_.m_6612_(ResourceLocation.m_135820_(compoundtag.m_128461_("id"))).ifPresent((p_44871_) -> {
+-            Integer integer = map.put(p_44871_, compoundtag.m_128451_("lvl"));
++         Registry.f_122825_.m_6612_(ResourceLocation.m_135820_(compoundtag.m_128461_("id"))).ifPresent((p_226651_2_) -> {
++            Integer integer = map.put(p_226651_2_, compoundtag.m_128451_("lvl"));
+          });
+       }
+ 
+@@ -100,8 +_,8 @@
+          for(int i = 0; i < listtag.size(); ++i) {
+             String s = listtag.m_128728_(i).m_128461_("id");
+             int j = listtag.m_128728_(i).m_128451_("lvl");
+-            Registry.f_122825_.m_6612_(ResourceLocation.m_135820_(s)).ifPresent((p_44849_) -> {
+-               p_44851_.m_44944_(p_44849_, j);
++            Registry.f_122825_.m_6612_(ResourceLocation.m_135820_(s)).ifPresent((p_222184_2_) -> {
++               p_44851_.m_44944_(p_222184_2_, j);
+             });
+          }
+ 
+@@ -117,16 +_,16 @@
+ 
+    public static int m_44856_(Iterable<ItemStack> p_44857_, DamageSource p_44858_) {
+       MutableInt mutableint = new MutableInt();
+-      m_44853_((p_44892_, p_44893_) -> {
+-         mutableint.add(p_44892_.m_7205_(p_44893_, p_44858_));
++      m_44853_((p_212576_2_, p_212576_3_) -> {
++         mutableint.add(p_212576_2_.m_7205_(p_212576_3_, p_44858_));
+       }, p_44857_);
+       return mutableint.intValue();
+    }
+ 
+    public static float m_44833_(ItemStack p_44834_, MobType p_44835_) {
+       MutableFloat mutablefloat = new MutableFloat();
+-      m_44850_((p_44887_, p_44888_) -> {
+-         mutablefloat.add(p_44887_.m_7335_(p_44888_, p_44835_));
++      m_44850_((p_212573_2_, p_212573_3_) -> {
++         mutablefloat.add(p_212573_2_.m_7335_(p_212573_3_, p_44835_));
+       }, p_44834_);
+       return mutablefloat.floatValue();
+    }
+@@ -137,8 +_,8 @@
+    }
+ 
+    public static void m_44823_(LivingEntity p_44824_, Entity p_44825_) {
+-      EnchantmentHelper.EnchantmentVisitor enchantmenthelper$enchantmentvisitor = (p_44902_, p_44903_) -> {
+-         p_44902_.m_7675_(p_44824_, p_44825_, p_44903_);
++      EnchantmentHelper.EnchantmentVisitor enchantmenthelper$enchantmentvisitor = (p_212575_2_, p_212575_3_) -> {
++         p_212575_2_.m_7675_(p_44824_, p_44825_, p_212575_3_);
+       };
+       if (p_44824_ != null) {
+          m_44853_(enchantmenthelper$enchantmentvisitor, p_44824_.m_20158_());
+@@ -151,8 +_,8 @@
+    }
+ 
+    public static void m_44896_(LivingEntity p_44897_, Entity p_44898_) {
+-      EnchantmentHelper.EnchantmentVisitor enchantmenthelper$enchantmentvisitor = (p_44829_, p_44830_) -> {
+-         p_44829_.m_7677_(p_44897_, p_44898_, p_44830_);
++      EnchantmentHelper.EnchantmentVisitor enchantmenthelper$enchantmentvisitor = (p_212574_2_, p_212574_3_) -> {
++         p_212574_2_.m_7677_(p_44897_, p_44898_, p_212574_3_);
+       };
+       if (p_44897_ != null) {
+          m_44853_(enchantmenthelper$enchantmentvisitor, p_44897_.m_20158_());
+@@ -248,7 +_,7 @@
+ 
+    @Nullable
+    public static Entry<EquipmentSlot, ItemStack> m_44906_(Enchantment p_44907_, LivingEntity p_44908_) {
+-      return m_44839_(p_44907_, p_44908_, (p_44941_) -> {
++      return m_44839_(p_44907_, p_44908_, (p_234845_0_) -> {
+          return true;
+       });
+    }
+@@ -274,7 +_,7 @@
+ 
+    public static int m_44872_(Random p_44873_, int p_44874_, int p_44875_, ItemStack p_44876_) {
+       Item item = p_44876_.m_41720_();
+-      int i = item.m_6473_();
++      int i = p_44876_.getItemEnchantability();
+       if (i <= 0) {
+          return 0;
+       } else {
+@@ -312,7 +_,7 @@
+    public static List<EnchantmentInstance> m_44909_(Random p_44910_, ItemStack p_44911_, int p_44912_, boolean p_44913_) {
+       List<EnchantmentInstance> list = Lists.newArrayList();
+       Item item = p_44911_.m_41720_();
+-      int i = item.m_6473_();
++      int i = p_44911_.getItemEnchantability();
+       if (i <= 0) {
+          return list;
+       } else {
+@@ -365,7 +_,7 @@
+       boolean flag = p_44819_.m_41720_() == Items.f_42517_;
+ 
+       for(Enchantment enchantment : Registry.f_122825_) {
+-         if ((!enchantment.m_6591_() || p_44820_) && enchantment.m_6592_() && (enchantment.f_44672_.m_7454_(item) || flag)) {
++         if ((!enchantment.m_6591_() || p_44820_) && enchantment.m_6592_() && (enchantment.canApplyAtEnchantingTable(p_44819_) || (flag && enchantment.isAllowedOnBooks()))) {
+             for(int i = enchantment.m_6586_(); i > enchantment.m_44702_() - 1; --i) {
+                if (p_44818_ >= enchantment.m_6183_(i) && p_44818_ <= enchantment.m_6175_(i)) {
+                   list.add(new EnchantmentInstance(enchantment, i));

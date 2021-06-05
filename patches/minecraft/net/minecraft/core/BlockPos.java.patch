@@ -1,0 +1,20 @@
+--- a/net/minecraft/core/BlockPos.java
++++ b/net/minecraft/core/BlockPos.java
+@@ -21,12 +_,12 @@
+ 
+ @Immutable
+ public class BlockPos extends Vec3i {
+-   public static final Codec<BlockPos> f_121852_ = Codec.INT_STREAM.comapFlatMap((p_121967_) -> {
+-      return Util.m_137539_(p_121967_, 3).map((p_121969_) -> {
+-         return new BlockPos(p_121969_[0], p_121969_[1], p_121969_[2]);
++   public static final Codec<BlockPos> f_121852_ = Codec.INT_STREAM.comapFlatMap((p_239586_0_) -> {
++      return Util.m_137539_(p_239586_0_, 3).map((p_239587_0_) -> {
++         return new BlockPos(p_239587_0_[0], p_239587_0_[1], p_239587_0_[2]);
+       });
+-   }, (p_121924_) -> {
+-      return IntStream.of(p_121924_.m_123341_(), p_121924_.m_123342_(), p_121924_.m_123343_());
++   }, (p_239582_0_) -> {
++      return IntStream.of(p_239582_0_.m_123341_(), p_239582_0_.m_123342_(), p_239582_0_.m_123343_());
+    }).stable();
+    private static final Logger f_121854_ = LogManager.getLogger();
+    public static final BlockPos f_121853_ = new BlockPos(0, 0, 0);

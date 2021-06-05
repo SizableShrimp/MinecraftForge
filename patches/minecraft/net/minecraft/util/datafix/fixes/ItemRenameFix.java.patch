@@ -1,0 +1,15 @@
+--- a/net/minecraft/util/datafix/fixes/ItemRenameFix.java
++++ b/net/minecraft/util/datafix/fixes/ItemRenameFix.java
+@@ -23,9 +_,9 @@
+       if (!Objects.equals(this.getInputSchema().getType(References.f_16788_), type)) {
+          throw new IllegalStateException("item name type is not what was expected.");
+       } else {
+-         return this.fixTypeEverywhere(this.f_15999_, type, (p_16010_) -> {
+-            return (p_16008_) -> {
+-               return p_16008_.mapSecond(this::m_7348_);
++         return this.fixTypeEverywhere(this.f_15999_, type, (p_211012_1_) -> {
++            return (p_206354_1_) -> {
++               return p_206354_1_.mapSecond(this::m_7348_);
+             };
+          });
+       }

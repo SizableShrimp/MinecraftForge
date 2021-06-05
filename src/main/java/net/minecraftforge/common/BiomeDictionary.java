@@ -32,7 +32,6 @@ import org.apache.logging.log4j.Logger;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.Registry;
-import net.minecraft.world.biome.*;
 import static net.minecraftforge.common.BiomeDictionary.Type.*;
 import net.minecraftforge.registries.ForgeRegistries;
 

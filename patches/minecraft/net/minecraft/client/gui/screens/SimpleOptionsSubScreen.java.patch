@@ -1,0 +1,11 @@
+--- a/net/minecraft/client/gui/screens/SimpleOptionsSubScreen.java
++++ b/net/minecraft/client/gui/screens/SimpleOptionsSubScreen.java
+@@ -40,7 +_,7 @@
+    }
+ 
+    protected void m_7853_() {
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 27, 200, 20, CommonComponents.f_130655_, (p_96680_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 27, 200, 20, CommonComponents.f_130655_, (p_243316_1_) -> {
+          this.f_96541_.m_91152_(this.f_96281_);
+       }));
+    }

@@ -1,0 +1,81 @@
+--- a/net/minecraft/world/level/levelgen/feature/structures/JigsawPlacement.java
++++ b/net/minecraft/world/level/levelgen/feature/structures/JigsawPlacement.java
+@@ -81,24 +_,6 @@
+ 
+    }
+ 
+-   public interface PieceFactory {
+-      PoolElementStructurePiece m_68964_(StructureManager p_68965_, StructurePoolElement p_68966_, BlockPos p_68967_, int p_68968_, Rotation p_68969_, BoundingBox p_68970_);
+-   }
+-
+-   static final class PieceState {
+-      private final PoolElementStructurePiece f_68971_;
+-      private final MutableObject<VoxelShape> f_68972_;
+-      private final int f_68973_;
+-      private final int f_68974_;
+-
+-      private PieceState(PoolElementStructurePiece p_68976_, MutableObject<VoxelShape> p_68977_, int p_68978_, int p_68979_) {
+-         this.f_68971_ = p_68976_;
+-         this.f_68972_ = p_68977_;
+-         this.f_68973_ = p_68978_;
+-         this.f_68974_ = p_68979_;
+-      }
+-   }
+-
+    static final class Placer {
+       private final Registry<StructureTemplatePool> f_68994_;
+       private final int f_68995_;
+@@ -173,20 +_,20 @@
+                         BoundingBox boundingbox1 = structurepoolelement1.m_6867_(this.f_68998_, BlockPos.f_121853_, rotation1);
+                         int i1;
+                         if (p_69038_ && boundingbox1.m_71057_() <= 16) {
+-                           i1 = list1.stream().mapToInt((p_69032_) -> {
+-                              if (!boundingbox1.m_71051_(p_69032_.f_74675_.m_121945_(JigsawBlock.m_54250_(p_69032_.f_74676_)))) {
++                           i1 = list1.stream().mapToInt((p_242841_2_) -> {
++                              if (!boundingbox1.m_71051_(p_242841_2_.f_74675_.m_121945_(JigsawBlock.m_54250_(p_242841_2_.f_74676_)))) {
+                                  return 0;
+                               } else {
+-                                 ResourceLocation resourcelocation2 = new ResourceLocation(p_69032_.f_74677_.m_128461_("pool"));
++                                 ResourceLocation resourcelocation2 = new ResourceLocation(p_242841_2_.f_74677_.m_128461_("pool"));
+                                  Optional<StructureTemplatePool> optional2 = this.f_68994_.m_6612_(resourcelocation2);
+-                                 Optional<StructureTemplatePool> optional3 = optional2.flatMap((p_69042_) -> {
+-                                    return this.f_68994_.m_6612_(p_69042_.m_69263_());
++                                 Optional<StructureTemplatePool> optional3 = optional2.flatMap((p_242843_1_) -> {
++                                    return this.f_68994_.m_6612_(p_242843_1_.m_69263_());
+                                  });
+-                                 int k3 = optional2.map((p_69040_) -> {
+-                                    return p_69040_.m_69268_(this.f_68998_);
++                                 int k3 = optional2.map((p_242842_1_) -> {
++                                    return p_242842_1_.m_69268_(this.f_68998_);
+                                  }).orElse(0);
+-                                 int l3 = optional3.map((p_69029_) -> {
+-                                    return p_69029_.m_69268_(this.f_68998_);
++                                 int l3 = optional3.map((p_242840_1_) -> {
++                                    return p_242840_1_.m_69268_(this.f_68998_);
+                                  }).orElse(0);
+                                  return Math.max(k3, l3);
+                               }
+@@ -269,5 +_,23 @@
+          }
+ 
+       }
++   }
++
++   static final class PieceState {
++      private final PoolElementStructurePiece f_68971_;
++      private final MutableObject<VoxelShape> f_68972_;
++      private final int f_68973_;
++      private final int f_68974_;
++
++      private PieceState(PoolElementStructurePiece p_68976_, MutableObject<VoxelShape> p_68977_, int p_68978_, int p_68979_) {
++         this.f_68971_ = p_68976_;
++         this.f_68972_ = p_68977_;
++         this.f_68973_ = p_68978_;
++         this.f_68974_ = p_68979_;
++      }
++   }
++
++   public interface PieceFactory {
++      PoolElementStructurePiece m_68964_(StructureManager p_68965_, StructurePoolElement p_68966_, BlockPos p_68967_, int p_68968_, Rotation p_68969_, BoundingBox p_68970_);
+    }
+ }

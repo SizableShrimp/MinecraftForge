@@ -39,7 +39,6 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.util.math.vector.*;
 import net.minecraftforge.versions.forge.ForgeVersion;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -731,7 +730,7 @@ public class B3DModel
         @Override
         public String toString()
         {
-            return String.format("Vertex [pos=%s, normal=%s, color=%s, texCoords=%s]", pos, normal, color, Arrays.toString(texCoords));
+            return String.format("Vertex [pos=%s, normal=%s, color=%s, texCoords=%s]", pos, normal, color, java.util.Arrays.toString(texCoords));
         }
     }
 

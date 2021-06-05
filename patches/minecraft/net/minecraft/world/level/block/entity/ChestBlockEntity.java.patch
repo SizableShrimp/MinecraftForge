@@ -1,0 +1,61 @@
+--- a/net/minecraft/world/level/block/entity/ChestBlockEntity.java
++++ b/net/minecraft/world/level/block/entity/ChestBlockEntity.java
+@@ -38,6 +_,7 @@
+    protected float f_59071_;
+    protected int f_59072_;
+    private int f_59074_;
++   private net.minecraftforge.common.util.LazyOptional<net.minecraftforge.items.IItemHandlerModifiable> chestHandler;
+ 
+    protected ChestBlockEntity(BlockEntityType<?> p_59077_) {
+       super(p_59077_);
+@@ -202,7 +_,7 @@
+ 
+    public static int m_59086_(BlockGetter p_59087_, BlockPos p_59088_) {
+       BlockState blockstate = p_59087_.m_8055_(p_59088_);
+-      if (blockstate.m_60734_().m_60588_()) {
++      if (blockstate.hasTileEntity()) {
+          BlockEntity blockentity = p_59087_.m_7702_(p_59088_);
+          if (blockentity instanceof ChestBlockEntity) {
+             return ((ChestBlockEntity)blockentity).f_59072_;
+@@ -220,5 +_,41 @@
+ 
+    protected AbstractContainerMenu m_6555_(int p_59082_, Inventory p_59083_) {
+       return ChestMenu.m_39237_(p_59082_, p_59083_, this);
++   }
++
++   @Override
++   public void m_58902_() {
++      super.m_58902_();
++      if (this.chestHandler != null) {
++         net.minecraftforge.common.util.LazyOptional<?> oldHandler = this.chestHandler;
++         this.chestHandler = null;
++         oldHandler.invalidate();
++      }
++   }
++
++   @Override
++   public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T> cap, Direction side) {
++       if (!this.f_58859_ && cap == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
++          if (this.chestHandler == null)
++             this.chestHandler = net.minecraftforge.common.util.LazyOptional.of(this::createHandler);
++          return this.chestHandler.cast();
++       }
++       return super.getCapability(cap, side);
++   }
++
++   private net.minecraftforge.items.IItemHandlerModifiable createHandler() {
++      BlockState state = this.m_58900_();
++      if (!(state.m_60734_() instanceof ChestBlock)) {
++         return new net.minecraftforge.items.wrapper.InvWrapper(this);
++      }
++      Container inv = ChestBlock.m_51511_((ChestBlock) state.m_60734_(), state, m_7642_(), m_58899_(), true);
++      return new net.minecraftforge.items.wrapper.InvWrapper(inv == null ? this : inv);
++   }
++
++   @Override
++   protected void invalidateCaps() {
++      super.invalidateCaps();
++      if (chestHandler != null)
++        chestHandler.invalidate();
+    }
+ }

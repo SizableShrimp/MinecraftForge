@@ -1,0 +1,23 @@
+--- a/net/minecraft/client/renderer/texture/PreloadedTexture.java
++++ b/net/minecraft/client/renderer/texture/PreloadedTexture.java
+@@ -33,7 +_,7 @@
+    }
+ 
+    public CompletableFuture<Void> m_118105_() {
+-      return this.f_118100_ == null ? CompletableFuture.completedFuture((Void)null) : this.f_118100_.thenApply((p_118110_) -> {
++      return this.f_118100_ == null ? CompletableFuture.completedFuture((Void)null) : this.f_118100_.thenApply((p_215247_0_) -> {
+          return null;
+       });
+    }
+@@ -48,9 +_,9 @@
+    }
+ 
+    private static Executor m_118120_(Executor p_118121_) {
+-      return (p_118124_) -> {
++      return (p_229206_1_) -> {
+          p_118121_.execute(() -> {
+-            RenderSystem.m_69879_(p_118124_::run);
++            RenderSystem.m_69879_(p_229206_1_::run);
+          });
+       };
+    }

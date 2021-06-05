@@ -1,0 +1,414 @@
+--- a/net/minecraft/server/commands/ExecuteCommand.java
++++ b/net/minecraft/server/commands/ExecuteCommand.java
+@@ -69,121 +_,121 @@
+ import net.minecraft.world.scores.Scoreboard;
+ 
+ public class ExecuteCommand {
+-   private static final Dynamic2CommandExceptionType f_137030_ = new Dynamic2CommandExceptionType((p_137129_, p_137130_) -> {
+-      return new TranslatableComponent("commands.execute.blocks.toobig", p_137129_, p_137130_);
++   private static final Dynamic2CommandExceptionType f_137030_ = new Dynamic2CommandExceptionType((p_208885_0_, p_208885_1_) -> {
++      return new TranslatableComponent("commands.execute.blocks.toobig", p_208885_0_, p_208885_1_);
+    });
+    private static final SimpleCommandExceptionType f_137031_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.execute.conditional.fail"));
+-   private static final DynamicCommandExceptionType f_137032_ = new DynamicCommandExceptionType((p_137127_) -> {
+-      return new TranslatableComponent("commands.execute.conditional.fail_count", p_137127_);
++   private static final DynamicCommandExceptionType f_137032_ = new DynamicCommandExceptionType((p_210446_0_) -> {
++      return new TranslatableComponent("commands.execute.conditional.fail_count", p_210446_0_);
+    });
+-   private static final BinaryOperator<ResultConsumer<CommandSourceStack>> f_137033_ = (p_137045_, p_137046_) -> {
+-      return (p_137050_, p_137051_, p_137052_) -> {
+-         p_137045_.onCommandComplete(p_137050_, p_137051_, p_137052_);
+-         p_137046_.onCommandComplete(p_137050_, p_137051_, p_137052_);
++   private static final BinaryOperator<ResultConsumer<CommandSourceStack>> f_137033_ = (p_209937_0_, p_209937_1_) -> {
++      return (p_209939_2_, p_209939_3_, p_209939_4_) -> {
++         p_209937_0_.onCommandComplete(p_209939_2_, p_209939_3_, p_209939_4_);
++         p_209937_1_.onCommandComplete(p_209939_2_, p_209939_3_, p_209939_4_);
+       };
+    };
+-   private static final SuggestionProvider<CommandSourceStack> f_137034_ = (p_137062_, p_137063_) -> {
+-      PredicateManager predicatemanager = p_137062_.getSource().m_81377_().m_129899_();
+-      return SharedSuggestionProvider.m_82926_(predicatemanager.m_79232_(), p_137063_);
++   private static final SuggestionProvider<CommandSourceStack> f_137034_ = (p_229763_0_, p_229763_1_) -> {
++      PredicateManager predicatemanager = p_229763_0_.getSource().m_81377_().m_129899_();
++      return SharedSuggestionProvider.m_82926_(predicatemanager.m_79232_(), p_229763_1_);
+    };
+ 
+    public static void m_137042_(CommandDispatcher<CommandSourceStack> p_137043_) {
+-      LiteralCommandNode<CommandSourceStack> literalcommandnode = p_137043_.register(Commands.m_82127_("execute").requires((p_137197_) -> {
+-         return p_137197_.m_6761_(2);
++      LiteralCommandNode<CommandSourceStack> literalcommandnode = p_137043_.register(Commands.m_82127_("execute").requires((p_198387_0_) -> {
++         return p_198387_0_.m_6761_(2);
+       }));
+-      p_137043_.register(Commands.m_82127_("execute").requires((p_137103_) -> {
+-         return p_137103_.m_6761_(2);
+-      }).then(Commands.m_82127_("run").redirect(p_137043_.getRoot())).then(m_137084_(literalcommandnode, Commands.m_82127_("if"), true)).then(m_137084_(literalcommandnode, Commands.m_82127_("unless"), false)).then(Commands.m_82127_("as").then(Commands.m_82129_("targets", EntityArgument.m_91460_()).fork(literalcommandnode, (p_137299_) -> {
+-         List<CommandSourceStack> list = Lists.newArrayList();
+-
+-         for(Entity entity : EntityArgument.m_91467_(p_137299_, "targets")) {
+-            list.add(p_137299_.getSource().m_81329_(entity));
+-         }
+-
+-         return list;
+-      }))).then(Commands.m_82127_("at").then(Commands.m_82129_("targets", EntityArgument.m_91460_()).fork(literalcommandnode, (p_137297_) -> {
+-         List<CommandSourceStack> list = Lists.newArrayList();
+-
+-         for(Entity entity : EntityArgument.m_91467_(p_137297_, "targets")) {
+-            list.add(p_137297_.getSource().m_81327_((ServerLevel)entity.f_19853_).m_81348_(entity.m_20182_()).m_81346_(entity.m_20155_()));
+-         }
+-
+-         return list;
+-      }))).then(Commands.m_82127_("store").then(m_137093_(literalcommandnode, Commands.m_82127_("result"), true)).then(m_137093_(literalcommandnode, Commands.m_82127_("success"), false))).then(Commands.m_82127_("positioned").then(Commands.m_82129_("pos", Vec3Argument.m_120841_()).redirect(literalcommandnode, (p_137295_) -> {
+-         return p_137295_.getSource().m_81348_(Vec3Argument.m_120844_(p_137295_, "pos")).m_81350_(EntityAnchorArgument.Anchor.FEET);
+-      })).then(Commands.m_82127_("as").then(Commands.m_82129_("targets", EntityArgument.m_91460_()).fork(literalcommandnode, (p_137293_) -> {
+-         List<CommandSourceStack> list = Lists.newArrayList();
+-
+-         for(Entity entity : EntityArgument.m_91467_(p_137293_, "targets")) {
+-            list.add(p_137293_.getSource().m_81348_(entity.m_20182_()));
+-         }
+-
+-         return list;
+-      })))).then(Commands.m_82127_("rotated").then(Commands.m_82129_("rot", RotationArgument.m_120479_()).redirect(literalcommandnode, (p_137291_) -> {
+-         return p_137291_.getSource().m_81346_(RotationArgument.m_120482_(p_137291_, "rot").m_6970_(p_137291_.getSource()));
+-      })).then(Commands.m_82127_("as").then(Commands.m_82129_("targets", EntityArgument.m_91460_()).fork(literalcommandnode, (p_137289_) -> {
+-         List<CommandSourceStack> list = Lists.newArrayList();
+-
+-         for(Entity entity : EntityArgument.m_91467_(p_137289_, "targets")) {
+-            list.add(p_137289_.getSource().m_81346_(entity.m_20155_()));
+-         }
+-
+-         return list;
+-      })))).then(Commands.m_82127_("facing").then(Commands.m_82127_("entity").then(Commands.m_82129_("targets", EntityArgument.m_91460_()).then(Commands.m_82129_("anchor", EntityAnchorArgument.m_90350_()).fork(literalcommandnode, (p_137287_) -> {
+-         List<CommandSourceStack> list = Lists.newArrayList();
+-         EntityAnchorArgument.Anchor entityanchorargument$anchor = EntityAnchorArgument.m_90353_(p_137287_, "anchor");
+-
+-         for(Entity entity : EntityArgument.m_91467_(p_137287_, "targets")) {
+-            list.add(p_137287_.getSource().m_81331_(entity, entityanchorargument$anchor));
+-         }
+-
+-         return list;
+-      })))).then(Commands.m_82129_("pos", Vec3Argument.m_120841_()).redirect(literalcommandnode, (p_137285_) -> {
+-         return p_137285_.getSource().m_81364_(Vec3Argument.m_120844_(p_137285_, "pos"));
+-      }))).then(Commands.m_82127_("align").then(Commands.m_82129_("axes", SwizzleArgument.m_120807_()).redirect(literalcommandnode, (p_137283_) -> {
+-         return p_137283_.getSource().m_81348_(p_137283_.getSource().m_81371_().m_82517_(SwizzleArgument.m_120810_(p_137283_, "axes")));
+-      }))).then(Commands.m_82127_("anchored").then(Commands.m_82129_("anchor", EntityAnchorArgument.m_90350_()).redirect(literalcommandnode, (p_137281_) -> {
+-         return p_137281_.getSource().m_81350_(EntityAnchorArgument.m_90353_(p_137281_, "anchor"));
+-      }))).then(Commands.m_82127_("in").then(Commands.m_82129_("dimension", DimensionArgument.m_88805_()).redirect(literalcommandnode, (p_137279_) -> {
+-         return p_137279_.getSource().m_81327_(DimensionArgument.m_88808_(p_137279_, "dimension"));
++      p_137043_.register(Commands.m_82127_("execute").requires((p_229766_0_) -> {
++         return p_229766_0_.m_6761_(2);
++      }).then(Commands.m_82127_("run").redirect(p_137043_.getRoot())).then(m_137084_(literalcommandnode, Commands.m_82127_("if"), true)).then(m_137084_(literalcommandnode, Commands.m_82127_("unless"), false)).then(Commands.m_82127_("as").then(Commands.m_82129_("targets", EntityArgument.m_91460_()).fork(literalcommandnode, (p_198384_0_) -> {
++         List<CommandSourceStack> list = Lists.newArrayList();
++
++         for(Entity entity : EntityArgument.m_91467_(p_198384_0_, "targets")) {
++            list.add(p_198384_0_.getSource().m_81329_(entity));
++         }
++
++         return list;
++      }))).then(Commands.m_82127_("at").then(Commands.m_82129_("targets", EntityArgument.m_91460_()).fork(literalcommandnode, (p_229809_0_) -> {
++         List<CommandSourceStack> list = Lists.newArrayList();
++
++         for(Entity entity : EntityArgument.m_91467_(p_229809_0_, "targets")) {
++            list.add(p_229809_0_.getSource().m_81327_((ServerLevel)entity.f_19853_).m_81348_(entity.m_20182_()).m_81346_(entity.m_20155_()));
++         }
++
++         return list;
++      }))).then(Commands.m_82127_("store").then(m_137093_(literalcommandnode, Commands.m_82127_("result"), true)).then(m_137093_(literalcommandnode, Commands.m_82127_("success"), false))).then(Commands.m_82127_("positioned").then(Commands.m_82129_("pos", Vec3Argument.m_120841_()).redirect(literalcommandnode, (p_229808_0_) -> {
++         return p_229808_0_.getSource().m_81348_(Vec3Argument.m_120844_(p_229808_0_, "pos")).m_81350_(EntityAnchorArgument.Anchor.FEET);
++      })).then(Commands.m_82127_("as").then(Commands.m_82129_("targets", EntityArgument.m_91460_()).fork(literalcommandnode, (p_229807_0_) -> {
++         List<CommandSourceStack> list = Lists.newArrayList();
++
++         for(Entity entity : EntityArgument.m_91467_(p_229807_0_, "targets")) {
++            list.add(p_229807_0_.getSource().m_81348_(entity.m_20182_()));
++         }
++
++         return list;
++      })))).then(Commands.m_82127_("rotated").then(Commands.m_82129_("rot", RotationArgument.m_120479_()).redirect(literalcommandnode, (p_229806_0_) -> {
++         return p_229806_0_.getSource().m_81346_(RotationArgument.m_120482_(p_229806_0_, "rot").m_6970_(p_229806_0_.getSource()));
++      })).then(Commands.m_82127_("as").then(Commands.m_82129_("targets", EntityArgument.m_91460_()).fork(literalcommandnode, (p_201083_0_) -> {
++         List<CommandSourceStack> list = Lists.newArrayList();
++
++         for(Entity entity : EntityArgument.m_91467_(p_201083_0_, "targets")) {
++            list.add(p_201083_0_.getSource().m_81346_(entity.m_20155_()));
++         }
++
++         return list;
++      })))).then(Commands.m_82127_("facing").then(Commands.m_82127_("entity").then(Commands.m_82129_("targets", EntityArgument.m_91460_()).then(Commands.m_82129_("anchor", EntityAnchorArgument.m_90350_()).fork(literalcommandnode, (p_229805_0_) -> {
++         List<CommandSourceStack> list = Lists.newArrayList();
++         EntityAnchorArgument.Anchor entityanchorargument$anchor = EntityAnchorArgument.m_90353_(p_229805_0_, "anchor");
++
++         for(Entity entity : EntityArgument.m_91467_(p_229805_0_, "targets")) {
++            list.add(p_229805_0_.getSource().m_81331_(entity, entityanchorargument$anchor));
++         }
++
++         return list;
++      })))).then(Commands.m_82129_("pos", Vec3Argument.m_120841_()).redirect(literalcommandnode, (p_198381_0_) -> {
++         return p_198381_0_.getSource().m_81364_(Vec3Argument.m_120844_(p_198381_0_, "pos"));
++      }))).then(Commands.m_82127_("align").then(Commands.m_82129_("axes", SwizzleArgument.m_120807_()).redirect(literalcommandnode, (p_201091_0_) -> {
++         return p_201091_0_.getSource().m_81348_(p_201091_0_.getSource().m_81371_().m_82517_(SwizzleArgument.m_120810_(p_201091_0_, "axes")));
++      }))).then(Commands.m_82127_("anchored").then(Commands.m_82129_("anchor", EntityAnchorArgument.m_90350_()).redirect(literalcommandnode, (p_201089_0_) -> {
++         return p_201089_0_.getSource().m_81350_(EntityAnchorArgument.m_90353_(p_201089_0_, "anchor"));
++      }))).then(Commands.m_82127_("in").then(Commands.m_82129_("dimension", DimensionArgument.m_88805_()).redirect(literalcommandnode, (p_229804_0_) -> {
++         return p_229804_0_.getSource().m_81327_(DimensionArgument.m_88808_(p_229804_0_, "dimension"));
+       }))));
+    }
+ 
+    private static ArgumentBuilder<CommandSourceStack, ?> m_137093_(LiteralCommandNode<CommandSourceStack> p_137094_, LiteralArgumentBuilder<CommandSourceStack> p_137095_, boolean p_137096_) {
+-      p_137095_.then(Commands.m_82127_("score").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).redirect(p_137094_, (p_137271_) -> {
+-         return m_137107_(p_137271_.getSource(), ScoreHolderArgument.m_108246_(p_137271_, "targets"), ObjectiveArgument.m_101960_(p_137271_, "objective"), p_137096_);
++      p_137095_.then(Commands.m_82127_("score").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).redirect(p_137094_, (p_201468_1_) -> {
++         return m_137107_(p_201468_1_.getSource(), ScoreHolderArgument.m_108246_(p_201468_1_, "targets"), ObjectiveArgument.m_101960_(p_201468_1_, "objective"), p_137096_);
+       }))));
+-      p_137095_.then(Commands.m_82127_("bossbar").then(Commands.m_82129_("id", ResourceLocationArgument.m_106984_()).suggests(BossBarCommands.f_136570_).then(Commands.m_82127_("value").redirect(p_137094_, (p_137259_) -> {
+-         return m_137112_(p_137259_.getSource(), BossBarCommands.m_136584_(p_137259_), true, p_137096_);
+-      })).then(Commands.m_82127_("max").redirect(p_137094_, (p_137247_) -> {
+-         return m_137112_(p_137247_.getSource(), BossBarCommands.m_136584_(p_137247_), false, p_137096_);
++      p_137095_.then(Commands.m_82127_("bossbar").then(Commands.m_82129_("id", ResourceLocationArgument.m_106984_()).suggests(BossBarCommands.f_136570_).then(Commands.m_82127_("value").redirect(p_137094_, (p_201457_1_) -> {
++         return m_137112_(p_201457_1_.getSource(), BossBarCommands.m_136584_(p_201457_1_), true, p_137096_);
++      })).then(Commands.m_82127_("max").redirect(p_137094_, (p_229795_1_) -> {
++         return m_137112_(p_229795_1_.getSource(), BossBarCommands.m_136584_(p_229795_1_), false, p_137096_);
+       }))));
+ 
+       for(DataCommands.DataProvider datacommands$dataprovider : DataCommands.f_139350_) {
+-         datacommands$dataprovider.m_7621_(p_137095_, (p_137101_) -> {
+-            return p_137101_.then(Commands.m_82129_("path", NbtPathArgument.m_99487_()).then(Commands.m_82127_("int").then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).redirect(p_137094_, (p_137268_) -> {
+-               return m_137117_(p_137268_.getSource(), datacommands$dataprovider.m_7018_(p_137268_), NbtPathArgument.m_99498_(p_137268_, "path"), (p_137264_) -> {
+-                  return IntTag.m_128679_((int)((double)p_137264_ * DoubleArgumentType.getDouble(p_137268_, "scale")));
+-               }, p_137096_);
+-            }))).then(Commands.m_82127_("float").then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).redirect(p_137094_, (p_137256_) -> {
+-               return m_137117_(p_137256_.getSource(), datacommands$dataprovider.m_7018_(p_137256_), NbtPathArgument.m_99498_(p_137256_, "path"), (p_137252_) -> {
+-                  return FloatTag.m_128566_((float)((double)p_137252_ * DoubleArgumentType.getDouble(p_137256_, "scale")));
+-               }, p_137096_);
+-            }))).then(Commands.m_82127_("short").then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).redirect(p_137094_, (p_137244_) -> {
+-               return m_137117_(p_137244_.getSource(), datacommands$dataprovider.m_7018_(p_137244_), NbtPathArgument.m_99498_(p_137244_, "path"), (p_137237_) -> {
+-                  return ShortTag.m_129258_((short)((int)((double)p_137237_ * DoubleArgumentType.getDouble(p_137244_, "scale"))));
+-               }, p_137096_);
+-            }))).then(Commands.m_82127_("long").then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).redirect(p_137094_, (p_137229_) -> {
+-               return m_137117_(p_137229_.getSource(), datacommands$dataprovider.m_7018_(p_137229_), NbtPathArgument.m_99498_(p_137229_, "path"), (p_137219_) -> {
+-                  return LongTag.m_128882_((long)((double)p_137219_ * DoubleArgumentType.getDouble(p_137229_, "scale")));
+-               }, p_137096_);
+-            }))).then(Commands.m_82127_("double").then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).redirect(p_137094_, (p_137207_) -> {
+-               return m_137117_(p_137207_.getSource(), datacommands$dataprovider.m_7018_(p_137207_), NbtPathArgument.m_99498_(p_137207_, "path"), (p_137192_) -> {
+-                  return DoubleTag.m_128500_((double)p_137192_ * DoubleArgumentType.getDouble(p_137207_, "scale"));
+-               }, p_137096_);
+-            }))).then(Commands.m_82127_("byte").then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).redirect(p_137094_, (p_137162_) -> {
+-               return m_137117_(p_137162_.getSource(), datacommands$dataprovider.m_7018_(p_137162_), NbtPathArgument.m_99498_(p_137162_, "path"), (p_137057_) -> {
+-                  return ByteTag.m_128266_((byte)((int)((double)p_137057_ * DoubleArgumentType.getDouble(p_137162_, "scale"))));
++         datacommands$dataprovider.m_7621_(p_137095_, (p_229765_3_) -> {
++            return p_229765_3_.then(Commands.m_82129_("path", NbtPathArgument.m_99487_()).then(Commands.m_82127_("int").then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).redirect(p_137094_, (p_229801_2_) -> {
++               return m_137117_(p_229801_2_.getSource(), datacommands$dataprovider.m_7018_(p_229801_2_), NbtPathArgument.m_99498_(p_229801_2_, "path"), (p_229800_1_) -> {
++                  return IntTag.m_128679_((int)((double)p_229800_1_ * DoubleArgumentType.getDouble(p_229801_2_, "scale")));
++               }, p_137096_);
++            }))).then(Commands.m_82127_("float").then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).redirect(p_137094_, (p_229798_2_) -> {
++               return m_137117_(p_229798_2_.getSource(), datacommands$dataprovider.m_7018_(p_229798_2_), NbtPathArgument.m_99498_(p_229798_2_, "path"), (p_229797_1_) -> {
++                  return FloatTag.m_128566_((float)((double)p_229797_1_ * DoubleArgumentType.getDouble(p_229798_2_, "scale")));
++               }, p_137096_);
++            }))).then(Commands.m_82127_("short").then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).redirect(p_137094_, (p_229794_2_) -> {
++               return m_137117_(p_229794_2_.getSource(), datacommands$dataprovider.m_7018_(p_229794_2_), NbtPathArgument.m_99498_(p_229794_2_, "path"), (p_229792_1_) -> {
++                  return ShortTag.m_129258_((short)((int)((double)p_229792_1_ * DoubleArgumentType.getDouble(p_229794_2_, "scale"))));
++               }, p_137096_);
++            }))).then(Commands.m_82127_("long").then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).redirect(p_137094_, (p_229790_2_) -> {
++               return m_137117_(p_229790_2_.getSource(), datacommands$dataprovider.m_7018_(p_229790_2_), NbtPathArgument.m_99498_(p_229790_2_, "path"), (p_229788_1_) -> {
++                  return LongTag.m_128882_((long)((double)p_229788_1_ * DoubleArgumentType.getDouble(p_229790_2_, "scale")));
++               }, p_137096_);
++            }))).then(Commands.m_82127_("double").then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).redirect(p_137094_, (p_229784_2_) -> {
++               return m_137117_(p_229784_2_.getSource(), datacommands$dataprovider.m_7018_(p_229784_2_), NbtPathArgument.m_99498_(p_229784_2_, "path"), (p_229781_1_) -> {
++                  return DoubleTag.m_128500_((double)p_229781_1_ * DoubleArgumentType.getDouble(p_229784_2_, "scale"));
++               }, p_137096_);
++            }))).then(Commands.m_82127_("byte").then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).redirect(p_137094_, (p_229774_2_) -> {
++               return m_137117_(p_229774_2_.getSource(), datacommands$dataprovider.m_7018_(p_229774_2_), NbtPathArgument.m_99498_(p_229774_2_, "path"), (p_229762_1_) -> {
++                  return ByteTag.m_128266_((byte)((int)((double)p_229762_1_ * DoubleArgumentType.getDouble(p_229774_2_, "scale"))));
+                }, p_137096_);
+             }))));
+          });
+@@ -194,10 +_,10 @@
+ 
+    private static CommandSourceStack m_137107_(CommandSourceStack p_137108_, Collection<String> p_137109_, Objective p_137110_, boolean p_137111_) {
+       Scoreboard scoreboard = p_137108_.m_81377_().m_129896_();
+-      return p_137108_.m_81336_((p_137136_, p_137137_, p_137138_) -> {
++      return p_137108_.m_81336_((p_229769_4_, p_229769_5_, p_229769_6_) -> {
+          for(String s : p_137109_) {
+             Score score = scoreboard.m_83471_(s, p_137110_);
+-            int i = p_137111_ ? p_137138_ : (p_137137_ ? 1 : 0);
++            int i = p_137111_ ? p_229769_6_ : (p_229769_5_ ? 1 : 0);
+             score.m_83402_(i);
+          }
+ 
+@@ -205,8 +_,8 @@
+    }
+ 
+    private static CommandSourceStack m_137112_(CommandSourceStack p_137113_, CustomBossEvent p_137114_, boolean p_137115_, boolean p_137116_) {
+-      return p_137113_.m_81336_((p_137185_, p_137186_, p_137187_) -> {
+-         int i = p_137116_ ? p_137187_ : (p_137186_ ? 1 : 0);
++      return p_137113_.m_81336_((p_229779_3_, p_229779_4_, p_229779_5_) -> {
++         int i = p_137116_ ? p_229779_5_ : (p_229779_4_ ? 1 : 0);
+          if (p_137115_) {
+             p_137114_.m_136264_(i);
+          } else {
+@@ -217,10 +_,10 @@
+    }
+ 
+    private static CommandSourceStack m_137117_(CommandSourceStack p_137118_, DataAccessor p_137119_, NbtPathArgument.NbtPath p_137120_, IntFunction<Tag> p_137121_, boolean p_137122_) {
+-      return p_137118_.m_81336_((p_137153_, p_137154_, p_137155_) -> {
++      return p_137118_.m_81336_((p_229772_4_, p_229772_5_, p_229772_6_) -> {
+          try {
+             CompoundTag compoundtag = p_137119_.m_6184_();
+-            int i = p_137122_ ? p_137155_ : (p_137154_ ? 1 : 0);
++            int i = p_137122_ ? p_229772_6_ : (p_229772_5_ ? 1 : 0);
+             p_137120_.m_99645_(compoundtag, () -> {
+                return p_137121_.apply(i);
+             });
+@@ -232,42 +_,42 @@
+    }
+ 
+    private static ArgumentBuilder<CommandSourceStack, ?> m_137084_(CommandNode<CommandSourceStack> p_137085_, LiteralArgumentBuilder<CommandSourceStack> p_137086_, boolean p_137087_) {
+-      p_137086_.then(Commands.m_82127_("block").then(Commands.m_82129_("pos", BlockPosArgument.m_118239_()).then(m_137074_(p_137085_, Commands.m_82129_("block", BlockPredicateArgument.m_115570_()), p_137087_, (p_137277_) -> {
+-         return BlockPredicateArgument.m_115573_(p_137277_, "block").test(new BlockInWorld(((CommandSourceStack)p_137277_.getSource()).m_81372_(), BlockPosArgument.m_118242_(p_137277_, "pos"), true));
+-      })))).then(Commands.m_82127_("score").then(Commands.m_82129_("target", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("targetObjective", ObjectiveArgument.m_101957_()).then(Commands.m_82127_("=").then(Commands.m_82129_("source", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(m_137074_(p_137085_, Commands.m_82129_("sourceObjective", ObjectiveArgument.m_101957_()), p_137087_, (p_137275_) -> {
+-         return m_137064_(p_137275_, Integer::equals);
+-      })))).then(Commands.m_82127_("<").then(Commands.m_82129_("source", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(m_137074_(p_137085_, Commands.m_82129_("sourceObjective", ObjectiveArgument.m_101957_()), p_137087_, (p_137273_) -> {
+-         return m_137064_(p_137273_, (p_137239_, p_137240_) -> {
+-            return p_137239_ < p_137240_;
+-         });
+-      })))).then(Commands.m_82127_("<=").then(Commands.m_82129_("source", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(m_137074_(p_137085_, Commands.m_82129_("sourceObjective", ObjectiveArgument.m_101957_()), p_137087_, (p_137261_) -> {
+-         return m_137064_(p_137261_, (p_137224_, p_137225_) -> {
+-            return p_137224_ <= p_137225_;
+-         });
+-      })))).then(Commands.m_82127_(">").then(Commands.m_82129_("source", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(m_137074_(p_137085_, Commands.m_82129_("sourceObjective", ObjectiveArgument.m_101957_()), p_137087_, (p_137249_) -> {
+-         return m_137064_(p_137249_, (p_137199_, p_137200_) -> {
+-            return p_137199_ > p_137200_;
+-         });
+-      })))).then(Commands.m_82127_(">=").then(Commands.m_82129_("source", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(m_137074_(p_137085_, Commands.m_82129_("sourceObjective", ObjectiveArgument.m_101957_()), p_137087_, (p_137234_) -> {
+-         return m_137064_(p_137234_, (p_137124_, p_137125_) -> {
+-            return p_137124_ >= p_137125_;
+-         });
+-      })))).then(Commands.m_82127_("matches").then(m_137074_(p_137085_, Commands.m_82129_("range", RangeArgument.m_105404_()), p_137087_, (p_137216_) -> {
+-         return m_137058_(p_137216_, RangeArgument.Ints.m_105419_(p_137216_, "range"));
+-      })))))).then(Commands.m_82127_("blocks").then(Commands.m_82129_("start", BlockPosArgument.m_118239_()).then(Commands.m_82129_("end", BlockPosArgument.m_118239_()).then(Commands.m_82129_("destination", BlockPosArgument.m_118239_()).then(m_137079_(p_137085_, Commands.m_82127_("all"), p_137087_, false)).then(m_137079_(p_137085_, Commands.m_82127_("masked"), p_137087_, true)))))).then(Commands.m_82127_("entity").then(Commands.m_82129_("entities", EntityArgument.m_91460_()).fork(p_137085_, (p_137232_) -> {
+-         return m_137070_(p_137232_, p_137087_, !EntityArgument.m_91467_(p_137232_, "entities").isEmpty());
+-      }).executes(m_137166_(p_137087_, (p_137189_) -> {
+-         return EntityArgument.m_91467_(p_137189_, "entities").size();
+-      })))).then(Commands.m_82127_("predicate").then(m_137074_(p_137085_, Commands.m_82129_("predicate", ResourceLocationArgument.m_106984_()).suggests(f_137034_), p_137087_, (p_137054_) -> {
+-         return m_137104_((CommandSourceStack)p_137054_.getSource(), ResourceLocationArgument.m_107001_(p_137054_, "predicate"));
++      p_137086_.then(Commands.m_82127_("block").then(Commands.m_82129_("pos", BlockPosArgument.m_118239_()).then(m_137074_(p_137085_, Commands.m_82129_("block", BlockPredicateArgument.m_115570_()), p_137087_, (p_210438_0_) -> {
++         return BlockPredicateArgument.m_115573_(p_210438_0_, "block").test(new BlockInWorld(p_210438_0_.getSource().m_81372_(), BlockPosArgument.m_118242_(p_210438_0_, "pos"), true));
++      })))).then(Commands.m_82127_("score").then(Commands.m_82129_("target", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("targetObjective", ObjectiveArgument.m_101957_()).then(Commands.m_82127_("=").then(Commands.m_82129_("source", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(m_137074_(p_137085_, Commands.m_82129_("sourceObjective", ObjectiveArgument.m_101957_()), p_137087_, (p_229803_0_) -> {
++         return m_137064_(p_229803_0_, Integer::equals);
++      })))).then(Commands.m_82127_("<").then(Commands.m_82129_("source", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(m_137074_(p_137085_, Commands.m_82129_("sourceObjective", ObjectiveArgument.m_101957_()), p_137087_, (p_229802_0_) -> {
++         return m_137064_(p_229802_0_, (p_229793_0_, p_229793_1_) -> {
++            return p_229793_0_ < p_229793_1_;
++         });
++      })))).then(Commands.m_82127_("<=").then(Commands.m_82129_("source", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(m_137074_(p_137085_, Commands.m_82129_("sourceObjective", ObjectiveArgument.m_101957_()), p_137087_, (p_229799_0_) -> {
++         return m_137064_(p_229799_0_, (p_229789_0_, p_229789_1_) -> {
++            return p_229789_0_ <= p_229789_1_;
++         });
++      })))).then(Commands.m_82127_(">").then(Commands.m_82129_("source", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(m_137074_(p_137085_, Commands.m_82129_("sourceObjective", ObjectiveArgument.m_101957_()), p_137087_, (p_229796_0_) -> {
++         return m_137064_(p_229796_0_, (p_229782_0_, p_229782_1_) -> {
++            return p_229782_0_ > p_229782_1_;
++         });
++      })))).then(Commands.m_82127_(">=").then(Commands.m_82129_("source", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(m_137074_(p_137085_, Commands.m_82129_("sourceObjective", ObjectiveArgument.m_101957_()), p_137087_, (p_201088_0_) -> {
++         return m_137064_(p_201088_0_, (p_229768_0_, p_229768_1_) -> {
++            return p_229768_0_ >= p_229768_1_;
++         });
++      })))).then(Commands.m_82127_("matches").then(m_137074_(p_137085_, Commands.m_82129_("range", RangeArgument.m_105404_()), p_137087_, (p_229787_0_) -> {
++         return m_137058_(p_229787_0_, RangeArgument.Ints.m_105419_(p_229787_0_, "range"));
++      })))))).then(Commands.m_82127_("blocks").then(Commands.m_82129_("start", BlockPosArgument.m_118239_()).then(Commands.m_82129_("end", BlockPosArgument.m_118239_()).then(Commands.m_82129_("destination", BlockPosArgument.m_118239_()).then(m_137079_(p_137085_, Commands.m_82127_("all"), p_137087_, false)).then(m_137079_(p_137085_, Commands.m_82127_("masked"), p_137087_, true)))))).then(Commands.m_82127_("entity").then(Commands.m_82129_("entities", EntityArgument.m_91460_()).fork(p_137085_, (p_229791_1_) -> {
++         return m_137070_(p_229791_1_, p_137087_, !EntityArgument.m_91467_(p_229791_1_, "entities").isEmpty());
++      }).executes(m_137166_(p_137087_, (p_229780_0_) -> {
++         return EntityArgument.m_91467_(p_229780_0_, "entities").size();
++      })))).then(Commands.m_82127_("predicate").then(m_137074_(p_137085_, Commands.m_82129_("predicate", ResourceLocationArgument.m_106984_()).suggests(f_137034_), p_137087_, (p_229761_0_) -> {
++         return m_137104_(p_229761_0_.getSource(), ResourceLocationArgument.m_107001_(p_229761_0_, "predicate"));
+       })));
+ 
+       for(DataCommands.DataProvider datacommands$dataprovider : DataCommands.f_139351_) {
+-         p_137086_.then(datacommands$dataprovider.m_7621_(Commands.m_82127_("data"), (p_137092_) -> {
+-            return p_137092_.then(Commands.m_82129_("path", NbtPathArgument.m_99487_()).fork(p_137085_, (p_137176_) -> {
+-               return m_137070_(p_137176_, p_137087_, m_137145_(datacommands$dataprovider.m_7018_(p_137176_), NbtPathArgument.m_99498_(p_137176_, "path")) > 0);
+-            }).executes(m_137166_(p_137087_, (p_137158_) -> {
+-               return m_137145_(datacommands$dataprovider.m_7018_(p_137158_), NbtPathArgument.m_99498_(p_137158_, "path"));
++         p_137086_.then(datacommands$dataprovider.m_7621_(Commands.m_82127_("data"), (p_229764_3_) -> {
++            return p_229764_3_.then(Commands.m_82129_("path", NbtPathArgument.m_99487_()).fork(p_137085_, (p_229777_2_) -> {
++               return m_137070_(p_229777_2_, p_137087_, m_137145_(datacommands$dataprovider.m_7018_(p_229777_2_), NbtPathArgument.m_99498_(p_229777_2_, "path")) > 0);
++            }).executes(m_137166_(p_137087_, (p_229773_1_) -> {
++               return m_137145_(datacommands$dataprovider.m_7018_(p_229773_1_), NbtPathArgument.m_99498_(p_229773_1_, "path"));
+             })));
+          }));
+       }
+@@ -276,18 +_,18 @@
+    }
+ 
+    private static Command<CommandSourceStack> m_137166_(boolean p_137167_, ExecuteCommand.CommandNumericPredicate p_137168_) {
+-      return p_137167_ ? (p_137203_) -> {
+-         int i = p_137168_.m_137300_(p_137203_);
++      return p_137167_ ? (p_229783_1_) -> {
++         int i = p_137168_.m_137300_(p_229783_1_);
+          if (i > 0) {
+-            p_137203_.getSource().m_81354_(new TranslatableComponent("commands.execute.conditional.pass_count", i), false);
++            p_229783_1_.getSource().m_81354_(new TranslatableComponent("commands.execute.conditional.pass_count", i), false);
+             return i;
+          } else {
+             throw f_137031_.create();
+          }
+-      } : (p_137144_) -> {
+-         int i = p_137168_.m_137300_(p_137144_);
++      } : (p_229771_1_) -> {
++         int i = p_137168_.m_137300_(p_229771_1_);
+          if (i == 0) {
+-            p_137144_.getSource().m_81354_(new TranslatableComponent("commands.execute.conditional.pass"), false);
++            p_229771_1_.getSource().m_81354_(new TranslatableComponent("commands.execute.conditional.pass"), false);
+             return 1;
+          } else {
+             throw f_137032_.create(i);
+@@ -332,11 +_,11 @@
+    }
+ 
+    private static ArgumentBuilder<CommandSourceStack, ?> m_137074_(CommandNode<CommandSourceStack> p_137075_, ArgumentBuilder<CommandSourceStack, ?> p_137076_, boolean p_137077_, ExecuteCommand.CommandPredicate p_137078_) {
+-      return p_137076_.fork(p_137075_, (p_137214_) -> {
+-         return m_137070_(p_137214_, p_137077_, p_137078_.m_137302_(p_137214_));
+-      }).executes((p_137172_) -> {
+-         if (p_137077_ == p_137078_.m_137302_(p_137172_)) {
+-            p_137172_.getSource().m_81354_(new TranslatableComponent("commands.execute.conditional.pass"), false);
++      return p_137076_.fork(p_137075_, (p_229786_2_) -> {
++         return m_137070_(p_229786_2_, p_137077_, p_137078_.m_137302_(p_229786_2_));
++      }).executes((p_229776_2_) -> {
++         if (p_137077_ == p_137078_.m_137302_(p_229776_2_)) {
++            p_229776_2_.getSource().m_81354_(new TranslatableComponent("commands.execute.conditional.pass"), false);
+             return 1;
+          } else {
+             throw f_137031_.create();
+@@ -345,12 +_,12 @@
+    }
+ 
+    private static ArgumentBuilder<CommandSourceStack, ?> m_137079_(CommandNode<CommandSourceStack> p_137080_, ArgumentBuilder<CommandSourceStack, ?> p_137081_, boolean p_137082_, boolean p_137083_) {
+-      return p_137081_.fork(p_137080_, (p_137180_) -> {
+-         return m_137070_(p_137180_, p_137082_, m_137220_(p_137180_, p_137083_).isPresent());
+-      }).executes(p_137082_ ? (p_137210_) -> {
+-         return m_137067_(p_137210_, p_137083_);
+-      } : (p_137165_) -> {
+-         return m_137193_(p_137165_, p_137083_);
++      return p_137081_.fork(p_137080_, (p_229778_2_) -> {
++         return m_137070_(p_229778_2_, p_137082_, m_137220_(p_229778_2_, p_137083_).isPresent());
++      }).executes(p_137082_ ? (p_229785_1_) -> {
++         return m_137067_(p_229785_1_, p_137083_);
++      } : (p_229775_1_) -> {
++         return m_137193_(p_229775_1_, p_137083_);
+       });
+    }
+ 
+@@ -430,12 +_,12 @@
+    }
+ 
+    @FunctionalInterface
+-   interface CommandNumericPredicate {
+-      int m_137300_(CommandContext<CommandSourceStack> p_137301_) throws CommandSyntaxException;
+-   }
+-
+-   @FunctionalInterface
+    interface CommandPredicate {
+       boolean m_137302_(CommandContext<CommandSourceStack> p_137303_) throws CommandSyntaxException;
++   }
++
++   @FunctionalInterface
++   interface CommandNumericPredicate {
++      int m_137300_(CommandContext<CommandSourceStack> p_137301_) throws CommandSyntaxException;
+    }
+ }

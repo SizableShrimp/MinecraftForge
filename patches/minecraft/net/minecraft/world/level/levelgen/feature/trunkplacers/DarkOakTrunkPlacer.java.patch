@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/trunkplacers/DarkOakTrunkPlacer.java
++++ b/net/minecraft/world/level/levelgen/feature/trunkplacers/DarkOakTrunkPlacer.java
+@@ -15,8 +_,8 @@
+ import net.minecraft.world.level.levelgen.structure.BoundingBox;
+ 
+ public class DarkOakTrunkPlacer extends TrunkPlacer {
+-   public static final Codec<DarkOakTrunkPlacer> f_70074_ = RecordCodecBuilder.create((p_70090_) -> {
+-      return m_70305_(p_70090_).apply(p_70090_, DarkOakTrunkPlacer::new);
++   public static final Codec<DarkOakTrunkPlacer> f_70074_ = RecordCodecBuilder.create((p_236883_0_) -> {
++      return m_70305_(p_236883_0_).apply(p_236883_0_, DarkOakTrunkPlacer::new);
+    });
+ 
+    public DarkOakTrunkPlacer(int p_70077_, int p_70078_, int p_70079_) {

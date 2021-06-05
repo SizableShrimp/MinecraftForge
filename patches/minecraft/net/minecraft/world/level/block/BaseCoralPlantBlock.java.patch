@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/BaseCoralPlantBlock.java
++++ b/net/minecraft/world/level/block/BaseCoralPlantBlock.java
+@@ -10,7 +_,7 @@
+ public class BaseCoralPlantBlock extends BaseCoralPlantTypeBlock {
+    protected static final VoxelShape f_49148_ = Block.m_49796_(2.0D, 0.0D, 2.0D, 14.0D, 15.0D, 14.0D);
+ 
+-   protected BaseCoralPlantBlock(BlockBehaviour.Properties p_49151_) {
++   public BaseCoralPlantBlock(BlockBehaviour.Properties p_49151_) {
+       super(p_49151_);
+    }
+ 

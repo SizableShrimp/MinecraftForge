@@ -1,0 +1,66 @@
+--- a/net/minecraft/world/entity/animal/horse/AbstractHorse.java
++++ b/net/minecraft/world/entity/animal/horse/AbstractHorse.java
+@@ -70,8 +_,8 @@
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public abstract class AbstractHorse extends Animal implements ContainerListener, PlayerRideableJumping, Saddleable {
+-   private static final Predicate<LivingEntity> f_30525_ = (p_30636_) -> {
+-      return p_30636_ instanceof AbstractHorse && ((AbstractHorse)p_30636_).m_30623_();
++   private static final Predicate<LivingEntity> f_30525_ = (p_213617_0_) -> {
++      return p_213617_0_ instanceof AbstractHorse && ((AbstractHorse)p_213617_0_).m_30623_();
+    };
+    private static final TargetingConditions f_30526_ = (new TargetingConditions()).m_26883_(16.0D).m_26882_().m_26890_().m_26891_().m_26888_(f_30525_);
+    private static final Ingredient f_30527_ = Ingredient.m_43929_(Items.f_42405_, Items.f_42501_, Blocks.f_50335_.m_5456_(), Items.f_42410_, Items.f_42677_, Items.f_42436_, Items.f_42437_);
+@@ -276,6 +_,7 @@
+ 
+       this.f_30520_.m_19164_(this);
+       this.m_7493_();
++      this.itemHandler = net.minecraftforge.common.util.LazyOptional.of(() -> new net.minecraftforge.items.wrapper.InvWrapper(this.f_30520_));
+    }
+ 
+    protected void m_7493_() {
+@@ -334,9 +_,9 @@
+    protected void m_7355_(BlockPos p_30584_, BlockState p_30585_) {
+       if (!p_30585_.m_60767_().m_76332_()) {
+          BlockState blockstate = this.f_19853_.m_8055_(p_30584_.m_7494_());
+-         SoundType soundtype = p_30585_.m_60827_();
++         SoundType soundtype = p_30585_.getSoundType(f_19853_, p_30584_, this);
+          if (blockstate.m_60713_(Blocks.f_50125_)) {
+-            soundtype = blockstate.m_60827_();
++            soundtype = blockstate.getSoundType(f_19853_, p_30584_, this);
+          }
+ 
+          if (this.m_20160_() && this.f_30523_) {
+@@ -694,6 +_,7 @@
+                this.m_20334_(vec3.f_82479_, d1, vec3.f_82481_);
+                this.m_30655_(true);
+                this.f_19812_ = true;
++               net.minecraftforge.common.ForgeHooks.onLivingJump(this);
+                if (f1 > 0.0F) {
+                   float f2 = Mth.m_14031_(this.f_19857_ * ((float)Math.PI / 180F));
+                   float f3 = Mth.m_14089_(this.f_19857_ * ((float)Math.PI / 180F));
+@@ -1009,5 +_,24 @@
+ 
+       this.m_7505_();
+       return super.m_6518_(p_30555_, p_30556_, p_30557_, p_30558_, p_30559_);
++   }
++
++   private net.minecraftforge.common.util.LazyOptional<?> itemHandler = null;
++
++   @Override
++   public <T> net.minecraftforge.common.util.LazyOptional<T> getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, @Nullable net.minecraft.core.Direction facing) {
++      if (this.m_6084_() && capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && itemHandler != null)
++         return itemHandler.cast();
++      return super.getCapability(capability, facing);
++   }
++
++   @Override
++   protected void invalidateCaps() {
++      super.invalidateCaps();
++      if (itemHandler != null) {
++         net.minecraftforge.common.util.LazyOptional<?> oldHandler = itemHandler;
++         itemHandler = null;
++         oldHandler.invalidate();
++      }
+    }
+ }

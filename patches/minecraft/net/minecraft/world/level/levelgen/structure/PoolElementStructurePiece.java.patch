@@ -1,0 +1,24 @@
+--- a/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java
++++ b/net/minecraft/world/level/levelgen/structure/PoolElementStructurePiece.java
+@@ -50,8 +_,8 @@
+       this.f_73383_ = this.f_72597_.m_6867_(p_72613_, this.f_72598_, this.f_72599_);
+       ListTag listtag = p_72614_.m_128437_("junctions", 10);
+       this.f_72602_.clear();
+-      listtag.forEach((p_72643_) -> {
+-         this.f_72602_.add(JigsawJunction.m_68931_(new Dynamic<>(NbtOps.f_128958_, p_72643_)));
++      listtag.forEach((p_214827_1_) -> {
++         this.f_72602_.add(JigsawJunction.m_68931_(new Dynamic<>(NbtOps.f_128958_, p_214827_1_)));
+       });
+    }
+ 
+@@ -60,8 +_,8 @@
+       p_72638_.m_128405_("PosY", this.f_72598_.m_123342_());
+       p_72638_.m_128405_("PosZ", this.f_72598_.m_123343_());
+       p_72638_.m_128405_("ground_level_delta", this.f_72601_);
+-      StructurePoolElement.f_69153_.encodeStart(NbtOps.f_128958_, this.f_72597_).resultOrPartial(f_72600_::error).ifPresent((p_72641_) -> {
+-         p_72638_.m_128365_("pool_element", p_72641_);
++      StructurePoolElement.f_69153_.encodeStart(NbtOps.f_128958_, this.f_72597_).resultOrPartial(f_72600_::error).ifPresent((p_237002_1_) -> {
++         p_72638_.m_128365_("pool_element", p_237002_1_);
+       });
+       p_72638_.m_128359_("rotation", this.f_72599_.name());
+       ListTag listtag = new ListTag();

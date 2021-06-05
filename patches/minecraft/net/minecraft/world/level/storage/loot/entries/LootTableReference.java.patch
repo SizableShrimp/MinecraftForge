@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/storage/loot/entries/LootTableReference.java
++++ b/net/minecraft/world/level/storage/loot/entries/LootTableReference.java
+@@ -46,8 +_,8 @@
+    }
+ 
+    public static LootPoolSingletonContainer.Builder<?> m_79776_(ResourceLocation p_79777_) {
+-      return m_79687_((p_79780_, p_79781_, p_79782_, p_79783_) -> {
+-         return new LootTableReference(p_79777_, p_79780_, p_79781_, p_79782_, p_79783_);
++      return m_79687_((p_216173_1_, p_216173_2_, p_216173_3_, p_216173_4_) -> {
++         return new LootTableReference(p_79777_, p_216173_1_, p_216173_2_, p_216173_3_, p_216173_4_);
+       });
+    }
+ 

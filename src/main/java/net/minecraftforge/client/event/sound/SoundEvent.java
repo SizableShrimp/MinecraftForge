@@ -19,12 +19,11 @@
 
 package net.minecraftforge.client.event.sound;
 
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundEngine;
 import com.mojang.blaze3d.audio.Channel;
 
-public class SoundEvent extends Event
+public class SoundEvent extends net.minecraftforge.eventbus.api.Event
 {
     private final SoundEngine manager;
     public SoundEvent(SoundEngine manager)

@@ -1,0 +1,18 @@
+--- a/net/minecraft/world/level/levelgen/feature/SwamplandHutFeature.java
++++ b/net/minecraft/world/level/levelgen/feature/SwamplandHutFeature.java
+@@ -26,11 +_,13 @@
+       return SwamplandHutFeature.FeatureStart::new;
+    }
+ 
+-   public List<MobSpawnSettings.SpawnerData> m_7963_() {
++   @Override
++   public List<MobSpawnSettings.SpawnerData> getDefaultSpawnList() {
+       return f_67169_;
+    }
+ 
+-   public List<MobSpawnSettings.SpawnerData> m_7948_() {
++   @Override
++   public List<MobSpawnSettings.SpawnerData> getDefaultCreatureSpawnList() {
+       return f_67170_;
+    }
+ 

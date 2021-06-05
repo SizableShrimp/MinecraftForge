@@ -33,7 +33,6 @@ import javax.annotation.Nullable;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.world.level.block.state.BlockState;
 import com.mojang.math.Transformation;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;

@@ -1,0 +1,15 @@
+--- a/net/minecraft/client/searchtree/ReloadableIdSearchTree.java
++++ b/net/minecraft/client/searchtree/ReloadableIdSearchTree.java
+@@ -52,9 +_,9 @@
+    }
+ 
+    protected void m_8074_(T p_119889_) {
+-      this.f_119872_.apply(p_119889_).forEach((p_119885_) -> {
+-         this.f_119870_.m_119970_(p_119889_, p_119885_.m_135827_().toLowerCase(Locale.ROOT));
+-         this.f_119871_.m_119970_(p_119889_, p_119885_.m_135815_().toLowerCase(Locale.ROOT));
++      this.f_119872_.apply(p_119889_).forEach((p_217873_2_) -> {
++         this.f_119870_.m_119970_(p_119889_, p_217873_2_.m_135827_().toLowerCase(Locale.ROOT));
++         this.f_119871_.m_119970_(p_119889_, p_217873_2_.m_135815_().toLowerCase(Locale.ROOT));
+       });
+    }
+ 

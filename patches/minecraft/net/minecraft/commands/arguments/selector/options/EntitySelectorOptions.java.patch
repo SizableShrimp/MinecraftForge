@@ -1,0 +1,619 @@
+--- a/net/minecraft/commands/arguments/selector/options/EntitySelectorOptions.java
++++ b/net/minecraft/commands/arguments/selector/options/EntitySelectorOptions.java
+@@ -51,142 +_,142 @@
+ 
+ public class EntitySelectorOptions {
+    private static final Map<String, EntitySelectorOptions.Option> f_121392_ = Maps.newHashMap();
+-   public static final DynamicCommandExceptionType f_121384_ = new DynamicCommandExceptionType((p_121520_) -> {
+-      return new TranslatableComponent("argument.entity.options.unknown", p_121520_);
++   public static final DynamicCommandExceptionType f_121384_ = new DynamicCommandExceptionType((p_208752_0_) -> {
++      return new TranslatableComponent("argument.entity.options.unknown", p_208752_0_);
+    });
+-   public static final DynamicCommandExceptionType f_121385_ = new DynamicCommandExceptionType((p_121516_) -> {
+-      return new TranslatableComponent("argument.entity.options.inapplicable", p_121516_);
++   public static final DynamicCommandExceptionType f_121385_ = new DynamicCommandExceptionType((p_208726_0_) -> {
++      return new TranslatableComponent("argument.entity.options.inapplicable", p_208726_0_);
+    });
+    public static final SimpleCommandExceptionType f_121386_ = new SimpleCommandExceptionType(new TranslatableComponent("argument.entity.options.distance.negative"));
+    public static final SimpleCommandExceptionType f_121387_ = new SimpleCommandExceptionType(new TranslatableComponent("argument.entity.options.level.negative"));
+    public static final SimpleCommandExceptionType f_121388_ = new SimpleCommandExceptionType(new TranslatableComponent("argument.entity.options.limit.toosmall"));
+-   public static final DynamicCommandExceptionType f_121389_ = new DynamicCommandExceptionType((p_121508_) -> {
+-      return new TranslatableComponent("argument.entity.options.sort.irreversible", p_121508_);
+-   });
+-   public static final DynamicCommandExceptionType f_121390_ = new DynamicCommandExceptionType((p_121493_) -> {
+-      return new TranslatableComponent("argument.entity.options.mode.invalid", p_121493_);
+-   });
+-   public static final DynamicCommandExceptionType f_121391_ = new DynamicCommandExceptionType((p_121452_) -> {
+-      return new TranslatableComponent("argument.entity.options.type.invalid", p_121452_);
++   public static final DynamicCommandExceptionType f_121389_ = new DynamicCommandExceptionType((p_208749_0_) -> {
++      return new TranslatableComponent("argument.entity.options.sort.irreversible", p_208749_0_);
++   });
++   public static final DynamicCommandExceptionType f_121390_ = new DynamicCommandExceptionType((p_208740_0_) -> {
++      return new TranslatableComponent("argument.entity.options.mode.invalid", p_208740_0_);
++   });
++   public static final DynamicCommandExceptionType f_121391_ = new DynamicCommandExceptionType((p_208758_0_) -> {
++      return new TranslatableComponent("argument.entity.options.type.invalid", p_208758_0_);
+    });
+ 
+-   private static void m_121453_(String p_121454_, EntitySelectorOptions.Modifier p_121455_, Predicate<EntitySelectorParser> p_121456_, Component p_121457_) {
++   public static void m_121453_(String p_121454_, EntitySelectorOptions.Modifier p_121455_, Predicate<EntitySelectorParser> p_121456_, Component p_121457_) {
+       f_121392_.put(p_121454_, new EntitySelectorOptions.Option(p_121455_, p_121456_, p_121457_));
+    }
+ 
+    public static void m_121426_() {
+       if (f_121392_.isEmpty()) {
+-         m_121453_("name", (p_121425_) -> {
+-            int i = p_121425_.m_121346_().getCursor();
+-            boolean flag = p_121425_.m_121330_();
+-            String s = p_121425_.m_121346_().readString();
+-            if (p_121425_.m_121380_() && !flag) {
+-               p_121425_.m_121346_().setCursor(i);
+-               throw f_121385_.createWithContext(p_121425_.m_121346_(), "name");
++         m_121453_("name", (p_197440_0_) -> {
++            int i = p_197440_0_.m_121346_().getCursor();
++            boolean flag = p_197440_0_.m_121330_();
++            String s = p_197440_0_.m_121346_().readString();
++            if (p_197440_0_.m_121380_() && !flag) {
++               p_197440_0_.m_121346_().setCursor(i);
++               throw f_121385_.createWithContext(p_197440_0_.m_121346_(), "name");
+             } else {
+                if (flag) {
+-                  p_121425_.m_121315_(true);
++                  p_197440_0_.m_121315_(true);
+                } else {
+-                  p_121425_.m_121302_(true);
++                  p_197440_0_.m_121302_(true);
+                }
+ 
+-               p_121425_.m_121272_((p_121512_) -> {
+-                  return p_121512_.m_7755_().getString().equals(s) != flag;
++               p_197440_0_.m_121272_((p_197446_2_) -> {
++                  return p_197446_2_.m_7755_().getString().equals(s) != flag;
+                });
+             }
+-         }, (p_121423_) -> {
+-            return !p_121423_.m_121379_();
++         }, (p_202016_0_) -> {
++            return !p_202016_0_.m_121379_();
+          }, new TranslatableComponent("argument.entity.options.name.description"));
+-         m_121453_("distance", (p_121421_) -> {
+-            int i = p_121421_.m_121346_().getCursor();
+-            MinMaxBounds.Floats minmaxbounds$floats = MinMaxBounds.Floats.m_55347_(p_121421_.m_121346_());
++         m_121453_("distance", (p_197439_0_) -> {
++            int i = p_197439_0_.m_121346_().getCursor();
++            MinMaxBounds.Floats minmaxbounds$floats = MinMaxBounds.Floats.m_55347_(p_197439_0_.m_121346_());
+             if ((minmaxbounds$floats.m_55305_() == null || !(minmaxbounds$floats.m_55305_() < 0.0F)) && (minmaxbounds$floats.m_55326_() == null || !(minmaxbounds$floats.m_55326_() < 0.0F))) {
+-               p_121421_.m_121243_(minmaxbounds$floats);
+-               p_121421_.m_121352_();
++               p_197439_0_.m_121243_(minmaxbounds$floats);
++               p_197439_0_.m_121352_();
+             } else {
+-               p_121421_.m_121346_().setCursor(i);
+-               throw f_121386_.createWithContext(p_121421_.m_121346_());
++               p_197439_0_.m_121346_().setCursor(i);
++               throw f_121386_.createWithContext(p_197439_0_.m_121346_());
+             }
+-         }, (p_121419_) -> {
+-            return p_121419_.m_121358_().m_55327_();
++         }, (p_202020_0_) -> {
++            return p_202020_0_.m_121358_().m_55327_();
+          }, new TranslatableComponent("argument.entity.options.distance.description"));
+-         m_121453_("level", (p_121417_) -> {
+-            int i = p_121417_.m_121346_().getCursor();
+-            MinMaxBounds.Ints minmaxbounds$ints = MinMaxBounds.Ints.m_55375_(p_121417_.m_121346_());
++         m_121453_("level", (p_197438_0_) -> {
++            int i = p_197438_0_.m_121346_().getCursor();
++            MinMaxBounds.Ints minmaxbounds$ints = MinMaxBounds.Ints.m_55375_(p_197438_0_.m_121346_());
+             if ((minmaxbounds$ints.m_55305_() == null || minmaxbounds$ints.m_55305_() >= 0) && (minmaxbounds$ints.m_55326_() == null || minmaxbounds$ints.m_55326_() >= 0)) {
+-               p_121417_.m_121245_(minmaxbounds$ints);
+-               p_121417_.m_121279_(false);
++               p_197438_0_.m_121245_(minmaxbounds$ints);
++               p_197438_0_.m_121279_(false);
+             } else {
+-               p_121417_.m_121346_().setCursor(i);
+-               throw f_121387_.createWithContext(p_121417_.m_121346_());
++               p_197438_0_.m_121346_().setCursor(i);
++               throw f_121387_.createWithContext(p_197438_0_.m_121346_());
+             }
+-         }, (p_121415_) -> {
+-            return p_121415_.m_121361_().m_55327_();
++         }, (p_202019_0_) -> {
++            return p_202019_0_.m_121361_().m_55327_();
+          }, new TranslatableComponent("argument.entity.options.level.description"));
+-         m_121453_("x", (p_121413_) -> {
+-            p_121413_.m_121352_();
+-            p_121413_.m_121231_(p_121413_.m_121346_().readDouble());
+-         }, (p_121411_) -> {
+-            return p_121411_.m_121371_() == null;
++         m_121453_("x", (p_197437_0_) -> {
++            p_197437_0_.m_121352_();
++            p_197437_0_.m_121231_(p_197437_0_.m_121346_().readDouble());
++         }, (p_202022_0_) -> {
++            return p_202022_0_.m_121371_() == null;
+          }, new TranslatableComponent("argument.entity.options.x.description"));
+-         m_121453_("y", (p_121409_) -> {
+-            p_121409_.m_121352_();
+-            p_121409_.m_121282_(p_121409_.m_121346_().readDouble());
+-         }, (p_121407_) -> {
+-            return p_121407_.m_121372_() == null;
++         m_121453_("y", (p_197442_0_) -> {
++            p_197442_0_.m_121352_();
++            p_197442_0_.m_121282_(p_197442_0_.m_121346_().readDouble());
++         }, (p_202021_0_) -> {
++            return p_202021_0_.m_121372_() == null;
+          }, new TranslatableComponent("argument.entity.options.y.description"));
+-         m_121453_("z", (p_121405_) -> {
+-            p_121405_.m_121352_();
+-            p_121405_.m_121305_(p_121405_.m_121346_().readDouble());
+-         }, (p_121403_) -> {
+-            return p_121403_.m_121373_() == null;
++         m_121453_("z", (p_197464_0_) -> {
++            p_197464_0_.m_121352_();
++            p_197464_0_.m_121305_(p_197464_0_.m_121346_().readDouble());
++         }, (p_202029_0_) -> {
++            return p_202029_0_.m_121373_() == null;
+          }, new TranslatableComponent("argument.entity.options.z.description"));
+-         m_121453_("dx", (p_121401_) -> {
+-            p_121401_.m_121352_();
+-            p_121401_.m_121318_(p_121401_.m_121346_().readDouble());
+-         }, (p_121399_) -> {
+-            return p_121399_.m_121374_() == null;
++         m_121453_("dx", (p_197460_0_) -> {
++            p_197460_0_.m_121352_();
++            p_197460_0_.m_121318_(p_197460_0_.m_121346_().readDouble());
++         }, (p_202027_0_) -> {
++            return p_202027_0_.m_121374_() == null;
+          }, new TranslatableComponent("argument.entity.options.dx.description"));
+-         m_121453_("dy", (p_121397_) -> {
+-            p_121397_.m_121352_();
+-            p_121397_.m_121331_(p_121397_.m_121346_().readDouble());
+-         }, (p_121395_) -> {
+-            return p_121395_.m_121375_() == null;
++         m_121453_("dy", (p_197463_0_) -> {
++            p_197463_0_.m_121352_();
++            p_197463_0_.m_121331_(p_197463_0_.m_121346_().readDouble());
++         }, (p_202026_0_) -> {
++            return p_202026_0_.m_121375_() == null;
+          }, new TranslatableComponent("argument.entity.options.dy.description"));
+-         m_121453_("dz", (p_121562_) -> {
+-            p_121562_.m_121352_();
+-            p_121562_.m_121339_(p_121562_.m_121346_().readDouble());
+-         }, (p_121560_) -> {
+-            return p_121560_.m_121376_() == null;
++         m_121453_("dz", (p_197458_0_) -> {
++            p_197458_0_.m_121352_();
++            p_197458_0_.m_121339_(p_197458_0_.m_121346_().readDouble());
++         }, (p_202030_0_) -> {
++            return p_202030_0_.m_121376_() == null;
+          }, new TranslatableComponent("argument.entity.options.dz.description"));
+-         m_121453_("x_rotation", (p_121558_) -> {
+-            p_121558_.m_121252_(WrappedMinMaxBounds.m_75359_(p_121558_.m_121346_(), true, Mth::m_14177_));
+-         }, (p_121556_) -> {
+-            return p_121556_.m_121367_() == WrappedMinMaxBounds.f_75350_;
++         m_121453_("x_rotation", (p_197462_0_) -> {
++            p_197462_0_.m_121252_(WrappedMinMaxBounds.m_75359_(p_197462_0_.m_121346_(), true, Mth::m_14177_));
++         }, (p_202028_0_) -> {
++            return p_202028_0_.m_121367_() == WrappedMinMaxBounds.f_75350_;
+          }, new TranslatableComponent("argument.entity.options.x_rotation.description"));
+-         m_121453_("y_rotation", (p_121554_) -> {
+-            p_121554_.m_121289_(WrappedMinMaxBounds.m_75359_(p_121554_.m_121346_(), true, Mth::m_14177_));
+-         }, (p_121552_) -> {
+-            return p_121552_.m_121370_() == WrappedMinMaxBounds.f_75350_;
++         m_121453_("y_rotation", (p_197461_0_) -> {
++            p_197461_0_.m_121289_(WrappedMinMaxBounds.m_75359_(p_197461_0_.m_121346_(), true, Mth::m_14177_));
++         }, (p_202036_0_) -> {
++            return p_202036_0_.m_121370_() == WrappedMinMaxBounds.f_75350_;
+          }, new TranslatableComponent("argument.entity.options.y_rotation.description"));
+-         m_121453_("limit", (p_121550_) -> {
+-            int i = p_121550_.m_121346_().getCursor();
+-            int j = p_121550_.m_121346_().readInt();
++         m_121453_("limit", (p_197456_0_) -> {
++            int i = p_197456_0_.m_121346_().getCursor();
++            int j = p_197456_0_.m_121346_().readInt();
+             if (j < 1) {
+-               p_121550_.m_121346_().setCursor(i);
+-               throw f_121388_.createWithContext(p_121550_.m_121346_());
++               p_197456_0_.m_121346_().setCursor(i);
++               throw f_121388_.createWithContext(p_197456_0_.m_121346_());
+             } else {
+-               p_121550_.m_121237_(j);
+-               p_121550_.m_121328_(true);
++               p_197456_0_.m_121237_(j);
++               p_197456_0_.m_121328_(true);
+             }
+-         }, (p_121548_) -> {
+-            return !p_121548_.m_121378_() && !p_121548_.m_121381_();
++         }, (p_202035_0_) -> {
++            return !p_202035_0_.m_121378_() && !p_202035_0_.m_121381_();
+          }, new TranslatableComponent("argument.entity.options.limit.description"));
+-         m_121453_("sort", (p_121546_) -> {
+-            int i = p_121546_.m_121346_().getCursor();
+-            String s = p_121546_.m_121346_().readUnquotedString();
+-            p_121546_.m_121270_((p_121432_, p_121433_) -> {
+-               return SharedSuggestionProvider.m_82970_(Arrays.asList("nearest", "furthest", "random", "arbitrary"), p_121432_);
++         m_121453_("sort", (p_197455_0_) -> {
++            int i = p_197455_0_.m_121346_().getCursor();
++            String s = p_197455_0_.m_121346_().readUnquotedString();
++            p_197455_0_.m_121270_((p_202056_0_, p_202056_1_) -> {
++               return SharedSuggestionProvider.m_82970_(Arrays.asList("nearest", "furthest", "random", "arbitrary"), p_202056_0_);
+             });
+             BiConsumer<Vec3, List<? extends Entity>> biconsumer;
+             switch(s) {
+@@ -203,19 +_,19 @@
+                biconsumer = EntitySelectorParser.f_121196_;
+                break;
+             default:
+-               p_121546_.m_121346_().setCursor(i);
+-               throw f_121389_.createWithContext(p_121546_.m_121346_(), s);
++               p_197455_0_.m_121346_().setCursor(i);
++               throw f_121389_.createWithContext(p_197455_0_.m_121346_(), s);
+             }
+ 
+-            p_121546_.m_121268_(biconsumer);
+-            p_121546_.m_121336_(true);
+-         }, (p_121544_) -> {
+-            return !p_121544_.m_121378_() && !p_121544_.m_121382_();
++            p_197455_0_.m_121268_(biconsumer);
++            p_197455_0_.m_121336_(true);
++         }, (p_202043_0_) -> {
++            return !p_202043_0_.m_121378_() && !p_202043_0_.m_121382_();
+          }, new TranslatableComponent("argument.entity.options.sort.description"));
+-         m_121453_("gamemode", (p_121542_) -> {
+-            p_121542_.m_121270_((p_121490_, p_121491_) -> {
+-               String s1 = p_121490_.getRemaining().toLowerCase(Locale.ROOT);
+-               boolean flag1 = !p_121542_.m_121222_();
++         m_121453_("gamemode", (p_197452_0_) -> {
++            p_197452_0_.m_121270_((p_202018_1_, p_202018_2_) -> {
++               String s1 = p_202018_1_.getRemaining().toLowerCase(Locale.ROOT);
++               boolean flag1 = !p_197452_0_.m_121222_();
+                boolean flag2 = true;
+                if (!s1.isEmpty()) {
+                   if (s1.charAt(0) == '!') {
+@@ -229,138 +_,138 @@
+                for(GameType gametype1 : GameType.values()) {
+                   if (gametype1 != GameType.NOT_SET && gametype1.m_46405_().toLowerCase(Locale.ROOT).startsWith(s1)) {
+                      if (flag2) {
+-                        p_121490_.suggest('!' + gametype1.m_46405_());
++                        p_202018_1_.suggest('!' + gametype1.m_46405_());
+                      }
+ 
+                      if (flag1) {
+-                        p_121490_.suggest(gametype1.m_46405_());
++                        p_202018_1_.suggest(gametype1.m_46405_());
+                      }
+                   }
+                }
+ 
+-               return p_121490_.buildFuture();
++               return p_202018_1_.buildFuture();
+             });
+-            int i = p_121542_.m_121346_().getCursor();
+-            boolean flag = p_121542_.m_121330_();
+-            if (p_121542_.m_121222_() && !flag) {
+-               p_121542_.m_121346_().setCursor(i);
+-               throw f_121385_.createWithContext(p_121542_.m_121346_(), "gamemode");
++            int i = p_197452_0_.m_121346_().getCursor();
++            boolean flag = p_197452_0_.m_121330_();
++            if (p_197452_0_.m_121222_() && !flag) {
++               p_197452_0_.m_121346_().setCursor(i);
++               throw f_121385_.createWithContext(p_197452_0_.m_121346_(), "gamemode");
+             } else {
+-               String s = p_121542_.m_121346_().readUnquotedString();
++               String s = p_197452_0_.m_121346_().readUnquotedString();
+                GameType gametype = GameType.m_46402_(s, GameType.NOT_SET);
+                if (gametype == GameType.NOT_SET) {
+-                  p_121542_.m_121346_().setCursor(i);
+-                  throw f_121390_.createWithContext(p_121542_.m_121346_(), s);
++                  p_197452_0_.m_121346_().setCursor(i);
++                  throw f_121390_.createWithContext(p_197452_0_.m_121346_(), s);
+                } else {
+-                  p_121542_.m_121279_(false);
+-                  p_121542_.m_121272_((p_121485_) -> {
+-                     if (!(p_121485_ instanceof ServerPlayer)) {
++                  p_197452_0_.m_121279_(false);
++                  p_197452_0_.m_121272_((p_202055_2_) -> {
++                     if (!(p_202055_2_ instanceof ServerPlayer)) {
+                         return false;
+                      } else {
+-                        GameType gametype1 = ((ServerPlayer)p_121485_).f_8941_.m_9290_();
++                        GameType gametype1 = ((ServerPlayer)p_202055_2_).f_8941_.m_9290_();
+                         return flag ? gametype1 != gametype : gametype1 == gametype;
+                      }
+                   });
+                   if (flag) {
+-                     p_121542_.m_121350_(true);
++                     p_197452_0_.m_121350_(true);
+                   } else {
+-                     p_121542_.m_121344_(true);
++                     p_197452_0_.m_121344_(true);
+                   }
+ 
+                }
+             }
+-         }, (p_121540_) -> {
+-            return !p_121540_.m_121383_();
++         }, (p_202048_0_) -> {
++            return !p_202048_0_.m_121383_();
+          }, new TranslatableComponent("argument.entity.options.gamemode.description"));
+-         m_121453_("team", (p_121538_) -> {
+-            boolean flag = p_121538_.m_121330_();
+-            String s = p_121538_.m_121346_().readUnquotedString();
+-            p_121538_.m_121272_((p_121497_) -> {
+-               if (!(p_121497_ instanceof LivingEntity)) {
++         m_121453_("team", (p_197449_0_) -> {
++            boolean flag = p_197449_0_.m_121330_();
++            String s = p_197449_0_.m_121346_().readUnquotedString();
++            p_197449_0_.m_121272_((p_197454_2_) -> {
++               if (!(p_197454_2_ instanceof LivingEntity)) {
+                   return false;
+                } else {
+-                  Team team = p_121497_.m_5647_();
++                  Team team = p_197454_2_.m_5647_();
+                   String s1 = team == null ? "" : team.m_5758_();
+                   return s1.equals(s) != flag;
+                }
+             });
+             if (flag) {
+-               p_121538_.m_121359_(true);
++               p_197449_0_.m_121359_(true);
+             } else {
+-               p_121538_.m_121356_(true);
++               p_197449_0_.m_121356_(true);
+             }
+ 
+-         }, (p_121536_) -> {
+-            return !p_121536_.m_121223_();
++         }, (p_202038_0_) -> {
++            return !p_202038_0_.m_121223_();
+          }, new TranslatableComponent("argument.entity.options.team.description"));
+-         m_121453_("type", (p_121534_) -> {
+-            p_121534_.m_121270_((p_121445_, p_121446_) -> {
+-               SharedSuggestionProvider.m_82929_(Registry.f_122826_.m_6566_(), p_121445_, String.valueOf('!'));
+-               SharedSuggestionProvider.m_82929_(EntityTypeTags.m_13126_().m_13406_(), p_121445_, "!#");
+-               if (!p_121534_.m_121226_()) {
+-                  SharedSuggestionProvider.m_82926_(Registry.f_122826_.m_6566_(), p_121445_);
+-                  SharedSuggestionProvider.m_82929_(EntityTypeTags.m_13126_().m_13406_(), p_121445_, String.valueOf('#'));
++         m_121453_("type", (p_197447_0_) -> {
++            p_197447_0_.m_121270_((p_202052_1_, p_202052_2_) -> {
++               SharedSuggestionProvider.m_82929_(Registry.f_122826_.m_6566_(), p_202052_1_, String.valueOf('!'));
++               SharedSuggestionProvider.m_82929_(EntityTypeTags.m_13126_().m_13406_(), p_202052_1_, "!#");
++               if (!p_197447_0_.m_121226_()) {
++                  SharedSuggestionProvider.m_82926_(Registry.f_122826_.m_6566_(), p_202052_1_);
++                  SharedSuggestionProvider.m_82929_(EntityTypeTags.m_13126_().m_13406_(), p_202052_1_, String.valueOf('#'));
+                }
+ 
+-               return p_121445_.buildFuture();
++               return p_202052_1_.buildFuture();
+             });
+-            int i = p_121534_.m_121346_().getCursor();
+-            boolean flag = p_121534_.m_121330_();
+-            if (p_121534_.m_121226_() && !flag) {
+-               p_121534_.m_121346_().setCursor(i);
+-               throw f_121385_.createWithContext(p_121534_.m_121346_(), "type");
++            int i = p_197447_0_.m_121346_().getCursor();
++            boolean flag = p_197447_0_.m_121330_();
++            if (p_197447_0_.m_121226_() && !flag) {
++               p_197447_0_.m_121346_().setCursor(i);
++               throw f_121385_.createWithContext(p_197447_0_.m_121346_(), "type");
+             } else {
+                if (flag) {
+-                  p_121534_.m_121224_();
++                  p_197447_0_.m_121224_();
+                }
+ 
+-               if (p_121534_.m_121338_()) {
+-                  ResourceLocation resourcelocation = ResourceLocation.m_135818_(p_121534_.m_121346_());
+-                  p_121534_.m_121272_((p_121504_) -> {
+-                     return p_121504_.m_20194_().m_129895_().m_5901_().m_7689_(resourcelocation).m_8110_(p_121504_.m_6095_()) != flag;
++               if (p_197447_0_.m_121338_()) {
++                  ResourceLocation resourcelocation = ResourceLocation.m_135818_(p_197447_0_.m_121346_());
++                  p_197447_0_.m_121272_((p_239573_2_) -> {
++                     return p_239573_2_.m_20194_().m_129895_().m_5901_().m_7689_(resourcelocation).m_8110_(p_239573_2_.m_6095_()) != flag;
+                   });
+                } else {
+-                  ResourceLocation resourcelocation1 = ResourceLocation.m_135818_(p_121534_.m_121346_());
++                  ResourceLocation resourcelocation1 = ResourceLocation.m_135818_(p_197447_0_.m_121346_());
+                   EntityType<?> entitytype = Registry.f_122826_.m_6612_(resourcelocation1).orElseThrow(() -> {
+-                     p_121534_.m_121346_().setCursor(i);
+-                     return f_121391_.createWithContext(p_121534_.m_121346_(), resourcelocation1.toString());
++                     p_197447_0_.m_121346_().setCursor(i);
++                     return f_121391_.createWithContext(p_197447_0_.m_121346_(), resourcelocation1.toString());
+                   });
+                   if (Objects.equals(EntityType.f_20532_, entitytype) && !flag) {
+-                     p_121534_.m_121279_(false);
++                     p_197447_0_.m_121279_(false);
+                   }
+ 
+-                  p_121534_.m_121272_((p_121430_) -> {
+-                     return Objects.equals(entitytype, p_121430_.m_6095_()) != flag;
++                  p_197447_0_.m_121272_((p_202057_2_) -> {
++                     return Objects.equals(entitytype, p_202057_2_.m_6095_()) != flag;
+                   });
+                   if (!flag) {
+-                     p_121534_.m_121241_(entitytype);
++                     p_197447_0_.m_121241_(entitytype);
+                   }
+                }
+ 
+             }
+-         }, (p_121532_) -> {
+-            return !p_121532_.m_121225_();
++         }, (p_202047_0_) -> {
++            return !p_202047_0_.m_121225_();
+          }, new TranslatableComponent("argument.entity.options.type.description"));
+-         m_121453_("tag", (p_121530_) -> {
+-            boolean flag = p_121530_.m_121330_();
+-            String s = p_121530_.m_121346_().readUnquotedString();
+-            p_121530_.m_121272_((p_121461_) -> {
++         m_121453_("tag", (p_197448_0_) -> {
++            boolean flag = p_197448_0_.m_121330_();
++            String s = p_197448_0_.m_121346_().readUnquotedString();
++            p_197448_0_.m_121272_((p_197466_2_) -> {
+                if ("".equals(s)) {
+-                  return p_121461_.m_19880_().isEmpty() != flag;
++                  return p_197466_2_.m_19880_().isEmpty() != flag;
+                } else {
+-                  return p_121461_.m_19880_().contains(s) != flag;
++                  return p_197466_2_.m_19880_().contains(s) != flag;
+                }
+             });
+-         }, (p_121528_) -> {
++         }, (p_202041_0_) -> {
+             return true;
+          }, new TranslatableComponent("argument.entity.options.tag.description"));
+-         m_121453_("nbt", (p_121526_) -> {
+-            boolean flag = p_121526_.m_121330_();
+-            CompoundTag compoundtag = (new TagParser(p_121526_.m_121346_())).m_129373_();
+-            p_121526_.m_121272_((p_121471_) -> {
+-               CompoundTag compoundtag1 = p_121471_.m_20240_(new CompoundTag());
+-               if (p_121471_ instanceof ServerPlayer) {
+-                  ItemStack itemstack = ((ServerPlayer)p_121471_).f_36093_.m_36056_();
++         m_121453_("nbt", (p_197450_0_) -> {
++            boolean flag = p_197450_0_.m_121330_();
++            CompoundTag compoundtag = (new TagParser(p_197450_0_.m_121346_())).m_129373_();
++            p_197450_0_.m_121272_((p_197443_2_) -> {
++               CompoundTag compoundtag1 = p_197443_2_.m_20240_(new CompoundTag());
++               if (p_197443_2_ instanceof ServerPlayer) {
++                  ItemStack itemstack = ((ServerPlayer)p_197443_2_).f_36093_.m_36056_();
+                   if (!itemstack.m_41619_()) {
+                      compoundtag1.m_128365_("SelectedItem", itemstack.m_41739_(new CompoundTag()));
+                   }
+@@ -368,11 +_,11 @@
+ 
+                return NbtUtils.m_129235_(compoundtag, compoundtag1, true) != flag;
+             });
+-         }, (p_121524_) -> {
++         }, (p_202046_0_) -> {
+             return true;
+          }, new TranslatableComponent("argument.entity.options.nbt.description"));
+-         m_121453_("scores", (p_121522_) -> {
+-            StringReader stringreader = p_121522_.m_121346_();
++         m_121453_("scores", (p_197457_0_) -> {
++            StringReader stringreader = p_197457_0_.m_121346_();
+             Map<String, MinMaxBounds.Ints> map = Maps.newHashMap();
+             stringreader.expect('{');
+             stringreader.skipWhitespace();
+@@ -393,9 +_,9 @@
+ 
+             stringreader.expect('}');
+             if (!map.isEmpty()) {
+-               p_121522_.m_121272_((p_121500_) -> {
+-                  Scoreboard scoreboard = p_121500_.m_20194_().m_129896_();
+-                  String s1 = p_121500_.m_6302_();
++               p_197457_0_.m_121272_((p_197465_1_) -> {
++                  Scoreboard scoreboard = p_197465_1_.m_20194_().m_129896_();
++                  String s1 = p_197465_1_.m_6302_();
+ 
+                   for(Entry<String, MinMaxBounds.Ints> entry : map.entrySet()) {
+                      Objective objective = scoreboard.m_83477_(entry.getKey());
+@@ -418,12 +_,12 @@
+                });
+             }
+ 
+-            p_121522_.m_121365_(true);
+-         }, (p_121518_) -> {
+-            return !p_121518_.m_121227_();
++            p_197457_0_.m_121365_(true);
++         }, (p_202033_0_) -> {
++            return !p_202033_0_.m_121227_();
+          }, new TranslatableComponent("argument.entity.options.scores.description"));
+-         m_121453_("advancements", (p_121514_) -> {
+-            StringReader stringreader = p_121514_.m_121346_();
++         m_121453_("advancements", (p_197453_0_) -> {
++            StringReader stringreader = p_197453_0_.m_121346_();
+             Map<ResourceLocation, Predicate<AdvancementProgress>> map = Maps.newHashMap();
+             stringreader.expect('{');
+             stringreader.skipWhitespace();
+@@ -447,8 +_,8 @@
+                      stringreader.expect('=');
+                      stringreader.skipWhitespace();
+                      boolean flag1 = stringreader.readBoolean();
+-                     map1.put(s, (p_121481_) -> {
+-                        return p_121481_.m_12911_() == flag1;
++                     map1.put(s, (p_197444_1_) -> {
++                        return p_197444_1_.m_12911_() == flag1;
+                      });
+                      stringreader.skipWhitespace();
+                      if (stringreader.canRead() && stringreader.peek() == ',') {
+@@ -459,9 +_,9 @@
+                   stringreader.skipWhitespace();
+                   stringreader.expect('}');
+                   stringreader.skipWhitespace();
+-                  map.put(resourcelocation, (p_121464_) -> {
++                  map.put(resourcelocation, (p_197435_1_) -> {
+                      for(Entry<String, Predicate<CriterionProgress>> entry : map1.entrySet()) {
+-                        CriterionProgress criterionprogress = p_121464_.m_8214_(entry.getKey());
++                        CriterionProgress criterionprogress = p_197435_1_.m_8214_(entry.getKey());
+                         if (criterionprogress == null || !entry.getValue().test(criterionprogress)) {
+                            return false;
+                         }
+@@ -471,8 +_,8 @@
+                   });
+                } else {
+                   boolean flag = stringreader.readBoolean();
+-                  map.put(resourcelocation, (p_121478_) -> {
+-                     return p_121478_.m_8193_() == flag;
++                  map.put(resourcelocation, (p_197451_1_) -> {
++                     return p_197451_1_.m_8193_() == flag;
+                   });
+                }
+ 
+@@ -484,11 +_,11 @@
+ 
+             stringreader.expect('}');
+             if (!map.isEmpty()) {
+-               p_121514_.m_121272_((p_121467_) -> {
+-                  if (!(p_121467_ instanceof ServerPlayer)) {
++               p_197453_0_.m_121272_((p_197441_1_) -> {
++                  if (!(p_197441_1_ instanceof ServerPlayer)) {
+                      return false;
+                   } else {
+-                     ServerPlayer serverplayer = (ServerPlayer)p_121467_;
++                     ServerPlayer serverplayer = (ServerPlayer)p_197441_1_;
+                      PlayerAdvancements playeradvancements = serverplayer.m_8960_();
+                      ServerAdvancementManager serveradvancementmanager = serverplayer.m_20194_().m_129889_();
+ 
+@@ -502,31 +_,31 @@
+                      return true;
+                   }
+                });
+-               p_121514_.m_121279_(false);
++               p_197453_0_.m_121279_(false);
+             }
+ 
+-            p_121514_.m_121368_(true);
+-         }, (p_121506_) -> {
+-            return !p_121506_.m_121228_();
++            p_197453_0_.m_121368_(true);
++         }, (p_202032_0_) -> {
++            return !p_202032_0_.m_121228_();
+          }, new TranslatableComponent("argument.entity.options.advancements.description"));
+-         m_121453_("predicate", (p_121487_) -> {
+-            boolean flag = p_121487_.m_121330_();
+-            ResourceLocation resourcelocation = ResourceLocation.m_135818_(p_121487_.m_121346_());
+-            p_121487_.m_121272_((p_121475_) -> {
+-               if (!(p_121475_.f_19853_ instanceof ServerLevel)) {
++         m_121453_("predicate", (p_229367_0_) -> {
++            boolean flag = p_229367_0_.m_121330_();
++            ResourceLocation resourcelocation = ResourceLocation.m_135818_(p_229367_0_.m_121346_());
++            p_229367_0_.m_121272_((p_229366_2_) -> {
++               if (!(p_229366_2_.f_19853_ instanceof ServerLevel)) {
+                   return false;
+                } else {
+-                  ServerLevel serverlevel = (ServerLevel)p_121475_.f_19853_;
++                  ServerLevel serverlevel = (ServerLevel)p_229366_2_.f_19853_;
+                   LootItemCondition lootitemcondition = serverlevel.m_7654_().m_129899_().m_79252_(resourcelocation);
+                   if (lootitemcondition == null) {
+                      return false;
+                   } else {
+-                     LootContext lootcontext = (new LootContext.Builder(serverlevel)).m_78972_(LootContextParams.f_81455_, p_121475_).m_78972_(LootContextParams.f_81460_, p_121475_.m_20182_()).m_78975_(LootContextParamSets.f_81413_);
++                     LootContext lootcontext = (new LootContext.Builder(serverlevel)).m_78972_(LootContextParams.f_81455_, p_229366_2_).m_78972_(LootContextParams.f_81460_, p_229366_2_.m_20182_()).m_78975_(LootContextParamSets.f_81413_);
+                      return flag ^ lootitemcondition.test(lootcontext);
+                   }
+                }
+             });
+-         }, (p_121435_) -> {
++         }, (p_229365_0_) -> {
+             return true;
+          }, new TranslatableComponent("argument.entity.options.predicate.description"));
+       }

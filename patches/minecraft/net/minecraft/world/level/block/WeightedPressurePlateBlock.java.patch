@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/WeightedPressurePlateBlock.java
++++ b/net/minecraft/world/level/block/WeightedPressurePlateBlock.java
+@@ -18,7 +_,7 @@
+    public static final IntegerProperty f_58198_ = BlockStateProperties.f_61426_;
+    private final int f_58199_;
+ 
+-   protected WeightedPressurePlateBlock(int p_58202_, BlockBehaviour.Properties p_58203_) {
++   public WeightedPressurePlateBlock(int p_58202_, BlockBehaviour.Properties p_58203_) {
+       super(p_58203_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_58198_, Integer.valueOf(0)));
+       this.f_58199_ = p_58202_;

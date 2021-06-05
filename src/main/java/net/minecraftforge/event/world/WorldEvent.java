@@ -22,18 +22,11 @@ package net.minecraftforge.event.world;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.profiler.Profiler;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.integrated.IntegratedServer;
-import net.minecraft.util.IProgressUpdate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.WorldSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.storage.ServerLevelData;
-import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 
 /**
@@ -123,7 +116,7 @@ public class WorldEvent extends Event
      * where the latter checks for identity, meaning both events must add the same instance.
      * Canceling the event will result in a empty list, meaning no entity will be spawned.
      */
-    @Cancelable
+    @net.minecraftforge.eventbus.api.Cancelable
     public static class PotentialSpawns extends WorldEvent
     {
         private final MobCategory type;
@@ -161,7 +154,7 @@ public class WorldEvent extends Event
      * Called by WorldServer when it attempts to create a spawnpoint for a dimension.
      * Canceling the event will prevent the vanilla code from running.
      */
-    @Cancelable
+    @net.minecraftforge.eventbus.api.Cancelable
     public static class CreateSpawnPosition extends WorldEvent
     {
         private final ServerLevelData settings;

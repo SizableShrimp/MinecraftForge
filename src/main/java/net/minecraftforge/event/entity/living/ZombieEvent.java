@@ -21,13 +21,8 @@ package net.minecraftforge.event.entity.living;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.util.DamageSource;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityEvent;
-import net.minecraftforge.eventbus.api.Cancelable;
-import net.minecraftforge.eventbus.api.Event;
 
 import net.minecraftforge.eventbus.api.Event.HasResult;
 
@@ -65,7 +60,7 @@ public class ZombieEvent extends EntityEvent {
      * {@link #attacker} contains the living Entity that attacked and caused this event to fire.
      * {@link #summonChance} contains the likelihood that a Zombie would successfully be summoned.
      * 
-     * This event is not {@link Cancelable}.
+     * This event is not {@link net.minecraftforge.eventbus.api.Cancelable}.
      * 
      * This event has a result. {@link HasResult}
      * {@link Result#ALLOW} Zombie is summoned.

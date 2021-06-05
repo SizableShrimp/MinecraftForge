@@ -30,9 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.schedule.Activity;
@@ -53,7 +51,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.stats.StatType;
 import net.minecraft.tags.StaticTags;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.util.*;
 import net.minecraft.core.DefaultedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.MappedRegistry;
@@ -70,17 +67,12 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerTy
 import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 import net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ForgeTagHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.world.ForgeWorldType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
-import net.minecraftforge.fml.ModContainer;
-import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.ModLoadingStage;
 import net.minecraftforge.fml.common.EnhancedRuntimeException;
@@ -99,7 +91,6 @@ import java.lang.reflect.Field;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -400,7 +391,7 @@ public class GameData
                 revertTo(RegistryManager.VANILLA, false);
                 LOGGER.fatal("Detected errors during registry event dispatch, roll back to VANILLA complete");
             } else {
-                ForgeHooks.modifyAttributes();
+                net.minecraftforge.common.ForgeHooks.modifyAttributes();
             }
         }, executor);
     }
@@ -531,7 +522,7 @@ public class GameData
 
         private static class BlockDummyAir extends AirBlock //A named class so DummyBlockReplacementTest can detect if its a dummy
         {
-            private BlockDummyAir(Properties properties)
+            private BlockDummyAir(Block.Properties properties)
             {
                 super(properties);
             }
@@ -795,7 +786,7 @@ public class GameData
             {
                 ResourceLocation name = m.getKey();
                 ForgeRegistry<?> reg = STAGING.getRegistry(name);
-                MissingMappings<?> event = reg.getMissingEvent(name, m.getValue());
+                RegistryEvent.MissingMappings<?> event = reg.getMissingEvent(name, m.getValue());
                 MinecraftForge.EVENT_BUS.post(event);
 
                 List<MissingMappings.Mapping<?>> lst = event.getAllMappings().stream().filter(e -> e.getAction() == MissingMappings.Action.DEFAULT).sorted((a, b) -> a.toString().compareTo(b.toString())).collect(Collectors.toList());

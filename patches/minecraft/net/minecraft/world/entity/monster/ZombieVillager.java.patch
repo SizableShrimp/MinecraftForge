@@ -1,0 +1,31 @@
+--- a/net/minecraft/world/entity/monster/ZombieVillager.java
++++ b/net/minecraft/world/entity/monster/ZombieVillager.java
+@@ -68,8 +_,8 @@
+ 
+    public void m_7380_(CompoundTag p_34397_) {
+       super.m_7380_(p_34397_);
+-      VillagerData.f_35550_.encodeStart(NbtOps.f_128958_, this.m_7141_()).resultOrPartial(f_19849_::error).ifPresent((p_34390_) -> {
+-         p_34397_.m_128365_("VillagerData", p_34390_);
++      VillagerData.f_35550_.encodeStart(NbtOps.f_128958_, this.m_7141_()).resultOrPartial(f_19849_::error).ifPresent((p_234343_1_) -> {
++         p_34397_.m_128365_("VillagerData", p_234343_1_);
+       });
+       if (this.f_34362_ != null) {
+          p_34397_.m_128365_("Offers", this.f_34362_);
+@@ -116,7 +_,7 @@
+       if (!this.f_19853_.f_46443_ && this.m_6084_() && this.m_34408_()) {
+          int i = this.m_34410_();
+          this.f_34365_ -= i;
+-         if (this.f_34365_ <= 0) {
++         if (this.f_34365_ <= 0 && net.minecraftforge.event.ForgeEventFactory.canLivingConvert(this, EntityType.f_20492_, (timer) -> this.f_34365_ = timer)) {
+             this.m_34398_((ServerLevel)this.f_19853_);
+          }
+       }
+@@ -218,7 +_,7 @@
+       if (!this.m_20067_()) {
+          p_34399_.m_5898_((Player)null, 1027, this.m_20183_(), 0);
+       }
+-
++      net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, villager);
+    }
+ 
+    private int m_34410_() {

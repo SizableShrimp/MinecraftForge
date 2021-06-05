@@ -1,0 +1,39 @@
+--- a/net/minecraft/world/level/block/CampfireBlock.java
++++ b/net/minecraft/world/level/block/CampfireBlock.java
+@@ -24,7 +_,6 @@
+ import net.minecraft.world.item.crafting.CampfireCookingRecipe;
+ import net.minecraft.world.item.enchantment.EnchantmentHelper;
+ import net.minecraft.world.level.BlockGetter;
+-import net.minecraft.world.level.GameRules;
+ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.LevelAccessor;
+ import net.minecraft.world.level.block.entity.BlockEntity;
+@@ -181,7 +_,7 @@
+    public void m_5581_(Level p_51244_, BlockState p_51245_, BlockHitResult p_51246_, Projectile p_51247_) {
+       if (!p_51244_.f_46443_ && p_51247_.m_6060_()) {
+          Entity entity = p_51247_.m_37282_();
+-         boolean flag = entity == null || entity instanceof Player || p_51244_.m_46469_().m_46207_(GameRules.f_46132_);
++         boolean flag = entity == null || entity instanceof Player || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(p_51244_, entity);
+          if (flag && !p_51245_.m_61143_(f_51227_) && !p_51245_.m_61143_(f_51229_)) {
+             BlockPos blockpos = p_51246_.m_82425_();
+             p_51244_.m_7731_(blockpos, p_51245_.m_61124_(BlockStateProperties.f_61443_, Boolean.valueOf(true)), 11);
+@@ -208,7 +_,7 @@
+             return true;
+          }
+ 
+-         boolean flag = Shapes.m_83157_(f_51231_, blockstate.m_60742_(p_51249_, p_51250_, CollisionContext.m_82749_()), BooleanOp.f_82689_);
++         boolean flag = Shapes.m_83157_(f_51231_, blockstate.m_60742_(p_51249_, blockpos, CollisionContext.m_82749_()), BooleanOp.f_82689_);//Forge fix: MC-201374
+          if (flag) {
+             BlockState blockstate1 = p_51249_.m_8055_(blockpos.m_7495_());
+             return m_51319_(blockstate1);
+@@ -247,8 +_,8 @@
+    }
+ 
+    public static boolean m_51321_(BlockState p_51322_) {
+-      return p_51322_.m_60622_(BlockTags.f_13087_, (p_51262_) -> {
+-         return p_51262_.m_61138_(BlockStateProperties.f_61362_) && p_51262_.m_61138_(BlockStateProperties.f_61443_);
++      return p_51322_.m_60622_(BlockTags.f_13087_, (p_241469_0_) -> {
++         return p_241469_0_.m_61138_(BlockStateProperties.f_61362_) && p_241469_0_.m_61138_(BlockStateProperties.f_61443_);
+       }) && !p_51322_.m_61143_(BlockStateProperties.f_61362_) && !p_51322_.m_61143_(BlockStateProperties.f_61443_);
+    }
+ }

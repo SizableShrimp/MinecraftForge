@@ -1,0 +1,158 @@
+--- a/net/minecraft/tags/Tag.java
++++ b/net/minecraft/tags/Tag.java
+@@ -20,13 +_,13 @@
+ 
+ public interface Tag<T> {
+    static <T> Codec<Tag<T>> m_13290_(Supplier<TagCollection<T>> p_13291_) {
+-      return ResourceLocation.f_135803_.flatXmap((p_13297_) -> {
+-         return Optional.ofNullable(p_13291_.get().m_13404_(p_13297_)).map(DataResult::success).orElseGet(() -> {
+-            return DataResult.error("Unknown tag: " + p_13297_);
++      return ResourceLocation.f_135803_.flatXmap((p_232949_1_) -> {
++         return Optional.ofNullable(p_13291_.get().m_13404_(p_232949_1_)).map(DataResult::success).orElseGet(() -> {
++            return DataResult.error("Unknown tag: " + p_232949_1_);
+          });
+-      }, (p_13294_) -> {
+-         return Optional.ofNullable(p_13291_.get().m_7473_(p_13294_)).map(DataResult::success).orElseGet(() -> {
+-            return DataResult.error("Unknown tag: " + p_13294_);
++      }, (p_232948_1_) -> {
++         return Optional.ofNullable(p_13291_.get().m_7473_(p_232948_1_)).map(DataResult::success).orElseGet(() -> {
++            return DataResult.error("Unknown tag: " + p_232948_1_);
+          });
+       });
+    }
+@@ -46,6 +_,7 @@
+ 
+    public static class Builder {
+       private final List<Tag.BuilderEntry> f_13302_ = Lists.newArrayList();
++      private boolean replace = false;
+ 
+       public static Tag.Builder m_13304_() {
+          return new Tag.Builder();
+@@ -68,6 +_,15 @@
+          return this.m_13307_(new Tag.TagEntry(p_13336_), p_13337_);
+       }
+ 
++      public Tag.Builder replace(boolean value) {
++         this.replace = value;
++         return this;
++      }
++
++      public Tag.Builder replace() {
++         return replace(true);
++      }
++
+       public <T> Optional<Tag<T>> m_13320_(Function<ResourceLocation, Tag<T>> p_13321_, Function<ResourceLocation, T> p_13322_) {
+          ImmutableSet.Builder<T> builder = ImmutableSet.builder();
+ 
+@@ -85,8 +_,8 @@
+       }
+ 
+       public <T> Stream<Tag.BuilderEntry> m_13331_(Function<ResourceLocation, Tag<T>> p_13332_, Function<ResourceLocation, T> p_13333_) {
+-         return this.m_13330_().filter((p_13326_) -> {
+-            return !p_13326_.m_13347_().m_7657_(p_13332_, p_13333_, (p_13316_) -> {
++         return this.m_13330_().filter((p_232960_2_) -> {
++            return !p_232960_2_.m_13347_().m_7657_(p_13332_, p_13333_, (p_232957_0_) -> {
+             });
+          });
+       }
+@@ -103,8 +_,9 @@
+             this.f_13302_.clear();
+          }
+ 
+-         list.forEach((p_13319_) -> {
+-            this.f_13302_.add(new Tag.BuilderEntry(p_13319_, p_13314_));
++         net.minecraftforge.common.ForgeHooks.deserializeTagAdditions(list, p_13313_, f_13302_);
++         list.forEach((p_232958_2_) -> {
++            this.f_13302_.add(new Tag.BuilderEntry(p_232958_2_, p_13314_));
+          });
+          return this;
+       }
+@@ -138,28 +_,20 @@
+             tag$builderentry.m_13347_().m_6383_(jsonarray);
+          }
+ 
+-         jsonobject.addProperty("replace", false);
++         jsonobject.addProperty("replace", replace);
+          jsonobject.add("values", jsonarray);
+          return jsonobject;
+       }
+    }
+ 
+-   public static class BuilderEntry {
+-      private final Tag.Entry f_13338_;
+-      private final String f_13339_;
+-
+-      private BuilderEntry(Tag.Entry p_13341_, String p_13342_) {
+-         this.f_13338_ = p_13341_;
+-         this.f_13339_ = p_13342_;
+-      }
+-
+-      public Tag.Entry m_13347_() {
+-         return this.f_13338_;
+-      }
+-
+-      public String toString() {
+-         return this.f_13338_.toString() + " (from " + this.f_13339_ + ")";
+-      }
++   public interface Named<T> extends Tag<T> {
++      ResourceLocation m_6979_();
++   }
++
++   public interface Entry {
++      <T> boolean m_7657_(Function<ResourceLocation, Tag<T>> p_13360_, Function<ResourceLocation, T> p_13361_, Consumer<T> p_13362_);
++
++      void m_6383_(JsonArray p_13359_);
+    }
+ 
+    public static class ElementEntry implements Tag.Entry {
+@@ -186,16 +_,7 @@
+       public String toString() {
+          return this.f_13349_.toString();
+       }
+-   }
+-
+-   public interface Entry {
+-      <T> boolean m_7657_(Function<ResourceLocation, Tag<T>> p_13360_, Function<ResourceLocation, T> p_13361_, Consumer<T> p_13362_);
+-
+-      void m_6383_(JsonArray p_13359_);
+-   }
+-
+-   public interface Named<T> extends Tag<T> {
+-      ResourceLocation m_6979_();
++      @Override public boolean equals(Object o) { return o == this || (o instanceof Tag.ElementEntry && java.util.Objects.equals(this.f_13349_, ((Tag.ElementEntry) o).f_13349_)); }
+    }
+ 
+    public static class OptionalElementEntry implements Tag.Entry {
+@@ -254,6 +_,24 @@
+       }
+    }
+ 
++   public static class BuilderEntry {
++      private final Tag.Entry f_13338_;
++      private final String f_13339_;
++
++      private BuilderEntry(Tag.Entry p_13341_, String p_13342_) {
++         this.f_13338_ = p_13341_;
++         this.f_13339_ = p_13342_;
++      }
++
++      public Tag.Entry m_13347_() {
++         return this.f_13338_;
++      }
++
++      public String toString() {
++         return this.f_13338_.toString() + " (from " + this.f_13339_ + ")";
++      }
++   }
++
+    public static class TagEntry implements Tag.Entry {
+       private final ResourceLocation f_13383_;
+ 
+@@ -278,5 +_,7 @@
+       public String toString() {
+          return "#" + this.f_13383_;
+       }
++      @Override public boolean equals(Object o) { return o == this || (o instanceof Tag.TagEntry && java.util.Objects.equals(this.f_13383_, ((Tag.TagEntry) o).f_13383_)); }
++      public ResourceLocation getId() { return f_13383_; }
+    }
+ }

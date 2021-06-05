@@ -1,0 +1,21 @@
+--- a/net/minecraft/util/datafix/fixes/AdvancementsRenameFix.java
++++ b/net/minecraft/util/datafix/fixes/AdvancementsRenameFix.java
+@@ -17,12 +_,12 @@
+    }
+ 
+    protected TypeRewriteRule makeRule() {
+-      return this.fixTypeEverywhereTyped(this.f_14649_, this.getInputSchema().getType(References.f_16779_), (p_14657_) -> {
+-         return p_14657_.update(DSL.remainderFinder(), (p_14659_) -> {
+-            return p_14659_.updateMapValues((p_14662_) -> {
+-               String s = p_14662_.getFirst().asString("");
+-               return p_14662_.mapFirst((p_14666_) -> {
+-                  return p_14659_.createString(this.f_14650_.apply(s));
++      return this.fixTypeEverywhereTyped(this.f_14649_, this.getInputSchema().getType(References.f_16779_), (p_230071_1_) -> {
++         return p_230071_1_.update(DSL.remainderFinder(), (p_230068_1_) -> {
++            return p_230068_1_.updateMapValues((p_233068_2_) -> {
++               String s = p_233068_2_.getFirst().asString("");
++               return p_233068_2_.mapFirst((p_233069_3_) -> {
++                  return p_230068_1_.createString(this.f_14650_.apply(s));
+                });
+             });
+          });

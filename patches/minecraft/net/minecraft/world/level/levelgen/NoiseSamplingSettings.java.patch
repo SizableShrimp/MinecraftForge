@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/NoiseSamplingSettings.java
++++ b/net/minecraft/world/level/levelgen/NoiseSamplingSettings.java
+@@ -5,8 +_,8 @@
+ 
+ public class NoiseSamplingSettings {
+    private static final Codec<Double> f_64490_ = Codec.doubleRange(0.001D, 1000.0D);
+-   public static final Codec<NoiseSamplingSettings> f_64489_ = RecordCodecBuilder.create((p_64503_) -> {
+-      return p_64503_.group(f_64490_.fieldOf("xz_scale").forGetter(NoiseSamplingSettings::m_64501_), f_64490_.fieldOf("y_scale").forGetter(NoiseSamplingSettings::m_64504_), f_64490_.fieldOf("xz_factor").forGetter(NoiseSamplingSettings::m_64505_), f_64490_.fieldOf("y_factor").forGetter(NoiseSamplingSettings::m_64506_)).apply(p_64503_, NoiseSamplingSettings::new);
++   public static final Codec<NoiseSamplingSettings> f_64489_ = RecordCodecBuilder.create((p_236152_0_) -> {
++      return p_236152_0_.group(f_64490_.fieldOf("xz_scale").forGetter(NoiseSamplingSettings::m_64501_), f_64490_.fieldOf("y_scale").forGetter(NoiseSamplingSettings::m_64504_), f_64490_.fieldOf("xz_factor").forGetter(NoiseSamplingSettings::m_64505_), f_64490_.fieldOf("y_factor").forGetter(NoiseSamplingSettings::m_64506_)).apply(p_236152_0_, NoiseSamplingSettings::new);
+    });
+    private final double f_64491_;
+    private final double f_64492_;

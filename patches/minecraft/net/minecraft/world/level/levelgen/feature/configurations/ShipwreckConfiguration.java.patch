@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/ShipwreckConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/ShipwreckConfiguration.java
+@@ -3,8 +_,8 @@
+ import com.mojang.serialization.Codec;
+ 
+ public class ShipwreckConfiguration implements FeatureConfiguration {
+-   public static final Codec<ShipwreckConfiguration> f_68061_ = Codec.BOOL.fieldOf("is_beached").orElse(false).xmap(ShipwreckConfiguration::new, (p_68067_) -> {
+-      return p_68067_.f_68062_;
++   public static final Codec<ShipwreckConfiguration> f_68061_ = Codec.BOOL.fieldOf("is_beached").orElse(false).xmap(ShipwreckConfiguration::new, (p_236635_0_) -> {
++      return p_236635_0_.f_68062_;
+    }).codec();
+    public final boolean f_68062_;
+ 

@@ -1,0 +1,72 @@
+--- a/net/minecraft/world/entity/raid/Raid.java
++++ b/net/minecraft/world/entity/raid/Raid.java
+@@ -156,9 +_,9 @@
+    }
+ 
+    private Predicate<ServerPlayer> m_37784_() {
+-      return (p_37723_) -> {
+-         BlockPos blockpos = p_37723_.m_20183_();
+-         return p_37723_.m_6084_() && this.f_37675_.m_8832_(blockpos) == this;
++      return (p_221302_1_) -> {
++         BlockPos blockpos = p_221302_1_.m_20183_();
++         return p_221302_1_.m_6084_() && this.f_37675_.m_8832_(blockpos) == this;
+       };
+    }
+ 
+@@ -356,8 +_,8 @@
+ 
+    private void m_37786_() {
+       Stream<SectionPos> stream = SectionPos.m_123201_(SectionPos.m_123199_(this.f_37674_), 2);
+-      stream.filter(this.f_37675_::m_8762_).map(SectionPos::m_123250_).min(Comparator.comparingDouble((p_37766_) -> {
+-         return p_37766_.m_123331_(this.f_37674_);
++      stream.filter(this.f_37675_::m_8762_).map(SectionPos::m_123250_).min(Comparator.comparingDouble((p_223025_1_) -> {
++         return p_223025_1_.m_123331_(this.f_37674_);
+       })).ifPresent(this::m_37760_);
+    }
+ 
+@@ -599,7 +_,7 @@
+    }
+ 
+    public boolean m_37718_(int p_37719_, Raider p_37720_, boolean p_37721_) {
+-      this.f_37671_.computeIfAbsent(p_37719_, (p_37746_) -> {
++      this.f_37671_.computeIfAbsent(p_37719_, (p_221323_0_) -> {
+          return Sets.newHashSet();
+       });
+       Set<Raider> set = this.f_37671_.get(p_37719_);
+@@ -768,20 +_,34 @@
+       }
+    }
+ 
+-   static enum RaiderType {
++   public static enum RaiderType implements net.minecraftforge.common.IExtensibleEnum {
+       VINDICATOR(EntityType.f_20493_, new int[]{0, 0, 2, 0, 1, 4, 2, 5}),
+       EVOKER(EntityType.f_20568_, new int[]{0, 0, 0, 0, 0, 1, 1, 2}),
+       PILLAGER(EntityType.f_20513_, new int[]{0, 4, 3, 3, 4, 4, 4, 2}),
+       WITCH(EntityType.f_20495_, new int[]{0, 0, 0, 0, 3, 0, 0, 1}),
+       RAVAGER(EntityType.f_20518_, new int[]{0, 0, 0, 1, 0, 1, 0, 2});
+ 
+-      private static final Raid.RaiderType[] f_37813_ = values();
++      private static Raid.RaiderType[] f_37813_ = values();
+       private final EntityType<? extends Raider> f_37814_;
+       private final int[] f_37815_;
+ 
+       private RaiderType(EntityType<? extends Raider> p_37821_, int[] p_37822_) {
+          this.f_37814_ = p_37821_;
+          this.f_37815_ = p_37822_;
++      }
++      
++      /**
++       * The waveCountsIn integer decides how many entities of the EntityType defined in typeIn will spawn in each wave.
++       * For example, one ravager will always spawn in wave 3.
++       */
++      public static RaiderType create(String name, EntityType<? extends Raider> typeIn, int[] waveCountsIn) {
++         throw new IllegalStateException("Enum not extended");
++      }
++      
++      @Override
++      @Deprecated
++      public void init() {
++         f_37813_ = values();
+       }
+    }
+ }

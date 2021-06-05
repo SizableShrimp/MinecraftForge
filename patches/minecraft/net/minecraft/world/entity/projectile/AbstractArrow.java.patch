@@ -1,0 +1,20 @@
+--- a/net/minecraft/world/entity/projectile/AbstractArrow.java
++++ b/net/minecraft/world/entity/projectile/AbstractArrow.java
+@@ -130,7 +_,7 @@
+ 
+       BlockPos blockpos = this.m_20183_();
+       BlockState blockstate = this.f_19853_.m_8055_(blockpos);
+-      if (!blockstate.m_60795_() && !flag) {
++      if (!blockstate.isAir(this.f_19853_, blockpos) && !flag) {
+          VoxelShape voxelshape = blockstate.m_60812_(this.f_19853_, blockpos);
+          if (!voxelshape.m_83281_()) {
+             Vec3 vec31 = this.m_20182_();
+@@ -184,7 +_,7 @@
+                }
+             }
+ 
+-            if (hitresult != null && !flag) {
++            if (hitresult != null && hitresult.m_6662_() != HitResult.Type.MISS && !flag && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, hitresult)) {
+                this.m_6532_(hitresult);
+                this.f_19812_ = true;
+             }

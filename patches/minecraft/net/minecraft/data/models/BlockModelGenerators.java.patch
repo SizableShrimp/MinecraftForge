@@ -1,0 +1,451 @@
+--- a/net/minecraft/data/models/BlockModelGenerators.java
++++ b/net/minecraft/data/models/BlockModelGenerators.java
+@@ -333,8 +_,8 @@
+       TextureMapping texturemapping1 = TextureMapping.m_125750_(p_124789_, p_124790_);
+       ResourceLocation resourcelocation = ModelTemplates.f_125679_.m_125592_(p_124790_, texturemapping1, this.f_124478_);
+       this.f_124477_.accept(MultiVariantGenerator.m_125256_(p_124790_, Variant.m_125501_().m_125511_(VariantProperties.f_125520_, resourcelocation)).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61374_).m_125329_(Direction.WEST, Variant.m_125501_()).m_125329_(Direction.SOUTH, Variant.m_125501_().m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R270)).m_125329_(Direction.NORTH, Variant.m_125501_().m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R90)).m_125329_(Direction.EAST, Variant.m_125501_().m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R180))));
+-      this.f_124477_.accept(MultiVariantGenerator.m_125254_(p_124789_).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61409_).m_125335_((p_124574_) -> {
+-         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, ModelTemplates.f_125678_[p_124574_].m_125592_(p_124789_, texturemapping, this.f_124478_));
++      this.f_124477_.accept(MultiVariantGenerator.m_125254_(p_124789_).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61409_).m_125335_((p_239881_3_) -> {
++         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, ModelTemplates.f_125678_[p_239881_3_].m_125592_(p_124789_, texturemapping, this.f_124478_));
+       })));
+    }
+ 
+@@ -389,20 +_,20 @@
+       ResourceLocation resourcelocation3 = this.m_124578_(p_124975_, "_on", ModelTemplates.f_125643_, TextureMapping::m_125802_);
+       ResourceLocation resourcelocation4 = this.m_124578_(p_124975_, "_on", ModelTemplates.f_125645_, TextureMapping::m_125802_);
+       ResourceLocation resourcelocation5 = this.m_124578_(p_124975_, "_on", ModelTemplates.f_125646_, TextureMapping::m_125802_);
+-      PropertyDispatch propertydispatch = PropertyDispatch.m_125296_(BlockStateProperties.f_61448_, BlockStateProperties.f_61404_).m_125362_((p_124706_, p_124707_) -> {
+-         switch(p_124707_) {
++      PropertyDispatch propertydispatch = PropertyDispatch.m_125296_(BlockStateProperties.f_61448_, BlockStateProperties.f_61404_).m_125362_((p_239919_6_, p_239919_7_) -> {
++         switch(p_239919_7_) {
+          case NORTH_SOUTH:
+-            return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_124706_ ? resourcelocation3 : resourcelocation);
++            return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_239919_6_ ? resourcelocation3 : resourcelocation);
+          case EAST_WEST:
+-            return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_124706_ ? resourcelocation3 : resourcelocation).m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R90);
++            return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_239919_6_ ? resourcelocation3 : resourcelocation).m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R90);
+          case ASCENDING_EAST:
+-            return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_124706_ ? resourcelocation4 : resourcelocation1).m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R90);
++            return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_239919_6_ ? resourcelocation4 : resourcelocation1).m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R90);
+          case ASCENDING_WEST:
+-            return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_124706_ ? resourcelocation5 : resourcelocation2).m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R90);
++            return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_239919_6_ ? resourcelocation5 : resourcelocation2).m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R90);
+          case ASCENDING_NORTH:
+-            return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_124706_ ? resourcelocation4 : resourcelocation1);
++            return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_239919_6_ ? resourcelocation4 : resourcelocation1);
+          case ASCENDING_SOUTH:
+-            return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_124706_ ? resourcelocation5 : resourcelocation2);
++            return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_239919_6_ ? resourcelocation5 : resourcelocation2);
+          default:
+             throw new UnsupportedOperationException("Fix you generator!");
+          }
+@@ -467,8 +_,8 @@
+    private void m_124977_(Block p_124978_) {
+       TextureMapping texturemapping = TextureMapping.m_125844_(p_124978_);
+       ResourceLocation resourcelocation = ModelTemplates.f_125676_.m_125592_(p_124978_, texturemapping, this.f_124478_);
+-      ResourceLocation resourcelocation1 = this.m_124578_(p_124978_, "_conditional", ModelTemplates.f_125676_, (p_124773_) -> {
+-         return texturemapping.m_125785_(TextureSlot.f_125875_, p_124773_);
++      ResourceLocation resourcelocation1 = this.m_124578_(p_124978_, "_conditional", ModelTemplates.f_125676_, (p_239947_1_) -> {
++         return texturemapping.m_125785_(TextureSlot.f_125875_, p_239947_1_);
+       });
+       this.f_124477_.accept(MultiVariantGenerator.m_125254_(p_124978_).m_125271_(m_124622_(BlockStateProperties.f_61428_, resourcelocation1, resourcelocation)).m_125271_(m_124850_()));
+    }
+@@ -480,8 +_,8 @@
+ 
+    private List<Variant> m_124511_(int p_124512_) {
+       String s = "_age" + p_124512_;
+-      return IntStream.range(1, 5).mapToObj((p_124681_) -> {
+-         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, ModelLocationUtils.m_125578_(Blocks.f_50571_, p_124681_ + s));
++      return IntStream.range(1, 5).mapToObj((p_239913_1_) -> {
++         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, ModelLocationUtils.m_125578_(Blocks.f_50571_, p_239913_1_ + s));
+       }).collect(Collectors.toList());
+    }
+ 
+@@ -496,16 +_,16 @@
+ 
+    private void m_124959_() {
+       ResourceLocation resourcelocation = TextureMapping.m_125753_(Blocks.f_50618_, "_top_open");
+-      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50618_).m_125271_(this.m_124947_()).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61446_).m_125329_(false, Variant.m_125501_().m_125511_(VariantProperties.f_125520_, TexturedModel.f_125909_.m_125956_(Blocks.f_50618_, this.f_124478_))).m_125329_(true, Variant.m_125501_().m_125511_(VariantProperties.f_125520_, TexturedModel.f_125909_.m_125964_(Blocks.f_50618_).m_125940_((p_124849_) -> {
+-         p_124849_.m_125758_(TextureSlot.f_125872_, resourcelocation);
++      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50618_).m_125271_(this.m_124947_()).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61446_).m_125329_(false, Variant.m_125501_().m_125511_(VariantProperties.f_125520_, TexturedModel.f_125909_.m_125956_(Blocks.f_50618_, this.f_124478_))).m_125329_(true, Variant.m_125501_().m_125511_(VariantProperties.f_125520_, TexturedModel.f_125909_.m_125964_(Blocks.f_50618_).m_125940_((p_239973_1_) -> {
++         p_239973_1_.m_125758_(TextureSlot.f_125872_, resourcelocation);
+       }).m_125933_(Blocks.f_50618_, "_open", this.f_124478_)))));
+    }
+ 
+    private static <T extends Comparable<T>> PropertyDispatch m_124626_(Property<T> p_124627_, T p_124628_, ResourceLocation p_124629_, ResourceLocation p_124630_) {
+       Variant variant = Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_124629_);
+       Variant variant1 = Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_124630_);
+-      return PropertyDispatch.m_125294_(p_124627_).m_125335_((p_124669_) -> {
+-         boolean flag = p_124669_.compareTo(p_124628_) >= 0;
++      return PropertyDispatch.m_125294_(p_124627_).m_125335_((p_239909_3_) -> {
++         boolean flag = p_239909_3_.compareTo(p_124628_) >= 0;
+          return flag ? variant : variant1;
+       });
+    }
+@@ -523,9 +_,9 @@
+          throw new IllegalArgumentException();
+       } else {
+          Int2ObjectMap<ResourceLocation> int2objectmap = new Int2ObjectOpenHashMap<>();
+-         PropertyDispatch propertydispatch = PropertyDispatch.m_125294_(p_124555_).m_125335_((p_124712_) -> {
+-            int i = p_124556_[p_124712_];
+-            ResourceLocation resourcelocation = int2objectmap.computeIfAbsent(i, (p_124529_) -> {
++         PropertyDispatch propertydispatch = PropertyDispatch.m_125294_(p_124555_).m_125335_((p_239920_4_) -> {
++            int i = p_124556_[p_239920_4_];
++            ResourceLocation resourcelocation = int2objectmap.computeIfAbsent(i, (p_239870_3_) -> {
+                return this.m_124578_(p_124554_, "_stage" + i, ModelTemplates.f_125680_, TextureMapping::m_125808_);
+             });
+             return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, resourcelocation);
+@@ -551,8 +_,8 @@
+    private void m_124856_(Block p_124857_, TexturedModel.Provider p_124858_) {
+       ResourceLocation resourcelocation = p_124858_.m_125956_(p_124857_, this.f_124478_);
+       ResourceLocation resourcelocation1 = TextureMapping.m_125753_(p_124857_, "_front_on");
+-      ResourceLocation resourcelocation2 = p_124858_.m_125964_(p_124857_).m_125940_((p_124821_) -> {
+-         p_124821_.m_125758_(TextureSlot.f_125873_, resourcelocation1);
++      ResourceLocation resourcelocation2 = p_124858_.m_125964_(p_124857_).m_125940_((p_239963_1_) -> {
++         p_239963_1_.m_125758_(TextureSlot.f_125873_, resourcelocation1);
+       }).m_125933_(p_124857_, "_on", this.f_124478_);
+       this.f_124477_.accept(MultiVariantGenerator.m_125254_(p_124857_).m_125271_(m_124622_(BlockStateProperties.f_61443_, resourcelocation2, resourcelocation)).m_125271_(m_124727_()));
+    }
+@@ -651,8 +_,8 @@
+    private void m_125006_() {
+       TextureMapping texturemapping = TextureMapping.m_125768_(Blocks.f_50491_);
+       ResourceLocation resourcelocation = ModelTemplates.f_125669_.m_125592_(Blocks.f_50491_, texturemapping, this.f_124478_);
+-      ResourceLocation resourcelocation1 = this.m_124578_(Blocks.f_50491_, "_dead", ModelTemplates.f_125669_, (p_124661_) -> {
+-         return texturemapping.m_125785_(TextureSlot.f_125868_, p_124661_);
++      ResourceLocation resourcelocation1 = this.m_124578_(Blocks.f_50491_, "_dead", ModelTemplates.f_125669_, (p_239906_1_) -> {
++         return texturemapping.m_125785_(TextureSlot.f_125868_, p_239906_1_);
+       });
+       this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50491_).m_125271_(m_124626_(BlockStateProperties.f_61408_, 5, resourcelocation1, resourcelocation)));
+    }
+@@ -731,8 +_,8 @@
+    }
+ 
+    private static List<Variant> m_124682_(List<ResourceLocation> p_124683_, UnaryOperator<Variant> p_124684_) {
+-      return p_124683_.stream().map((p_124781_) -> {
+-         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_124781_);
++      return p_124683_.stream().map((p_239950_0_) -> {
++         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_239950_0_);
+       }).map(p_124684_).collect(Collectors.toList());
+    }
+ 
+@@ -741,34 +_,34 @@
+       List<ResourceLocation> list = this.m_124995_(Blocks.f_50083_);
+       List<ResourceLocation> list1 = this.m_124998_(Blocks.f_50083_);
+       List<ResourceLocation> list2 = this.m_125001_(Blocks.f_50083_);
+-      this.f_124477_.accept(MultiPartGenerator.m_125204_(Blocks.f_50083_).m_125212_(condition, m_124682_(list, (p_124966_) -> {
+-         return p_124966_;
+-      })).m_125212_(Condition.m_125137_(Condition.m_125135_().m_125176_(BlockStateProperties.f_61368_, true), condition), m_124682_(list1, (p_124958_) -> {
+-         return p_124958_;
+-      })).m_125212_(Condition.m_125137_(Condition.m_125135_().m_125176_(BlockStateProperties.f_61369_, true), condition), m_124682_(list1, (p_124946_) -> {
+-         return p_124946_.m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R90);
+-      })).m_125212_(Condition.m_125137_(Condition.m_125135_().m_125176_(BlockStateProperties.f_61370_, true), condition), m_124682_(list1, (p_124934_) -> {
+-         return p_124934_.m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R180);
+-      })).m_125212_(Condition.m_125137_(Condition.m_125135_().m_125176_(BlockStateProperties.f_61371_, true), condition), m_124682_(list1, (p_124914_) -> {
+-         return p_124914_.m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R270);
+-      })).m_125212_(Condition.m_125135_().m_125176_(BlockStateProperties.f_61366_, true), m_124682_(list2, (p_124894_) -> {
+-         return p_124894_;
++      this.f_124477_.accept(MultiPartGenerator.m_125204_(Blocks.f_50083_).m_125212_(condition, m_124682_(list, (p_240016_0_) -> {
++         return p_240016_0_;
++      })).m_125212_(Condition.m_125137_(Condition.m_125135_().m_125176_(BlockStateProperties.f_61368_, true), condition), m_124682_(list1, (p_240012_0_) -> {
++         return p_240012_0_;
++      })).m_125212_(Condition.m_125137_(Condition.m_125135_().m_125176_(BlockStateProperties.f_61369_, true), condition), m_124682_(list1, (p_240007_0_) -> {
++         return p_240007_0_.m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R90);
++      })).m_125212_(Condition.m_125137_(Condition.m_125135_().m_125176_(BlockStateProperties.f_61370_, true), condition), m_124682_(list1, (p_240002_0_) -> {
++         return p_240002_0_.m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R180);
++      })).m_125212_(Condition.m_125137_(Condition.m_125135_().m_125176_(BlockStateProperties.f_61371_, true), condition), m_124682_(list1, (p_239996_0_) -> {
++         return p_239996_0_.m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R270);
++      })).m_125212_(Condition.m_125135_().m_125176_(BlockStateProperties.f_61366_, true), m_124682_(list2, (p_239989_0_) -> {
++         return p_239989_0_;
+       })));
+    }
+ 
+    private void m_124488_() {
+       List<ResourceLocation> list = this.m_124995_(Blocks.f_50084_);
+       List<ResourceLocation> list1 = this.m_124998_(Blocks.f_50084_);
+-      this.f_124477_.accept(MultiPartGenerator.m_125204_(Blocks.f_50084_).m_125220_(m_124682_(list, (p_124872_) -> {
+-         return p_124872_;
+-      })).m_125220_(m_124682_(list1, (p_124844_) -> {
+-         return p_124844_;
+-      })).m_125220_(m_124682_(list1, (p_124816_) -> {
+-         return p_124816_.m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R90);
+-      })).m_125220_(m_124682_(list1, (p_124768_) -> {
+-         return p_124768_.m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R180);
+-      })).m_125220_(m_124682_(list1, (p_124656_) -> {
+-         return p_124656_.m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R270);
++      this.f_124477_.accept(MultiPartGenerator.m_125204_(Blocks.f_50084_).m_125220_(m_124682_(list, (p_239981_0_) -> {
++         return p_239981_0_;
++      })).m_125220_(m_124682_(list1, (p_239971_0_) -> {
++         return p_239971_0_;
++      })).m_125220_(m_124682_(list1, (p_239961_0_) -> {
++         return p_239961_0_.m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R90);
++      })).m_125220_(m_124682_(list1, (p_239945_0_) -> {
++         return p_239945_0_.m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R180);
++      })).m_125220_(m_124682_(list1, (p_239904_0_) -> {
++         return p_239904_0_.m_125511_(VariantProperties.f_125519_, VariantProperties.Rotation.R270);
+       })));
+    }
+ 
+@@ -788,12 +_,12 @@
+       TextureMapping texturemapping = (new TextureMapping()).m_125758_(TextureSlot.f_125871_, resourcelocation).m_125773_(TextureSlot.f_125871_, TextureSlot.f_125869_).m_125758_(TextureSlot.f_125872_, TextureMapping.m_125753_(Blocks.f_50440_, "_top")).m_125758_(TextureSlot.f_125875_, TextureMapping.m_125753_(Blocks.f_50440_, "_snow"));
+       Variant variant = Variant.m_125501_().m_125511_(VariantProperties.f_125520_, ModelTemplates.f_125697_.m_125596_(Blocks.f_50440_, "_snow", texturemapping, this.f_124478_));
+       this.m_124599_(Blocks.f_50440_, ModelLocationUtils.m_125576_(Blocks.f_50440_), variant);
+-      ResourceLocation resourcelocation1 = TexturedModel.f_125909_.m_125964_(Blocks.f_50195_).m_125940_((p_124784_) -> {
+-         p_124784_.m_125758_(TextureSlot.f_125871_, resourcelocation);
++      ResourceLocation resourcelocation1 = TexturedModel.f_125909_.m_125964_(Blocks.f_50195_).m_125940_((p_239951_1_) -> {
++         p_239951_1_.m_125758_(TextureSlot.f_125871_, resourcelocation);
+       }).m_125937_(Blocks.f_50195_, this.f_124478_);
+       this.m_124599_(Blocks.f_50195_, resourcelocation1, variant);
+-      ResourceLocation resourcelocation2 = TexturedModel.f_125909_.m_125964_(Blocks.f_50599_).m_125940_((p_124695_) -> {
+-         p_124695_.m_125758_(TextureSlot.f_125871_, resourcelocation);
++      ResourceLocation resourcelocation2 = TexturedModel.f_125909_.m_125964_(Blocks.f_50599_).m_125940_((p_239917_1_) -> {
++         p_239917_1_.m_125758_(TextureSlot.f_125871_, resourcelocation);
+       }).m_125937_(Blocks.f_50599_, this.f_124478_);
+       this.m_124599_(Blocks.f_50599_, resourcelocation2, variant);
+    }
+@@ -937,14 +_,14 @@
+ 
+    private void m_124505_() {
+       this.m_124517_(Items.f_42350_);
+-      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50146_).m_125271_(PropertyDispatch.m_125299_(BlockStateProperties.f_61413_, BlockStateProperties.f_61444_, BlockStateProperties.f_61448_).m_125389_((p_124673_, p_124674_, p_124675_) -> {
++      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50146_).m_125271_(PropertyDispatch.m_125299_(BlockStateProperties.f_61413_, BlockStateProperties.f_61444_, BlockStateProperties.f_61448_).m_125389_((p_239911_0_, p_239911_1_, p_239911_2_) -> {
+          StringBuilder stringbuilder = new StringBuilder();
+-         stringbuilder.append('_').append((Object)p_124673_).append("tick");
+-         if (p_124675_) {
++         stringbuilder.append('_').append((Object)p_239911_0_).append("tick");
++         if (p_239911_2_) {
+             stringbuilder.append("_on");
+          }
+ 
+-         if (p_124674_) {
++         if (p_239911_1_) {
+             stringbuilder.append("_locked");
+          }
+ 
+@@ -960,8 +_,8 @@
+    private void m_124507_() {
+       TextureMapping texturemapping = TextureMapping.m_125748_(Blocks.f_50125_);
+       ResourceLocation resourcelocation = ModelTemplates.f_125692_.m_125592_(Blocks.f_50127_, texturemapping, this.f_124478_);
+-      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50125_).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61417_).m_125335_((p_124698_) -> {
+-         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_124698_ < 8 ? ModelLocationUtils.m_125578_(Blocks.f_50125_, "_height" + p_124698_ * 2) : resourcelocation);
++      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50125_).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61417_).m_125335_((p_239918_1_) -> {
++         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, p_239918_1_ < 8 ? ModelLocationUtils.m_125578_(Blocks.f_50125_, "_height" + p_239918_1_ * 2) : resourcelocation);
+       })));
+       this.m_124797_(Blocks.f_50125_, ModelLocationUtils.m_125578_(Blocks.f_50125_, "_height2"));
+       this.f_124477_.accept(m_124859_(Blocks.f_50127_, resourcelocation));
+@@ -974,15 +_,15 @@
+    private void m_124509_() {
+       ResourceLocation resourcelocation = TexturedModel.f_125905_.m_125956_(Blocks.f_50677_, this.f_124478_);
+       this.m_124797_(Blocks.f_50677_, resourcelocation);
+-      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50677_).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61399_).m_125335_((p_124632_) -> {
+-         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, this.m_124578_(Blocks.f_50677_, "_" + p_124632_.m_7912_(), ModelTemplates.f_125692_, TextureMapping::m_125776_));
++      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50677_).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61399_).m_125335_((p_239896_1_) -> {
++         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, this.m_124578_(Blocks.f_50677_, "_" + p_239896_1_.m_7912_(), ModelTemplates.f_125692_, TextureMapping::m_125776_));
+       })));
+    }
+ 
+    private void m_124718_() {
+       this.m_124517_(Items.f_42780_);
+-      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50685_).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61407_).m_125335_((p_124671_) -> {
+-         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, this.m_124578_(Blocks.f_50685_, "_stage" + p_124671_, ModelTemplates.f_125639_, TextureMapping::m_125788_));
++      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50685_).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61407_).m_125335_((p_239910_1_) -> {
++         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, this.m_124578_(Blocks.f_50685_, "_stage" + p_239910_1_, ModelTemplates.f_125639_, TextureMapping::m_125788_));
+       })));
+    }
+ 
+@@ -993,8 +_,8 @@
+ 
+    private void m_124720_() {
+       this.m_124728_(Blocks.f_50266_);
+-      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50266_).m_125271_(PropertyDispatch.m_125296_(BlockStateProperties.f_61386_, BlockStateProperties.f_61448_).m_125362_((p_124663_, p_124664_) -> {
+-         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, TextureMapping.m_125753_(Blocks.f_50266_, (p_124663_ ? "_attached" : "") + (p_124664_ ? "_on" : "")));
++      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50266_).m_125271_(PropertyDispatch.m_125296_(BlockStateProperties.f_61386_, BlockStateProperties.f_61448_).m_125362_((p_239908_0_, p_239908_1_) -> {
++         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, TextureMapping.m_125753_(Blocks.f_50266_, (p_239908_0_ ? "_attached" : "") + (p_239908_1_ ? "_on" : "")));
+       })).m_125271_(m_124727_()));
+    }
+ 
+@@ -1028,8 +_,8 @@
+ 
+    private void m_124721_() {
+       this.m_124517_(Items.f_42279_);
+-      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50578_).m_125271_(PropertyDispatch.m_125296_(BlockStateProperties.f_61415_, BlockStateProperties.f_61416_).m_125372_((p_124775_, p_124776_) -> {
+-         return Arrays.asList(m_124688_(this.m_124676_(p_124775_, p_124776_)));
++      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50578_).m_125271_(PropertyDispatch.m_125296_(BlockStateProperties.f_61415_, BlockStateProperties.f_61416_).m_125372_((p_239949_1_, p_239949_2_) -> {
++         return Arrays.asList(m_124688_(this.m_124676_(p_239949_1_, p_239949_2_)));
+       })));
+    }
+ 
+@@ -1081,8 +_,8 @@
+          aresourcelocation[i] = ModelTemplates.f_125697_.m_125596_(Blocks.f_50724_, "_" + i, texturemapping, this.f_124478_);
+       }
+ 
+-      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50724_).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61389_).m_125335_((p_124717_) -> {
+-         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, aresourcelocation[p_124717_]);
++      this.f_124477_.accept(MultiVariantGenerator.m_125254_(Blocks.f_50724_).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61389_).m_125335_((p_239922_1_) -> {
++         return Variant.m_125501_().m_125511_(VariantProperties.f_125520_, aresourcelocation[p_239922_1_]);
+       })));
+       this.m_124519_(Items.f_42767_, aresourcelocation[0]);
+    }
+@@ -1125,8 +_,8 @@
+       ResourceLocation resourcelocation3 = TextureMapping.m_125753_(Blocks.f_50678_, "_lock");
+       TextureMapping texturemapping = (new TextureMapping()).m_125758_(TextureSlot.f_125881_, resourcelocation2).m_125758_(TextureSlot.f_125879_, resourcelocation2).m_125758_(TextureSlot.f_125878_, resourcelocation2).m_125758_(TextureSlot.f_125869_, resourcelocation).m_125758_(TextureSlot.f_125876_, resourcelocation).m_125758_(TextureSlot.f_125877_, resourcelocation1).m_125758_(TextureSlot.f_125880_, resourcelocation3);
+       ResourceLocation resourcelocation4 = ModelTemplates.f_125691_.m_125592_(Blocks.f_50678_, texturemapping, this.f_124478_);
+-      this.f_124477_.accept(MultiVariantGenerator.m_125256_(Blocks.f_50678_, Variant.m_125501_().m_125511_(VariantProperties.f_125520_, resourcelocation4)).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61375_).m_125335_((p_124634_) -> {
+-         return this.m_124635_(p_124634_, Variant.m_125501_());
++      this.f_124477_.accept(MultiVariantGenerator.m_125256_(Blocks.f_50678_, Variant.m_125501_().m_125511_(VariantProperties.f_125520_, resourcelocation4)).m_125271_(PropertyDispatch.m_125294_(BlockStateProperties.f_61375_).m_125335_((p_239897_1_) -> {
++         return this.m_124635_(p_239897_1_, Variant.m_125501_());
+       })));
+    }
+ 
+@@ -1206,8 +_,8 @@
+       this.m_124794_(Blocks.f_50692_, TexturedModel.f_125905_);
+       this.m_124794_(Blocks.f_50057_, TexturedModel.f_125905_);
+       this.m_124794_(Blocks.f_50736_, TexturedModel.f_125905_);
+-      this.m_124794_(Blocks.f_50282_, TexturedModel.f_125907_.m_125959_((p_124874_) -> {
+-         p_124874_.m_125758_(TextureSlot.f_125875_, TextureMapping.m_125740_(Blocks.f_50282_));
++      this.m_124794_(Blocks.f_50282_, TexturedModel.f_125907_.m_125959_((p_239982_0_) -> {
++         p_239982_0_.m_125758_(TextureSlot.f_125875_, TextureMapping.m_125740_(Blocks.f_50282_));
+       }));
+       this.m_124794_(Blocks.f_50225_, TexturedModel.f_125905_);
+       this.m_124898_(Blocks.f_50063_, Blocks.f_50062_);
+@@ -1509,9 +_,9 @@
+       this.m_124970_(Blocks.f_50693_, Blocks.f_50728_);
+       this.m_124737_(Blocks.f_50694_, BlockModelGenerators.TintState.NOT_TINTED);
+       this.m_124517_(Items.f_41906_);
+-      this.m_124657_(TextureMapping.m_125748_(Blocks.f_50069_)).m_125043_((p_124846_) -> {
+-         ResourceLocation resourcelocation = ModelTemplates.f_125692_.m_125592_(Blocks.f_50069_, p_124846_, this.f_124478_);
+-         ResourceLocation resourcelocation1 = ModelTemplates.f_125693_.m_125592_(Blocks.f_50069_, p_124846_, this.f_124478_);
++      this.m_124657_(TextureMapping.m_125748_(Blocks.f_50069_)).m_125043_((p_239972_1_) -> {
++         ResourceLocation resourcelocation = ModelTemplates.f_125692_.m_125592_(Blocks.f_50069_, p_239972_1_, this.f_124478_);
++         ResourceLocation resourcelocation1 = ModelTemplates.f_125693_.m_125592_(Blocks.f_50069_, p_239972_1_, this.f_124478_);
+          this.f_124477_.accept(m_124862_(Blocks.f_50069_, resourcelocation, resourcelocation1));
+          return resourcelocation;
+       }).m_125053_(Blocks.f_50404_).m_125051_(Blocks.f_50165_).m_125035_(Blocks.f_50124_).m_125055_(Blocks.f_50635_);
+@@ -1526,13 +_,13 @@
+       this.m_124876_(Blocks.f_50379_).m_125055_(Blocks.f_50382_).m_125053_(Blocks.f_50385_);
+       this.m_124828_(Blocks.f_50062_, TexturedModel.f_125924_).m_125045_(Blocks.f_50613_).m_125055_(Blocks.f_50263_).m_125053_(Blocks.f_50406_);
+       this.m_124593_(Blocks.f_50471_, TexturedModel.m_125949_(TextureMapping.m_125753_(Blocks.f_50062_, "_top"))).m_125053_(Blocks.f_50649_).m_125055_(Blocks.f_50636_);
+-      this.m_124593_(Blocks.f_50064_, TexturedModel.f_125907_.m_125964_(Blocks.f_50062_).m_125940_((p_124818_) -> {
+-         p_124818_.m_125758_(TextureSlot.f_125875_, TextureMapping.m_125740_(Blocks.f_50064_));
++      this.m_124593_(Blocks.f_50064_, TexturedModel.f_125907_.m_125964_(Blocks.f_50062_).m_125940_((p_239962_0_) -> {
++         p_239962_0_.m_125758_(TextureSlot.f_125875_, TextureMapping.m_125740_(Blocks.f_50064_));
+       })).m_125053_(Blocks.f_50407_);
+       this.m_124828_(Blocks.f_50394_, TexturedModel.f_125924_).m_125045_(Blocks.f_50606_).m_125055_(Blocks.f_50397_).m_125053_(Blocks.f_50467_);
+       this.m_124593_(Blocks.f_50473_, TexturedModel.m_125949_(TextureMapping.m_125753_(Blocks.f_50394_, "_top"))).m_125053_(Blocks.f_50644_).m_125055_(Blocks.f_50630_);
+-      this.m_124593_(Blocks.f_50396_, TexturedModel.f_125907_.m_125964_(Blocks.f_50394_).m_125940_((p_124770_) -> {
+-         p_124770_.m_125758_(TextureSlot.f_125875_, TextureMapping.m_125740_(Blocks.f_50396_));
++      this.m_124593_(Blocks.f_50396_, TexturedModel.f_125907_.m_125964_(Blocks.f_50394_).m_125940_((p_239946_0_) -> {
++         p_239946_0_.m_125758_(TextureSlot.f_125875_, TextureMapping.m_125740_(Blocks.f_50396_));
+       })).m_125053_(Blocks.f_50468_);
+       this.m_124876_(Blocks.f_50076_).m_125045_(Blocks.f_50604_).m_125055_(Blocks.f_50193_).m_125053_(Blocks.f_50410_);
+       this.m_124876_(Blocks.f_50197_).m_125047_(Blocks.f_50198_).m_125045_(Blocks.f_50610_).m_125055_(Blocks.f_50199_).m_125053_(Blocks.f_50412_);
+@@ -1575,41 +_,9 @@
+       this.m_124938_(Blocks.f_50223_, Blocks.f_50177_);
+       this.m_124724_();
+       this.m_124938_(Blocks.f_50222_, Blocks.f_50176_);
+-      SpawnEggItem.m_43233_().forEach((p_124523_) -> {
+-         this.m_124519_(p_124523_, ModelLocationUtils.m_125583_("template_spawn_egg"));
++      SpawnEggItem.m_43233_().forEach((p_239868_1_) -> {
++         this.m_124519_(p_239868_1_, ModelLocationUtils.m_125583_("template_spawn_egg"));
+       });
+-   }
+-
+-   class BlockEntityModelGenerator {
+-      private final ResourceLocation f_125017_;
+-
+-      public BlockEntityModelGenerator(ResourceLocation p_125020_, Block p_125021_) {
+-         this.f_125017_ = ModelTemplates.f_125626_.m_125612_(p_125020_, TextureMapping.m_125834_(p_125021_), BlockModelGenerators.this.f_124478_);
+-      }
+-
+-      public BlockModelGenerators.BlockEntityModelGenerator m_125025_(Block... p_125026_) {
+-         for(Block block : p_125026_) {
+-            BlockModelGenerators.this.f_124477_.accept(BlockModelGenerators.m_124859_(block, this.f_125017_));
+-         }
+-
+-         return this;
+-      }
+-
+-      public BlockModelGenerators.BlockEntityModelGenerator m_125027_(Block... p_125028_) {
+-         for(Block block : p_125028_) {
+-            BlockModelGenerators.this.m_124524_(block);
+-         }
+-
+-         return this.m_125025_(p_125028_);
+-      }
+-
+-      public BlockModelGenerators.BlockEntityModelGenerator m_125022_(ModelTemplate p_125023_, Block... p_125024_) {
+-         for(Block block : p_125024_) {
+-            p_125023_.m_125612_(ModelLocationUtils.m_125571_(block.m_5456_()), TextureMapping.m_125834_(block), BlockModelGenerators.this.f_124478_);
+-         }
+-
+-         return this.m_125025_(p_125024_);
+-      }
+    }
+ 
+    class BlockFamilyProvider {
+@@ -1705,16 +_,35 @@
+       }
+    }
+ 
+-   static enum TintState {
+-      TINTED,
+-      NOT_TINTED;
+-
+-      public ModelTemplate m_125064_() {
+-         return this == TINTED ? ModelTemplates.f_125640_ : ModelTemplates.f_125639_;
+-      }
+-
+-      public ModelTemplate m_125065_() {
+-         return this == TINTED ? ModelTemplates.f_125642_ : ModelTemplates.f_125641_;
++   class BlockEntityModelGenerator {
++      private final ResourceLocation f_125017_;
++
++      public BlockEntityModelGenerator(ResourceLocation p_125020_, Block p_125021_) {
++         this.f_125017_ = ModelTemplates.f_125626_.m_125612_(p_125020_, TextureMapping.m_125834_(p_125021_), BlockModelGenerators.this.f_124478_);
++      }
++
++      public BlockModelGenerators.BlockEntityModelGenerator m_125025_(Block... p_125026_) {
++         for(Block block : p_125026_) {
++            BlockModelGenerators.this.f_124477_.accept(BlockModelGenerators.m_124859_(block, this.f_125017_));
++         }
++
++         return this;
++      }
++
++      public BlockModelGenerators.BlockEntityModelGenerator m_125027_(Block... p_125028_) {
++         for(Block block : p_125028_) {
++            BlockModelGenerators.this.m_124524_(block);
++         }
++
++         return this.m_125025_(p_125028_);
++      }
++
++      public BlockModelGenerators.BlockEntityModelGenerator m_125022_(ModelTemplate p_125023_, Block... p_125024_) {
++         for(Block block : p_125024_) {
++            p_125023_.m_125612_(ModelLocationUtils.m_125571_(block.m_5456_()), TextureMapping.m_125834_(block), BlockModelGenerators.this.f_124478_);
++         }
++
++         return this.m_125025_(p_125024_);
+       }
+    }
+ 
+@@ -1743,6 +_,19 @@
+          ResourceLocation resourcelocation1 = ModelTemplates.f_125695_.m_125592_(p_125079_, this.f_125070_, BlockModelGenerators.this.f_124478_);
+          BlockModelGenerators.this.f_124477_.accept(BlockModelGenerators.m_124924_(p_125079_, resourcelocation, resourcelocation1));
+          return this;
++      }
++   }
++
++   static enum TintState {
++      TINTED,
++      NOT_TINTED;
++
++      public ModelTemplate m_125064_() {
++         return this == TINTED ? ModelTemplates.f_125640_ : ModelTemplates.f_125639_;
++      }
++
++      public ModelTemplate m_125065_() {
++         return this == TINTED ? ModelTemplates.f_125642_ : ModelTemplates.f_125641_;
+       }
+    }
+ }

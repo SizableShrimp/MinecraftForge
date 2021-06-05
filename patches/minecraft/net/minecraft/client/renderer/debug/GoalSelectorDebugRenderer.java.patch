@@ -1,0 +1,15 @@
+--- a/net/minecraft/client/renderer/debug/GoalSelectorDebugRenderer.java
++++ b/net/minecraft/client/renderer/debug/GoalSelectorDebugRenderer.java
+@@ -36,9 +_,9 @@
+       RenderSystem.m_69453_();
+       RenderSystem.m_69472_();
+       BlockPos blockpos = new BlockPos(camera.m_90583_().f_82479_, 0.0D, camera.m_90583_().f_82481_);
+-      this.f_113544_.forEach((p_113559_, p_113560_) -> {
+-         for(int i = 0; i < p_113560_.size(); ++i) {
+-            GoalSelectorDebugRenderer.DebugGoal goalselectordebugrenderer$debuggoal = p_113560_.get(i);
++      this.f_113544_.forEach((p_217683_1_, p_217683_2_) -> {
++         for(int i = 0; i < p_217683_2_.size(); ++i) {
++            GoalSelectorDebugRenderer.DebugGoal goalselectordebugrenderer$debuggoal = p_217683_2_.get(i);
+             if (blockpos.m_123314_(goalselectordebugrenderer$debuggoal.f_113561_, 160.0D)) {
+                double d0 = (double)goalselectordebugrenderer$debuggoal.f_113561_.m_123341_() + 0.5D;
+                double d1 = (double)goalselectordebugrenderer$debuggoal.f_113561_.m_123342_() + 2.0D + (double)i * 0.25D;

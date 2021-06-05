@@ -1,0 +1,13 @@
+--- a/net/minecraft/realms/RepeatedNarrator.java
++++ b/net/minecraft/realms/RepeatedNarrator.java
+@@ -20,8 +_,8 @@
+    }
+ 
+    public void m_120789_(String p_120790_) {
+-      RepeatedNarrator.Params repeatednarrator$params = this.f_120786_.updateAndGet((p_120793_) -> {
+-         return p_120793_ != null && p_120790_.equals(p_120793_.f_120794_) ? p_120793_ : new RepeatedNarrator.Params(p_120790_, RateLimiter.create((double)this.f_120785_));
++      RepeatedNarrator.Params repeatednarrator$params = this.f_120786_.updateAndGet((p_229956_2_) -> {
++         return p_229956_2_ != null && p_120790_.equals(p_229956_2_.f_120794_) ? p_229956_2_ : new RepeatedNarrator.Params(p_120790_, RateLimiter.create((double)this.f_120785_));
+       });
+       if (repeatednarrator$params.f_120795_.tryAcquire(1)) {
+          NarratorChatListener.f_93311_.m_7437_(ChatType.SYSTEM, new TextComponent(p_120790_), Util.f_137441_);

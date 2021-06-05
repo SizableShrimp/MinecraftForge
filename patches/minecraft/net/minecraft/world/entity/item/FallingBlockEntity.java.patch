@@ -1,0 +1,19 @@
+--- a/net/minecraft/world/entity/item/FallingBlockEntity.java
++++ b/net/minecraft/world/entity/item/FallingBlockEntity.java
+@@ -29,7 +_,6 @@
+ import net.minecraft.world.level.block.Block;
+ import net.minecraft.world.level.block.Blocks;
+ import net.minecraft.world.level.block.ConcretePowderBlock;
+-import net.minecraft.world.level.block.EntityBlock;
+ import net.minecraft.world.level.block.FallingBlock;
+ import net.minecraft.world.level.block.entity.BlockEntity;
+ import net.minecraft.world.level.block.state.BlockState;
+@@ -153,7 +_,7 @@
+                               ((FallingBlock)block).m_5977_(this.f_19853_, blockpos1, this.f_31946_, blockstate, this);
+                            }
+ 
+-                           if (this.f_31944_ != null && block instanceof EntityBlock) {
++                           if (this.f_31944_ != null && this.f_31946_.hasTileEntity()) {
+                               BlockEntity blockentity = this.f_19853_.m_7702_(blockpos1);
+                               if (blockentity != null) {
+                                  CompoundTag compoundtag = blockentity.m_6945_(new CompoundTag());

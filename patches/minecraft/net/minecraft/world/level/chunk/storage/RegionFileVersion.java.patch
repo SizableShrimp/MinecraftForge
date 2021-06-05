@@ -1,0 +1,17 @@
+--- a/net/minecraft/world/level/chunk/storage/RegionFileVersion.java
++++ b/net/minecraft/world/level/chunk/storage/RegionFileVersion.java
+@@ -15,10 +_,10 @@
+    private static final Int2ObjectMap<RegionFileVersion> f_63746_ = new Int2ObjectOpenHashMap<>();
+    public static final RegionFileVersion f_63743_ = m_63758_(new RegionFileVersion(1, GZIPInputStream::new, GZIPOutputStream::new));
+    public static final RegionFileVersion f_63744_ = m_63758_(new RegionFileVersion(2, InflaterInputStream::new, DeflaterOutputStream::new));
+-   public static final RegionFileVersion f_63745_ = m_63758_(new RegionFileVersion(3, (p_63767_) -> {
+-      return p_63767_;
+-   }, (p_63769_) -> {
+-      return p_63769_;
++   public static final RegionFileVersion f_63745_ = m_63758_(new RegionFileVersion(3, (p_227171_0_) -> {
++      return p_227171_0_;
++   }, (p_227172_0_) -> {
++      return p_227172_0_;
+    }));
+    private final int f_63747_;
+    private final RegionFileVersion.StreamWrapper<InputStream> f_63748_;

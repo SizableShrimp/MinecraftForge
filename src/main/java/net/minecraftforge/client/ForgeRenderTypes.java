@@ -164,8 +164,8 @@ public enum ForgeRenderTypes
         }
 
         public static RenderType layeredItemSolid(ResourceLocation locationIn) {
-            CompositeState rendertype$state = CompositeState.builder()
-                    .setTextureState(new TextureStateShard(locationIn, false, false))
+            RenderType.CompositeState rendertype$state = RenderType.CompositeState.builder()
+                    .setTextureState(new RenderStateShard.TextureStateShard(locationIn, false, false))
                     .setTransparencyState(NO_TRANSPARENCY)
                     .setDiffuseLightingState(DIFFUSE_LIGHTING)
                     .setLightmapState(LIGHTMAP)
@@ -175,8 +175,8 @@ public enum ForgeRenderTypes
         }
 
         public static RenderType layeredItemCutout(ResourceLocation locationIn) {
-            CompositeState rendertype$state = CompositeState.builder()
-                    .setTextureState(new TextureStateShard(locationIn, false, false))
+            RenderType.CompositeState rendertype$state = RenderType.CompositeState.builder()
+                    .setTextureState(new RenderStateShard.TextureStateShard(locationIn, false, false))
                     .setTransparencyState(NO_TRANSPARENCY)
                     .setDiffuseLightingState(DIFFUSE_LIGHTING)
                     .setAlphaState(DEFAULT_ALPHA)
@@ -187,8 +187,8 @@ public enum ForgeRenderTypes
         }
 
         public static RenderType layeredItemCutoutMipped(ResourceLocation locationIn) {
-            CompositeState rendertype$state = CompositeState.builder()
-                    .setTextureState(new TextureStateShard(locationIn, false, true))
+            RenderType.CompositeState rendertype$state = RenderType.CompositeState.builder()
+                    .setTextureState(new RenderStateShard.TextureStateShard(locationIn, false, true))
                     .setTransparencyState(NO_TRANSPARENCY)
                     .setDiffuseLightingState(DIFFUSE_LIGHTING)
                     .setAlphaState(DEFAULT_ALPHA)
@@ -199,8 +199,8 @@ public enum ForgeRenderTypes
         }
 
         public static RenderType layeredItemTranslucent(ResourceLocation locationIn) {
-            CompositeState rendertype$state = CompositeState.builder()
-                    .setTextureState(new TextureStateShard(locationIn, false, false))
+            RenderType.CompositeState rendertype$state = RenderType.CompositeState.builder()
+                    .setTextureState(new RenderStateShard.TextureStateShard(locationIn, false, false))
                     .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
                     .setDiffuseLightingState(DIFFUSE_LIGHTING)
                     .setAlphaState(DEFAULT_ALPHA)

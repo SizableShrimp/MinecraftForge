@@ -1,0 +1,15 @@
+--- a/net/minecraft/util/thread/ProcessorHandle.java
++++ b/net/minecraft/util/thread/ProcessorHandle.java
+@@ -22,9 +_,9 @@
+ 
+    default <Source> CompletableFuture<Source> m_18722_(Function<? super ProcessorHandle<Either<Source, Exception>>, ? extends Msg> p_18723_) {
+       CompletableFuture<Source> completablefuture = new CompletableFuture<>();
+-      Msg msg = p_18723_.apply(m_18714_("ask future procesor handle", (p_18719_) -> {
+-         p_18719_.ifLeft(completablefuture::complete);
+-         p_18719_.ifRight(completablefuture::completeExceptionally);
++      Msg msg = p_18723_.apply(m_18714_("ask future procesor handle", (p_233527_1_) -> {
++         p_233527_1_.ifLeft(completablefuture::complete);
++         p_233527_1_.ifRight(completablefuture::completeExceptionally);
+       }));
+       this.m_6937_(msg);
+       return completablefuture;

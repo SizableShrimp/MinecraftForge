@@ -1,0 +1,13 @@
+--- a/net/minecraft/server/players/StoredUserList.java
++++ b/net/minecraft/server/players/StoredUserList.java
+@@ -107,8 +_,8 @@
+ 
+    public void m_11398_() throws IOException {
+       JsonArray jsonarray = new JsonArray();
+-      this.f_11377_.values().stream().map((p_11392_) -> {
+-         return Util.m_137469_(new JsonObject(), p_11392_::m_6009_);
++      this.f_11377_.values().stream().map((p_232646_0_) -> {
++         return Util.m_137469_(new JsonObject(), p_232646_0_::m_6009_);
+       }).forEach(jsonarray::add);
+ 
+       try (BufferedWriter bufferedwriter = Files.newWriter(this.f_11376_, StandardCharsets.UTF_8)) {

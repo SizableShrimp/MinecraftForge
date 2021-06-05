@@ -1,0 +1,25 @@
+--- a/net/minecraft/data/models/blockstates/VariantProperties.java
++++ b/net/minecraft/data/models/blockstates/VariantProperties.java
+@@ -4,14 +_,14 @@
+ import net.minecraft.resources.ResourceLocation;
+ 
+ public class VariantProperties {
+-   public static final VariantProperty<VariantProperties.Rotation> f_125518_ = new VariantProperty<>("x", (p_125529_) -> {
+-      return new JsonPrimitive(p_125529_.f_125534_);
+-   });
+-   public static final VariantProperty<VariantProperties.Rotation> f_125519_ = new VariantProperty<>("y", (p_125525_) -> {
+-      return new JsonPrimitive(p_125525_.f_125534_);
+-   });
+-   public static final VariantProperty<ResourceLocation> f_125520_ = new VariantProperty<>("model", (p_125527_) -> {
+-      return new JsonPrimitive(p_125527_.toString());
++   public static final VariantProperty<VariantProperties.Rotation> f_125518_ = new VariantProperty<>("x", (p_240207_0_) -> {
++      return new JsonPrimitive(p_240207_0_.f_125534_);
++   });
++   public static final VariantProperty<VariantProperties.Rotation> f_125519_ = new VariantProperty<>("y", (p_240205_0_) -> {
++      return new JsonPrimitive(p_240205_0_.f_125534_);
++   });
++   public static final VariantProperty<ResourceLocation> f_125520_ = new VariantProperty<>("model", (p_240206_0_) -> {
++      return new JsonPrimitive(p_240206_0_.toString());
+    });
+    public static final VariantProperty<Boolean> f_125521_ = new VariantProperty<>("uvlock", JsonPrimitive::new);
+    public static final VariantProperty<Integer> f_125522_ = new VariantProperty<>("weight", JsonPrimitive::new);

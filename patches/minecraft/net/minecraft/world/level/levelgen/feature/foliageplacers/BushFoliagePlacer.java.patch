@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/foliageplacers/BushFoliagePlacer.java
++++ b/net/minecraft/world/level/levelgen/feature/foliageplacers/BushFoliagePlacer.java
+@@ -11,8 +_,8 @@
+ import net.minecraft.world.level.levelgen.structure.BoundingBox;
+ 
+ public class BushFoliagePlacer extends BlobFoliagePlacer {
+-   public static final Codec<BushFoliagePlacer> f_68428_ = RecordCodecBuilder.create((p_68454_) -> {
+-      return m_68413_(p_68454_).apply(p_68454_, BushFoliagePlacer::new);
++   public static final Codec<BushFoliagePlacer> f_68428_ = RecordCodecBuilder.create((p_236744_0_) -> {
++      return m_68413_(p_236744_0_).apply(p_236744_0_, BushFoliagePlacer::new);
+    });
+ 
+    public BushFoliagePlacer(UniformInt p_68431_, UniformInt p_68432_, int p_68433_) {

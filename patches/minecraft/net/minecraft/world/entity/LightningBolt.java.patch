@@ -1,0 +1,10 @@
+--- a/net/minecraft/world/entity/LightningBolt.java
++++ b/net/minecraft/world/entity/LightningBolt.java
+@@ -81,6 +_,7 @@
+             List<Entity> list = this.f_19853_.m_6249_(this, new AABB(this.m_20185_() - 3.0D, this.m_20186_() - 3.0D, this.m_20189_() - 3.0D, this.m_20185_() + 3.0D, this.m_20186_() + 6.0D + 3.0D, this.m_20189_() + 3.0D), Entity::m_6084_);
+ 
+             for(Entity entity : list) {
++               if (!net.minecraftforge.event.ForgeEventFactory.onEntityStruckByLightning(entity, this))
+                entity.m_8038_((ServerLevel)this.f_19853_, this);
+             }
+ 

@@ -1,0 +1,11 @@
+--- a/net/minecraft/network/RateKickingConnection.java
++++ b/net/minecraft/network/RateKickingConnection.java
+@@ -22,7 +_,7 @@
+       float f = this.m_129542_();
+       if (f > (float)this.f_130555_) {
+          f_130553_.warn("Player exceeded rate-limit (sent {} packets per second)", (float)f);
+-         this.m_129514_(new ClientboundDisconnectPacket(f_130554_), (p_130560_) -> {
++         this.m_129514_(new ClientboundDisconnectPacket(f_130554_), (p_244277_1_) -> {
+             this.m_129507_(f_130554_);
+          });
+          this.m_129540_();

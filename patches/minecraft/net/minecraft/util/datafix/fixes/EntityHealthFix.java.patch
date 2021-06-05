@@ -1,0 +1,13 @@
+--- a/net/minecraft/util/datafix/fixes/EntityHealthFix.java
++++ b/net/minecraft/util/datafix/fixes/EntityHealthFix.java
+@@ -35,8 +_,8 @@
+    }
+ 
+    public TypeRewriteRule makeRule() {
+-      return this.fixTypeEverywhereTyped("EntityHealthFix", this.getInputSchema().getType(References.f_16786_), (p_15437_) -> {
+-         return p_15437_.update(DSL.remainderFinder(), this::m_15438_);
++      return this.fixTypeEverywhereTyped("EntityHealthFix", this.getInputSchema().getType(References.f_16786_), (p_207449_1_) -> {
++         return p_207449_1_.update(DSL.remainderFinder(), this::m_15438_);
+       });
+    }
+ }

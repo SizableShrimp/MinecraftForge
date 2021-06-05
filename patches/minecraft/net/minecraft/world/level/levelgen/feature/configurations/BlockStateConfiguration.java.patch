@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/BlockStateConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/BlockStateConfiguration.java
+@@ -4,8 +_,8 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class BlockStateConfiguration implements FeatureConfiguration {
+-   public static final Codec<BlockStateConfiguration> f_67546_ = BlockState.f_61039_.fieldOf("state").xmap(BlockStateConfiguration::new, (p_67552_) -> {
+-      return p_67552_.f_67547_;
++   public static final Codec<BlockStateConfiguration> f_67546_ = BlockState.f_61039_.fieldOf("state").xmap(BlockStateConfiguration::new, (p_236456_0_) -> {
++      return p_236456_0_.f_67547_;
+    }).codec();
+    public final BlockState f_67547_;
+ 

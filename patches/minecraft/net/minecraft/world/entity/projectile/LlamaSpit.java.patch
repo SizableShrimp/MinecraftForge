@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/entity/projectile/LlamaSpit.java
++++ b/net/minecraft/world/entity/projectile/LlamaSpit.java
+@@ -46,7 +_,7 @@
+       super.m_8119_();
+       Vec3 vec3 = this.m_20184_();
+       HitResult hitresult = ProjectileUtil.m_37294_(this, this::m_5603_);
+-      if (hitresult != null) {
++      if (hitresult != null && hitresult.m_6662_() != HitResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, hitresult)) {
+          this.m_6532_(hitresult);
+       }
+ 

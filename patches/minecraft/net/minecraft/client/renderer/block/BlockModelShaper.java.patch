@@ -1,0 +1,29 @@
+--- a/net/minecraft/client/renderer/block/BlockModelShaper.java
++++ b/net/minecraft/client/renderer/block/BlockModelShaper.java
+@@ -24,8 +_,14 @@
+       this.f_110878_ = p_110880_;
+    }
+ 
++   @Deprecated
+    public TextureAtlasSprite m_110882_(BlockState p_110883_) {
+-      return this.m_110893_(p_110883_).m_6160_();
++      return this.m_110893_(p_110883_).getParticleTexture(net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
++   }
++
++   public TextureAtlasSprite getTexture(BlockState state, net.minecraft.world.level.Level world, net.minecraft.core.BlockPos pos) {
++      net.minecraftforge.client.model.data.IModelData data = net.minecraftforge.client.model.ModelDataManager.getModelData(world, pos);
++      return this.m_110893_(state).getParticleTexture(data == null ? net.minecraftforge.client.model.data.EmptyModelData.INSTANCE : data);
+    }
+ 
+    public BakedModel m_110893_(BlockState p_110894_) {
+@@ -45,8 +_,8 @@
+       this.f_110877_.clear();
+ 
+       for(Block block : Registry.f_122824_) {
+-         block.m_49965_().m_61056_().forEach((p_110898_) -> {
+-            BakedModel bakedmodel = this.f_110877_.put(p_110898_, this.f_110878_.m_119422_(m_110895_(p_110898_)));
++         block.m_49965_().m_61056_().forEach((p_209551_1_) -> {
++            BakedModel bakedmodel = this.f_110877_.put(p_209551_1_, this.f_110878_.m_119422_(m_110895_(p_209551_1_)));
+          });
+       }
+ 

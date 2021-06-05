@@ -1,0 +1,1036 @@
+--- a/net/minecraft/world/level/levelgen/structure/NetherBridgePieces.java
++++ b/net/minecraft/world/level/levelgen/structure/NetherBridgePieces.java
+@@ -61,6 +_,374 @@
+       return netherbridgepieces$netherbridgepiece;
+    }
+ 
++   public static class CastleSmallCorridorLeftTurnPiece extends NetherBridgePieces.NetherBridgePiece {
++      private boolean f_71758_;
++
++      public CastleSmallCorridorLeftTurnPiece(int p_71760_, Random p_71761_, BoundingBox p_71762_, Direction p_71763_) {
++         super(StructurePieceType.f_67147_, p_71760_);
++         this.m_73519_(p_71763_);
++         this.f_73383_ = p_71762_;
++         this.f_71758_ = p_71761_.nextInt(3) == 0;
++      }
++
++      public CastleSmallCorridorLeftTurnPiece(StructureManager p_71765_, CompoundTag p_71766_) {
++         super(StructurePieceType.f_67147_, p_71766_);
++         this.f_71758_ = p_71766_.m_128471_("Chest");
++      }
++
++      protected void m_5688_(CompoundTag p_71788_) {
++         super.m_5688_(p_71788_);
++         p_71788_.m_128379_("Chest", this.f_71758_);
++      }
++
++      public void m_6811_(StructurePiece p_71776_, List<StructurePiece> p_71777_, Random p_71778_) {
++         this.m_71936_((NetherBridgePieces.StartPiece)p_71776_, p_71777_, p_71778_, 0, 1, true);
++      }
++
++      public static NetherBridgePieces.CastleSmallCorridorLeftTurnPiece m_71779_(List<StructurePiece> p_71780_, Random p_71781_, int p_71782_, int p_71783_, int p_71784_, Direction p_71785_, int p_71786_) {
++         BoundingBox boundingbox = BoundingBox.m_71031_(p_71782_, p_71783_, p_71784_, -1, 0, 0, 5, 7, 5, p_71785_);
++         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71780_, boundingbox) == null ? new NetherBridgePieces.CastleSmallCorridorLeftTurnPiece(p_71786_, p_71781_, boundingbox, p_71785_) : null;
++      }
++
++      public boolean m_7832_(WorldGenLevel p_71768_, StructureFeatureManager p_71769_, ChunkGenerator p_71770_, Random p_71771_, BoundingBox p_71772_, ChunkPos p_71773_, BlockPos p_71774_) {
++         this.m_73441_(p_71768_, p_71772_, 0, 0, 0, 4, 1, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71768_, p_71772_, 0, 2, 0, 4, 5, 4, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
++         BlockState blockstate = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true));
++         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
++         this.m_73441_(p_71768_, p_71772_, 4, 2, 0, 4, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71768_, p_71772_, 4, 3, 1, 4, 4, 1, blockstate1, blockstate1, false);
++         this.m_73441_(p_71768_, p_71772_, 4, 3, 3, 4, 4, 3, blockstate1, blockstate1, false);
++         this.m_73441_(p_71768_, p_71772_, 0, 2, 0, 0, 5, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71768_, p_71772_, 0, 2, 4, 3, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71768_, p_71772_, 1, 3, 4, 1, 4, 4, blockstate, blockstate, false);
++         this.m_73441_(p_71768_, p_71772_, 3, 3, 4, 3, 4, 4, blockstate, blockstate, false);
++         if (this.f_71758_ && p_71772_.m_71051_(new BlockPos(this.m_73392_(3, 3), this.m_73544_(2), this.m_73525_(3, 3)))) {
++            this.f_71758_ = false;
++            this.m_5606_(p_71768_, p_71772_, p_71771_, 3, 2, 3, BuiltInLootTables.f_78760_);
++         }
++
++         this.m_73441_(p_71768_, p_71772_, 0, 6, 0, 4, 6, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++
++         for(int i = 0; i <= 4; ++i) {
++            for(int j = 0; j <= 4; ++j) {
++               this.m_73528_(p_71768_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71772_);
++            }
++         }
++
++         return true;
++      }
++   }
++
++   public static class CastleSmallCorridorRightTurnPiece extends NetherBridgePieces.NetherBridgePiece {
++      private boolean f_71815_;
++
++      public CastleSmallCorridorRightTurnPiece(int p_71817_, Random p_71818_, BoundingBox p_71819_, Direction p_71820_) {
++         super(StructurePieceType.f_67149_, p_71817_);
++         this.m_73519_(p_71820_);
++         this.f_73383_ = p_71819_;
++         this.f_71815_ = p_71818_.nextInt(3) == 0;
++      }
++
++      public CastleSmallCorridorRightTurnPiece(StructureManager p_71822_, CompoundTag p_71823_) {
++         super(StructurePieceType.f_67149_, p_71823_);
++         this.f_71815_ = p_71823_.m_128471_("Chest");
++      }
++
++      protected void m_5688_(CompoundTag p_71845_) {
++         super.m_5688_(p_71845_);
++         p_71845_.m_128379_("Chest", this.f_71815_);
++      }
++
++      public void m_6811_(StructurePiece p_71833_, List<StructurePiece> p_71834_, Random p_71835_) {
++         this.m_71943_((NetherBridgePieces.StartPiece)p_71833_, p_71834_, p_71835_, 0, 1, true);
++      }
++
++      public static NetherBridgePieces.CastleSmallCorridorRightTurnPiece m_71836_(List<StructurePiece> p_71837_, Random p_71838_, int p_71839_, int p_71840_, int p_71841_, Direction p_71842_, int p_71843_) {
++         BoundingBox boundingbox = BoundingBox.m_71031_(p_71839_, p_71840_, p_71841_, -1, 0, 0, 5, 7, 5, p_71842_);
++         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71837_, boundingbox) == null ? new NetherBridgePieces.CastleSmallCorridorRightTurnPiece(p_71843_, p_71838_, boundingbox, p_71842_) : null;
++      }
++
++      public boolean m_7832_(WorldGenLevel p_71825_, StructureFeatureManager p_71826_, ChunkGenerator p_71827_, Random p_71828_, BoundingBox p_71829_, ChunkPos p_71830_, BlockPos p_71831_) {
++         this.m_73441_(p_71825_, p_71829_, 0, 0, 0, 4, 1, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71825_, p_71829_, 0, 2, 0, 4, 5, 4, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
++         BlockState blockstate = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true));
++         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
++         this.m_73441_(p_71825_, p_71829_, 0, 2, 0, 0, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71825_, p_71829_, 0, 3, 1, 0, 4, 1, blockstate1, blockstate1, false);
++         this.m_73441_(p_71825_, p_71829_, 0, 3, 3, 0, 4, 3, blockstate1, blockstate1, false);
++         this.m_73441_(p_71825_, p_71829_, 4, 2, 0, 4, 5, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71825_, p_71829_, 1, 2, 4, 4, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71825_, p_71829_, 1, 3, 4, 1, 4, 4, blockstate, blockstate, false);
++         this.m_73441_(p_71825_, p_71829_, 3, 3, 4, 3, 4, 4, blockstate, blockstate, false);
++         if (this.f_71815_ && p_71829_.m_71051_(new BlockPos(this.m_73392_(1, 3), this.m_73544_(2), this.m_73525_(1, 3)))) {
++            this.f_71815_ = false;
++            this.m_5606_(p_71825_, p_71829_, p_71828_, 1, 2, 3, BuiltInLootTables.f_78760_);
++         }
++
++         this.m_73441_(p_71825_, p_71829_, 0, 6, 0, 4, 6, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++
++         for(int i = 0; i <= 4; ++i) {
++            for(int j = 0; j <= 4; ++j) {
++               this.m_73528_(p_71825_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71829_);
++            }
++         }
++
++         return true;
++      }
++   }
++
++   public static class CastleCorridorStairsPiece extends NetherBridgePieces.NetherBridgePiece {
++      public CastleCorridorStairsPiece(int p_71653_, BoundingBox p_71654_, Direction p_71655_) {
++         super(StructurePieceType.f_67143_, p_71653_);
++         this.m_73519_(p_71655_);
++         this.f_73383_ = p_71654_;
++      }
++
++      public CastleCorridorStairsPiece(StructureManager p_71657_, CompoundTag p_71658_) {
++         super(StructurePieceType.f_67143_, p_71658_);
++      }
++
++      public void m_6811_(StructurePiece p_71668_, List<StructurePiece> p_71669_, Random p_71670_) {
++         this.m_71925_((NetherBridgePieces.StartPiece)p_71668_, p_71669_, p_71670_, 1, 0, true);
++      }
++
++      public static NetherBridgePieces.CastleCorridorStairsPiece m_71671_(List<StructurePiece> p_71672_, int p_71673_, int p_71674_, int p_71675_, Direction p_71676_, int p_71677_) {
++         BoundingBox boundingbox = BoundingBox.m_71031_(p_71673_, p_71674_, p_71675_, -1, -7, 0, 5, 14, 10, p_71676_);
++         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71672_, boundingbox) == null ? new NetherBridgePieces.CastleCorridorStairsPiece(p_71677_, boundingbox, p_71676_) : null;
++      }
++
++      public boolean m_7832_(WorldGenLevel p_71660_, StructureFeatureManager p_71661_, ChunkGenerator p_71662_, Random p_71663_, BoundingBox p_71664_, ChunkPos p_71665_, BlockPos p_71666_) {
++         BlockState blockstate = Blocks.f_50199_.m_49966_().m_61124_(StairBlock.f_56841_, Direction.SOUTH);
++         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
++
++         for(int i = 0; i <= 9; ++i) {
++            int j = Math.max(1, 7 - i);
++            int k = Math.min(Math.max(j + 5, 14 - i), 13);
++            int l = i;
++            this.m_73441_(p_71660_, p_71664_, 0, 0, i, 4, j, i, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++            this.m_73441_(p_71660_, p_71664_, 1, j + 1, i, 3, k - 1, i, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
++            if (i <= 6) {
++               this.m_73434_(p_71660_, blockstate, 1, j + 1, i, p_71664_);
++               this.m_73434_(p_71660_, blockstate, 2, j + 1, i, p_71664_);
++               this.m_73434_(p_71660_, blockstate, 3, j + 1, i, p_71664_);
++            }
++
++            this.m_73441_(p_71660_, p_71664_, 0, k, i, 4, k, i, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++            this.m_73441_(p_71660_, p_71664_, 0, j + 1, i, 0, k - 1, i, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++            this.m_73441_(p_71660_, p_71664_, 4, j + 1, i, 4, k - 1, i, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++            if ((i & 1) == 0) {
++               this.m_73441_(p_71660_, p_71664_, 0, j + 2, i, 0, j + 3, i, blockstate1, blockstate1, false);
++               this.m_73441_(p_71660_, p_71664_, 4, j + 2, i, 4, j + 3, i, blockstate1, blockstate1, false);
++            }
++
++            for(int i1 = 0; i1 <= 4; ++i1) {
++               this.m_73528_(p_71660_, Blocks.f_50197_.m_49966_(), i1, -1, l, p_71664_);
++            }
++         }
++
++         return true;
++      }
++   }
++
++   public static class CastleCorridorTBalconyPiece extends NetherBridgePieces.NetherBridgePiece {
++      public CastleCorridorTBalconyPiece(int p_71679_, BoundingBox p_71680_, Direction p_71681_) {
++         super(StructurePieceType.f_67144_, p_71679_);
++         this.m_73519_(p_71681_);
++         this.f_73383_ = p_71680_;
++      }
++
++      public CastleCorridorTBalconyPiece(StructureManager p_71683_, CompoundTag p_71684_) {
++         super(StructurePieceType.f_67144_, p_71684_);
++      }
++
++      public void m_6811_(StructurePiece p_71694_, List<StructurePiece> p_71695_, Random p_71696_) {
++         int i = 1;
++         Direction direction = this.m_73549_();
++         if (direction == Direction.WEST || direction == Direction.NORTH) {
++            i = 5;
++         }
++
++         this.m_71936_((NetherBridgePieces.StartPiece)p_71694_, p_71695_, p_71696_, 0, i, p_71696_.nextInt(8) > 0);
++         this.m_71943_((NetherBridgePieces.StartPiece)p_71694_, p_71695_, p_71696_, 0, i, p_71696_.nextInt(8) > 0);
++      }
++
++      public static NetherBridgePieces.CastleCorridorTBalconyPiece m_71697_(List<StructurePiece> p_71698_, int p_71699_, int p_71700_, int p_71701_, Direction p_71702_, int p_71703_) {
++         BoundingBox boundingbox = BoundingBox.m_71031_(p_71699_, p_71700_, p_71701_, -3, 0, 0, 9, 7, 9, p_71702_);
++         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71698_, boundingbox) == null ? new NetherBridgePieces.CastleCorridorTBalconyPiece(p_71703_, boundingbox, p_71702_) : null;
++      }
++
++      public boolean m_7832_(WorldGenLevel p_71686_, StructureFeatureManager p_71687_, ChunkGenerator p_71688_, Random p_71689_, BoundingBox p_71690_, ChunkPos p_71691_, BlockPos p_71692_) {
++         BlockState blockstate = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
++         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true));
++         this.m_73441_(p_71686_, p_71690_, 0, 0, 0, 8, 1, 8, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71686_, p_71690_, 0, 2, 0, 8, 5, 8, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
++         this.m_73441_(p_71686_, p_71690_, 0, 6, 0, 8, 6, 5, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71686_, p_71690_, 0, 2, 0, 2, 5, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71686_, p_71690_, 6, 2, 0, 8, 5, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71686_, p_71690_, 1, 3, 0, 1, 4, 0, blockstate1, blockstate1, false);
++         this.m_73441_(p_71686_, p_71690_, 7, 3, 0, 7, 4, 0, blockstate1, blockstate1, false);
++         this.m_73441_(p_71686_, p_71690_, 0, 2, 4, 8, 2, 8, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71686_, p_71690_, 1, 1, 4, 2, 2, 4, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
++         this.m_73441_(p_71686_, p_71690_, 6, 1, 4, 7, 2, 4, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
++         this.m_73441_(p_71686_, p_71690_, 1, 3, 8, 7, 3, 8, blockstate1, blockstate1, false);
++         this.m_73434_(p_71686_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true)), 0, 3, 8, p_71690_);
++         this.m_73434_(p_71686_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true)), 8, 3, 8, p_71690_);
++         this.m_73441_(p_71686_, p_71690_, 0, 3, 6, 0, 3, 7, blockstate, blockstate, false);
++         this.m_73441_(p_71686_, p_71690_, 8, 3, 6, 8, 3, 7, blockstate, blockstate, false);
++         this.m_73441_(p_71686_, p_71690_, 0, 3, 4, 0, 5, 5, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71686_, p_71690_, 8, 3, 4, 8, 5, 5, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71686_, p_71690_, 1, 3, 5, 2, 5, 5, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71686_, p_71690_, 6, 3, 5, 7, 5, 5, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71686_, p_71690_, 1, 4, 5, 1, 5, 5, blockstate1, blockstate1, false);
++         this.m_73441_(p_71686_, p_71690_, 7, 4, 5, 7, 5, 5, blockstate1, blockstate1, false);
++
++         for(int i = 0; i <= 5; ++i) {
++            for(int j = 0; j <= 8; ++j) {
++               this.m_73528_(p_71686_, Blocks.f_50197_.m_49966_(), j, -1, i, p_71690_);
++            }
++         }
++
++         return true;
++      }
++   }
++
++   public static class CastleSmallCorridorPiece extends NetherBridgePieces.NetherBridgePiece {
++      public CastleSmallCorridorPiece(int p_71790_, BoundingBox p_71791_, Direction p_71792_) {
++         super(StructurePieceType.f_67148_, p_71790_);
++         this.m_73519_(p_71792_);
++         this.f_73383_ = p_71791_;
++      }
++
++      public CastleSmallCorridorPiece(StructureManager p_71794_, CompoundTag p_71795_) {
++         super(StructurePieceType.f_67148_, p_71795_);
++      }
++
++      public void m_6811_(StructurePiece p_71805_, List<StructurePiece> p_71806_, Random p_71807_) {
++         this.m_71925_((NetherBridgePieces.StartPiece)p_71805_, p_71806_, p_71807_, 1, 0, true);
++      }
++
++      public static NetherBridgePieces.CastleSmallCorridorPiece m_71808_(List<StructurePiece> p_71809_, int p_71810_, int p_71811_, int p_71812_, Direction p_71813_, int p_71814_) {
++         BoundingBox boundingbox = BoundingBox.m_71031_(p_71810_, p_71811_, p_71812_, -1, 0, 0, 5, 7, 5, p_71813_);
++         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71809_, boundingbox) == null ? new NetherBridgePieces.CastleSmallCorridorPiece(p_71814_, boundingbox, p_71813_) : null;
++      }
++
++      public boolean m_7832_(WorldGenLevel p_71797_, StructureFeatureManager p_71798_, ChunkGenerator p_71799_, Random p_71800_, BoundingBox p_71801_, ChunkPos p_71802_, BlockPos p_71803_) {
++         this.m_73441_(p_71797_, p_71801_, 0, 0, 0, 4, 1, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71797_, p_71801_, 0, 2, 0, 4, 5, 4, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
++         BlockState blockstate = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
++         this.m_73441_(p_71797_, p_71801_, 0, 2, 0, 0, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71797_, p_71801_, 4, 2, 0, 4, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71797_, p_71801_, 0, 3, 1, 0, 4, 1, blockstate, blockstate, false);
++         this.m_73441_(p_71797_, p_71801_, 0, 3, 3, 0, 4, 3, blockstate, blockstate, false);
++         this.m_73441_(p_71797_, p_71801_, 4, 3, 1, 4, 4, 1, blockstate, blockstate, false);
++         this.m_73441_(p_71797_, p_71801_, 4, 3, 3, 4, 4, 3, blockstate, blockstate, false);
++         this.m_73441_(p_71797_, p_71801_, 0, 6, 0, 4, 6, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++
++         for(int i = 0; i <= 4; ++i) {
++            for(int j = 0; j <= 4; ++j) {
++               this.m_73528_(p_71797_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71801_);
++            }
++         }
++
++         return true;
++      }
++   }
++
++   public static class RoomCrossing extends NetherBridgePieces.NetherBridgePiece {
++      public RoomCrossing(int p_71968_, BoundingBox p_71969_, Direction p_71970_) {
++         super(StructurePieceType.f_67152_, p_71968_);
++         this.m_73519_(p_71970_);
++         this.f_73383_ = p_71969_;
++      }
++
++      public RoomCrossing(StructureManager p_71972_, CompoundTag p_71973_) {
++         super(StructurePieceType.f_67152_, p_71973_);
++      }
++
++      public void m_6811_(StructurePiece p_71983_, List<StructurePiece> p_71984_, Random p_71985_) {
++         this.m_71925_((NetherBridgePieces.StartPiece)p_71983_, p_71984_, p_71985_, 2, 0, false);
++         this.m_71936_((NetherBridgePieces.StartPiece)p_71983_, p_71984_, p_71985_, 0, 2, false);
++         this.m_71943_((NetherBridgePieces.StartPiece)p_71983_, p_71984_, p_71985_, 0, 2, false);
++      }
++
++      public static NetherBridgePieces.RoomCrossing m_71986_(List<StructurePiece> p_71987_, int p_71988_, int p_71989_, int p_71990_, Direction p_71991_, int p_71992_) {
++         BoundingBox boundingbox = BoundingBox.m_71031_(p_71988_, p_71989_, p_71990_, -2, 0, 0, 7, 9, 7, p_71991_);
++         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71987_, boundingbox) == null ? new NetherBridgePieces.RoomCrossing(p_71992_, boundingbox, p_71991_) : null;
++      }
++
++      public boolean m_7832_(WorldGenLevel p_71975_, StructureFeatureManager p_71976_, ChunkGenerator p_71977_, Random p_71978_, BoundingBox p_71979_, ChunkPos p_71980_, BlockPos p_71981_) {
++         this.m_73441_(p_71975_, p_71979_, 0, 0, 0, 6, 1, 6, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 0, 2, 0, 6, 7, 6, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 0, 2, 0, 1, 6, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 0, 2, 6, 1, 6, 6, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 5, 2, 0, 6, 6, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 5, 2, 6, 6, 6, 6, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 0, 2, 0, 0, 6, 1, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 0, 2, 5, 0, 6, 6, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 6, 2, 0, 6, 6, 1, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 6, 2, 5, 6, 6, 6, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         BlockState blockstate = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true));
++         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
++         this.m_73441_(p_71975_, p_71979_, 2, 6, 0, 4, 6, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 2, 5, 0, 4, 5, 0, blockstate, blockstate, false);
++         this.m_73441_(p_71975_, p_71979_, 2, 6, 6, 4, 6, 6, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 2, 5, 6, 4, 5, 6, blockstate, blockstate, false);
++         this.m_73441_(p_71975_, p_71979_, 0, 6, 2, 0, 6, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 0, 5, 2, 0, 5, 4, blockstate1, blockstate1, false);
++         this.m_73441_(p_71975_, p_71979_, 6, 6, 2, 6, 6, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71975_, p_71979_, 6, 5, 2, 6, 5, 4, blockstate1, blockstate1, false);
++
++         for(int i = 0; i <= 6; ++i) {
++            for(int j = 0; j <= 6; ++j) {
++               this.m_73528_(p_71975_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71979_);
++            }
++         }
++
++         return true;
++      }
++   }
++
++   public static class CastleSmallCorridorCrossingPiece extends NetherBridgePieces.NetherBridgePiece {
++      public CastleSmallCorridorCrossingPiece(int p_71733_, BoundingBox p_71734_, Direction p_71735_) {
++         super(StructurePieceType.f_67146_, p_71733_);
++         this.m_73519_(p_71735_);
++         this.f_73383_ = p_71734_;
++      }
++
++      public CastleSmallCorridorCrossingPiece(StructureManager p_71737_, CompoundTag p_71738_) {
++         super(StructurePieceType.f_67146_, p_71738_);
++      }
++
++      public void m_6811_(StructurePiece p_71748_, List<StructurePiece> p_71749_, Random p_71750_) {
++         this.m_71925_((NetherBridgePieces.StartPiece)p_71748_, p_71749_, p_71750_, 1, 0, true);
++         this.m_71936_((NetherBridgePieces.StartPiece)p_71748_, p_71749_, p_71750_, 0, 1, true);
++         this.m_71943_((NetherBridgePieces.StartPiece)p_71748_, p_71749_, p_71750_, 0, 1, true);
++      }
++
++      public static NetherBridgePieces.CastleSmallCorridorCrossingPiece m_71751_(List<StructurePiece> p_71752_, int p_71753_, int p_71754_, int p_71755_, Direction p_71756_, int p_71757_) {
++         BoundingBox boundingbox = BoundingBox.m_71031_(p_71753_, p_71754_, p_71755_, -1, 0, 0, 5, 7, 5, p_71756_);
++         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71752_, boundingbox) == null ? new NetherBridgePieces.CastleSmallCorridorCrossingPiece(p_71757_, boundingbox, p_71756_) : null;
++      }
++
++      public boolean m_7832_(WorldGenLevel p_71740_, StructureFeatureManager p_71741_, ChunkGenerator p_71742_, Random p_71743_, BoundingBox p_71744_, ChunkPos p_71745_, BlockPos p_71746_) {
++         this.m_73441_(p_71740_, p_71744_, 0, 0, 0, 4, 1, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71740_, p_71744_, 0, 2, 0, 4, 5, 4, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
++         this.m_73441_(p_71740_, p_71744_, 0, 2, 0, 0, 5, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71740_, p_71744_, 4, 2, 0, 4, 5, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71740_, p_71744_, 0, 2, 4, 0, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71740_, p_71744_, 4, 2, 4, 4, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71740_, p_71744_, 0, 6, 0, 4, 6, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++
++         for(int i = 0; i <= 4; ++i) {
++            for(int j = 0; j <= 4; ++j) {
++               this.m_73528_(p_71740_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71744_);
++            }
++         }
++
++         return true;
++      }
++   }
++
+    public static class BridgeCrossing extends NetherBridgePieces.NetherBridgePiece {
+       public BridgeCrossing(int p_71565_, BoundingBox p_71566_, Direction p_71567_) {
+          super(StructurePieceType.f_67140_, p_71565_);
+@@ -195,173 +_,6 @@
+       }
+    }
+ 
+-   public static class BridgeStraight extends NetherBridgePieces.NetherBridgePiece {
+-      public BridgeStraight(int p_71625_, Random p_71626_, BoundingBox p_71627_, Direction p_71628_) {
+-         super(StructurePieceType.f_67142_, p_71625_);
+-         this.m_73519_(p_71628_);
+-         this.f_73383_ = p_71627_;
+-      }
+-
+-      public BridgeStraight(StructureManager p_71630_, CompoundTag p_71631_) {
+-         super(StructurePieceType.f_67142_, p_71631_);
+-      }
+-
+-      public void m_6811_(StructurePiece p_71641_, List<StructurePiece> p_71642_, Random p_71643_) {
+-         this.m_71925_((NetherBridgePieces.StartPiece)p_71641_, p_71642_, p_71643_, 1, 3, false);
+-      }
+-
+-      public static NetherBridgePieces.BridgeStraight m_71644_(List<StructurePiece> p_71645_, Random p_71646_, int p_71647_, int p_71648_, int p_71649_, Direction p_71650_, int p_71651_) {
+-         BoundingBox boundingbox = BoundingBox.m_71031_(p_71647_, p_71648_, p_71649_, -1, -3, 0, 5, 10, 19, p_71650_);
+-         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71645_, boundingbox) == null ? new NetherBridgePieces.BridgeStraight(p_71651_, p_71646_, boundingbox, p_71650_) : null;
+-      }
+-
+-      public boolean m_7832_(WorldGenLevel p_71633_, StructureFeatureManager p_71634_, ChunkGenerator p_71635_, Random p_71636_, BoundingBox p_71637_, ChunkPos p_71638_, BlockPos p_71639_) {
+-         this.m_73441_(p_71633_, p_71637_, 0, 3, 0, 4, 4, 18, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71633_, p_71637_, 1, 5, 0, 3, 7, 18, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
+-         this.m_73441_(p_71633_, p_71637_, 0, 5, 0, 0, 5, 18, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71633_, p_71637_, 4, 5, 0, 4, 5, 18, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71633_, p_71637_, 0, 2, 0, 4, 2, 5, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71633_, p_71637_, 0, 2, 13, 4, 2, 18, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71633_, p_71637_, 0, 0, 0, 4, 1, 3, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71633_, p_71637_, 0, 0, 15, 4, 1, 18, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-
+-         for(int i = 0; i <= 4; ++i) {
+-            for(int j = 0; j <= 2; ++j) {
+-               this.m_73528_(p_71633_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71637_);
+-               this.m_73528_(p_71633_, Blocks.f_50197_.m_49966_(), i, -1, 18 - j, p_71637_);
+-            }
+-         }
+-
+-         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
+-         BlockState blockstate2 = blockstate1.m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true));
+-         BlockState blockstate = blockstate1.m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true));
+-         this.m_73441_(p_71633_, p_71637_, 0, 1, 1, 0, 4, 1, blockstate2, blockstate2, false);
+-         this.m_73441_(p_71633_, p_71637_, 0, 3, 4, 0, 4, 4, blockstate2, blockstate2, false);
+-         this.m_73441_(p_71633_, p_71637_, 0, 3, 14, 0, 4, 14, blockstate2, blockstate2, false);
+-         this.m_73441_(p_71633_, p_71637_, 0, 1, 17, 0, 4, 17, blockstate2, blockstate2, false);
+-         this.m_73441_(p_71633_, p_71637_, 4, 1, 1, 4, 4, 1, blockstate, blockstate, false);
+-         this.m_73441_(p_71633_, p_71637_, 4, 3, 4, 4, 4, 4, blockstate, blockstate, false);
+-         this.m_73441_(p_71633_, p_71637_, 4, 3, 14, 4, 4, 14, blockstate, blockstate, false);
+-         this.m_73441_(p_71633_, p_71637_, 4, 1, 17, 4, 4, 17, blockstate, blockstate, false);
+-         return true;
+-      }
+-   }
+-
+-   public static class CastleCorridorStairsPiece extends NetherBridgePieces.NetherBridgePiece {
+-      public CastleCorridorStairsPiece(int p_71653_, BoundingBox p_71654_, Direction p_71655_) {
+-         super(StructurePieceType.f_67143_, p_71653_);
+-         this.m_73519_(p_71655_);
+-         this.f_73383_ = p_71654_;
+-      }
+-
+-      public CastleCorridorStairsPiece(StructureManager p_71657_, CompoundTag p_71658_) {
+-         super(StructurePieceType.f_67143_, p_71658_);
+-      }
+-
+-      public void m_6811_(StructurePiece p_71668_, List<StructurePiece> p_71669_, Random p_71670_) {
+-         this.m_71925_((NetherBridgePieces.StartPiece)p_71668_, p_71669_, p_71670_, 1, 0, true);
+-      }
+-
+-      public static NetherBridgePieces.CastleCorridorStairsPiece m_71671_(List<StructurePiece> p_71672_, int p_71673_, int p_71674_, int p_71675_, Direction p_71676_, int p_71677_) {
+-         BoundingBox boundingbox = BoundingBox.m_71031_(p_71673_, p_71674_, p_71675_, -1, -7, 0, 5, 14, 10, p_71676_);
+-         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71672_, boundingbox) == null ? new NetherBridgePieces.CastleCorridorStairsPiece(p_71677_, boundingbox, p_71676_) : null;
+-      }
+-
+-      public boolean m_7832_(WorldGenLevel p_71660_, StructureFeatureManager p_71661_, ChunkGenerator p_71662_, Random p_71663_, BoundingBox p_71664_, ChunkPos p_71665_, BlockPos p_71666_) {
+-         BlockState blockstate = Blocks.f_50199_.m_49966_().m_61124_(StairBlock.f_56841_, Direction.SOUTH);
+-         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
+-
+-         for(int i = 0; i <= 9; ++i) {
+-            int j = Math.max(1, 7 - i);
+-            int k = Math.min(Math.max(j + 5, 14 - i), 13);
+-            int l = i;
+-            this.m_73441_(p_71660_, p_71664_, 0, 0, i, 4, j, i, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-            this.m_73441_(p_71660_, p_71664_, 1, j + 1, i, 3, k - 1, i, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
+-            if (i <= 6) {
+-               this.m_73434_(p_71660_, blockstate, 1, j + 1, i, p_71664_);
+-               this.m_73434_(p_71660_, blockstate, 2, j + 1, i, p_71664_);
+-               this.m_73434_(p_71660_, blockstate, 3, j + 1, i, p_71664_);
+-            }
+-
+-            this.m_73441_(p_71660_, p_71664_, 0, k, i, 4, k, i, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-            this.m_73441_(p_71660_, p_71664_, 0, j + 1, i, 0, k - 1, i, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-            this.m_73441_(p_71660_, p_71664_, 4, j + 1, i, 4, k - 1, i, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-            if ((i & 1) == 0) {
+-               this.m_73441_(p_71660_, p_71664_, 0, j + 2, i, 0, j + 3, i, blockstate1, blockstate1, false);
+-               this.m_73441_(p_71660_, p_71664_, 4, j + 2, i, 4, j + 3, i, blockstate1, blockstate1, false);
+-            }
+-
+-            for(int i1 = 0; i1 <= 4; ++i1) {
+-               this.m_73528_(p_71660_, Blocks.f_50197_.m_49966_(), i1, -1, l, p_71664_);
+-            }
+-         }
+-
+-         return true;
+-      }
+-   }
+-
+-   public static class CastleCorridorTBalconyPiece extends NetherBridgePieces.NetherBridgePiece {
+-      public CastleCorridorTBalconyPiece(int p_71679_, BoundingBox p_71680_, Direction p_71681_) {
+-         super(StructurePieceType.f_67144_, p_71679_);
+-         this.m_73519_(p_71681_);
+-         this.f_73383_ = p_71680_;
+-      }
+-
+-      public CastleCorridorTBalconyPiece(StructureManager p_71683_, CompoundTag p_71684_) {
+-         super(StructurePieceType.f_67144_, p_71684_);
+-      }
+-
+-      public void m_6811_(StructurePiece p_71694_, List<StructurePiece> p_71695_, Random p_71696_) {
+-         int i = 1;
+-         Direction direction = this.m_73549_();
+-         if (direction == Direction.WEST || direction == Direction.NORTH) {
+-            i = 5;
+-         }
+-
+-         this.m_71936_((NetherBridgePieces.StartPiece)p_71694_, p_71695_, p_71696_, 0, i, p_71696_.nextInt(8) > 0);
+-         this.m_71943_((NetherBridgePieces.StartPiece)p_71694_, p_71695_, p_71696_, 0, i, p_71696_.nextInt(8) > 0);
+-      }
+-
+-      public static NetherBridgePieces.CastleCorridorTBalconyPiece m_71697_(List<StructurePiece> p_71698_, int p_71699_, int p_71700_, int p_71701_, Direction p_71702_, int p_71703_) {
+-         BoundingBox boundingbox = BoundingBox.m_71031_(p_71699_, p_71700_, p_71701_, -3, 0, 0, 9, 7, 9, p_71702_);
+-         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71698_, boundingbox) == null ? new NetherBridgePieces.CastleCorridorTBalconyPiece(p_71703_, boundingbox, p_71702_) : null;
+-      }
+-
+-      public boolean m_7832_(WorldGenLevel p_71686_, StructureFeatureManager p_71687_, ChunkGenerator p_71688_, Random p_71689_, BoundingBox p_71690_, ChunkPos p_71691_, BlockPos p_71692_) {
+-         BlockState blockstate = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
+-         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true));
+-         this.m_73441_(p_71686_, p_71690_, 0, 0, 0, 8, 1, 8, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71686_, p_71690_, 0, 2, 0, 8, 5, 8, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
+-         this.m_73441_(p_71686_, p_71690_, 0, 6, 0, 8, 6, 5, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71686_, p_71690_, 0, 2, 0, 2, 5, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71686_, p_71690_, 6, 2, 0, 8, 5, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71686_, p_71690_, 1, 3, 0, 1, 4, 0, blockstate1, blockstate1, false);
+-         this.m_73441_(p_71686_, p_71690_, 7, 3, 0, 7, 4, 0, blockstate1, blockstate1, false);
+-         this.m_73441_(p_71686_, p_71690_, 0, 2, 4, 8, 2, 8, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71686_, p_71690_, 1, 1, 4, 2, 2, 4, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
+-         this.m_73441_(p_71686_, p_71690_, 6, 1, 4, 7, 2, 4, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
+-         this.m_73441_(p_71686_, p_71690_, 1, 3, 8, 7, 3, 8, blockstate1, blockstate1, false);
+-         this.m_73434_(p_71686_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true)), 0, 3, 8, p_71690_);
+-         this.m_73434_(p_71686_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true)), 8, 3, 8, p_71690_);
+-         this.m_73441_(p_71686_, p_71690_, 0, 3, 6, 0, 3, 7, blockstate, blockstate, false);
+-         this.m_73441_(p_71686_, p_71690_, 8, 3, 6, 8, 3, 7, blockstate, blockstate, false);
+-         this.m_73441_(p_71686_, p_71690_, 0, 3, 4, 0, 5, 5, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71686_, p_71690_, 8, 3, 4, 8, 5, 5, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71686_, p_71690_, 1, 3, 5, 2, 5, 5, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71686_, p_71690_, 6, 3, 5, 7, 5, 5, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71686_, p_71690_, 1, 4, 5, 1, 5, 5, blockstate1, blockstate1, false);
+-         this.m_73441_(p_71686_, p_71690_, 7, 4, 5, 7, 5, 5, blockstate1, blockstate1, false);
+-
+-         for(int i = 0; i <= 5; ++i) {
+-            for(int j = 0; j <= 8; ++j) {
+-               this.m_73528_(p_71686_, Blocks.f_50197_.m_49966_(), j, -1, i, p_71690_);
+-            }
+-         }
+-
+-         return true;
+-      }
+-   }
+-
+    public static class CastleEntrance extends NetherBridgePieces.NetherBridgePiece {
+       public CastleEntrance(int p_71705_, Random p_71706_, BoundingBox p_71707_, Direction p_71708_) {
+          super(StructurePieceType.f_67145_, p_71705_);
+@@ -459,205 +_,6 @@
+       }
+    }
+ 
+-   public static class CastleSmallCorridorCrossingPiece extends NetherBridgePieces.NetherBridgePiece {
+-      public CastleSmallCorridorCrossingPiece(int p_71733_, BoundingBox p_71734_, Direction p_71735_) {
+-         super(StructurePieceType.f_67146_, p_71733_);
+-         this.m_73519_(p_71735_);
+-         this.f_73383_ = p_71734_;
+-      }
+-
+-      public CastleSmallCorridorCrossingPiece(StructureManager p_71737_, CompoundTag p_71738_) {
+-         super(StructurePieceType.f_67146_, p_71738_);
+-      }
+-
+-      public void m_6811_(StructurePiece p_71748_, List<StructurePiece> p_71749_, Random p_71750_) {
+-         this.m_71925_((NetherBridgePieces.StartPiece)p_71748_, p_71749_, p_71750_, 1, 0, true);
+-         this.m_71936_((NetherBridgePieces.StartPiece)p_71748_, p_71749_, p_71750_, 0, 1, true);
+-         this.m_71943_((NetherBridgePieces.StartPiece)p_71748_, p_71749_, p_71750_, 0, 1, true);
+-      }
+-
+-      public static NetherBridgePieces.CastleSmallCorridorCrossingPiece m_71751_(List<StructurePiece> p_71752_, int p_71753_, int p_71754_, int p_71755_, Direction p_71756_, int p_71757_) {
+-         BoundingBox boundingbox = BoundingBox.m_71031_(p_71753_, p_71754_, p_71755_, -1, 0, 0, 5, 7, 5, p_71756_);
+-         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71752_, boundingbox) == null ? new NetherBridgePieces.CastleSmallCorridorCrossingPiece(p_71757_, boundingbox, p_71756_) : null;
+-      }
+-
+-      public boolean m_7832_(WorldGenLevel p_71740_, StructureFeatureManager p_71741_, ChunkGenerator p_71742_, Random p_71743_, BoundingBox p_71744_, ChunkPos p_71745_, BlockPos p_71746_) {
+-         this.m_73441_(p_71740_, p_71744_, 0, 0, 0, 4, 1, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71740_, p_71744_, 0, 2, 0, 4, 5, 4, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
+-         this.m_73441_(p_71740_, p_71744_, 0, 2, 0, 0, 5, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71740_, p_71744_, 4, 2, 0, 4, 5, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71740_, p_71744_, 0, 2, 4, 0, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71740_, p_71744_, 4, 2, 4, 4, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71740_, p_71744_, 0, 6, 0, 4, 6, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-
+-         for(int i = 0; i <= 4; ++i) {
+-            for(int j = 0; j <= 4; ++j) {
+-               this.m_73528_(p_71740_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71744_);
+-            }
+-         }
+-
+-         return true;
+-      }
+-   }
+-
+-   public static class CastleSmallCorridorLeftTurnPiece extends NetherBridgePieces.NetherBridgePiece {
+-      private boolean f_71758_;
+-
+-      public CastleSmallCorridorLeftTurnPiece(int p_71760_, Random p_71761_, BoundingBox p_71762_, Direction p_71763_) {
+-         super(StructurePieceType.f_67147_, p_71760_);
+-         this.m_73519_(p_71763_);
+-         this.f_73383_ = p_71762_;
+-         this.f_71758_ = p_71761_.nextInt(3) == 0;
+-      }
+-
+-      public CastleSmallCorridorLeftTurnPiece(StructureManager p_71765_, CompoundTag p_71766_) {
+-         super(StructurePieceType.f_67147_, p_71766_);
+-         this.f_71758_ = p_71766_.m_128471_("Chest");
+-      }
+-
+-      protected void m_5688_(CompoundTag p_71788_) {
+-         super.m_5688_(p_71788_);
+-         p_71788_.m_128379_("Chest", this.f_71758_);
+-      }
+-
+-      public void m_6811_(StructurePiece p_71776_, List<StructurePiece> p_71777_, Random p_71778_) {
+-         this.m_71936_((NetherBridgePieces.StartPiece)p_71776_, p_71777_, p_71778_, 0, 1, true);
+-      }
+-
+-      public static NetherBridgePieces.CastleSmallCorridorLeftTurnPiece m_71779_(List<StructurePiece> p_71780_, Random p_71781_, int p_71782_, int p_71783_, int p_71784_, Direction p_71785_, int p_71786_) {
+-         BoundingBox boundingbox = BoundingBox.m_71031_(p_71782_, p_71783_, p_71784_, -1, 0, 0, 5, 7, 5, p_71785_);
+-         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71780_, boundingbox) == null ? new NetherBridgePieces.CastleSmallCorridorLeftTurnPiece(p_71786_, p_71781_, boundingbox, p_71785_) : null;
+-      }
+-
+-      public boolean m_7832_(WorldGenLevel p_71768_, StructureFeatureManager p_71769_, ChunkGenerator p_71770_, Random p_71771_, BoundingBox p_71772_, ChunkPos p_71773_, BlockPos p_71774_) {
+-         this.m_73441_(p_71768_, p_71772_, 0, 0, 0, 4, 1, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71768_, p_71772_, 0, 2, 0, 4, 5, 4, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
+-         BlockState blockstate = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true));
+-         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
+-         this.m_73441_(p_71768_, p_71772_, 4, 2, 0, 4, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71768_, p_71772_, 4, 3, 1, 4, 4, 1, blockstate1, blockstate1, false);
+-         this.m_73441_(p_71768_, p_71772_, 4, 3, 3, 4, 4, 3, blockstate1, blockstate1, false);
+-         this.m_73441_(p_71768_, p_71772_, 0, 2, 0, 0, 5, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71768_, p_71772_, 0, 2, 4, 3, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71768_, p_71772_, 1, 3, 4, 1, 4, 4, blockstate, blockstate, false);
+-         this.m_73441_(p_71768_, p_71772_, 3, 3, 4, 3, 4, 4, blockstate, blockstate, false);
+-         if (this.f_71758_ && p_71772_.m_71051_(new BlockPos(this.m_73392_(3, 3), this.m_73544_(2), this.m_73525_(3, 3)))) {
+-            this.f_71758_ = false;
+-            this.m_5606_(p_71768_, p_71772_, p_71771_, 3, 2, 3, BuiltInLootTables.f_78760_);
+-         }
+-
+-         this.m_73441_(p_71768_, p_71772_, 0, 6, 0, 4, 6, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-
+-         for(int i = 0; i <= 4; ++i) {
+-            for(int j = 0; j <= 4; ++j) {
+-               this.m_73528_(p_71768_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71772_);
+-            }
+-         }
+-
+-         return true;
+-      }
+-   }
+-
+-   public static class CastleSmallCorridorPiece extends NetherBridgePieces.NetherBridgePiece {
+-      public CastleSmallCorridorPiece(int p_71790_, BoundingBox p_71791_, Direction p_71792_) {
+-         super(StructurePieceType.f_67148_, p_71790_);
+-         this.m_73519_(p_71792_);
+-         this.f_73383_ = p_71791_;
+-      }
+-
+-      public CastleSmallCorridorPiece(StructureManager p_71794_, CompoundTag p_71795_) {
+-         super(StructurePieceType.f_67148_, p_71795_);
+-      }
+-
+-      public void m_6811_(StructurePiece p_71805_, List<StructurePiece> p_71806_, Random p_71807_) {
+-         this.m_71925_((NetherBridgePieces.StartPiece)p_71805_, p_71806_, p_71807_, 1, 0, true);
+-      }
+-
+-      public static NetherBridgePieces.CastleSmallCorridorPiece m_71808_(List<StructurePiece> p_71809_, int p_71810_, int p_71811_, int p_71812_, Direction p_71813_, int p_71814_) {
+-         BoundingBox boundingbox = BoundingBox.m_71031_(p_71810_, p_71811_, p_71812_, -1, 0, 0, 5, 7, 5, p_71813_);
+-         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71809_, boundingbox) == null ? new NetherBridgePieces.CastleSmallCorridorPiece(p_71814_, boundingbox, p_71813_) : null;
+-      }
+-
+-      public boolean m_7832_(WorldGenLevel p_71797_, StructureFeatureManager p_71798_, ChunkGenerator p_71799_, Random p_71800_, BoundingBox p_71801_, ChunkPos p_71802_, BlockPos p_71803_) {
+-         this.m_73441_(p_71797_, p_71801_, 0, 0, 0, 4, 1, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71797_, p_71801_, 0, 2, 0, 4, 5, 4, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
+-         BlockState blockstate = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
+-         this.m_73441_(p_71797_, p_71801_, 0, 2, 0, 0, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71797_, p_71801_, 4, 2, 0, 4, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71797_, p_71801_, 0, 3, 1, 0, 4, 1, blockstate, blockstate, false);
+-         this.m_73441_(p_71797_, p_71801_, 0, 3, 3, 0, 4, 3, blockstate, blockstate, false);
+-         this.m_73441_(p_71797_, p_71801_, 4, 3, 1, 4, 4, 1, blockstate, blockstate, false);
+-         this.m_73441_(p_71797_, p_71801_, 4, 3, 3, 4, 4, 3, blockstate, blockstate, false);
+-         this.m_73441_(p_71797_, p_71801_, 0, 6, 0, 4, 6, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-
+-         for(int i = 0; i <= 4; ++i) {
+-            for(int j = 0; j <= 4; ++j) {
+-               this.m_73528_(p_71797_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71801_);
+-            }
+-         }
+-
+-         return true;
+-      }
+-   }
+-
+-   public static class CastleSmallCorridorRightTurnPiece extends NetherBridgePieces.NetherBridgePiece {
+-      private boolean f_71815_;
+-
+-      public CastleSmallCorridorRightTurnPiece(int p_71817_, Random p_71818_, BoundingBox p_71819_, Direction p_71820_) {
+-         super(StructurePieceType.f_67149_, p_71817_);
+-         this.m_73519_(p_71820_);
+-         this.f_73383_ = p_71819_;
+-         this.f_71815_ = p_71818_.nextInt(3) == 0;
+-      }
+-
+-      public CastleSmallCorridorRightTurnPiece(StructureManager p_71822_, CompoundTag p_71823_) {
+-         super(StructurePieceType.f_67149_, p_71823_);
+-         this.f_71815_ = p_71823_.m_128471_("Chest");
+-      }
+-
+-      protected void m_5688_(CompoundTag p_71845_) {
+-         super.m_5688_(p_71845_);
+-         p_71845_.m_128379_("Chest", this.f_71815_);
+-      }
+-
+-      public void m_6811_(StructurePiece p_71833_, List<StructurePiece> p_71834_, Random p_71835_) {
+-         this.m_71943_((NetherBridgePieces.StartPiece)p_71833_, p_71834_, p_71835_, 0, 1, true);
+-      }
+-
+-      public static NetherBridgePieces.CastleSmallCorridorRightTurnPiece m_71836_(List<StructurePiece> p_71837_, Random p_71838_, int p_71839_, int p_71840_, int p_71841_, Direction p_71842_, int p_71843_) {
+-         BoundingBox boundingbox = BoundingBox.m_71031_(p_71839_, p_71840_, p_71841_, -1, 0, 0, 5, 7, 5, p_71842_);
+-         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71837_, boundingbox) == null ? new NetherBridgePieces.CastleSmallCorridorRightTurnPiece(p_71843_, p_71838_, boundingbox, p_71842_) : null;
+-      }
+-
+-      public boolean m_7832_(WorldGenLevel p_71825_, StructureFeatureManager p_71826_, ChunkGenerator p_71827_, Random p_71828_, BoundingBox p_71829_, ChunkPos p_71830_, BlockPos p_71831_) {
+-         this.m_73441_(p_71825_, p_71829_, 0, 0, 0, 4, 1, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71825_, p_71829_, 0, 2, 0, 4, 5, 4, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
+-         BlockState blockstate = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true));
+-         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
+-         this.m_73441_(p_71825_, p_71829_, 0, 2, 0, 0, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71825_, p_71829_, 0, 3, 1, 0, 4, 1, blockstate1, blockstate1, false);
+-         this.m_73441_(p_71825_, p_71829_, 0, 3, 3, 0, 4, 3, blockstate1, blockstate1, false);
+-         this.m_73441_(p_71825_, p_71829_, 4, 2, 0, 4, 5, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71825_, p_71829_, 1, 2, 4, 4, 5, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71825_, p_71829_, 1, 3, 4, 1, 4, 4, blockstate, blockstate, false);
+-         this.m_73441_(p_71825_, p_71829_, 3, 3, 4, 3, 4, 4, blockstate, blockstate, false);
+-         if (this.f_71815_ && p_71829_.m_71051_(new BlockPos(this.m_73392_(1, 3), this.m_73544_(2), this.m_73525_(1, 3)))) {
+-            this.f_71815_ = false;
+-            this.m_5606_(p_71825_, p_71829_, p_71828_, 1, 2, 3, BuiltInLootTables.f_78760_);
+-         }
+-
+-         this.m_73441_(p_71825_, p_71829_, 0, 6, 0, 4, 6, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-
+-         for(int i = 0; i <= 4; ++i) {
+-            for(int j = 0; j <= 4; ++j) {
+-               this.m_73528_(p_71825_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71829_);
+-            }
+-         }
+-
+-         return true;
+-      }
+-   }
+-
+    public static class CastleStalkRoom extends NetherBridgePieces.NetherBridgePiece {
+       public CastleStalkRoom(int p_71847_, BoundingBox p_71848_, Direction p_71849_) {
+          super(StructurePieceType.f_67150_, p_71847_);
+@@ -795,82 +_,6 @@
+       }
+    }
+ 
+-   public static class MonsterThrone extends NetherBridgePieces.NetherBridgePiece {
+-      private boolean f_71872_;
+-
+-      public MonsterThrone(int p_71874_, BoundingBox p_71875_, Direction p_71876_) {
+-         super(StructurePieceType.f_67151_, p_71874_);
+-         this.m_73519_(p_71876_);
+-         this.f_73383_ = p_71875_;
+-      }
+-
+-      public MonsterThrone(StructureManager p_71878_, CompoundTag p_71879_) {
+-         super(StructurePieceType.f_67151_, p_71879_);
+-         this.f_71872_ = p_71879_.m_128471_("Mob");
+-      }
+-
+-      protected void m_5688_(CompoundTag p_71896_) {
+-         super.m_5688_(p_71896_);
+-         p_71896_.m_128379_("Mob", this.f_71872_);
+-      }
+-
+-      public static NetherBridgePieces.MonsterThrone m_71888_(List<StructurePiece> p_71889_, int p_71890_, int p_71891_, int p_71892_, int p_71893_, Direction p_71894_) {
+-         BoundingBox boundingbox = BoundingBox.m_71031_(p_71890_, p_71891_, p_71892_, -2, 0, 0, 7, 8, 9, p_71894_);
+-         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71889_, boundingbox) == null ? new NetherBridgePieces.MonsterThrone(p_71893_, boundingbox, p_71894_) : null;
+-      }
+-
+-      public boolean m_7832_(WorldGenLevel p_71881_, StructureFeatureManager p_71882_, ChunkGenerator p_71883_, Random p_71884_, BoundingBox p_71885_, ChunkPos p_71886_, BlockPos p_71887_) {
+-         this.m_73441_(p_71881_, p_71885_, 0, 2, 0, 6, 7, 7, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
+-         this.m_73441_(p_71881_, p_71885_, 1, 0, 0, 5, 1, 7, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71881_, p_71885_, 1, 2, 1, 5, 2, 7, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71881_, p_71885_, 1, 3, 2, 5, 3, 7, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71881_, p_71885_, 1, 4, 3, 5, 4, 7, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71881_, p_71885_, 1, 2, 0, 1, 4, 2, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71881_, p_71885_, 5, 2, 0, 5, 4, 2, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71881_, p_71885_, 1, 5, 2, 1, 5, 3, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71881_, p_71885_, 5, 5, 2, 5, 5, 3, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71881_, p_71885_, 0, 5, 3, 0, 5, 8, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71881_, p_71885_, 6, 5, 3, 6, 5, 8, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71881_, p_71885_, 1, 5, 8, 5, 5, 8, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         BlockState blockstate = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true));
+-         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
+-         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)), 1, 6, 3, p_71885_);
+-         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true)), 5, 6, 3, p_71885_);
+-         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)), 0, 6, 3, p_71885_);
+-         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)), 6, 6, 3, p_71885_);
+-         this.m_73441_(p_71881_, p_71885_, 0, 6, 4, 0, 6, 7, blockstate1, blockstate1, false);
+-         this.m_73441_(p_71881_, p_71885_, 6, 6, 4, 6, 6, 7, blockstate1, blockstate1, false);
+-         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true)), 0, 6, 8, p_71885_);
+-         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true)), 6, 6, 8, p_71885_);
+-         this.m_73441_(p_71881_, p_71885_, 1, 6, 8, 5, 6, 8, blockstate, blockstate, false);
+-         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true)), 1, 7, 8, p_71885_);
+-         this.m_73441_(p_71881_, p_71885_, 2, 7, 8, 4, 7, 8, blockstate, blockstate, false);
+-         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)), 5, 7, 8, p_71885_);
+-         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true)), 2, 8, 8, p_71885_);
+-         this.m_73434_(p_71881_, blockstate, 3, 8, 8, p_71885_);
+-         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)), 4, 8, 8, p_71885_);
+-         if (!this.f_71872_) {
+-            BlockPos blockpos = new BlockPos(this.m_73392_(3, 5), this.m_73544_(5), this.m_73525_(3, 5));
+-            if (p_71885_.m_71051_(blockpos)) {
+-               this.f_71872_ = true;
+-               p_71881_.m_7731_(blockpos, Blocks.f_50085_.m_49966_(), 2);
+-               BlockEntity blockentity = p_71881_.m_7702_(blockpos);
+-               if (blockentity instanceof SpawnerBlockEntity) {
+-                  ((SpawnerBlockEntity)blockentity).m_59801_().m_45462_(EntityType.f_20551_);
+-               }
+-            }
+-         }
+-
+-         for(int i = 0; i <= 6; ++i) {
+-            for(int j = 0; j <= 6; ++j) {
+-               this.m_73528_(p_71881_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71885_);
+-            }
+-         }
+-
+-         return true;
+-      }
+-   }
+-
+    abstract static class NetherBridgePiece extends StructurePiece {
+       protected NetherBridgePiece(StructurePieceType p_71898_, int p_71899_) {
+          super(p_71898_, p_71899_);
+@@ -1039,60 +_,6 @@
+       }
+    }
+ 
+-   public static class RoomCrossing extends NetherBridgePieces.NetherBridgePiece {
+-      public RoomCrossing(int p_71968_, BoundingBox p_71969_, Direction p_71970_) {
+-         super(StructurePieceType.f_67152_, p_71968_);
+-         this.m_73519_(p_71970_);
+-         this.f_73383_ = p_71969_;
+-      }
+-
+-      public RoomCrossing(StructureManager p_71972_, CompoundTag p_71973_) {
+-         super(StructurePieceType.f_67152_, p_71973_);
+-      }
+-
+-      public void m_6811_(StructurePiece p_71983_, List<StructurePiece> p_71984_, Random p_71985_) {
+-         this.m_71925_((NetherBridgePieces.StartPiece)p_71983_, p_71984_, p_71985_, 2, 0, false);
+-         this.m_71936_((NetherBridgePieces.StartPiece)p_71983_, p_71984_, p_71985_, 0, 2, false);
+-         this.m_71943_((NetherBridgePieces.StartPiece)p_71983_, p_71984_, p_71985_, 0, 2, false);
+-      }
+-
+-      public static NetherBridgePieces.RoomCrossing m_71986_(List<StructurePiece> p_71987_, int p_71988_, int p_71989_, int p_71990_, Direction p_71991_, int p_71992_) {
+-         BoundingBox boundingbox = BoundingBox.m_71031_(p_71988_, p_71989_, p_71990_, -2, 0, 0, 7, 9, 7, p_71991_);
+-         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71987_, boundingbox) == null ? new NetherBridgePieces.RoomCrossing(p_71992_, boundingbox, p_71991_) : null;
+-      }
+-
+-      public boolean m_7832_(WorldGenLevel p_71975_, StructureFeatureManager p_71976_, ChunkGenerator p_71977_, Random p_71978_, BoundingBox p_71979_, ChunkPos p_71980_, BlockPos p_71981_) {
+-         this.m_73441_(p_71975_, p_71979_, 0, 0, 0, 6, 1, 6, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 0, 2, 0, 6, 7, 6, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 0, 2, 0, 1, 6, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 0, 2, 6, 1, 6, 6, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 5, 2, 0, 6, 6, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 5, 2, 6, 6, 6, 6, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 0, 2, 0, 0, 6, 1, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 0, 2, 5, 0, 6, 6, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 6, 2, 0, 6, 6, 1, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 6, 2, 5, 6, 6, 6, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         BlockState blockstate = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true));
+-         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
+-         this.m_73441_(p_71975_, p_71979_, 2, 6, 0, 4, 6, 0, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 2, 5, 0, 4, 5, 0, blockstate, blockstate, false);
+-         this.m_73441_(p_71975_, p_71979_, 2, 6, 6, 4, 6, 6, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 2, 5, 6, 4, 5, 6, blockstate, blockstate, false);
+-         this.m_73441_(p_71975_, p_71979_, 0, 6, 2, 0, 6, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 0, 5, 2, 0, 5, 4, blockstate1, blockstate1, false);
+-         this.m_73441_(p_71975_, p_71979_, 6, 6, 2, 6, 6, 4, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
+-         this.m_73441_(p_71975_, p_71979_, 6, 5, 2, 6, 5, 4, blockstate1, blockstate1, false);
+-
+-         for(int i = 0; i <= 6; ++i) {
+-            for(int j = 0; j <= 6; ++j) {
+-               this.m_73528_(p_71975_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71979_);
+-            }
+-         }
+-
+-         return true;
+-      }
+-   }
+-
+    public static class StairsRoom extends NetherBridgePieces.NetherBridgePiece {
+       public StairsRoom(int p_71994_, BoundingBox p_71995_, Direction p_71996_) {
+          super(StructurePieceType.f_67153_, p_71994_);
+@@ -1172,6 +_,134 @@
+ 
+       public StartPiece(StructureManager p_72024_, CompoundTag p_72025_) {
+          super(StructurePieceType.f_67154_, p_72025_);
++      }
++   }
++
++   public static class BridgeStraight extends NetherBridgePieces.NetherBridgePiece {
++      public BridgeStraight(int p_71625_, Random p_71626_, BoundingBox p_71627_, Direction p_71628_) {
++         super(StructurePieceType.f_67142_, p_71625_);
++         this.m_73519_(p_71628_);
++         this.f_73383_ = p_71627_;
++      }
++
++      public BridgeStraight(StructureManager p_71630_, CompoundTag p_71631_) {
++         super(StructurePieceType.f_67142_, p_71631_);
++      }
++
++      public void m_6811_(StructurePiece p_71641_, List<StructurePiece> p_71642_, Random p_71643_) {
++         this.m_71925_((NetherBridgePieces.StartPiece)p_71641_, p_71642_, p_71643_, 1, 3, false);
++      }
++
++      public static NetherBridgePieces.BridgeStraight m_71644_(List<StructurePiece> p_71645_, Random p_71646_, int p_71647_, int p_71648_, int p_71649_, Direction p_71650_, int p_71651_) {
++         BoundingBox boundingbox = BoundingBox.m_71031_(p_71647_, p_71648_, p_71649_, -1, -3, 0, 5, 10, 19, p_71650_);
++         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71645_, boundingbox) == null ? new NetherBridgePieces.BridgeStraight(p_71651_, p_71646_, boundingbox, p_71650_) : null;
++      }
++
++      public boolean m_7832_(WorldGenLevel p_71633_, StructureFeatureManager p_71634_, ChunkGenerator p_71635_, Random p_71636_, BoundingBox p_71637_, ChunkPos p_71638_, BlockPos p_71639_) {
++         this.m_73441_(p_71633_, p_71637_, 0, 3, 0, 4, 4, 18, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71633_, p_71637_, 1, 5, 0, 3, 7, 18, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
++         this.m_73441_(p_71633_, p_71637_, 0, 5, 0, 0, 5, 18, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71633_, p_71637_, 4, 5, 0, 4, 5, 18, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71633_, p_71637_, 0, 2, 0, 4, 2, 5, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71633_, p_71637_, 0, 2, 13, 4, 2, 18, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71633_, p_71637_, 0, 0, 0, 4, 1, 3, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71633_, p_71637_, 0, 0, 15, 4, 1, 18, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++
++         for(int i = 0; i <= 4; ++i) {
++            for(int j = 0; j <= 2; ++j) {
++               this.m_73528_(p_71633_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71637_);
++               this.m_73528_(p_71633_, Blocks.f_50197_.m_49966_(), i, -1, 18 - j, p_71637_);
++            }
++         }
++
++         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
++         BlockState blockstate2 = blockstate1.m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true));
++         BlockState blockstate = blockstate1.m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true));
++         this.m_73441_(p_71633_, p_71637_, 0, 1, 1, 0, 4, 1, blockstate2, blockstate2, false);
++         this.m_73441_(p_71633_, p_71637_, 0, 3, 4, 0, 4, 4, blockstate2, blockstate2, false);
++         this.m_73441_(p_71633_, p_71637_, 0, 3, 14, 0, 4, 14, blockstate2, blockstate2, false);
++         this.m_73441_(p_71633_, p_71637_, 0, 1, 17, 0, 4, 17, blockstate2, blockstate2, false);
++         this.m_73441_(p_71633_, p_71637_, 4, 1, 1, 4, 4, 1, blockstate, blockstate, false);
++         this.m_73441_(p_71633_, p_71637_, 4, 3, 4, 4, 4, 4, blockstate, blockstate, false);
++         this.m_73441_(p_71633_, p_71637_, 4, 3, 14, 4, 4, 14, blockstate, blockstate, false);
++         this.m_73441_(p_71633_, p_71637_, 4, 1, 17, 4, 4, 17, blockstate, blockstate, false);
++         return true;
++      }
++   }
++
++   public static class MonsterThrone extends NetherBridgePieces.NetherBridgePiece {
++      private boolean f_71872_;
++
++      public MonsterThrone(int p_71874_, BoundingBox p_71875_, Direction p_71876_) {
++         super(StructurePieceType.f_67151_, p_71874_);
++         this.m_73519_(p_71876_);
++         this.f_73383_ = p_71875_;
++      }
++
++      public MonsterThrone(StructureManager p_71878_, CompoundTag p_71879_) {
++         super(StructurePieceType.f_67151_, p_71879_);
++         this.f_71872_ = p_71879_.m_128471_("Mob");
++      }
++
++      protected void m_5688_(CompoundTag p_71896_) {
++         super.m_5688_(p_71896_);
++         p_71896_.m_128379_("Mob", this.f_71872_);
++      }
++
++      public static NetherBridgePieces.MonsterThrone m_71888_(List<StructurePiece> p_71889_, int p_71890_, int p_71891_, int p_71892_, int p_71893_, Direction p_71894_) {
++         BoundingBox boundingbox = BoundingBox.m_71031_(p_71890_, p_71891_, p_71892_, -2, 0, 0, 7, 8, 9, p_71894_);
++         return m_71903_(boundingbox) && StructurePiece.m_73521_(p_71889_, boundingbox) == null ? new NetherBridgePieces.MonsterThrone(p_71893_, boundingbox, p_71894_) : null;
++      }
++
++      public boolean m_7832_(WorldGenLevel p_71881_, StructureFeatureManager p_71882_, ChunkGenerator p_71883_, Random p_71884_, BoundingBox p_71885_, ChunkPos p_71886_, BlockPos p_71887_) {
++         this.m_73441_(p_71881_, p_71885_, 0, 2, 0, 6, 7, 7, Blocks.f_50016_.m_49966_(), Blocks.f_50016_.m_49966_(), false);
++         this.m_73441_(p_71881_, p_71885_, 1, 0, 0, 5, 1, 7, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71881_, p_71885_, 1, 2, 1, 5, 2, 7, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71881_, p_71885_, 1, 3, 2, 5, 3, 7, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71881_, p_71885_, 1, 4, 3, 5, 4, 7, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71881_, p_71885_, 1, 2, 0, 1, 4, 2, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71881_, p_71885_, 5, 2, 0, 5, 4, 2, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71881_, p_71885_, 1, 5, 2, 1, 5, 3, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71881_, p_71885_, 5, 5, 2, 5, 5, 3, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71881_, p_71885_, 0, 5, 3, 0, 5, 8, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71881_, p_71885_, 6, 5, 3, 6, 5, 8, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         this.m_73441_(p_71881_, p_71885_, 1, 5, 8, 5, 5, 8, Blocks.f_50197_.m_49966_(), Blocks.f_50197_.m_49966_(), false);
++         BlockState blockstate = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true));
++         BlockState blockstate1 = Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true));
++         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)), 1, 6, 3, p_71885_);
++         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true)), 5, 6, 3, p_71885_);
++         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)), 0, 6, 3, p_71885_);
++         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52309_, Boolean.valueOf(true)), 6, 6, 3, p_71885_);
++         this.m_73441_(p_71881_, p_71885_, 0, 6, 4, 0, 6, 7, blockstate1, blockstate1, false);
++         this.m_73441_(p_71881_, p_71885_, 6, 6, 4, 6, 6, 7, blockstate1, blockstate1, false);
++         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true)), 0, 6, 8, p_71885_);
++         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)).m_61124_(FenceBlock.f_52311_, Boolean.valueOf(true)), 6, 6, 8, p_71885_);
++         this.m_73441_(p_71881_, p_71885_, 1, 6, 8, 5, 6, 8, blockstate, blockstate, false);
++         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true)), 1, 7, 8, p_71885_);
++         this.m_73441_(p_71881_, p_71885_, 2, 7, 8, 4, 7, 8, blockstate, blockstate, false);
++         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)), 5, 7, 8, p_71885_);
++         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52310_, Boolean.valueOf(true)), 2, 8, 8, p_71885_);
++         this.m_73434_(p_71881_, blockstate, 3, 8, 8, p_71885_);
++         this.m_73434_(p_71881_, Blocks.f_50198_.m_49966_().m_61124_(FenceBlock.f_52312_, Boolean.valueOf(true)), 4, 8, 8, p_71885_);
++         if (!this.f_71872_) {
++            BlockPos blockpos = new BlockPos(this.m_73392_(3, 5), this.m_73544_(5), this.m_73525_(3, 5));
++            if (p_71885_.m_71051_(blockpos)) {
++               this.f_71872_ = true;
++               p_71881_.m_7731_(blockpos, Blocks.f_50085_.m_49966_(), 2);
++               BlockEntity blockentity = p_71881_.m_7702_(blockpos);
++               if (blockentity instanceof SpawnerBlockEntity) {
++                  ((SpawnerBlockEntity)blockentity).m_59801_().m_45462_(EntityType.f_20551_);
++               }
++            }
++         }
++
++         for(int i = 0; i <= 6; ++i) {
++            for(int j = 0; j <= 6; ++j) {
++               this.m_73528_(p_71881_, Blocks.f_50197_.m_49966_(), i, -1, j, p_71885_);
++            }
++         }
++
++         return true;
+       }
+    }
+ }

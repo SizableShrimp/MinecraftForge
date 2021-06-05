@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/levelgen/feature/SpringFeature.java
++++ b/net/minecraft/world/level/levelgen/feature/SpringFeature.java
+@@ -20,7 +_,7 @@
+          return false;
+       } else {
+          BlockState blockstate = p_66922_.m_8055_(p_66925_);
+-         if (!blockstate.m_60795_() && !p_66926_.f_68128_.contains(blockstate.m_60734_())) {
++         if (!blockstate.isAir(p_66922_, p_66925_) && !p_66926_.f_68128_.contains(blockstate.m_60734_())) {
+             return false;
+          } else {
+             int i = 0;

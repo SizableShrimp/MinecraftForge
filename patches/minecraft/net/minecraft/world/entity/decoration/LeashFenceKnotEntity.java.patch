@@ -1,0 +1,10 @@
+--- a/net/minecraft/world/entity/decoration/LeashFenceKnotEntity.java
++++ b/net/minecraft/world/entity/decoration/LeashFenceKnotEntity.java
+@@ -45,6 +_,7 @@
+ 
+    protected void m_7087_() {
+       this.m_20343_((double)this.f_31698_.m_123341_() + 0.5D, (double)this.f_31698_.m_123342_() + 0.5D, (double)this.f_31698_.m_123343_() + 0.5D);
++      if (this.isAddedToWorld() && this.f_19853_ instanceof net.minecraft.server.level.ServerLevel) ((net.minecraft.server.level.ServerLevel)this.f_19853_).m_8819_(this); // Forge - Process chunk registration after moving.
+    }
+ 
+    public void m_6022_(Direction p_31848_) {

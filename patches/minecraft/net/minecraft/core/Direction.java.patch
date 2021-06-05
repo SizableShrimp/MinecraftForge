@@ -1,0 +1,67 @@
+--- a/net/minecraft/core/Direction.java
++++ b/net/minecraft/core/Direction.java
+@@ -41,26 +_,26 @@
+    private final Direction.AxisDirection f_122344_;
+    private final Vec3i f_122345_;
+    private static final Direction[] f_122346_ = values();
+-   private static final Map<String, Direction> f_122347_ = Arrays.stream(f_122346_).collect(Collectors.toMap(Direction::m_122433_, (p_122426_) -> {
+-      return p_122426_;
++   private static final Map<String, Direction> f_122347_ = Arrays.stream(f_122346_).collect(Collectors.toMap(Direction::m_122433_, (p_199787_0_) -> {
++      return p_199787_0_;
+    }));
+-   private static final Direction[] f_122348_ = Arrays.stream(f_122346_).sorted(Comparator.comparingInt((p_122423_) -> {
+-      return p_122423_.f_122339_;
+-   })).toArray((p_122418_) -> {
+-      return new Direction[p_122418_];
+-   });
+-   private static final Direction[] f_122349_ = Arrays.stream(f_122346_).filter((p_122420_) -> {
+-      return p_122420_.m_122434_().m_122479_();
+-   }).sorted(Comparator.comparingInt((p_122415_) -> {
+-      return p_122415_.f_122341_;
+-   })).toArray((p_122413_) -> {
+-      return new Direction[p_122413_];
+-   });
+-   private static final Long2ObjectMap<Direction> f_122350_ = Arrays.stream(f_122346_).collect(Collectors.toMap((p_122410_) -> {
+-      return (new BlockPos(p_122410_.m_122436_())).m_121878_();
+-   }, (p_122394_) -> {
+-      return p_122394_;
+-   }, (p_122396_, p_122397_) -> {
++   private static final Direction[] f_122348_ = Arrays.stream(f_122346_).sorted(Comparator.comparingInt((p_199790_0_) -> {
++      return p_199790_0_.f_122339_;
++   })).toArray((p_199788_0_) -> {
++      return new Direction[p_199788_0_];
++   });
++   private static final Direction[] f_122349_ = Arrays.stream(f_122346_).filter((p_199786_0_) -> {
++      return p_199786_0_.m_122434_().m_122479_();
++   }).sorted(Comparator.comparingInt((p_199789_0_) -> {
++      return p_199789_0_.f_122341_;
++   })).toArray((p_199791_0_) -> {
++      return new Direction[p_199791_0_];
++   });
++   private static final Long2ObjectMap<Direction> f_122350_ = Arrays.stream(f_122346_).collect(Collectors.toMap((p_218385_0_) -> {
++      return (new BlockPos(p_218385_0_.m_122436_())).m_121878_();
++   }, (p_218384_0_) -> {
++      return p_218384_0_;
++   }, (p_218386_0_, p_218386_1_) -> {
+       throw new IllegalArgumentException("Duplicate keys");
+    }, Long2ObjectOpenHashMap::new));
+ 
+@@ -212,7 +_,6 @@
+    }
+ 
+    @Nullable
+-   @OnlyIn(Dist.CLIENT)
+    public static Direction m_122402_(@Nullable String p_122403_) {
+       return p_122403_ == null ? null : f_122347_.get(p_122403_.toLowerCase(Locale.ROOT));
+    }
+@@ -333,8 +_,8 @@
+ 
+       private static final Direction.Axis[] f_122448_ = values();
+       public static final Codec<Direction.Axis> f_122447_ = StringRepresentable.m_14350_(Direction.Axis::values, Direction.Axis::m_122473_);
+-      private static final Map<String, Direction.Axis> f_122449_ = Arrays.stream(f_122448_).collect(Collectors.toMap(Direction.Axis::m_122477_, (p_122470_) -> {
+-         return p_122470_;
++      private static final Map<String, Direction.Axis> f_122449_ = Arrays.stream(f_122448_).collect(Collectors.toMap(Direction.Axis::m_122477_, (p_199785_0_) -> {
++         return p_199785_0_;
+       }));
+       private final String f_122450_;
+ 

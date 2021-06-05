@@ -1,0 +1,37 @@
+--- a/net/minecraft/server/commands/PlaySoundCommand.java
++++ b/net/minecraft/server/commands/PlaySoundCommand.java
+@@ -32,22 +_,22 @@
+          requiredargumentbuilder.then(m_138151_(soundsource));
+       }
+ 
+-      p_138157_.register(Commands.m_82127_("playsound").requires((p_138159_) -> {
+-         return p_138159_.m_6761_(2);
++      p_138157_.register(Commands.m_82127_("playsound").requires((p_198576_0_) -> {
++         return p_198576_0_.m_6761_(2);
+       }).then(requiredargumentbuilder));
+    }
+ 
+    private static LiteralArgumentBuilder<CommandSourceStack> m_138151_(SoundSource p_138152_) {
+-      return Commands.m_82127_(p_138152_.m_12676_()).then(Commands.m_82129_("targets", EntityArgument.m_91470_()).executes((p_138180_) -> {
+-         return m_138160_(p_138180_.getSource(), EntityArgument.m_91477_(p_138180_, "targets"), ResourceLocationArgument.m_107011_(p_138180_, "sound"), p_138152_, p_138180_.getSource().m_81371_(), 1.0F, 1.0F, 0.0F);
+-      }).then(Commands.m_82129_("pos", Vec3Argument.m_120841_()).executes((p_138177_) -> {
+-         return m_138160_(p_138177_.getSource(), EntityArgument.m_91477_(p_138177_, "targets"), ResourceLocationArgument.m_107011_(p_138177_, "sound"), p_138152_, Vec3Argument.m_120844_(p_138177_, "pos"), 1.0F, 1.0F, 0.0F);
+-      }).then(Commands.m_82129_("volume", FloatArgumentType.floatArg(0.0F)).executes((p_138174_) -> {
+-         return m_138160_(p_138174_.getSource(), EntityArgument.m_91477_(p_138174_, "targets"), ResourceLocationArgument.m_107011_(p_138174_, "sound"), p_138152_, Vec3Argument.m_120844_(p_138174_, "pos"), p_138174_.getArgument("volume", Float.class), 1.0F, 0.0F);
+-      }).then(Commands.m_82129_("pitch", FloatArgumentType.floatArg(0.0F, 2.0F)).executes((p_138171_) -> {
+-         return m_138160_(p_138171_.getSource(), EntityArgument.m_91477_(p_138171_, "targets"), ResourceLocationArgument.m_107011_(p_138171_, "sound"), p_138152_, Vec3Argument.m_120844_(p_138171_, "pos"), p_138171_.getArgument("volume", Float.class), p_138171_.getArgument("pitch", Float.class), 0.0F);
+-      }).then(Commands.m_82129_("minVolume", FloatArgumentType.floatArg(0.0F, 1.0F)).executes((p_138155_) -> {
+-         return m_138160_(p_138155_.getSource(), EntityArgument.m_91477_(p_138155_, "targets"), ResourceLocationArgument.m_107011_(p_138155_, "sound"), p_138152_, Vec3Argument.m_120844_(p_138155_, "pos"), p_138155_.getArgument("volume", Float.class), p_138155_.getArgument("pitch", Float.class), p_138155_.getArgument("minVolume", Float.class));
++      return Commands.m_82127_(p_138152_.m_12676_()).then(Commands.m_82129_("targets", EntityArgument.m_91470_()).executes((p_198575_1_) -> {
++         return m_138160_(p_198575_1_.getSource(), EntityArgument.m_91477_(p_198575_1_, "targets"), ResourceLocationArgument.m_107011_(p_198575_1_, "sound"), p_138152_, p_198575_1_.getSource().m_81371_(), 1.0F, 1.0F, 0.0F);
++      }).then(Commands.m_82129_("pos", Vec3Argument.m_120841_()).executes((p_198578_1_) -> {
++         return m_138160_(p_198578_1_.getSource(), EntityArgument.m_91477_(p_198578_1_, "targets"), ResourceLocationArgument.m_107011_(p_198578_1_, "sound"), p_138152_, Vec3Argument.m_120844_(p_198578_1_, "pos"), 1.0F, 1.0F, 0.0F);
++      }).then(Commands.m_82129_("volume", FloatArgumentType.floatArg(0.0F)).executes((p_198571_1_) -> {
++         return m_138160_(p_198571_1_.getSource(), EntityArgument.m_91477_(p_198571_1_, "targets"), ResourceLocationArgument.m_107011_(p_198571_1_, "sound"), p_138152_, Vec3Argument.m_120844_(p_198571_1_, "pos"), p_198571_1_.getArgument("volume", Float.class), 1.0F, 0.0F);
++      }).then(Commands.m_82129_("pitch", FloatArgumentType.floatArg(0.0F, 2.0F)).executes((p_198574_1_) -> {
++         return m_138160_(p_198574_1_.getSource(), EntityArgument.m_91477_(p_198574_1_, "targets"), ResourceLocationArgument.m_107011_(p_198574_1_, "sound"), p_138152_, Vec3Argument.m_120844_(p_198574_1_, "pos"), p_198574_1_.getArgument("volume", Float.class), p_198574_1_.getArgument("pitch", Float.class), 0.0F);
++      }).then(Commands.m_82129_("minVolume", FloatArgumentType.floatArg(0.0F, 1.0F)).executes((p_198570_1_) -> {
++         return m_138160_(p_198570_1_.getSource(), EntityArgument.m_91477_(p_198570_1_, "targets"), ResourceLocationArgument.m_107011_(p_198570_1_, "sound"), p_138152_, Vec3Argument.m_120844_(p_198570_1_, "pos"), p_198570_1_.getArgument("volume", Float.class), p_198570_1_.getArgument("pitch", Float.class), p_198570_1_.getArgument("minVolume", Float.class));
+       }))))));
+    }
+ 

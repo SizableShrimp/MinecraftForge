@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/FishingRodHookedTrigger.java
++++ b/net/minecraft/advancements/critereon/FishingRodHookedTrigger.java
+@@ -27,8 +_,8 @@
+ 
+    public void m_40416_(ServerPlayer p_40417_, ItemStack p_40418_, FishingHook p_40419_, Collection<ItemStack> p_40420_) {
+       LootContext lootcontext = EntityPredicate.m_36616_(p_40417_, (Entity)(p_40419_.m_37170_() != null ? p_40419_.m_37170_() : p_40419_));
+-      this.m_66234_(p_40417_, (p_40425_) -> {
+-         return p_40425_.m_40443_(p_40418_, lootcontext, p_40420_);
++      this.m_66234_(p_40417_, (p_234658_3_) -> {
++         return p_234658_3_.m_40443_(p_40418_, lootcontext, p_40420_);
+       });
+    }
+ 

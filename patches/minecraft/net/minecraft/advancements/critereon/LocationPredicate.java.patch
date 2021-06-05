@@ -1,0 +1,24 @@
+--- a/net/minecraft/advancements/critereon/LocationPredicate.java
++++ b/net/minecraft/advancements/critereon/LocationPredicate.java
+@@ -117,8 +_,8 @@
+          }
+ 
+          if (this.f_52599_ != null) {
+-            Level.f_46427_.encodeStart(JsonOps.INSTANCE, this.f_52599_).resultOrPartial(f_52593_::error).ifPresent((p_52633_) -> {
+-               jsonobject.add("dimension", p_52633_);
++            Level.f_46427_.encodeStart(JsonOps.INSTANCE, this.f_52599_).resultOrPartial(f_52593_::error).ifPresent((p_235307_1_) -> {
++               jsonobject.add("dimension", p_235307_1_);
+             });
+          }
+ 
+@@ -148,8 +_,8 @@
+          MinMaxBounds.Floats minmaxbounds$floats = MinMaxBounds.Floats.m_55345_(jsonobject1.get("x"));
+          MinMaxBounds.Floats minmaxbounds$floats1 = MinMaxBounds.Floats.m_55345_(jsonobject1.get("y"));
+          MinMaxBounds.Floats minmaxbounds$floats2 = MinMaxBounds.Floats.m_55345_(jsonobject1.get("z"));
+-         ResourceKey<Level> resourcekey = jsonobject.has("dimension") ? ResourceLocation.f_135803_.parse(JsonOps.INSTANCE, jsonobject.get("dimension")).resultOrPartial(f_52593_::error).map((p_52637_) -> {
+-            return ResourceKey.m_135785_(Registry.f_122819_, p_52637_);
++         ResourceKey<Level> resourcekey = jsonobject.has("dimension") ? ResourceLocation.f_135803_.parse(JsonOps.INSTANCE, jsonobject.get("dimension")).resultOrPartial(f_52593_::error).map((p_235310_0_) -> {
++            return ResourceKey.m_135785_(Registry.f_122819_, p_235310_0_);
+          }).orElse((ResourceKey<Level>)null) : null;
+          StructureFeature<?> structurefeature = jsonobject.has("feature") ? StructureFeature.f_67012_.get(GsonHelper.m_13906_(jsonobject, "feature")) : null;
+          ResourceKey<Biome> resourcekey1 = null;

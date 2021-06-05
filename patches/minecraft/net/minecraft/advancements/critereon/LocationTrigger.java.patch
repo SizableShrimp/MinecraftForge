@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/LocationTrigger.java
++++ b/net/minecraft/advancements/critereon/LocationTrigger.java
+@@ -25,8 +_,8 @@
+    }
+ 
+    public void m_53645_(ServerPlayer p_53646_) {
+-      this.m_66234_(p_53646_, (p_53649_) -> {
+-         return p_53649_.m_53665_(p_53646_.m_9236_(), p_53646_.m_20185_(), p_53646_.m_20186_(), p_53646_.m_20189_());
++      this.m_66234_(p_53646_, (p_226923_1_) -> {
++         return p_226923_1_.m_53665_(p_53646_.m_9236_(), p_53646_.m_20185_(), p_53646_.m_20186_(), p_53646_.m_20189_());
+       });
+    }
+ 

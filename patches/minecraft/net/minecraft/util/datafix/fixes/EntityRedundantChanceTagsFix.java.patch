@@ -1,0 +1,42 @@
+--- a/net/minecraft/util/datafix/fixes/EntityRedundantChanceTagsFix.java
++++ b/net/minecraft/util/datafix/fixes/EntityRedundantChanceTagsFix.java
+@@ -16,25 +_,25 @@
+    }
+ 
+    public TypeRewriteRule makeRule() {
+-      return this.fixTypeEverywhereTyped("EntityRedundantChanceTagsFix", this.getInputSchema().getType(References.f_16786_), (p_15607_) -> {
+-         return p_15607_.update(DSL.remainderFinder(), (p_15609_) -> {
+-            if (m_15610_(p_15609_.get("HandDropChances"), 2)) {
+-               p_15609_ = p_15609_.remove("HandDropChances");
+-            }
+-
+-            if (m_15610_(p_15609_.get("ArmorDropChances"), 4)) {
+-               p_15609_ = p_15609_.remove("ArmorDropChances");
+-            }
+-
+-            return p_15609_;
++      return this.fixTypeEverywhereTyped("EntityRedundantChanceTagsFix", this.getInputSchema().getType(References.f_16786_), (p_210996_0_) -> {
++         return p_210996_0_.update(DSL.remainderFinder(), (p_206334_0_) -> {
++            if (m_15610_(p_206334_0_.get("HandDropChances"), 2)) {
++               p_206334_0_ = p_206334_0_.remove("HandDropChances");
++            }
++
++            if (m_15610_(p_206334_0_.get("ArmorDropChances"), 4)) {
++               p_206334_0_ = p_206334_0_.remove("ArmorDropChances");
++            }
++
++            return p_206334_0_;
+          });
+       });
+    }
+ 
+    private static boolean m_15610_(OptionalDynamic<?> p_15611_, int p_15612_) {
+-      return p_15611_.flatMap(f_15598_::parse).map((p_15605_) -> {
+-         return p_15605_.size() == p_15612_ && p_15605_.stream().allMatch((p_15614_) -> {
+-            return p_15614_ == 0.0F;
++      return p_15611_.flatMap(f_15598_::parse).map((p_241304_1_) -> {
++         return p_241304_1_.size() == p_15612_ && p_241304_1_.stream().allMatch((p_241307_0_) -> {
++            return p_241307_0_ == 0.0F;
+          });
+       }).result().orElse(false);
+    }

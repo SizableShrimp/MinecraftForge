@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/CuredZombieVillagerTrigger.java
++++ b/net/minecraft/advancements/critereon/CuredZombieVillagerTrigger.java
+@@ -23,8 +_,8 @@
+    public void m_24274_(ServerPlayer p_24275_, Zombie p_24276_, Villager p_24277_) {
+       LootContext lootcontext = EntityPredicate.m_36616_(p_24275_, p_24276_);
+       LootContext lootcontext1 = EntityPredicate.m_36616_(p_24275_, p_24277_);
+-      this.m_66234_(p_24275_, (p_24285_) -> {
+-         return p_24285_.m_24299_(lootcontext, lootcontext1);
++      this.m_66234_(p_24275_, (p_233969_2_) -> {
++         return p_233969_2_.m_24299_(lootcontext, lootcontext1);
+       });
+    }
+ 

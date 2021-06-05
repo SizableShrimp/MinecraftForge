@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/entity/monster/piglin/Piglin.java
++++ b/net/minecraft/world/entity/monster/piglin/Piglin.java
+@@ -307,7 +_,7 @@
+    }
+ 
+    protected void m_34785_(ItemStack p_34786_) {
+-      if (p_34786_.m_41720_() == PiglinAi.f_34794_) {
++      if (p_34786_.isPiglinCurrency()) {
+          this.m_8061_(EquipmentSlot.OFFHAND, p_34786_);
+          this.m_21508_(EquipmentSlot.OFFHAND);
+       } else {

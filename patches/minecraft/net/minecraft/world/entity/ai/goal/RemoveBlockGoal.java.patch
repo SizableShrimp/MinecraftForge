@@ -1,0 +1,19 @@
+--- a/net/minecraft/world/entity/ai/goal/RemoveBlockGoal.java
++++ b/net/minecraft/world/entity/ai/goal/RemoveBlockGoal.java
+@@ -11,7 +_,6 @@
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
+ import net.minecraft.world.level.BlockGetter;
+-import net.minecraft.world.level.GameRules;
+ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.LevelAccessor;
+ import net.minecraft.world.level.LevelReader;
+@@ -32,7 +_,7 @@
+    }
+ 
+    public boolean m_8036_() {
+-      if (!this.f_25837_.f_19853_.m_46469_().m_46207_(GameRules.f_46132_)) {
++      if (!net.minecraftforge.common.ForgeHooks.canEntityDestroy(this.f_25837_.f_19853_, this.f_25602_, this.f_25837_)) {
+          return false;
+       } else if (this.f_25600_ > 0) {
+          --this.f_25600_;

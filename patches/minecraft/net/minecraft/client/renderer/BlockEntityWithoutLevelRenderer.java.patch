@@ -1,0 +1,13 @@
+--- a/net/minecraft/client/renderer/BlockEntityWithoutLevelRenderer.java
++++ b/net/minecraft/client/renderer/BlockEntityWithoutLevelRenderer.java
+@@ -48,8 +_,8 @@
+ 
+ @OnlyIn(Dist.CLIENT)
+ public class BlockEntityWithoutLevelRenderer {
+-   private static final ShulkerBoxBlockEntity[] f_108815_ = Arrays.stream(DyeColor.values()).sorted(Comparator.comparingInt(DyeColor::m_41060_)).map(ShulkerBoxBlockEntity::new).toArray((p_108828_) -> {
+-      return new ShulkerBoxBlockEntity[p_108828_];
++   private static final ShulkerBoxBlockEntity[] f_108815_ = Arrays.stream(DyeColor.values()).sorted(Comparator.comparingInt(DyeColor::m_41060_)).map(ShulkerBoxBlockEntity::new).toArray((p_199929_0_) -> {
++      return new ShulkerBoxBlockEntity[p_199929_0_];
+    });
+    private static final ShulkerBoxBlockEntity f_108816_ = new ShulkerBoxBlockEntity((DyeColor)null);
+    public static final BlockEntityWithoutLevelRenderer f_108814_ = new BlockEntityWithoutLevelRenderer();

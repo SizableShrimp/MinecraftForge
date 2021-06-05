@@ -1,0 +1,71 @@
+--- a/net/minecraft/data/loot/EntityLoot.java
++++ b/net/minecraft/data/loot/EntityLoot.java
+@@ -42,7 +_,7 @@
+ import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithLootingCondition;
+ 
+ public class EntityLoot implements Consumer<BiConsumer<ResourceLocation, LootTable.Builder>> {
+-   private static final EntityPredicate.Builder f_124366_ = EntityPredicate.Builder.m_36633_().m_36642_(EntityFlagsPredicate.Builder.m_33713_().m_33714_(true).m_33716_());
++   protected static final EntityPredicate.Builder f_124366_ = EntityPredicate.Builder.m_36633_().m_36642_(EntityFlagsPredicate.Builder.m_33713_().m_33714_(true).m_33716_());
+    private static final Set<EntityType<?>> f_124367_ = ImmutableSet.of(EntityType.f_20532_, EntityType.f_20529_, EntityType.f_20460_, EntityType.f_20528_, EntityType.f_20492_);
+    private final Map<ResourceLocation, LootTable.Builder> f_124368_ = Maps.newHashMap();
+ 
+@@ -50,7 +_,7 @@
+       return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124375_))).m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootTableReference.m_79776_(EntityType.f_20520_.m_20677_())));
+    }
+ 
+-   public void accept(BiConsumer<ResourceLocation, LootTable.Builder> p_124377_) {
++   protected void addTables() {
+       this.m_124371_(EntityType.f_20529_, LootTable.m_79147_());
+       this.m_124371_(EntityType.f_20549_, LootTable.m_79147_());
+       this.m_124371_(EntityType.f_20550_, LootTable.m_79147_());
+@@ -118,8 +_,8 @@
+       this.m_124371_(EntityType.f_20528_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42452_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(0.0F, 15.0F))))));
+       this.m_124371_(EntityType.f_20479_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42401_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(0.0F, 2.0F))).m_5577_(LootingEnchantFunction.m_80791_(RandomValueBounds.m_79291_(0.0F, 1.0F))))).m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42591_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(-1.0F, 1.0F))).m_5577_(LootingEnchantFunction.m_80791_(RandomValueBounds.m_79291_(0.0F, 1.0F)))).m_6509_(LootItemKilledByPlayerCondition.m_81901_())));
+       this.m_124371_(EntityType.f_20480_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42532_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(1.0F, 3.0F))).m_5577_(LootingEnchantFunction.m_80791_(RandomValueBounds.m_79291_(0.0F, 1.0F))))));
+-      this.m_124371_(EntityType.f_20481_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42412_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(0.0F, 2.0F))).m_5577_(LootingEnchantFunction.m_80791_(RandomValueBounds.m_79291_(0.0F, 1.0F))))).m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42500_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(0.0F, 2.0F))).m_5577_(LootingEnchantFunction.m_80791_(RandomValueBounds.m_79291_(0.0F, 1.0F))))).m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42738_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(0.0F, 1.0F))).m_5577_(LootingEnchantFunction.m_80791_(RandomValueBounds.m_79291_(0.0F, 1.0F)).m_80806_(1)).m_5577_(SetNbtFunction.m_81187_(Util.m_137469_(new CompoundTag(), (p_124379_) -> {
+-         p_124379_.m_128359_("Potion", "minecraft:slowness");
++      this.m_124371_(EntityType.f_20481_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42412_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(0.0F, 2.0F))).m_5577_(LootingEnchantFunction.m_80791_(RandomValueBounds.m_79291_(0.0F, 1.0F))))).m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42500_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(0.0F, 2.0F))).m_5577_(LootingEnchantFunction.m_80791_(RandomValueBounds.m_79291_(0.0F, 1.0F))))).m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42738_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(0.0F, 1.0F))).m_5577_(LootingEnchantFunction.m_80791_(RandomValueBounds.m_79291_(0.0F, 1.0F)).m_80806_(1)).m_5577_(SetNbtFunction.m_81187_(Util.m_137469_(new CompoundTag(), (p_218584_0_) -> {
++         p_218584_0_.m_128359_("Potion", "minecraft:slowness");
+       })))).m_6509_(LootItemKilledByPlayerCondition.m_81901_())));
+       this.m_124371_(EntityType.f_20482_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42401_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 5.0F))).m_5577_(LootingEnchantFunction.m_80791_(RandomValueBounds.m_79291_(0.0F, 1.0F))))));
+       this.m_124371_(EntityType.f_20488_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42454_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(0.0F, 2.0F))).m_5577_(LootingEnchantFunction.m_80791_(RandomValueBounds.m_79291_(0.0F, 1.0F))))));
+@@ -141,11 +_,15 @@
+       this.m_124371_(EntityType.f_20511_, LootTable.m_79147_());
+       this.m_124371_(EntityType.f_20512_, LootTable.m_79147_());
+       this.m_124371_(EntityType.f_20530_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42583_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(0.0F, 2.0F))).m_5577_(LootingEnchantFunction.m_80791_(RandomValueBounds.m_79291_(0.0F, 1.0F))))).m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42416_)).m_79076_(LootItem.m_79579_(Items.f_42619_)).m_79076_(LootItem.m_79579_(Items.f_42620_)).m_6509_(LootItemKilledByPlayerCondition.m_81901_()).m_6509_(LootItemRandomChanceWithLootingCondition.m_81963_(0.025F, 0.01F))));
++   }
++
++   public void accept(BiConsumer<ResourceLocation, LootTable.Builder> p_124377_) {
++      this.addTables();
+       Set<ResourceLocation> set = Sets.newHashSet();
+ 
+-      for(EntityType<?> entitytype : Registry.f_122826_) {
++      for(EntityType<?> entitytype : getKnownEntities()) {
+          ResourceLocation resourcelocation = entitytype.m_20677_();
+-         if (!f_124367_.contains(entitytype) && entitytype.m_20674_() == MobCategory.MISC) {
++         if (isNonLiving(entitytype)) {
+             if (resourcelocation != BuiltInLootTables.f_78712_ && this.f_124368_.remove(resourcelocation) != null) {
+                throw new IllegalStateException(String.format("Weird loottable '%s' for '%s', not a LivingEntity so should not have loot", resourcelocation, Registry.f_122826_.m_7981_(entitytype)));
+             }
+@@ -162,11 +_,19 @@
+       this.f_124368_.forEach(p_124377_::accept);
+    }
+ 
+-   private void m_124371_(EntityType<?> p_124372_, LootTable.Builder p_124373_) {
++   protected Iterable<EntityType<?>> getKnownEntities() {
++      return Registry.f_122826_;
++   }
++
++   protected boolean isNonLiving(EntityType<?> entitytype) {
++      return !f_124367_.contains(entitytype) && entitytype.m_20674_() == MobCategory.MISC;
++   }
++
++   protected void m_124371_(EntityType<?> p_124372_, LootTable.Builder p_124373_) {
+       this.m_124380_(p_124372_.m_20677_(), p_124373_);
+    }
+ 
+-   private void m_124380_(ResourceLocation p_124381_, LootTable.Builder p_124382_) {
++   protected void m_124380_(ResourceLocation p_124381_, LootTable.Builder p_124382_) {
+       this.f_124368_.put(p_124381_, p_124382_);
+    }
+ }

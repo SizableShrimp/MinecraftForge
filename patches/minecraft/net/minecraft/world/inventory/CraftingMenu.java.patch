@@ -1,0 +1,35 @@
+--- a/net/minecraft/world/inventory/CraftingMenu.java
++++ b/net/minecraft/world/inventory/CraftingMenu.java
+@@ -68,8 +_,8 @@
+    }
+ 
+    public void m_6199_(Container p_39366_) {
+-      this.f_39350_.m_39292_((p_39386_, p_39387_) -> {
+-         m_39359_(this.f_38840_, p_39386_, this.f_39351_, this.f_39348_, this.f_39349_);
++      this.f_39350_.m_39292_((p_217069_1_, p_217069_2_) -> {
++         m_39359_(this.f_38840_, p_217069_1_, this.f_39351_, this.f_39348_, this.f_39349_);
+       });
+    }
+ 
+@@ -88,8 +_,8 @@
+ 
+    public void m_6877_(Player p_39389_) {
+       super.m_6877_(p_39389_);
+-      this.f_39350_.m_39292_((p_39371_, p_39372_) -> {
+-         this.m_38877_(p_39389_, p_39371_, this.f_39348_);
++      this.f_39350_.m_39292_((p_217068_2_, p_217068_3_) -> {
++         this.m_38877_(p_39389_, p_217068_2_, this.f_39348_);
+       });
+    }
+ 
+@@ -104,8 +_,8 @@
+          ItemStack itemstack1 = slot.m_7993_();
+          itemstack = itemstack1.m_41777_();
+          if (p_39392_ == 0) {
+-            this.f_39350_.m_39292_((p_39378_, p_39379_) -> {
+-               itemstack1.m_41720_().m_7836_(itemstack1, p_39378_, p_39391_);
++            this.f_39350_.m_39292_((p_217067_2_, p_217067_3_) -> {
++               itemstack1.m_41720_().m_7836_(itemstack1, p_217067_2_, p_39391_);
+             });
+             if (!this.m_38903_(itemstack1, 10, 46, true)) {
+                return ItemStack.f_41583_;

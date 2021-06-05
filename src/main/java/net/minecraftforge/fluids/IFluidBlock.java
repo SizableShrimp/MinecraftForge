@@ -25,7 +25,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Implement this interface on Block classes which represent world-placeable Fluids.

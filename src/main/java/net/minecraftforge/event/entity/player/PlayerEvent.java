@@ -22,14 +22,11 @@ package net.minecraftforge.event.entity.player;
 import java.io.File;
 
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.Entity;
@@ -37,14 +34,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.eventbus.api.Event;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
  * PlayerEvent is fired whenever an event involving Living entities occurs. <br>
- * If a method utilizes this {@link Event} as its parameter, the method will
+ * If a method utilizes this {@link net.minecraftforge.eventbus.api.Event} as its parameter, the method will
  * receive every child event of this class.<br>
  * <br>
  * All children of this event are fired on the {@link MinecraftForge#EVENT_BUS}.
@@ -72,7 +68,7 @@ public class PlayerEvent extends LivingEvent
      * {@link #state} contains the {@link IBlockState} that is being checked for harvesting. <br>
      * {@link #success} contains the boolean value for whether the Block will be successfully harvested. <br>
      * <br>
-     * This event is not {@link Cancelable}.<br>
+     * This event is not {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
      * <br>
      * This event does not have a result. {@link HasResult}<br>
      * <br>
@@ -107,7 +103,7 @@ public class PlayerEvent extends LivingEvent
      * {@link #newSpeed} contains the newSpeed at which the player will break the block. <br>
      * {@link #pos} contains the coordinates at which this event is occurring. Y value -1 means location is unknown.<br>
      * <br>
-     * This event is {@link Cancelable}.<br>
+     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
      * If it is canceled, the player is unable to break the block.<br>
      * <br>
      * This event does not have a result. {@link HasResult}<br>
@@ -148,7 +144,7 @@ public class PlayerEvent extends LivingEvent
      * {@link #username} contains the username of the player.
      * {@link #displayname} contains the display name of the player.
      * <br>
-     * This event is not {@link Cancelable}.
+     * This event is not {@link net.minecraftforge.eventbus.api.Cancelable}.
      * <br>
      * This event does not have a result. {@link HasResult}
      * <br>
@@ -191,7 +187,7 @@ public class PlayerEvent extends LivingEvent
      * <br>
      * {@link #getDisplayName()} contains the display name of the player or null if the client should determine the display name itself.
      * <br>
-     * This event is not {@link Cancelable}.
+     * This event is not {@link net.minecraftforge.eventbus.api.Cancelable}.
      * <br>
      * This event does not have a result. {@link HasResult}
      * <br>

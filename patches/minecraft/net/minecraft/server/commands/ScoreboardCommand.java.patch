@@ -1,0 +1,103 @@
+--- a/net/minecraft/server/commands/ScoreboardCommand.java
++++ b/net/minecraft/server/commands/ScoreboardCommand.java
+@@ -39,49 +_,49 @@
+    private static final SimpleCommandExceptionType f_138462_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.scoreboard.objectives.display.alreadySet"));
+    private static final SimpleCommandExceptionType f_138463_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.scoreboard.players.enable.failed"));
+    private static final SimpleCommandExceptionType f_138464_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.scoreboard.players.enable.invalid"));
+-   private static final Dynamic2CommandExceptionType f_138465_ = new Dynamic2CommandExceptionType((p_138534_, p_138535_) -> {
+-      return new TranslatableComponent("commands.scoreboard.players.get.null", p_138534_, p_138535_);
++   private static final Dynamic2CommandExceptionType f_138465_ = new Dynamic2CommandExceptionType((p_208907_0_, p_208907_1_) -> {
++      return new TranslatableComponent("commands.scoreboard.players.get.null", p_208907_0_, p_208907_1_);
+    });
+ 
+    public static void m_138468_(CommandDispatcher<CommandSourceStack> p_138469_) {
+-      p_138469_.register(Commands.m_82127_("scoreboard").requires((p_138552_) -> {
+-         return p_138552_.m_6761_(2);
+-      }).then(Commands.m_82127_("objectives").then(Commands.m_82127_("list").executes((p_138585_) -> {
+-         return m_138538_(p_138585_.getSource());
+-      })).then(Commands.m_82127_("add").then(Commands.m_82129_("objective", StringArgumentType.word()).then(Commands.m_82129_("criteria", ObjectiveCriteriaArgument.m_102555_()).executes((p_138583_) -> {
+-         return m_138502_(p_138583_.getSource(), StringArgumentType.getString(p_138583_, "objective"), ObjectiveCriteriaArgument.m_102565_(p_138583_, "criteria"), new TextComponent(StringArgumentType.getString(p_138583_, "objective")));
+-      }).then(Commands.m_82129_("displayName", ComponentArgument.m_87114_()).executes((p_138581_) -> {
+-         return m_138502_(p_138581_.getSource(), StringArgumentType.getString(p_138581_, "objective"), ObjectiveCriteriaArgument.m_102565_(p_138581_, "criteria"), ComponentArgument.m_87117_(p_138581_, "displayName"));
+-      }))))).then(Commands.m_82127_("modify").then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).then(Commands.m_82127_("displayname").then(Commands.m_82129_("displayName", ComponentArgument.m_87114_()).executes((p_138579_) -> {
+-         return m_138491_(p_138579_.getSource(), ObjectiveArgument.m_101960_(p_138579_, "objective"), ComponentArgument.m_87117_(p_138579_, "displayName"));
+-      }))).then(m_138467_()))).then(Commands.m_82127_("remove").then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).executes((p_138577_) -> {
+-         return m_138484_(p_138577_.getSource(), ObjectiveArgument.m_101960_(p_138577_, "objective"));
+-      }))).then(Commands.m_82127_("setdisplay").then(Commands.m_82129_("slot", ScoreboardSlotArgument.m_109196_()).executes((p_138575_) -> {
+-         return m_138477_(p_138575_.getSource(), ScoreboardSlotArgument.m_109199_(p_138575_, "slot"));
+-      }).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).executes((p_138573_) -> {
+-         return m_138480_(p_138573_.getSource(), ScoreboardSlotArgument.m_109199_(p_138573_, "slot"), ObjectiveArgument.m_101960_(p_138573_, "objective"));
+-      }))))).then(Commands.m_82127_("players").then(Commands.m_82127_("list").executes((p_138571_) -> {
+-         return m_138475_(p_138571_.getSource());
+-      }).then(Commands.m_82129_("target", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).executes((p_138569_) -> {
+-         return m_138495_(p_138569_.getSource(), ScoreHolderArgument.m_108223_(p_138569_, "target"));
+-      }))).then(Commands.m_82127_("set").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).then(Commands.m_82129_("score", IntegerArgumentType.integer()).executes((p_138567_) -> {
+-         return m_138518_(p_138567_.getSource(), ScoreHolderArgument.m_108246_(p_138567_, "targets"), ObjectiveArgument.m_101965_(p_138567_, "objective"), IntegerArgumentType.getInteger(p_138567_, "score"));
+-      }))))).then(Commands.m_82127_("get").then(Commands.m_82129_("target", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).executes((p_138565_) -> {
+-         return m_138498_(p_138565_.getSource(), ScoreHolderArgument.m_108223_(p_138565_, "target"), ObjectiveArgument.m_101960_(p_138565_, "objective"));
+-      })))).then(Commands.m_82127_("add").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).then(Commands.m_82129_("score", IntegerArgumentType.integer(0)).executes((p_138563_) -> {
+-         return m_138544_(p_138563_.getSource(), ScoreHolderArgument.m_108246_(p_138563_, "targets"), ObjectiveArgument.m_101965_(p_138563_, "objective"), IntegerArgumentType.getInteger(p_138563_, "score"));
+-      }))))).then(Commands.m_82127_("remove").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).then(Commands.m_82129_("score", IntegerArgumentType.integer(0)).executes((p_138561_) -> {
+-         return m_138553_(p_138561_.getSource(), ScoreHolderArgument.m_108246_(p_138561_, "targets"), ObjectiveArgument.m_101965_(p_138561_, "objective"), IntegerArgumentType.getInteger(p_138561_, "score"));
+-      }))))).then(Commands.m_82127_("reset").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).executes((p_138559_) -> {
+-         return m_138507_(p_138559_.getSource(), ScoreHolderArgument.m_108246_(p_138559_, "targets"));
+-      }).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).executes((p_138550_) -> {
+-         return m_138540_(p_138550_.getSource(), ScoreHolderArgument.m_108246_(p_138550_, "targets"), ObjectiveArgument.m_101960_(p_138550_, "objective"));
+-      })))).then(Commands.m_82127_("enable").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).suggests((p_138473_, p_138474_) -> {
+-         return m_138510_(p_138473_.getSource(), ScoreHolderArgument.m_108246_(p_138473_, "targets"), p_138474_);
+-      }).executes((p_138537_) -> {
+-         return m_138514_(p_138537_.getSource(), ScoreHolderArgument.m_108246_(p_138537_, "targets"), ObjectiveArgument.m_101960_(p_138537_, "objective"));
+-      })))).then(Commands.m_82127_("operation").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("targetObjective", ObjectiveArgument.m_101957_()).then(Commands.m_82129_("operation", OperationArgument.m_103269_()).then(Commands.m_82129_("source", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("sourceObjective", ObjectiveArgument.m_101957_()).executes((p_138471_) -> {
+-         return m_138523_(p_138471_.getSource(), ScoreHolderArgument.m_108246_(p_138471_, "targets"), ObjectiveArgument.m_101965_(p_138471_, "targetObjective"), OperationArgument.m_103275_(p_138471_, "operation"), ScoreHolderArgument.m_108246_(p_138471_, "source"), ObjectiveArgument.m_101960_(p_138471_, "sourceObjective"));
++      p_138469_.register(Commands.m_82127_("scoreboard").requires((p_198650_0_) -> {
++         return p_198650_0_.m_6761_(2);
++      }).then(Commands.m_82127_("objectives").then(Commands.m_82127_("list").executes((p_198640_0_) -> {
++         return m_138538_(p_198640_0_.getSource());
++      })).then(Commands.m_82127_("add").then(Commands.m_82129_("objective", StringArgumentType.word()).then(Commands.m_82129_("criteria", ObjectiveCriteriaArgument.m_102555_()).executes((p_198636_0_) -> {
++         return m_138502_(p_198636_0_.getSource(), StringArgumentType.getString(p_198636_0_, "objective"), ObjectiveCriteriaArgument.m_102565_(p_198636_0_, "criteria"), new TextComponent(StringArgumentType.getString(p_198636_0_, "objective")));
++      }).then(Commands.m_82129_("displayName", ComponentArgument.m_87114_()).executes((p_198649_0_) -> {
++         return m_138502_(p_198649_0_.getSource(), StringArgumentType.getString(p_198649_0_, "objective"), ObjectiveCriteriaArgument.m_102565_(p_198649_0_, "criteria"), ComponentArgument.m_87117_(p_198649_0_, "displayName"));
++      }))))).then(Commands.m_82127_("modify").then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).then(Commands.m_82127_("displayname").then(Commands.m_82129_("displayName", ComponentArgument.m_87114_()).executes((p_211750_0_) -> {
++         return m_138491_(p_211750_0_.getSource(), ObjectiveArgument.m_101960_(p_211750_0_, "objective"), ComponentArgument.m_87117_(p_211750_0_, "displayName"));
++      }))).then(m_138467_()))).then(Commands.m_82127_("remove").then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).executes((p_198646_0_) -> {
++         return m_138484_(p_198646_0_.getSource(), ObjectiveArgument.m_101960_(p_198646_0_, "objective"));
++      }))).then(Commands.m_82127_("setdisplay").then(Commands.m_82129_("slot", ScoreboardSlotArgument.m_109196_()).executes((p_198652_0_) -> {
++         return m_138477_(p_198652_0_.getSource(), ScoreboardSlotArgument.m_109199_(p_198652_0_, "slot"));
++      }).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).executes((p_198639_0_) -> {
++         return m_138480_(p_198639_0_.getSource(), ScoreboardSlotArgument.m_109199_(p_198639_0_, "slot"), ObjectiveArgument.m_101960_(p_198639_0_, "objective"));
++      }))))).then(Commands.m_82127_("players").then(Commands.m_82127_("list").executes((p_198642_0_) -> {
++         return m_138475_(p_198642_0_.getSource());
++      }).then(Commands.m_82129_("target", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).executes((p_198631_0_) -> {
++         return m_138495_(p_198631_0_.getSource(), ScoreHolderArgument.m_108223_(p_198631_0_, "target"));
++      }))).then(Commands.m_82127_("set").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).then(Commands.m_82129_("score", IntegerArgumentType.integer()).executes((p_198655_0_) -> {
++         return m_138518_(p_198655_0_.getSource(), ScoreHolderArgument.m_108246_(p_198655_0_, "targets"), ObjectiveArgument.m_101965_(p_198655_0_, "objective"), IntegerArgumentType.getInteger(p_198655_0_, "score"));
++      }))))).then(Commands.m_82127_("get").then(Commands.m_82129_("target", ScoreHolderArgument.m_108217_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).executes((p_198660_0_) -> {
++         return m_138498_(p_198660_0_.getSource(), ScoreHolderArgument.m_108223_(p_198660_0_, "target"), ObjectiveArgument.m_101960_(p_198660_0_, "objective"));
++      })))).then(Commands.m_82127_("add").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).then(Commands.m_82129_("score", IntegerArgumentType.integer(0)).executes((p_198645_0_) -> {
++         return m_138544_(p_198645_0_.getSource(), ScoreHolderArgument.m_108246_(p_198645_0_, "targets"), ObjectiveArgument.m_101965_(p_198645_0_, "objective"), IntegerArgumentType.getInteger(p_198645_0_, "score"));
++      }))))).then(Commands.m_82127_("remove").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).then(Commands.m_82129_("score", IntegerArgumentType.integer(0)).executes((p_198648_0_) -> {
++         return m_138553_(p_198648_0_.getSource(), ScoreHolderArgument.m_108246_(p_198648_0_, "targets"), ObjectiveArgument.m_101965_(p_198648_0_, "objective"), IntegerArgumentType.getInteger(p_198648_0_, "score"));
++      }))))).then(Commands.m_82127_("reset").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).executes((p_198635_0_) -> {
++         return m_138507_(p_198635_0_.getSource(), ScoreHolderArgument.m_108246_(p_198635_0_, "targets"));
++      }).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).executes((p_198630_0_) -> {
++         return m_138540_(p_198630_0_.getSource(), ScoreHolderArgument.m_108246_(p_198630_0_, "targets"), ObjectiveArgument.m_101960_(p_198630_0_, "objective"));
++      })))).then(Commands.m_82127_("enable").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).suggests((p_198638_0_, p_198638_1_) -> {
++         return m_138510_(p_198638_0_.getSource(), ScoreHolderArgument.m_108246_(p_198638_0_, "targets"), p_198638_1_);
++      }).executes((p_198628_0_) -> {
++         return m_138514_(p_198628_0_.getSource(), ScoreHolderArgument.m_108246_(p_198628_0_, "targets"), ObjectiveArgument.m_101960_(p_198628_0_, "objective"));
++      })))).then(Commands.m_82127_("operation").then(Commands.m_82129_("targets", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("targetObjective", ObjectiveArgument.m_101957_()).then(Commands.m_82129_("operation", OperationArgument.m_103269_()).then(Commands.m_82129_("source", ScoreHolderArgument.m_108239_()).suggests(ScoreHolderArgument.f_108210_).then(Commands.m_82129_("sourceObjective", ObjectiveArgument.m_101957_()).executes((p_198657_0_) -> {
++         return m_138523_(p_198657_0_.getSource(), ScoreHolderArgument.m_108246_(p_198657_0_, "targets"), ObjectiveArgument.m_101965_(p_198657_0_, "targetObjective"), OperationArgument.m_103275_(p_198657_0_, "operation"), ScoreHolderArgument.m_108246_(p_198657_0_, "source"), ObjectiveArgument.m_101960_(p_198657_0_, "sourceObjective"));
+       })))))))));
+    }
+ 
+@@ -89,8 +_,8 @@
+       LiteralArgumentBuilder<CommandSourceStack> literalargumentbuilder = Commands.m_82127_("rendertype");
+ 
+       for(ObjectiveCriteria.RenderType objectivecriteria$rendertype : ObjectiveCriteria.RenderType.values()) {
+-         literalargumentbuilder.then(Commands.m_82127_(objectivecriteria$rendertype.m_83633_()).executes((p_138532_) -> {
+-            return m_138487_(p_138532_.getSource(), ObjectiveArgument.m_101960_(p_138532_, "objective"), objectivecriteria$rendertype);
++         literalargumentbuilder.then(Commands.m_82127_(objectivecriteria$rendertype.m_83633_()).executes((p_211912_1_) -> {
++            return m_138487_(p_211912_1_.getSource(), ObjectiveArgument.m_101960_(p_211912_1_, "objective"), objectivecriteria$rendertype);
+          }));
+       }
+ 

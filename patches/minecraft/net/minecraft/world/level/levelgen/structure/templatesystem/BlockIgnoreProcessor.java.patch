@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/structure/templatesystem/BlockIgnoreProcessor.java
++++ b/net/minecraft/world/level/levelgen/structure/templatesystem/BlockIgnoreProcessor.java
+@@ -12,8 +_,8 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class BlockIgnoreProcessor extends StructureProcessor {
+-   public static final Codec<BlockIgnoreProcessor> f_74045_ = BlockState.f_61039_.xmap(BlockBehaviour.BlockStateBase::m_60734_, Block::m_49966_).listOf().fieldOf("blocks").xmap(BlockIgnoreProcessor::new, (p_74062_) -> {
+-      return p_74062_.f_74049_;
++   public static final Codec<BlockIgnoreProcessor> f_74045_ = BlockState.f_61039_.xmap(BlockBehaviour.BlockStateBase::m_60734_, Block::m_49966_).listOf().fieldOf("blocks").xmap(BlockIgnoreProcessor::new, (p_237074_0_) -> {
++      return p_237074_0_.f_74049_;
+    }).codec();
+    public static final BlockIgnoreProcessor f_74046_ = new BlockIgnoreProcessor(ImmutableList.of(Blocks.f_50677_));
+    public static final BlockIgnoreProcessor f_74047_ = new BlockIgnoreProcessor(ImmutableList.of(Blocks.f_50016_));

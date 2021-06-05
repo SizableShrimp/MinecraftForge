@@ -1,0 +1,31 @@
+--- a/net/minecraft/world/level/block/EnchantmentTableBlock.java
++++ b/net/minecraft/world/level/block/EnchantmentTableBlock.java
+@@ -31,7 +_,7 @@
+ public class EnchantmentTableBlock extends BaseEntityBlock {
+    protected static final VoxelShape f_52950_ = Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+ 
+-   protected EnchantmentTableBlock(BlockBehaviour.Properties p_52953_) {
++   public EnchantmentTableBlock(BlockBehaviour.Properties p_52953_) {
+       super(p_52953_);
+    }
+ 
+@@ -56,7 +_,7 @@
+             if (p_52984_.nextInt(16) == 0) {
+                for(int k = 0; k <= 1; ++k) {
+                   BlockPos blockpos = p_52983_.m_7918_(i, k, j);
+-                  if (p_52982_.m_8055_(blockpos).m_60713_(Blocks.f_50078_)) {
++                  if (p_52982_.m_8055_(blockpos).getEnchantPowerBonus(p_52982_, blockpos) > 0) {
+                      if (!p_52982_.m_46859_(p_52983_.m_7918_(i / 2, 0, j / 2))) {
+                         break;
+                      }
+@@ -92,8 +_,8 @@
+       BlockEntity blockentity = p_52994_.m_7702_(p_52995_);
+       if (blockentity instanceof EnchantmentTableBlockEntity) {
+          Component component = ((Nameable)blockentity).m_5446_();
+-         return new SimpleMenuProvider((p_52959_, p_52960_, p_52961_) -> {
+-            return new EnchantmentMenu(p_52959_, p_52960_, ContainerLevelAccess.m_39289_(p_52994_, p_52995_));
++         return new SimpleMenuProvider((p_220147_2_, p_220147_3_, p_220147_4_) -> {
++            return new EnchantmentMenu(p_220147_2_, p_220147_3_, ContainerLevelAccess.m_39289_(p_52994_, p_52995_));
+          }, component);
+       } else {
+          return null;

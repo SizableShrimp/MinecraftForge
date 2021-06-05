@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/entity/ai/sensing/HoglinSpecificSensor.java
++++ b/net/minecraft/world/entity/ai/sensing/HoglinSpecificSensor.java
+@@ -46,8 +_,8 @@
+    }
+ 
+    private Optional<BlockPos> m_26664_(ServerLevel p_26665_, Hoglin p_26666_) {
+-      return BlockPos.m_121930_(p_26666_.m_20183_(), 8, 4, (p_26663_) -> {
+-         return p_26665_.m_8055_(p_26663_).m_60620_(BlockTags.f_13084_);
++      return BlockPos.m_121930_(p_26666_.m_20183_(), 8, 4, (p_234119_1_) -> {
++         return p_26665_.m_8055_(p_234119_1_).m_60620_(BlockTags.f_13084_);
+       });
+    }
+ }

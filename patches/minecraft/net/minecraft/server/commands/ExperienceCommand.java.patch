@@ -1,0 +1,81 @@
+--- a/net/minecraft/server/commands/ExperienceCommand.java
++++ b/net/minecraft/server/commands/ExperienceCommand.java
+@@ -21,27 +_,27 @@
+    private static final SimpleCommandExceptionType f_137304_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.experience.set.points.invalid"));
+ 
+    public static void m_137306_(CommandDispatcher<CommandSourceStack> p_137307_) {
+-      LiteralCommandNode<CommandSourceStack> literalcommandnode = p_137307_.register(Commands.m_82127_("experience").requires((p_137324_) -> {
+-         return p_137324_.m_6761_(2);
+-      }).then(Commands.m_82127_("add").then(Commands.m_82129_("targets", EntityArgument.m_91470_()).then(Commands.m_82129_("amount", IntegerArgumentType.integer()).executes((p_137341_) -> {
+-         return m_137316_(p_137341_.getSource(), EntityArgument.m_91477_(p_137341_, "targets"), IntegerArgumentType.getInteger(p_137341_, "amount"), ExperienceCommand.Type.POINTS);
+-      }).then(Commands.m_82127_("points").executes((p_137339_) -> {
+-         return m_137316_(p_137339_.getSource(), EntityArgument.m_91477_(p_137339_, "targets"), IntegerArgumentType.getInteger(p_137339_, "amount"), ExperienceCommand.Type.POINTS);
+-      })).then(Commands.m_82127_("levels").executes((p_137337_) -> {
+-         return m_137316_(p_137337_.getSource(), EntityArgument.m_91477_(p_137337_, "targets"), IntegerArgumentType.getInteger(p_137337_, "amount"), ExperienceCommand.Type.LEVELS);
+-      }))))).then(Commands.m_82127_("set").then(Commands.m_82129_("targets", EntityArgument.m_91470_()).then(Commands.m_82129_("amount", IntegerArgumentType.integer(0)).executes((p_137335_) -> {
+-         return m_137325_(p_137335_.getSource(), EntityArgument.m_91477_(p_137335_, "targets"), IntegerArgumentType.getInteger(p_137335_, "amount"), ExperienceCommand.Type.POINTS);
+-      }).then(Commands.m_82127_("points").executes((p_137333_) -> {
+-         return m_137325_(p_137333_.getSource(), EntityArgument.m_91477_(p_137333_, "targets"), IntegerArgumentType.getInteger(p_137333_, "amount"), ExperienceCommand.Type.POINTS);
+-      })).then(Commands.m_82127_("levels").executes((p_137331_) -> {
+-         return m_137325_(p_137331_.getSource(), EntityArgument.m_91477_(p_137331_, "targets"), IntegerArgumentType.getInteger(p_137331_, "amount"), ExperienceCommand.Type.LEVELS);
+-      }))))).then(Commands.m_82127_("query").then(Commands.m_82129_("targets", EntityArgument.m_91466_()).then(Commands.m_82127_("points").executes((p_137322_) -> {
+-         return m_137312_(p_137322_.getSource(), EntityArgument.m_91474_(p_137322_, "targets"), ExperienceCommand.Type.POINTS);
+-      })).then(Commands.m_82127_("levels").executes((p_137309_) -> {
+-         return m_137312_(p_137309_.getSource(), EntityArgument.m_91474_(p_137309_, "targets"), ExperienceCommand.Type.LEVELS);
++      LiteralCommandNode<CommandSourceStack> literalcommandnode = p_137307_.register(Commands.m_82127_("experience").requires((p_198442_0_) -> {
++         return p_198442_0_.m_6761_(2);
++      }).then(Commands.m_82127_("add").then(Commands.m_82129_("targets", EntityArgument.m_91470_()).then(Commands.m_82129_("amount", IntegerArgumentType.integer()).executes((p_198445_0_) -> {
++         return m_137316_(p_198445_0_.getSource(), EntityArgument.m_91477_(p_198445_0_, "targets"), IntegerArgumentType.getInteger(p_198445_0_, "amount"), ExperienceCommand.Type.POINTS);
++      }).then(Commands.m_82127_("points").executes((p_198447_0_) -> {
++         return m_137316_(p_198447_0_.getSource(), EntityArgument.m_91477_(p_198447_0_, "targets"), IntegerArgumentType.getInteger(p_198447_0_, "amount"), ExperienceCommand.Type.POINTS);
++      })).then(Commands.m_82127_("levels").executes((p_198436_0_) -> {
++         return m_137316_(p_198436_0_.getSource(), EntityArgument.m_91477_(p_198436_0_, "targets"), IntegerArgumentType.getInteger(p_198436_0_, "amount"), ExperienceCommand.Type.LEVELS);
++      }))))).then(Commands.m_82127_("set").then(Commands.m_82129_("targets", EntityArgument.m_91470_()).then(Commands.m_82129_("amount", IntegerArgumentType.integer(0)).executes((p_198439_0_) -> {
++         return m_137325_(p_198439_0_.getSource(), EntityArgument.m_91477_(p_198439_0_, "targets"), IntegerArgumentType.getInteger(p_198439_0_, "amount"), ExperienceCommand.Type.POINTS);
++      }).then(Commands.m_82127_("points").executes((p_198444_0_) -> {
++         return m_137325_(p_198444_0_.getSource(), EntityArgument.m_91477_(p_198444_0_, "targets"), IntegerArgumentType.getInteger(p_198444_0_, "amount"), ExperienceCommand.Type.POINTS);
++      })).then(Commands.m_82127_("levels").executes((p_198440_0_) -> {
++         return m_137325_(p_198440_0_.getSource(), EntityArgument.m_91477_(p_198440_0_, "targets"), IntegerArgumentType.getInteger(p_198440_0_, "amount"), ExperienceCommand.Type.LEVELS);
++      }))))).then(Commands.m_82127_("query").then(Commands.m_82129_("targets", EntityArgument.m_91466_()).then(Commands.m_82127_("points").executes((p_198435_0_) -> {
++         return m_137312_(p_198435_0_.getSource(), EntityArgument.m_91474_(p_198435_0_, "targets"), ExperienceCommand.Type.POINTS);
++      })).then(Commands.m_82127_("levels").executes((p_198446_0_) -> {
++         return m_137312_(p_198446_0_.getSource(), EntityArgument.m_91474_(p_198446_0_, "targets"), ExperienceCommand.Type.LEVELS);
+       })))));
+-      p_137307_.register(Commands.m_82127_("xp").requires((p_137311_) -> {
+-         return p_137311_.m_6761_(2);
++      p_137307_.register(Commands.m_82127_("xp").requires((p_198441_0_) -> {
++         return p_198441_0_.m_6761_(2);
+       }).redirect(literalcommandnode));
+    }
+ 
+@@ -88,21 +_,21 @@
+    }
+ 
+    static enum Type {
+-      POINTS("points", Player::m_6756_, (p_137367_, p_137368_) -> {
+-         if (p_137368_ >= p_137367_.m_36323_()) {
++      POINTS("points", Player::m_6756_, (p_198424_0_, p_198424_1_) -> {
++         if (p_198424_1_ >= p_198424_0_.m_36323_()) {
+             return false;
+          } else {
+-            p_137367_.m_8985_(p_137368_);
++            p_198424_0_.m_8985_(p_198424_1_);
+             return true;
+          }
+-      }, (p_137365_) -> {
+-         return Mth.m_14143_(p_137365_.f_36080_ * (float)p_137365_.m_36323_());
++      }, (p_198422_0_) -> {
++         return Mth.m_14143_(p_198422_0_.f_36080_ * (float)p_198422_0_.m_36323_());
+       }),
+-      LEVELS("levels", ServerPlayer::m_6749_, (p_137360_, p_137361_) -> {
+-         p_137360_.m_9174_(p_137361_);
++      LEVELS("levels", ServerPlayer::m_6749_, (p_198425_0_, p_198425_1_) -> {
++         p_198425_0_.m_9174_(p_198425_1_);
+          return true;
+-      }, (p_137358_) -> {
+-         return p_137358_.f_36078_;
++      }, (p_198427_0_) -> {
++         return p_198427_0_.f_36078_;
+       });
+ 
+       public final BiConsumer<ServerPlayer, Integer> f_137344_;

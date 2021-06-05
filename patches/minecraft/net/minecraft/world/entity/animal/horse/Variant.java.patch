@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/entity/animal/horse/Variant.java
++++ b/net/minecraft/world/entity/animal/horse/Variant.java
+@@ -12,8 +_,8 @@
+    GRAY(5),
+    DARKBROWN(6);
+ 
+-   private static final Variant[] f_30977_ = Arrays.stream(values()).sorted(Comparator.comparingInt(Variant::m_30985_)).toArray((p_30989_) -> {
+-      return new Variant[p_30989_];
++   private static final Variant[] f_30977_ = Arrays.stream(values()).sorted(Comparator.comparingInt(Variant::m_30985_)).toArray((p_234255_0_) -> {
++      return new Variant[p_234255_0_];
+    });
+    private final int f_30978_;
+ 

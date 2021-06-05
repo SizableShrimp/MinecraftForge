@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/border/WorldBorder.java
++++ b/net/minecraft/world/level/border/WorldBorder.java
+@@ -136,6 +_,10 @@
+       this.f_61905_.add(p_61930_);
+    }
+ 
++   public void removeListener(BorderChangeListener listener) {
++      this.f_61905_.remove(listener);
++   }
++
+    public void m_61923_(int p_61924_) {
+       this.f_61913_ = p_61924_;
+       this.f_61914_.m_6623_();

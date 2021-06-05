@@ -1,0 +1,15 @@
+--- a/net/minecraft/world/entity/ai/goal/CatSitOnBlockGoal.java
++++ b/net/minecraft/world/entity/ai/goal/CatSitOnBlockGoal.java
+@@ -46,9 +_,9 @@
+          if (blockstate.m_60713_(Blocks.f_50087_)) {
+             return ChestBlockEntity.m_59086_(p_25153_, p_25154_) < 1;
+          } else {
+-            return blockstate.m_60713_(Blocks.f_50094_) && blockstate.m_61143_(FurnaceBlock.f_48684_) ? true : blockstate.m_60622_(BlockTags.f_13038_, (p_25156_) -> {
+-               return p_25156_.<BedPart>m_61145_(BedBlock.f_49440_).map((p_25158_) -> {
+-                  return p_25158_ != BedPart.HEAD;
++            return blockstate.m_60713_(Blocks.f_50094_) && blockstate.m_61143_(FurnaceBlock.f_48684_) ? true : blockstate.m_60622_(BlockTags.f_13038_, (p_234025_0_) -> {
++               return p_234025_0_.<BedPart>m_61145_(BedBlock.f_49440_).map((p_234026_0_) -> {
++                  return p_234026_0_ != BedPart.HEAD;
+                }).orElse(true);
+             });
+          }

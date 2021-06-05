@@ -1,0 +1,11 @@
+--- a/net/minecraft/realms/DisconnectedRealmsScreen.java
++++ b/net/minecraft/realms/DisconnectedRealmsScreen.java
+@@ -31,7 +_,7 @@
+       NarrationHelper.m_120670_(this.f_120647_.getString() + ": " + this.f_120648_.getString());
+       this.f_120649_ = MultiLineLabel.m_94341_(this.f_96547_, this.f_120648_, this.f_96543_ - 50);
+       this.f_120651_ = this.f_120649_.m_5770_() * 9;
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 2 + this.f_120651_ / 2 + 9, 200, 20, CommonComponents.f_130660_, (p_120663_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 2 + this.f_120651_ / 2 + 9, 200, 20, CommonComponents.f_130660_, (p_239547_2_) -> {
+          minecraft.m_91152_(this.f_120650_);
+       }));
+    }

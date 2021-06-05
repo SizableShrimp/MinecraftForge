@@ -1,0 +1,25 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/ReplaceSphereConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/ReplaceSphereConfiguration.java
+@@ -6,14 +_,14 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class ReplaceSphereConfiguration implements FeatureConfiguration {
+-   public static final Codec<ReplaceSphereConfiguration> f_68036_ = RecordCodecBuilder.create((p_68048_) -> {
+-      return p_68048_.group(BlockState.f_61039_.fieldOf("target").forGetter((p_68053_) -> {
+-         return p_68053_.f_68037_;
+-      }), BlockState.f_61039_.fieldOf("state").forGetter((p_68051_) -> {
+-         return p_68051_.f_68038_;
+-      }), UniformInt.f_14420_.fieldOf("radius").forGetter((p_68046_) -> {
+-         return p_68046_.f_68039_;
+-      })).apply(p_68048_, ReplaceSphereConfiguration::new);
++   public static final Codec<ReplaceSphereConfiguration> f_68036_ = RecordCodecBuilder.create((p_242822_0_) -> {
++      return p_242822_0_.group(BlockState.f_61039_.fieldOf("target").forGetter((p_242825_0_) -> {
++         return p_242825_0_.f_68037_;
++      }), BlockState.f_61039_.fieldOf("state").forGetter((p_242824_0_) -> {
++         return p_242824_0_.f_68038_;
++      }), UniformInt.f_14420_.fieldOf("radius").forGetter((p_242821_0_) -> {
++         return p_242821_0_.f_68039_;
++      })).apply(p_242822_0_, ReplaceSphereConfiguration::new);
+    });
+    public final BlockState f_68037_;
+    public final BlockState f_68038_;

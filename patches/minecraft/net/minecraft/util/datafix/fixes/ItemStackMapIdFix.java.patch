@@ -1,0 +1,25 @@
+--- a/net/minecraft/util/datafix/fixes/ItemStackMapIdFix.java
++++ b/net/minecraft/util/datafix/fixes/ItemStackMapIdFix.java
+@@ -22,16 +_,16 @@
+       Type<?> type = this.getInputSchema().getType(References.f_16782_);
+       OpticFinder<Pair<String, String>> opticfinder = DSL.fieldFinder("id", DSL.named(References.f_16788_.typeName(), NamespacedSchema.m_17310_()));
+       OpticFinder<?> opticfinder1 = type.findField("tag");
+-      return this.fixTypeEverywhereTyped("ItemInstanceMapIdFix", type, (p_16093_) -> {
+-         Optional<Pair<String, String>> optional = p_16093_.getOptional(opticfinder);
++      return this.fixTypeEverywhereTyped("ItemInstanceMapIdFix", type, (p_206360_2_) -> {
++         Optional<Pair<String, String>> optional = p_206360_2_.getOptional(opticfinder);
+          if (optional.isPresent() && Objects.equals(optional.get().getSecond(), "minecraft:filled_map")) {
+-            Dynamic<?> dynamic = p_16093_.get(DSL.remainderFinder());
+-            Typed<?> typed = p_16093_.getOrCreateTyped(opticfinder1);
++            Dynamic<?> dynamic = p_206360_2_.get(DSL.remainderFinder());
++            Typed<?> typed = p_206360_2_.getOrCreateTyped(opticfinder1);
+             Dynamic<?> dynamic1 = typed.get(DSL.remainderFinder());
+             dynamic1 = dynamic1.set("map", dynamic1.createInt(dynamic.get("Damage").asInt(0)));
+-            return p_16093_.set(opticfinder1, typed.set(DSL.remainderFinder(), dynamic1));
++            return p_206360_2_.set(opticfinder1, typed.set(DSL.remainderFinder(), dynamic1));
+          } else {
+-            return p_16093_;
++            return p_206360_2_;
+          }
+       });
+    }

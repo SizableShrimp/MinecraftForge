@@ -1,0 +1,16 @@
+--- a/net/minecraft/world/level/levelgen/feature/EndGatewayFeature.java
++++ b/net/minecraft/world/level/levelgen/feature/EndGatewayFeature.java
+@@ -24,11 +_,11 @@
+          if (flag && flag1 && flag2) {
+             BlockPos blockpos1 = blockpos.m_7949_();
+             this.m_5974_(p_65684_, blockpos1, Blocks.f_50446_.m_49966_());
+-            p_65688_.m_67656_().ifPresent((p_65699_) -> {
++            p_65688_.m_67656_().ifPresent((p_236280_3_) -> {
+                BlockEntity blockentity = p_65684_.m_7702_(blockpos1);
+                if (blockentity instanceof TheEndGatewayBlockEntity) {
+                   TheEndGatewayBlockEntity theendgatewayblockentity = (TheEndGatewayBlockEntity)blockentity;
+-                  theendgatewayblockentity.m_59955_(p_65699_, p_65688_.m_67657_());
++                  theendgatewayblockentity.m_59955_(p_236280_3_, p_65688_.m_67657_());
+                   blockentity.m_6596_();
+                }
+ 

@@ -1,0 +1,52 @@
+--- a/net/minecraft/commands/arguments/item/ItemPredicateArgument.java
++++ b/net/minecraft/commands/arguments/item/ItemPredicateArgument.java
+@@ -24,8 +_,8 @@
+ 
+ public class ItemPredicateArgument implements ArgumentType<ItemPredicateArgument.Result> {
+    private static final Collection<String> f_121033_ = Arrays.asList("stick", "minecraft:stick", "#stick", "#stick{foo=bar}");
+-   private static final DynamicCommandExceptionType f_121034_ = new DynamicCommandExceptionType((p_121047_) -> {
+-      return new TranslatableComponent("arguments.item.tag.unknown", p_121047_);
++   private static final DynamicCommandExceptionType f_121034_ = new DynamicCommandExceptionType((p_208699_0_) -> {
++      return new TranslatableComponent("arguments.item.tag.unknown", p_208699_0_);
+    });
+ 
+    public static ItemPredicateArgument m_121037_() {
+@@ -36,13 +_,13 @@
+       ItemParser itemparser = (new ItemParser(p_121039_, true)).m_121032_();
+       if (itemparser.m_121014_() != null) {
+          ItemPredicateArgument.ItemPredicate itempredicateargument$itempredicate = new ItemPredicateArgument.ItemPredicate(itemparser.m_121014_(), itemparser.m_121018_());
+-         return (p_121045_) -> {
++         return (p_199848_1_) -> {
+             return itempredicateargument$itempredicate;
+          };
+       } else {
+          ResourceLocation resourcelocation = itemparser.m_121022_();
+-         return (p_121051_) -> {
+-            Tag<Item> tag = ((CommandSourceStack)p_121051_.getSource()).m_81377_().m_129895_().m_5881_().m_13404_(resourcelocation);
++         return (p_199845_2_) -> {
++            Tag<Item> tag = p_199845_2_.getSource().m_81377_().m_129895_().m_5881_().m_13404_(resourcelocation);
+             if (tag == null) {
+                throw f_121034_.create(resourcelocation.toString());
+             } else {
+@@ -73,6 +_,10 @@
+       return f_121033_;
+    }
+ 
++   public interface Result {
++      Predicate<ItemStack> m_121067_(CommandContext<CommandSourceStack> p_121068_) throws CommandSyntaxException;
++   }
++
+    static class ItemPredicate implements Predicate<ItemStack> {
+       private final Item f_121058_;
+       @Nullable
+@@ -86,10 +_,6 @@
+       public boolean test(ItemStack p_121064_) {
+          return p_121064_.m_41720_() == this.f_121058_ && NbtUtils.m_129235_(this.f_121059_, p_121064_.m_41783_(), true);
+       }
+-   }
+-
+-   public interface Result {
+-      Predicate<ItemStack> m_121067_(CommandContext<CommandSourceStack> p_121068_) throws CommandSyntaxException;
+    }
+ 
+    static class TagPredicate implements Predicate<ItemStack> {

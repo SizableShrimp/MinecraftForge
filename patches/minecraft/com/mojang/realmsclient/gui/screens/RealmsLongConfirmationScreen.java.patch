@@ -1,0 +1,20 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsLongConfirmationScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsLongConfirmationScreen.java
+@@ -30,14 +_,14 @@
+    public void m_7856_() {
+       NarrationHelper.m_120672_(this.f_88726_.f_88755_, this.f_88727_.getString(), this.f_88728_.getString());
+       if (this.f_88729_) {
+-         this.m_7082_(new Button(this.f_96543_ / 2 - 105, m_120774_(8), 100, 20, CommonComponents.f_130657_, (p_88751_) -> {
++         this.m_7082_(new Button(this.f_96543_ / 2 - 105, m_120774_(8), 100, 20, CommonComponents.f_130657_, (p_237848_1_) -> {
+             this.f_88725_.accept(true);
+          }));
+-         this.m_7082_(new Button(this.f_96543_ / 2 + 5, m_120774_(8), 100, 20, CommonComponents.f_130658_, (p_88749_) -> {
++         this.m_7082_(new Button(this.f_96543_ / 2 + 5, m_120774_(8), 100, 20, CommonComponents.f_130658_, (p_237847_1_) -> {
+             this.f_88725_.accept(false);
+          }));
+       } else {
+-         this.m_7082_(new Button(this.f_96543_ / 2 - 50, m_120774_(8), 100, 20, new TranslatableComponent("mco.gui.ok"), (p_88746_) -> {
++         this.m_7082_(new Button(this.f_96543_ / 2 - 50, m_120774_(8), 100, 20, new TranslatableComponent("mco.gui.ok"), (p_237846_1_) -> {
+             this.f_88725_.accept(true);
+          }));
+       }

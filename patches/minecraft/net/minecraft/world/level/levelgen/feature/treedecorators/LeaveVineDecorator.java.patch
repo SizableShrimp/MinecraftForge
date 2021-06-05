@@ -1,0 +1,38 @@
+--- a/net/minecraft/world/level/levelgen/feature/treedecorators/LeaveVineDecorator.java
++++ b/net/minecraft/world/level/levelgen/feature/treedecorators/LeaveVineDecorator.java
+@@ -21,30 +_,30 @@
+    }
+ 
+    public void m_6218_(WorldGenLevel p_70008_, Random p_70009_, List<BlockPos> p_70010_, List<BlockPos> p_70011_, Set<BlockPos> p_70012_, BoundingBox p_70013_) {
+-      p_70011_.forEach((p_70019_) -> {
++      p_70011_.forEach((p_242866_5_) -> {
+          if (p_70009_.nextInt(4) == 0) {
+-            BlockPos blockpos = p_70019_.m_122024_();
++            BlockPos blockpos = p_242866_5_.m_122024_();
+             if (Feature.m_65810_(p_70008_, blockpos)) {
+                this.m_70001_(p_70008_, blockpos, VineBlock.f_57835_, p_70012_, p_70013_);
+             }
+          }
+ 
+          if (p_70009_.nextInt(4) == 0) {
+-            BlockPos blockpos1 = p_70019_.m_122029_();
++            BlockPos blockpos1 = p_242866_5_.m_122029_();
+             if (Feature.m_65810_(p_70008_, blockpos1)) {
+                this.m_70001_(p_70008_, blockpos1, VineBlock.f_57837_, p_70012_, p_70013_);
+             }
+          }
+ 
+          if (p_70009_.nextInt(4) == 0) {
+-            BlockPos blockpos2 = p_70019_.m_122012_();
++            BlockPos blockpos2 = p_242866_5_.m_122012_();
+             if (Feature.m_65810_(p_70008_, blockpos2)) {
+                this.m_70001_(p_70008_, blockpos2, VineBlock.f_57836_, p_70012_, p_70013_);
+             }
+          }
+ 
+          if (p_70009_.nextInt(4) == 0) {
+-            BlockPos blockpos3 = p_70019_.m_122019_();
++            BlockPos blockpos3 = p_242866_5_.m_122019_();
+             if (Feature.m_65810_(p_70008_, blockpos3)) {
+                this.m_70001_(p_70008_, blockpos3, VineBlock.f_57834_, p_70012_, p_70013_);
+             }

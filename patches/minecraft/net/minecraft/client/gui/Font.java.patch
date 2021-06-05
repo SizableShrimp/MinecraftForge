@@ -1,0 +1,13 @@
+--- a/net/minecraft/client/gui/Font.java
++++ b/net/minecraft/client/gui/Font.java
+@@ -44,8 +_,8 @@
+ 
+    public Font(Function<ResourceLocation, FontSet> p_92717_) {
+       this.f_92713_ = p_92717_;
+-      this.f_92714_ = new StringSplitter((p_92722_, p_92723_) -> {
+-         return this.m_92863_(p_92723_.m_131192_()).m_95065_(p_92722_).m_83827_(p_92723_.m_131154_());
++      this.f_92714_ = new StringSplitter((p_238404_1_, p_238404_2_) -> {
++         return this.m_92863_(p_238404_2_.m_131192_()).m_95065_(p_238404_1_).m_83827_(p_238404_2_.m_131154_());
+       });
+    }
+ 

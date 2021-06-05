@@ -1,0 +1,23 @@
+--- a/net/minecraft/world/level/block/entity/BellBlockEntity.java
++++ b/net/minecraft/world/level/block/entity/BellBlockEntity.java
+@@ -127,14 +_,14 @@
+       if (p_58843_.f_46443_) {
+          BlockPos blockpos = this.m_58899_();
+          MutableInt mutableint = new MutableInt(16700985);
+-         int i = (int)this.f_58817_.stream().filter((p_58833_) -> {
+-            return blockpos.m_123306_(p_58833_.m_20182_(), 48.0D);
++         int i = (int)this.f_58817_.stream().filter((p_222829_1_) -> {
++            return blockpos.m_123306_(p_222829_1_.m_20182_(), 48.0D);
+          }).count();
+-         this.f_58817_.stream().filter(this::m_58821_).forEach((p_58830_) -> {
++         this.f_58817_.stream().filter(this::m_58821_).forEach((p_235655_4_) -> {
+             float f = 1.0F;
+-            float f1 = Mth.m_14003_((p_58830_.m_20185_() - (double)blockpos.m_123341_()) * (p_58830_.m_20185_() - (double)blockpos.m_123341_()) + (p_58830_.m_20189_() - (double)blockpos.m_123343_()) * (p_58830_.m_20189_() - (double)blockpos.m_123343_()));
+-            double d0 = (double)((float)blockpos.m_123341_() + 0.5F) + (double)(1.0F / f1) * (p_58830_.m_20185_() - (double)blockpos.m_123341_());
+-            double d1 = (double)((float)blockpos.m_123343_() + 0.5F) + (double)(1.0F / f1) * (p_58830_.m_20189_() - (double)blockpos.m_123343_());
++            float f1 = Mth.m_14003_((p_235655_4_.m_20185_() - (double)blockpos.m_123341_()) * (p_235655_4_.m_20185_() - (double)blockpos.m_123341_()) + (p_235655_4_.m_20189_() - (double)blockpos.m_123343_()) * (p_235655_4_.m_20189_() - (double)blockpos.m_123343_()));
++            double d0 = (double)((float)blockpos.m_123341_() + 0.5F) + (double)(1.0F / f1) * (p_235655_4_.m_20185_() - (double)blockpos.m_123341_());
++            double d1 = (double)((float)blockpos.m_123343_() + 0.5F) + (double)(1.0F / f1) * (p_235655_4_.m_20189_() - (double)blockpos.m_123343_());
+             int j = Mth.m_14045_((i - 21) / -2, 3, 15);
+ 
+             for(int k = 0; k < j; ++k) {

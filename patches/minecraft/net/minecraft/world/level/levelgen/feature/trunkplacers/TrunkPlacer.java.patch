@@ -1,0 +1,34 @@
+--- a/net/minecraft/world/level/levelgen/feature/trunkplacers/TrunkPlacer.java
++++ b/net/minecraft/world/level/levelgen/feature/trunkplacers/TrunkPlacer.java
+@@ -28,12 +_,12 @@
+    protected final int f_70265_;
+ 
+    protected static <P extends TrunkPlacer> P3<Mu<P>, Integer, Integer, Integer> m_70305_(Instance<P> p_70306_) {
+-      return p_70306_.group(Codec.intRange(0, 32).fieldOf("base_height").forGetter((p_70314_) -> {
+-         return p_70314_.f_70263_;
+-      }), Codec.intRange(0, 24).fieldOf("height_rand_a").forGetter((p_70312_) -> {
+-         return p_70312_.f_70264_;
+-      }), Codec.intRange(0, 24).fieldOf("height_rand_b").forGetter((p_70308_) -> {
+-         return p_70308_.f_70265_;
++      return p_70306_.group(Codec.intRange(0, 32).fieldOf("base_height").forGetter((p_236919_0_) -> {
++         return p_236919_0_.f_70263_;
++      }), Codec.intRange(0, 24).fieldOf("height_rand_a").forGetter((p_236918_0_) -> {
++         return p_236918_0_.f_70264_;
++      }), Codec.intRange(0, 24).fieldOf("height_rand_b").forGetter((p_236916_0_) -> {
++         return p_236916_0_.f_70265_;
+       }));
+    }
+ 
+@@ -57,9 +_,9 @@
+    }
+ 
+    private static boolean m_70295_(LevelSimulatedReader p_70296_, BlockPos p_70297_) {
+-      return p_70296_.m_7433_(p_70297_, (p_70304_) -> {
+-         Block block = p_70304_.m_60734_();
+-         return Feature.m_65813_(block) && !p_70304_.m_60713_(Blocks.f_50440_) && !p_70304_.m_60713_(Blocks.f_50195_);
++      return p_70296_.m_7433_(p_70297_, (p_236914_0_) -> {
++         Block block = p_236914_0_.m_60734_();
++         return Feature.m_65813_(block) && !p_236914_0_.m_60713_(Blocks.f_50440_) && !p_236914_0_.m_60713_(Blocks.f_50195_);
+       });
+    }
+ 

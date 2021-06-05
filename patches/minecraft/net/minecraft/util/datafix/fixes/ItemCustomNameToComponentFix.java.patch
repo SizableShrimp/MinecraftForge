@@ -1,0 +1,15 @@
+--- a/net/minecraft/util/datafix/fixes/ItemCustomNameToComponentFix.java
++++ b/net/minecraft/util/datafix/fixes/ItemCustomNameToComponentFix.java
+@@ -41,9 +_,9 @@
+    public TypeRewriteRule makeRule() {
+       Type<?> type = this.getInputSchema().getType(References.f_16782_);
+       OpticFinder<?> opticfinder = type.findField("tag");
+-      return this.fixTypeEverywhereTyped("ItemCustomNameToComponentFix", type, (p_15931_) -> {
+-         return p_15931_.updateTyped(opticfinder, (p_15933_) -> {
+-            return p_15933_.update(DSL.remainderFinder(), this::m_15934_);
++      return this.fixTypeEverywhereTyped("ItemCustomNameToComponentFix", type, (p_207467_2_) -> {
++         return p_207467_2_.updateTyped(opticfinder, (p_207469_1_) -> {
++            return p_207469_1_.update(DSL.remainderFinder(), this::m_15934_);
+          });
+       });
+    }

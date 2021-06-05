@@ -1,0 +1,11 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsClientOutdatedScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsClientOutdatedScreen.java
+@@ -25,7 +_,7 @@
+    }
+ 
+    public void m_7856_() {
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 100, m_120774_(12), 200, 20, CommonComponents.f_130660_, (p_88378_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 100, m_120774_(12), 200, 20, CommonComponents.f_130660_, (p_237786_1_) -> {
+          this.f_96541_.m_91152_(this.f_88362_);
+       }));
+    }

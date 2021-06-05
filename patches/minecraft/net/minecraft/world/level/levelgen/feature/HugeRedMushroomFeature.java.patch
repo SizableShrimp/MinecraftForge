@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/levelgen/feature/HugeRedMushroomFeature.java
++++ b/net/minecraft/world/level/levelgen/feature/HugeRedMushroomFeature.java
+@@ -27,7 +_,7 @@
+                boolean flag5 = flag2 || flag3;
+                if (i >= p_65985_ || flag4 != flag5) {
+                   p_65986_.m_122154_(p_65984_, l, i, i1);
+-                  if (!p_65982_.m_8055_(p_65986_).m_60804_(p_65982_, p_65986_)) {
++                  if (p_65982_.m_8055_(p_65986_).canBeReplacedByLeaves(p_65982_, p_65986_)) {
+                      this.m_5974_(p_65982_, p_65986_, p_65987_.f_67740_.m_7112_(p_65983_, p_65984_).m_61124_(HugeMushroomBlock.f_54131_, Boolean.valueOf(i >= p_65985_ - 1)).m_61124_(HugeMushroomBlock.f_54130_, Boolean.valueOf(l < -k)).m_61124_(HugeMushroomBlock.f_54128_, Boolean.valueOf(l > k)).m_61124_(HugeMushroomBlock.f_54127_, Boolean.valueOf(i1 < -k)).m_61124_(HugeMushroomBlock.f_54129_, Boolean.valueOf(i1 > k)));
+                   }
+                }

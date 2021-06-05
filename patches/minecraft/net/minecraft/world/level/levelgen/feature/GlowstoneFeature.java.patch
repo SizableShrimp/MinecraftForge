@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/levelgen/feature/GlowstoneFeature.java
++++ b/net/minecraft/world/level/levelgen/feature/GlowstoneFeature.java
+@@ -27,7 +_,7 @@
+ 
+             for(int i = 0; i < 1500; ++i) {
+                BlockPos blockpos = p_65876_.m_7918_(p_65875_.nextInt(8) - p_65875_.nextInt(8), -p_65875_.nextInt(12), p_65875_.nextInt(8) - p_65875_.nextInt(8));
+-               if (p_65873_.m_8055_(blockpos).m_60795_()) {
++               if (p_65873_.m_8055_(blockpos).isAir(p_65873_, blockpos)) {
+                   int j = 0;
+ 
+                   for(Direction direction : Direction.values()) {

@@ -1,0 +1,46 @@
+--- a/net/minecraft/world/entity/animal/TropicalFish.java
++++ b/net/minecraft/world/entity/animal/TropicalFish.java
+@@ -196,6 +_,21 @@
+       }
+    }
+ 
++   static class TropicalFishGroupData extends AbstractSchoolingFish.SchoolSpawnGroupData {
++      private final int f_30097_;
++      private final int f_30098_;
++      private final int f_30099_;
++      private final int f_30100_;
++
++      private TropicalFishGroupData(TropicalFish p_30102_, int p_30103_, int p_30104_, int p_30105_, int p_30106_) {
++         super(p_30102_);
++         this.f_30097_ = p_30103_;
++         this.f_30098_ = p_30104_;
++         this.f_30099_ = p_30105_;
++         this.f_30100_ = p_30106_;
++      }
++   }
++
+    static enum Pattern {
+       KOB(0, 0),
+       SUNSTREAK(0, 1),
+@@ -235,21 +_,6 @@
+       @OnlyIn(Dist.CLIENT)
+       public String m_30093_() {
+          return this.name().toLowerCase(Locale.ROOT);
+-      }
+-   }
+-
+-   static class TropicalFishGroupData extends AbstractSchoolingFish.SchoolSpawnGroupData {
+-      private final int f_30097_;
+-      private final int f_30098_;
+-      private final int f_30099_;
+-      private final int f_30100_;
+-
+-      private TropicalFishGroupData(TropicalFish p_30102_, int p_30103_, int p_30104_, int p_30105_, int p_30106_) {
+-         super(p_30102_);
+-         this.f_30097_ = p_30103_;
+-         this.f_30098_ = p_30104_;
+-         this.f_30099_ = p_30105_;
+-         this.f_30100_ = p_30106_;
+       }
+    }
+ }

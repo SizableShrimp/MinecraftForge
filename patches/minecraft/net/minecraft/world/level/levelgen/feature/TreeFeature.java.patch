@@ -1,0 +1,76 @@
+--- a/net/minecraft/world/level/levelgen/feature/TreeFeature.java
++++ b/net/minecraft/world/level/levelgen/feature/TreeFeature.java
+@@ -37,39 +_,39 @@
+    }
+ 
+    public static boolean m_67262_(LevelSimulatedReader p_67263_, BlockPos p_67264_) {
+-      return m_67272_(p_67263_, p_67264_) || p_67263_.m_7433_(p_67264_, (p_67281_) -> {
+-         return p_67281_.m_60620_(BlockTags.f_13106_);
++      return m_67272_(p_67263_, p_67264_) || p_67263_.m_7433_(p_67264_, (p_236417_0_) -> {
++         return p_236417_0_.m_60620_(BlockTags.f_13106_);
+       });
+    }
+ 
+    private static boolean m_67277_(LevelSimulatedReader p_67278_, BlockPos p_67279_) {
+-      return p_67278_.m_7433_(p_67279_, (p_67276_) -> {
+-         return p_67276_.m_60713_(Blocks.f_50191_);
++      return p_67278_.m_7433_(p_67279_, (p_236415_0_) -> {
++         return p_236415_0_.m_60713_(Blocks.f_50191_);
+       });
+    }
+ 
+    private static boolean m_67282_(LevelSimulatedReader p_67283_, BlockPos p_67284_) {
+-      return p_67283_.m_7433_(p_67284_, (p_67271_) -> {
+-         return p_67271_.m_60713_(Blocks.f_49990_);
++      return p_67283_.m_7433_(p_67284_, (p_236413_0_) -> {
++         return p_236413_0_.m_60713_(Blocks.f_49990_);
+       });
+    }
+ 
+    public static boolean m_67267_(LevelSimulatedReader p_67268_, BlockPos p_67269_) {
+-      return p_67268_.m_7433_(p_67269_, (p_67266_) -> {
+-         return p_67266_.m_60795_() || p_67266_.m_60620_(BlockTags.f_13035_);
++      return p_67268_.m_7433_(p_67269_, (p_236411_0_) -> {
++         return p_236411_0_.m_60795_() || p_236411_0_.m_60620_(BlockTags.f_13035_);
+       });
+    }
+ 
+    private static boolean m_67285_(LevelSimulatedReader p_67286_, BlockPos p_67287_) {
+-      return p_67286_.m_7433_(p_67287_, (p_67261_) -> {
+-         Block block = p_67261_.m_60734_();
++      return p_67286_.m_7433_(p_67287_, (p_236409_0_) -> {
++         Block block = p_236409_0_.m_60734_();
+          return m_65813_(block) || block == Blocks.f_50093_;
+       });
+    }
+ 
+    private static boolean m_67288_(LevelSimulatedReader p_67289_, BlockPos p_67290_) {
+-      return p_67289_.m_7433_(p_67290_, (p_67245_) -> {
+-         Material material = p_67245_.m_60767_();
++      return p_67289_.m_7433_(p_67290_, (p_236406_0_) -> {
++         Material material = p_236406_0_.m_60767_();
+          return material == Material.f_76302_;
+       });
+    }
+@@ -117,8 +_,8 @@
+             int l1 = this.m_67215_(p_67208_, i, blockpos, p_67214_);
+             if (l1 >= i || optionalint.isPresent() && l1 >= optionalint.getAsInt()) {
+                List<FoliagePlacer.FoliageAttachment> list = p_67214_.f_68190_.m_6382_(p_67208_, p_67209_, l1, blockpos, p_67211_, p_67213_, p_67214_);
+-               list.forEach((p_67255_) -> {
+-                  p_67214_.f_68189_.m_68536_(p_67208_, p_67209_, p_67214_, l1, p_67255_, j, l, p_67212_, p_67213_);
++               list.forEach((p_236407_8_) -> {
++                  p_67214_.f_68189_.m_68536_(p_67208_, p_67209_, p_67214_, l1, p_236407_8_, j, l, p_67212_, p_67213_);
+                });
+                return true;
+             } else {
+@@ -165,8 +_,8 @@
+             List<BlockPos> list1 = Lists.newArrayList(set1);
+             list.sort(Comparator.comparingInt(Vec3i::m_123342_));
+             list1.sort(Comparator.comparingInt(Vec3i::m_123342_));
+-            p_67235_.f_68187_.forEach((p_67243_) -> {
+-               p_67243_.m_6218_(p_67231_, p_67233_, list, list1, set2, boundingbox);
++            p_67235_.f_68187_.forEach((p_236405_6_) -> {
++               p_236405_6_.m_6218_(p_67231_, p_67233_, list, list1, set2, boundingbox);
+             });
+          }
+ 

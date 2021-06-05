@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/item/FishingRodItem.java
++++ b/net/minecraft/world/item/FishingRodItem.java
+@@ -20,8 +_,8 @@
+       if (p_41291_.f_36083_ != null) {
+          if (!p_41290_.f_46443_) {
+             int i = p_41291_.f_36083_.m_37156_(itemstack);
+-            itemstack.m_41622_(i, p_41291_, (p_41288_) -> {
+-               p_41288_.m_21190_(p_41292_);
++            itemstack.m_41622_(i, p_41291_, (p_220000_1_) -> {
++               p_220000_1_.m_21190_(p_41292_);
+             });
+          }
+ 

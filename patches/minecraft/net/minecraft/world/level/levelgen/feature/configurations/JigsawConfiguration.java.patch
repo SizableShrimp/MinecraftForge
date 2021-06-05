@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/JigsawConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/JigsawConfiguration.java
+@@ -6,8 +_,8 @@
+ import net.minecraft.world.level.levelgen.feature.structures.StructureTemplatePool;
+ 
+ public class JigsawConfiguration implements FeatureConfiguration {
+-   public static final Codec<JigsawConfiguration> f_67756_ = RecordCodecBuilder.create((p_67764_) -> {
+-      return p_67764_.group(StructureTemplatePool.f_69246_.fieldOf("start_pool").forGetter(JigsawConfiguration::m_67766_), Codec.intRange(0, 7).fieldOf("size").forGetter(JigsawConfiguration::m_67765_)).apply(p_67764_, JigsawConfiguration::new);
++   public static final Codec<JigsawConfiguration> f_67756_ = RecordCodecBuilder.create((p_236535_0_) -> {
++      return p_236535_0_.group(StructureTemplatePool.f_69246_.fieldOf("start_pool").forGetter(JigsawConfiguration::m_67766_), Codec.intRange(0, 7).fieldOf("size").forGetter(JigsawConfiguration::m_67765_)).apply(p_236535_0_, JigsawConfiguration::new);
+    });
+    private final Supplier<StructureTemplatePool> f_67757_;
+    private final int f_67758_;

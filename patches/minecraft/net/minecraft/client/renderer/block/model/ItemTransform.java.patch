@@ -1,0 +1,30 @@
+--- a/net/minecraft/client/renderer/block/model/ItemTransform.java
++++ b/net/minecraft/client/renderer/block/model/ItemTransform.java
+@@ -14,7 +_,11 @@
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
++/**
++ * @deprecated use {@link net.minecraft.util.math.vector.TransformationMatrix} through {@link net.minecraftforge.client.extensions.IForgeBakedModel#handlePerspective}
++ */
+ @OnlyIn(Dist.CLIENT)
++@Deprecated
+ public class ItemTransform {
+    public static final ItemTransform f_111754_ = new ItemTransform(new Vector3f(), new Vector3f(), new Vector3f(1.0F, 1.0F, 1.0F));
+    public final Vector3f f_111755_;
+@@ -63,12 +_,9 @@
+ 
+    @OnlyIn(Dist.CLIENT)
+    public static class Deserializer implements JsonDeserializer<ItemTransform> {
+-      private static final Vector3f f_111769_ = new Vector3f(0.0F, 0.0F, 0.0F);
+-      private static final Vector3f f_111770_ = new Vector3f(0.0F, 0.0F, 0.0F);
+-      private static final Vector3f f_111771_ = new Vector3f(1.0F, 1.0F, 1.0F);
+-
+-      protected Deserializer() {
+-      }
++      public static final Vector3f f_111769_ = new Vector3f(0.0F, 0.0F, 0.0F);
++      public static final Vector3f f_111770_ = new Vector3f(0.0F, 0.0F, 0.0F);
++      public static final Vector3f f_111771_ = new Vector3f(1.0F, 1.0F, 1.0F);
+ 
+       public ItemTransform deserialize(JsonElement p_111775_, Type p_111776_, JsonDeserializationContext p_111777_) throws JsonParseException {
+          JsonObject jsonobject = p_111775_.getAsJsonObject();

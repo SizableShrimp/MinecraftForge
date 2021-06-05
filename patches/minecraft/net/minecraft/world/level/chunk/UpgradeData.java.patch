@@ -1,0 +1,41 @@
+--- a/net/minecraft/world/level/chunk/UpgradeData.java
++++ b/net/minecraft/world/level/chunk/UpgradeData.java
+@@ -73,8 +_,8 @@
+       }
+ 
+       Level level = p_63342_.m_62953_();
+-      f_63326_.forEach((p_63334_) -> {
+-         p_63334_.m_5870_(level);
++      f_63326_.forEach((p_208829_1_) -> {
++         p_208829_1_.m_5870_(level);
+       });
+    }
+ 
+@@ -195,13 +_,6 @@
+       return compoundtag;
+    }
+ 
+-   public interface BlockFixer {
+-      BlockState m_5731_(BlockState p_63352_, Direction p_63353_, BlockState p_63354_, LevelAccessor p_63355_, BlockPos p_63356_, BlockPos p_63357_);
+-
+-      default void m_5870_(LevelAccessor p_63351_) {
+-      }
+-   }
+-
+    static enum BlockFixers implements UpgradeData.BlockFixer {
+       BLACKLIST(Blocks.f_50455_, Blocks.f_50142_, Blocks.f_50506_, Blocks.f_50507_, Blocks.f_50508_, Blocks.f_50509_, Blocks.f_50510_, Blocks.f_50511_, Blocks.f_50512_, Blocks.f_50513_, Blocks.f_50514_, Blocks.f_50515_, Blocks.f_50516_, Blocks.f_50517_, Blocks.f_50518_, Blocks.f_50519_, Blocks.f_50573_, Blocks.f_50574_, Blocks.f_50322_, Blocks.f_50323_, Blocks.f_50324_, Blocks.f_50260_, Blocks.f_49994_, Blocks.f_49992_, Blocks.f_49993_, Blocks.f_50095_, Blocks.f_50149_, Blocks.f_50150_, Blocks.f_50151_, Blocks.f_50152_, Blocks.f_50153_, Blocks.f_50158_, Blocks.f_50159_, Blocks.f_50160_, Blocks.f_50161_, Blocks.f_50162_, Blocks.f_50163_) {
+          public BlockState m_5731_(BlockState p_63394_, Direction p_63395_, BlockState p_63396_, LevelAccessor p_63397_, BlockPos p_63398_, BlockPos p_63399_) {
+@@ -314,6 +_,13 @@
+             UpgradeData.f_63326_.add(this);
+          }
+ 
++      }
++   }
++
++   public interface BlockFixer {
++      BlockState m_5731_(BlockState p_63352_, Direction p_63353_, BlockState p_63354_, LevelAccessor p_63355_, BlockPos p_63356_, BlockPos p_63357_);
++
++      default void m_5870_(LevelAccessor p_63351_) {
+       }
+    }
+ }

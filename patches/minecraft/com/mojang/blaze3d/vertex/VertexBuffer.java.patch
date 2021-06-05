@@ -1,0 +1,24 @@
+--- a/com/mojang/blaze3d/vertex/VertexBuffer.java
++++ b/com/mojang/blaze3d/vertex/VertexBuffer.java
+@@ -16,8 +_,8 @@
+ 
+    public VertexBuffer(VertexFormat p_85920_) {
+       this.f_85917_ = p_85920_;
+-      RenderSystem.m_69531_((p_85928_) -> {
+-         this.f_85916_ = p_85928_;
++      RenderSystem.m_69531_((p_227876_1_) -> {
++         this.f_85916_ = p_227876_1_;
+       });
+    }
+ 
+@@ -42,8 +_,8 @@
+       if (!RenderSystem.m_69586_()) {
+          return CompletableFuture.runAsync(() -> {
+             this.m_85935_(p_85933_);
+-         }, (p_85930_) -> {
+-            RenderSystem.m_69879_(p_85930_::run);
++         }, (p_227877_0_) -> {
++            RenderSystem.m_69879_(p_227877_0_::run);
+          });
+       } else {
+          this.m_85935_(p_85933_);

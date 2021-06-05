@@ -61,7 +61,6 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
-import net.minecraft.fluid.*;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -112,7 +111,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.resources.RegistryReadOps;
 import net.minecraft.resources.RegistryWriteOps;
-import net.minecraft.util.text.*;
 import net.minecraft.world.*;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
@@ -124,7 +122,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -923,11 +920,11 @@ public class ForgeHooks
     public static FluidAttributes createVanillaFluidAttributes(Fluid fluid)
     {
         if (fluid instanceof EmptyFluid)
-            return FluidAttributes.builder(null, null)
+            return net.minecraftforge.fluids.FluidAttributes.builder(null, null)
                     .translationKey("block.minecraft.air")
                     .color(0).density(0).temperature(0).luminosity(0).viscosity(0).build(fluid);
         if (fluid instanceof WaterFluid)
-            return FluidAttributes.Water.builder(
+            return net.minecraftforge.fluids.FluidAttributes.Water.builder(
                     new ResourceLocation("block/water_still"),
                     new ResourceLocation("block/water_flow"))
                     .overlay(new ResourceLocation("block/water_overlay"))
@@ -936,7 +933,7 @@ public class ForgeHooks
                     .sound(SoundEvents.BUCKET_FILL, SoundEvents.BUCKET_EMPTY)
                     .build(fluid);
         if (fluid instanceof LavaFluid)
-            return FluidAttributes.builder(
+            return net.minecraftforge.fluids.FluidAttributes.builder(
                     new ResourceLocation("block/lava_still"),
                     new ResourceLocation("block/lava_flow"))
                     .translationKey("block.minecraft.lava")
@@ -1058,7 +1055,7 @@ public class ForgeHooks
     {
         BlockEvent ev = new BlockEvent.CropGrowEvent.Pre(worldIn,pos,state);
         MinecraftForge.EVENT_BUS.post(ev);
-        return (ev.getResult() == Result.ALLOW || (ev.getResult() == Result.DEFAULT && def));
+        return (ev.getResult() == net.minecraftforge.eventbus.api.Event.Result.ALLOW || (ev.getResult() == net.minecraftforge.eventbus.api.Event.Result.DEFAULT && def));
     }
 
     public static void onCropsGrowPost(Level worldIn, BlockPos pos, BlockState state)
@@ -1071,7 +1068,7 @@ public class ForgeHooks
     {
         CriticalHitEvent hitResult = new CriticalHitEvent(player, target, damageModifier, vanillaCritical);
         MinecraftForge.EVENT_BUS.post(hitResult);
-        if (hitResult.getResult() == Result.ALLOW || (vanillaCritical && hitResult.getResult() == Result.DEFAULT))
+        if (hitResult.getResult() == net.minecraftforge.eventbus.api.Event.Result.ALLOW || (vanillaCritical && hitResult.getResult() == net.minecraftforge.eventbus.api.Event.Result.DEFAULT))
         {
             return hitResult;
         }

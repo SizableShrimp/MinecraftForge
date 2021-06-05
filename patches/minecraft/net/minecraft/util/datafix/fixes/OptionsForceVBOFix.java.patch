@@ -1,0 +1,15 @@
+--- a/net/minecraft/util/datafix/fixes/OptionsForceVBOFix.java
++++ b/net/minecraft/util/datafix/fixes/OptionsForceVBOFix.java
+@@ -11,9 +_,9 @@
+    }
+ 
+    public TypeRewriteRule makeRule() {
+-      return this.fixTypeEverywhereTyped("OptionsForceVBOFix", this.getInputSchema().getType(References.f_16775_), (p_16623_) -> {
+-         return p_16623_.update(DSL.remainderFinder(), (p_16625_) -> {
+-            return p_16625_.set("useVbo", p_16625_.createString("true"));
++      return this.fixTypeEverywhereTyped("OptionsForceVBOFix", this.getInputSchema().getType(References.f_16775_), (p_207425_0_) -> {
++         return p_207425_0_.update(DSL.remainderFinder(), (p_207426_0_) -> {
++            return p_207426_0_.set("useVbo", p_207426_0_.createString("true"));
+          });
+       });
+    }

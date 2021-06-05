@@ -1,0 +1,19 @@
+--- a/net/minecraft/world/item/crafting/SuspiciousStewRecipe.java
++++ b/net/minecraft/world/item/crafting/SuspiciousStewRecipe.java
+@@ -11,8 +_,6 @@
+ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.block.Blocks;
+ import net.minecraft.world.level.block.FlowerBlock;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public class SuspiciousStewRecipe extends CustomRecipe {
+    public SuspiciousStewRecipe(ResourceLocation p_44487_) {
+@@ -68,7 +_,6 @@
+       return itemstack2;
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public boolean m_8004_(int p_44489_, int p_44490_) {
+       return p_44489_ >= 2 && p_44490_ >= 2;
+    }

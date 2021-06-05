@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/stateproviders/SimpleStateProvider.java
++++ b/net/minecraft/world/level/levelgen/feature/stateproviders/SimpleStateProvider.java
+@@ -6,8 +_,8 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class SimpleStateProvider extends BlockStateProvider {
+-   public static final Codec<SimpleStateProvider> f_68797_ = BlockState.f_61039_.fieldOf("state").xmap(SimpleStateProvider::new, (p_68804_) -> {
+-      return p_68804_.f_68798_;
++   public static final Codec<SimpleStateProvider> f_68797_ = BlockState.f_61039_.fieldOf("state").xmap(SimpleStateProvider::new, (p_236810_0_) -> {
++      return p_236810_0_.f_68798_;
+    }).codec();
+    private final BlockState f_68798_;
+ 

@@ -1,0 +1,52 @@
+--- a/net/minecraft/util/datafix/fixes/TrappedChestBlockEntityFix.java
++++ b/net/minecraft/util/datafix/fixes/TrappedChestBlockEntityFix.java
+@@ -44,11 +_,11 @@
+          } else {
+             Type<?> type5 = ((ListType)type4).getElement();
+             OpticFinder<?> opticfinder3 = DSL.typeFinder(type5);
+-            return TypeRewriteRule.seq((new AddNewChoices(this.getOutputSchema(), "AddTrappedChestFix", References.f_16781_)).makeRule(), this.fixTypeEverywhereTyped("Trapped Chest fix", type3, (p_17031_) -> {
+-               return p_17031_.updateTyped(opticfinder1, (p_17036_) -> {
+-                  Optional<? extends Typed<?>> optional = p_17036_.getOptionalTyped(opticfinder2);
++            return TypeRewriteRule.seq((new AddNewChoices(this.getOutputSchema(), "AddTrappedChestFix", References.f_16781_)).makeRule(), this.fixTypeEverywhereTyped("Trapped Chest fix", type3, (p_212533_5_) -> {
++               return p_212533_5_.updateTyped(opticfinder1, (p_212531_4_) -> {
++                  Optional<? extends Typed<?>> optional = p_212531_4_.getOptionalTyped(opticfinder2);
+                   if (!optional.isPresent()) {
+-                     return p_17036_;
++                     return p_212531_4_;
+                   } else {
+                      List<? extends Typed<?>> list = optional.get().getAllTyped(opticfinder3);
+                      IntSet intset = new IntOpenHashSet();
+@@ -65,25 +_,25 @@
+                         }
+                      }
+ 
+-                     Dynamic<?> dynamic = p_17036_.get(DSL.remainderFinder());
++                     Dynamic<?> dynamic = p_212531_4_.get(DSL.remainderFinder());
+                      int k = dynamic.get("xPos").asInt(0);
+                      int l = dynamic.get("zPos").asInt(0);
+                      TaggedChoiceType<String> taggedchoicetype = (TaggedChoiceType<String>)this.getInputSchema().findChoiceType(References.f_16781_);
+-                     return p_17036_.updateTyped(opticfinder, (p_17042_) -> {
+-                        return p_17042_.updateTyped(taggedchoicetype.finder(), (p_17025_) -> {
+-                           Dynamic<?> dynamic1 = p_17025_.getOrCreate(DSL.remainderFinder());
++                     return p_212531_4_.updateTyped(opticfinder, (p_212532_4_) -> {
++                        return p_212532_4_.updateTyped(taggedchoicetype.finder(), (p_212530_4_) -> {
++                           Dynamic<?> dynamic1 = p_212530_4_.getOrCreate(DSL.remainderFinder());
+                            int i1 = dynamic1.get("x").asInt(0) - (k << 4);
+                            int j1 = dynamic1.get("y").asInt(0);
+                            int k1 = dynamic1.get("z").asInt(0) - (l << 4);
+-                           return intset.contains(LeavesFix.m_16210_(i1, j1, k1)) ? p_17025_.update(taggedchoicetype.finder(), (p_17044_) -> {
+-                              return p_17044_.mapFirst((p_17046_) -> {
+-                                 if (!Objects.equals(p_17046_, "minecraft:chest")) {
++                           return intset.contains(LeavesFix.m_16210_(i1, j1, k1)) ? p_212530_4_.update(taggedchoicetype.finder(), (p_212534_0_) -> {
++                              return p_212534_0_.mapFirst((p_212535_0_) -> {
++                                 if (!Objects.equals(p_212535_0_, "minecraft:chest")) {
+                                     f_17015_.warn("Block Entity was expected to be a chest");
+                                  }
+ 
+                                  return "minecraft:trapped_chest";
+                               });
+-                           }) : p_17025_;
++                           }) : p_212530_4_;
+                         });
+                      });
+                   }

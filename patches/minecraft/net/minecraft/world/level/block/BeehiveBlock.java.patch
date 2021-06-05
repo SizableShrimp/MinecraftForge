@@ -1,0 +1,21 @@
+--- a/net/minecraft/world/level/block/BeehiveBlock.java
++++ b/net/minecraft/world/level/block/BeehiveBlock.java
+@@ -87,6 +_,7 @@
+       List<Bee> list = p_49650_.m_45976_(Bee.class, (new AABB(p_49651_)).m_82377_(8.0D, 6.0D, 8.0D));
+       if (!list.isEmpty()) {
+          List<Player> list1 = p_49650_.m_45976_(Player.class, (new AABB(p_49651_)).m_82377_(8.0D, 6.0D, 8.0D));
++         if (list1.isEmpty()) return; //Forge: Prevent Error when no players are around.
+          int i = list1.size();
+ 
+          for(Bee bee : list) {
+@@ -110,8 +_,8 @@
+          if (itemstack.m_41720_() == Items.f_42574_) {
+             p_49625_.m_6263_(p_49627_, p_49627_.m_20185_(), p_49627_.m_20186_(), p_49627_.m_20189_(), SoundEvents.f_11697_, SoundSource.NEUTRAL, 1.0F, 1.0F);
+             m_49600_(p_49625_, p_49626_);
+-            itemstack.m_41622_(1, p_49627_, (p_49571_) -> {
+-               p_49571_.m_21190_(p_49628_);
++            itemstack.m_41622_(1, p_49627_, (p_226874_1_) -> {
++               p_226874_1_.m_21190_(p_49628_);
+             });
+             flag = true;
+          } else if (itemstack.m_41720_() == Items.f_42590_) {

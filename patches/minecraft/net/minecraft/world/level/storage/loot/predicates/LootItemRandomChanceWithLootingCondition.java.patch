@@ -1,0 +1,28 @@
+--- a/net/minecraft/world/level/storage/loot/predicates/LootItemRandomChanceWithLootingCondition.java
++++ b/net/minecraft/world/level/storage/loot/predicates/LootItemRandomChanceWithLootingCondition.java
+@@ -6,10 +_,8 @@
+ import com.google.gson.JsonSerializationContext;
+ import java.util.Set;
+ import net.minecraft.util.GsonHelper;
+-import net.minecraft.world.entity.Entity;
+-import net.minecraft.world.entity.LivingEntity;
+-import net.minecraft.world.item.enchantment.EnchantmentHelper;
+ import net.minecraft.world.level.storage.loot.LootContext;
++import net.minecraft.world.level.storage.loot.Serializer;
+ import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
+ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+ 
+@@ -31,12 +_,7 @@
+    }
+ 
+    public boolean test(LootContext p_81967_) {
+-      Entity entity = p_81967_.m_78953_(LootContextParams.f_81458_);
+-      int i = 0;
+-      if (entity instanceof LivingEntity) {
+-         i = EnchantmentHelper.m_44930_((LivingEntity)entity);
+-      }
+-
++      int i = p_81967_.getLootingModifier();
+       return p_81967_.m_78933_().nextFloat() < this.f_81953_ + (float)i * this.f_81954_;
+    }
+ 

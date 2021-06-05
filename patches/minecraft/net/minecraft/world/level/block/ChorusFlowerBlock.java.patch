@@ -1,0 +1,56 @@
+--- a/net/minecraft/world/level/block/ChorusFlowerBlock.java
++++ b/net/minecraft/world/level/block/ChorusFlowerBlock.java
+@@ -21,7 +_,7 @@
+    public static final IntegerProperty f_51647_ = BlockStateProperties.f_61408_;
+    private final ChorusPlantBlock f_51648_;
+ 
+-   protected ChorusFlowerBlock(ChorusPlantBlock p_51651_, BlockBehaviour.Properties p_51652_) {
++   public ChorusFlowerBlock(ChorusPlantBlock p_51651_, BlockBehaviour.Properties p_51652_) {
+       super(p_51652_);
+       this.f_51648_ = p_51651_;
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_51647_, Integer.valueOf(0)));
+@@ -42,7 +_,7 @@
+       BlockPos blockpos = p_51704_.m_7494_();
+       if (p_51703_.m_46859_(blockpos) && blockpos.m_123342_() < 256) {
+          int i = p_51702_.m_61143_(f_51647_);
+-         if (i < 5) {
++         if (i < 5 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(p_51703_, blockpos, p_51702_, true)) {
+             boolean flag = false;
+             boolean flag1 = false;
+             BlockState blockstate = p_51703_.m_8055_(p_51704_.m_7495_());
+@@ -67,7 +_,7 @@
+                if (j < 2 || j <= p_51705_.nextInt(flag1 ? 5 : 4)) {
+                   flag = true;
+                }
+-            } else if (blockstate.m_60795_()) {
++            } else if (blockstate.isAir(p_51703_, p_51704_.m_7495_())) {
+                flag = true;
+             }
+ 
+@@ -99,7 +_,7 @@
+             } else {
+                this.m_51658_(p_51703_, p_51704_);
+             }
+-
++            net.minecraftforge.common.ForgeHooks.onCropsGrowPost(p_51703_, p_51704_, p_51702_);
+          }
+       }
+    }
+@@ -135,7 +_,7 @@
+    public boolean m_7898_(BlockState p_51683_, LevelReader p_51684_, BlockPos p_51685_) {
+       BlockState blockstate = p_51684_.m_8055_(p_51685_.m_7495_());
+       if (blockstate.m_60734_() != this.f_51648_ && !blockstate.m_60713_(Blocks.f_50259_)) {
+-         if (!blockstate.m_60795_()) {
++         if (!blockstate.isAir(p_51684_, p_51685_.m_7495_())) {
+             return false;
+          } else {
+             boolean flag = false;
+@@ -148,7 +_,7 @@
+                   }
+ 
+                   flag = true;
+-               } else if (!blockstate1.m_60795_()) {
++               } else if (!blockstate1.isAir(p_51684_, p_51685_.m_121945_(direction))) {
+                   return false;
+                }
+             }

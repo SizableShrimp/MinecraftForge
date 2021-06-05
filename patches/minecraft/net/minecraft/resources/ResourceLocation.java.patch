@@ -1,0 +1,41 @@
+--- a/net/minecraft/resources/ResourceLocation.java
++++ b/net/minecraft/resources/ResourceLocation.java
+@@ -19,7 +_,6 @@
+ import net.minecraft.util.GsonHelper;
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.api.distmarker.OnlyIn;
+-import org.apache.commons.lang3.StringUtils;
+ 
+ public class ResourceLocation implements Comparable<ResourceLocation> {
+    public static final Codec<ResourceLocation> f_135803_ = Codec.STRING.comapFlatMap(ResourceLocation::m_135837_, ResourceLocation::toString).stable();
+@@ -28,7 +_,7 @@
+    protected final String f_135805_;
+ 
+    protected ResourceLocation(String[] p_135814_) {
+-      this.f_135804_ = StringUtils.isEmpty(p_135814_[0]) ? "minecraft" : p_135814_[0];
++      this.f_135804_ = org.apache.commons.lang3.StringUtils.isEmpty(p_135814_[0]) ? "minecraft" : p_135814_[0];
+       this.f_135805_ = p_135814_[1];
+       if (!m_135843_(this.f_135804_)) {
+          throw new ResourceLocationException("Non [a-z0-9_.-] character in namespace of location: " + this.f_135804_ + ':' + this.f_135805_);
+@@ -115,6 +_,12 @@
+       return i;
+    }
+ 
++   // Normal compare sorts by path first, this compares namespace first.
++   public int compareNamespaced(ResourceLocation o) {
++      int ret = this.f_135804_.compareTo(o.f_135804_);
++      return ret != 0 ? ret : this.f_135805_.compareTo(o.f_135805_);
++   }
++
+    public static ResourceLocation m_135818_(StringReader p_135819_) throws CommandSyntaxException {
+       int i = p_135819_.getCursor();
+ 
+@@ -167,7 +_,7 @@
+    @OnlyIn(Dist.CLIENT)
+    public static boolean m_135830_(String p_135831_) {
+       String[] astring = m_135832_(p_135831_, ':');
+-      return m_135843_(StringUtils.isEmpty(astring[0]) ? "minecraft" : astring[0]) && m_135841_(astring[1]);
++      return m_135843_(org.apache.commons.lang3.StringUtils.isEmpty(astring[0]) ? "minecraft" : astring[0]) && m_135841_(astring[1]);
+    }
+ 
+    public static class Serializer implements JsonDeserializer<ResourceLocation>, JsonSerializer<ResourceLocation> {

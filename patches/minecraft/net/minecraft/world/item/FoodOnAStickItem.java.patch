@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/item/FoodOnAStickItem.java
++++ b/net/minecraft/world/item/FoodOnAStickItem.java
+@@ -28,8 +_,8 @@
+          if (p_41315_.m_20159_() && entity instanceof ItemSteerable && entity.m_6095_() == this.f_41304_) {
+             ItemSteerable itemsteerable = (ItemSteerable)entity;
+             if (itemsteerable.m_6746_()) {
+-               itemstack.m_41622_(this.f_41305_, p_41315_, (p_41312_) -> {
+-                  p_41312_.m_21190_(p_41316_);
++               itemstack.m_41622_(this.f_41305_, p_41315_, (p_234682_1_) -> {
++                  p_234682_1_.m_21190_(p_41316_);
+                });
+                if (itemstack.m_41619_()) {
+                   ItemStack itemstack1 = new ItemStack(Items.f_42523_);

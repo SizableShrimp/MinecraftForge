@@ -1,0 +1,37 @@
+--- a/net/minecraft/network/chat/Style.java
++++ b/net/minecraft/network/chat/Style.java
+@@ -124,6 +_,18 @@
+       return new Style(this.f_131101_, this.f_131102_, this.f_131103_, p_131163_, this.f_131105_, this.f_131106_, this.f_131107_, this.f_131108_, this.f_131109_, this.f_131110_);
+    }
+ 
++   public Style setUnderlined(@Nullable Boolean underlined) {
++      return new Style(this.f_131101_, this.f_131102_, this.f_131103_, underlined, this.f_131105_, this.f_131106_, this.f_131107_, this.f_131108_, this.f_131109_, this.f_131110_);
++   }
++
++   public Style setStrikethrough(@Nullable Boolean strikethrough) {
++      return new Style(this.f_131101_, this.f_131102_, this.f_131103_, this.f_131104_, strikethrough, this.f_131106_, this.f_131107_, this.f_131108_, this.f_131109_, this.f_131110_);
++   }
++
++   public Style setObfuscated(@Nullable Boolean obfuscated) {
++      return new Style(this.f_131101_, this.f_131102_, this.f_131103_, this.f_131104_, this.f_131105_, obfuscated, this.f_131107_, this.f_131108_, this.f_131109_, this.f_131110_);
++   }
++
+    public Style m_131142_(@Nullable ClickEvent p_131143_) {
+       return new Style(this.f_131101_, this.f_131102_, this.f_131103_, this.f_131104_, this.f_131105_, this.f_131106_, p_131143_, this.f_131108_, this.f_131109_, this.f_131110_);
+    }
+@@ -136,7 +_,6 @@
+       return new Style(this.f_131101_, this.f_131102_, this.f_131103_, this.f_131104_, this.f_131105_, this.f_131106_, this.f_131107_, this.f_131108_, p_131139_, this.f_131110_);
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public Style m_131150_(@Nullable ResourceLocation p_131151_) {
+       return new Style(this.f_131101_, this.f_131102_, this.f_131103_, this.f_131104_, this.f_131105_, this.f_131106_, this.f_131107_, this.f_131108_, this.f_131109_, p_131151_);
+    }
+@@ -173,7 +_,6 @@
+       return new Style(textcolor, obool, obool1, obool3, obool2, obool4, this.f_131107_, this.f_131108_, this.f_131109_, this.f_131110_);
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public Style m_131164_(ChatFormatting p_131165_) {
+       TextColor textcolor = this.f_131101_;
+       Boolean obool = this.f_131102_;

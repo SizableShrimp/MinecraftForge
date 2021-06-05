@@ -1,0 +1,40 @@
+--- a/net/minecraft/BlockUtil.java
++++ b/net/minecraft/BlockUtil.java
+@@ -104,18 +_,6 @@
+       return new Pair<>(new BlockUtil.IntBounds(i, j - 1), k);
+    }
+ 
+-   public static class FoundRectangle {
+-      public final BlockPos f_124348_;
+-      public final int f_124349_;
+-      public final int f_124350_;
+-
+-      public FoundRectangle(BlockPos p_124352_, int p_124353_, int p_124354_) {
+-         this.f_124348_ = p_124352_;
+-         this.f_124349_ = p_124353_;
+-         this.f_124350_ = p_124354_;
+-      }
+-   }
+-
+    public static class IntBounds {
+       public final int f_124355_;
+       public final int f_124356_;
+@@ -127,6 +_,18 @@
+ 
+       public String toString() {
+          return "IntBounds{min=" + this.f_124355_ + ", max=" + this.f_124356_ + '}';
++      }
++   }
++
++   public static class FoundRectangle {
++      public final BlockPos f_124348_;
++      public final int f_124349_;
++      public final int f_124350_;
++
++      public FoundRectangle(BlockPos p_124352_, int p_124353_, int p_124354_) {
++         this.f_124348_ = p_124352_;
++         this.f_124349_ = p_124353_;
++         this.f_124350_ = p_124354_;
+       }
+    }
+ }

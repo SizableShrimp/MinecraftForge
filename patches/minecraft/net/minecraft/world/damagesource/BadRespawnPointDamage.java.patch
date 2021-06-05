@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/damagesource/BadRespawnPointDamage.java
++++ b/net/minecraft/world/damagesource/BadRespawnPointDamage.java
+@@ -16,8 +_,8 @@
+    }
+ 
+    public Component m_6157_(LivingEntity p_19247_) {
+-      Component component = ComponentUtils.m_130748_(new TranslatableComponent("death.attack.badRespawnPoint.link")).m_130938_((p_19249_) -> {
+-         return p_19249_.m_131142_(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://bugs.mojang.com/browse/MCPE-28723")).m_131144_(new HoverEvent(HoverEvent.Action.f_130831_, new TextComponent("MCPE-28723")));
++      Component component = ComponentUtils.m_130748_(new TranslatableComponent("death.attack.badRespawnPoint.link")).m_130938_((p_233545_0_) -> {
++         return p_233545_0_.m_131142_(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://bugs.mojang.com/browse/MCPE-28723")).m_131144_(new HoverEvent(HoverEvent.Action.f_130831_, new TextComponent("MCPE-28723")));
+       });
+       return new TranslatableComponent("death.attack.badRespawnPoint.message", p_19247_.m_5446_(), component);
+    }

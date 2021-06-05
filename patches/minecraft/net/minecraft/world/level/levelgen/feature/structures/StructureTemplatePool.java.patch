@@ -1,0 +1,63 @@
+--- a/net/minecraft/world/level/levelgen/feature/structures/StructureTemplatePool.java
++++ b/net/minecraft/world/level/levelgen/feature/structures/StructureTemplatePool.java
+@@ -29,10 +_,10 @@
+ 
+ public class StructureTemplatePool {
+    private static final Logger f_69247_ = LogManager.getLogger();
+-   public static final Codec<StructureTemplatePool> f_69245_ = RecordCodecBuilder.create((p_69267_) -> {
+-      return p_69267_.group(ResourceLocation.f_135803_.fieldOf("name").forGetter(StructureTemplatePool::m_69275_), ResourceLocation.f_135803_.fieldOf("fallback").forGetter(StructureTemplatePool::m_69263_), Codec.mapPair(StructurePoolElement.f_69153_.fieldOf("element"), Codec.INT.fieldOf("weight")).codec().listOf().promotePartial(Util.m_137489_("Pool element: ", f_69247_::error)).fieldOf("elements").forGetter((p_69265_) -> {
+-         return p_69265_.f_69249_;
+-      })).apply(p_69267_, StructureTemplatePool::new);
++   public static final Codec<StructureTemplatePool> f_69245_ = RecordCodecBuilder.create((p_236854_0_) -> {
++      return p_236854_0_.group(ResourceLocation.f_135803_.fieldOf("name").forGetter(StructureTemplatePool::m_69275_), ResourceLocation.f_135803_.fieldOf("fallback").forGetter(StructureTemplatePool::m_69263_), Codec.mapPair(StructurePoolElement.f_69153_.fieldOf("element"), Codec.INT.fieldOf("weight")).codec().listOf().promotePartial(Util.m_137489_("Pool element: ", f_69247_::error)).fieldOf("elements").forGetter((p_236857_0_) -> {
++         return p_236857_0_.f_69249_;
++      })).apply(p_236854_0_, StructureTemplatePool::new);
+    });
+    public static final Codec<Supplier<StructureTemplatePool>> f_69246_ = RegistryFileCodec.m_135589_(Registry.f_122884_, f_69245_);
+    private final ResourceLocation f_69248_;
+@@ -76,8 +_,8 @@
+ 
+    public int m_69268_(StructureManager p_69269_) {
+       if (this.f_69252_ == Integer.MIN_VALUE) {
+-         this.f_69252_ = this.f_69250_.stream().mapToInt((p_69272_) -> {
+-            return p_69272_.m_6867_(p_69269_, BlockPos.f_121853_, Rotation.NONE).m_71057_();
++         this.f_69252_ = this.f_69250_.stream().mapToInt((p_236856_1_) -> {
++            return p_236856_1_.m_6867_(p_69269_, BlockPos.f_121853_, Rotation.NONE).m_71057_();
+          }).max().orElse(0);
+       }
+ 
+@@ -104,13 +_,13 @@
+       return this.f_69250_.size();
+    }
+ 
+-   public static enum Projection implements StringRepresentable {
++   public static enum Projection implements StringRepresentable, net.minecraftforge.common.IExtensibleEnum {
+       TERRAIN_MATCHING("terrain_matching", ImmutableList.of(new GravityProcessor(Heightmap.Types.WORLD_SURFACE_WG, -1))),
+       RIGID("rigid", ImmutableList.of());
+ 
+-      public static final Codec<StructureTemplatePool.Projection> f_69281_ = StringRepresentable.m_14350_(StructureTemplatePool.Projection::values, StructureTemplatePool.Projection::m_69295_);
+-      private static final Map<String, StructureTemplatePool.Projection> f_69282_ = Arrays.stream(values()).collect(Collectors.toMap(StructureTemplatePool.Projection::m_69297_, (p_69294_) -> {
+-         return p_69294_;
++      public static final Codec<StructureTemplatePool.Projection> f_69281_ = net.minecraftforge.common.IExtensibleEnum.createCodecForExtensibleEnum(StructureTemplatePool.Projection::values, StructureTemplatePool.Projection::m_69295_);
++      private static final Map<String, StructureTemplatePool.Projection> f_69282_ = Arrays.stream(values()).collect(Collectors.toMap(StructureTemplatePool.Projection::m_69297_, (p_214935_0_) -> {
++         return p_214935_0_;
+       }));
+       private final String f_69283_;
+       private final ImmutableList<StructureProcessor> f_69284_;
+@@ -134,6 +_,16 @@
+ 
+       public String m_7912_() {
+          return this.f_69283_;
++      }
++
++      public static Projection create(String enumName, String p_i50487_3_, ImmutableList<StructureProcessor> p_i50487_4_) {
++         throw new IllegalStateException("Enum not extended");
++      }
++
++      @Override
++      @Deprecated
++      public void init() {
++         f_69282_.put(m_69297_(), this);
+       }
+    }
+ }

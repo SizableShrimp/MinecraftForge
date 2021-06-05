@@ -6,6 +6,17 @@
  
 -public class StatType<T> implements Iterable<Stat<T>> {
 +public class StatType<T> extends net.minecraftforge.registries.ForgeRegistryEntry<StatType<?>> implements Iterable<Stat<T>> {
-    private final Registry<T> field_199082_a;
-    private final Map<T, Stat<T>> field_199083_b = new IdentityHashMap<>();
+    private final Registry<T> f_12888_;
+    private final Map<T, Stat<T>> f_12889_ = new IdentityHashMap<>();
     @Nullable
+@@ -27,8 +_,8 @@
+    }
+ 
+    public Stat<T> m_12899_(T p_12900_, StatFormatter p_12901_) {
+-      return this.f_12889_.computeIfAbsent(p_12900_, (p_12896_) -> {
+-         return new Stat<>(this, p_12896_, p_12901_);
++      return this.f_12889_.computeIfAbsent(p_12900_, (p_199075_2_) -> {
++         return new Stat<>(this, p_199075_2_, p_12901_);
+       });
+    }
+ 

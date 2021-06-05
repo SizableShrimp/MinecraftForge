@@ -1,0 +1,59 @@
+--- a/net/minecraft/client/gui/screens/multiplayer/JoinMultiplayerScreen.java
++++ b/net/minecraft/client/gui/screens/multiplayer/JoinMultiplayerScreen.java
+@@ -66,18 +_,18 @@
+       }
+ 
+       this.f_96540_.add(this.f_99673_);
+-      this.f_99679_ = this.m_7082_(new Button(this.f_96543_ / 2 - 154, this.f_96544_ - 52, 100, 20, new TranslatableComponent("selectServer.select"), (p_99728_) -> {
++      this.f_99679_ = this.m_7082_(new Button(this.f_96543_ / 2 - 154, this.f_96544_ - 52, 100, 20, new TranslatableComponent("selectServer.select"), (p_214293_1_) -> {
+          this.m_99729_();
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 50, this.f_96544_ - 52, 100, 20, new TranslatableComponent("selectServer.direct"), (p_99724_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 50, this.f_96544_ - 52, 100, 20, new TranslatableComponent("selectServer.direct"), (p_214286_1_) -> {
+          this.f_99682_ = new ServerData(I18n.m_118938_("selectServer.defaultName"), "", false);
+          this.f_96541_.m_91152_(new DirectJoinServerScreen(this, this::m_99725_, this.f_99682_));
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 50, this.f_96544_ - 52, 100, 20, new TranslatableComponent("selectServer.add"), (p_99720_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 50, this.f_96544_ - 52, 100, 20, new TranslatableComponent("selectServer.add"), (p_214288_1_) -> {
+          this.f_99682_ = new ServerData(I18n.m_118938_("selectServer.defaultName"), "", false);
+          this.f_96541_.m_91152_(new EditServerScreen(this, this::m_99721_, this.f_99682_));
+       }));
+-      this.f_99678_ = this.m_7082_(new Button(this.f_96543_ / 2 - 154, this.f_96544_ - 28, 70, 20, new TranslatableComponent("selectServer.edit"), (p_99715_) -> {
++      this.f_99678_ = this.m_7082_(new Button(this.f_96543_ / 2 - 154, this.f_96544_ - 28, 70, 20, new TranslatableComponent("selectServer.edit"), (p_214283_1_) -> {
+          ServerSelectionList.Entry serverselectionlist$entry = this.f_99673_.m_93511_();
+          if (serverselectionlist$entry instanceof ServerSelectionList.OnlineServerEntry) {
+             ServerData serverdata = ((ServerSelectionList.OnlineServerEntry)serverselectionlist$entry).m_99898_();
+@@ -87,7 +_,7 @@
+          }
+ 
+       }));
+-      this.f_99680_ = this.m_7082_(new Button(this.f_96543_ / 2 - 74, this.f_96544_ - 28, 70, 20, new TranslatableComponent("selectServer.delete"), (p_99710_) -> {
++      this.f_99680_ = this.m_7082_(new Button(this.f_96543_ / 2 - 74, this.f_96544_ - 28, 70, 20, new TranslatableComponent("selectServer.delete"), (p_214294_1_) -> {
+          ServerSelectionList.Entry serverselectionlist$entry = this.f_99673_.m_93511_();
+          if (serverselectionlist$entry instanceof ServerSelectionList.OnlineServerEntry) {
+             String s = ((ServerSelectionList.OnlineServerEntry)serverselectionlist$entry).m_99898_().f_105362_;
+@@ -101,10 +_,10 @@
+          }
+ 
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ - 28, 70, 20, new TranslatableComponent("selectServer.refresh"), (p_99706_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ - 28, 70, 20, new TranslatableComponent("selectServer.refresh"), (p_214291_1_) -> {
+          this.m_99733_();
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 76, this.f_96544_ - 28, 75, 20, CommonComponents.f_130656_, (p_99699_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 76, this.f_96544_ - 28, 75, 20, CommonComponents.f_130656_, (p_214289_1_) -> {
+          this.f_96541_.m_91152_(this.f_99676_);
+       }));
+       this.m_99730_();
+@@ -244,6 +_,11 @@
+          }
+       }
+ 
++   }
++
++   @Override
++   public void m_7379_() {
++      this.f_96541_.m_91152_(this.f_99676_);
+    }
+ 
+    public ServerStatusPinger m_99731_() {

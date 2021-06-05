@@ -1,0 +1,11 @@
+--- a/net/minecraft/util/datafix/schemas/V1451_3.java
++++ b/net/minecraft/util/datafix/schemas/V1451_3.java
+@@ -17,7 +_,7 @@
+       p_17472_.registerSimple(map, "minecraft:egg");
+       p_17472_.registerSimple(map, "minecraft:ender_pearl");
+       p_17472_.registerSimple(map, "minecraft:fireball");
+-      p_17472_.register(map, "minecraft:potion", (p_17450_) -> {
++      p_17472_.register(map, "minecraft:potion", (p_206498_1_) -> {
+          return DSL.optionalFields("Potion", References.f_16782_.in(p_17472_));
+       });
+       p_17472_.registerSimple(map, "minecraft:small_fireball");

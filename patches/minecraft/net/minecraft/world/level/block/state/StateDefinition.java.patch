@@ -1,0 +1,41 @@
+--- a/net/minecraft/world/level/block/state/StateDefinition.java
++++ b/net/minecraft/world/level/block/state/StateDefinition.java
+@@ -48,17 +_,17 @@
+       Stream<List<Pair<Property<?>, Comparable<?>>>> stream = Stream.of(Collections.emptyList());
+ 
+       for(Property<?> property : this.f_61048_.values()) {
+-         stream = stream.flatMap((p_61072_) -> {
+-            return property.m_6908_().stream().map((p_61086_) -> {
+-               List<Pair<Property<?>, Comparable<?>>> list1 = Lists.newArrayList(p_61072_);
+-               list1.add(Pair.of(property, p_61086_));
++         stream = stream.flatMap((p_200999_1_) -> {
++            return property.m_6908_().stream().map((p_200998_2_) -> {
++               List<Pair<Property<?>, Comparable<?>>> list1 = Lists.newArrayList(p_200999_1_);
++               list1.add(Pair.of(property, p_200998_2_));
+                return list1;
+             });
+          });
+       }
+ 
+-      stream.forEach((p_61063_) -> {
+-         ImmutableMap<Property<?>, Comparable<?>> immutablemap = p_61063_.stream().collect(ImmutableMap.toImmutableMap(Pair::getFirst, Pair::getSecond));
++      stream.forEach((p_201000_5_) -> {
++         ImmutableMap<Property<?>, Comparable<?>> immutablemap = p_201000_5_.stream().collect(ImmutableMap.toImmutableMap(Pair::getFirst, Pair::getSecond));
+          S s1 = p_61054_.m_61106_(p_61053_, immutablemap, mapcodec1);
+          map.put(immutablemap, s1);
+          list.add(s1);
+@@ -74,10 +_,10 @@
+    private static <S extends StateHolder<?, S>, T extends Comparable<T>> MapCodec<S> m_61076_(MapCodec<S> p_61077_, Supplier<S> p_61078_, String p_61079_, Property<T> p_61080_) {
+       return Codec.mapPair(p_61077_, p_61080_.m_61705_().fieldOf(p_61079_).setPartial(() -> {
+          return p_61080_.m_61694_(p_61078_.get());
+-      })).xmap((p_61069_) -> {
+-         return p_61069_.getFirst().m_61124_(p_61080_, p_61069_.getSecond().m_61722_());
+-      }, (p_61066_) -> {
+-         return Pair.of(p_61066_, p_61080_.m_61694_(p_61066_));
++      })).xmap((p_241485_1_) -> {
++         return p_241485_1_.getFirst().m_61124_(p_61080_, p_241485_1_.getSecond().m_61722_());
++      }, (p_241484_1_) -> {
++         return Pair.of(p_241484_1_, p_61080_.m_61694_(p_241484_1_));
+       });
+    }
+ 

@@ -1,0 +1,55 @@
+--- a/net/minecraft/server/commands/WhitelistCommand.java
++++ b/net/minecraft/server/commands/WhitelistCommand.java
+@@ -22,29 +_,29 @@
+    private static final SimpleCommandExceptionType f_139194_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.whitelist.remove.failed"));
+ 
+    public static void m_139201_(CommandDispatcher<CommandSourceStack> p_139202_) {
+-      p_139202_.register(Commands.m_82127_("whitelist").requires((p_139234_) -> {
+-         return p_139234_.m_6761_(3);
+-      }).then(Commands.m_82127_("on").executes((p_139236_) -> {
+-         return m_139218_(p_139236_.getSource());
+-      })).then(Commands.m_82127_("off").executes((p_139232_) -> {
+-         return m_139225_(p_139232_.getSource());
+-      })).then(Commands.m_82127_("list").executes((p_139228_) -> {
+-         return m_139229_(p_139228_.getSource());
+-      })).then(Commands.m_82127_("add").then(Commands.m_82129_("targets", GameProfileArgument.m_94584_()).suggests((p_139216_, p_139217_) -> {
+-         PlayerList playerlist = p_139216_.getSource().m_81377_().m_6846_();
+-         return SharedSuggestionProvider.m_82981_(playerlist.m_11314_().stream().filter((p_139200_) -> {
+-            return !playerlist.m_11305_().m_11453_(p_139200_.m_36316_());
+-         }).map((p_139197_) -> {
+-            return p_139197_.m_36316_().getName();
+-         }), p_139217_);
+-      }).executes((p_139224_) -> {
+-         return m_139210_(p_139224_.getSource(), GameProfileArgument.m_94590_(p_139224_, "targets"));
+-      }))).then(Commands.m_82127_("remove").then(Commands.m_82129_("targets", GameProfileArgument.m_94584_()).suggests((p_139206_, p_139207_) -> {
+-         return SharedSuggestionProvider.m_82967_(p_139206_.getSource().m_81377_().m_6846_().m_11306_(), p_139207_);
+-      }).executes((p_139214_) -> {
+-         return m_139220_(p_139214_.getSource(), GameProfileArgument.m_94590_(p_139214_, "targets"));
+-      }))).then(Commands.m_82127_("reload").executes((p_139204_) -> {
+-         return m_139208_(p_139204_.getSource());
++      p_139202_.register(Commands.m_82127_("whitelist").requires((p_198877_0_) -> {
++         return p_198877_0_.m_6761_(3);
++      }).then(Commands.m_82127_("on").executes((p_198872_0_) -> {
++         return m_139218_(p_198872_0_.getSource());
++      })).then(Commands.m_82127_("off").executes((p_198874_0_) -> {
++         return m_139225_(p_198874_0_.getSource());
++      })).then(Commands.m_82127_("list").executes((p_198878_0_) -> {
++         return m_139229_(p_198878_0_.getSource());
++      })).then(Commands.m_82127_("add").then(Commands.m_82129_("targets", GameProfileArgument.m_94584_()).suggests((p_198879_0_, p_198879_1_) -> {
++         PlayerList playerlist = p_198879_0_.getSource().m_81377_().m_6846_();
++         return SharedSuggestionProvider.m_82981_(playerlist.m_11314_().stream().filter((p_198871_1_) -> {
++            return !playerlist.m_11305_().m_11453_(p_198871_1_.m_36316_());
++         }).map((p_200567_0_) -> {
++            return p_200567_0_.m_36316_().getName();
++         }), p_198879_1_);
++      }).executes((p_198875_0_) -> {
++         return m_139210_(p_198875_0_.getSource(), GameProfileArgument.m_94590_(p_198875_0_, "targets"));
++      }))).then(Commands.m_82127_("remove").then(Commands.m_82129_("targets", GameProfileArgument.m_94584_()).suggests((p_198881_0_, p_198881_1_) -> {
++         return SharedSuggestionProvider.m_82967_(p_198881_0_.getSource().m_81377_().m_6846_().m_11306_(), p_198881_1_);
++      }).executes((p_198870_0_) -> {
++         return m_139220_(p_198870_0_.getSource(), GameProfileArgument.m_94590_(p_198870_0_, "targets"));
++      }))).then(Commands.m_82127_("reload").executes((p_198882_0_) -> {
++         return m_139208_(p_198882_0_.getSource());
+       })));
+    }
+ 

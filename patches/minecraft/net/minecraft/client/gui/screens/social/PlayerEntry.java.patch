@@ -1,0 +1,38 @@
+--- a/net/minecraft/client/gui/screens/social/PlayerEntry.java
++++ b/net/minecraft/client/gui/screens/social/PlayerEntry.java
+@@ -60,14 +_,14 @@
+       this.f_100543_ = p_100552_.f_91062_.m_92923_(new TranslatableComponent("gui.socialInteractions.tooltip.show", p_100555_), 150);
+       PlayerSocialManager playersocialmanager = p_100552_.m_91266_();
+       if (!p_100552_.f_91074_.m_36316_().getId().equals(p_100554_) && !playersocialmanager.m_100688_(p_100554_)) {
+-         this.f_100540_ = new ImageButton(0, 0, 20, 20, 0, 38, 20, SocialInteractionsScreen.f_100736_, 256, 256, (p_100612_) -> {
++         this.f_100540_ = new ImageButton(0, 0, 20, 20, 0, 38, 20, SocialInteractionsScreen.f_100736_, 256, 256, (p_244751_4_) -> {
+             playersocialmanager.m_100680_(p_100554_);
+             this.m_100596_(true, new TranslatableComponent("gui.socialInteractions.hidden_in_chat", p_100555_));
+-         }, (p_100604_, p_100605_, p_100606_, p_100607_) -> {
++         }, (p_244637_3_, p_244637_4_, p_244637_5_, p_244637_6_) -> {
+             this.f_100544_ += p_100552_.m_91297_();
+             if (this.f_100544_ >= 10.0F) {
+                p_100553_.m_100777_(() -> {
+-                  m_100588_(p_100553_, p_100605_, this.f_100542_, p_100606_, p_100607_);
++                  m_100588_(p_100553_, p_244637_4_, this.f_100542_, p_244637_5_, p_244637_6_);
+                });
+             }
+ 
+@@ -76,14 +_,14 @@
+                return PlayerEntry.this.m_100594_(super.m_5646_());
+             }
+          };
+-         this.f_100541_ = new ImageButton(0, 0, 20, 20, 20, 38, 20, SocialInteractionsScreen.f_100736_, 256, 256, (p_100582_) -> {
++         this.f_100541_ = new ImageButton(0, 0, 20, 20, 20, 38, 20, SocialInteractionsScreen.f_100736_, 256, 256, (p_244749_4_) -> {
+             playersocialmanager.m_100682_(p_100554_);
+             this.m_100596_(false, new TranslatableComponent("gui.socialInteractions.shown_in_chat", p_100555_));
+-         }, (p_100571_, p_100572_, p_100573_, p_100574_) -> {
++         }, (p_244631_3_, p_244631_4_, p_244631_5_, p_244631_6_) -> {
+             this.f_100544_ += p_100552_.m_91297_();
+             if (this.f_100544_ >= 10.0F) {
+                p_100553_.m_100777_(() -> {
+-                  m_100588_(p_100553_, p_100572_, this.f_100543_, p_100573_, p_100574_);
++                  m_100588_(p_100553_, p_244631_4_, this.f_100543_, p_244631_5_, p_244631_6_);
+                });
+             }
+ 

@@ -1,0 +1,15 @@
+--- a/net/minecraft/world/level/block/DeadBushBlock.java
++++ b/net/minecraft/world/level/block/DeadBushBlock.java
+@@ -7,10 +_,10 @@
+ import net.minecraft.world.phys.shapes.CollisionContext;
+ import net.minecraft.world.phys.shapes.VoxelShape;
+ 
+-public class DeadBushBlock extends BushBlock {
++public class DeadBushBlock extends BushBlock implements net.minecraftforge.common.IForgeShearable {
+    protected static final VoxelShape f_52414_ = Block.m_49796_(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
+ 
+-   protected DeadBushBlock(BlockBehaviour.Properties p_52417_) {
++   public DeadBushBlock(BlockBehaviour.Properties p_52417_) {
+       super(p_52417_);
+    }
+ 

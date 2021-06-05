@@ -79,7 +79,7 @@ public interface IAbstractRailBlock
      * @param pos Block's position in world
      * @return The max speed of the current rail.
      */
-    default float getRailMaxSpeed(BlockState state, Level world, BlockPos pos, AbstractMinecart cart)
+    default float getRailMaxSpeed(BlockState state, Level world, BlockPos pos, net.minecraft.world.entity.vehicle.AbstractMinecart cart)
     {
         return 0.4f;
     }
@@ -91,5 +91,5 @@ public interface IAbstractRailBlock
       * @param cart The cart on the rail.
       * @param pos Block's position in world
       */
-    default void onMinecartPass(BlockState state, Level world, BlockPos pos, AbstractMinecart cart){}
+    default void onMinecartPass(BlockState state, Level world, BlockPos pos, net.minecraft.world.entity.vehicle.AbstractMinecart cart){}
 }

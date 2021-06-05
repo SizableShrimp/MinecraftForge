@@ -35,7 +35,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraftforge.common.capabilities.Capability;
 
 /**
  * This object encapsulates a lazy value, with typical transformation operations

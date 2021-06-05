@@ -1,0 +1,27 @@
+--- a/net/minecraft/world/level/saveddata/SavedData.java
++++ b/net/minecraft/world/level/saveddata/SavedData.java
+@@ -8,7 +_,7 @@
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ 
+-public abstract class SavedData {
++public abstract class SavedData implements net.minecraftforge.common.util.INBTSerializable<CompoundTag> {
+    private static final Logger f_77751_ = LogManager.getLogger();
+    private final String f_77752_;
+    private boolean f_77753_;
+@@ -51,5 +_,15 @@
+ 
+          this.m_77760_(false);
+       }
++   }
++
++   @Override
++   public void deserializeNBT(CompoundTag nbt) {
++      m_5887_(nbt);
++   }
++
++   @Override
++   public CompoundTag serializeNBT() {
++      return m_7176_(new CompoundTag());
+    }
+ }

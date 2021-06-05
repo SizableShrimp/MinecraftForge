@@ -1,0 +1,50 @@
+--- a/net/minecraft/util/UniformInt.java
++++ b/net/minecraft/util/UniformInt.java
+@@ -9,30 +_,30 @@
+ import java.util.function.Function;
+ 
+ public class UniformInt {
+-   public static final Codec<UniformInt> f_14420_ = Codec.either(Codec.INT, RecordCodecBuilder.<UniformInt>create((p_14446_) -> {
+-      return p_14446_.group(Codec.INT.fieldOf("base").forGetter((p_14456_) -> {
+-         return p_14456_.f_14421_;
+-      }), Codec.INT.fieldOf("spread").forGetter((p_14454_) -> {
+-         return p_14454_.f_14422_;
+-      })).apply(p_14446_, UniformInt::new);
+-   }).comapFlatMap((p_14452_) -> {
+-      return p_14452_.f_14422_ < 0 ? DataResult.error("Spread must be non-negative, got: " + p_14452_.f_14422_) : DataResult.success(p_14452_);
+-   }, Function.identity())).xmap((p_14444_) -> {
+-      return p_14444_.map(UniformInt::m_14427_, (p_14450_) -> {
+-         return p_14450_;
++   public static final Codec<UniformInt> f_14420_ = Codec.either(Codec.INT, RecordCodecBuilder.<UniformInt>create((p_242258_0_) -> {
++      return p_242258_0_.group(Codec.INT.fieldOf("base").forGetter((p_242263_0_) -> {
++         return p_242263_0_.f_14421_;
++      }), Codec.INT.fieldOf("spread").forGetter((p_242262_0_) -> {
++         return p_242262_0_.f_14422_;
++      })).apply(p_242258_0_, UniformInt::new);
++   }).comapFlatMap((p_242261_0_) -> {
++      return p_242261_0_.f_14422_ < 0 ? DataResult.error("Spread must be non-negative, got: " + p_242261_0_.f_14422_) : DataResult.success(p_242261_0_);
++   }, Function.identity())).xmap((p_242257_0_) -> {
++      return p_242257_0_.map(UniformInt::m_14427_, (p_242260_0_) -> {
++         return p_242260_0_;
+       });
+-   }, (p_14442_) -> {
+-      return p_14442_.f_14422_ == 0 ? Either.left(p_14442_.f_14421_) : Either.right(p_14442_);
++   }, (p_242256_0_) -> {
++      return p_242256_0_.f_14422_ == 0 ? Either.left(p_242256_0_.f_14421_) : Either.right(p_242256_0_);
+    });
+    private final int f_14421_;
+    private final int f_14422_;
+ 
+    public static Codec<UniformInt> m_14432_(int p_14433_, int p_14434_, int p_14435_) {
+-      Function<UniformInt, DataResult<UniformInt>> function = (p_14440_) -> {
+-         if (p_14440_.f_14421_ >= p_14433_ && p_14440_.f_14421_ <= p_14434_) {
+-            return p_14440_.f_14422_ <= p_14435_ ? DataResult.success(p_14440_) : DataResult.error("Spread too big: " + p_14440_.f_14422_ + " > " + p_14435_);
++      Function<UniformInt, DataResult<UniformInt>> function = (p_242255_3_) -> {
++         if (p_242255_3_.f_14421_ >= p_14433_ && p_242255_3_.f_14421_ <= p_14434_) {
++            return p_242255_3_.f_14422_ <= p_14435_ ? DataResult.success(p_242255_3_) : DataResult.error("Spread too big: " + p_242255_3_.f_14422_ + " > " + p_14435_);
+          } else {
+-            return DataResult.error("Base value out of range: " + p_14440_.f_14421_ + " [" + p_14433_ + "-" + p_14434_ + "]");
++            return DataResult.error("Base value out of range: " + p_242255_3_.f_14421_ + " [" + p_14433_ + "-" + p_14434_ + "]");
+          }
+       };
+       return f_14420_.flatXmap(function, function);

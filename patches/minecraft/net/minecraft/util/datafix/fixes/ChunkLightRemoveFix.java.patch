@@ -1,0 +1,17 @@
+--- a/net/minecraft/util/datafix/fixes/ChunkLightRemoveFix.java
++++ b/net/minecraft/util/datafix/fixes/ChunkLightRemoveFix.java
+@@ -16,10 +_,10 @@
+       Type<?> type = this.getInputSchema().getType(References.f_16773_);
+       Type<?> type1 = type.findFieldType("Level");
+       OpticFinder<?> opticfinder = DSL.fieldFinder("Level", type1);
+-      return this.fixTypeEverywhereTyped("ChunkLightRemoveFix", type, this.getOutputSchema().getType(References.f_16773_), (p_15029_) -> {
+-         return p_15029_.updateTyped(opticfinder, (p_15031_) -> {
+-            return p_15031_.update(DSL.remainderFinder(), (p_15033_) -> {
+-               return p_15033_.remove("isLightOn");
++      return this.fixTypeEverywhereTyped("ChunkLightRemoveFix", type, this.getOutputSchema().getType(References.f_16773_), (p_219821_1_) -> {
++         return p_219821_1_.updateTyped(opticfinder, (p_219822_0_) -> {
++            return p_219822_0_.update(DSL.remainderFinder(), (p_219820_0_) -> {
++               return p_219820_0_.remove("isLightOn");
+             });
+          });
+       });

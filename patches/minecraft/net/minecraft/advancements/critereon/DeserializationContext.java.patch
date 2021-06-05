@@ -1,0 +1,20 @@
+--- a/net/minecraft/advancements/critereon/DeserializationContext.java
++++ b/net/minecraft/advancements/critereon/DeserializationContext.java
+@@ -24,14 +_,14 @@
+ 
+    public final LootItemCondition[] m_25874_(JsonArray p_25875_, String p_25876_, LootContextParamSet p_25877_) {
+       LootItemCondition[] alootitemcondition = this.f_25868_.fromJson(p_25875_, LootItemCondition[].class);
+-      ValidationContext validationcontext = new ValidationContext(p_25877_, this.f_25867_::m_79252_, (p_25883_) -> {
++      ValidationContext validationcontext = new ValidationContext(p_25877_, this.f_25867_::m_79252_, (p_234052_0_) -> {
+          return null;
+       });
+ 
+       for(LootItemCondition lootitemcondition : alootitemcondition) {
+          lootitemcondition.m_6169_(validationcontext);
+-         validationcontext.m_79352_().forEach((p_25880_, p_25881_) -> {
+-            f_25865_.warn("Found validation problem in advancement trigger {}/{}: {}", p_25876_, p_25880_, p_25881_);
++         validationcontext.m_79352_().forEach((p_234051_1_, p_234051_2_) -> {
++            f_25865_.warn("Found validation problem in advancement trigger {}/{}: {}", p_25876_, p_234051_1_, p_234051_2_);
+          });
+       }
+ 

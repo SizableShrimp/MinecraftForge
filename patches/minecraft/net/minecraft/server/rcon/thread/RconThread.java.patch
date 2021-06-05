@@ -1,0 +1,13 @@
+--- a/net/minecraft/server/rcon/thread/RconThread.java
++++ b/net/minecraft/server/rcon/thread/RconThread.java
+@@ -28,8 +_,8 @@
+    }
+ 
+    private void m_11618_() {
+-      this.f_11604_.removeIf((p_11612_) -> {
+-         return !p_11612_.m_11523_();
++      this.f_11604_.removeIf((p_232654_0_) -> {
++         return !p_232654_0_.m_11523_();
+       });
+    }
+ 

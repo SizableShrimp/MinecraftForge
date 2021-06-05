@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/TradeTrigger.java
++++ b/net/minecraft/advancements/critereon/TradeTrigger.java
+@@ -22,8 +_,8 @@
+ 
+    public void m_70959_(ServerPlayer p_70960_, AbstractVillager p_70961_, ItemStack p_70962_) {
+       LootContext lootcontext = EntityPredicate.m_36616_(p_70960_, p_70961_);
+-      this.m_66234_(p_70960_, (p_70970_) -> {
+-         return p_70970_.m_70984_(lootcontext, p_70962_);
++      this.m_66234_(p_70960_, (p_227267_2_) -> {
++         return p_227267_2_.m_70984_(lootcontext, p_70962_);
+       });
+    }
+ 

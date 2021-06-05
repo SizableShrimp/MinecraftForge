@@ -1,0 +1,74 @@
+--- a/net/minecraft/world/level/levelgen/feature/structures/StructurePoolElement.java
++++ b/net/minecraft/world/level/levelgen/feature/structures/StructurePoolElement.java
+@@ -66,56 +_,56 @@
+    }
+ 
+    public static Function<StructureTemplatePool.Projection, EmptyPoolElement> m_69232_() {
+-      return (p_69213_) -> {
++      return (p_242857_0_) -> {
+          return EmptyPoolElement.f_68856_;
+       };
+    }
+ 
+    public static Function<StructureTemplatePool.Projection, LegacySinglePoolElement> m_69192_(String p_69193_) {
+-      return (p_69220_) -> {
++      return (p_242860_1_) -> {
+          return new LegacySinglePoolElement(Either.left(new ResourceLocation(p_69193_)), () -> {
+             return ProcessorLists.f_127198_;
+-         }, p_69220_);
++         }, p_242860_1_);
+       };
+    }
+ 
+    public static Function<StructureTemplatePool.Projection, LegacySinglePoolElement> m_69197_(String p_69198_, StructureProcessorList p_69199_) {
+-      return (p_69227_) -> {
++      return (p_242862_2_) -> {
+          return new LegacySinglePoolElement(Either.left(new ResourceLocation(p_69198_)), () -> {
+             return p_69199_;
+-         }, p_69227_);
++         }, p_242862_2_);
+       };
+    }
+ 
+    public static Function<StructureTemplatePool.Projection, SinglePoolElement> m_69216_(String p_69217_) {
+-      return (p_69196_) -> {
++      return (p_242850_1_) -> {
+          return new SinglePoolElement(Either.left(new ResourceLocation(p_69217_)), () -> {
+             return ProcessorLists.f_127198_;
+-         }, p_69196_);
++         }, p_242850_1_);
+       };
+    }
+ 
+    public static Function<StructureTemplatePool.Projection, SinglePoolElement> m_69221_(String p_69222_, StructureProcessorList p_69223_) {
+-      return (p_69203_) -> {
++      return (p_242852_2_) -> {
+          return new SinglePoolElement(Either.left(new ResourceLocation(p_69222_)), () -> {
+             return p_69223_;
+-         }, p_69203_);
++         }, p_242852_2_);
+       };
+    }
+ 
+    public static Function<StructureTemplatePool.Projection, FeaturePoolElement> m_69164_(ConfiguredFeature<?, ?> p_69165_) {
+-      return (p_69168_) -> {
++      return (p_242846_1_) -> {
+          return new FeaturePoolElement(() -> {
+             return p_69165_;
+-         }, p_69168_);
++         }, p_242846_1_);
+       };
+    }
+ 
+    public static Function<StructureTemplatePool.Projection, ListPoolElement> m_69204_(List<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>> p_69205_) {
+-      return (p_69208_) -> {
+-         return new ListPoolElement(p_69205_.stream().map((p_69172_) -> {
+-            return p_69172_.apply(p_69208_);
+-         }).collect(Collectors.toList()), p_69208_);
++      return (p_242854_1_) -> {
++         return new ListPoolElement(p_69205_.stream().map((p_242847_1_) -> {
++            return p_242847_1_.apply(p_242854_1_);
++         }).collect(Collectors.toList()), p_242854_1_);
+       };
+    }
+ }

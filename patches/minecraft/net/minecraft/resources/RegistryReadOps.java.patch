@@ -1,0 +1,135 @@
+--- a/net/minecraft/resources/RegistryReadOps.java
++++ b/net/minecraft/resources/RegistryReadOps.java
+@@ -71,18 +_,18 @@
+          WritableRegistry<E> writableregistry = optional.get();
+          DataResult<Pair<ResourceLocation, T>> dataresult = ResourceLocation.f_135803_.decode(this.f_135465_, p_135678_);
+          if (!dataresult.result().isPresent()) {
+-            return !p_135681_ ? DataResult.error("Inline definitions not allowed here") : p_135680_.decode(this, p_135678_).map((p_135647_) -> {
+-               return p_135647_.mapFirst((p_135676_) -> {
++            return !p_135681_ ? DataResult.error("Inline definitions not allowed here") : p_135680_.decode(this, p_135678_).map((p_240874_0_) -> {
++               return p_240874_0_.mapFirst((p_240891_0_) -> {
+                   return () -> {
+-                     return p_135676_;
++                     return p_240891_0_;
+                   };
+                });
+             });
+          } else {
+             Pair<ResourceLocation, T> pair = dataresult.result().get();
+             ResourceLocation resourcelocation = pair.getFirst();
+-            return this.m_135689_(p_135679_, writableregistry, p_135680_, resourcelocation).map((p_135650_) -> {
+-               return Pair.of(p_135650_, pair.getSecond());
++            return this.m_135689_(p_135679_, writableregistry, p_135680_, resourcelocation).map((p_240875_1_) -> {
++               return Pair.of(p_240875_1_, pair.getSecond());
+             });
+          }
+       }
+@@ -102,9 +_,9 @@
+          } else {
+             String s2 = s1.substring(s.length(), s1.length() - ".json".length());
+             ResourceLocation resourcelocation1 = new ResourceLocation(resourcelocation.m_135827_(), s2);
+-            dataresult = dataresult.flatMap((p_135688_) -> {
+-               return this.m_135689_(p_135664_, p_135688_, p_135665_, resourcelocation1).map((p_135661_) -> {
+-                  return p_135688_;
++            dataresult = dataresult.flatMap((p_240885_4_) -> {
++               return this.m_135689_(p_135664_, p_240885_4_, p_135665_, resourcelocation1).map((p_240877_1_) -> {
++                  return p_240885_4_;
+                });
+             });
+          }
+@@ -142,7 +_,7 @@
+                return p_135691_.m_6246_(resourcekey);
+             }, Lifecycle.stable());
+          } else {
+-            dataresult2 = dataresult1.map((p_135674_) -> {
++            dataresult2 = dataresult1.map((p_244339_2_) -> {
+                return () -> {
+                   return p_135691_.m_6246_(resourcekey);
+                };
+@@ -155,26 +_,19 @@
+    }
+ 
+    private <E> RegistryReadOps.ReadCache<E> m_135699_(ResourceKey<? extends Registry<E>> p_135700_) {
+-      return (RegistryReadOps.ReadCache<E>)this.f_135637_.computeIfAbsent(p_135700_, (p_135707_) -> {
++      return (RegistryReadOps.ReadCache<E>)this.f_135637_.computeIfAbsent(p_135700_, (p_244344_0_) -> {
+          return new RegistryReadOps.ReadCache();
+       });
+    }
+ 
+    protected <E> DataResult<Registry<E>> m_135682_(ResourceKey<? extends Registry<E>> p_135683_) {
+-      return (DataResult)this.f_135636_.m_6632_(p_135683_).map((p_135667_) -> {
+-         return DataResult.success(p_135667_, p_135667_.m_7837_());
++      return (DataResult)this.f_135636_.m_6632_(p_135683_).map((p_244337_0_) -> {
++         return DataResult.success(p_244337_0_, p_244337_0_.m_7837_());
+       }).orElseGet(() -> {
+          return DataResult.error("Unknown registry: " + p_135683_);
+       });
+    }
+ 
+-   static final class ReadCache<E> {
+-      private final Map<ResourceKey<E>, DataResult<Supplier<E>>> f_135708_ = Maps.newIdentityHashMap();
+-
+-      private ReadCache() {
+-      }
+-   }
+-
+    public interface ResourceAccess {
+       Collection<ResourceLocation> m_7115_(ResourceKey<? extends Registry<?>> p_135720_);
+ 
+@@ -183,8 +_,8 @@
+       static RegistryReadOps.ResourceAccess m_135714_(final ResourceManager p_135715_) {
+          return new RegistryReadOps.ResourceAccess() {
+             public Collection<ResourceLocation> m_7115_(ResourceKey<? extends Registry<?>> p_135734_) {
+-               return p_135715_.m_6540_(p_135734_.m_135782_().m_135815_(), (p_135732_) -> {
+-                  return p_135732_.endsWith(".json");
++               return p_135715_.m_6540_(p_135734_.m_135782_().m_135815_(), (p_244348_0_) -> {
++                  return p_244348_0_.endsWith(".json");
+                });
+             }
+ 
+@@ -198,8 +_,9 @@
+                ) {
+                   JsonParser jsonparser = new JsonParser();
+                   JsonElement jsonelement = jsonparser.parse(reader);
+-                  return p_135728_.parse(p_135725_, jsonelement).map((p_135730_) -> {
+-                     return Pair.of(p_135730_, OptionalInt.empty());
++                  if (jsonelement!= null) jsonelement.getAsJsonObject().addProperty("forge:registry_name", p_135727_.m_135782_().toString());
++                  return p_135728_.parse(p_135725_, jsonelement).map((p_244347_0_) -> {
++                     return Pair.of(p_244347_0_, OptionalInt.empty());
+                   });
+                } catch (JsonIOException | JsonSyntaxException | IOException ioexception) {
+                   return DataResult.error("Failed to parse " + resourcelocation1 + " file: " + ioexception.getMessage());
+@@ -230,19 +_,27 @@
+          }
+ 
+          public Collection<ResourceLocation> m_7115_(ResourceKey<? extends Registry<?>> p_135753_) {
+-            return this.f_135736_.keySet().stream().filter((p_135762_) -> {
+-               return p_135762_.m_135783_(p_135753_);
+-            }).map((p_135759_) -> {
+-               return new ResourceLocation(p_135759_.m_135782_().m_135827_(), p_135753_.m_135782_().m_135815_() + "/" + p_135759_.m_135782_().m_135815_() + ".json");
++            return this.f_135736_.keySet().stream().filter((p_244355_1_) -> {
++               return p_244355_1_.m_135783_(p_135753_);
++            }).map((p_244354_1_) -> {
++               return new ResourceLocation(p_244354_1_.m_135782_().m_135827_(), p_135753_.m_135782_().m_135815_() + "/" + p_244354_1_.m_135782_().m_135815_() + ".json");
+             }).collect(Collectors.toList());
+          }
+ 
+          public <E> DataResult<Pair<E, OptionalInt>> m_8082_(DynamicOps<JsonElement> p_135741_, ResourceKey<? extends Registry<E>> p_135742_, ResourceKey<E> p_135743_, Decoder<E> p_135744_) {
+             JsonElement jsonelement = this.f_135736_.get(p_135743_);
+-            return jsonelement == null ? DataResult.error("Unknown element: " + p_135743_) : p_135744_.parse(p_135741_, jsonelement).setLifecycle(this.f_135738_.get(p_135743_)).map((p_135756_) -> {
+-               return Pair.of(p_135756_, OptionalInt.of(this.f_135737_.getInt(p_135743_)));
++            if (jsonelement!= null) jsonelement.getAsJsonObject().addProperty("forge:registry_name", p_135743_.m_135782_().toString());
++            return jsonelement == null ? DataResult.error("Unknown element: " + p_135743_) : p_135744_.parse(p_135741_, jsonelement).setLifecycle(this.f_135738_.get(p_135743_)).map((p_244353_2_) -> {
++               return Pair.of(p_244353_2_, OptionalInt.of(this.f_135737_.getInt(p_135743_)));
+             });
+          }
++      }
++   }
++
++   static final class ReadCache<E> {
++      private final Map<ResourceKey<E>, DataResult<Supplier<E>>> f_135708_ = Maps.newIdentityHashMap();
++
++      private ReadCache() {
+       }
+    }
+ }

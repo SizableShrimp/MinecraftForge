@@ -1,0 +1,46 @@
+--- a/net/minecraft/client/particle/SuspendedTownParticle.java
++++ b/net/minecraft/client/particle/SuspendedTownParticle.java
+@@ -80,6 +_,21 @@
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
++   public static class Provider implements ParticleProvider<SimpleParticleType> {
++      private final SpriteSet f_108189_;
++
++      public Provider(SpriteSet p_108191_) {
++         this.f_108189_ = p_108191_;
++      }
++
++      public Particle m_6966_(SimpleParticleType p_108202_, ClientLevel p_108203_, double p_108204_, double p_108205_, double p_108206_, double p_108207_, double p_108208_, double p_108209_) {
++         SuspendedTownParticle suspendedtownparticle = new SuspendedTownParticle(p_108203_, p_108204_, p_108205_, p_108206_, p_108207_, p_108208_, p_108209_);
++         suspendedtownparticle.m_108335_(this.f_108189_);
++         return suspendedtownparticle;
++      }
++   }
++
++   @OnlyIn(Dist.CLIENT)
+    public static class HappyVillagerProvider implements ParticleProvider<SimpleParticleType> {
+       private final SpriteSet f_108168_;
+ 
+@@ -91,21 +_,6 @@
+          SuspendedTownParticle suspendedtownparticle = new SuspendedTownParticle(p_108182_, p_108183_, p_108184_, p_108185_, p_108186_, p_108187_, p_108188_);
+          suspendedtownparticle.m_108335_(this.f_108168_);
+          suspendedtownparticle.m_107253_(1.0F, 1.0F, 1.0F);
+-         return suspendedtownparticle;
+-      }
+-   }
+-
+-   @OnlyIn(Dist.CLIENT)
+-   public static class Provider implements ParticleProvider<SimpleParticleType> {
+-      private final SpriteSet f_108189_;
+-
+-      public Provider(SpriteSet p_108191_) {
+-         this.f_108189_ = p_108191_;
+-      }
+-
+-      public Particle m_6966_(SimpleParticleType p_108202_, ClientLevel p_108203_, double p_108204_, double p_108205_, double p_108206_, double p_108207_, double p_108208_, double p_108209_) {
+-         SuspendedTownParticle suspendedtownparticle = new SuspendedTownParticle(p_108203_, p_108204_, p_108205_, p_108206_, p_108207_, p_108208_, p_108209_);
+-         suspendedtownparticle.m_108335_(this.f_108189_);
+          return suspendedtownparticle;
+       }
+    }

@@ -1,0 +1,19 @@
+--- a/net/minecraft/world/level/block/GrowingPlantBodyBlock.java
++++ b/net/minecraft/world/level/block/GrowingPlantBodyBlock.java
+@@ -14,8 +_,6 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.level.material.Fluids;
+ import net.minecraft.world.phys.shapes.VoxelShape;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public abstract class GrowingPlantBodyBlock extends GrowingPlantBlock implements BonemealableBlock {
+    protected GrowingPlantBodyBlock(BlockBehaviour.Properties p_53886_, Direction p_53887_, VoxelShape p_53888_, boolean p_53889_) {
+@@ -42,7 +_,6 @@
+       return super.m_7417_(p_53913_, p_53914_, p_53915_, p_53916_, p_53917_, p_53918_);
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public ItemStack m_7397_(BlockGetter p_53896_, BlockPos p_53897_, BlockState p_53898_) {
+       return new ItemStack(this.m_7272_());
+    }

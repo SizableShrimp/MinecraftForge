@@ -1,0 +1,15 @@
+--- a/net/minecraft/client/resources/AssetIndex.java
++++ b/net/minecraft/client/resources/AssetIndex.java
+@@ -77,9 +_,9 @@
+    }
+ 
+    public Collection<ResourceLocation> m_6487_(String p_118533_, String p_118534_, int p_118535_, Predicate<String> p_118536_) {
+-      return this.f_118526_.keySet().stream().filter((p_118541_) -> {
+-         String s = p_118541_.m_135815_();
+-         return p_118541_.m_135827_().equals(p_118534_) && !s.endsWith(".mcmeta") && s.startsWith(p_118533_ + "/") && p_118536_.test(s);
++      return this.f_118526_.keySet().stream().filter((p_229273_3_) -> {
++         String s = p_229273_3_.m_135815_();
++         return p_229273_3_.m_135827_().equals(p_118534_) && !s.endsWith(".mcmeta") && s.startsWith(p_118533_ + "/") && p_118536_.test(s);
+       }).collect(Collectors.toList());
+    }
+ }

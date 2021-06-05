@@ -26,7 +26,6 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.multiplayer.ClientLevel;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Transformation;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.world.entity.LivingEntity;

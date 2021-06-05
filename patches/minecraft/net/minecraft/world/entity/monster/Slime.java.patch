@@ -1,0 +1,118 @@
+--- a/net/minecraft/world/entity/monster/Slime.java
++++ b/net/minecraft/world/entity/monster/Slime.java
+@@ -62,8 +_,8 @@
+       this.f_21345_.m_25352_(2, new Slime.SlimeAttackGoal(this));
+       this.f_21345_.m_25352_(3, new Slime.SlimeRandomDirectionGoal(this));
+       this.f_21345_.m_25352_(5, new Slime.SlimeKeepOnJumpingGoal(this));
+-      this.f_21346_.m_25352_(1, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, (p_33641_) -> {
+-         return Math.abs(p_33641_.m_20186_() - this.m_20186_()) <= 4.0D;
++      this.f_21346_.m_25352_(1, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, (p_213811_1_) -> {
++         return Math.abs(p_213811_1_.m_20186_() - this.m_20186_()) <= 4.0D;
+       }));
+       this.f_21346_.m_25352_(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
+    }
+@@ -127,6 +_,7 @@
+       if (this.f_19861_ && !this.f_33583_) {
+          int i = this.m_33632_();
+ 
++         if (spawnCustomParticles()) i = 0; // don't spawn particles if it's handled by the implementation itself
+          for(int j = 0; j < i * 8; ++j) {
+             float f = this.f_19796_.nextFloat() * ((float)Math.PI * 2F);
+             float f1 = this.f_19796_.nextFloat() * 0.5F + 0.5F;
+@@ -178,9 +_,10 @@
+       return (EntityType<? extends Slime>)super.m_6095_();
+    }
+ 
+-   public void m_6091_() {
++   @Override
++   public void remove(boolean keepData) {
+       int i = this.m_33632_();
+-      if (!this.f_19853_.f_46443_ && i > 1 && this.m_21224_()) {
++      if (!this.f_19853_.f_46443_ && i > 1 && this.m_21224_() && !this.f_19866_) {
+          Component component = this.m_7770_();
+          boolean flag = this.m_21525_();
+          float f = (float)i / 4.0F;
+@@ -204,7 +_,7 @@
+          }
+       }
+ 
+-      super.m_6091_();
++      super.remove(keepData);
+    }
+ 
+    public void m_7334_(Entity p_33636_) {
+@@ -324,6 +_,12 @@
+       return super.m_6972_(p_33597_).m_20388_(0.255F * (float)this.m_33632_());
+    }
+ 
++   /**
++    * Called when the slime spawns particles on landing, see onUpdate.
++    * Return true to prevent the spawning of the default particles.
++    */
++   protected boolean spawnCustomParticles() { return false; }
++
+    static class SlimeAttackGoal extends Goal {
+       private final Slime f_33645_;
+       private int f_33646_;
+@@ -368,6 +_,30 @@
+       }
+    }
+ 
++   static class SlimeRandomDirectionGoal extends Goal {
++      private final Slime f_33675_;
++      private float f_33676_;
++      private int f_33677_;
++
++      public SlimeRandomDirectionGoal(Slime p_33679_) {
++         this.f_33675_ = p_33679_;
++         this.m_7021_(EnumSet.of(Goal.Flag.LOOK));
++      }
++
++      public boolean m_8036_() {
++         return this.f_33675_.m_5448_() == null && (this.f_33675_.f_19861_ || this.f_33675_.m_20069_() || this.f_33675_.m_20077_() || this.f_33675_.m_21023_(MobEffects.f_19620_)) && this.f_33675_.m_21566_() instanceof Slime.SlimeMoveControl;
++      }
++
++      public void m_8037_() {
++         if (--this.f_33677_ <= 0) {
++            this.f_33677_ = 40 + this.f_33675_.m_21187_().nextInt(60);
++            this.f_33676_ = (float)this.f_33675_.m_21187_().nextInt(360);
++         }
++
++         ((Slime.SlimeMoveControl)this.f_33675_.m_21566_()).m_33672_(this.f_33676_, false);
++      }
++   }
++
+    static class SlimeFloatGoal extends Goal {
+       private final Slime f_33653_;
+ 
+@@ -459,30 +_,6 @@
+             }
+ 
+          }
+-      }
+-   }
+-
+-   static class SlimeRandomDirectionGoal extends Goal {
+-      private final Slime f_33675_;
+-      private float f_33676_;
+-      private int f_33677_;
+-
+-      public SlimeRandomDirectionGoal(Slime p_33679_) {
+-         this.f_33675_ = p_33679_;
+-         this.m_7021_(EnumSet.of(Goal.Flag.LOOK));
+-      }
+-
+-      public boolean m_8036_() {
+-         return this.f_33675_.m_5448_() == null && (this.f_33675_.f_19861_ || this.f_33675_.m_20069_() || this.f_33675_.m_20077_() || this.f_33675_.m_21023_(MobEffects.f_19620_)) && this.f_33675_.m_21566_() instanceof Slime.SlimeMoveControl;
+-      }
+-
+-      public void m_8037_() {
+-         if (--this.f_33677_ <= 0) {
+-            this.f_33677_ = 40 + this.f_33675_.m_21187_().nextInt(60);
+-            this.f_33676_ = (float)this.f_33675_.m_21187_().nextInt(360);
+-         }
+-
+-         ((Slime.SlimeMoveControl)this.f_33675_.m_21566_()).m_33672_(this.f_33676_, false);
+       }
+    }
+ }

@@ -1,0 +1,24 @@
+--- a/net/minecraft/client/gui/components/events/ContainerEventHandler.java
++++ b/net/minecraft/client/gui/components/events/ContainerEventHandler.java
+@@ -40,8 +_,8 @@
+ 
+    default boolean m_6348_(double p_94722_, double p_94723_, int p_94724_) {
+       this.m_7897_(false);
+-      return this.m_94729_(p_94722_, p_94723_).filter((p_94708_) -> {
+-         return p_94708_.m_6348_(p_94722_, p_94723_, p_94724_);
++      return this.m_94729_(p_94722_, p_94723_).filter((p_212931_5_) -> {
++         return p_212931_5_.m_6348_(p_94722_, p_94723_, p_94724_);
+       }).isPresent();
+    }
+ 
+@@ -54,8 +_,8 @@
+    void m_7897_(boolean p_94720_);
+ 
+    default boolean m_6050_(double p_94686_, double p_94687_, double p_94688_) {
+-      return this.m_94729_(p_94686_, p_94687_).filter((p_94693_) -> {
+-         return p_94693_.m_6050_(p_94686_, p_94687_, p_94688_);
++      return this.m_94729_(p_94686_, p_94687_).filter((p_212929_6_) -> {
++         return p_212929_6_.m_6050_(p_94686_, p_94687_, p_94688_);
+       }).isPresent();
+    }
+ 

@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/RecipeUnlockedTrigger.java
++++ b/net/minecraft/advancements/critereon/RecipeUnlockedTrigger.java
+@@ -19,8 +_,8 @@
+    }
+ 
+    public void m_63718_(ServerPlayer p_63719_, Recipe<?> p_63720_) {
+-      this.m_66234_(p_63719_, (p_63723_) -> {
+-         return p_63723_.m_63739_(p_63720_);
++      this.m_66234_(p_63719_, (p_227018_1_) -> {
++         return p_227018_1_.m_63739_(p_63720_);
+       });
+    }
+ 

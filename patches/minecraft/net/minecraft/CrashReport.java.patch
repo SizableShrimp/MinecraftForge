@@ -1,0 +1,53 @@
+--- a/net/minecraft/CrashReport.java
++++ b/net/minecraft/CrashReport.java
+@@ -67,6 +_,7 @@
+          List<String> list = Util.m_137582_().collect(Collectors.toList());
+          return String.format("%d total; %s", list.size(), list.stream().collect(Collectors.joining(" ")));
+       });
++      net.minecraftforge.fml.CrashReportExtender.enhanceCrashReport(this, this.f_127502_);
+    }
+ 
+    public String m_127511_() {
+@@ -85,14 +_,8 @@
+       if (this.f_127506_ != null && this.f_127506_.length > 0) {
+          p_127520_.append("-- Head --\n");
+          p_127520_.append("Thread: ").append(Thread.currentThread().getName()).append("\n");
+-         p_127520_.append("Stacktrace:\n");
+-
+-         for(StackTraceElement stacktraceelement : this.f_127506_) {
+-            p_127520_.append("\t").append("at ").append((Object)stacktraceelement);
+-            p_127520_.append("\n");
+-         }
+-
+-         p_127520_.append("\n");
++         p_127520_.append("Stacktrace:");
++         p_127520_.append(net.minecraftforge.fml.CrashReportExtender.generateEnhancedStackTrace(this.f_127506_));
+       }
+ 
+       for(CrashReportCategory crashreportcategory : this.f_127503_) {
+@@ -119,23 +_,13 @@
+          throwable.setStackTrace(this.f_127501_.getStackTrace());
+       }
+ 
+-      String s;
+-      try {
+-         stringwriter = new StringWriter();
+-         printwriter = new PrintWriter(stringwriter);
+-         throwable.printStackTrace(printwriter);
+-         s = stringwriter.toString();
+-      } finally {
+-         IOUtils.closeQuietly((Writer)stringwriter);
+-         IOUtils.closeQuietly((Writer)printwriter);
+-      }
+-
+-      return s;
++      return net.minecraftforge.fml.CrashReportExtender.generateEnhancedStackTrace(throwable);
+    }
+ 
+    public String m_127526_() {
+       StringBuilder stringbuilder = new StringBuilder();
+       stringbuilder.append("---- Minecraft Crash Report ----\n");
++      net.minecraftforge.fml.CrashReportExtender.addCrashReportHeader(stringbuilder, this);
+       stringbuilder.append("// ");
+       stringbuilder.append(m_127531_());
+       stringbuilder.append("\n\n");

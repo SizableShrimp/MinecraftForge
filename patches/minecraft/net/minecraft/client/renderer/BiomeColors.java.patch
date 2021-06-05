@@ -1,0 +1,18 @@
+--- a/net/minecraft/client/renderer/BiomeColors.java
++++ b/net/minecraft/client/renderer/BiomeColors.java
+@@ -10,11 +_,11 @@
+ @OnlyIn(Dist.CLIENT)
+ public class BiomeColors {
+    public static final ColorResolver f_108789_ = Biome::m_47464_;
+-   public static final ColorResolver f_108790_ = (p_108808_, p_108809_, p_108810_) -> {
+-      return p_108808_.m_47542_();
++   public static final ColorResolver f_108790_ = (p_228362_0_, p_228362_1_, p_228362_3_) -> {
++      return p_228362_0_.m_47542_();
+    };
+-   public static final ColorResolver f_108791_ = (p_108801_, p_108802_, p_108803_) -> {
+-      return p_108801_.m_47560_();
++   public static final ColorResolver f_108791_ = (p_228360_0_, p_228360_1_, p_228360_3_) -> {
++      return p_228360_0_.m_47560_();
+    };
+ 
+    private static int m_108796_(BlockAndTintGetter p_108797_, BlockPos p_108798_, ColorResolver p_108799_) {

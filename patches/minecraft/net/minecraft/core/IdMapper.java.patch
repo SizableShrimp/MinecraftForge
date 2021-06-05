@@ -1,0 +1,15 @@
+--- a/net/minecraft/core/IdMapper.java
++++ b/net/minecraft/core/IdMapper.java
+@@ -9,9 +_,9 @@
+ import javax.annotation.Nullable;
+ 
+ public class IdMapper<T> implements IdMap<T> {
+-   private int f_122653_;
+-   private final IdentityHashMap<T, Integer> f_122654_;
+-   private final List<T> f_122655_;
++   protected int f_122653_;
++   protected final IdentityHashMap<T, Integer> f_122654_;
++   protected final List<T> f_122655_;
+ 
+    public IdMapper() {
+       this(512);

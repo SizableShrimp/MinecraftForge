@@ -24,7 +24,6 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.server.ServerResources;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.ModLoader;
 

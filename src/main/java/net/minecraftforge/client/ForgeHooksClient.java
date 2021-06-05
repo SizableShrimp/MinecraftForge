@@ -767,7 +767,7 @@ public class ForgeHooksClient
         {
             BakedModel layer = layerModel.getFirst();
             RenderType rendertype = layerModel.getSecond();
-            ForgeHooksClient.setRenderLayer(rendertype); // neded for compatibility with MultiLayerModels
+            net.minecraftforge.client.ForgeHooksClient.setRenderLayer(rendertype); // neded for compatibility with MultiLayerModels
             VertexConsumer ivertexbuilder;
             if (fabulous)
             {
@@ -777,7 +777,7 @@ public class ForgeHooksClient
             }
             renderer.renderModelLists(layer, itemStackIn, combinedLightIn, combinedOverlayIn, matrixStackIn, ivertexbuilder);
         }
-        ForgeHooksClient.setRenderLayer(null);
+        net.minecraftforge.client.ForgeHooksClient.setRenderLayer(null);
     }
 
     public static boolean isNameplateInRenderDistance(Entity entity, double squareDistance) {

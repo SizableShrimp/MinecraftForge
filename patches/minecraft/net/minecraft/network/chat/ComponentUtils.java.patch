@@ -1,0 +1,13 @@
+--- a/net/minecraft/network/chat/ComponentUtils.java
++++ b/net/minecraft/network/chat/ComponentUtils.java
+@@ -62,8 +_,8 @@
+    }
+ 
+    public static Component m_130743_(Collection<String> p_130744_) {
+-      return m_130745_(p_130744_, (p_130742_) -> {
+-         return (new TextComponent(p_130742_)).m_130940_(ChatFormatting.GREEN);
++      return m_130745_(p_130744_, (p_197681_0_) -> {
++         return (new TextComponent(p_197681_0_)).m_130940_(ChatFormatting.GREEN);
+       });
+    }
+ 

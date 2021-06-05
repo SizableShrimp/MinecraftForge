@@ -22,10 +22,8 @@ package net.minecraftforge.client.extensions;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import net.minecraft.util.math.vector.*;
 import net.minecraftforge.client.model.pipeline.LightUtil;
 
 import org.lwjgl.system.MemoryStack;

@@ -1,0 +1,16 @@
+--- a/net/minecraft/world/level/storage/DimensionDataStorage.java
++++ b/net/minecraft/world/level/storage/DimensionDataStorage.java
+@@ -48,9 +_,13 @@
+    @Nullable
+    public <T extends SavedData> T m_78164_(Supplier<T> p_78165_, String p_78166_) {
+       SavedData saveddata = this.f_78144_.get(p_78166_);
++      if (saveddata == net.minecraftforge.common.util.DummyWorldSaveData.DUMMY) return null;
+       if (saveddata == null && !this.f_78144_.containsKey(p_78166_)) {
+          saveddata = this.m_78167_(p_78165_, p_78166_);
+          this.f_78144_.put(p_78166_, saveddata);
++      } else if (saveddata == null) {
++         this.f_78144_.put(p_78166_, net.minecraftforge.common.util.DummyWorldSaveData.DUMMY);
++         return null;
+       }
+ 
+       return (T)saveddata;

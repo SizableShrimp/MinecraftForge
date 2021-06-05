@@ -1,0 +1,29 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/StructureFeatureConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/StructureFeatureConfiguration.java
+@@ -6,16 +_,16 @@
+ import java.util.function.Function;
+ 
+ public class StructureFeatureConfiguration {
+-   public static final Codec<StructureFeatureConfiguration> f_68162_ = RecordCodecBuilder.<StructureFeatureConfiguration>create((p_68175_) -> {
+-      return p_68175_.group(Codec.intRange(0, 4096).fieldOf("spacing").forGetter((p_68183_) -> {
+-         return p_68183_.f_68163_;
+-      }), Codec.intRange(0, 4096).fieldOf("separation").forGetter((p_68181_) -> {
+-         return p_68181_.f_68164_;
+-      }), Codec.intRange(0, Integer.MAX_VALUE).fieldOf("salt").forGetter((p_68178_) -> {
+-         return p_68178_.f_68165_;
+-      })).apply(p_68175_, StructureFeatureConfiguration::new);
+-   }).comapFlatMap((p_68173_) -> {
+-      return p_68173_.f_68163_ <= p_68173_.f_68164_ ? DataResult.error("Spacing has to be smaller than separation") : DataResult.success(p_68173_);
++   public static final Codec<StructureFeatureConfiguration> f_68162_ = RecordCodecBuilder.<StructureFeatureConfiguration>create((p_236669_0_) -> {
++      return p_236669_0_.group(Codec.intRange(0, 4096).fieldOf("spacing").forGetter((p_236675_0_) -> {
++         return p_236675_0_.f_68163_;
++      }), Codec.intRange(0, 4096).fieldOf("separation").forGetter((p_236674_0_) -> {
++         return p_236674_0_.f_68164_;
++      }), Codec.intRange(0, Integer.MAX_VALUE).fieldOf("salt").forGetter((p_236672_0_) -> {
++         return p_236672_0_.f_68165_;
++      })).apply(p_236669_0_, StructureFeatureConfiguration::new);
++   }).comapFlatMap((p_236670_0_) -> {
++      return p_236670_0_.f_68163_ <= p_236670_0_.f_68164_ ? DataResult.error("Spacing has to be smaller than separation") : DataResult.success(p_236670_0_);
+    }, Function.identity());
+    private final int f_68163_;
+    private final int f_68164_;

@@ -1,0 +1,38 @@
+--- a/net/minecraft/world/level/DataPackConfig.java
++++ b/net/minecraft/world/level/DataPackConfig.java
+@@ -7,18 +_,18 @@
+ 
+ public class DataPackConfig {
+    public static final DataPackConfig f_45842_ = new DataPackConfig(ImmutableList.of("vanilla"), ImmutableList.of());
+-   public static final Codec<DataPackConfig> f_45843_ = RecordCodecBuilder.create((p_45854_) -> {
+-      return p_45854_.group(Codec.STRING.listOf().fieldOf("Enabled").forGetter((p_45857_) -> {
+-         return p_45857_.f_45844_;
+-      }), Codec.STRING.listOf().fieldOf("Disabled").forGetter((p_45852_) -> {
+-         return p_45852_.f_45845_;
+-      })).apply(p_45854_, DataPackConfig::new);
++   public static final Codec<DataPackConfig> f_45843_ = RecordCodecBuilder.create((p_234886_0_) -> {
++      return p_234886_0_.group(Codec.STRING.listOf().fieldOf("Enabled").forGetter((p_234888_0_) -> {
++         return p_234888_0_.f_45844_;
++      }), Codec.STRING.listOf().fieldOf("Disabled").forGetter((p_234885_0_) -> {
++         return p_234885_0_.f_45845_;
++      })).apply(p_234886_0_, DataPackConfig::new);
+    });
+    private final List<String> f_45844_;
+    private final List<String> f_45845_;
+ 
+    public DataPackConfig(List<String> p_45848_, List<String> p_45849_) {
+-      this.f_45844_ = ImmutableList.copyOf(p_45848_);
++      this.f_45844_ = com.google.common.collect.Lists.newArrayList(p_45848_);
+       this.f_45845_ = ImmutableList.copyOf(p_45849_);
+    }
+ 
+@@ -28,5 +_,9 @@
+ 
+    public List<String> m_45855_() {
+       return this.f_45845_;
++   }
++
++   public void addModPacks(List<String> modPacks) {
++      f_45844_.addAll(modPacks.stream().filter(p->!f_45844_.contains(p)).collect(java.util.stream.Collectors.toList()));
+    }
+ }

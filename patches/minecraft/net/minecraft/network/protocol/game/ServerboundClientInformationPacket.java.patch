@@ -1,0 +1,11 @@
+--- a/net/minecraft/network/protocol/game/ServerboundClientInformationPacket.java
++++ b/net/minecraft/network/protocol/game/ServerboundClientInformationPacket.java
+@@ -66,4 +_,8 @@
+    public HumanoidArm m_133888_() {
+       return this.f_133868_;
+    }
++
++   public String getLanguage() {
++      return this.f_133863_;
++   }
+ }

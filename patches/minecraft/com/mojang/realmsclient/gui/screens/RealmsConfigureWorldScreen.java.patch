@@ -1,0 +1,87 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsConfigureWorldScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsConfigureWorldScreen.java
+@@ -73,13 +_,13 @@
+       this.f_88383_ = this.f_96543_ / 2 - 187;
+       this.f_88384_ = this.f_96543_ / 2 + 190;
+       this.f_96541_.f_91068_.m_90926_(true);
+-      this.f_88385_ = this.m_7082_(new Button(this.m_88465_(0, 3), m_120774_(0), 100, 20, new TranslatableComponent("mco.configure.world.buttons.players"), (p_88532_) -> {
++      this.f_88385_ = this.m_7082_(new Button(this.m_88465_(0, 3), m_120774_(0), 100, 20, new TranslatableComponent("mco.configure.world.buttons.players"), (p_237818_1_) -> {
+          this.f_96541_.m_91152_(new RealmsPlayerScreen(this, this.f_88381_));
+       }));
+-      this.f_88386_ = this.m_7082_(new Button(this.m_88465_(1, 3), m_120774_(0), 100, 20, new TranslatableComponent("mco.configure.world.buttons.settings"), (p_88530_) -> {
++      this.f_88386_ = this.m_7082_(new Button(this.m_88465_(1, 3), m_120774_(0), 100, 20, new TranslatableComponent("mco.configure.world.buttons.settings"), (p_237817_1_) -> {
+          this.f_96541_.m_91152_(new RealmsSettingsScreen(this, this.f_88381_.clone()));
+       }));
+-      this.f_88387_ = this.m_7082_(new Button(this.m_88465_(2, 3), m_120774_(0), 100, 20, new TranslatableComponent("mco.configure.world.buttons.subscription"), (p_88527_) -> {
++      this.f_88387_ = this.m_7082_(new Button(this.m_88465_(2, 3), m_120774_(0), 100, 20, new TranslatableComponent("mco.configure.world.buttons.subscription"), (p_237816_1_) -> {
+          this.f_96541_.m_91152_(new RealmsSubscriptionInfoScreen(this, this.f_88381_.clone(), this.f_88380_));
+       }));
+ 
+@@ -87,25 +_,25 @@
+          this.m_88414_(i);
+       }
+ 
+-      this.f_88391_ = this.m_7082_(new Button(this.m_88463_(0), m_120774_(13) - 5, 100, 20, new TranslatableComponent("mco.configure.world.buttons.switchminigame"), (p_88524_) -> {
++      this.f_88391_ = this.m_7082_(new Button(this.m_88463_(0), m_120774_(13) - 5, 100, 20, new TranslatableComponent("mco.configure.world.buttons.switchminigame"), (p_237815_1_) -> {
+          RealmsSelectWorldTemplateScreen realmsselectworldtemplatescreen = new RealmsSelectWorldTemplateScreen(this, RealmsServer.WorldType.MINIGAME);
+          realmsselectworldtemplatescreen.m_89680_(new TranslatableComponent("mco.template.title.minigame"));
+          this.f_96541_.m_91152_(realmsselectworldtemplatescreen);
+       }));
+-      this.f_88388_ = this.m_7082_(new Button(this.m_88463_(0), m_120774_(13) - 5, 90, 20, new TranslatableComponent("mco.configure.world.buttons.options"), (p_88522_) -> {
++      this.f_88388_ = this.m_7082_(new Button(this.m_88463_(0), m_120774_(13) - 5, 90, 20, new TranslatableComponent("mco.configure.world.buttons.options"), (p_237814_1_) -> {
+          this.f_96541_.m_91152_(new RealmsSlotOptionsScreen(this, this.f_88381_.f_87481_.get(this.f_88381_.f_87486_).clone(), this.f_88381_.f_87485_, this.f_88381_.f_87486_));
+       }));
+-      this.f_88389_ = this.m_7082_(new Button(this.m_88463_(1), m_120774_(13) - 5, 90, 20, new TranslatableComponent("mco.configure.world.backup"), (p_88514_) -> {
++      this.f_88389_ = this.m_7082_(new Button(this.m_88463_(1), m_120774_(13) - 5, 90, 20, new TranslatableComponent("mco.configure.world.backup"), (p_237812_1_) -> {
+          this.f_96541_.m_91152_(new RealmsBackupScreen(this, this.f_88381_.clone(), this.f_88381_.f_87486_));
+       }));
+-      this.f_88390_ = this.m_7082_(new Button(this.m_88463_(2), m_120774_(13) - 5, 90, 20, new TranslatableComponent("mco.configure.world.buttons.resetworld"), (p_88505_) -> {
++      this.f_88390_ = this.m_7082_(new Button(this.m_88463_(2), m_120774_(13) - 5, 90, 20, new TranslatableComponent("mco.configure.world.buttons.resetworld"), (p_237810_1_) -> {
+          this.f_96541_.m_91152_(new RealmsResetWorldScreen(this, this.f_88381_.clone(), () -> {
+             this.f_96541_.m_91152_(this.m_88486_());
+          }, () -> {
+             this.f_96541_.m_91152_(this.m_88486_());
+          }));
+       }));
+-      this.m_7082_(new Button(this.f_88384_ - 80 + 8, m_120774_(13) - 5, 70, 20, CommonComponents.f_130660_, (p_88496_) -> {
++      this.m_7082_(new Button(this.f_88384_ - 80 + 8, m_120774_(13) - 5, 70, 20, CommonComponents.f_130660_, (p_237808_1_) -> {
+          this.m_88525_();
+       }));
+       this.f_88389_.f_93623_ = true;
+@@ -131,10 +_,10 @@
+       int j = m_120774_(5) + 5;
+       RealmsWorldSlotButton realmsworldslotbutton = new RealmsWorldSlotButton(i, j, 80, 80, () -> {
+          return this.f_88381_;
+-      }, (p_88458_) -> {
+-         this.f_88408_ = p_88458_;
+-      }, p_88415_, (p_88425_) -> {
+-         RealmsWorldSlotButton.State realmsworldslotbutton$state = ((RealmsWorldSlotButton)p_88425_).m_87937_();
++      }, (p_237801_1_) -> {
++         this.f_88408_ = p_237801_1_;
++      }, p_88415_, (p_237795_2_) -> {
++         RealmsWorldSlotButton.State realmsworldslotbutton$state = ((RealmsWorldSlotButton)p_237795_2_).m_87937_();
+          if (realmsworldslotbutton$state != null) {
+             switch(realmsworldslotbutton$state.f_87982_) {
+             case NOTHING:
+@@ -282,8 +_,8 @@
+    private void m_88420_(int p_88421_, RealmsServer p_88422_) {
+       Component component = new TranslatableComponent("mco.configure.world.slot.switch.question.line1");
+       Component component1 = new TranslatableComponent("mco.configure.world.slot.switch.question.line2");
+-      this.f_96541_.m_91152_(new RealmsLongConfirmationScreen((p_88483_) -> {
+-         if (p_88483_) {
++      this.f_96541_.m_91152_(new RealmsLongConfirmationScreen((p_237805_3_) -> {
++         if (p_237805_3_) {
+             this.f_96541_.m_91152_(new RealmsLongRunningMcoTaskScreen(this.f_88380_, new SwitchSlotTask(p_88422_.f_87473_, p_88421_, () -> {
+                this.f_96541_.m_91152_(this.m_88486_());
+             })));
+@@ -297,8 +_,8 @@
+    private void m_88468_(int p_88469_, RealmsServer p_88470_) {
+       Component component = new TranslatableComponent("mco.configure.world.slot.switch.question.line1");
+       Component component1 = new TranslatableComponent("mco.configure.world.slot.switch.question.line2");
+-      this.f_96541_.m_91152_(new RealmsLongConfirmationScreen((p_88443_) -> {
+-         if (p_88443_) {
++      this.f_96541_.m_91152_(new RealmsLongConfirmationScreen((p_237797_3_) -> {
++         if (p_237797_3_) {
+             RealmsResetWorldScreen realmsresetworldscreen = new RealmsResetWorldScreen(this, p_88470_, new TranslatableComponent("mco.configure.world.switch.slot"), new TranslatableComponent("mco.configure.world.switch.slot.subtitle"), 10526880, CommonComponents.f_130656_, () -> {
+                this.f_96541_.m_91152_(this.m_88486_());
+             }, () -> {

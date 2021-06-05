@@ -19,11 +19,8 @@
 
 package net.minecraftforge.common.util;
 
-import net.minecraft.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;

@@ -1,0 +1,87 @@
+--- a/net/minecraft/client/gui/screens/inventory/StructureBlockEditScreen.java
++++ b/net/minecraft/client/gui/screens/inventory/StructureBlockEditScreen.java
+@@ -104,42 +_,42 @@
+ 
+    protected void m_7856_() {
+       this.f_96541_.f_91068_.m_90926_(true);
+-      this.f_99367_ = this.m_7082_(new Button(this.f_96543_ / 2 - 4 - 150, 210, 150, 20, CommonComponents.f_130655_, (p_99463_) -> {
++      this.f_99367_ = this.m_7082_(new Button(this.f_96543_ / 2 - 4 - 150, 210, 150, 20, CommonComponents.f_130655_, (p_214274_1_) -> {
+          this.m_99444_();
+       }));
+-      this.f_99368_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4, 210, 150, 20, CommonComponents.f_130656_, (p_99460_) -> {
++      this.f_99368_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4, 210, 150, 20, CommonComponents.f_130656_, (p_214275_1_) -> {
+          this.m_99447_();
+       }));
+-      this.f_99369_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 100, 185, 50, 20, new TranslatableComponent("structure_block.button.save"), (p_99457_) -> {
++      this.f_99369_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 100, 185, 50, 20, new TranslatableComponent("structure_block.button.save"), (p_214276_1_) -> {
+          if (this.f_99391_.m_59908_() == StructureMode.SAVE) {
+             this.m_99403_(StructureBlockEntity.UpdateType.SAVE_AREA);
+             this.f_96541_.m_91152_((Screen)null);
+          }
+ 
+       }));
+-      this.f_99370_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 100, 185, 50, 20, new TranslatableComponent("structure_block.button.load"), (p_99454_) -> {
++      this.f_99370_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 100, 185, 50, 20, new TranslatableComponent("structure_block.button.load"), (p_214277_1_) -> {
+          if (this.f_99391_.m_59908_() == StructureMode.LOAD) {
+             this.m_99403_(StructureBlockEntity.UpdateType.LOAD_AREA);
+             this.f_96541_.m_91152_((Screen)null);
+          }
+ 
+       }));
+-      this.f_99375_ = this.m_7082_(new Button(this.f_96543_ / 2 - 4 - 150, 185, 50, 20, new TextComponent("MODE"), (p_99451_) -> {
++      this.f_99375_ = this.m_7082_(new Button(this.f_96543_ / 2 - 4 - 150, 185, 50, 20, new TextComponent("MODE"), (p_214280_1_) -> {
+          this.f_99391_.m_59909_();
+          this.m_99465_();
+       }));
+-      this.f_99376_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 100, 120, 50, 20, new TranslatableComponent("structure_block.button.detect_size"), (p_99449_) -> {
++      this.f_99376_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 100, 120, 50, 20, new TranslatableComponent("structure_block.button.detect_size"), (p_214278_1_) -> {
+          if (this.f_99391_.m_59908_() == StructureMode.SAVE) {
+             this.m_99403_(StructureBlockEntity.UpdateType.SCAN_AREA);
+             this.f_96541_.m_91152_((Screen)null);
+          }
+ 
+       }));
+-      this.f_99377_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 100, 160, 50, 20, new TextComponent("ENTITIES"), (p_99446_) -> {
++      this.f_99377_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 100, 160, 50, 20, new TextComponent("ENTITIES"), (p_214282_1_) -> {
+          this.f_99391_.m_59876_(!this.f_99391_.m_59910_());
+          this.m_99452_();
+       }));
+-      this.f_99378_ = this.m_7082_(new Button(this.f_96543_ / 2 - 20, 185, 40, 20, new TextComponent("MIRROR"), (p_99443_) -> {
++      this.f_99378_ = this.m_7082_(new Button(this.f_96543_ / 2 - 20, 185, 40, 20, new TextComponent("MIRROR"), (p_214281_1_) -> {
+          switch(this.f_99391_.m_59905_()) {
+          case NONE:
+             this.f_99391_.m_59881_(Mirror.LEFT_RIGHT);
+@@ -153,27 +_,27 @@
+ 
+          this.m_99461_();
+       }));
+-      this.f_99379_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 100, 80, 50, 20, new TextComponent("SHOWAIR"), (p_99441_) -> {
++      this.f_99379_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 100, 80, 50, 20, new TextComponent("SHOWAIR"), (p_214269_1_) -> {
+          this.f_99391_.m_59896_(!this.f_99391_.m_59834_());
+          this.m_99455_();
+       }));
+-      this.f_99380_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 100, 80, 50, 20, new TextComponent("SHOWBB"), (p_99439_) -> {
++      this.f_99380_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4 + 100, 80, 50, 20, new TextComponent("SHOWBB"), (p_214270_1_) -> {
+          this.f_99391_.m_59898_(!this.f_99391_.m_59835_());
+          this.m_99458_();
+       }));
+-      this.f_99371_ = this.m_7082_(new Button(this.f_96543_ / 2 - 1 - 40 - 1 - 40 - 20, 185, 40, 20, new TextComponent("0"), (p_99434_) -> {
++      this.f_99371_ = this.m_7082_(new Button(this.f_96543_ / 2 - 1 - 40 - 1 - 40 - 20, 185, 40, 20, new TextComponent("0"), (p_214268_1_) -> {
+          this.f_99391_.m_59883_(Rotation.NONE);
+          this.m_99464_();
+       }));
+-      this.f_99372_ = this.m_7082_(new Button(this.f_96543_ / 2 - 1 - 40 - 20, 185, 40, 20, new TextComponent("90"), (p_99429_) -> {
++      this.f_99372_ = this.m_7082_(new Button(this.f_96543_ / 2 - 1 - 40 - 20, 185, 40, 20, new TextComponent("90"), (p_214273_1_) -> {
+          this.f_99391_.m_59883_(Rotation.CLOCKWISE_90);
+          this.m_99464_();
+       }));
+-      this.f_99373_ = this.m_7082_(new Button(this.f_96543_ / 2 + 1 + 20, 185, 40, 20, new TextComponent("180"), (p_99425_) -> {
++      this.f_99373_ = this.m_7082_(new Button(this.f_96543_ / 2 + 1 + 20, 185, 40, 20, new TextComponent("180"), (p_214272_1_) -> {
+          this.f_99391_.m_59883_(Rotation.CLOCKWISE_180);
+          this.m_99464_();
+       }));
+-      this.f_99374_ = this.m_7082_(new Button(this.f_96543_ / 2 + 1 + 40 + 1 + 20, 185, 40, 20, new TextComponent("270"), (p_99415_) -> {
++      this.f_99374_ = this.m_7082_(new Button(this.f_96543_ / 2 + 1 + 40 + 1 + 20, 185, 40, 20, new TextComponent("270"), (p_214271_1_) -> {
+          this.f_99391_.m_59883_(Rotation.COUNTERCLOCKWISE_90);
+          this.m_99464_();
+       }));

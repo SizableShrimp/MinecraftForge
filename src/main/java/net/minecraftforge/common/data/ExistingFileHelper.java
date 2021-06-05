@@ -30,7 +30,6 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
-import net.minecraft.data.IDataProvider;
 import net.minecraft.server.packs.FilePackResources;
 import net.minecraft.server.packs.FolderPackResources;
 import net.minecraft.server.packs.resources.Resource;
@@ -40,9 +39,7 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.SimpleReloadableResourceManager;
 import net.minecraft.server.packs.VanillaPackResources;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.loading.moddiscovery.ModFileInfo;
 import net.minecraftforge.fml.packs.ModFileResourcePack;
 

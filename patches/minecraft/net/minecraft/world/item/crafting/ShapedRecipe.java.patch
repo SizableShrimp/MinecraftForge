@@ -1,0 +1,100 @@
+--- a/net/minecraft/world/item/crafting/ShapedRecipe.java
++++ b/net/minecraft/world/item/crafting/ShapedRecipe.java
+@@ -20,10 +_,21 @@
+ import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.level.Level;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+-
+-public class ShapedRecipe implements CraftingRecipe {
++
++public class ShapedRecipe implements CraftingRecipe, net.minecraftforge.common.crafting.IShapedRecipe<CraftingContainer> {
++   static int MAX_WIDTH = 3;
++   static int MAX_HEIGHT = 3;
++   /**
++    * Expand the max width and height allowed in the deserializer.
++    * This should be called by modders who add custom crafting tables that are larger than the vanilla 3x3.
++    * @param width your max recipe width
++    * @param height your max recipe height
++    */
++   public static void setCraftingSize(int width, int height) {
++      if (MAX_WIDTH < width) MAX_WIDTH = width;
++      if (MAX_HEIGHT < height) MAX_HEIGHT = height;
++   }
++
+    private final int f_44146_;
+    private final int f_44147_;
+    private final NonNullList<Ingredient> f_44148_;
+@@ -48,7 +_,6 @@
+       return RecipeSerializer.f_44076_;
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public String m_6076_() {
+       return this.f_44151_;
+    }
+@@ -61,7 +_,6 @@
+       return this.f_44148_;
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public boolean m_8004_(int p_44161_, int p_44162_) {
+       return p_44161_ >= this.f_44146_ && p_44162_ >= this.f_44147_;
+    }
+@@ -113,10 +_,20 @@
+       return this.f_44146_;
+    }
+ 
++   @Override
++   public int getRecipeWidth() {
++      return m_44220_();
++   }
++
+    public int m_44221_() {
+       return this.f_44147_;
+    }
+ 
++   @Override
++   public int getRecipeHeight() {
++      return m_44221_();
++   }
++
+    private static NonNullList<Ingredient> m_44202_(String[] p_44203_, Map<String, Ingredient> p_44204_, int p_44205_, int p_44206_) {
+       NonNullList<Ingredient> nonnulllist = NonNullList.m_122780_(p_44205_ * p_44206_, Ingredient.f_43901_);
+       Set<String> set = Sets.newHashSet(p_44204_.keySet());
+@@ -196,15 +_,15 @@
+ 
+    private static String[] m_44196_(JsonArray p_44197_) {
+       String[] astring = new String[p_44197_.size()];
+-      if (astring.length > 3) {
+-         throw new JsonSyntaxException("Invalid pattern: too many rows, 3 is maximum");
++      if (astring.length > MAX_HEIGHT) {
++         throw new JsonSyntaxException("Invalid pattern: too many rows, " + MAX_HEIGHT + " is maximum");
+       } else if (astring.length == 0) {
+          throw new JsonSyntaxException("Invalid pattern: empty pattern not allowed");
+       } else {
+          for(int i = 0; i < astring.length; ++i) {
+             String s = GsonHelper.m_13805_(p_44197_.get(i), "pattern[" + i + "]");
+-            if (s.length() > 3) {
+-               throw new JsonSyntaxException("Invalid pattern: too many columns, 3 is maximum");
++            if (s.length() > MAX_WIDTH) {
++               throw new JsonSyntaxException("Invalid pattern: too many columns, " + MAX_WIDTH + " is maximum");
+             }
+ 
+             if (i > 0 && astring[0].length() != s.length()) {
+@@ -246,11 +_,12 @@
+          throw new JsonParseException("Disallowed data tag found");
+       } else {
+          int i = GsonHelper.m_13824_(p_44183_, "count", 1);
+-         return new ItemStack(item, i);
++         return net.minecraftforge.common.crafting.CraftingHelper.getItemStack(p_44183_, true);
+       }
+    }
+ 
+-   public static class Serializer implements RecipeSerializer<ShapedRecipe> {
++   public static class Serializer extends net.minecraftforge.registries.ForgeRegistryEntry<RecipeSerializer<?>>  implements RecipeSerializer<ShapedRecipe> {
++      private static final ResourceLocation NAME = new ResourceLocation("minecraft", "crafting_shaped");
+       public ShapedRecipe m_6729_(ResourceLocation p_44236_, JsonObject p_44237_) {
+          String s = GsonHelper.m_13851_(p_44237_, "group", "");
+          Map<String, Ingredient> map = ShapedRecipe.m_44210_(GsonHelper.m_13930_(p_44237_, "key"));

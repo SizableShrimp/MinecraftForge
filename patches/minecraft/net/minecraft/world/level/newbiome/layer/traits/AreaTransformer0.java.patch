@@ -1,0 +1,15 @@
+--- a/net/minecraft/world/level/newbiome/layer/traits/AreaTransformer0.java
++++ b/net/minecraft/world/level/newbiome/layer/traits/AreaTransformer0.java
+@@ -8,9 +_,9 @@
+ public interface AreaTransformer0 {
+    default <R extends Area> AreaFactory<R> m_76984_(BigContext<R> p_76985_) {
+       return () -> {
+-         return p_76985_.m_7851_((p_76988_, p_76989_) -> {
+-            p_76985_.m_6687_((long)p_76988_, (long)p_76989_);
+-            return this.m_7215_(p_76985_, p_76988_, p_76989_);
++         return p_76985_.m_7851_((p_202820_2_, p_202820_3_) -> {
++            p_76985_.m_6687_((long)p_202820_2_, (long)p_202820_3_);
++            return this.m_7215_(p_76985_, p_202820_2_, p_202820_3_);
+          });
+       };
+    }

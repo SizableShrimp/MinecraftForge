@@ -1,0 +1,13 @@
+--- a/net/minecraft/client/AmbientOcclusionStatus.java
++++ b/net/minecraft/client/AmbientOcclusionStatus.java
+@@ -12,8 +_,8 @@
+    MIN(1, "options.ao.min"),
+    MAX(2, "options.ao.max");
+ 
+-   private static final AmbientOcclusionStatus[] f_90476_ = Arrays.stream(values()).sorted(Comparator.comparingInt(AmbientOcclusionStatus::m_90486_)).toArray((p_90491_) -> {
+-      return new AmbientOcclusionStatus[p_90491_];
++   private static final AmbientOcclusionStatus[] f_90476_ = Arrays.stream(values()).sorted(Comparator.comparingInt(AmbientOcclusionStatus::m_90486_)).toArray((p_216571_0_) -> {
++      return new AmbientOcclusionStatus[p_216571_0_];
+    });
+    private final int f_90477_;
+    private final String f_90478_;

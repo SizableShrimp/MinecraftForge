@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/EnchantedItemTrigger.java
++++ b/net/minecraft/advancements/critereon/EnchantedItemTrigger.java
+@@ -19,8 +_,8 @@
+    }
+ 
+    public void m_27668_(ServerPlayer p_27669_, ItemStack p_27670_, int p_27671_) {
+-      this.m_66234_(p_27669_, (p_27675_) -> {
+-         return p_27675_.m_27691_(p_27670_, p_27671_);
++      this.m_66234_(p_27669_, (p_226528_2_) -> {
++         return p_226528_2_.m_27691_(p_27670_, p_27671_);
+       });
+    }
+ 

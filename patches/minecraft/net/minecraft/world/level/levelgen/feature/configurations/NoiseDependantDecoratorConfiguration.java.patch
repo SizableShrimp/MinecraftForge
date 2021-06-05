@@ -1,0 +1,25 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/NoiseDependantDecoratorConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/NoiseDependantDecoratorConfiguration.java
+@@ -4,14 +_,14 @@
+ import com.mojang.serialization.codecs.RecordCodecBuilder;
+ 
+ public class NoiseDependantDecoratorConfiguration implements DecoratorConfiguration {
+-   public static final Codec<NoiseDependantDecoratorConfiguration> f_67793_ = RecordCodecBuilder.create((p_67805_) -> {
+-      return p_67805_.group(Codec.DOUBLE.fieldOf("noise_level").forGetter((p_67809_) -> {
+-         return p_67809_.f_67794_;
+-      }), Codec.INT.fieldOf("below_noise").forGetter((p_67807_) -> {
+-         return p_67807_.f_67795_;
+-      }), Codec.INT.fieldOf("above_noise").forGetter((p_67803_) -> {
+-         return p_67803_.f_67796_;
+-      })).apply(p_67805_, NoiseDependantDecoratorConfiguration::new);
++   public static final Codec<NoiseDependantDecoratorConfiguration> f_67793_ = RecordCodecBuilder.create((p_236552_0_) -> {
++      return p_236552_0_.group(Codec.DOUBLE.fieldOf("noise_level").forGetter((p_236554_0_) -> {
++         return p_236554_0_.f_67794_;
++      }), Codec.INT.fieldOf("below_noise").forGetter((p_236553_0_) -> {
++         return p_236553_0_.f_67795_;
++      }), Codec.INT.fieldOf("above_noise").forGetter((p_236551_0_) -> {
++         return p_236551_0_.f_67796_;
++      })).apply(p_236552_0_, NoiseDependantDecoratorConfiguration::new);
+    });
+    public final double f_67794_;
+    public final int f_67795_;

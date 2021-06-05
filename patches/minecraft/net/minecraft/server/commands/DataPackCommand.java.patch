@@ -1,0 +1,134 @@
+--- a/net/minecraft/server/commands/DataPackCommand.java
++++ b/net/minecraft/server/commands/DataPackCommand.java
+@@ -19,57 +_,57 @@
+ import net.minecraft.server.packs.repository.PackRepository;
+ 
+ public class DataPackCommand {
+-   private static final DynamicCommandExceptionType f_136800_ = new DynamicCommandExceptionType((p_136868_) -> {
+-      return new TranslatableComponent("commands.datapack.unknown", p_136868_);
+-   });
+-   private static final DynamicCommandExceptionType f_136801_ = new DynamicCommandExceptionType((p_136857_) -> {
+-      return new TranslatableComponent("commands.datapack.enable.failed", p_136857_);
+-   });
+-   private static final DynamicCommandExceptionType f_136802_ = new DynamicCommandExceptionType((p_136833_) -> {
+-      return new TranslatableComponent("commands.datapack.disable.failed", p_136833_);
+-   });
+-   private static final SuggestionProvider<CommandSourceStack> f_136803_ = (p_136848_, p_136849_) -> {
+-      return SharedSuggestionProvider.m_82981_(p_136848_.getSource().m_81377_().m_129891_().m_10523_().stream().map(StringArgumentType::escapeIfRequired), p_136849_);
++   private static final DynamicCommandExceptionType f_136800_ = new DynamicCommandExceptionType((p_208808_0_) -> {
++      return new TranslatableComponent("commands.datapack.unknown", p_208808_0_);
++   });
++   private static final DynamicCommandExceptionType f_136801_ = new DynamicCommandExceptionType((p_208818_0_) -> {
++      return new TranslatableComponent("commands.datapack.enable.failed", p_208818_0_);
++   });
++   private static final DynamicCommandExceptionType f_136802_ = new DynamicCommandExceptionType((p_208815_0_) -> {
++      return new TranslatableComponent("commands.datapack.disable.failed", p_208815_0_);
++   });
++   private static final SuggestionProvider<CommandSourceStack> f_136803_ = (p_198305_0_, p_198305_1_) -> {
++      return SharedSuggestionProvider.m_82981_(p_198305_0_.getSource().m_81377_().m_129891_().m_10523_().stream().map(StringArgumentType::escapeIfRequired), p_198305_1_);
+    };
+-   private static final SuggestionProvider<CommandSourceStack> f_136804_ = (p_136813_, p_136814_) -> {
+-      PackRepository packrepository = p_136813_.getSource().m_81377_().m_129891_();
++   private static final SuggestionProvider<CommandSourceStack> f_136804_ = (p_241030_0_, p_241030_1_) -> {
++      PackRepository packrepository = p_241030_0_.getSource().m_81377_().m_129891_();
+       Collection<String> collection = packrepository.m_10523_();
+-      return SharedSuggestionProvider.m_82981_(packrepository.m_10514_().stream().filter((p_136839_) -> {
+-         return !collection.contains(p_136839_);
+-      }).map(StringArgumentType::escapeIfRequired), p_136814_);
++      return SharedSuggestionProvider.m_82981_(packrepository.m_10514_().stream().filter((p_241033_1_) -> {
++         return !collection.contains(p_241033_1_);
++      }).map(StringArgumentType::escapeIfRequired), p_241030_1_);
+    };
+ 
+    public static void m_136808_(CommandDispatcher<CommandSourceStack> p_136809_) {
+-      p_136809_.register(Commands.m_82127_("datapack").requires((p_136872_) -> {
+-         return p_136872_.m_6761_(2);
+-      }).then(Commands.m_82127_("enable").then(Commands.m_82129_("name", StringArgumentType.string()).suggests(f_136804_).executes((p_136882_) -> {
+-         return m_136828_(p_136882_.getSource(), m_136815_(p_136882_, "name", true), (p_136859_, p_136860_) -> {
+-            p_136860_.m_10451_().m_10470_(p_136859_, p_136860_, (p_136862_) -> {
+-               return p_136862_;
++      p_136809_.register(Commands.m_82127_("datapack").requires((p_198301_0_) -> {
++         return p_198301_0_.m_6761_(2);
++      }).then(Commands.m_82127_("enable").then(Commands.m_82129_("name", StringArgumentType.string()).suggests(f_136804_).executes((p_198292_0_) -> {
++         return m_136828_(p_198292_0_.getSource(), m_136815_(p_198292_0_, "name", true), (p_198289_0_, p_198289_1_) -> {
++            p_198289_1_.m_10451_().m_10470_(p_198289_0_, p_198289_1_, (p_198304_0_) -> {
++               return p_198304_0_;
+             }, false);
+          });
+-      }).then(Commands.m_82127_("after").then(Commands.m_82129_("existing", StringArgumentType.string()).suggests(f_136803_).executes((p_136880_) -> {
+-         return m_136828_(p_136880_.getSource(), m_136815_(p_136880_, "name", true), (p_136852_, p_136853_) -> {
+-            p_136852_.add(p_136852_.indexOf(m_136815_(p_136880_, "existing", false)) + 1, p_136853_);
+-         });
+-      }))).then(Commands.m_82127_("before").then(Commands.m_82129_("existing", StringArgumentType.string()).suggests(f_136803_).executes((p_136878_) -> {
+-         return m_136828_(p_136878_.getSource(), m_136815_(p_136878_, "name", true), (p_136821_, p_136822_) -> {
+-            p_136821_.add(p_136821_.indexOf(m_136815_(p_136878_, "existing", false)), p_136822_);
+-         });
+-      }))).then(Commands.m_82127_("last").executes((p_136876_) -> {
+-         return m_136828_(p_136876_.getSource(), m_136815_(p_136876_, "name", true), List::add);
+-      })).then(Commands.m_82127_("first").executes((p_136874_) -> {
+-         return m_136828_(p_136874_.getSource(), m_136815_(p_136874_, "name", true), (p_136841_, p_136842_) -> {
+-            p_136841_.add(0, p_136842_);
+-         });
+-      })))).then(Commands.m_82127_("disable").then(Commands.m_82129_("name", StringArgumentType.string()).suggests(f_136803_).executes((p_136870_) -> {
+-         return m_136825_(p_136870_.getSource(), m_136815_(p_136870_, "name", false));
+-      }))).then(Commands.m_82127_("list").executes((p_136864_) -> {
+-         return m_136823_(p_136864_.getSource());
+-      }).then(Commands.m_82127_("available").executes((p_136846_) -> {
+-         return m_136854_(p_136846_.getSource());
+-      })).then(Commands.m_82127_("enabled").executes((p_136811_) -> {
+-         return m_136865_(p_136811_.getSource());
++      }).then(Commands.m_82127_("after").then(Commands.m_82129_("existing", StringArgumentType.string()).suggests(f_136803_).executes((p_198307_0_) -> {
++         return m_136828_(p_198307_0_.getSource(), m_136815_(p_198307_0_, "name", true), (p_198308_1_, p_198308_2_) -> {
++            p_198308_1_.add(p_198308_1_.indexOf(m_136815_(p_198307_0_, "existing", false)) + 1, p_198308_2_);
++         });
++      }))).then(Commands.m_82127_("before").then(Commands.m_82129_("existing", StringArgumentType.string()).suggests(f_136803_).executes((p_198311_0_) -> {
++         return m_136828_(p_198311_0_.getSource(), m_136815_(p_198311_0_, "name", true), (p_198302_1_, p_198302_2_) -> {
++            p_198302_1_.add(p_198302_1_.indexOf(m_136815_(p_198311_0_, "existing", false)), p_198302_2_);
++         });
++      }))).then(Commands.m_82127_("last").executes((p_198298_0_) -> {
++         return m_136828_(p_198298_0_.getSource(), m_136815_(p_198298_0_, "name", true), List::add);
++      })).then(Commands.m_82127_("first").executes((p_198300_0_) -> {
++         return m_136828_(p_198300_0_.getSource(), m_136815_(p_198300_0_, "name", true), (p_241034_0_, p_241034_1_) -> {
++            p_241034_0_.add(0, p_241034_1_);
++         });
++      })))).then(Commands.m_82127_("disable").then(Commands.m_82129_("name", StringArgumentType.string()).suggests(f_136803_).executes((p_198295_0_) -> {
++         return m_136825_(p_198295_0_.getSource(), m_136815_(p_198295_0_, "name", false));
++      }))).then(Commands.m_82127_("list").executes((p_198290_0_) -> {
++         return m_136823_(p_198290_0_.getSource());
++      }).then(Commands.m_82127_("available").executes((p_198288_0_) -> {
++         return m_136854_(p_198288_0_.getSource());
++      })).then(Commands.m_82127_("enabled").executes((p_198309_0_) -> {
++         return m_136865_(p_198309_0_.getSource());
+       }))));
+    }
+ 
+@@ -100,14 +_,14 @@
+       packrepository.m_10506_();
+       Collection<? extends Pack> collection = packrepository.m_10524_();
+       Collection<? extends Pack> collection1 = packrepository.m_10519_();
+-      List<Pack> list = collection1.stream().filter((p_136836_) -> {
+-         return !collection.contains(p_136836_);
++      List<Pack> list = collection1.stream().filter((p_241032_1_) -> {
++         return !collection.contains(p_241032_1_);
+       }).collect(Collectors.toList());
+       if (list.isEmpty()) {
+          p_136855_.m_81354_(new TranslatableComponent("commands.datapack.list.available.none"), false);
+       } else {
+-         p_136855_.m_81354_(new TranslatableComponent("commands.datapack.list.available.success", list.size(), ComponentUtils.m_130753_(list, (p_136844_) -> {
+-            return p_136844_.m_10437_(false);
++         p_136855_.m_81354_(new TranslatableComponent("commands.datapack.list.available.success", list.size(), ComponentUtils.m_130753_(list, (p_198293_0_) -> {
++            return p_198293_0_.m_10437_(false);
+          })), false);
+       }
+ 
+@@ -121,8 +_,8 @@
+       if (collection.isEmpty()) {
+          p_136866_.m_81354_(new TranslatableComponent("commands.datapack.list.enabled.none"), false);
+       } else {
+-         p_136866_.m_81354_(new TranslatableComponent("commands.datapack.list.enabled.success", collection.size(), ComponentUtils.m_130753_(collection, (p_136807_) -> {
+-            return p_136807_.m_10437_(true);
++         p_136866_.m_81354_(new TranslatableComponent("commands.datapack.list.enabled.success", collection.size(), ComponentUtils.m_130753_(collection, (p_198306_0_) -> {
++            return p_198306_0_.m_10437_(true);
+          })), false);
+       }
+ 

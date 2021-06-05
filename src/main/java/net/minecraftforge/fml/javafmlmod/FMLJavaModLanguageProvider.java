@@ -20,9 +20,7 @@
 package net.minecraftforge.fml.javafmlmod;
 
 import cpw.mods.modlauncher.api.LamdbaExceptionUtils;
-import net.minecraftforge.fml.ModLoadingException;
 import net.minecraftforge.fml.ModLoadingStage;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forgespi.language.ILifecycleEvent;
 import net.minecraftforge.forgespi.language.IModLanguageProvider;
 import net.minecraftforge.forgespi.language.IModInfo;
@@ -45,7 +43,7 @@ public class FMLJavaModLanguageProvider implements IModLanguageProvider
 {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static class FMLModTarget implements IModLanguageLoader {
+    private static class FMLModTarget implements IModLanguageProvider.IModLanguageLoader {
         private static final Logger LOGGER = FMLJavaModLanguageProvider.LOGGER;
         private final String className;
         private final String modId;

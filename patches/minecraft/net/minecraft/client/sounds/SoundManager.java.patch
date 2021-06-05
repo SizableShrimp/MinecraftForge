@@ -1,0 +1,14 @@
+--- a/net/minecraft/client/sounds/SoundManager.java
++++ b/net/minecraft/client/sounds/SoundManager.java
+@@ -197,6 +_,11 @@
+       this.f_120349_.m_120299_(p_120387_, p_120388_);
+    }
+ 
++   //@Override //TODO: Filtered reload
++   public net.minecraftforge.resource.IResourceType getResourceType() {
++      return net.minecraftforge.resource.VanillaResourceType.SOUNDS;
++   }
++
+    public String m_120408_() {
+       return this.f_120349_.m_120320_();
+    }

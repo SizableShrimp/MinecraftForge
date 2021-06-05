@@ -1,0 +1,28 @@
+--- a/net/minecraft/util/datafix/fixes/MissingDimensionFix.java
++++ b/net/minecraft/util/datafix/fixes/MissingDimensionFix.java
+@@ -46,17 +_,17 @@
+          throw new IllegalStateException();
+       } else {
+          OpticFinder<? extends List<? extends Pair<String, ?>>> opticfinder = compoundlisttype.finder();
+-         return this.fixTypeEverywhereTyped("MissingDimensionFix", type1, (p_16426_) -> {
+-            return p_16426_.updateTyped(fieldfinder, (p_16431_) -> {
+-               return p_16431_.updateTyped(opticfinder, (p_16435_) -> {
+-                  if (!(p_16435_.getValue() instanceof List)) {
++         return this.fixTypeEverywhereTyped("MissingDimensionFix", type1, (p_241308_4_) -> {
++            return p_241308_4_.updateTyped(fieldfinder, (p_241309_4_) -> {
++               return p_241309_4_.updateTyped(opticfinder, (p_241310_3_) -> {
++                  if (!(p_241310_3_.getValue() instanceof List)) {
+                      throw new IllegalStateException("List exptected");
+-                  } else if (((List)p_16435_.getValue()).isEmpty()) {
+-                     Dynamic<?> dynamic = p_16426_.get(DSL.remainderFinder());
++                  } else if (((List)p_241310_3_.getValue()).isEmpty()) {
++                     Dynamic<?> dynamic = p_241308_4_.get(DSL.remainderFinder());
+                      Dynamic<?> dynamic1 = this.m_16436_(dynamic);
+-                     return DataFixUtils.orElse(compoundlisttype.readTyped(dynamic1).result().map(Pair::getFirst), p_16435_);
++                     return DataFixUtils.orElse(compoundlisttype.readTyped(dynamic1).result().map(Pair::getFirst), p_241310_3_);
+                   } else {
+-                     return p_16435_;
++                     return p_241310_3_;
+                   }
+                });
+             });

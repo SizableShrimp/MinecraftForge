@@ -1,0 +1,21 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/DecoratedFeatureConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/DecoratedFeatureConfiguration.java
+@@ -9,12 +_,12 @@
+ import net.minecraft.world.level.levelgen.placement.ConfiguredDecorator;
+ 
+ public class DecoratedFeatureConfiguration implements FeatureConfiguration {
+-   public static final Codec<DecoratedFeatureConfiguration> f_67576_ = RecordCodecBuilder.create((p_67586_) -> {
+-      return p_67586_.group(ConfiguredFeature.f_65374_.fieldOf("feature").forGetter((p_67589_) -> {
+-         return p_67589_.f_67577_;
+-      }), ConfiguredDecorator.f_70471_.fieldOf("decorator").forGetter((p_67584_) -> {
+-         return p_67584_.f_67578_;
+-      })).apply(p_67586_, DecoratedFeatureConfiguration::new);
++   public static final Codec<DecoratedFeatureConfiguration> f_67576_ = RecordCodecBuilder.create((p_236493_0_) -> {
++      return p_236493_0_.group(ConfiguredFeature.f_65374_.fieldOf("feature").forGetter((p_236494_0_) -> {
++         return p_236494_0_.f_67577_;
++      }), ConfiguredDecorator.f_70471_.fieldOf("decorator").forGetter((p_236492_0_) -> {
++         return p_236492_0_.f_67578_;
++      })).apply(p_236493_0_, DecoratedFeatureConfiguration::new);
+    });
+    public final Supplier<ConfiguredFeature<?, ?>> f_67577_;
+    public final ConfiguredDecorator<?> f_67578_;

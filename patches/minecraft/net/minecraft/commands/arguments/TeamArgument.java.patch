@@ -1,0 +1,13 @@
+--- a/net/minecraft/commands/arguments/TeamArgument.java
++++ b/net/minecraft/commands/arguments/TeamArgument.java
+@@ -18,8 +_,8 @@
+ 
+ public class TeamArgument implements ArgumentType<String> {
+    private static final Collection<String> f_112084_ = Arrays.asList("foo", "123");
+-   private static final DynamicCommandExceptionType f_112085_ = new DynamicCommandExceptionType((p_112095_) -> {
+-      return new TranslatableComponent("team.notFound", p_112095_);
++   private static final DynamicCommandExceptionType f_112085_ = new DynamicCommandExceptionType((p_208680_0_) -> {
++      return new TranslatableComponent("team.notFound", p_208680_0_);
+    });
+ 
+    public static TeamArgument m_112088_() {

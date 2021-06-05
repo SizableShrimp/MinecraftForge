@@ -1,0 +1,29 @@
+--- a/com/mojang/blaze3d/platform/NativeImage.java
++++ b/com/mojang/blaze3d/platform/NativeImage.java
+@@ -178,7 +_,7 @@
+    public int m_84985_(int p_84986_, int p_84987_) {
+       if (this.f_84960_ != NativeImage.Format.RGBA) {
+          throw new IllegalArgumentException(String.format("getPixelRGBA only works on RGBA images; have %s", this.f_84960_));
+-      } else if (p_84986_ <= this.f_84961_ && p_84987_ <= this.f_84962_) {
++      } else if (p_84986_ >= 0 && p_84987_ >= 0 && p_84986_ < this.f_84961_ && p_84987_ < this.f_84962_) { //Fix MC-162953 bounds checks in `NativeImage`
+          this.m_85124_();
+          long i = (long)((p_84986_ + p_84987_ * this.f_84961_) * 4);
+          return MemoryUtil.memGetInt(this.f_84964_ + i);
+@@ -190,7 +_,7 @@
+    public void m_84988_(int p_84989_, int p_84990_, int p_84991_) {
+       if (this.f_84960_ != NativeImage.Format.RGBA) {
+          throw new IllegalArgumentException(String.format("getPixelRGBA only works on RGBA images; have %s", this.f_84960_));
+-      } else if (p_84989_ <= this.f_84961_ && p_84990_ <= this.f_84962_) {
++      } else if (p_84989_ >= 0 && p_84990_ >= 0 && p_84989_ < this.f_84961_ && p_84990_ < this.f_84962_) { //Fix MC-162953 bounds checks in `NativeImage`
+          this.m_85124_();
+          long i = (long)((p_84989_ + p_84990_ * this.f_84961_) * 4);
+          MemoryUtil.memPutInt(this.f_84964_ + i, p_84991_);
+@@ -202,7 +_,7 @@
+    public byte m_85087_(int p_85088_, int p_85089_) {
+       if (!this.f_84960_.m_85173_()) {
+          throw new IllegalArgumentException(String.format("no luminance or alpha in %s", this.f_84960_));
+-      } else if (p_85088_ <= this.f_84961_ && p_85089_ <= this.f_84962_) {
++      } else if (p_85088_ >= 0 && p_85089_ >= 0 && p_85088_ < this.f_84961_ && p_85089_ < this.f_84962_) { //Fix MC-162953 bounds checks in `NativeImage`
+          int i = (p_85088_ + p_85089_ * this.f_84961_) * this.f_84960_.m_85161_() + this.f_84960_.m_85174_() / 8;
+          return MemoryUtil.memGetByte(this.f_84964_ + (long)i);
+       } else {

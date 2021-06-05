@@ -1,0 +1,33 @@
+--- a/net/minecraft/world/level/ClipContext.java
++++ b/net/minecraft/world/level/ClipContext.java
+@@ -18,12 +_,12 @@
+    private final ClipContext.Fluid f_45685_;
+    private final CollisionContext f_45686_;
+ 
+-   public ClipContext(Vec3 p_45688_, Vec3 p_45689_, ClipContext.Block p_45690_, ClipContext.Fluid p_45691_, Entity p_45692_) {
++   public ClipContext(Vec3 p_45688_, Vec3 p_45689_, ClipContext.Block p_45690_, ClipContext.Fluid p_45691_, @javax.annotation.Nullable Entity p_45692_) {
+       this.f_45682_ = p_45688_;
+       this.f_45683_ = p_45689_;
+       this.f_45684_ = p_45690_;
+       this.f_45685_ = p_45691_;
+-      this.f_45686_ = CollisionContext.m_82750_(p_45692_);
++      this.f_45686_ = p_45692_ == null ? CollisionContext.m_82749_() : CollisionContext.m_82750_(p_45692_);
+    }
+ 
+    public Vec3 m_45693_() {
+@@ -59,12 +_,12 @@
+    }
+ 
+    public static enum Fluid {
+-      NONE((p_45736_) -> {
++      NONE((p_222247_0_) -> {
+          return false;
+       }),
+       SOURCE_ONLY(FluidState::m_76170_),
+-      ANY((p_45734_) -> {
+-         return !p_45734_.m_76178_();
++      ANY((p_222246_0_) -> {
++         return !p_222246_0_.m_76178_();
+       });
+ 
+       private final Predicate<FluidState> f_45724_;

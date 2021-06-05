@@ -1,0 +1,162 @@
+--- a/net/minecraft/world/entity/ai/gossip/GossipContainer.java
++++ b/net/minecraft/world/entity/ai/gossip/GossipContainer.java
+@@ -42,8 +_,8 @@
+    }
+ 
+    private Stream<GossipContainer.GossipEntry> m_26203_() {
+-      return this.f_26156_.entrySet().stream().flatMap((p_26185_) -> {
+-         return p_26185_.getValue().m_26215_(p_26185_.getKey());
++      return this.f_26156_.entrySet().stream().flatMap((p_220917_0_) -> {
++         return p_220917_0_.getValue().m_26215_(p_220917_0_.getKey());
+       });
+    }
+ 
+@@ -74,17 +_,17 @@
+    }
+ 
+    private GossipContainer.EntityGossips m_26189_(UUID p_26190_) {
+-      return this.f_26156_.computeIfAbsent(p_26190_, (p_26202_) -> {
++      return this.f_26156_.computeIfAbsent(p_26190_, (p_220922_0_) -> {
+          return new GossipContainer.EntityGossips();
+       });
+    }
+ 
+    public void m_26163_(GossipContainer p_26164_, Random p_26165_, int p_26166_) {
+       Collection<GossipContainer.GossipEntry> collection = p_26164_.m_26186_(p_26165_, p_26166_);
+-      collection.forEach((p_26200_) -> {
+-         int i = p_26200_.f_26230_ - p_26200_.f_26229_.f_26277_;
++      collection.forEach((p_220923_1_) -> {
++         int i = p_220923_1_.f_26230_ - p_220923_1_.f_26229_.f_26277_;
+          if (i >= 2) {
+-            this.m_26189_(p_26200_.f_26228_).f_26204_.mergeInt(p_26200_.f_26229_, i, GossipContainer::m_26158_);
++            this.m_26189_(p_220923_1_.f_26228_).f_26204_.mergeInt(p_220923_1_.f_26229_, i, GossipContainer::m_26158_);
+          }
+ 
+       });
+@@ -97,8 +_,8 @@
+ 
+    public void m_26191_(UUID p_26192_, GossipType p_26193_, int p_26194_) {
+       GossipContainer.EntityGossips gossipcontainer$entitygossips = this.m_26189_(p_26192_);
+-      gossipcontainer$entitygossips.f_26204_.mergeInt(p_26193_, p_26194_, (p_26173_, p_26174_) -> {
+-         return this.m_26167_(p_26193_, p_26173_, p_26174_);
++      gossipcontainer$entitygossips.f_26204_.mergeInt(p_26193_, p_26194_, (p_220915_2_, p_220915_3_) -> {
++         return this.m_26167_(p_26193_, p_220915_2_, p_220915_3_);
+       });
+       gossipcontainer$entitygossips.m_26211_(p_26193_);
+       if (gossipcontainer$entitygossips.m_26225_()) {
+@@ -108,16 +_,16 @@
+    }
+ 
+    public <T> Dynamic<T> m_26179_(DynamicOps<T> p_26180_) {
+-      return new Dynamic<>(p_26180_, p_26180_.createList(this.m_26203_().map((p_26183_) -> {
+-         return p_26183_.m_26238_(p_26180_);
++      return new Dynamic<>(p_26180_, p_26180_.createList(this.m_26203_().map((p_234059_1_) -> {
++         return p_234059_1_.m_26238_(p_26180_);
+       }).map(Dynamic::getValue)));
+    }
+ 
+    public void m_26177_(Dynamic<?> p_26178_) {
+-      p_26178_.asStream().map(GossipContainer.GossipEntry::m_26236_).flatMap((p_26176_) -> {
+-         return Util.m_137519_(p_26176_.result());
+-      }).forEach((p_26162_) -> {
+-         this.m_26189_(p_26162_.f_26228_).f_26204_.put(p_26162_.f_26229_, p_26162_.f_26230_);
++      p_26178_.asStream().map(GossipContainer.GossipEntry::m_26236_).flatMap((p_234056_0_) -> {
++         return Util.m_137519_(p_234056_0_.result());
++      }).forEach((p_234055_1_) -> {
++         this.m_26189_(p_234055_1_.f_26228_).f_26204_.put(p_234055_1_.f_26229_, p_234055_1_.f_26230_);
+       });
+    }
+ 
+@@ -130,6 +_,34 @@
+       return i > p_26168_.f_26275_ ? Math.max(p_26168_.f_26275_, p_26169_) : i;
+    }
+ 
++   static class GossipEntry {
++      public final UUID f_26228_;
++      public final GossipType f_26229_;
++      public final int f_26230_;
++
++      public GossipEntry(UUID p_26232_, GossipType p_26233_, int p_26234_) {
++         this.f_26228_ = p_26232_;
++         this.f_26229_ = p_26233_;
++         this.f_26230_ = p_26234_;
++      }
++
++      public int m_26235_() {
++         return this.f_26230_ * this.f_26229_.f_26274_;
++      }
++
++      public String toString() {
++         return "GossipEntry{target=" + this.f_26228_ + ", type=" + this.f_26229_ + ", value=" + this.f_26230_ + '}';
++      }
++
++      public <T> Dynamic<T> m_26238_(DynamicOps<T> p_26239_) {
++         return new Dynamic<>(p_26239_, p_26239_.createMap(ImmutableMap.of(p_26239_.createString("Target"), SerializableUUID.f_123272_.encodeStart(p_26239_, this.f_26228_).result().orElseThrow(RuntimeException::new), p_26239_.createString("Type"), p_26239_.createString(this.f_26229_.f_26273_), p_26239_.createString("Value"), p_26239_.createInt(this.f_26230_))));
++      }
++
++      public static DataResult<GossipContainer.GossipEntry> m_26236_(Dynamic<?> p_26237_) {
++         return DataResult.unbox(DataResult.instance().group(p_26237_.get("Target").read(SerializableUUID.f_123272_), p_26237_.get("Type").asString().map(GossipType::m_26291_), p_26237_.get("Value").asNumber().map(Number::intValue)).apply(DataResult.instance(), GossipContainer.GossipEntry::new));
++      }
++   }
++
+    static class EntityGossips {
+       private final Object2IntMap<GossipType> f_26204_ = new Object2IntOpenHashMap<>();
+ 
+@@ -137,16 +_,16 @@
+       }
+ 
+       public int m_26220_(Predicate<GossipType> p_26221_) {
+-         return this.f_26204_.object2IntEntrySet().stream().filter((p_26224_) -> {
+-            return p_26221_.test(p_26224_.getKey());
+-         }).mapToInt((p_26214_) -> {
+-            return p_26214_.getIntValue() * (p_26214_.getKey()).f_26274_;
++         return this.f_26204_.object2IntEntrySet().stream().filter((p_220898_1_) -> {
++            return p_26221_.test(p_220898_1_.getKey());
++         }).mapToInt((p_220894_0_) -> {
++            return p_220894_0_.getIntValue() * (p_220894_0_.getKey()).f_26274_;
+          }).sum();
+       }
+ 
+       public Stream<GossipContainer.GossipEntry> m_26215_(UUID p_26216_) {
+-         return this.f_26204_.object2IntEntrySet().stream().map((p_26219_) -> {
+-            return new GossipContainer.GossipEntry(p_26216_, p_26219_.getKey(), p_26219_.getIntValue());
++         return this.f_26204_.object2IntEntrySet().stream().map((p_220897_1_) -> {
++            return new GossipContainer.GossipEntry(p_26216_, p_220897_1_.getKey(), p_220897_1_.getIntValue());
+          });
+       }
+ 
+@@ -183,34 +_,6 @@
+ 
+       public void m_26226_(GossipType p_26227_) {
+          this.f_26204_.removeInt(p_26227_);
+-      }
+-   }
+-
+-   static class GossipEntry {
+-      public final UUID f_26228_;
+-      public final GossipType f_26229_;
+-      public final int f_26230_;
+-
+-      public GossipEntry(UUID p_26232_, GossipType p_26233_, int p_26234_) {
+-         this.f_26228_ = p_26232_;
+-         this.f_26229_ = p_26233_;
+-         this.f_26230_ = p_26234_;
+-      }
+-
+-      public int m_26235_() {
+-         return this.f_26230_ * this.f_26229_.f_26274_;
+-      }
+-
+-      public String toString() {
+-         return "GossipEntry{target=" + this.f_26228_ + ", type=" + this.f_26229_ + ", value=" + this.f_26230_ + '}';
+-      }
+-
+-      public <T> Dynamic<T> m_26238_(DynamicOps<T> p_26239_) {
+-         return new Dynamic<>(p_26239_, p_26239_.createMap(ImmutableMap.of(p_26239_.createString("Target"), SerializableUUID.f_123272_.encodeStart(p_26239_, this.f_26228_).result().orElseThrow(RuntimeException::new), p_26239_.createString("Type"), p_26239_.createString(this.f_26229_.f_26273_), p_26239_.createString("Value"), p_26239_.createInt(this.f_26230_))));
+-      }
+-
+-      public static DataResult<GossipContainer.GossipEntry> m_26236_(Dynamic<?> p_26237_) {
+-         return DataResult.unbox(DataResult.instance().group(p_26237_.get("Target").read(SerializableUUID.f_123272_), p_26237_.get("Type").asString().map(GossipType::m_26291_), p_26237_.get("Value").asNumber().map(Number::intValue)).apply(DataResult.instance(), GossipContainer.GossipEntry::new));
+       }
+    }
+ }

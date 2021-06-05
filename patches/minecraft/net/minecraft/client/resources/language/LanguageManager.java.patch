@@ -1,0 +1,33 @@
+--- a/net/minecraft/client/resources/language/LanguageManager.java
++++ b/net/minecraft/client/resources/language/LanguageManager.java
+@@ -33,16 +_,16 @@
+ 
+    private static Map<String, LanguageInfo> m_118981_(Stream<PackResources> p_118982_) {
+       Map<String, LanguageInfo> map = Maps.newHashMap();
+-      p_118982_.forEach((p_118980_) -> {
++      p_118982_.forEach((p_239505_1_) -> {
+          try {
+-            LanguageMetadataSection languagemetadatasection = p_118980_.m_5550_(LanguageMetadataSection.f_119096_);
++            LanguageMetadataSection languagemetadatasection = p_239505_1_.m_5550_(LanguageMetadataSection.f_119096_);
+             if (languagemetadatasection != null) {
+                for(LanguageInfo languageinfo : languagemetadatasection.m_119101_()) {
+                   map.putIfAbsent(languageinfo.getCode(), languageinfo);
+                }
+             }
+          } catch (IOException | RuntimeException runtimeexception) {
+-            f_118964_.warn("Unable to parse language metadata section of resourcepack: {}", p_118980_.m_8017_(), runtimeexception);
++            f_118964_.warn("Unable to parse language metadata section of resourcepack: {}", p_239505_1_.m_8017_(), runtimeexception);
+          }
+ 
+       });
+@@ -78,5 +_,10 @@
+ 
+    public LanguageInfo m_118976_(String p_118977_) {
+       return this.f_118966_.get(p_118977_);
++   }
++
++   @Override
++   public net.minecraftforge.resource.IResourceType getResourceType() {
++      return net.minecraftforge.resource.VanillaResourceType.LANGUAGES;
+    }
+ }

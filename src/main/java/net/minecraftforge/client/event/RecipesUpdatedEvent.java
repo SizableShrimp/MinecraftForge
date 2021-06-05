@@ -20,7 +20,6 @@
 package net.minecraftforge.client.event;
 
 import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.Event;
 
 /**

@@ -1,0 +1,33 @@
+--- a/net/minecraft/client/gui/screens/ShareToLanScreen.java
++++ b/net/minecraft/client/gui/screens/ShareToLanScreen.java
+@@ -28,7 +_,7 @@
+    }
+ 
+    protected void m_7856_() {
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 155, this.f_96544_ - 28, 150, 20, new TranslatableComponent("lanServer.start"), (p_96664_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 155, this.f_96544_ - 28, 150, 20, new TranslatableComponent("lanServer.start"), (p_213082_1_) -> {
+          this.f_96541_.m_91152_((Screen)null);
+          int i = HttpUtil.m_13939_();
+          Component component;
+@@ -41,10 +_,10 @@
+          this.f_96541_.f_91065_.m_93076_().m_93785_(component);
+          this.f_96541_.m_91341_();
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 5, this.f_96544_ - 28, 150, 20, CommonComponents.f_130656_, (p_96662_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 5, this.f_96544_ - 28, 150, 20, CommonComponents.f_130656_, (p_213085_1_) -> {
+          this.f_96541_.m_91152_(this.f_96643_);
+       }));
+-      this.f_96645_ = this.m_7082_(new Button(this.f_96543_ / 2 - 155, 100, 150, 20, TextComponent.f_131282_, (p_96660_) -> {
++      this.f_96645_ = this.m_7082_(new Button(this.f_96543_ / 2 - 155, 100, 150, 20, TextComponent.f_131282_, (p_213084_1_) -> {
+          if ("spectator".equals(this.f_96646_)) {
+             this.f_96646_ = "creative";
+          } else if ("creative".equals(this.f_96646_)) {
+@@ -57,7 +_,7 @@
+ 
+          this.m_96665_();
+       }));
+-      this.f_96644_ = this.m_7082_(new Button(this.f_96543_ / 2 + 5, 100, 150, 20, f_96640_, (p_96657_) -> {
++      this.f_96644_ = this.m_7082_(new Button(this.f_96543_ / 2 + 5, 100, 150, 20, f_96640_, (p_213083_1_) -> {
+          this.f_96647_ = !this.f_96647_;
+          this.m_96665_();
+       }));

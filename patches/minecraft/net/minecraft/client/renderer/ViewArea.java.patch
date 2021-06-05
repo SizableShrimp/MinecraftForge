@@ -1,0 +1,10 @@
+--- a/net/minecraft/client/renderer/ViewArea.java
++++ b/net/minecraft/client/renderer/ViewArea.java
+@@ -2,6 +_,7 @@
+ 
+ import javax.annotation.Nullable;
+ import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
++import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher.RenderChunk;
+ import net.minecraft.core.BlockPos;
+ import net.minecraft.util.Mth;
+ import net.minecraft.world.level.Level;

@@ -1,0 +1,119 @@
+--- a/net/minecraft/client/multiplayer/ClientLevel.java
++++ b/net/minecraft/client/multiplayer/ClientLevel.java
+@@ -86,10 +_,10 @@
+    private Scoreboard f_104555_ = new Scoreboard();
+    private final Map<String, MapItemSavedData> f_104556_ = Maps.newHashMap();
+    private int f_104557_;
+-   private final Object2ObjectArrayMap<ColorResolver, BlockTintCache> f_104558_ = Util.m_137469_(new Object2ObjectArrayMap<>(3), (p_104723_) -> {
+-      p_104723_.put(BiomeColors.f_108789_, new BlockTintCache());
+-      p_104723_.put(BiomeColors.f_108790_, new BlockTintCache());
+-      p_104723_.put(BiomeColors.f_108791_, new BlockTintCache());
++   private final Object2ObjectArrayMap<ColorResolver, BlockTintCache> f_104558_ = Util.m_137469_(new Object2ObjectArrayMap<>(3), (p_228319_0_) -> {
++      p_228319_0_.put(BiomeColors.f_108789_, new BlockTintCache());
++      p_228319_0_.put(BiomeColors.f_108790_, new BlockTintCache());
++      p_228319_0_.put(BiomeColors.f_108791_, new BlockTintCache());
+    });
+    private final ClientChunkCache f_104559_;
+ 
+@@ -103,6 +_,8 @@
+       this.m_104752_(new BlockPos(8, 64, 8), 0.0F);
+       this.m_46465_();
+       this.m_46466_();
++      this.gatherCapabilities();
++      net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.world.WorldEvent.Load(this));
+    }
+ 
+    public DimensionSpecialEffects m_104583_() {
+@@ -185,6 +_,7 @@
+             this.m_46473_().m_6521_(() -> {
+                return Registry.f_122826_.m_7981_(p_104640_.m_6095_()).toString();
+             });
++            if (p_104640_.canUpdate())
+             p_104640_.m_8119_();
+             this.m_46473_().m_7238_();
+          }
+@@ -255,14 +_,14 @@
+    }
+ 
+    public void m_104799_(int p_104800_, int p_104801_) {
+-      this.f_104558_.forEach((p_104625_, p_104626_) -> {
+-         p_104626_.m_92655_(p_104800_, p_104801_);
++      this.f_104558_.forEach((p_228316_2_, p_228316_3_) -> {
++         p_228316_3_.m_92655_(p_104800_, p_104801_);
+       });
+    }
+ 
+    public void m_104810_() {
+-      this.f_104558_.forEach((p_104731_, p_104732_) -> {
+-         p_104732_.m_92654_();
++      this.f_104558_.forEach((p_228320_0_, p_228320_1_) -> {
++         p_228320_1_.m_92654_();
+       });
+    }
+ 
+@@ -284,9 +_,11 @@
+    }
+ 
+    private void m_104739_(int p_104740_, Entity p_104741_) {
++      if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.EntityJoinWorldEvent(p_104741_, this))) return;
+       this.m_104791_(p_104740_);
+       this.f_104560_.put(p_104740_, p_104741_);
+       this.m_7726_().m_7587_(Mth.m_14107_(p_104741_.m_20185_() / 16.0D), Mth.m_14107_(p_104741_.m_20189_() / 16.0D), ChunkStatus.f_62326_, true).m_6286_(p_104741_);
++      p_104741_.onAddedToWorld();
+    }
+ 
+    public void m_104791_(int p_104792_) {
+@@ -305,6 +_,8 @@
+       }
+ 
+       this.f_104566_.remove(p_104798_);
++      p_104798_.onRemovedFromWorld();
++      net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.EntityLeaveWorldEvent(p_104798_, this));
+    }
+ 
+    public void m_104750_(LevelChunk p_104751_) {
+@@ -377,9 +_,9 @@
+       }
+ 
+       if (!blockstate.m_60838_(this, p_104621_)) {
+-         this.m_46857_(p_104621_).m_47562_().ifPresent((p_104673_) -> {
+-            if (p_104673_.m_47424_(this.f_46441_)) {
+-               this.m_7106_(p_104673_.m_47419_(), (double)p_104621_.m_123341_() + this.f_46441_.nextDouble(), (double)p_104621_.m_123342_() + this.f_46441_.nextDouble(), (double)p_104621_.m_123343_() + this.f_46441_.nextDouble(), 0.0D, 0.0D, 0.0D);
++         this.m_46857_(p_104621_).m_47562_().ifPresent((p_239135_2_) -> {
++            if (p_239135_2_.m_47424_(this.f_46441_)) {
++               this.m_7106_(p_239135_2_.m_47419_(), (double)p_104621_.m_123341_() + this.f_46441_.nextDouble(), (double)p_104621_.m_123342_() + this.f_46441_.nextDouble(), (double)p_104621_.m_123343_() + this.f_46441_.nextDouble(), 0.0D, 0.0D, 0.0D);
+             }
+ 
+          });
+@@ -447,6 +_,11 @@
+    }
+ 
+    public void m_6263_(@Nullable Player p_104645_, double p_104646_, double p_104647_, double p_104648_, SoundEvent p_104649_, SoundSource p_104650_, float p_104651_, float p_104652_) {
++      net.minecraftforge.event.entity.PlaySoundAtEntityEvent event = net.minecraftforge.event.ForgeEventFactory.onPlaySoundAtEntity(p_104645_, p_104649_, p_104650_, p_104651_, p_104652_);
++      if (event.isCanceled() || event.getSound() == null) return;
++      p_104649_ = event.getSound();
++      p_104650_ = event.getCategory();
++      p_104651_ = event.getVolume();
+       if (p_104645_ == this.f_104565_.f_91074_) {
+          this.m_7785_(p_104646_, p_104647_, p_104648_, p_104649_, p_104650_, p_104651_, p_104652_, false);
+       }
+@@ -454,6 +_,11 @@
+    }
+ 
+    public void m_6269_(@Nullable Player p_104659_, Entity p_104660_, SoundEvent p_104661_, SoundSource p_104662_, float p_104663_, float p_104664_) {
++      net.minecraftforge.event.entity.PlaySoundAtEntityEvent event = net.minecraftforge.event.ForgeEventFactory.onPlaySoundAtEntity(p_104659_, p_104661_, p_104662_, p_104663_, p_104664_);
++      if (event.isCanceled() || event.getSound() == null) return;
++      p_104661_ = event.getSound();
++      p_104662_ = event.getCategory();
++      p_104663_ = event.getVolume();
+       if (p_104659_ == this.f_104565_.f_91074_) {
+          this.f_104565_.m_91106_().m_120367_(new EntityBoundSoundInstance(p_104661_, p_104662_, p_104660_));
+       }
+@@ -875,6 +_,7 @@
+       }
+ 
+       public void m_104851_(Difficulty p_104852_) {
++         net.minecraftforge.common.ForgeHooks.onDifficultyChange(p_104852_, this.f_104840_);
+          this.f_104840_ = p_104852_;
+       }
+ 

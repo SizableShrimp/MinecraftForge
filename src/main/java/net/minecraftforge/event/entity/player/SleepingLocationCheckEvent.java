@@ -19,8 +19,6 @@
 
 package net.minecraftforge.event.entity.player;
 
-import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraftforge.event.entity.living.LivingEvent;

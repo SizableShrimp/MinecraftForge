@@ -1,0 +1,20 @@
+--- a/net/minecraft/world/level/levelgen/feature/AbstractHugeMushroomFeature.java
++++ b/net/minecraft/world/level/levelgen/feature/AbstractHugeMushroomFeature.java
+@@ -20,7 +_,7 @@
+    protected void m_65110_(LevelAccessor p_65111_, Random p_65112_, BlockPos p_65113_, HugeMushroomFeatureConfiguration p_65114_, int p_65115_, BlockPos.MutableBlockPos p_65116_) {
+       for(int i = 0; i < p_65115_; ++i) {
+          p_65116_.m_122190_(p_65113_).m_122175_(Direction.UP, i);
+-         if (!p_65111_.m_8055_(p_65116_).m_60804_(p_65111_, p_65116_)) {
++         if (p_65111_.m_8055_(p_65116_).canBeReplacedByLogs(p_65111_, p_65116_)) {
+             this.m_5974_(p_65111_, p_65116_, p_65114_.f_67741_.m_7112_(p_65112_, p_65113_));
+          }
+       }
+@@ -49,7 +_,7 @@
+                for(int l = -k; l <= k; ++l) {
+                   for(int i1 = -k; i1 <= k; ++i1) {
+                      BlockState blockstate = p_65099_.m_8055_(p_65102_.m_122154_(p_65100_, l, j, i1));
+-                     if (!blockstate.m_60795_() && !blockstate.m_60620_(BlockTags.f_13035_)) {
++                     if (!blockstate.isAir(p_65099_, p_65102_.m_122154_(p_65100_, l, j, i1)) && !blockstate.m_60620_(BlockTags.f_13035_)) {
+                         return false;
+                      }
+                   }

@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/item/CompassItem.java
++++ b/net/minecraft/world/item/CompassItem.java
+@@ -88,8 +_,8 @@
+ 
+    private void m_40732_(ResourceKey<Level> p_40733_, BlockPos p_40734_, CompoundTag p_40735_) {
+       p_40735_.m_128365_("LodestonePos", NbtUtils.m_129224_(p_40734_));
+-      Level.f_46427_.encodeStart(NbtOps.f_128958_, p_40733_).resultOrPartial(f_40715_::error).ifPresent((p_40731_) -> {
+-         p_40735_.m_128365_("LodestoneDimension", p_40731_);
++      Level.f_46427_.encodeStart(NbtOps.f_128958_, p_40733_).resultOrPartial(f_40715_::error).ifPresent((p_234668_1_) -> {
++         p_40735_.m_128365_("LodestoneDimension", p_234668_1_);
+       });
+       p_40735_.m_128379_("LodestoneTracked", true);
+    }

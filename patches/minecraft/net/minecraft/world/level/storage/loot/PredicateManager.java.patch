@@ -1,0 +1,44 @@
+--- a/net/minecraft/world/level/storage/loot/PredicateManager.java
++++ b/net/minecraft/world/level/storage/loot/PredicateManager.java
+@@ -36,29 +_,29 @@
+ 
+    protected void m_5787_(Map<ResourceLocation, JsonElement> p_79249_, ResourceManager p_79250_, ProfilerFiller p_79251_) {
+       Builder<ResourceLocation, LootItemCondition> builder = ImmutableMap.builder();
+-      p_79249_.forEach((p_79235_, p_79236_) -> {
++      p_79249_.forEach((p_237404_1_, p_237404_2_) -> {
+          try {
+-            if (p_79236_.isJsonArray()) {
+-               LootItemCondition[] alootitemcondition = f_79228_.fromJson(p_79236_, LootItemCondition[].class);
+-               builder.put(p_79235_, new PredicateManager.CompositePredicate(alootitemcondition));
++            if (p_237404_2_.isJsonArray()) {
++               LootItemCondition[] alootitemcondition = f_79228_.fromJson(p_237404_2_, LootItemCondition[].class);
++               builder.put(p_237404_1_, new PredicateManager.CompositePredicate(alootitemcondition));
+             } else {
+-               LootItemCondition lootitemcondition = f_79228_.fromJson(p_79236_, LootItemCondition.class);
+-               builder.put(p_79235_, lootitemcondition);
++               LootItemCondition lootitemcondition = f_79228_.fromJson(p_237404_2_, LootItemCondition.class);
++               builder.put(p_237404_1_, lootitemcondition);
+             }
+          } catch (Exception exception) {
+-            f_79227_.error("Couldn't parse loot table {}", p_79235_, exception);
++            f_79227_.error("Couldn't parse loot table {}", p_237404_1_, exception);
+          }
+ 
+       });
+       Map<ResourceLocation, LootItemCondition> map = builder.build();
+-      ValidationContext validationcontext = new ValidationContext(LootContextParamSets.f_81420_, map::get, (p_79255_) -> {
++      ValidationContext validationcontext = new ValidationContext(LootContextParamSets.f_81420_, map::get, (p_227518_0_) -> {
+          return null;
+       });
+-      map.forEach((p_79239_, p_79240_) -> {
+-         p_79240_.m_6169_(validationcontext.m_79367_("{" + p_79239_ + "}", p_79239_));
++      map.forEach((p_227515_1_, p_227515_2_) -> {
++         p_227515_2_.m_6169_(validationcontext.m_79367_("{" + p_227515_1_ + "}", p_227515_1_));
+       });
+-      validationcontext.m_79352_().forEach((p_79246_, p_79247_) -> {
+-         f_79227_.warn("Found validation problem in " + p_79246_ + ": " + p_79247_);
++      validationcontext.m_79352_().forEach((p_227516_0_, p_227516_1_) -> {
++         f_79227_.warn("Found validation problem in " + p_227516_0_ + ": " + p_227516_1_);
+       });
+       this.f_79229_ = map;
+    }

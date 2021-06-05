@@ -1,0 +1,57 @@
+--- a/net/minecraft/server/Bootstrap.java
++++ b/net/minecraft/server/Bootstrap.java
+@@ -15,7 +_,6 @@
+ import net.minecraft.world.effect.MobEffect;
+ import net.minecraft.world.entity.EntityType;
+ import net.minecraft.world.entity.ai.attributes.Attribute;
+-import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
+ import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.alchemy.PotionBrewing;
+ import net.minecraft.world.item.enchantment.Enchantment;
+@@ -47,6 +_,8 @@
+                DispenseItemBehavior.m_123402_();
+                ArgumentTypes.m_121586_();
+                StaticTags.m_13282_();
++               net.minecraftforge.registries.GameData.vanillaSnapshot();
++               if (false) // skip redirectOutputToLog, Forge already redirects stdout and stderr output to log so that they print with more context
+                m_135890_();
+             }
+          }
+@@ -55,8 +_,8 @@
+ 
+    private static <T> void m_135871_(Iterable<T> p_135872_, Function<T, String> p_135873_, Set<String> p_135874_) {
+       Language language = Language.m_128107_();
+-      p_135872_.forEach((p_135883_) -> {
+-         String s = p_135873_.apply(p_135883_);
++      p_135872_.forEach((p_218818_3_) -> {
++         String s = p_135873_.apply(p_218818_3_);
+          if (!language.m_6722_(s)) {
+             p_135874_.add(s);
+          }
+@@ -84,8 +_,8 @@
+       m_135871_(Registry.f_122827_, Item::m_5524_, set);
+       m_135871_(Registry.f_122825_, Enchantment::m_44704_, set);
+       m_135871_(Registry.f_122824_, Block::m_7705_, set);
+-      m_135871_(Registry.f_122832_, (p_135885_) -> {
+-         return "stat." + p_135885_.toString().replace(':', '.');
++      m_135871_(Registry.f_122832_, (p_218820_0_) -> {
++         return "stat." + p_218820_0_.toString().replace(':', '.');
+       }, set);
+       m_135877_(set);
+       return set;
+@@ -96,13 +_,12 @@
+          throw new IllegalArgumentException("Not bootstrapped");
+       } else {
+          if (SharedConstants.f_136183_) {
+-            m_135886_().forEach((p_135888_) -> {
+-               f_135868_.error("Missing translations: " + p_135888_);
++            m_135886_().forEach((p_218817_0_) -> {
++               f_135868_.error("Missing translations: " + p_218817_0_);
+             });
+             Commands.m_82138_();
+          }
+ 
+-         DefaultAttributes.m_22296_();
+       }
+    }
+ 

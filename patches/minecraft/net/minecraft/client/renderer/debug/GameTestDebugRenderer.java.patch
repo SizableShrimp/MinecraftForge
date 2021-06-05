@@ -1,0 +1,13 @@
+--- a/net/minecraft/client/renderer/debug/GameTestDebugRenderer.java
++++ b/net/minecraft/client/renderer/debug/GameTestDebugRenderer.java
+@@ -25,8 +_,8 @@
+ 
+    public void m_7790_(PoseStack p_113519_, MultiBufferSource p_113520_, double p_113521_, double p_113522_, double p_113523_) {
+       long i = Util.m_137550_();
+-      this.f_113512_.entrySet().removeIf((p_113517_) -> {
+-         return i > (p_113517_.getValue()).f_113534_;
++      this.f_113512_.entrySet().removeIf((p_229021_2_) -> {
++         return i > (p_229021_2_.getValue()).f_113534_;
+       });
+       this.f_113512_.forEach(this::m_113529_);
+    }

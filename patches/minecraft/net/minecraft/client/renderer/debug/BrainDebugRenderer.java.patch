@@ -1,0 +1,86 @@
+--- a/net/minecraft/client/renderer/debug/BrainDebugRenderer.java
++++ b/net/minecraft/client/renderer/debug/BrainDebugRenderer.java
+@@ -84,17 +_,17 @@
+    }
+ 
+    private void m_113264_() {
+-      this.f_113196_.entrySet().removeIf((p_113263_) -> {
+-         Entity entity = this.f_113194_.f_91073_.m_6815_((p_113263_.getValue()).f_113294_);
++      this.f_113196_.entrySet().removeIf((p_239330_1_) -> {
++         Entity entity = this.f_113194_.f_91073_.m_6815_((p_239330_1_.getValue()).f_113294_);
+          return entity == null || entity.f_19866_;
+       });
+    }
+ 
+    private void m_113202_(double p_113203_, double p_113204_, double p_113205_) {
+       BlockPos blockpos = new BlockPos(p_113203_, p_113204_, p_113205_);
+-      this.f_113196_.values().forEach((p_113210_) -> {
+-         if (this.m_113280_(p_113210_)) {
+-            this.m_113267_(p_113210_, p_113203_, p_113204_, p_113205_);
++      this.f_113196_.values().forEach((p_222924_7_) -> {
++         if (this.m_113280_(p_222924_7_)) {
++            this.m_113267_(p_222924_7_, p_113203_, p_113204_, p_113205_);
+          }
+ 
+       });
+@@ -105,15 +_,15 @@
+          }
+       }
+ 
+-      this.f_113195_.values().forEach((p_113238_) -> {
+-         if (blockpos.m_123314_(p_113238_.f_113333_, 30.0D)) {
+-            this.m_113272_(p_113238_);
++      this.f_113195_.values().forEach((p_239324_2_) -> {
++         if (blockpos.m_123314_(p_239324_2_.f_113333_, 30.0D)) {
++            this.m_113272_(p_239324_2_);
+          }
+ 
+       });
+-      this.m_113279_().forEach((p_113241_, p_113242_) -> {
+-         if (blockpos.m_123314_(p_113241_, 30.0D)) {
+-            this.m_113243_(p_113241_, p_113242_);
++      this.m_113279_().forEach((p_239325_2_, p_239325_3_) -> {
++         if (blockpos.m_123314_(p_239325_2_, 30.0D)) {
++            this.m_113243_(p_239325_2_, p_239325_3_);
+          }
+ 
+       });
+@@ -275,14 +_,14 @@
+    }
+ 
+    private Collection<UUID> m_113284_(BlockPos p_113285_) {
+-      return this.f_113196_.values().stream().filter((p_113278_) -> {
+-         return p_113278_.m_113326_(p_113285_);
++      return this.f_113196_.values().stream().filter((p_239336_1_) -> {
++         return p_239336_1_.m_113326_(p_113285_);
+       }).map(BrainDebugRenderer.BrainDump::m_113322_).collect(Collectors.toSet());
+    }
+ 
+    private Collection<UUID> m_113289_(BlockPos p_113290_) {
+-      return this.f_113196_.values().stream().filter((p_113235_) -> {
+-         return p_113235_.m_113331_(p_113290_);
++      return this.f_113196_.values().stream().filter((p_239323_1_) -> {
++         return p_239323_1_.m_113331_(p_113290_);
+       }).map(BrainDebugRenderer.BrainDump::m_113322_).collect(Collectors.toSet());
+    }
+ 
+@@ -292,7 +_,7 @@
+       for(BrainDebugRenderer.BrainDump braindebugrenderer$braindump : this.f_113196_.values()) {
+          for(BlockPos blockpos : Iterables.concat(braindebugrenderer$braindump.f_113308_, braindebugrenderer$braindump.f_113309_)) {
+             if (!this.f_113195_.containsKey(blockpos)) {
+-               map.computeIfAbsent(blockpos, (p_113292_) -> {
++               map.computeIfAbsent(blockpos, (p_241729_0_) -> {
+                   return Lists.newArrayList();
+                }).add(braindebugrenderer$braindump.f_113295_);
+             }
+@@ -303,8 +_,8 @@
+    }
+ 
+    private void m_113286_() {
+-      DebugRenderer.m_113448_(this.f_113194_.m_91288_(), 8).ifPresent((p_113212_) -> {
+-         this.f_113197_ = p_113212_.m_20148_();
++      DebugRenderer.m_113448_(this.f_113194_.m_91288_(), 8).ifPresent((p_239317_1_) -> {
++         this.f_113197_ = p_239317_1_.m_20148_();
+       });
+    }
+ 

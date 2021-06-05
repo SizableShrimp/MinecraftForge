@@ -1,0 +1,20 @@
+--- a/net/minecraft/world/level/block/FallingBlock.java
++++ b/net/minecraft/world/level/block/FallingBlock.java
+@@ -32,7 +_,7 @@
+    }
+ 
+    public void m_7458_(BlockState p_53216_, ServerLevel p_53217_, BlockPos p_53218_, Random p_53219_) {
+-      if (m_53241_(p_53217_.m_8055_(p_53218_.m_7495_())) && p_53218_.m_123342_() >= 0) {
++      if (p_53217_.m_46859_(p_53218_.m_7495_()) || m_53241_(p_53217_.m_8055_(p_53218_.m_7495_())) && p_53218_.m_123342_() >= 0) {
+          FallingBlockEntity fallingblockentity = new FallingBlockEntity(p_53217_, (double)p_53218_.m_123341_() + 0.5D, (double)p_53218_.m_123342_(), (double)p_53218_.m_123343_() + 0.5D, p_53217_.m_8055_(p_53218_));
+          this.m_6788_(fallingblockentity);
+          p_53217_.m_7967_(fallingblockentity);
+@@ -61,7 +_,7 @@
+    public void m_7100_(BlockState p_53221_, Level p_53222_, BlockPos p_53223_, Random p_53224_) {
+       if (p_53224_.nextInt(16) == 0) {
+          BlockPos blockpos = p_53223_.m_7495_();
+-         if (m_53241_(p_53222_.m_8055_(blockpos))) {
++         if (p_53222_.m_46859_(blockpos) || m_53241_(p_53222_.m_8055_(blockpos))) {
+             double d0 = (double)p_53223_.m_123341_() + p_53224_.nextDouble();
+             double d1 = (double)p_53223_.m_123342_() - 0.05D;
+             double d2 = (double)p_53223_.m_123343_() + p_53224_.nextDouble();

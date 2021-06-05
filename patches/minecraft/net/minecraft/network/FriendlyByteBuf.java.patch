@@ -1,0 +1,51 @@
+--- a/net/minecraft/network/FriendlyByteBuf.java
++++ b/net/minecraft/network/FriendlyByteBuf.java
+@@ -39,7 +_,7 @@
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+-public class FriendlyByteBuf extends ByteBuf {
++public class FriendlyByteBuf extends ByteBuf implements net.minecraftforge.common.extensions.IForgePacketBuffer {
+    private final ByteBuf f_130049_;
+ 
+    public FriendlyByteBuf(ByteBuf p_130051_) {
+@@ -292,16 +_,25 @@
+    }
+ 
+    public FriendlyByteBuf m_130055_(ItemStack p_130056_) {
+-      if (p_130056_.m_41619_()) {
++      return writeItemStack(p_130056_, true);
++   }
++
++   /**
++    * Most ItemStack serialization is Server to Client,and doesn't need to know the FULL tag details.
++    * One exception is items from the creative menu, which must be sent from Client to Server with their full NBT.
++    * If you want to send the FULL tag set limitedTag to false
++    */
++   public FriendlyByteBuf writeItemStack(ItemStack p_150788_1_, boolean limitedTag) {
++      if (p_150788_1_.m_41619_()) {
+          this.writeBoolean(false);
+       } else {
+          this.writeBoolean(true);
+-         Item item = p_130056_.m_41720_();
++         Item item = p_150788_1_.m_41720_();
+          this.m_130130_(Item.m_41393_(item));
+-         this.writeByte(p_130056_.m_41613_());
++         this.writeByte(p_150788_1_.m_41613_());
+          CompoundTag compoundtag = null;
+-         if (item.m_41465_() || item.m_41468_()) {
+-            compoundtag = p_130056_.m_41783_();
++         if (item.isDamageable(p_150788_1_) || item.m_41468_()) {
++            compoundtag = limitedTag ? p_150788_1_.getShareTag() : p_150788_1_.m_41783_();
+          }
+ 
+          this.m_130079_(compoundtag);
+@@ -317,7 +_,7 @@
+          int i = this.m_130242_();
+          int j = this.readByte();
+          ItemStack itemstack = new ItemStack(Item.m_41445_(i), j);
+-         itemstack.m_41751_(this.m_130260_());
++         itemstack.readShareTag(this.m_130260_());
+          return itemstack;
+       }
+    }

@@ -1,0 +1,15 @@
+--- a/net/minecraft/world/level/levelgen/placement/DarkOakTreePlacementDecorator.java
++++ b/net/minecraft/world/level/levelgen/placement/DarkOakTreePlacementDecorator.java
+@@ -18,9 +_,9 @@
+    }
+ 
+    public Stream<BlockPos> m_7887_(DecorationContext p_70543_, Random p_70544_, NoneDecoratorConfiguration p_70545_, BlockPos p_70546_) {
+-      return IntStream.range(0, 16).mapToObj((p_70552_) -> {
+-         int i = p_70552_ / 4;
+-         int j = p_70552_ % 4;
++      return IntStream.range(0, 16).mapToObj((p_242881_5_) -> {
++         int i = p_242881_5_ / 4;
++         int j = p_242881_5_ % 4;
+          int k = i * 4 + 1 + p_70544_.nextInt(3) + p_70546_.m_123341_();
+          int l = j * 4 + 1 + p_70544_.nextInt(3) + p_70546_.m_123343_();
+          int i1 = p_70543_.m_70590_(this.m_5627_(p_70545_), k, l);

@@ -1,0 +1,24 @@
+--- a/net/minecraft/client/renderer/GpuWarnlistManager.java
++++ b/net/minecraft/client/renderer/GpuWarnlistManager.java
+@@ -88,8 +_,8 @@
+    @Nullable
+    public String m_109256_() {
+       StringBuilder stringbuilder = new StringBuilder();
+-      this.f_109212_.forEach((p_109235_, p_109236_) -> {
+-         stringbuilder.append(p_109235_).append(": ").append(p_109236_);
++      this.f_109212_.forEach((p_243498_1_, p_243498_2_) -> {
++         stringbuilder.append(p_243498_1_).append(": ").append(p_243498_2_);
+       });
+       return stringbuilder.length() == 0 ? null : stringbuilder.toString();
+    }
+@@ -117,8 +_,8 @@
+    }
+ 
+    private static void m_109222_(JsonArray p_109223_, List<Pattern> p_109224_) {
+-      p_109223_.forEach((p_109239_) -> {
+-         p_109224_.add(Pattern.compile(p_109239_.getAsString(), 2));
++      p_109223_.forEach((p_241694_1_) -> {
++         p_109224_.add(Pattern.compile(p_241694_1_.getAsString(), 2));
+       });
+    }
+ 

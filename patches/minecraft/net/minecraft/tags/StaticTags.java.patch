@@ -1,0 +1,56 @@
+--- a/net/minecraft/tags/StaticTags.java
++++ b/net/minecraft/tags/StaticTags.java
+@@ -24,8 +_,8 @@
+    }
+ 
+    public static void m_13269_(TagContainer p_13270_) {
+-      f_13264_.values().forEach((p_13273_) -> {
+-         p_13273_.m_13242_(p_13270_);
++      f_13264_.values().forEach((p_242194_1_) -> {
++         p_242194_1_.m_13242_(p_13270_);
+       });
+    }
+ 
+@@ -36,19 +_,38 @@
+ 
+    public static Multimap<ResourceLocation, ResourceLocation> m_13283_(TagContainer p_13284_) {
+       Multimap<ResourceLocation, ResourceLocation> multimap = HashMultimap.create();
+-      f_13264_.forEach((p_13277_, p_13278_) -> {
+-         multimap.putAll(p_13277_, p_13278_.m_13247_(p_13284_));
++      f_13264_.forEach((p_242195_2_, p_242195_3_) -> {
++         multimap.putAll(p_242195_2_, p_242195_3_.m_13247_(p_13284_));
+       });
+       return multimap;
+    }
+ 
+    public static void m_13282_() {
+       StaticTagHelper[] astatictaghelper = new StaticTagHelper[]{BlockTags.f_13053_, ItemTags.f_13163_, FluidTags.f_13130_, EntityTypeTags.f_13119_};
+-      boolean flag = Stream.of(astatictaghelper).anyMatch((p_13268_) -> {
+-         return !f_13264_.containsValue(p_13268_);
++      boolean flag = Stream.of(astatictaghelper).anyMatch((p_242192_0_) -> {
++         return !f_13264_.containsValue(p_242192_0_);
+       });
+       if (flag) {
+          throw new IllegalStateException("Missing helper registrations");
+       }
++   }
++
++   @javax.annotation.Nullable
++   public static StaticTagHelper<?> get(ResourceLocation rl) {
++      return f_13264_.get(rl);
++   }
++
++   public static Multimap<ResourceLocation, ResourceLocation> validateVanillaTags(TagContainer tagCollectionSupplier) {
++      Multimap<ResourceLocation, ResourceLocation> missingTags = HashMultimap.create();
++      for (java.util.Map.Entry<ResourceLocation, StaticTagHelper<?>> entry : f_13264_.entrySet()) {
++         if (!net.minecraftforge.common.ForgeTagHandler.getCustomTagTypeNames().contains(entry.getKey())) {
++            missingTags.putAll(entry.getKey(), entry.getValue().m_13247_(tagCollectionSupplier));
++         }
++      }
++      return missingTags;
++   }
++
++   public static void fetchCustomTagTypes(TagContainer tagCollectionSupplier) {
++      net.minecraftforge.common.ForgeTagHandler.getCustomTagTypeNames().forEach(tagRegistry -> f_13264_.get(tagRegistry).m_13242_(tagCollectionSupplier));
+    }
+ }

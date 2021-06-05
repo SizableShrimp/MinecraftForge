@@ -1,0 +1,65 @@
+--- a/net/minecraft/client/renderer/texture/TextureAtlas.java
++++ b/net/minecraft/client/renderer/texture/TextureAtlas.java
+@@ -80,12 +_,13 @@
+          }
+       }
+ 
++      net.minecraftforge.client.ForgeHooksClient.onTextureStitchedPost(this);
+    }
+ 
+    public TextureAtlas.Preparations m_118307_(ResourceManager p_118308_, Stream<ResourceLocation> p_118309_, ProfilerFiller p_118310_, int p_118311_) {
+       p_118310_.m_6180_("preparing");
+-      Set<ResourceLocation> set = p_118309_.peek((p_118327_) -> {
+-         if (p_118327_ == null) {
++      Set<ResourceLocation> set = p_118309_.peek((p_229222_0_) -> {
++         if (p_229222_0_ == null) {
+             throw new IllegalArgumentException("Location cannot be null!");
+          }
+       }).collect(Collectors.toSet());
+@@ -94,6 +_,7 @@
+       int j = Integer.MAX_VALUE;
+       int k = 1 << p_118311_;
+       p_118310_.m_6182_("extracting_frames");
++      net.minecraftforge.client.ForgeHooksClient.onTextureStitchedPre(this, set);
+ 
+       for(TextureAtlasSprite.Info textureatlassprite$info : this.m_118304_(p_118308_, set)) {
+          j = Math.min(j, Math.min(textureatlassprite$info.m_118434_(), textureatlassprite$info.m_118437_()));
+@@ -108,7 +_,8 @@
+ 
+       int i1 = Math.min(j, k);
+       int j1 = Mth.m_14173_(i1);
+-      int k1;
++      int k1 = p_118311_;
++      if (false) // FORGE: do not lower the mipmap level
+       if (j1 < p_118311_) {
+          f_118261_.warn("{}: dropping miplevel from {} to {}, because of minimum power of two: {}", this.f_118265_, p_118311_, j1, i1);
+          k1 = j1;
+@@ -125,8 +_,8 @@
+       } catch (StitcherException stitcherexception) {
+          CrashReport crashreport = CrashReport.m_127521_(stitcherexception, "Stitching");
+          CrashReportCategory crashreportcategory = crashreport.m_127514_("Stitcher");
+-         crashreportcategory.m_128159_("Sprites", stitcherexception.m_118258_().stream().map((p_118315_) -> {
+-            return String.format("%s[%dx%d]", p_118315_.m_118431_(), p_118315_.m_118434_(), p_118315_.m_118437_());
++         crashreportcategory.m_128159_("Sprites", stitcherexception.m_118258_().stream().map((p_229216_0_) -> {
++            return String.format("%s[%dx%d]", p_229216_0_.m_118431_(), p_229216_0_.m_118434_(), p_229216_0_.m_118437_());
+          }).collect(Collectors.joining(",")));
+          crashreportcategory.m_128159_("Max Texture Size", i);
+          throw new ReportedException(crashreport);
+@@ -177,13 +_,13 @@
+    private List<TextureAtlasSprite> m_118283_(ResourceManager p_118284_, Stitcher p_118285_, int p_118286_) {
+       ConcurrentLinkedQueue<TextureAtlasSprite> concurrentlinkedqueue = new ConcurrentLinkedQueue<>();
+       List<CompletableFuture<?>> list = Lists.newArrayList();
+-      p_118285_.m_118180_((p_118276_, p_118277_, p_118278_, p_118279_, p_118280_) -> {
+-         if (p_118276_ == MissingTextureAtlasSprite.m_118079_()) {
+-            MissingTextureAtlasSprite missingtextureatlassprite = MissingTextureAtlasSprite.m_118072_(this, p_118286_, p_118277_, p_118278_, p_118279_, p_118280_);
++      p_118285_.m_118180_((p_229215_5_, p_229215_6_, p_229215_7_, p_229215_8_, p_229215_9_) -> {
++         if (p_229215_5_ == MissingTextureAtlasSprite.m_118079_()) {
++            MissingTextureAtlasSprite missingtextureatlassprite = MissingTextureAtlasSprite.m_118072_(this, p_118286_, p_229215_6_, p_229215_7_, p_229215_8_, p_229215_9_);
+             concurrentlinkedqueue.add(missingtextureatlassprite);
+          } else {
+             list.add(CompletableFuture.runAsync(() -> {
+-               TextureAtlasSprite textureatlassprite = this.m_118287_(p_118284_, p_118276_, p_118277_, p_118278_, p_118286_, p_118279_, p_118280_);
++               TextureAtlasSprite textureatlassprite = this.m_118287_(p_118284_, p_229215_5_, p_229215_6_, p_229215_7_, p_118286_, p_229215_8_, p_229215_9_);
+                if (textureatlassprite != null) {
+                   concurrentlinkedqueue.add(textureatlassprite);
+                }

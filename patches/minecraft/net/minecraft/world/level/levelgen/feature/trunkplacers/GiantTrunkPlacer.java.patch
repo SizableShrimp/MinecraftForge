@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/trunkplacers/GiantTrunkPlacer.java
++++ b/net/minecraft/world/level/levelgen/feature/trunkplacers/GiantTrunkPlacer.java
+@@ -13,8 +_,8 @@
+ import net.minecraft.world.level.levelgen.structure.BoundingBox;
+ 
+ public class GiantTrunkPlacer extends TrunkPlacer {
+-   public static final Codec<GiantTrunkPlacer> f_70162_ = RecordCodecBuilder.create((p_70189_) -> {
+-      return m_70305_(p_70189_).apply(p_70189_, GiantTrunkPlacer::new);
++   public static final Codec<GiantTrunkPlacer> f_70162_ = RecordCodecBuilder.create((p_236900_0_) -> {
++      return m_70305_(p_236900_0_).apply(p_236900_0_, GiantTrunkPlacer::new);
+    });
+ 
+    public GiantTrunkPlacer(int p_70165_, int p_70166_, int p_70167_) {

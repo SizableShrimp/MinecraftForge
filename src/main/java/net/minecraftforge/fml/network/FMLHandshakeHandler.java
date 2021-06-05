@@ -19,15 +19,12 @@
 
 package net.minecraftforge.fml.network;
 
-import net.minecraft.network.login.ServerLoginNetHandler;
 import com.google.common.collect.Multimap;
 import net.minecraft.network.Connection;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.fml.config.ConfigTracker;
 import net.minecraftforge.fml.loading.AdvancedLogMessageAdapter;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
 import net.minecraftforge.fml.util.ThreeConsumer;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.GameData;
@@ -63,9 +60,9 @@ import static net.minecraftforge.registries.ForgeRegistry.REGISTRIES;
  *
  * <p>During client to server initiation, on the <em>server</em>, the {@link NetworkEvent.GatherLoginPayloadsEvent} is fired,
  * which solicits all registered channels at the {@link NetworkRegistry} for any
- * {@link NetworkRegistry.LoginPayload} they wish to supply.
+ * {@link net.minecraftforge.fml.network.NetworkRegistry.LoginPayload} they wish to supply.
  *
- * <p>The collected {@link NetworkRegistry.LoginPayload} are sent, one per tick, via
+ * <p>The collected {@link net.minecraftforge.fml.network.NetworkRegistry.LoginPayload} are sent, one per tick, via
  * the {@link FMLLoginWrapper#wrapPacket(ResourceLocation, PacketBuffer)} mechanism to the incoming client connection. Each
  * packet is indexed via {@link net.minecraft.network.login.client.CCustomPayloadLoginPacket#transaction}, which is
  * the only mechanism available for tracking request/response pairs.

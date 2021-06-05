@@ -1,0 +1,75 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsSlotOptionsScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsSlotOptionsScreen.java
+@@ -113,43 +_,43 @@
+       this.f_89877_.m_94199_(10);
+       this.f_89877_.m_94144_(this.f_89881_.m_87626_(this.f_89883_));
+       this.m_94725_(this.f_89877_);
+-      this.f_89861_ = this.m_7082_(new Button(this.f_89880_, m_120774_(1), this.f_89879_, 20, this.m_89933_(), (p_89932_) -> {
++      this.f_89861_ = this.m_7082_(new Button(this.f_89880_, m_120774_(1), this.f_89879_, 20, this.m_89933_(), (p_238059_1_) -> {
+          this.f_89854_ = !this.f_89854_;
+-         p_89932_.m_93666_(this.m_89933_());
++         p_238059_1_.m_93666_(this.m_89933_());
+       }));
+-      this.m_7082_(new Button(this.f_89878_, m_120774_(3), this.f_89879_, 20, this.m_89928_(), (p_89930_) -> {
++      this.m_7082_(new Button(this.f_89878_, m_120774_(3), this.f_89879_, 20, this.m_89928_(), (p_238057_1_) -> {
+          this.f_89853_ = (this.f_89853_ + 1) % f_89871_.length;
+-         p_89930_.m_93666_(this.m_89928_());
++         p_238057_1_.m_93666_(this.m_89928_());
+       }));
+-      this.f_89862_ = this.m_7082_(new Button(this.f_89880_, m_120774_(3), this.f_89879_, 20, this.m_89934_(), (p_89927_) -> {
++      this.f_89862_ = this.m_7082_(new Button(this.f_89880_, m_120774_(3), this.f_89879_, 20, this.m_89934_(), (p_238056_1_) -> {
+          this.f_89856_ = !this.f_89856_;
+-         p_89927_.m_93666_(this.m_89934_());
++         p_238056_1_.m_93666_(this.m_89934_());
+       }));
+-      this.m_7082_(new Button(this.f_89878_, m_120774_(5), this.f_89879_, 20, this.m_89925_(), (p_89924_) -> {
++      this.m_7082_(new Button(this.f_89878_, m_120774_(5), this.f_89879_, 20, this.m_89925_(), (p_238055_1_) -> {
+          this.f_89852_ = (this.f_89852_ + 1) % f_89870_.length;
+-         p_89924_.m_93666_(this.m_89925_());
++         p_238055_1_.m_93666_(this.m_89925_());
+          if (this.f_89882_ == RealmsServer.WorldType.NORMAL) {
+             this.f_89863_.f_93623_ = this.f_89852_ != 0;
+             this.f_89863_.m_93666_(this.m_89935_());
+          }
+ 
+       }));
+-      this.f_89863_ = this.m_7082_(new Button(this.f_89880_, m_120774_(5), this.f_89879_, 20, this.m_89935_(), (p_89922_) -> {
++      this.f_89863_ = this.m_7082_(new Button(this.f_89880_, m_120774_(5), this.f_89879_, 20, this.m_89935_(), (p_238053_1_) -> {
+          this.f_89857_ = !this.f_89857_;
+-         p_89922_.m_93666_(this.m_89935_());
++         p_238053_1_.m_93666_(this.m_89935_());
+       }));
+       this.f_89865_ = this.m_7082_(new RealmsSlotOptionsScreen.SettingsSlider(this.f_89878_, m_120774_(7), this.f_89879_, this.f_89858_, 0.0F, 16.0F));
+-      this.f_89864_ = this.m_7082_(new Button(this.f_89880_, m_120774_(7), this.f_89879_, 20, this.m_89936_(), (p_89920_) -> {
++      this.f_89864_ = this.m_7082_(new Button(this.f_89880_, m_120774_(7), this.f_89879_, 20, this.m_89936_(), (p_238052_1_) -> {
+          this.f_89855_ = !this.f_89855_;
+-         p_89920_.m_93666_(this.m_89936_());
++         p_238052_1_.m_93666_(this.m_89936_());
+       }));
+-      this.f_89867_ = this.m_7082_(new Button(this.f_89878_, m_120774_(9), this.f_89879_, 20, this.m_89938_(), (p_89917_) -> {
++      this.f_89867_ = this.m_7082_(new Button(this.f_89878_, m_120774_(9), this.f_89879_, 20, this.m_89938_(), (p_238051_1_) -> {
+          this.f_89860_ = !this.f_89860_;
+-         p_89917_.m_93666_(this.m_89938_());
++         p_238051_1_.m_93666_(this.m_89938_());
+       }));
+-      this.f_89866_ = this.m_7082_(new Button(this.f_89880_, m_120774_(9), this.f_89879_, 20, this.m_89937_(), (p_89912_) -> {
++      this.f_89866_ = this.m_7082_(new Button(this.f_89880_, m_120774_(9), this.f_89879_, 20, this.m_89937_(), (p_238049_1_) -> {
+          this.f_89859_ = !this.f_89859_;
+-         p_89912_.m_93666_(this.m_89937_());
++         p_238049_1_.m_93666_(this.m_89937_());
+       }));
+       if (this.f_89882_ != RealmsServer.WorldType.NORMAL) {
+          this.f_89861_.f_93623_ = false;
+@@ -165,10 +_,10 @@
+          this.f_89863_.f_93623_ = false;
+       }
+ 
+-      this.m_7082_(new Button(this.f_89878_, m_120774_(13), this.f_89879_, 20, new TranslatableComponent("mco.configure.world.buttons.done"), (p_89910_) -> {
++      this.m_7082_(new Button(this.f_89878_, m_120774_(13), this.f_89879_, 20, new TranslatableComponent("mco.configure.world.buttons.done"), (p_238048_1_) -> {
+          this.m_89940_();
+       }));
+-      this.m_7082_(new Button(this.f_89880_, m_120774_(13), this.f_89879_, 20, CommonComponents.f_130656_, (p_89905_) -> {
++      this.m_7082_(new Button(this.f_89880_, m_120774_(13), this.f_89879_, 20, CommonComponents.f_130656_, (p_238046_1_) -> {
+          this.f_96541_.m_91152_(this.f_89872_);
+       }));
+       this.m_7787_(this.f_89877_);

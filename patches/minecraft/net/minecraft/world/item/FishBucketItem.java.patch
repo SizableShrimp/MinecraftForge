@@ -1,0 +1,31 @@
+--- a/net/minecraft/world/item/FishBucketItem.java
++++ b/net/minecraft/world/item/FishBucketItem.java
+@@ -26,9 +_,17 @@
+ public class FishBucketItem extends BucketItem {
+    private final EntityType<?> f_41262_;
+ 
++   @Deprecated
+    public FishBucketItem(EntityType<?> p_41264_, Fluid p_41265_, Item.Properties p_41266_) {
+       super(p_41265_, p_41266_);
+       this.f_41262_ = p_41264_;
++      this.fishTypeSupplier = () -> p_41264_;
++   }
++
++   public FishBucketItem(java.util.function.Supplier<? extends EntityType<?>> fishTypeIn, java.util.function.Supplier<? extends Fluid> p_i49022_2_, Item.Properties builder) {
++      super(p_i49022_2_, builder);
++      this.f_41262_ = null;
++      this.fishTypeSupplier = fishTypeIn;
+    }
+ 
+    public void m_6660_(Level p_41281_, ItemStack p_41282_, BlockPos p_41283_) {
+@@ -78,5 +_,10 @@
+          }
+       }
+ 
++   }
++
++   private final java.util.function.Supplier<? extends EntityType<?>> fishTypeSupplier;
++   protected EntityType<?> getFishType() {
++       return fishTypeSupplier.get();
+    }
+ }

@@ -1,0 +1,44 @@
+--- a/net/minecraft/util/datafix/fixes/ItemWrittenBookPagesStrictJsonFix.java
++++ b/net/minecraft/util/datafix/fixes/ItemWrittenBookPagesStrictJsonFix.java
+@@ -20,13 +_,13 @@
+    }
+ 
+    public Dynamic<?> m_16171_(Dynamic<?> p_16172_) {
+-      return p_16172_.update("pages", (p_16175_) -> {
+-         return DataFixUtils.orElse(p_16175_.asStreamOpt().map((p_16177_) -> {
+-            return p_16177_.map((p_16179_) -> {
+-               if (!p_16179_.asString().result().isPresent()) {
+-                  return p_16179_;
++      return p_16172_.update("pages", (p_212821_1_) -> {
++         return DataFixUtils.orElse(p_212821_1_.asStreamOpt().map((p_209630_0_) -> {
++            return p_209630_0_.map((p_209631_0_) -> {
++               if (!p_209631_0_.asString().result().isPresent()) {
++                  return p_209631_0_;
+                } else {
+-                  String s = p_16179_.asString("");
++                  String s = p_209631_0_.asString("");
+                   Component component = null;
+                   if (!"null".equals(s) && !StringUtils.isEmpty(s)) {
+                      if (s.charAt(0) == '"' && s.charAt(s.length() - 1) == '"' || s.charAt(0) == '{' && s.charAt(s.length() - 1) == '}') {
+@@ -62,7 +_,7 @@
+                      component = TextComponent.f_131282_;
+                   }
+ 
+-                  return p_16179_.createString(Component.Serializer.m_130703_(component));
++                  return p_209631_0_.createString(Component.Serializer.m_130703_(component));
+                }
+             });
+          }).map(p_16172_::createList).result(), p_16172_.emptyList());
+@@ -72,9 +_,9 @@
+    public TypeRewriteRule makeRule() {
+       Type<?> type = this.getInputSchema().getType(References.f_16782_);
+       OpticFinder<?> opticfinder = type.findField("tag");
+-      return this.fixTypeEverywhereTyped("ItemWrittenBookPagesStrictJsonFix", type, (p_16168_) -> {
+-         return p_16168_.updateTyped(opticfinder, (p_16170_) -> {
+-            return p_16170_.update(DSL.remainderFinder(), this::m_16171_);
++      return this.fixTypeEverywhereTyped("ItemWrittenBookPagesStrictJsonFix", type, (p_207415_2_) -> {
++         return p_207415_2_.updateTyped(opticfinder, (p_207417_1_) -> {
++            return p_207417_1_.update(DSL.remainderFinder(), this::m_16171_);
+          });
+       });
+    }

@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/UsedTotemTrigger.java
++++ b/net/minecraft/advancements/critereon/UsedTotemTrigger.java
+@@ -19,8 +_,8 @@
+    }
+ 
+    public void m_74431_(ServerPlayer p_74432_, ItemStack p_74433_) {
+-      this.m_66234_(p_74432_, (p_74436_) -> {
+-         return p_74436_.m_74450_(p_74433_);
++      this.m_66234_(p_74432_, (p_227409_1_) -> {
++         return p_227409_1_.m_74450_(p_74433_);
+       });
+    }
+ 

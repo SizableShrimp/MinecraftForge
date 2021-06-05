@@ -1,0 +1,24 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/SimpleRandomFeatureConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/SimpleRandomFeatureConfiguration.java
+@@ -7,8 +_,8 @@
+ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+ 
+ public class SimpleRandomFeatureConfiguration implements FeatureConfiguration {
+-   public static final Codec<SimpleRandomFeatureConfiguration> f_68089_ = ConfiguredFeature.f_65375_.fieldOf("features").xmap(SimpleRandomFeatureConfiguration::new, (p_68095_) -> {
+-      return p_68095_.f_68090_;
++   public static final Codec<SimpleRandomFeatureConfiguration> f_68089_ = ConfiguredFeature.f_65375_.fieldOf("features").xmap(SimpleRandomFeatureConfiguration::new, (p_236643_0_) -> {
++      return p_236643_0_.f_68090_;
+    }).codec();
+    public final List<Supplier<ConfiguredFeature<?, ?>>> f_68090_;
+ 
+@@ -17,8 +_,8 @@
+    }
+ 
+    public Stream<ConfiguredFeature<?, ?>> m_7817_() {
+-      return this.f_68090_.stream().flatMap((p_68097_) -> {
+-         return p_68097_.get().m_65398_();
++      return this.f_68090_.stream().flatMap((p_242826_0_) -> {
++         return p_242826_0_.get().m_65398_();
+       });
+    }
+ }

@@ -1,0 +1,19 @@
+--- a/net/minecraft/client/gui/screens/inventory/AbstractCommandBlockEditScreen.java
++++ b/net/minecraft/client/gui/screens/inventory/AbstractCommandBlockEditScreen.java
+@@ -43,13 +_,13 @@
+ 
+    protected void m_7856_() {
+       this.f_96541_.f_91068_.m_90926_(true);
+-      this.f_97648_ = this.m_7082_(new Button(this.f_96543_ / 2 - 4 - 150, this.f_96544_ / 4 + 120 + 12, 150, 20, CommonComponents.f_130655_, (p_97691_) -> {
++      this.f_97648_ = this.m_7082_(new Button(this.f_96543_ / 2 - 4 - 150, this.f_96544_ / 4 + 120 + 12, 150, 20, CommonComponents.f_130655_, (p_214187_1_) -> {
+          this.m_97695_();
+       }));
+-      this.f_97649_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ / 4 + 120 + 12, 150, 20, CommonComponents.f_130656_, (p_97687_) -> {
++      this.f_97649_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ / 4 + 120 + 12, 150, 20, CommonComponents.f_130656_, (p_214186_1_) -> {
+          this.m_7379_();
+       }));
+-      this.f_97650_ = this.m_7082_(new Button(this.f_96543_ / 2 + 150 - 20, this.m_7821_(), 20, 20, new TextComponent("O"), (p_97681_) -> {
++      this.f_97650_ = this.m_7082_(new Button(this.f_96543_ / 2 + 150 - 20, this.m_7821_(), 20, 20, new TextComponent("O"), (p_214184_1_) -> {
+          BaseCommandBlock basecommandblock = this.m_6556_();
+          basecommandblock.m_45428_(!basecommandblock.m_45440_());
+          this.m_97694_();

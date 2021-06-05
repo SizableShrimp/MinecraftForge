@@ -21,13 +21,8 @@ package net.minecraftforge.event.world;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.Cancelable;
-import net.minecraftforge.eventbus.api.Event;
 
 /**
  * ChunkDataEvent is fired when an event involving chunk data occurs.<br>
@@ -91,7 +86,7 @@ public class ChunkDataEvent extends ChunkEvent
      * This event is fired during chunk saving in
      * {@link AnvilChunkLoader#saveChunk(World, Chunk)}. <br>
      * <br>
-     * This event is not {@link Cancelable}.<br>
+     * This event is not {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
      * <br>
      * This event does not have a result. {@link HasResult} <br>
      * <br>

@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/scores/criteria/ObjectiveCriteria.java
++++ b/net/minecraft/world/scores/criteria/ObjectiveCriteria.java
+@@ -45,8 +_,8 @@
+          return Optional.of(f_83587_.get(p_83615_));
+       } else {
+          int i = p_83615_.indexOf(58);
+-         return i < 0 ? Optional.empty() : Registry.f_122867_.m_6612_(ResourceLocation.m_135822_(p_83615_.substring(0, i), '.')).flatMap((p_83619_) -> {
+-            return m_83611_(p_83619_, ResourceLocation.m_135822_(p_83615_.substring(i + 1), '.'));
++         return i < 0 ? Optional.empty() : Registry.f_122867_.m_6612_(ResourceLocation.m_135822_(p_83615_.substring(0, i), '.')).flatMap((p_216392_2_) -> {
++            return m_83611_(p_216392_2_, ResourceLocation.m_135822_(p_83615_.substring(i + 1), '.'));
+          });
+       }
+    }

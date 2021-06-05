@@ -1,0 +1,68 @@
+--- a/net/minecraft/server/commands/TeleportCommand.java
++++ b/net/minecraft/server/commands/TeleportCommand.java
+@@ -36,27 +_,27 @@
+    private static final SimpleCommandExceptionType f_139006_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.teleport.invalidPosition"));
+ 
+    public static void m_139008_(CommandDispatcher<CommandSourceStack> p_139009_) {
+-      LiteralCommandNode<CommandSourceStack> literalcommandnode = p_139009_.register(Commands.m_82127_("teleport").requires((p_139039_) -> {
+-         return p_139039_.m_6761_(2);
+-      }).then(Commands.m_82129_("targets", EntityArgument.m_91460_()).then(Commands.m_82129_("location", Vec3Argument.m_120841_()).executes((p_139051_) -> {
+-         return m_139025_(p_139051_.getSource(), EntityArgument.m_91461_(p_139051_, "targets"), p_139051_.getSource().m_81372_(), Vec3Argument.m_120849_(p_139051_, "location"), (Coordinates)null, (TeleportCommand.LookAt)null);
+-      }).then(Commands.m_82129_("rotation", RotationArgument.m_120479_()).executes((p_139049_) -> {
+-         return m_139025_(p_139049_.getSource(), EntityArgument.m_91461_(p_139049_, "targets"), p_139049_.getSource().m_81372_(), Vec3Argument.m_120849_(p_139049_, "location"), RotationArgument.m_120482_(p_139049_, "rotation"), (TeleportCommand.LookAt)null);
+-      })).then(Commands.m_82127_("facing").then(Commands.m_82127_("entity").then(Commands.m_82129_("facingEntity", EntityArgument.m_91449_()).executes((p_139047_) -> {
+-         return m_139025_(p_139047_.getSource(), EntityArgument.m_91461_(p_139047_, "targets"), p_139047_.getSource().m_81372_(), Vec3Argument.m_120849_(p_139047_, "location"), (Coordinates)null, new TeleportCommand.LookAt(EntityArgument.m_91452_(p_139047_, "facingEntity"), EntityAnchorArgument.Anchor.FEET));
+-      }).then(Commands.m_82129_("facingAnchor", EntityAnchorArgument.m_90350_()).executes((p_139045_) -> {
+-         return m_139025_(p_139045_.getSource(), EntityArgument.m_91461_(p_139045_, "targets"), p_139045_.getSource().m_81372_(), Vec3Argument.m_120849_(p_139045_, "location"), (Coordinates)null, new TeleportCommand.LookAt(EntityArgument.m_91452_(p_139045_, "facingEntity"), EntityAnchorArgument.m_90353_(p_139045_, "facingAnchor")));
+-      })))).then(Commands.m_82129_("facingLocation", Vec3Argument.m_120841_()).executes((p_139043_) -> {
+-         return m_139025_(p_139043_.getSource(), EntityArgument.m_91461_(p_139043_, "targets"), p_139043_.getSource().m_81372_(), Vec3Argument.m_120849_(p_139043_, "location"), (Coordinates)null, new TeleportCommand.LookAt(Vec3Argument.m_120844_(p_139043_, "facingLocation")));
+-      })))).then(Commands.m_82129_("destination", EntityArgument.m_91449_()).executes((p_139041_) -> {
+-         return m_139032_(p_139041_.getSource(), EntityArgument.m_91461_(p_139041_, "targets"), EntityArgument.m_91452_(p_139041_, "destination"));
+-      }))).then(Commands.m_82129_("location", Vec3Argument.m_120841_()).executes((p_139037_) -> {
+-         return m_139025_(p_139037_.getSource(), Collections.singleton(p_139037_.getSource().m_81374_()), p_139037_.getSource().m_81372_(), Vec3Argument.m_120849_(p_139037_, "location"), WorldCoordinates.m_120898_(), (TeleportCommand.LookAt)null);
+-      })).then(Commands.m_82129_("destination", EntityArgument.m_91449_()).executes((p_139011_) -> {
+-         return m_139032_(p_139011_.getSource(), Collections.singleton(p_139011_.getSource().m_81374_()), EntityArgument.m_91452_(p_139011_, "destination"));
++      LiteralCommandNode<CommandSourceStack> literalcommandnode = p_139009_.register(Commands.m_82127_("teleport").requires((p_198816_0_) -> {
++         return p_198816_0_.m_6761_(2);
++      }).then(Commands.m_82129_("targets", EntityArgument.m_91460_()).then(Commands.m_82129_("location", Vec3Argument.m_120841_()).executes((p_198807_0_) -> {
++         return m_139025_(p_198807_0_.getSource(), EntityArgument.m_91461_(p_198807_0_, "targets"), p_198807_0_.getSource().m_81372_(), Vec3Argument.m_120849_(p_198807_0_, "location"), (Coordinates)null, (TeleportCommand.LookAt)null);
++      }).then(Commands.m_82129_("rotation", RotationArgument.m_120479_()).executes((p_198811_0_) -> {
++         return m_139025_(p_198811_0_.getSource(), EntityArgument.m_91461_(p_198811_0_, "targets"), p_198811_0_.getSource().m_81372_(), Vec3Argument.m_120849_(p_198811_0_, "location"), RotationArgument.m_120482_(p_198811_0_, "rotation"), (TeleportCommand.LookAt)null);
++      })).then(Commands.m_82127_("facing").then(Commands.m_82127_("entity").then(Commands.m_82129_("facingEntity", EntityArgument.m_91449_()).executes((p_198806_0_) -> {
++         return m_139025_(p_198806_0_.getSource(), EntityArgument.m_91461_(p_198806_0_, "targets"), p_198806_0_.getSource().m_81372_(), Vec3Argument.m_120849_(p_198806_0_, "location"), (Coordinates)null, new TeleportCommand.LookAt(EntityArgument.m_91452_(p_198806_0_, "facingEntity"), EntityAnchorArgument.Anchor.FEET));
++      }).then(Commands.m_82129_("facingAnchor", EntityAnchorArgument.m_90350_()).executes((p_198812_0_) -> {
++         return m_139025_(p_198812_0_.getSource(), EntityArgument.m_91461_(p_198812_0_, "targets"), p_198812_0_.getSource().m_81372_(), Vec3Argument.m_120849_(p_198812_0_, "location"), (Coordinates)null, new TeleportCommand.LookAt(EntityArgument.m_91452_(p_198812_0_, "facingEntity"), EntityAnchorArgument.m_90353_(p_198812_0_, "facingAnchor")));
++      })))).then(Commands.m_82129_("facingLocation", Vec3Argument.m_120841_()).executes((p_198805_0_) -> {
++         return m_139025_(p_198805_0_.getSource(), EntityArgument.m_91461_(p_198805_0_, "targets"), p_198805_0_.getSource().m_81372_(), Vec3Argument.m_120849_(p_198805_0_, "location"), (Coordinates)null, new TeleportCommand.LookAt(Vec3Argument.m_120844_(p_198805_0_, "facingLocation")));
++      })))).then(Commands.m_82129_("destination", EntityArgument.m_91449_()).executes((p_198814_0_) -> {
++         return m_139032_(p_198814_0_.getSource(), EntityArgument.m_91461_(p_198814_0_, "targets"), EntityArgument.m_91452_(p_198814_0_, "destination"));
++      }))).then(Commands.m_82129_("location", Vec3Argument.m_120841_()).executes((p_200560_0_) -> {
++         return m_139025_(p_200560_0_.getSource(), Collections.singleton(p_200560_0_.getSource().m_81374_()), p_200560_0_.getSource().m_81372_(), Vec3Argument.m_120849_(p_200560_0_, "location"), WorldCoordinates.m_120898_(), (TeleportCommand.LookAt)null);
++      })).then(Commands.m_82129_("destination", EntityArgument.m_91449_()).executes((p_200562_0_) -> {
++         return m_139032_(p_200562_0_.getSource(), Collections.singleton(p_200562_0_.getSource().m_81374_()), EntityArgument.m_91452_(p_200562_0_, "destination"));
+       })));
+-      p_139009_.register(Commands.m_82127_("tp").requires((p_139013_) -> {
+-         return p_139013_.m_6761_(2);
++      p_139009_.register(Commands.m_82127_("tp").requires((p_200556_0_) -> {
++         return p_200556_0_.m_6761_(2);
+       }).redirect(literalcommandnode));
+    }
+ 
+@@ -121,6 +_,9 @@
+    }
+ 
+    private static void m_139014_(CommandSourceStack p_139015_, Entity p_139016_, ServerLevel p_139017_, double p_139018_, double p_139019_, double p_139020_, Set<ClientboundPlayerPositionPacket.RelativeArgument> p_139021_, float p_139022_, float p_139023_, @Nullable TeleportCommand.LookAt p_139024_) throws CommandSyntaxException {
++      net.minecraftforge.event.entity.living.EntityTeleportEvent.TeleportCommand event = net.minecraftforge.event.ForgeEventFactory.onEntityTeleportCommand(p_139016_, p_139018_, p_139019_, p_139020_);
++      if (event.isCanceled()) return;
++      p_139018_ = event.getTargetX(); p_139019_ = event.getTargetY(); p_139020_ = event.getTargetZ();
+       BlockPos blockpos = new BlockPos(p_139018_, p_139019_, p_139020_);
+       if (!Level.m_46741_(blockpos)) {
+          throw f_139006_.create();
+@@ -159,7 +_,6 @@
+                p_139016_.m_7678_(p_139018_, p_139019_, p_139020_, f1, f);
+                p_139016_.m_5616_(f1);
+                p_139017_.m_8851_(p_139016_);
+-               entity.f_19866_ = true;
+             }
+          }
+ 

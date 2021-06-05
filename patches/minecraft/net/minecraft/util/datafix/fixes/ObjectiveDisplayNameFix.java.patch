@@ -1,0 +1,23 @@
+--- a/net/minecraft/util/datafix/fixes/ObjectiveDisplayNameFix.java
++++ b/net/minecraft/util/datafix/fixes/ObjectiveDisplayNameFix.java
+@@ -22,13 +_,13 @@
+       if (!Objects.equals(type, this.getInputSchema().getType(References.f_16791_))) {
+          throw new IllegalStateException("Objective type is not what was expected.");
+       } else {
+-         return this.fixTypeEverywhere("ObjectiveDisplayNameFix", type, (p_16531_) -> {
+-            return (p_16524_) -> {
+-               return p_16524_.mapSecond((p_16526_) -> {
+-                  return p_16526_.update("DisplayName", (p_16529_) -> {
+-                     return DataFixUtils.orElse(p_16529_.asString().map((p_16533_) -> {
+-                        return Component.Serializer.m_130703_(new TextComponent(p_16533_));
+-                     }).map(p_16526_::createString).result(), p_16529_);
++         return this.fixTypeEverywhere("ObjectiveDisplayNameFix", type, (p_211862_0_) -> {
++            return (p_211863_0_) -> {
++               return p_211863_0_.mapSecond((p_211861_0_) -> {
++                  return p_211861_0_.update("DisplayName", (p_211864_1_) -> {
++                     return DataFixUtils.orElse(p_211864_1_.asString().map((p_211865_0_) -> {
++                        return Component.Serializer.m_130703_(new TextComponent(p_211865_0_));
++                     }).map(p_211861_0_::createString).result(), p_211864_1_);
+                   });
+                });
+             };

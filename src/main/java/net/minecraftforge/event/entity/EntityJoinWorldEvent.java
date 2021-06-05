@@ -19,12 +19,8 @@
 
 package net.minecraftforge.event.entity;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
-
-import java.util.Collection;
 
 /**
  * EntityJoinWorldEvent is fired when an Entity joins the world. <br>
@@ -41,7 +37,7 @@ import java.util.Collection;
  * <br>
  * This event is fired on the {@link MinecraftForge#EVENT_BUS}.
  **/
-@Cancelable
+@net.minecraftforge.eventbus.api.Cancelable
 public class EntityJoinWorldEvent extends EntityEvent
 {
 

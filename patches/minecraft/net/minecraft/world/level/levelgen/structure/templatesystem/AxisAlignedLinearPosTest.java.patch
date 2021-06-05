@@ -1,0 +1,33 @@
+--- a/net/minecraft/world/level/levelgen/structure/templatesystem/AxisAlignedLinearPosTest.java
++++ b/net/minecraft/world/level/levelgen/structure/templatesystem/AxisAlignedLinearPosTest.java
+@@ -8,18 +_,18 @@
+ import net.minecraft.util.Mth;
+ 
+ public class AxisAlignedLinearPosTest extends PosRuleTest {
+-   public static final Codec<AxisAlignedLinearPosTest> f_73962_ = RecordCodecBuilder.create((p_73977_) -> {
+-      return p_73977_.group(Codec.FLOAT.fieldOf("min_chance").orElse(0.0F).forGetter((p_73992_) -> {
+-         return p_73992_.f_73963_;
+-      }), Codec.FLOAT.fieldOf("max_chance").orElse(0.0F).forGetter((p_73990_) -> {
+-         return p_73990_.f_73964_;
+-      }), Codec.INT.fieldOf("min_dist").orElse(0).forGetter((p_73988_) -> {
+-         return p_73988_.f_73965_;
+-      }), Codec.INT.fieldOf("max_dist").orElse(0).forGetter((p_73986_) -> {
+-         return p_73986_.f_73966_;
+-      }), Direction.Axis.f_122447_.fieldOf("axis").orElse(Direction.Axis.Y).forGetter((p_73979_) -> {
+-         return p_73979_.f_73967_;
+-      })).apply(p_73977_, AxisAlignedLinearPosTest::new);
++   public static final Codec<AxisAlignedLinearPosTest> f_73962_ = RecordCodecBuilder.create((p_237051_0_) -> {
++      return p_237051_0_.group(Codec.FLOAT.fieldOf("min_chance").orElse(0.0F).forGetter((p_237056_0_) -> {
++         return p_237056_0_.f_73963_;
++      }), Codec.FLOAT.fieldOf("max_chance").orElse(0.0F).forGetter((p_237055_0_) -> {
++         return p_237055_0_.f_73964_;
++      }), Codec.INT.fieldOf("min_dist").orElse(0).forGetter((p_237054_0_) -> {
++         return p_237054_0_.f_73965_;
++      }), Codec.INT.fieldOf("max_dist").orElse(0).forGetter((p_237053_0_) -> {
++         return p_237053_0_.f_73966_;
++      }), Direction.Axis.f_122447_.fieldOf("axis").orElse(Direction.Axis.Y).forGetter((p_237052_0_) -> {
++         return p_237052_0_.f_73967_;
++      })).apply(p_237051_0_, AxisAlignedLinearPosTest::new);
+    });
+    private final float f_73963_;
+    private final float f_73964_;

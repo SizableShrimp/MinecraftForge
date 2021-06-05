@@ -1,0 +1,165 @@
+--- a/net/minecraft/nbt/NbtOps.java
++++ b/net/minecraft/nbt/NbtOps.java
+@@ -126,9 +_,9 @@
+ 
+    private static <T extends Tag> void m_129012_(CollectionTag<T> p_129013_, Tag p_129014_, Tag p_129015_) {
+       if (p_129014_ instanceof CollectionTag) {
+-         CollectionTag<T> collectiontag = (CollectionTag<T>)p_129014_;
+-         collectiontag.forEach((p_129064_) -> {
+-            p_129013_.add(p_129064_);
++         CollectionTag<?> collectiontag = (CollectionTag)p_129014_;
++         collectiontag.forEach((p_240616_1_) -> {
++            p_129013_.add((T)p_240616_1_);
+          });
+       }
+ 
+@@ -137,14 +_,14 @@
+ 
+    private static <T extends Tag> void m_129008_(CollectionTag<T> p_129009_, Tag p_129010_, List<Tag> p_129011_) {
+       if (p_129010_ instanceof CollectionTag) {
+-         CollectionTag<T> collectiontag = (CollectionTag<T>)p_129010_;
+-         collectiontag.forEach((p_129055_) -> {
+-            p_129009_.add(p_129055_);
++         CollectionTag<?> collectiontag = (CollectionTag)p_129010_;
++         collectiontag.forEach((p_240614_1_) -> {
++            p_129009_.add((T)p_240614_1_);
+          });
+       }
+ 
+-      ((List<T>)p_129011_).forEach((p_129007_) -> {
+-         p_129009_.add(p_129007_);
++      p_129011_.forEach((p_240607_1_) -> {
++         p_129009_.add((T)p_240607_1_);
+       });
+    }
+ 
+@@ -177,8 +_,8 @@
+          CompoundTag compoundtag = new CompoundTag();
+          if (p_129044_ instanceof CompoundTag) {
+             CompoundTag compoundtag1 = (CompoundTag)p_129044_;
+-            compoundtag1.m_128431_().forEach((p_129068_) -> {
+-               compoundtag.m_128365_(p_129068_, compoundtag1.m_128423_(p_129068_));
++            compoundtag1.m_128431_().forEach((p_240617_2_) -> {
++               compoundtag.m_128365_(p_240617_2_, compoundtag1.m_128423_(p_240617_2_));
+             });
+          }
+ 
+@@ -194,18 +_,18 @@
+          CompoundTag compoundtag = new CompoundTag();
+          if (p_129032_ instanceof CompoundTag) {
+             CompoundTag compoundtag1 = (CompoundTag)p_129032_;
+-            compoundtag1.m_128431_().forEach((p_129059_) -> {
+-               compoundtag.m_128365_(p_129059_, compoundtag1.m_128423_(p_129059_));
++            compoundtag1.m_128431_().forEach((p_240615_2_) -> {
++               compoundtag.m_128365_(p_240615_2_, compoundtag1.m_128423_(p_240615_2_));
+             });
+          }
+ 
+          List<Tag> list = Lists.newArrayList();
+-         p_129033_.entries().forEach((p_128994_) -> {
+-            Tag tag = p_128994_.getFirst();
++         p_129033_.entries().forEach((p_240605_2_) -> {
++            Tag tag = p_240605_2_.getFirst();
+             if (!(tag instanceof StringTag)) {
+                list.add(tag);
+             } else {
+-               compoundtag.m_128365_(tag.m_7916_(), p_128994_.getSecond());
++               compoundtag.m_128365_(tag.m_7916_(), p_240605_2_.getSecond());
+             }
+          });
+          return !list.isEmpty() ? DataResult.error("some keys are not strings: " + list, compoundtag) : DataResult.success(compoundtag);
+@@ -217,8 +_,8 @@
+          return DataResult.error("Not a map: " + p_129070_);
+       } else {
+          CompoundTag compoundtag = (CompoundTag)p_129070_;
+-         return DataResult.success(compoundtag.m_128431_().stream().map((p_129021_) -> {
+-            return Pair.of(this.createString(p_129021_), compoundtag.m_128423_(p_129021_));
++         return DataResult.success(compoundtag.m_128431_().stream().map((p_240611_2_) -> {
++            return Pair.of(this.createString(p_240611_2_), compoundtag.m_128423_(p_240611_2_));
+          }));
+       }
+    }
+@@ -228,9 +_,9 @@
+          return DataResult.error("Not a map: " + p_129103_);
+       } else {
+          CompoundTag compoundtag = (CompoundTag)p_129103_;
+-         return DataResult.success((p_129024_) -> {
+-            compoundtag.m_128431_().forEach((p_128998_) -> {
+-               p_129024_.accept(this.createString(p_128998_), compoundtag.m_128423_(p_128998_));
++         return DataResult.success((p_240612_2_) -> {
++            compoundtag.m_128431_().forEach((p_240606_3_) -> {
++               p_240612_2_.accept(this.createString(p_240606_3_), compoundtag.m_128423_(p_240606_3_));
+             });
+          });
+       }
+@@ -253,8 +_,8 @@
+             }
+ 
+             public Stream<Pair<Tag, Tag>> entries() {
+-               return compoundtag.m_128431_().stream().map((p_129172_) -> {
+-                  return Pair.of(NbtOps.this.createString(p_129172_), compoundtag.m_128423_(p_129172_));
++               return compoundtag.m_128431_().stream().map((p_240624_2_) -> {
++                  return Pair.of(NbtOps.this.createString(p_240624_2_), compoundtag.m_128423_(p_240624_2_));
+                });
+             }
+ 
+@@ -267,15 +_,15 @@
+ 
+    public Tag createMap(Stream<Pair<Tag, Tag>> p_129004_) {
+       CompoundTag compoundtag = new CompoundTag();
+-      p_129004_.forEach((p_129018_) -> {
+-         compoundtag.m_128365_(p_129018_.getFirst().m_7916_(), p_129018_.getSecond());
++      p_129004_.forEach((p_240610_1_) -> {
++         compoundtag.m_128365_(p_240610_1_.getFirst().m_7916_(), p_240610_1_.getSecond());
+       });
+       return compoundtag;
+    }
+ 
+    public DataResult<Stream<Tag>> getStream(Tag p_129108_) {
+-      return p_129108_ instanceof CollectionTag ? DataResult.success(((CollectionTag)p_129108_).stream().map((p_129158_) -> {
+-         return p_129158_;
++      return p_129108_ instanceof CollectionTag ? DataResult.success(((CollectionTag)p_129108_).stream().map((p_240621_0_) -> {
++         return p_240621_0_;
+       })) : DataResult.error("Not a list");
+    }
+ 
+@@ -319,18 +_,18 @@
+       } else {
+          Tag tag = peekingiterator.peek();
+          if (tag instanceof ByteTag) {
+-            List<Byte> list2 = Lists.newArrayList(Iterators.transform(peekingiterator, (p_129142_) -> {
+-               return ((ByteTag)p_129142_).m_7063_();
++            List<Byte> list2 = Lists.newArrayList(Iterators.transform(peekingiterator, (p_210815_0_) -> {
++               return ((ByteTag)p_210815_0_).m_7063_();
+             }));
+             return new ByteArrayTag(list2);
+          } else if (tag instanceof IntTag) {
+-            List<Integer> list1 = Lists.newArrayList(Iterators.transform(peekingiterator, (p_129140_) -> {
+-               return ((IntTag)p_129140_).m_7047_();
++            List<Integer> list1 = Lists.newArrayList(Iterators.transform(peekingiterator, (p_210818_0_) -> {
++               return ((IntTag)p_210818_0_).m_7047_();
+             }));
+             return new IntArrayTag(list1);
+          } else if (tag instanceof LongTag) {
+-            List<Long> list = Lists.newArrayList(Iterators.transform(peekingiterator, (p_129138_) -> {
+-               return ((LongTag)p_129138_).m_7046_();
++            List<Long> list = Lists.newArrayList(Iterators.transform(peekingiterator, (p_210816_0_) -> {
++               return ((LongTag)p_210816_0_).m_7046_();
+             }));
+             return new LongArrayTag(list);
+          } else {
+@@ -352,10 +_,10 @@
+       if (p_129035_ instanceof CompoundTag) {
+          CompoundTag compoundtag = (CompoundTag)p_129035_;
+          CompoundTag compoundtag1 = new CompoundTag();
+-         compoundtag.m_128431_().stream().filter((p_128988_) -> {
+-            return !Objects.equals(p_128988_, p_129036_);
+-         }).forEach((p_129028_) -> {
+-            compoundtag1.m_128365_(p_129028_, compoundtag.m_128423_(p_129028_));
++         compoundtag.m_128431_().stream().filter((p_212019_1_) -> {
++            return !Objects.equals(p_212019_1_, p_129036_);
++         }).forEach((p_212010_2_) -> {
++            compoundtag1.m_128365_(p_212010_2_, compoundtag.m_128423_(p_212010_2_));
+          });
+          return compoundtag1;
+       } else {

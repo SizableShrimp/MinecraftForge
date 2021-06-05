@@ -1,0 +1,47 @@
+--- a/net/minecraft/world/level/BlockGetter.java
++++ b/net/minecraft/world/level/BlockGetter.java
+@@ -25,7 +_,7 @@
+    FluidState m_6425_(BlockPos p_45569_);
+ 
+    default int m_7146_(BlockPos p_45572_) {
+-      return this.m_8055_(p_45572_).m_60791_();
++      return this.m_8055_(p_45572_).getLightValue(this, p_45572_);
+    }
+ 
+    default int m_7469_() {
+@@ -41,21 +_,21 @@
+    }
+ 
+    default BlockHitResult m_45547_(ClipContext p_45548_) {
+-      return m_45552_(p_45548_, (p_45550_, p_45551_) -> {
+-         BlockState blockstate = this.m_8055_(p_45551_);
+-         FluidState fluidstate = this.m_6425_(p_45551_);
+-         Vec3 vec3 = p_45550_.m_45702_();
+-         Vec3 vec31 = p_45550_.m_45693_();
+-         VoxelShape voxelshape = p_45550_.m_45694_(blockstate, this, p_45551_);
+-         BlockHitResult blockhitresult = this.m_45558_(vec3, vec31, p_45551_, voxelshape, blockstate);
+-         VoxelShape voxelshape1 = p_45550_.m_45698_(fluidstate, this, p_45551_);
+-         BlockHitResult blockhitresult1 = voxelshape1.m_83220_(vec3, vec31, p_45551_);
+-         double d0 = blockhitresult == null ? Double.MAX_VALUE : p_45550_.m_45702_().m_82557_(blockhitresult.m_82450_());
+-         double d1 = blockhitresult1 == null ? Double.MAX_VALUE : p_45550_.m_45702_().m_82557_(blockhitresult1.m_82450_());
++      return m_45552_(p_45548_, (p_217297_1_, p_217297_2_) -> {
++         BlockState blockstate = this.m_8055_(p_217297_2_);
++         FluidState fluidstate = this.m_6425_(p_217297_2_);
++         Vec3 vec3 = p_217297_1_.m_45702_();
++         Vec3 vec31 = p_217297_1_.m_45693_();
++         VoxelShape voxelshape = p_217297_1_.m_45694_(blockstate, this, p_217297_2_);
++         BlockHitResult blockhitresult = this.m_45558_(vec3, vec31, p_217297_2_, voxelshape, blockstate);
++         VoxelShape voxelshape1 = p_217297_1_.m_45698_(fluidstate, this, p_217297_2_);
++         BlockHitResult blockhitresult1 = voxelshape1.m_83220_(vec3, vec31, p_217297_2_);
++         double d0 = blockhitresult == null ? Double.MAX_VALUE : p_217297_1_.m_45702_().m_82557_(blockhitresult.m_82450_());
++         double d1 = blockhitresult1 == null ? Double.MAX_VALUE : p_217297_1_.m_45702_().m_82557_(blockhitresult1.m_82450_());
+          return d0 <= d1 ? blockhitresult : blockhitresult1;
+-      }, (p_45568_) -> {
+-         Vec3 vec3 = p_45568_.m_45702_().m_82546_(p_45568_.m_45693_());
+-         return BlockHitResult.m_82426_(p_45568_.m_45693_(), Direction.m_122366_(vec3.f_82479_, vec3.f_82480_, vec3.f_82481_), new BlockPos(p_45568_.m_45693_()));
++      }, (p_217302_0_) -> {
++         Vec3 vec3 = p_217302_0_.m_45702_().m_82546_(p_217302_0_.m_45693_());
++         return BlockHitResult.m_82426_(p_217302_0_.m_45693_(), Direction.m_122366_(vec3.f_82479_, vec3.f_82480_, vec3.f_82481_), new BlockPos(p_217302_0_.m_45693_()));
+       });
+    }
+ 

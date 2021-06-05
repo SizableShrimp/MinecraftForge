@@ -1,0 +1,17 @@
+--- a/net/minecraft/util/datafix/fixes/EntityPaintingMotiveFix.java
++++ b/net/minecraft/util/datafix/fixes/EntityPaintingMotiveFix.java
+@@ -12,10 +_,10 @@
+ import net.minecraft.resources.ResourceLocation;
+ 
+ public class EntityPaintingMotiveFix extends NamedEntityFix {
+-   private static final Map<String, String> f_15522_ = DataFixUtils.make(Maps.newHashMap(), (p_15532_) -> {
+-      p_15532_.put("donkeykong", "donkey_kong");
+-      p_15532_.put("burningskull", "burning_skull");
+-      p_15532_.put("skullandroses", "skull_and_roses");
++   private static final Map<String, String> f_15522_ = DataFixUtils.make(Maps.newHashMap(), (p_201153_0_) -> {
++      p_201153_0_.put("donkeykong", "donkey_kong");
++      p_201153_0_.put("burningskull", "burning_skull");
++      p_201153_0_.put("skullandroses", "skull_and_roses");
+    });
+ 
+    public EntityPaintingMotiveFix(Schema p_15525_, boolean p_15526_) {

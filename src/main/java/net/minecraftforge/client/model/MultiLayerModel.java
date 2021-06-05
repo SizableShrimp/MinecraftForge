@@ -32,7 +32,6 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.renderer.RenderType;
 import com.mojang.math.Transformation;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.world.item.ItemStack;

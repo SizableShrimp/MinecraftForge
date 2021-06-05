@@ -1,0 +1,17 @@
+--- a/net/minecraft/world/level/levelgen/feature/foliageplacers/PineFoliagePlacer.java
++++ b/net/minecraft/world/level/levelgen/feature/foliageplacers/PineFoliagePlacer.java
+@@ -11,10 +_,10 @@
+ import net.minecraft.world.level.levelgen.structure.BoundingBox;
+ 
+ public class PineFoliagePlacer extends FoliagePlacer {
+-   public static final Codec<PineFoliagePlacer> f_68676_ = RecordCodecBuilder.create((p_68698_) -> {
+-      return m_68573_(p_68698_).and(UniformInt.m_14432_(0, 16, 8).fieldOf("height").forGetter((p_68696_) -> {
+-         return p_68696_.f_68677_;
+-      })).apply(p_68698_, PineFoliagePlacer::new);
++   public static final Codec<PineFoliagePlacer> f_68676_ = RecordCodecBuilder.create((p_242834_0_) -> {
++      return m_68573_(p_242834_0_).and(UniformInt.m_14432_(0, 16, 8).fieldOf("height").forGetter((p_242833_0_) -> {
++         return p_242833_0_.f_68677_;
++      })).apply(p_242834_0_, PineFoliagePlacer::new);
+    });
+    private final UniformInt f_68677_;
+ 

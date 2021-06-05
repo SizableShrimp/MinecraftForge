@@ -1,0 +1,55 @@
+--- a/net/minecraft/world/level/block/FarmBlock.java
++++ b/net/minecraft/world/level/block/FarmBlock.java
+@@ -6,11 +_,8 @@
+ import net.minecraft.server.level.ServerLevel;
+ import net.minecraft.tags.FluidTags;
+ import net.minecraft.world.entity.Entity;
+-import net.minecraft.world.entity.LivingEntity;
+-import net.minecraft.world.entity.player.Player;
+ import net.minecraft.world.item.context.BlockPlaceContext;
+ import net.minecraft.world.level.BlockGetter;
+-import net.minecraft.world.level.GameRules;
+ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.LevelAccessor;
+ import net.minecraft.world.level.LevelReader;
+@@ -28,7 +_,7 @@
+    public static final IntegerProperty f_53243_ = BlockStateProperties.f_61423_;
+    protected static final VoxelShape f_53244_ = Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 15.0D, 16.0D);
+ 
+-   protected FarmBlock(BlockBehaviour.Properties p_53247_) {
++   public FarmBlock(BlockBehaviour.Properties p_53247_) {
+       super(p_53247_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_53243_, Integer.valueOf(0)));
+    }
+@@ -80,7 +_,7 @@
+    }
+ 
+    public void m_6750_(Level p_53254_, BlockPos p_53255_, Entity p_53256_, float p_53257_) {
+-      if (!p_53254_.f_46443_ && p_53254_.f_46441_.nextFloat() < p_53257_ - 0.5F && p_53256_ instanceof LivingEntity && (p_53256_ instanceof Player || p_53254_.m_46469_().m_46207_(GameRules.f_46132_)) && p_53256_.m_20205_() * p_53256_.m_20205_() * p_53256_.m_20206_() > 0.512F) {
++      if (!p_53254_.f_46443_ && net.minecraftforge.common.ForgeHooks.onFarmlandTrample(p_53254_, p_53255_, Blocks.f_50493_.m_49966_(), p_53257_, p_53256_)) { // Forge: Move logic to Entity#canTrample
+          m_53296_(p_53254_.m_8055_(p_53255_), p_53254_, p_53255_);
+       }
+ 
+@@ -91,9 +_,10 @@
+       p_53298_.m_46597_(p_53299_, m_49897_(p_53297_, Blocks.f_50493_.m_49966_(), p_53298_, p_53299_));
+    }
+ 
+-   private static boolean m_53250_(BlockGetter p_53251_, BlockPos p_53252_) {
+-      Block block = p_53251_.m_8055_(p_53252_.m_7494_()).m_60734_();
+-      return block instanceof CropBlock || block instanceof StemBlock || block instanceof AttachedStemBlock;
++   private boolean m_53250_(BlockGetter p_53251_, BlockPos p_53252_) {
++      BlockState plant = p_53251_.m_8055_(p_53252_.m_7494_());
++      BlockState state = p_53251_.m_8055_(p_53252_);
++      return plant.m_60734_() instanceof net.minecraftforge.common.IPlantable && state.canSustainPlant(p_53251_, p_53252_, Direction.UP, (net.minecraftforge.common.IPlantable)plant.m_60734_());
+    }
+ 
+    private static boolean m_53258_(LevelReader p_53259_, BlockPos p_53260_) {
+@@ -103,7 +_,7 @@
+          }
+       }
+ 
+-      return false;
++      return net.minecraftforge.common.FarmlandWaterManager.hasBlockWaterTicket(p_53259_, p_53260_);
+    }
+ 
+    protected void m_7926_(StateDefinition.Builder<Block, BlockState> p_53283_) {

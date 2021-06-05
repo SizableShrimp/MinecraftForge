@@ -1,0 +1,39 @@
+--- a/net/minecraft/client/sounds/SoundBufferLibrary.java
++++ b/net/minecraft/client/sounds/SoundBufferLibrary.java
+@@ -28,10 +_,10 @@
+    }
+ 
+    public CompletableFuture<SoundBuffer> m_120202_(ResourceLocation p_120203_) {
+-      return this.f_120190_.computeIfAbsent(p_120203_, (p_120208_) -> {
++      return this.f_120190_.computeIfAbsent(p_120203_, (p_217913_1_) -> {
+          return CompletableFuture.supplyAsync(() -> {
+             try (
+-               Resource resource = this.f_120189_.m_6296_(p_120208_);
++               Resource resource = this.f_120189_.m_6296_(p_217913_1_);
+                InputStream inputstream = resource.m_6679_();
+                OggAudioStream oggaudiostream = new OggAudioStream(inputstream);
+             ) {
+@@ -57,17 +_,17 @@
+    }
+ 
+    public void m_120193_() {
+-      this.f_120190_.values().forEach((p_120201_) -> {
+-         p_120201_.thenAccept(SoundBuffer::m_83801_);
++      this.f_120190_.values().forEach((p_217910_0_) -> {
++         p_217910_0_.thenAccept(SoundBuffer::m_83801_);
+       });
+       this.f_120190_.clear();
+    }
+ 
+    public CompletableFuture<?> m_120198_(Collection<Sound> p_120199_) {
+-      return CompletableFuture.allOf(p_120199_.stream().map((p_120197_) -> {
+-         return this.m_120202_(p_120197_.m_119790_());
+-      }).toArray((p_120195_) -> {
+-         return new CompletableFuture[p_120195_];
++      return CompletableFuture.allOf(p_120199_.stream().map((p_217911_1_) -> {
++         return this.m_120202_(p_217911_1_.m_119790_());
++      }).toArray((p_217916_0_) -> {
++         return new CompletableFuture[p_217916_0_];
+       }));
+    }
+ }

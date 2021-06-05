@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/structure/templatesystem/TagMatchTest.java
++++ b/net/minecraft/world/level/levelgen/structure/templatesystem/TagMatchTest.java
+@@ -10,8 +_,8 @@
+ public class TagMatchTest extends RuleTest {
+    public static final Codec<TagMatchTest> f_74690_ = Tag.m_13290_(() -> {
+       return SerializationTags.m_13199_().m_5883_();
+-   }).fieldOf("tag").xmap(TagMatchTest::new, (p_74700_) -> {
+-      return p_74700_.f_74691_;
++   }).fieldOf("tag").xmap(TagMatchTest::new, (p_237162_0_) -> {
++      return p_237162_0_.f_74691_;
+    }).codec();
+    private final Tag<Block> f_74691_;
+ 

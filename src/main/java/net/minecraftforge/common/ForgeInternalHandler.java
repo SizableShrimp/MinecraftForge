@@ -21,7 +21,6 @@ package net.minecraftforge.common;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.util.thread.BlockableEventLoop;
@@ -40,7 +39,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.ClientTickEvent;
-import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.TickEvent.ServerTickEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.LogicalSidedProvider;
@@ -82,7 +80,7 @@ public class ForgeInternalHandler
     @SubscribeEvent
     public void onServerTick(ServerTickEvent event)
     {
-        WorldWorkerManager.tick(event.phase == Phase.START);
+        WorldWorkerManager.tick(event.phase == TickEvent.Phase.START);
     }
 
     @SubscribeEvent

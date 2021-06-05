@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/storage/loot/functions/SetItemCountFunction.java
++++ b/net/minecraft/world/level/storage/loot/functions/SetItemCountFunction.java
+@@ -27,8 +_,8 @@
+    }
+ 
+    public static LootItemConditionalFunction.Builder<?> m_81008_(RandomIntGenerator p_81009_) {
+-      return m_80683_((p_81012_) -> {
+-         return new SetItemCountFunction(p_81012_, p_81009_);
++      return m_80683_((p_215934_1_) -> {
++         return new SetItemCountFunction(p_215934_1_, p_81009_);
+       });
+    }
+ 

@@ -1,0 +1,15 @@
+--- a/net/minecraft/client/gui/components/OptionsList.java
++++ b/net/minecraft/client/gui/components/OptionsList.java
+@@ -85,9 +_,9 @@
+       }
+ 
+       public void m_6311_(PoseStack p_94496_, int p_94497_, int p_94498_, int p_94499_, int p_94500_, int p_94501_, int p_94502_, int p_94503_, boolean p_94504_, float p_94505_) {
+-         this.f_94485_.forEach((p_94494_) -> {
+-            p_94494_.f_93621_ = p_94498_;
+-            p_94494_.m_6305_(p_94496_, p_94502_, p_94503_, p_94505_);
++         this.f_94485_.forEach((p_238519_5_) -> {
++            p_238519_5_.f_93621_ = p_94498_;
++            p_238519_5_.m_6305_(p_94496_, p_94502_, p_94503_, p_94505_);
+          });
+       }
+ 

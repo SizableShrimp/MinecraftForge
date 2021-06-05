@@ -1,0 +1,13 @@
+--- a/net/minecraft/client/gui/spectator/categories/TeleportToPlayerMenuCategory.java
++++ b/net/minecraft/client/gui/spectator/categories/TeleportToPlayerMenuCategory.java
+@@ -22,8 +_,8 @@
+ 
+ @OnlyIn(Dist.CLIENT)
+ public class TeleportToPlayerMenuCategory implements SpectatorMenuCategory, SpectatorMenuItem {
+-   private static final Ordering<PlayerInfo> f_101854_ = Ordering.from((p_101870_, p_101871_) -> {
+-      return ComparisonChain.start().compare(p_101870_.m_105312_().getId(), p_101871_.m_105312_().getId()).result();
++   private static final Ordering<PlayerInfo> f_101854_ = Ordering.from((p_210243_0_, p_210243_1_) -> {
++      return ComparisonChain.start().compare(p_210243_0_.m_105312_().getId(), p_210243_1_.m_105312_().getId()).result();
+    });
+    private static final Component f_101855_ = new TranslatableComponent("spectatorMenu.teleport");
+    private static final Component f_101856_ = new TranslatableComponent("spectatorMenu.teleport.prompt");

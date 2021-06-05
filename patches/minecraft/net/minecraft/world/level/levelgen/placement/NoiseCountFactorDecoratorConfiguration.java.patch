@@ -1,0 +1,25 @@
+--- a/net/minecraft/world/level/levelgen/placement/NoiseCountFactorDecoratorConfiguration.java
++++ b/net/minecraft/world/level/levelgen/placement/NoiseCountFactorDecoratorConfiguration.java
+@@ -5,14 +_,14 @@
+ import net.minecraft.world.level.levelgen.feature.configurations.DecoratorConfiguration;
+ 
+ public class NoiseCountFactorDecoratorConfiguration implements DecoratorConfiguration {
+-   public static final Codec<NoiseCountFactorDecoratorConfiguration> f_70806_ = RecordCodecBuilder.create((p_70816_) -> {
+-      return p_70816_.group(Codec.INT.fieldOf("noise_to_count_ratio").forGetter((p_70822_) -> {
+-         return p_70822_.f_70807_;
+-      }), Codec.DOUBLE.fieldOf("noise_factor").forGetter((p_70820_) -> {
+-         return p_70820_.f_70808_;
+-      }), Codec.DOUBLE.fieldOf("noise_offset").orElse(0.0D).forGetter((p_70818_) -> {
+-         return p_70818_.f_70809_;
+-      })).apply(p_70816_, NoiseCountFactorDecoratorConfiguration::new);
++   public static final Codec<NoiseCountFactorDecoratorConfiguration> f_70806_ = RecordCodecBuilder.create((p_236980_0_) -> {
++      return p_236980_0_.group(Codec.INT.fieldOf("noise_to_count_ratio").forGetter((p_236984_0_) -> {
++         return p_236984_0_.f_70807_;
++      }), Codec.DOUBLE.fieldOf("noise_factor").forGetter((p_236983_0_) -> {
++         return p_236983_0_.f_70808_;
++      }), Codec.DOUBLE.fieldOf("noise_offset").orElse(0.0D).forGetter((p_236982_0_) -> {
++         return p_236982_0_.f_70809_;
++      })).apply(p_236980_0_, NoiseCountFactorDecoratorConfiguration::new);
+    });
+    public final int f_70807_;
+    public final double f_70808_;

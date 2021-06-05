@@ -1,0 +1,17 @@
+--- a/net/minecraft/util/datafix/fixes/EntityCustomNameToComponentFix.java
++++ b/net/minecraft/util/datafix/fixes/EntityCustomNameToComponentFix.java
+@@ -19,10 +_,10 @@
+ 
+    public TypeRewriteRule makeRule() {
+       OpticFinder<String> opticfinder = DSL.fieldFinder("id", NamespacedSchema.m_17310_());
+-      return this.fixTypeEverywhereTyped("EntityCustomNameToComponentFix", this.getInputSchema().getType(References.f_16786_), (p_15402_) -> {
+-         return p_15402_.update(DSL.remainderFinder(), (p_15406_) -> {
+-            Optional<String> optional = p_15402_.getOptional(opticfinder);
+-            return optional.isPresent() && Objects.equals(optional.get(), "minecraft:commandblock_minecart") ? p_15406_ : m_15407_(p_15406_);
++      return this.fixTypeEverywhereTyped("EntityCustomNameToComponentFix", this.getInputSchema().getType(References.f_16786_), (p_207792_1_) -> {
++         return p_207792_1_.update(DSL.remainderFinder(), (p_207791_2_) -> {
++            Optional<String> optional = p_207792_1_.getOptional(opticfinder);
++            return optional.isPresent() && Objects.equals(optional.get(), "minecraft:commandblock_minecart") ? p_207791_2_ : m_15407_(p_207791_2_);
+          });
+       });
+    }

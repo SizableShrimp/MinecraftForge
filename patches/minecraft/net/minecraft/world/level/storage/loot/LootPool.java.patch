@@ -1,0 +1,145 @@
+--- a/net/minecraft/world/level/storage/loot/LootPool.java
++++ b/net/minecraft/world/level/storage/loot/LootPool.java
+@@ -29,22 +_,24 @@
+ import org.apache.commons.lang3.mutable.MutableInt;
+ 
+ public class LootPool {
+-   private final LootPoolEntryContainer[] f_79023_;
+-   private final LootItemCondition[] f_79024_;
++   private final String name;
++   private final List<LootPoolEntryContainer> f_79023_;
++   private final List<LootItemCondition> f_79024_;
+    private final Predicate<LootContext> f_79025_;
+    private final LootItemFunction[] f_79026_;
+    private final BiFunction<ItemStack, LootContext, ItemStack> f_79027_;
+-   private final RandomIntGenerator f_79028_;
+-   private final RandomValueBounds f_79029_;
++   private RandomIntGenerator f_79028_;
++   private RandomValueBounds f_79029_;
+ 
+-   private LootPool(LootPoolEntryContainer[] p_79031_, LootItemCondition[] p_79032_, LootItemFunction[] p_79033_, RandomIntGenerator p_79034_, RandomValueBounds p_79035_) {
+-      this.f_79023_ = p_79031_;
+-      this.f_79024_ = p_79032_;
+-      this.f_79025_ = LootItemConditions.m_81834_(p_79032_);
+-      this.f_79026_ = p_79033_;
+-      this.f_79027_ = LootItemFunctions.m_80770_(p_79033_);
+-      this.f_79028_ = p_79034_;
+-      this.f_79029_ = p_79035_;
++   private LootPool(LootPoolEntryContainer[] p_i51268_1_, LootItemCondition[] p_i51268_2_, LootItemFunction[] p_i51268_3_, RandomIntGenerator p_i51268_4_, RandomValueBounds p_i51268_5_, String name) {
++      this.name = name;
++      this.f_79023_ = Lists.newArrayList(p_i51268_1_);
++      this.f_79024_ = Lists.newArrayList(p_i51268_2_);
++      this.f_79025_ = LootItemConditions.m_81834_(p_i51268_2_);
++      this.f_79026_ = p_i51268_3_;
++      this.f_79027_ = LootItemFunctions.m_80770_(p_i51268_3_);
++      this.f_79028_ = p_i51268_4_;
++      this.f_79029_ = p_i51268_5_;
+    }
+ 
+    private void m_79058_(Consumer<ItemStack> p_79059_, LootContext p_79060_) {
+@@ -53,10 +_,10 @@
+       MutableInt mutableint = new MutableInt();
+ 
+       for(LootPoolEntryContainer lootpoolentrycontainer : this.f_79023_) {
+-         lootpoolentrycontainer.m_6562_(p_79060_, (p_79048_) -> {
+-            int k = p_79048_.m_7067_(p_79060_.m_78945_());
++         lootpoolentrycontainer.m_6562_(p_79060_, (p_216097_3_) -> {
++            int k = p_216097_3_.m_7067_(p_79060_.m_78945_());
+             if (k > 0) {
+-               list.add(p_79048_);
++               list.add(p_216097_3_);
+                mutableint.add(k);
+             }
+ 
+@@ -96,19 +_,33 @@
+    }
+ 
+    public void m_79051_(ValidationContext p_79052_) {
+-      for(int i = 0; i < this.f_79024_.length; ++i) {
+-         this.f_79024_[i].m_6169_(p_79052_.m_79365_(".condition[" + i + "]"));
++      for(int i = 0; i < this.f_79024_.size(); ++i) {
++         this.f_79024_.get(i).m_6169_(p_79052_.m_79365_(".condition[" + i + "]"));
+       }
+ 
+       for(int j = 0; j < this.f_79026_.length; ++j) {
+          this.f_79026_[j].m_6169_(p_79052_.m_79365_(".functions[" + j + "]"));
+       }
+ 
+-      for(int k = 0; k < this.f_79023_.length; ++k) {
+-         this.f_79023_[k].m_6165_(p_79052_.m_79365_(".entries[" + k + "]"));
++      for(int k = 0; k < this.f_79023_.size(); ++k) {
++         this.f_79023_.get(k).m_6165_(p_79052_.m_79365_(".entries[" + k + "]"));
+       }
+ 
+    }
++   //======================== FORGE START =============================================
++   private boolean isFrozen = false;
++   public void freeze() { this.isFrozen = true; }
++   public boolean isFrozen(){ return this.isFrozen; }
++   private void checkFrozen() {
++      if (this.isFrozen())
++         throw new RuntimeException("Attempted to modify LootPool after being frozen!");
++   }
++   public String getName(){ return this.name; }
++   public RandomIntGenerator getRolls()      { return this.f_79028_; }
++   public RandomIntGenerator getBonusRolls() { return this.f_79029_; }
++   public void setRolls     (RandomValueBounds v){ checkFrozen(); this.f_79028_ = v; }
++   public void setBonusRolls(RandomValueBounds v){ checkFrozen(); this.f_79029_ = v; }
++   //======================== FORGE END ===============================================
+ 
+    public static LootPool.Builder m_79043_() {
+       return new LootPool.Builder();
+@@ -120,6 +_,7 @@
+       private final List<LootItemFunction> f_79069_ = Lists.newArrayList();
+       private RandomIntGenerator f_79070_ = new RandomValueBounds(1.0F);
+       private RandomValueBounds f_79071_ = new RandomValueBounds(0.0F, 0.0F);
++      private String name;
+ 
+       public LootPool.Builder m_79074_(RandomIntGenerator p_79075_) {
+          this.f_79070_ = p_79075_;
+@@ -145,11 +_,21 @@
+          return this;
+       }
+ 
++      public LootPool.Builder name(String name) {
++         this.name = name;
++         return this;
++      }
++
++      public LootPool.Builder bonusRolls(float min, float max) {
++         this.f_79071_ = new RandomValueBounds(min, max);
++         return this;
++      }
++
+       public LootPool m_79082_() {
+          if (this.f_79070_ == null) {
+             throw new IllegalArgumentException("Rolls not set");
+          } else {
+-            return new LootPool(this.f_79067_.toArray(new LootPoolEntryContainer[0]), this.f_79068_.toArray(new LootItemCondition[0]), this.f_79069_.toArray(new LootItemFunction[0]), this.f_79070_, this.f_79071_);
++            return new LootPool(this.f_79067_.toArray(new LootPoolEntryContainer[0]), this.f_79068_.toArray(new LootItemCondition[0]), this.f_79069_.toArray(new LootItemFunction[0]), this.f_79070_, this.f_79071_, name);
+          }
+       }
+    }
+@@ -162,18 +_,20 @@
+          LootItemFunction[] alootitemfunction = GsonHelper.m_13845_(jsonobject, "functions", new LootItemFunction[0], p_79092_, LootItemFunction[].class);
+          RandomIntGenerator randomintgenerator = RandomIntGenerators.m_79277_(jsonobject.get("rolls"), p_79092_);
+          RandomValueBounds randomvaluebounds = GsonHelper.m_13845_(jsonobject, "bonus_rolls", new RandomValueBounds(0.0F, 0.0F), p_79092_, RandomValueBounds.class);
+-         return new LootPool(alootpoolentrycontainer, alootitemcondition, alootitemfunction, randomintgenerator, randomvaluebounds);
++         return new LootPool(alootpoolentrycontainer, alootitemcondition, alootitemfunction, randomintgenerator, randomvaluebounds, net.minecraftforge.common.ForgeHooks.readPoolName(jsonobject));
+       }
+ 
+       public JsonElement serialize(LootPool p_79094_, Type p_79095_, JsonSerializationContext p_79096_) {
+          JsonObject jsonobject = new JsonObject();
++         if (p_79094_.name != null && !p_79094_.name.startsWith("custom#"))
++            jsonobject.add("name", p_79096_.serialize(p_79094_.name));
+          jsonobject.add("rolls", RandomIntGenerators.m_79280_(p_79094_.f_79028_, p_79096_));
+          jsonobject.add("entries", p_79096_.serialize(p_79094_.f_79023_));
+          if (p_79094_.f_79029_.m_79300_() != 0.0F && p_79094_.f_79029_.m_79305_() != 0.0F) {
+             jsonobject.add("bonus_rolls", p_79096_.serialize(p_79094_.f_79029_));
+          }
+ 
+-         if (!ArrayUtils.isEmpty((Object[])p_79094_.f_79024_)) {
++         if (!p_79094_.f_79024_.isEmpty()) {
+             jsonobject.add("conditions", p_79096_.serialize(p_79094_.f_79024_));
+          }
+ 

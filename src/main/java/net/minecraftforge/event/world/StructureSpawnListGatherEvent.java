@@ -28,13 +28,12 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.EventPriority;
 
 /**
  * This event fires when a Structure is gathering what mobs/creatures can spawn in it.
  *
  * In order to maintain the most compatibility possible with other mods' modifications to a structure,
- * the event should be assigned a {@link EventPriority} as follows:
+ * the event should be assigned a {@link net.minecraftforge.eventbus.api.EventPriority} as follows:
  *
  * - Additions : {@link EventPriority#HIGH}
  * - Removals : {@link EventPriority#NORMAL}

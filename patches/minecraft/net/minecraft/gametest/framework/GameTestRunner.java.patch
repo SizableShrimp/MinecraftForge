@@ -1,0 +1,71 @@
+--- a/net/minecraft/gametest/framework/GameTestRunner.java
++++ b/net/minecraft/gametest/framework/GameTestRunner.java
+@@ -62,19 +_,19 @@
+ 
+    public static Collection<GameTestBatch> m_127724_(Collection<TestFunction> p_127725_) {
+       Map<String, Collection<TestFunction>> map = Maps.newHashMap();
+-      p_127725_.forEach((p_127738_) -> {
+-         String s = p_127738_.m_128081_();
+-         Collection<TestFunction> collection = map.computeIfAbsent(s, (p_127706_) -> {
++      p_127725_.forEach((p_229551_1_) -> {
++         String s = p_229551_1_.m_128081_();
++         Collection<TestFunction> collection = map.computeIfAbsent(s, (p_229543_0_) -> {
+             return Lists.newArrayList();
+          });
+-         collection.add(p_127738_);
++         collection.add(p_229551_1_);
+       });
+-      return map.keySet().stream().flatMap((p_127735_) -> {
+-         Collection<TestFunction> collection = map.get(p_127735_);
+-         Consumer<ServerLevel> consumer = GameTestRegistry.m_127676_(p_127735_);
++      return map.keySet().stream().flatMap((p_229550_1_) -> {
++         Collection<TestFunction> collection = map.get(p_229550_1_);
++         Consumer<ServerLevel> consumer = GameTestRegistry.m_127676_(p_229550_1_);
+          MutableInt mutableint = new MutableInt();
+-         return Streams.stream(Iterables.partition(collection, 100)).map((p_127716_) -> {
+-            return new GameTestBatch(p_127735_ + ":" + mutableint.incrementAndGet(), collection, consumer);
++         return Streams.stream(Iterables.partition(collection, 100)).map((p_240551_4_) -> {
++            return new GameTestBatch(p_229550_1_ + ":" + mutableint.incrementAndGet(), collection, consumer);
+          });
+       }).collect(Collectors.toList());
+    }
+@@ -124,8 +_,8 @@
+       ItemStack itemstack = new ItemStack(Items.f_42614_);
+       ListTag listtag = new ListTag();
+       StringBuffer stringbuffer = new StringBuffer();
+-      Arrays.stream(p_127718_.split("\\.")).forEach((p_127723_) -> {
+-         stringbuffer.append(p_127723_).append('\n');
++      Arrays.stream(p_127718_.split("\\.")).forEach((p_229547_1_) -> {
++         stringbuffer.append(p_229547_1_).append('\n');
+       });
+       if (!p_127719_) {
+          stringbuffer.append("(optional)\n");
+@@ -138,10 +_,10 @@
+    }
+ 
+    private static void m_127699_(ServerLevel p_127700_, ChatFormatting p_127701_, String p_127702_) {
+-      p_127700_.m_8795_((p_127704_) -> {
++      p_127700_.m_8795_((p_229557_0_) -> {
+          return true;
+-      }).forEach((p_127710_) -> {
+-         p_127710_.m_6352_((new TextComponent(p_127702_)).m_130940_(p_127701_), Util.f_137441_);
++      }).forEach((p_229544_2_) -> {
++         p_229544_2_.m_6352_((new TextComponent(p_127702_)).m_130940_(p_127701_), Util.f_137441_);
+       });
+    }
+ 
+@@ -157,10 +_,10 @@
+       p_127697_.m_127787_();
+       BlockPos blockpos = p_127696_.m_7918_(-p_127698_, 0, -p_127698_);
+       BlockPos blockpos1 = p_127696_.m_7918_(p_127698_, 0, p_127698_);
+-      BlockPos.m_121990_(blockpos, blockpos1).filter((p_127751_) -> {
+-         return p_127695_.m_8055_(p_127751_).m_60713_(Blocks.f_50677_);
+-      }).forEach((p_127689_) -> {
+-         StructureBlockEntity structureblockentity = (StructureBlockEntity)p_127695_.m_7702_(p_127689_);
++      BlockPos.m_121990_(blockpos, blockpos1).filter((p_229562_1_) -> {
++         return p_127695_.m_8055_(p_229562_1_).m_60713_(Blocks.f_50677_);
++      }).forEach((p_229553_1_) -> {
++         StructureBlockEntity structureblockentity = (StructureBlockEntity)p_127695_.m_7702_(p_229553_1_);
+          BlockPos blockpos2 = structureblockentity.m_58899_();
+          BoundingBox boundingbox = StructureUtils.m_127904_(structureblockentity);
+          StructureUtils.m_127849_(boundingbox, blockpos2.m_123342_(), p_127695_);

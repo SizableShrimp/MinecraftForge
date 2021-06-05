@@ -1,0 +1,10 @@
+--- a/net/minecraft/world/level/block/entity/BannerBlockEntity.java
++++ b/net/minecraft/world/level/block/entity/BannerBlockEntity.java
+@@ -158,7 +_,6 @@
+       }
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public ItemStack m_58492_(BlockState p_58493_) {
+       ItemStack itemstack = new ItemStack(BannerBlock.m_49014_(this.m_58497_(() -> {
+          return p_58493_;

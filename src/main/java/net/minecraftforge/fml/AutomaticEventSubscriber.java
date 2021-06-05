@@ -20,7 +20,6 @@
 package net.minecraftforge.fml;
 
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forgespi.language.ModFileScanData;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -39,8 +38,8 @@ import java.util.stream.Collectors;
 import static net.minecraftforge.fml.Logging.LOADING;
 
 /**
- * Automatic eventbus subscriber - reads {@link Mod.EventBusSubscriber}
- * annotations and passes the class instances to the {@link Mod.EventBusSubscriber.Bus}
+ * Automatic eventbus subscriber - reads {@link net.minecraftforge.fml.common.Mod.EventBusSubscriber}
+ * annotations and passes the class instances to the {@link net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus}
  * defined by the annotation. Defaults to {@link MinecraftForge#EVENT_BUS}
  */
 public class AutomaticEventSubscriber

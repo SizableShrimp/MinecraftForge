@@ -1,0 +1,25 @@
+--- a/net/minecraft/world/level/levelgen/surfacebuilders/SurfaceBuilderBaseConfiguration.java
++++ b/net/minecraft/world/level/levelgen/surfacebuilders/SurfaceBuilderBaseConfiguration.java
+@@ -5,14 +_,14 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class SurfaceBuilderBaseConfiguration implements SurfaceBuilderConfiguration {
+-   public static final Codec<SurfaceBuilderBaseConfiguration> f_75241_ = RecordCodecBuilder.create((p_75252_) -> {
+-      return p_75252_.group(BlockState.f_61039_.fieldOf("top_material").forGetter((p_75260_) -> {
+-         return p_75260_.f_75242_;
+-      }), BlockState.f_61039_.fieldOf("under_material").forGetter((p_75257_) -> {
+-         return p_75257_.f_75243_;
+-      }), BlockState.f_61039_.fieldOf("underwater_material").forGetter((p_75254_) -> {
+-         return p_75254_.f_75244_;
+-      })).apply(p_75252_, SurfaceBuilderBaseConfiguration::new);
++   public static final Codec<SurfaceBuilderBaseConfiguration> f_75241_ = RecordCodecBuilder.create((p_237204_0_) -> {
++      return p_237204_0_.group(BlockState.f_61039_.fieldOf("top_material").forGetter((p_237207_0_) -> {
++         return p_237207_0_.f_75242_;
++      }), BlockState.f_61039_.fieldOf("under_material").forGetter((p_237206_0_) -> {
++         return p_237206_0_.f_75243_;
++      }), BlockState.f_61039_.fieldOf("underwater_material").forGetter((p_237205_0_) -> {
++         return p_237205_0_.f_75244_;
++      })).apply(p_237204_0_, SurfaceBuilderBaseConfiguration::new);
+    });
+    private final BlockState f_75242_;
+    private final BlockState f_75243_;

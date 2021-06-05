@@ -1,0 +1,54 @@
+--- a/net/minecraft/tags/TagContainer.java
++++ b/net/minecraft/tags/TagContainer.java
+@@ -8,7 +_,7 @@
+ import net.minecraft.world.level.block.Blocks;
+ import net.minecraft.world.level.material.Fluid;
+ 
+-public interface TagContainer {
++public interface TagContainer extends net.minecraftforge.common.extensions.IForgeTagCollectionSupplier {
+    TagContainer f_13420_ = m_13422_(TagCollection.m_13410_(), TagCollection.m_13410_(), TagCollection.m_13410_(), TagCollection.m_13410_());
+ 
+    TagCollection<Block> m_5883_();
+@@ -22,6 +_,7 @@
+    default void m_13431_() {
+       StaticTags.m_13269_(this);
+       Blocks.m_50758_();
++      net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.TagsUpdatedEvent.VanillaTagTypes(this));
+    }
+ 
+    default void m_13427_(FriendlyByteBuf p_13428_) {
+@@ -55,6 +_,34 @@
+ 
+          public TagCollection<EntityType<?>> m_5901_() {
+             return p_13426_;
++         }
++      };
++   }
++
++   static TagContainer reinjectOptionalTags(TagContainer tagCollectionSupplier) {
++      TagCollection<Block> blockTagCollection = BlockTags.f_13053_.reinjectOptionalTags(tagCollectionSupplier.m_5883_());
++      TagCollection<Item> itemTagCollection = ItemTags.f_13163_.reinjectOptionalTags(tagCollectionSupplier.m_5881_());
++      TagCollection<Fluid> fluidTagCollection = FluidTags.f_13130_.reinjectOptionalTags(tagCollectionSupplier.m_5879_());
++      TagCollection<EntityType<?>> entityTypeTagCollection = EntityTypeTags.f_13119_.reinjectOptionalTags(tagCollectionSupplier.m_5901_());
++      return new TagContainer() {
++         @Override
++         public TagCollection<Block> m_5883_() {
++            return blockTagCollection;
++         }
++
++         @Override
++         public TagCollection<Item> m_5881_() {
++            return itemTagCollection;
++         }
++
++         @Override
++         public TagCollection<Fluid> m_5879_() {
++            return fluidTagCollection;
++         }
++
++         @Override
++         public TagCollection<EntityType<?>> m_5901_() {
++            return entityTypeTagCollection;
+          }
+       };
+    }

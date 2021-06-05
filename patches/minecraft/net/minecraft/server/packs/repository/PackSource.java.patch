@@ -1,0 +1,22 @@
+--- a/net/minecraft/server/packs/repository/PackSource.java
++++ b/net/minecraft/server/packs/repository/PackSource.java
+@@ -13,15 +_,15 @@
+    Component m_10540_(Component p_10541_);
+ 
+    static PackSource m_10532_() {
+-      return (p_10536_) -> {
+-         return p_10536_;
++      return (p_232631_0_) -> {
++         return p_232631_0_;
+       };
+    }
+ 
+    static PackSource m_10533_(String p_10534_) {
+       Component component = new TranslatableComponent(p_10534_);
+-      return (p_10539_) -> {
+-         return (new TranslatableComponent("pack.nameAndSource", p_10539_, component)).m_130940_(ChatFormatting.GRAY);
++      return (p_232632_1_) -> {
++         return (new TranslatableComponent("pack.nameAndSource", p_232632_1_, component)).m_130940_(ChatFormatting.GRAY);
+       };
+    }
+ }

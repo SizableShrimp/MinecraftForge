@@ -1,0 +1,21 @@
+--- a/net/minecraft/world/level/levelgen/feature/foliageplacers/BlobFoliagePlacer.java
++++ b/net/minecraft/world/level/levelgen/feature/foliageplacers/BlobFoliagePlacer.java
+@@ -14,14 +_,14 @@
+ import net.minecraft.world.level.levelgen.structure.BoundingBox;
+ 
+ public class BlobFoliagePlacer extends FoliagePlacer {
+-   public static final Codec<BlobFoliagePlacer> f_68392_ = RecordCodecBuilder.create((p_68427_) -> {
+-      return m_68413_(p_68427_).apply(p_68427_, BlobFoliagePlacer::new);
++   public static final Codec<BlobFoliagePlacer> f_68392_ = RecordCodecBuilder.create((p_236742_0_) -> {
++      return m_68413_(p_236742_0_).apply(p_236742_0_, BlobFoliagePlacer::new);
+    });
+    protected final int f_68393_;
+ 
+    protected static <P extends BlobFoliagePlacer> P3<Mu<P>, UniformInt, UniformInt, Integer> m_68413_(Instance<P> p_68414_) {
+-      return m_68573_(p_68414_).and(Codec.intRange(0, 16).fieldOf("height").forGetter((p_68412_) -> {
+-         return p_68412_.f_68393_;
++      return m_68573_(p_68414_).and(Codec.intRange(0, 16).fieldOf("height").forGetter((p_236741_0_) -> {
++         return p_236741_0_.f_68393_;
+       }));
+    }
+ 

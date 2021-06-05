@@ -1,0 +1,24 @@
+--- a/net/minecraft/advancements/critereon/EnterBlockTrigger.java
++++ b/net/minecraft/advancements/critereon/EnterBlockTrigger.java
+@@ -21,8 +_,8 @@
+       Block block = m_31278_(p_31281_);
+       StatePropertiesPredicate statepropertiespredicate = StatePropertiesPredicate.m_67679_(p_31281_.get("state"));
+       if (block != null) {
+-         statepropertiespredicate.m_67672_(block.m_49965_(), (p_31274_) -> {
+-            throw new JsonSyntaxException("Block " + block + " has no property " + p_31274_);
++         statepropertiespredicate.m_67672_(block.m_49965_(), (p_226548_1_) -> {
++            throw new JsonSyntaxException("Block " + block + " has no property " + p_226548_1_);
+          });
+       }
+ 
+@@ -42,8 +_,8 @@
+    }
+ 
+    public void m_31269_(ServerPlayer p_31270_, BlockState p_31271_) {
+-      this.m_66234_(p_31270_, (p_31277_) -> {
+-         return p_31277_.m_31299_(p_31271_);
++      this.m_66234_(p_31270_, (p_226549_1_) -> {
++         return p_226549_1_.m_31299_(p_31271_);
+       });
+    }
+ 

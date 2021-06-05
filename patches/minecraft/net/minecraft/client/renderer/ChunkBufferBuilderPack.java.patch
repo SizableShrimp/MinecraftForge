@@ -1,0 +1,17 @@
+--- a/net/minecraft/client/renderer/ChunkBufferBuilderPack.java
++++ b/net/minecraft/client/renderer/ChunkBufferBuilderPack.java
+@@ -8,10 +_,10 @@
+ 
+ @OnlyIn(Dist.CLIENT)
+ public class ChunkBufferBuilderPack {
+-   private final Map<RenderType, BufferBuilder> f_108836_ = RenderType.m_110506_().stream().collect(Collectors.toMap((p_108845_) -> {
+-      return p_108845_;
+-   }, (p_108843_) -> {
+-      return new BufferBuilder(p_108843_.m_110507_());
++   private final Map<RenderType, BufferBuilder> f_108836_ = RenderType.m_110506_().stream().collect(Collectors.toMap((p_228369_0_) -> {
++      return p_228369_0_;
++   }, (p_228368_0_) -> {
++      return new BufferBuilder(p_228368_0_.m_110507_());
+    }));
+ 
+    public BufferBuilder m_108839_(RenderType p_108840_) {

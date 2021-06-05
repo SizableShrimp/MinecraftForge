@@ -1,0 +1,17 @@
+--- a/net/minecraft/world/entity/ai/goal/target/ResetUniversalAngerTargetGoal.java
++++ b/net/minecraft/world/entity/ai/goal/target/ResetUniversalAngerTargetGoal.java
+@@ -31,10 +_,10 @@
+       this.f_26119_ = this.f_26117_.m_21213_();
+       this.f_26117_.m_21661_();
+       if (this.f_26118_) {
+-         this.m_26130_().stream().filter((p_26127_) -> {
+-            return p_26127_ != this.f_26117_;
+-         }).map((p_26125_) -> {
+-            return (NeutralMob)p_26125_;
++         this.m_26130_().stream().filter((p_241387_1_) -> {
++            return p_241387_1_ != this.f_26117_;
++         }).map((p_241386_0_) -> {
++            return (NeutralMob)p_241386_0_;
+          }).forEach(NeutralMob::m_21661_);
+       }
+ 

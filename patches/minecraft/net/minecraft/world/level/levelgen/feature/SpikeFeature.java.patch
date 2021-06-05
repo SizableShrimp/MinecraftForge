@@ -1,0 +1,33 @@
+--- a/net/minecraft/world/level/levelgen/feature/SpikeFeature.java
++++ b/net/minecraft/world/level/levelgen/feature/SpikeFeature.java
+@@ -96,18 +_,18 @@
+    }
+ 
+    public static class EndSpike {
+-      public static final Codec<SpikeFeature.EndSpike> f_66872_ = RecordCodecBuilder.create((p_66890_) -> {
+-         return p_66890_.group(Codec.INT.fieldOf("centerX").orElse(0).forGetter((p_66904_) -> {
+-            return p_66904_.f_66873_;
+-         }), Codec.INT.fieldOf("centerZ").orElse(0).forGetter((p_66901_) -> {
+-            return p_66901_.f_66874_;
+-         }), Codec.INT.fieldOf("radius").orElse(0).forGetter((p_66898_) -> {
+-            return p_66898_.f_66875_;
+-         }), Codec.INT.fieldOf("height").orElse(0).forGetter((p_66895_) -> {
+-            return p_66895_.f_66876_;
+-         }), Codec.BOOL.fieldOf("guarded").orElse(false).forGetter((p_66888_) -> {
+-            return p_66888_.f_66877_;
+-         })).apply(p_66890_, SpikeFeature.EndSpike::new);
++      public static final Codec<SpikeFeature.EndSpike> f_66872_ = RecordCodecBuilder.create((p_236359_0_) -> {
++         return p_236359_0_.group(Codec.INT.fieldOf("centerX").orElse(0).forGetter((p_236363_0_) -> {
++            return p_236363_0_.f_66873_;
++         }), Codec.INT.fieldOf("centerZ").orElse(0).forGetter((p_236362_0_) -> {
++            return p_236362_0_.f_66874_;
++         }), Codec.INT.fieldOf("radius").orElse(0).forGetter((p_236361_0_) -> {
++            return p_236361_0_.f_66875_;
++         }), Codec.INT.fieldOf("height").orElse(0).forGetter((p_236360_0_) -> {
++            return p_236360_0_.f_66876_;
++         }), Codec.BOOL.fieldOf("guarded").orElse(false).forGetter((p_236358_0_) -> {
++            return p_236358_0_.f_66877_;
++         })).apply(p_236359_0_, SpikeFeature.EndSpike::new);
+       });
+       private final int f_66873_;
+       private final int f_66874_;

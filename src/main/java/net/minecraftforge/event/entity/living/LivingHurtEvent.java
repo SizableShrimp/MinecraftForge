@@ -19,9 +19,6 @@
 
 package net.minecraftforge.event.entity.living;
 
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -44,7 +41,7 @@ import net.minecraft.world.entity.LivingEntity;
  * This event is fired on the {@link MinecraftForge#EVENT_BUS}.
  * @see LivingDamageEvent
  **/
-@Cancelable
+@net.minecraftforge.eventbus.api.Cancelable
 public class LivingHurtEvent extends LivingEvent
 {
     private final DamageSource source;

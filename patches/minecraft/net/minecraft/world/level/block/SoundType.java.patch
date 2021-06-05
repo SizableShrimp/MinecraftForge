@@ -1,0 +1,35 @@
+--- a/net/minecraft/world/level/block/SoundType.java
++++ b/net/minecraft/world/level/block/SoundType.java
+@@ -2,8 +_,6 @@
+ 
+ import net.minecraft.sounds.SoundEvent;
+ import net.minecraft.sounds.SoundEvents;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public class SoundType {
+    public static final SoundType f_56736_ = new SoundType(1.0F, 1.0F, SoundEvents.f_12630_, SoundEvents.f_12638_, SoundEvents.f_12635_, SoundEvents.f_12634_, SoundEvents.f_12633_);
+@@ -61,6 +_,7 @@
+    private final SoundEvent f_56737_;
+    private final SoundEvent f_56738_;
+ 
++   @Deprecated // Forge: Use {@link net.minecraftforge.common.util.ForgeSoundType} instead for suppliers
+    public SoundType(float p_56766_, float p_56767_, SoundEvent p_56768_, SoundEvent p_56769_, SoundEvent p_56770_, SoundEvent p_56771_, SoundEvent p_56772_) {
+       this.f_56731_ = p_56766_;
+       this.f_56732_ = p_56767_;
+@@ -79,7 +_,6 @@
+       return this.f_56732_;
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public SoundEvent m_56775_() {
+       return this.f_56733_;
+    }
+@@ -92,7 +_,6 @@
+       return this.f_56735_;
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public SoundEvent m_56778_() {
+       return this.f_56737_;
+    }

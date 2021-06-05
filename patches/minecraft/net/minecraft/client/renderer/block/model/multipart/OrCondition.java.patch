@@ -1,0 +1,20 @@
+--- a/net/minecraft/client/renderer/block/model/multipart/OrCondition.java
++++ b/net/minecraft/client/renderer/block/model/multipart/OrCondition.java
+@@ -19,12 +_,12 @@
+    }
+ 
+    public Predicate<BlockState> m_7289_(StateDefinition<Block, BlockState> p_112014_) {
+-      List<Predicate<BlockState>> list = Streams.stream(this.f_112001_).map((p_112009_) -> {
+-         return p_112009_.m_7289_(p_112014_);
++      List<Predicate<BlockState>> list = Streams.stream(this.f_112001_).map((p_200689_1_) -> {
++         return p_200689_1_.m_7289_(p_112014_);
+       }).collect(Collectors.toList());
+-      return (p_112012_) -> {
+-         return list.stream().anyMatch((p_112006_) -> {
+-            return p_112006_.test(p_112012_);
++      return (p_200690_1_) -> {
++         return list.stream().anyMatch((p_212488_1_) -> {
++            return p_212488_1_.test(p_200690_1_);
+          });
+       };
+    }

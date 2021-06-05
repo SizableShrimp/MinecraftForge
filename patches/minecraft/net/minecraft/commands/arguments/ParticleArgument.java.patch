@@ -1,0 +1,13 @@
+--- a/net/minecraft/commands/arguments/ParticleArgument.java
++++ b/net/minecraft/commands/arguments/ParticleArgument.java
+@@ -20,8 +_,8 @@
+ 
+ public class ParticleArgument implements ArgumentType<ParticleOptions> {
+    private static final Collection<String> f_103928_ = Arrays.asList("foo", "foo:bar", "particle with options");
+-   public static final DynamicCommandExceptionType f_103927_ = new DynamicCommandExceptionType((p_103941_) -> {
+-      return new TranslatableComponent("particle.notFound", p_103941_);
++   public static final DynamicCommandExceptionType f_103927_ = new DynamicCommandExceptionType((p_208673_0_) -> {
++      return new TranslatableComponent("particle.notFound", p_208673_0_);
+    });
+ 
+    public static ParticleArgument m_103931_() {

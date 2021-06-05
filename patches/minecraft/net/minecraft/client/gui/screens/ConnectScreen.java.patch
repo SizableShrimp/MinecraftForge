@@ -1,0 +1,22 @@
+--- a/net/minecraft/client/gui/screens/ConnectScreen.java
++++ b/net/minecraft/client/gui/screens/ConnectScreen.java
+@@ -65,8 +_,8 @@
+ 
+                inetaddress = InetAddress.getByName(p_95715_);
+                ConnectScreen.this.f_95684_ = Connection.m_129489_(inetaddress, p_95716_, ConnectScreen.this.f_96541_.f_91066_.m_92175_());
+-               ConnectScreen.this.f_95684_.m_129505_(new ClientHandshakePacketListenerImpl(ConnectScreen.this.f_95684_, ConnectScreen.this.f_96541_, ConnectScreen.this.f_95686_, (p_95738_) -> {
+-                  ConnectScreen.this.m_95717_(p_95738_);
++               ConnectScreen.this.f_95684_.m_129505_(new ClientHandshakePacketListenerImpl(ConnectScreen.this.f_95684_, ConnectScreen.this.f_96541_, ConnectScreen.this.f_95686_, (p_209549_1_) -> {
++                  ConnectScreen.this.m_95717_(p_209549_1_);
+                }));
+                ConnectScreen.this.f_95684_.m_129512_(new ClientIntentionPacket(p_95715_, p_95716_, ConnectionProtocol.LOGIN));
+                ConnectScreen.this.f_95684_.m_129512_(new ServerboundHelloPacket(ConnectScreen.this.f_96541_.m_91094_().m_92548_()));
+@@ -117,7 +_,7 @@
+    }
+ 
+    protected void m_7856_() {
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 120 + 12, 200, 20, CommonComponents.f_130656_, (p_95705_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 120 + 12, 200, 20, CommonComponents.f_130656_, (p_212999_1_) -> {
+          this.f_95685_ = true;
+          if (this.f_95684_ != null) {
+             this.f_95684_.m_129507_(new TranslatableComponent("connect.aborted"));

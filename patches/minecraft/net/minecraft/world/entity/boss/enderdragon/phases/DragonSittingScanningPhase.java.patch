@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/entity/boss/enderdragon/phases/DragonSittingScanningPhase.java
++++ b/net/minecraft/world/entity/boss/enderdragon/phases/DragonSittingScanningPhase.java
+@@ -13,8 +_,8 @@
+ 
+    public DragonSittingScanningPhase(EnderDragon p_31342_) {
+       super(p_31342_);
+-      this.f_31338_ = (new TargetingConditions()).m_26883_(20.0D).m_26888_((p_31345_) -> {
+-         return Math.abs(p_31345_.m_20186_() - p_31342_.m_20186_()) <= 10.0D;
++      this.f_31338_ = (new TargetingConditions()).m_26883_(20.0D).m_26888_((p_221114_1_) -> {
++         return Math.abs(p_221114_1_.m_20186_() - p_31342_.m_20186_()) <= 10.0D;
+       });
+    }
+ 

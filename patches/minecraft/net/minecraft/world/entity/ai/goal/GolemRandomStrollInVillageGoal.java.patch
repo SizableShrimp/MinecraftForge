@@ -1,0 +1,22 @@
+--- a/net/minecraft/world/entity/ai/goal/GolemRandomStrollInVillageGoal.java
++++ b/net/minecraft/world/entity/ai/goal/GolemRandomStrollInVillageGoal.java
+@@ -74,8 +_,8 @@
+    @Nullable
+    private SectionPos m_25413_() {
+       ServerLevel serverlevel = (ServerLevel)this.f_25725_.f_19853_;
+-      List<SectionPos> list = SectionPos.m_123201_(SectionPos.m_123194_(this.f_25725_), 2).filter((p_25402_) -> {
+-         return serverlevel.m_8828_(p_25402_) == 0;
++      List<SectionPos> list = SectionPos.m_123201_(SectionPos.m_123194_(this.f_25725_), 2).filter((p_234030_1_) -> {
++         return serverlevel.m_8828_(p_234030_1_) == 0;
+       }).collect(Collectors.toList());
+       return list.isEmpty() ? null : list.get(serverlevel.f_46441_.nextInt(list.size()));
+    }
+@@ -84,7 +_,7 @@
+    private BlockPos m_25407_(SectionPos p_25408_) {
+       ServerLevel serverlevel = (ServerLevel)this.f_25725_.f_19853_;
+       PoiManager poimanager = serverlevel.m_8904_();
+-      List<BlockPos> list = poimanager.m_27181_((p_25404_) -> {
++      List<BlockPos> list = poimanager.m_27181_((p_234027_0_) -> {
+          return true;
+       }, p_25408_.m_123250_(), 8, PoiManager.Occupancy.IS_OCCUPIED).map(PoiRecord::m_27257_).collect(Collectors.toList());
+       return list.isEmpty() ? null : list.get(serverlevel.f_46441_.nextInt(list.size()));

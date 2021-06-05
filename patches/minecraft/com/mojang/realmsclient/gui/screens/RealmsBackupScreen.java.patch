@@ -1,0 +1,46 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsBackupScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsBackupScreen.java
+@@ -91,17 +_,17 @@
+ 
+          }
+       }).start();
+-      this.f_88104_ = this.m_7082_(new Button(this.f_96543_ - 135, m_120774_(1), 120, 20, new TranslatableComponent("mco.backup.button.download"), (p_88185_) -> {
++      this.f_88104_ = this.m_7082_(new Button(this.f_96543_ - 135, m_120774_(1), 120, 20, new TranslatableComponent("mco.backup.button.download"), (p_237758_1_) -> {
+          this.m_88207_();
+       }));
+-      this.f_88105_ = this.m_7082_(new Button(this.f_96543_ - 135, m_120774_(3), 120, 20, new TranslatableComponent("mco.backup.button.restore"), (p_88179_) -> {
++      this.f_88105_ = this.m_7082_(new Button(this.f_96543_ - 135, m_120774_(3), 120, 20, new TranslatableComponent("mco.backup.button.restore"), (p_237754_1_) -> {
+          this.m_88166_(this.f_88122_);
+       }));
+-      this.f_88106_ = this.m_7082_(new Button(this.f_96543_ - 135, m_120774_(5), 120, 20, new TranslatableComponent("mco.backup.changes.tooltip"), (p_88174_) -> {
++      this.f_88106_ = this.m_7082_(new Button(this.f_96543_ - 135, m_120774_(5), 120, 20, new TranslatableComponent("mco.backup.changes.tooltip"), (p_237752_1_) -> {
+          this.f_96541_.m_91152_(new RealmsBackupInfoScreen(this, this.f_88119_.get(this.f_88122_)));
+          this.f_88122_ = -1;
+       }));
+-      this.m_7082_(new Button(this.f_96543_ - 100, this.f_96544_ - 35, 85, 20, CommonComponents.f_130660_, (p_88164_) -> {
++      this.m_7082_(new Button(this.f_96543_ - 100, this.f_96544_ - 35, 85, 20, CommonComponents.f_130660_, (p_237748_1_) -> {
+          this.f_96541_.m_91152_(this.f_88118_);
+       }));
+       this.m_7787_(this.f_88121_);
+@@ -181,8 +_,8 @@
+          String s1 = RealmsUtil.m_90223_(date);
+          Component component = new TranslatableComponent("mco.configure.world.restore.question.line1", s, s1);
+          Component component1 = new TranslatableComponent("mco.configure.world.restore.question.line2");
+-         this.f_96541_.m_91152_(new RealmsLongConfirmationScreen((p_88187_) -> {
+-            if (p_88187_) {
++         this.f_96541_.m_91152_(new RealmsLongConfirmationScreen((p_237759_1_) -> {
++            if (p_237759_1_) {
+                this.m_88209_();
+             } else {
+                this.f_88122_ = -1;
+@@ -197,8 +_,8 @@
+    private void m_88207_() {
+       Component component = new TranslatableComponent("mco.configure.world.restore.download.question.line1");
+       Component component1 = new TranslatableComponent("mco.configure.world.restore.download.question.line2");
+-      this.f_96541_.m_91152_(new RealmsLongConfirmationScreen((p_88181_) -> {
+-         if (p_88181_) {
++      this.f_96541_.m_91152_(new RealmsLongConfirmationScreen((p_237755_1_) -> {
++         if (p_237755_1_) {
+             this.m_88208_();
+          } else {
+             this.f_96541_.m_91152_(this);

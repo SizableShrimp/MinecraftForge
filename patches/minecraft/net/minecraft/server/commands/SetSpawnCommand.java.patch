@@ -1,0 +1,29 @@
+--- a/net/minecraft/server/commands/SetSpawnCommand.java
++++ b/net/minecraft/server/commands/SetSpawnCommand.java
+@@ -16,16 +_,16 @@
+ 
+ public class SetSpawnCommand {
+    public static void m_138643_(CommandDispatcher<CommandSourceStack> p_138644_) {
+-      p_138644_.register(Commands.m_82127_("spawnpoint").requires((p_138648_) -> {
+-         return p_138648_.m_6761_(2);
+-      }).executes((p_138659_) -> {
+-         return m_138649_(p_138659_.getSource(), Collections.singleton(p_138659_.getSource().m_81375_()), new BlockPos(p_138659_.getSource().m_81371_()), 0.0F);
+-      }).then(Commands.m_82129_("targets", EntityArgument.m_91470_()).executes((p_138657_) -> {
+-         return m_138649_(p_138657_.getSource(), EntityArgument.m_91477_(p_138657_, "targets"), new BlockPos(p_138657_.getSource().m_81371_()), 0.0F);
+-      }).then(Commands.m_82129_("pos", BlockPosArgument.m_118239_()).executes((p_138655_) -> {
+-         return m_138649_(p_138655_.getSource(), EntityArgument.m_91477_(p_138655_, "targets"), BlockPosArgument.m_118245_(p_138655_, "pos"), 0.0F);
+-      }).then(Commands.m_82129_("angle", AngleArgument.m_83807_()).executes((p_138646_) -> {
+-         return m_138649_(p_138646_.getSource(), EntityArgument.m_91477_(p_138646_, "targets"), BlockPosArgument.m_118245_(p_138646_, "pos"), AngleArgument.m_83810_(p_138646_, "angle"));
++      p_138644_.register(Commands.m_82127_("spawnpoint").requires((p_198699_0_) -> {
++         return p_198699_0_.m_6761_(2);
++      }).executes((p_198697_0_) -> {
++         return m_138649_(p_198697_0_.getSource(), Collections.singleton(p_198697_0_.getSource().m_81375_()), new BlockPos(p_198697_0_.getSource().m_81371_()), 0.0F);
++      }).then(Commands.m_82129_("targets", EntityArgument.m_91470_()).executes((p_198694_0_) -> {
++         return m_138649_(p_198694_0_.getSource(), EntityArgument.m_91477_(p_198694_0_, "targets"), new BlockPos(p_198694_0_.getSource().m_81371_()), 0.0F);
++      }).then(Commands.m_82129_("pos", BlockPosArgument.m_118239_()).executes((p_198698_0_) -> {
++         return m_138649_(p_198698_0_.getSource(), EntityArgument.m_91477_(p_198698_0_, "targets"), BlockPosArgument.m_118245_(p_198698_0_, "pos"), 0.0F);
++      }).then(Commands.m_82129_("angle", AngleArgument.m_83807_()).executes((p_244376_0_) -> {
++         return m_138649_(p_244376_0_.getSource(), EntityArgument.m_91477_(p_244376_0_, "targets"), BlockPosArgument.m_118245_(p_244376_0_, "pos"), AngleArgument.m_83810_(p_244376_0_, "angle"));
+       })))));
+    }
+ 

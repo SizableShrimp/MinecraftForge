@@ -1,0 +1,656 @@
+--- a/net/minecraft/data/loot/BlockLoot.java
++++ b/net/minecraft/data/loot/BlockLoot.java
+@@ -91,71 +_,71 @@
+    private static final float[] f_124069_ = new float[]{0.025F, 0.027777778F, 0.03125F, 0.041666668F, 0.1F};
+    private final Map<ResourceLocation, LootTable.Builder> f_124070_ = Maps.newHashMap();
+ 
+-   private static <T> T m_124131_(ItemLike p_124132_, FunctionUserBuilder<T> p_124133_) {
++   protected static <T> T m_124131_(ItemLike p_124132_, FunctionUserBuilder<T> p_124133_) {
+       return (T)(!f_124067_.contains(p_124132_.m_5456_()) ? p_124133_.m_5577_(ApplyExplosionDecay.m_80037_()) : p_124133_.m_5476_());
+    }
+ 
+-   private static <T> T m_124134_(ItemLike p_124135_, ConditionUserBuilder<T> p_124136_) {
++   protected static <T> T m_124134_(ItemLike p_124135_, ConditionUserBuilder<T> p_124136_) {
+       return (T)(!f_124067_.contains(p_124135_.m_5456_()) ? p_124136_.m_6509_(ExplosionCondition.m_81661_()) : p_124136_.m_5476_());
+    }
+ 
+-   private static LootTable.Builder m_124126_(ItemLike p_124127_) {
++   protected static LootTable.Builder m_124126_(ItemLike p_124127_) {
+       return LootTable.m_79147_().m_79161_(m_124134_(p_124127_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124127_))));
+    }
+ 
+-   private static LootTable.Builder m_124171_(Block p_124172_, LootItemCondition.Builder p_124173_, LootPoolEntryContainer.Builder<?> p_124174_) {
++   protected static LootTable.Builder m_124171_(Block p_124172_, LootItemCondition.Builder p_124173_, LootPoolEntryContainer.Builder<?> p_124174_) {
+       return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124172_).m_6509_(p_124173_).m_7170_(p_124174_)));
+    }
+ 
+-   private static LootTable.Builder m_124168_(Block p_124169_, LootPoolEntryContainer.Builder<?> p_124170_) {
++   protected static LootTable.Builder m_124168_(Block p_124169_, LootPoolEntryContainer.Builder<?> p_124170_) {
+       return m_124171_(p_124169_, f_124062_, p_124170_);
+    }
+ 
+-   private static LootTable.Builder m_124267_(Block p_124268_, LootPoolEntryContainer.Builder<?> p_124269_) {
++   protected static LootTable.Builder m_124267_(Block p_124268_, LootPoolEntryContainer.Builder<?> p_124269_) {
+       return m_124171_(p_124268_, f_124064_, p_124269_);
+    }
+ 
+-   private static LootTable.Builder m_124283_(Block p_124284_, LootPoolEntryContainer.Builder<?> p_124285_) {
++   protected static LootTable.Builder m_124283_(Block p_124284_, LootPoolEntryContainer.Builder<?> p_124285_) {
+       return m_124171_(p_124284_, f_124065_, p_124285_);
+    }
+ 
+-   private static LootTable.Builder m_124257_(Block p_124258_, ItemLike p_124259_) {
++   protected static LootTable.Builder m_124257_(Block p_124258_, ItemLike p_124259_) {
+       return m_124168_(p_124258_, m_124134_(p_124258_, LootItem.m_79579_(p_124259_)));
+    }
+ 
+-   private static LootTable.Builder m_124128_(ItemLike p_124129_, RandomIntGenerator p_124130_) {
++   protected static LootTable.Builder m_124128_(ItemLike p_124129_, RandomIntGenerator p_124130_) {
+       return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(m_124131_(p_124129_, LootItem.m_79579_(p_124129_).m_5577_(SetItemCountFunction.m_81008_(p_124130_)))));
+    }
+ 
+-   private static LootTable.Builder m_124150_(Block p_124151_, ItemLike p_124152_, RandomIntGenerator p_124153_) {
++   protected static LootTable.Builder m_124150_(Block p_124151_, ItemLike p_124152_, RandomIntGenerator p_124153_) {
+       return m_124168_(p_124151_, m_124131_(p_124151_, LootItem.m_79579_(p_124152_).m_5577_(SetItemCountFunction.m_81008_(p_124153_))));
+    }
+ 
+-   private static LootTable.Builder m_124250_(ItemLike p_124251_) {
++   protected static LootTable.Builder m_124250_(ItemLike p_124251_) {
+       return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_6509_(f_124062_).m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124251_)));
+    }
+ 
+-   private static LootTable.Builder m_124270_(ItemLike p_124271_) {
++   protected static LootTable.Builder m_124270_(ItemLike p_124271_) {
+       return LootTable.m_79147_().m_79161_(m_124134_(Blocks.f_50276_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Blocks.f_50276_)))).m_79161_(m_124134_(p_124271_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124271_))));
+    }
+ 
+-   private static LootTable.Builder m_124290_(Block p_124291_) {
++   protected static LootTable.Builder m_124290_(Block p_124291_) {
+       return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(m_124131_(p_124291_, LootItem.m_79579_(p_124291_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(2)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124291_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67697_(SlabBlock.f_56353_, SlabType.DOUBLE)))))));
+    }
+ 
+-   private static <T extends Comparable<T> & StringRepresentable> LootTable.Builder m_124161_(Block p_124162_, Property<T> p_124163_, T p_124164_) {
++   protected static <T extends Comparable<T> & StringRepresentable> LootTable.Builder m_124161_(Block p_124162_, Property<T> p_124163_, T p_124164_) {
+       return LootTable.m_79147_().m_79161_(m_124134_(p_124162_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124162_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124162_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67697_(p_124163_, p_124164_))))));
+    }
+ 
+-   private static LootTable.Builder m_124292_(Block p_124293_) {
++   protected static LootTable.Builder m_124292_(Block p_124293_) {
+       return LootTable.m_79147_().m_79161_(m_124134_(p_124293_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124293_).m_5577_(CopyNameFunction.m_80187_(CopyNameFunction.NameSource.BLOCK_ENTITY)))));
+    }
+ 
+-   private static LootTable.Builder m_124294_(Block p_124295_) {
++   protected static LootTable.Builder m_124294_(Block p_124295_) {
+       return LootTable.m_79147_().m_79161_(m_124134_(p_124295_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124295_).m_5577_(CopyNameFunction.m_80187_(CopyNameFunction.NameSource.BLOCK_ENTITY)).m_5577_(CopyNbtFunction.m_80258_(CopyNbtFunction.DataSource.BLOCK_ENTITY).m_80279_("Lock", "BlockEntityTag.Lock").m_80279_("LootTable", "BlockEntityTag.LootTable").m_80279_("LootTableSeed", "BlockEntityTag.LootTableSeed")).m_5577_(SetContainerContents.m_80926_().m_80930_(DynamicLoot.m_79483_(ShulkerBoxBlock.f_56184_))))));
+    }
+ 
+-   private static LootTable.Builder m_124296_(Block p_124297_) {
++   protected static LootTable.Builder m_124296_(Block p_124297_) {
+       return LootTable.m_79147_().m_79161_(m_124134_(p_124297_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124297_).m_5577_(CopyNameFunction.m_80187_(CopyNameFunction.NameSource.BLOCK_ENTITY)).m_5577_(CopyNbtFunction.m_80258_(CopyNbtFunction.DataSource.BLOCK_ENTITY).m_80279_("Patterns", "BlockEntityTag.Patterns")))));
+    }
+ 
+@@ -167,19 +_,19 @@
+       return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124301_).m_6509_(f_124062_).m_5577_(CopyNbtFunction.m_80258_(CopyNbtFunction.DataSource.BLOCK_ENTITY).m_80279_("Bees", "BlockEntityTag.Bees")).m_5577_(CopyBlockState.m_80062_(p_124301_).m_80084_(BeehiveBlock.f_49564_)).m_7170_(LootItem.m_79579_(p_124301_))));
+    }
+ 
+-   private static LootTable.Builder m_124139_(Block p_124140_, Item p_124141_) {
++   protected static LootTable.Builder m_124139_(Block p_124140_, Item p_124141_) {
+       return m_124168_(p_124140_, m_124131_(p_124140_, LootItem.m_79579_(p_124141_).m_5577_(ApplyBonusCount.m_79915_(Enchantments.f_44987_))));
+    }
+ 
+-   private static LootTable.Builder m_124277_(Block p_124278_, ItemLike p_124279_) {
++   protected static LootTable.Builder m_124277_(Block p_124278_, ItemLike p_124279_) {
+       return m_124168_(p_124278_, m_124131_(p_124278_, LootItem.m_79579_(p_124279_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(-6.0F, 2.0F))).m_5577_(LimitCount.m_80646_(IntLimiter.m_78865_(0)))));
+    }
+ 
+-   private static LootTable.Builder m_124302_(Block p_124303_) {
++   protected static LootTable.Builder m_124302_(Block p_124303_) {
+       return m_124267_(p_124303_, m_124131_(p_124303_, LootItem.m_79579_(Items.f_42404_).m_6509_(LootItemRandomChanceCondition.m_81927_(0.125F)).m_5577_(ApplyBonusCount.m_79921_(Enchantments.f_44987_, 2))));
+    }
+ 
+-   private static LootTable.Builder m_124254_(Block p_124255_, Item p_124256_) {
++   protected static LootTable.Builder m_124254_(Block p_124255_, Item p_124256_) {
+       return LootTable.m_79147_().m_79161_(m_124131_(p_124255_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124256_).m_5577_(SetItemCountFunction.m_81008_(BinomialDistributionGenerator.m_78660_(3, 0.06666667F)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124255_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(StemBlock.f_57013_, 0)))).m_5577_(SetItemCountFunction.m_81008_(BinomialDistributionGenerator.m_78660_(3, 0.13333334F)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124255_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(StemBlock.f_57013_, 1)))).m_5577_(SetItemCountFunction.m_81008_(BinomialDistributionGenerator.m_78660_(3, 0.2F)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124255_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(StemBlock.f_57013_, 2)))).m_5577_(SetItemCountFunction.m_81008_(BinomialDistributionGenerator.m_78660_(3, 0.26666668F)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124255_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(StemBlock.f_57013_, 3)))).m_5577_(SetItemCountFunction.m_81008_(BinomialDistributionGenerator.m_78660_(3, 0.33333334F)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124255_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(StemBlock.f_57013_, 4)))).m_5577_(SetItemCountFunction.m_81008_(BinomialDistributionGenerator.m_78660_(3, 0.4F)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124255_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(StemBlock.f_57013_, 5)))).m_5577_(SetItemCountFunction.m_81008_(BinomialDistributionGenerator.m_78660_(3, 0.46666667F)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124255_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(StemBlock.f_57013_, 6)))).m_5577_(SetItemCountFunction.m_81008_(BinomialDistributionGenerator.m_78660_(3, 0.53333336F)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124255_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(StemBlock.f_57013_, 7)))))));
+    }
+ 
+@@ -187,19 +_,19 @@
+       return LootTable.m_79147_().m_79161_(m_124131_(p_124275_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124276_).m_5577_(SetItemCountFunction.m_81008_(BinomialDistributionGenerator.m_78660_(3, 0.53333336F))))));
+    }
+ 
+-   private static LootTable.Builder m_124286_(ItemLike p_124287_) {
++   protected static LootTable.Builder m_124286_(ItemLike p_124287_) {
+       return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_6509_(f_124064_).m_79076_(LootItem.m_79579_(p_124287_)));
+    }
+ 
+-   private static LootTable.Builder m_124157_(Block p_124158_, Block p_124159_, float... p_124160_) {
++   protected static LootTable.Builder m_124157_(Block p_124158_, Block p_124159_, float... p_124160_) {
+       return m_124283_(p_124158_, m_124134_(p_124158_, LootItem.m_79579_(p_124159_)).m_6509_(BonusLevelTableCondition.m_81517_(Enchantments.f_44987_, p_124160_))).m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_6509_(f_124066_).m_79076_(m_124131_(p_124158_, LootItem.m_79579_(Items.f_42398_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(1.0F, 2.0F)))).m_6509_(BonusLevelTableCondition.m_81517_(Enchantments.f_44987_, 0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F))));
+    }
+ 
+-   private static LootTable.Builder m_124263_(Block p_124264_, Block p_124265_, float... p_124266_) {
++   protected static LootTable.Builder m_124263_(Block p_124264_, Block p_124265_, float... p_124266_) {
+       return m_124157_(p_124264_, p_124265_, p_124266_).m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_6509_(f_124066_).m_79076_(m_124134_(p_124264_, LootItem.m_79579_(Items.f_42410_)).m_6509_(BonusLevelTableCondition.m_81517_(Enchantments.f_44987_, 0.005F, 0.0055555557F, 0.00625F, 0.008333334F, 0.025F))));
+    }
+ 
+-   private static LootTable.Builder m_124142_(Block p_124143_, Item p_124144_, Item p_124145_, LootItemCondition.Builder p_124146_) {
++   protected static LootTable.Builder m_124142_(Block p_124143_, Item p_124144_, Item p_124145_, LootItemCondition.Builder p_124146_) {
+       return m_124131_(p_124143_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79076_(LootItem.m_79579_(p_124144_).m_6509_(p_124146_).m_7170_(LootItem.m_79579_(p_124145_)))).m_79161_(LootPool.m_79043_().m_6509_(p_124146_).m_79076_(LootItem.m_79579_(p_124145_).m_5577_(ApplyBonusCount.m_79917_(Enchantments.f_44987_, 0.5714286F, 3)))));
+    }
+ 
+@@ -216,7 +_,7 @@
+       return LootTable.m_79147_();
+    }
+ 
+-   public void accept(BiConsumer<ResourceLocation, LootTable.Builder> p_124179_) {
++   protected void addTables() {
+       this.m_124288_(Blocks.f_50122_);
+       this.m_124288_(Blocks.f_50175_);
+       this.m_124288_(Blocks.f_50228_);
+@@ -624,50 +_,50 @@
+       this.m_124147_(Blocks.f_50445_, Blocks.f_50493_);
+       this.m_124147_(Blocks.f_50576_, Blocks.f_50575_);
+       this.m_124147_(Blocks.f_50570_, Blocks.f_50571_);
+-      this.m_124175_(Blocks.f_50069_, (p_124195_) -> {
+-         return m_124257_(p_124195_, Blocks.f_50652_);
+-      });
+-      this.m_124175_(Blocks.f_50440_, (p_124193_) -> {
+-         return m_124257_(p_124193_, Blocks.f_50493_);
+-      });
+-      this.m_124175_(Blocks.f_50599_, (p_124191_) -> {
+-         return m_124257_(p_124191_, Blocks.f_50493_);
+-      });
+-      this.m_124175_(Blocks.f_50195_, (p_124189_) -> {
+-         return m_124257_(p_124189_, Blocks.f_50493_);
+-      });
+-      this.m_124175_(Blocks.f_50584_, (p_124187_) -> {
+-         return m_124257_(p_124187_, Blocks.f_50579_);
+-      });
+-      this.m_124175_(Blocks.f_50585_, (p_124185_) -> {
+-         return m_124257_(p_124185_, Blocks.f_50580_);
+-      });
+-      this.m_124175_(Blocks.f_50586_, (p_124183_) -> {
+-         return m_124257_(p_124183_, Blocks.f_50581_);
+-      });
+-      this.m_124175_(Blocks.f_50587_, (p_124181_) -> {
+-         return m_124257_(p_124181_, Blocks.f_50582_);
+-      });
+-      this.m_124175_(Blocks.f_50588_, (p_124249_) -> {
+-         return m_124257_(p_124249_, Blocks.f_50583_);
+-      });
+-      this.m_124175_(Blocks.f_50699_, (p_124247_) -> {
+-         return m_124257_(p_124247_, Blocks.f_50134_);
+-      });
+-      this.m_124175_(Blocks.f_50690_, (p_124245_) -> {
+-         return m_124257_(p_124245_, Blocks.f_50134_);
+-      });
+-      this.m_124175_(Blocks.f_50078_, (p_124243_) -> {
+-         return m_124150_(p_124243_, Items.f_42517_, ConstantIntValue.m_78775_(3));
+-      });
+-      this.m_124175_(Blocks.f_50129_, (p_124241_) -> {
+-         return m_124150_(p_124241_, Items.f_42461_, ConstantIntValue.m_78775_(4));
+-      });
+-      this.m_124175_(Blocks.f_50265_, (p_124239_) -> {
+-         return m_124150_(p_124239_, Blocks.f_50080_, ConstantIntValue.m_78775_(8));
+-      });
+-      this.m_124175_(Blocks.f_50127_, (p_124237_) -> {
+-         return m_124150_(p_124237_, Items.f_42452_, ConstantIntValue.m_78775_(4));
++      this.m_124175_(Blocks.f_50069_, (p_218490_0_) -> {
++         return m_124257_(p_218490_0_, Blocks.f_50652_);
++      });
++      this.m_124175_(Blocks.f_50440_, (p_218529_0_) -> {
++         return m_124257_(p_218529_0_, Blocks.f_50493_);
++      });
++      this.m_124175_(Blocks.f_50599_, (p_218514_0_) -> {
++         return m_124257_(p_218514_0_, Blocks.f_50493_);
++      });
++      this.m_124175_(Blocks.f_50195_, (p_218501_0_) -> {
++         return m_124257_(p_218501_0_, Blocks.f_50493_);
++      });
++      this.m_124175_(Blocks.f_50584_, (p_218539_0_) -> {
++         return m_124257_(p_218539_0_, Blocks.f_50579_);
++      });
++      this.m_124175_(Blocks.f_50585_, (p_218462_0_) -> {
++         return m_124257_(p_218462_0_, Blocks.f_50580_);
++      });
++      this.m_124175_(Blocks.f_50586_, (p_218505_0_) -> {
++         return m_124257_(p_218505_0_, Blocks.f_50581_);
++      });
++      this.m_124175_(Blocks.f_50587_, (p_218499_0_) -> {
++         return m_124257_(p_218499_0_, Blocks.f_50582_);
++      });
++      this.m_124175_(Blocks.f_50588_, (p_218502_0_) -> {
++         return m_124257_(p_218502_0_, Blocks.f_50583_);
++      });
++      this.m_124175_(Blocks.f_50699_, (p_239296_0_) -> {
++         return m_124257_(p_239296_0_, Blocks.f_50134_);
++      });
++      this.m_124175_(Blocks.f_50690_, (p_239293_0_) -> {
++         return m_124257_(p_239293_0_, Blocks.f_50134_);
++      });
++      this.m_124175_(Blocks.f_50078_, (p_218534_0_) -> {
++         return m_124150_(p_218534_0_, Items.f_42517_, ConstantIntValue.m_78775_(3));
++      });
++      this.m_124175_(Blocks.f_50129_, (p_218465_0_) -> {
++         return m_124150_(p_218465_0_, Items.f_42461_, ConstantIntValue.m_78775_(4));
++      });
++      this.m_124175_(Blocks.f_50265_, (p_218558_0_) -> {
++         return m_124150_(p_218558_0_, Blocks.f_50080_, ConstantIntValue.m_78775_(8));
++      });
++      this.m_124175_(Blocks.f_50127_, (p_218556_0_) -> {
++         return m_124150_(p_218556_0_, Items.f_42452_, ConstantIntValue.m_78775_(4));
+       });
+       this.m_124165_(Blocks.f_50490_, m_124128_(Items.f_42730_, RandomValueBounds.m_79291_(0.0F, 1.0F)));
+       this.m_124252_(Blocks.f_50277_);
+@@ -748,75 +_,75 @@
+       this.m_124175_(Blocks.f_50484_, BlockLoot::m_124137_);
+       this.m_124175_(Blocks.f_50672_, BlockLoot::m_124137_);
+       this.m_124175_(Blocks.f_50671_, BlockLoot::m_124137_);
+-      this.m_124175_(Blocks.f_50029_, (p_124235_) -> {
+-         return m_124161_(p_124235_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50025_, (p_124233_) -> {
+-         return m_124161_(p_124233_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50026_, (p_124231_) -> {
+-         return m_124161_(p_124231_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50023_, (p_124229_) -> {
+-         return m_124161_(p_124229_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50021_, (p_124227_) -> {
+-         return m_124161_(p_124227_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50027_, (p_124225_) -> {
+-         return m_124161_(p_124225_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50017_, (p_124223_) -> {
+-         return m_124161_(p_124223_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50022_, (p_124221_) -> {
+-         return m_124161_(p_124221_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50019_, (p_124219_) -> {
+-         return m_124161_(p_124219_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50068_, (p_124217_) -> {
+-         return m_124161_(p_124217_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50024_, (p_124215_) -> {
+-         return m_124161_(p_124215_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50067_, (p_124213_) -> {
+-         return m_124161_(p_124213_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50020_, (p_124211_) -> {
+-         return m_124161_(p_124211_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50028_, (p_124209_) -> {
+-         return m_124161_(p_124209_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50066_, (p_124207_) -> {
+-         return m_124161_(p_124207_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50018_, (p_124205_) -> {
+-         return m_124161_(p_124205_, BedBlock.f_49440_, BedPart.HEAD);
+-      });
+-      this.m_124175_(Blocks.f_50356_, (p_124201_) -> {
+-         return m_124161_(p_124201_, DoublePlantBlock.f_52858_, DoubleBlockHalf.LOWER);
+-      });
+-      this.m_124175_(Blocks.f_50355_, (p_124199_) -> {
+-         return m_124161_(p_124199_, DoublePlantBlock.f_52858_, DoubleBlockHalf.LOWER);
+-      });
+-      this.m_124175_(Blocks.f_50358_, (p_124197_) -> {
+-         return m_124161_(p_124197_, DoublePlantBlock.f_52858_, DoubleBlockHalf.LOWER);
+-      });
+-      this.m_124175_(Blocks.f_50357_, (p_124124_) -> {
+-         return m_124161_(p_124124_, DoublePlantBlock.f_52858_, DoubleBlockHalf.LOWER);
++      this.m_124175_(Blocks.f_50029_, (p_218567_0_) -> {
++         return m_124161_(p_218567_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50025_, (p_218555_0_) -> {
++         return m_124161_(p_218555_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50026_, (p_218543_0_) -> {
++         return m_124161_(p_218543_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50023_, (p_218479_0_) -> {
++         return m_124161_(p_218479_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50021_, (p_218521_0_) -> {
++         return m_124161_(p_218521_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50027_, (p_218470_0_) -> {
++         return m_124161_(p_218470_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50017_, (p_218536_0_) -> {
++         return m_124161_(p_218536_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50022_, (p_218545_0_) -> {
++         return m_124161_(p_218545_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50019_, (p_218557_0_) -> {
++         return m_124161_(p_218557_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50068_, (p_218566_0_) -> {
++         return m_124161_(p_218566_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50024_, (p_218520_0_) -> {
++         return m_124161_(p_218520_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50067_, (p_218472_0_) -> {
++         return m_124161_(p_218472_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50020_, (p_218537_0_) -> {
++         return m_124161_(p_218537_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50028_, (p_218549_0_) -> {
++         return m_124161_(p_218549_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50066_, (p_218569_0_) -> {
++         return m_124161_(p_218569_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50018_, (p_218517_0_) -> {
++         return m_124161_(p_218517_0_, BedBlock.f_49440_, BedPart.HEAD);
++      });
++      this.m_124175_(Blocks.f_50356_, (p_218488_0_) -> {
++         return m_124161_(p_218488_0_, DoublePlantBlock.f_52858_, DoubleBlockHalf.LOWER);
++      });
++      this.m_124175_(Blocks.f_50355_, (p_218503_0_) -> {
++         return m_124161_(p_218503_0_, DoublePlantBlock.f_52858_, DoubleBlockHalf.LOWER);
++      });
++      this.m_124175_(Blocks.f_50358_, (p_218497_0_) -> {
++         return m_124161_(p_218497_0_, DoublePlantBlock.f_52858_, DoubleBlockHalf.LOWER);
++      });
++      this.m_124175_(Blocks.f_50357_, (p_218504_0_) -> {
++         return m_124161_(p_218504_0_, DoublePlantBlock.f_52858_, DoubleBlockHalf.LOWER);
+       });
+       this.m_124165_(Blocks.f_50077_, LootTable.m_79147_().m_79161_(m_124134_(Blocks.f_50077_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Blocks.f_50077_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(Blocks.f_50077_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67703_(TntBlock.f_57419_, false)))))));
+-      this.m_124175_(Blocks.f_50262_, (p_124122_) -> {
+-         return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(m_124131_(p_124122_, LootItem.m_79579_(Items.f_42533_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(3)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124122_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(CocoaBlock.f_51736_, 2)))))));
+-      });
+-      this.m_124175_(Blocks.f_50567_, (p_124120_) -> {
+-         return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(m_124131_(Blocks.f_50567_, LootItem.m_79579_(p_124120_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(2)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124120_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SeaPickleBlock.f_56074_, 2)))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(3)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124120_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SeaPickleBlock.f_56074_, 3)))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(4)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124120_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SeaPickleBlock.f_56074_, 4)))))));
+-      });
+-      this.m_124175_(Blocks.f_50715_, (p_124118_) -> {
+-         return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79076_(m_124131_(p_124118_, LootItem.m_79579_(Items.f_42726_)))).m_79161_(LootPool.m_79043_().m_79076_(LootItem.m_79579_(Items.f_42499_)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124118_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(ComposterBlock.f_51913_, 8))));
++      this.m_124175_(Blocks.f_50262_, (p_218516_0_) -> {
++         return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(m_124131_(p_218516_0_, LootItem.m_79579_(Items.f_42533_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(3)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218516_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(CocoaBlock.f_51736_, 2)))))));
++      });
++      this.m_124175_(Blocks.f_50567_, (p_218478_0_) -> {
++         return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(m_124131_(Blocks.f_50567_, LootItem.m_79579_(p_218478_0_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(2)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218478_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SeaPickleBlock.f_56074_, 2)))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(3)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218478_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SeaPickleBlock.f_56074_, 3)))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(4)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218478_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SeaPickleBlock.f_56074_, 4)))))));
++      });
++      this.m_124175_(Blocks.f_50715_, (p_218551_0_) -> {
++         return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79076_(m_124131_(p_218551_0_, LootItem.m_79579_(Items.f_42726_)))).m_79161_(LootPool.m_79043_().m_79076_(LootItem.m_79579_(Items.f_42499_)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218551_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(ComposterBlock.f_51913_, 8))));
+       });
+       this.m_124175_(Blocks.f_50273_, BlockLoot::m_124292_);
+       this.m_124175_(Blocks.f_50255_, BlockLoot::m_124292_);
+@@ -872,28 +_,28 @@
+       this.m_124175_(Blocks.f_50428_, BlockLoot::m_124296_);
+       this.m_124175_(Blocks.f_50414_, BlockLoot::m_124296_);
+       this.m_124175_(Blocks.f_50418_, BlockLoot::m_124296_);
+-      this.m_124175_(Blocks.f_50316_, (p_124116_) -> {
+-         return LootTable.m_79147_().m_79161_(m_124134_(p_124116_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_124116_).m_5577_(CopyNbtFunction.m_80258_(CopyNbtFunction.DataSource.BLOCK_ENTITY).m_80279_("SkullOwner", "SkullOwner")))));
++      this.m_124175_(Blocks.f_50316_, (p_218565_0_) -> {
++         return LootTable.m_79147_().m_79161_(m_124134_(p_218565_0_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(p_218565_0_).m_5577_(CopyNbtFunction.m_80258_(CopyNbtFunction.DataSource.BLOCK_ENTITY).m_80279_("SkullOwner", "SkullOwner")))));
+       });
+       this.m_124175_(Blocks.f_50717_, BlockLoot::m_124298_);
+       this.m_124175_(Blocks.f_50718_, BlockLoot::m_124300_);
+-      this.m_124175_(Blocks.f_50052_, (p_124114_) -> {
+-         return m_124157_(p_124114_, Blocks.f_50748_, f_124068_);
+-      });
+-      this.m_124175_(Blocks.f_50054_, (p_124112_) -> {
+-         return m_124157_(p_124112_, Blocks.f_50750_, f_124068_);
+-      });
+-      this.m_124175_(Blocks.f_50053_, (p_124110_) -> {
+-         return m_124157_(p_124110_, Blocks.f_50749_, f_124069_);
+-      });
+-      this.m_124175_(Blocks.f_50051_, (p_124108_) -> {
+-         return m_124157_(p_124108_, Blocks.f_50747_, f_124068_);
+-      });
+-      this.m_124175_(Blocks.f_50050_, (p_124106_) -> {
+-         return m_124263_(p_124106_, Blocks.f_50746_, f_124068_);
+-      });
+-      this.m_124175_(Blocks.f_50055_, (p_124104_) -> {
+-         return m_124263_(p_124104_, Blocks.f_50751_, f_124068_);
++      this.m_124175_(Blocks.f_50052_, (p_218473_0_) -> {
++         return m_124157_(p_218473_0_, Blocks.f_50748_, f_124068_);
++      });
++      this.m_124175_(Blocks.f_50054_, (p_218518_0_) -> {
++         return m_124157_(p_218518_0_, Blocks.f_50750_, f_124068_);
++      });
++      this.m_124175_(Blocks.f_50053_, (p_218477_0_) -> {
++         return m_124157_(p_218477_0_, Blocks.f_50749_, f_124069_);
++      });
++      this.m_124175_(Blocks.f_50051_, (p_218500_0_) -> {
++         return m_124157_(p_218500_0_, Blocks.f_50747_, f_124068_);
++      });
++      this.m_124175_(Blocks.f_50050_, (p_218506_0_) -> {
++         return m_124263_(p_218506_0_, Blocks.f_50746_, f_124068_);
++      });
++      this.m_124175_(Blocks.f_50055_, (p_241172_0_) -> {
++         return m_124263_(p_241172_0_, Blocks.f_50751_, f_124068_);
+       });
+       LootItemCondition.Builder lootitemcondition$builder = LootItemBlockStatePropertyCondition.m_81769_(Blocks.f_50444_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(BeetrootBlock.f_49657_, 3));
+       this.m_124165_(Blocks.f_50444_, m_124142_(Blocks.f_50444_, Items.f_42732_, Items.f_42733_, lootitemcondition$builder));
+@@ -903,95 +_,95 @@
+       this.m_124165_(Blocks.f_50249_, m_124131_(Blocks.f_50249_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79076_(LootItem.m_79579_(Items.f_42619_))).m_79161_(LootPool.m_79043_().m_6509_(lootitemcondition$builder2).m_79076_(LootItem.m_79579_(Items.f_42619_).m_5577_(ApplyBonusCount.m_79917_(Enchantments.f_44987_, 0.5714286F, 3))))));
+       LootItemCondition.Builder lootitemcondition$builder3 = LootItemBlockStatePropertyCondition.m_81769_(Blocks.f_50250_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(PotatoBlock.f_52244_, 7));
+       this.m_124165_(Blocks.f_50250_, m_124131_(Blocks.f_50250_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79076_(LootItem.m_79579_(Items.f_42620_))).m_79161_(LootPool.m_79043_().m_6509_(lootitemcondition$builder3).m_79076_(LootItem.m_79579_(Items.f_42620_).m_5577_(ApplyBonusCount.m_79917_(Enchantments.f_44987_, 0.5714286F, 3)))).m_79161_(LootPool.m_79043_().m_6509_(lootitemcondition$builder3).m_79076_(LootItem.m_79579_(Items.f_42675_).m_6509_(LootItemRandomChanceCondition.m_81927_(0.02F))))));
+-      this.m_124175_(Blocks.f_50685_, (p_124102_) -> {
+-         return m_124131_(p_124102_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_6509_(LootItemBlockStatePropertyCondition.m_81769_(Blocks.f_50685_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SweetBerryBushBlock.f_57244_, 3))).m_79076_(LootItem.m_79579_(Items.f_42780_)).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 3.0F))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_))).m_79161_(LootPool.m_79043_().m_6509_(LootItemBlockStatePropertyCondition.m_81769_(Blocks.f_50685_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SweetBerryBushBlock.f_57244_, 2))).m_79076_(LootItem.m_79579_(Items.f_42780_)).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(1.0F, 2.0F))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_))));
+-      });
+-      this.m_124175_(Blocks.f_50180_, (p_124100_) -> {
+-         return m_124277_(p_124100_, Blocks.f_50072_);
+-      });
+-      this.m_124175_(Blocks.f_50181_, (p_124098_) -> {
+-         return m_124277_(p_124098_, Blocks.f_50073_);
+-      });
+-      this.m_124175_(Blocks.f_49997_, (p_124096_) -> {
+-         return m_124139_(p_124096_, Items.f_42413_);
+-      });
+-      this.m_124175_(Blocks.f_50264_, (p_124094_) -> {
+-         return m_124139_(p_124094_, Items.f_42616_);
+-      });
+-      this.m_124175_(Blocks.f_50331_, (p_124092_) -> {
+-         return m_124139_(p_124092_, Items.f_42692_);
+-      });
+-      this.m_124175_(Blocks.f_50089_, (p_124090_) -> {
+-         return m_124139_(p_124090_, Items.f_42415_);
+-      });
+-      this.m_124175_(Blocks.f_49998_, (p_124088_) -> {
+-         return m_124168_(p_124088_, m_124131_(p_124088_, LootItem.m_79579_(Items.f_42587_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 6.0F))).m_5577_(ApplyBonusCount.m_79915_(Enchantments.f_44987_))));
+-      });
+-      this.m_124175_(Blocks.f_50059_, (p_124086_) -> {
+-         return m_124168_(p_124086_, m_124131_(p_124086_, LootItem.m_79579_(Items.f_42534_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(4.0F, 9.0F))).m_5577_(ApplyBonusCount.m_79915_(Enchantments.f_44987_))));
+-      });
+-      this.m_124175_(Blocks.f_50033_, (p_124084_) -> {
+-         return m_124283_(p_124084_, m_124134_(p_124084_, LootItem.m_79579_(Items.f_42401_)));
+-      });
+-      this.m_124175_(Blocks.f_50036_, (p_124082_) -> {
+-         return m_124267_(p_124082_, m_124131_(p_124082_, LootItem.m_79579_(Items.f_42398_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(0.0F, 2.0F)))));
++      this.m_124175_(Blocks.f_50685_, (p_241171_0_) -> {
++         return m_124131_(p_241171_0_, LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_6509_(LootItemBlockStatePropertyCondition.m_81769_(Blocks.f_50685_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SweetBerryBushBlock.f_57244_, 3))).m_79076_(LootItem.m_79579_(Items.f_42780_)).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 3.0F))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_))).m_79161_(LootPool.m_79043_().m_6509_(LootItemBlockStatePropertyCondition.m_81769_(Blocks.f_50685_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SweetBerryBushBlock.f_57244_, 2))).m_79076_(LootItem.m_79579_(Items.f_42780_)).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(1.0F, 2.0F))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_))));
++      });
++      this.m_124175_(Blocks.f_50180_, (p_229434_0_) -> {
++         return m_124277_(p_229434_0_, Blocks.f_50072_);
++      });
++      this.m_124175_(Blocks.f_50181_, (p_229433_0_) -> {
++         return m_124277_(p_229433_0_, Blocks.f_50073_);
++      });
++      this.m_124175_(Blocks.f_49997_, (p_241170_0_) -> {
++         return m_124139_(p_241170_0_, Items.f_42413_);
++      });
++      this.m_124175_(Blocks.f_50264_, (p_229431_0_) -> {
++         return m_124139_(p_229431_0_, Items.f_42616_);
++      });
++      this.m_124175_(Blocks.f_50331_, (p_218554_0_) -> {
++         return m_124139_(p_218554_0_, Items.f_42692_);
++      });
++      this.m_124175_(Blocks.f_50089_, (p_218568_0_) -> {
++         return m_124139_(p_218568_0_, Items.f_42415_);
++      });
++      this.m_124175_(Blocks.f_49998_, (p_218471_0_) -> {
++         return m_124168_(p_218471_0_, m_124131_(p_218471_0_, LootItem.m_79579_(Items.f_42587_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 6.0F))).m_5577_(ApplyBonusCount.m_79915_(Enchantments.f_44987_))));
++      });
++      this.m_124175_(Blocks.f_50059_, (p_218548_0_) -> {
++         return m_124168_(p_218548_0_, m_124131_(p_218548_0_, LootItem.m_79579_(Items.f_42534_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(4.0F, 9.0F))).m_5577_(ApplyBonusCount.m_79915_(Enchantments.f_44987_))));
++      });
++      this.m_124175_(Blocks.f_50033_, (p_218487_0_) -> {
++         return m_124283_(p_218487_0_, m_124134_(p_218487_0_, LootItem.m_79579_(Items.f_42401_)));
++      });
++      this.m_124175_(Blocks.f_50036_, (p_218525_0_) -> {
++         return m_124267_(p_218525_0_, m_124131_(p_218525_0_, LootItem.m_79579_(Items.f_42398_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(0.0F, 2.0F)))));
+       });
+       this.m_124175_(Blocks.f_50694_, BlockLoot::m_124286_);
+       this.m_124175_(Blocks.f_50037_, BlockLoot::m_124286_);
+       this.m_124175_(Blocks.f_50191_, BlockLoot::m_124286_);
+       this.m_124165_(Blocks.f_50038_, m_124304_(Blocks.f_50037_));
+-      this.m_124175_(Blocks.f_50360_, (p_124080_) -> {
+-         return m_124260_(p_124080_, Blocks.f_50035_);
+-      });
+-      this.m_124175_(Blocks.f_50359_, (p_124078_) -> {
+-         return m_124260_(p_124078_, Blocks.f_50034_);
+-      });
+-      this.m_124175_(Blocks.f_50190_, (p_124076_) -> {
+-         return m_124254_(p_124076_, Items.f_42578_);
+-      });
+-      this.m_124175_(Blocks.f_50188_, (p_124074_) -> {
+-         return m_124274_(p_124074_, Items.f_42578_);
+-      });
+-      this.m_124175_(Blocks.f_50189_, (p_124333_) -> {
+-         return m_124254_(p_124333_, Items.f_42577_);
+-      });
+-      this.m_124175_(Blocks.f_50187_, (p_124331_) -> {
+-         return m_124274_(p_124331_, Items.f_42577_);
+-      });
+-      this.m_124175_(Blocks.f_50491_, (p_124329_) -> {
+-         return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(m_124134_(p_124329_, LootItem.m_79579_(p_124329_)).m_6509_(LootItemEntityPropertyCondition.m_81862_(LootContext.EntityTarget.THIS))));
++      this.m_124175_(Blocks.f_50360_, (p_218572_0_) -> {
++         return m_124260_(p_218572_0_, Blocks.f_50035_);
++      });
++      this.m_124175_(Blocks.f_50359_, (p_241752_0_) -> {
++         return m_124260_(p_241752_0_, Blocks.f_50034_);
++      });
++      this.m_124175_(Blocks.f_50190_, (p_218550_0_) -> {
++         return m_124254_(p_218550_0_, Items.f_42578_);
++      });
++      this.m_124175_(Blocks.f_50188_, (p_218531_0_) -> {
++         return m_124274_(p_218531_0_, Items.f_42578_);
++      });
++      this.m_124175_(Blocks.f_50189_, (p_218467_0_) -> {
++         return m_124254_(p_218467_0_, Items.f_42577_);
++      });
++      this.m_124175_(Blocks.f_50187_, (p_218509_0_) -> {
++         return m_124274_(p_218509_0_, Items.f_42577_);
++      });
++      this.m_124175_(Blocks.f_50491_, (p_218512_0_) -> {
++         return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(m_124134_(p_218512_0_, LootItem.m_79579_(p_218512_0_)).m_6509_(LootItemEntityPropertyCondition.m_81862_(LootContext.EntityTarget.THIS))));
+       });
+       this.m_124175_(Blocks.f_50035_, BlockLoot::m_124302_);
+       this.m_124175_(Blocks.f_50034_, BlockLoot::m_124302_);
+-      this.m_124175_(Blocks.f_50141_, (p_124327_) -> {
+-         return m_124168_(p_124327_, m_124131_(p_124327_, LootItem.m_79579_(Items.f_42525_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 4.0F))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_)).m_5577_(LimitCount.m_80646_(IntLimiter.m_78867_(1, 4)))));
+-      });
+-      this.m_124175_(Blocks.f_50186_, (p_124325_) -> {
+-         return m_124168_(p_124325_, m_124131_(p_124325_, LootItem.m_79579_(Items.f_42575_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(3.0F, 7.0F))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_)).m_5577_(LimitCount.m_80646_(IntLimiter.m_78878_(9)))));
+-      });
+-      this.m_124175_(Blocks.f_50173_, (p_124323_) -> {
+-         return m_124168_(p_124323_, m_124131_(p_124323_, LootItem.m_79579_(Items.f_42451_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(4.0F, 5.0F))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_))));
+-      });
+-      this.m_124175_(Blocks.f_50386_, (p_124321_) -> {
+-         return m_124168_(p_124321_, m_124131_(p_124321_, LootItem.m_79579_(Items.f_42696_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 3.0F))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_)).m_5577_(LimitCount.m_80646_(IntLimiter.m_78867_(1, 5)))));
+-      });
+-      this.m_124175_(Blocks.f_50200_, (p_124319_) -> {
+-         return LootTable.m_79147_().m_79161_(m_124131_(p_124319_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42588_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 4.0F)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124319_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(NetherWartBlock.f_54967_, 3)))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124319_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(NetherWartBlock.f_54967_, 3)))))));
+-      });
+-      this.m_124175_(Blocks.f_50125_, (p_124317_) -> {
+-         return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_6509_(LootItemEntityPropertyCondition.m_81862_(LootContext.EntityTarget.THIS)).m_79076_(AlternativesEntry.m_79395_(AlternativesEntry.m_79395_(LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 1))), LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 2))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(2))), LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 3))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(3))), LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 4))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(4))), LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 5))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(5))), LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 6))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(6))), LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 7))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(7))), LootItem.m_79579_(Items.f_42452_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(8)))).m_6509_(f_124063_), AlternativesEntry.m_79395_(LootItem.m_79579_(Blocks.f_50125_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 1))), LootItem.m_79579_(Blocks.f_50125_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(2))).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 2))), LootItem.m_79579_(Blocks.f_50125_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(3))).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 3))), LootItem.m_79579_(Blocks.f_50125_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(4))).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 4))), LootItem.m_79579_(Blocks.f_50125_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(5))).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 5))), LootItem.m_79579_(Blocks.f_50125_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(6))).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 6))), LootItem.m_79579_(Blocks.f_50125_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(7))).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_124317_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 7))), LootItem.m_79579_(Blocks.f_50127_)))));
+-      });
+-      this.m_124175_(Blocks.f_49994_, (p_124315_) -> {
+-         return m_124168_(p_124315_, m_124134_(p_124315_, LootItem.m_79579_(Items.f_42484_).m_6509_(BonusLevelTableCondition.m_81517_(Enchantments.f_44987_, 0.1F, 0.14285715F, 0.25F, 1.0F)).m_7170_(LootItem.m_79579_(p_124315_))));
+-      });
+-      this.m_124175_(Blocks.f_50683_, (p_124313_) -> {
+-         return m_124168_(p_124313_, m_124134_(p_124313_, LootItem.m_79579_(Items.f_42414_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(2)))));
+-      });
+-      this.m_124175_(Blocks.f_50706_, (p_124311_) -> {
+-         return m_124168_(p_124311_, m_124134_(p_124311_, LootItem.m_79579_(Items.f_42587_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 5.0F))).m_6509_(BonusLevelTableCondition.m_81517_(Enchantments.f_44987_, 0.1F, 0.14285715F, 0.25F, 1.0F)).m_7170_(LootItem.m_79579_(p_124311_))));
+-      });
+-      this.m_124175_(Blocks.f_50684_, (p_124309_) -> {
+-         return m_124168_(p_124309_, m_124134_(p_124309_, LootItem.m_79579_(Items.f_42050_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(1)))));
++      this.m_124175_(Blocks.f_50141_, (p_218496_0_) -> {
++         return m_124168_(p_218496_0_, m_124131_(p_218496_0_, LootItem.m_79579_(Items.f_42525_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 4.0F))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_)).m_5577_(LimitCount.m_80646_(IntLimiter.m_78867_(1, 4)))));
++      });
++      this.m_124175_(Blocks.f_50186_, (p_218532_0_) -> {
++         return m_124168_(p_218532_0_, m_124131_(p_218532_0_, LootItem.m_79579_(Items.f_42575_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(3.0F, 7.0F))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_)).m_5577_(LimitCount.m_80646_(IntLimiter.m_78878_(9)))));
++      });
++      this.m_124175_(Blocks.f_50173_, (p_218464_0_) -> {
++         return m_124168_(p_218464_0_, m_124131_(p_218464_0_, LootItem.m_79579_(Items.f_42451_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(4.0F, 5.0F))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_))));
++      });
++      this.m_124175_(Blocks.f_50386_, (p_218571_0_) -> {
++         return m_124168_(p_218571_0_, m_124131_(p_218571_0_, LootItem.m_79579_(Items.f_42696_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 3.0F))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_)).m_5577_(LimitCount.m_80646_(IntLimiter.m_78867_(1, 5)))));
++      });
++      this.m_124175_(Blocks.f_50200_, (p_218553_0_) -> {
++         return LootTable.m_79147_().m_79161_(m_124131_(p_218553_0_, LootPool.m_79043_().m_79074_(ConstantIntValue.m_78775_(1)).m_79076_(LootItem.m_79579_(Items.f_42588_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 4.0F)).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218553_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(NetherWartBlock.f_54967_, 3)))).m_5577_(ApplyBonusCount.m_79939_(Enchantments.f_44987_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218553_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(NetherWartBlock.f_54967_, 3)))))));
++      });
++      this.m_124175_(Blocks.f_50125_, (p_218485_0_) -> {
++         return LootTable.m_79147_().m_79161_(LootPool.m_79043_().m_6509_(LootItemEntityPropertyCondition.m_81862_(LootContext.EntityTarget.THIS)).m_79076_(AlternativesEntry.m_79395_(AlternativesEntry.m_79395_(LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 1))), LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 2))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(2))), LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 3))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(3))), LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 4))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(4))), LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 5))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(5))), LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 6))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(6))), LootItem.m_79579_(Items.f_42452_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 7))).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(7))), LootItem.m_79579_(Items.f_42452_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(8)))).m_6509_(f_124063_), AlternativesEntry.m_79395_(LootItem.m_79579_(Blocks.f_50125_).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 1))), LootItem.m_79579_(Blocks.f_50125_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(2))).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 2))), LootItem.m_79579_(Blocks.f_50125_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(3))).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 3))), LootItem.m_79579_(Blocks.f_50125_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(4))).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 4))), LootItem.m_79579_(Blocks.f_50125_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(5))).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 5))), LootItem.m_79579_(Blocks.f_50125_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(6))).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 6))), LootItem.m_79579_(Blocks.f_50125_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(7))).m_6509_(LootItemBlockStatePropertyCondition.m_81769_(p_218485_0_).m_81784_(StatePropertiesPredicate.Builder.m_67693_().m_67694_(SnowLayerBlock.f_56581_, 7))), LootItem.m_79579_(Blocks.f_50127_)))));
++      });
++      this.m_124175_(Blocks.f_49994_, (p_218533_0_) -> {
++         return m_124168_(p_218533_0_, m_124134_(p_218533_0_, LootItem.m_79579_(Items.f_42484_).m_6509_(BonusLevelTableCondition.m_81517_(Enchantments.f_44987_, 0.1F, 0.14285715F, 0.25F, 1.0F)).m_7170_(LootItem.m_79579_(p_218533_0_))));
++      });
++      this.m_124175_(Blocks.f_50683_, (p_218469_0_) -> {
++         return m_124168_(p_218469_0_, m_124134_(p_218469_0_, LootItem.m_79579_(Items.f_42414_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(2)))));
++      });
++      this.m_124175_(Blocks.f_50706_, (p_229432_0_) -> {
++         return m_124168_(p_229432_0_, m_124134_(p_229432_0_, LootItem.m_79579_(Items.f_42587_).m_5577_(SetItemCountFunction.m_81008_(RandomValueBounds.m_79291_(2.0F, 5.0F))).m_6509_(BonusLevelTableCondition.m_81517_(Enchantments.f_44987_, 0.1F, 0.14285715F, 0.25F, 1.0F)).m_7170_(LootItem.m_79579_(p_229432_0_))));
++      });
++      this.m_124175_(Blocks.f_50684_, (p_218538_0_) -> {
++         return m_124168_(p_218538_0_, m_124134_(p_218538_0_, LootItem.m_79579_(Items.f_42050_).m_5577_(SetItemCountFunction.m_81008_(ConstantIntValue.m_78775_(1)))));
+       });
+       this.m_124272_(Blocks.f_50058_);
+       this.m_124272_(Blocks.f_50147_);
+@@ -1066,9 +_,13 @@
+       this.m_124165_(Blocks.f_50083_, m_124125_());
+       this.m_124165_(Blocks.f_50084_, m_124125_());
+       this.m_124165_(Blocks.f_50142_, m_124125_());
++   }
++
++   public void accept(BiConsumer<ResourceLocation, LootTable.Builder> p_124179_) {
++      this.addTables();
+       Set<ResourceLocation> set = Sets.newHashSet();
+ 
+-      for(Block block : Registry.f_122824_) {
++      for(Block block : getKnownBlocks()) {
+          ResourceLocation resourcelocation = block.m_60589_();
+          if (resourcelocation != BuiltInLootTables.f_78712_ && set.add(resourcelocation)) {
+             LootTable.Builder loottable$builder = this.f_124070_.remove(resourcelocation);
+@@ -1095,9 +_,13 @@
+       return m_124161_(p_124138_, DoorBlock.f_52730_, DoubleBlockHalf.LOWER);
+    }
+ 
++   protected Iterable<Block> getKnownBlocks() {
++       return Registry.f_122824_;
++   }
++
+    public void m_124252_(Block p_124253_) {
+-      this.m_124175_(p_124253_, (p_124307_) -> {
+-         return m_124270_(((FlowerPotBlock)p_124307_).m_53560_());
++      this.m_124175_(p_124253_, (p_241751_0_) -> {
++         return m_124270_(((FlowerPotBlock)p_241751_0_).m_53560_());
+       });
+    }
+ 
+@@ -1117,11 +_,11 @@
+       this.m_124147_(p_124289_, p_124289_);
+    }
+ 
+-   private void m_124175_(Block p_124176_, Function<Block, LootTable.Builder> p_124177_) {
++   protected void m_124175_(Block p_124176_, Function<Block, LootTable.Builder> p_124177_) {
+       this.m_124165_(p_124176_, p_124177_.apply(p_124176_));
+    }
+ 
+-   private void m_124165_(Block p_124166_, LootTable.Builder p_124167_) {
++   protected void m_124165_(Block p_124166_, LootTable.Builder p_124167_) {
+       this.f_124070_.put(p_124166_.m_60589_(), p_124167_);
+    }
+ }

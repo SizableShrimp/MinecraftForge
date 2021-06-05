@@ -1,0 +1,32 @@
+--- a/net/minecraft/server/dedicated/DedicatedServerProperties.java
++++ b/net/minecraft/server/dedicated/DedicatedServerProperties.java
+@@ -25,8 +_,8 @@
+    public final GameType f_139740_ = this.m_139821_("gamemode", m_139850_(GameType::m_46393_, GameType::m_46400_), GameType::m_46405_, GameType.SURVIVAL);
+    public final String f_139741_ = this.m_139811_("level-name", "world");
+    public final int f_139742_ = this.m_139805_("server-port", 25565);
+-   public final int f_139743_ = this.m_139832_("max-build-height", (p_139771_) -> {
+-      return Mth.m_14045_((p_139771_ + 8) / 16 * 16, 64, 256);
++   public final int f_139743_ = this.m_139832_("max-build-height", (p_218987_0_) -> {
++      return Mth.m_14045_((p_218987_0_ + 8) / 16 * 16, 64, 256);
+    }, 256);
+    public final Boolean f_139744_ = this.m_139859_("announce-player-achievements");
+    public final boolean f_139745_ = this.m_139836_("enable-query", false);
+@@ -80,14 +_,14 @@
+       this.f_139716_ = this.m_139805_("network-compression-threshold", 256);
+       this.f_139717_ = this.m_139836_("broadcast-rcon-to-ops", true);
+       this.f_139718_ = this.m_139836_("broadcast-console-to-ops", true);
+-      this.f_139719_ = this.m_139832_("max-world-size", (p_139769_) -> {
+-         return Mth.m_14045_(p_139769_, 1, 29999984);
++      this.f_139719_ = this.m_139832_("max-world-size", (p_218986_0_) -> {
++         return Mth.m_14045_(p_218986_0_, 1, 29999984);
+       }, 29999984);
+       this.f_139720_ = this.m_139836_("sync-chunk-writes", true);
+       this.f_139721_ = this.m_139836_("enable-jmx-monitoring", false);
+       this.f_139722_ = this.m_139836_("enable-status", true);
+-      this.f_139723_ = this.m_139832_("entity-broadcast-range-percentage", (p_139764_) -> {
+-         return Mth.m_14045_(p_139764_, 10, 1000);
++      this.f_139723_ = this.m_139832_("entity-broadcast-range-percentage", (p_241083_0_) -> {
++         return Mth.m_14045_(p_241083_0_, 10, 1000);
+       }, 100);
+       this.f_139724_ = this.m_139811_("text-filtering-config", "");
+       this.f_139725_ = this.m_139861_("player-idle-timeout", 0);

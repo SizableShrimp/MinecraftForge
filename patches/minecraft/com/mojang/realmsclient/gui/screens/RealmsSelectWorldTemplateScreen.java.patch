@@ -1,0 +1,64 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsSelectWorldTemplateScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsSelectWorldTemplateScreen.java
+@@ -104,18 +_,18 @@
+    public void m_7856_() {
+       this.f_96541_.f_91068_.m_90926_(true);
+       this.f_89612_ = new RealmsSelectWorldTemplateScreen.WorldTemplateObjectSelectionList(this.f_89612_.m_89818_());
+-      this.f_89616_ = this.m_7082_(new Button(this.f_96543_ / 2 - 206, this.f_96544_ - 32, 100, 20, new TranslatableComponent("mco.template.button.trailer"), (p_89701_) -> {
++      this.f_89616_ = this.m_7082_(new Button(this.f_96543_ / 2 - 206, this.f_96544_ - 32, 100, 20, new TranslatableComponent("mco.template.button.trailer"), (p_238011_1_) -> {
+          this.m_89738_();
+       }));
+-      this.f_89615_ = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 32, 100, 20, new TranslatableComponent("mco.template.button.select"), (p_89696_) -> {
++      this.f_89615_ = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 32, 100, 20, new TranslatableComponent("mco.template.button.select"), (p_238008_1_) -> {
+          this.m_89736_();
+       }));
+       Component component = this.f_89598_ == RealmsServer.WorldType.MINIGAME ? CommonComponents.f_130656_ : CommonComponents.f_130660_;
+-      Button button = new Button(this.f_96543_ / 2 + 6, this.f_96544_ - 32, 100, 20, component, (p_89691_) -> {
++      Button button = new Button(this.f_96543_ / 2 + 6, this.f_96544_ - 32, 100, 20, component, (p_238006_1_) -> {
+          this.m_89733_();
+       });
+       this.m_7082_(button);
+-      this.f_89617_ = this.m_7082_(new Button(this.f_96543_ / 2 + 112, this.f_96544_ - 32, 100, 20, new TranslatableComponent("mco.template.button.publisher"), (p_89679_) -> {
++      this.f_89617_ = this.m_7082_(new Button(this.f_96543_ / 2 + 112, this.f_96544_ - 32, 100, 20, new TranslatableComponent("mco.template.button.publisher"), (p_238000_1_) -> {
+          this.m_89739_();
+       }));
+       this.f_89615_.f_93623_ = false;
+@@ -215,7 +_,7 @@
+             RealmsClient realmsclient = RealmsClient.m_87169_();
+             while (worldtemplatepaginatedlist != null) {
+                Either<WorldTemplatePaginatedList, String> either = RealmsSelectWorldTemplateScreen.this.m_89655_(worldtemplatepaginatedlist, realmsclient);
+-               worldtemplatepaginatedlist = RealmsSelectWorldTemplateScreen.this.f_96541_.m_18691_(() -> {
++            worldtemplatepaginatedlist = RealmsSelectWorldTemplateScreen.this.f_96541_.m_18691_(() -> {
+                if (either.right().isPresent()) {
+                   RealmsSelectWorldTemplateScreen.f_89605_.error("Couldn't fetch templates: {}", either.right().get());
+                   if (RealmsSelectWorldTemplateScreen.this.f_89612_.m_89817_()) {
+@@ -244,7 +_,6 @@
+                }
+             }).join();
+             }
+-
+          }
+       }).start();
+    }
+@@ -304,8 +_,8 @@
+       for(int i = 0; i < p_89647_.size(); ++i) {
+          TextRenderingUtils.Line textrenderingutils$line = p_89647_.get(i);
+          int j = m_120774_(4 + i);
+-         int k = textrenderingutils$line.f_90262_.stream().mapToInt((p_89677_) -> {
+-            return this.f_96547_.m_92895_(p_89677_.m_90278_());
++         int k = textrenderingutils$line.f_90262_.stream().mapToInt((p_237999_1_) -> {
++            return this.f_96547_.m_92895_(p_237999_1_.m_90278_());
+          }).sum();
+          int l = this.f_96543_ / 2 - k / 2;
+ 
+@@ -506,8 +_,8 @@
+       }
+ 
+       public List<WorldTemplate> m_89818_() {
+-         return this.m_6702_().stream().map((p_89814_) -> {
+-            return p_89814_.f_89750_;
++         return this.m_6702_().stream().map((p_223875_0_) -> {
++            return p_223875_0_.f_89750_;
+          }).collect(Collectors.toList());
+       }
+    }

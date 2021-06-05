@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/ShotCrossbowTrigger.java
++++ b/net/minecraft/advancements/critereon/ShotCrossbowTrigger.java
+@@ -19,8 +_,8 @@
+    }
+ 
+    public void m_65462_(ServerPlayer p_65463_, ItemStack p_65464_) {
+-      this.m_66234_(p_65463_, (p_65467_) -> {
+-         return p_65467_.m_65481_(p_65464_);
++      this.m_66234_(p_65463_, (p_227037_1_) -> {
++         return p_227037_1_.m_65481_(p_65464_);
+       });
+    }
+ 

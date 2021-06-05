@@ -1,0 +1,38 @@
+--- a/net/minecraft/world/level/StructureFeatureManager.java
++++ b/net/minecraft/world/level/StructureFeatureManager.java
+@@ -30,12 +_,12 @@
+    }
+ 
+    public Stream<? extends StructureStart<?>> m_47289_(SectionPos p_47290_, StructureFeature<?> p_47291_) {
+-      return this.f_47266_.m_46819_(p_47290_.m_123170_(), p_47290_.m_123222_(), ChunkStatus.f_62316_).m_6705_(p_47291_).stream().map((p_47307_) -> {
+-         return SectionPos.m_123196_(new ChunkPos(p_47307_), 0);
+-      }).map((p_47276_) -> {
+-         return this.m_47297_(p_47276_, p_47291_, this.f_47266_.m_46819_(p_47276_.m_123170_(), p_47276_.m_123222_(), ChunkStatus.f_62315_));
+-      }).filter((p_47278_) -> {
+-         return p_47278_ != null && p_47278_.m_73603_();
++      return this.f_47266_.m_46819_(p_47290_.m_123170_(), p_47290_.m_123222_(), ChunkStatus.f_62316_).m_6705_(p_47291_).stream().map((p_235015_0_) -> {
++         return SectionPos.m_123196_(new ChunkPos(p_235015_0_), 0);
++      }).map((p_235006_2_) -> {
++         return this.m_47297_(p_235006_2_, p_47291_, this.f_47266_.m_46819_(p_235006_2_.m_123170_(), p_235006_2_.m_123222_(), ChunkStatus.f_62315_));
++      }).filter((p_235007_0_) -> {
++         return p_235007_0_ != null && p_235007_0_.m_73603_();
+       });
+    }
+ 
+@@ -57,11 +_,11 @@
+    }
+ 
+    public StructureStart<?> m_47285_(BlockPos p_47286_, boolean p_47287_, StructureFeature<?> p_47288_) {
+-      return DataFixUtils.orElse(this.m_47289_(SectionPos.m_123199_(p_47286_), p_47288_).filter((p_47284_) -> {
+-         return p_47284_.m_73601_().m_71051_(p_47286_);
+-      }).filter((p_47311_) -> {
+-         return !p_47287_ || p_47311_.m_73602_().stream().anyMatch((p_47281_) -> {
+-            return p_47281_.m_73547_().m_71051_(p_47286_);
++      return DataFixUtils.orElse(this.m_47289_(SectionPos.m_123199_(p_47286_), p_47288_).filter((p_235009_1_) -> {
++         return p_235009_1_.m_73601_().m_71051_(p_47286_);
++      }).filter((p_235016_2_) -> {
++         return !p_47287_ || p_235016_2_.m_73602_().stream().anyMatch((p_235008_1_) -> {
++            return p_235008_1_.m_73547_().m_71051_(p_47286_);
+          });
+       }).findFirst(), StructureStart.f_73561_);
+    }

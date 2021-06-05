@@ -1,0 +1,81 @@
+--- a/net/minecraft/data/models/blockstates/Condition.java
++++ b/net/minecraft/data/models/blockstates/Condition.java
+@@ -24,30 +_,6 @@
+       return new Condition.CompositeCondition(Condition.Operation.OR, Arrays.asList(p_125138_));
+    }
+ 
+-   public static class CompositeCondition implements Condition {
+-      private final Condition.Operation f_125139_;
+-      private final List<Condition> f_125140_;
+-
+-      private CompositeCondition(Condition.Operation p_125142_, List<Condition> p_125143_) {
+-         this.f_125139_ = p_125142_;
+-         this.f_125140_ = p_125143_;
+-      }
+-
+-      public void m_7619_(StateDefinition<?, ?> p_125149_) {
+-         this.f_125140_.forEach((p_125152_) -> {
+-            p_125152_.m_7619_(p_125149_);
+-         });
+-      }
+-
+-      public JsonElement get() {
+-         JsonArray jsonarray = new JsonArray();
+-         this.f_125140_.stream().map(Supplier::get).forEach(jsonarray::add);
+-         JsonObject jsonobject = new JsonObject();
+-         jsonobject.add(this.f_125139_.f_125157_, jsonarray);
+-         return jsonobject;
+-      }
+-   }
+-
+    public static enum Operation {
+       AND("AND"),
+       OR("OR");
+@@ -90,19 +_,43 @@
+ 
+       public JsonElement get() {
+          JsonObject jsonobject = new JsonObject();
+-         this.f_125169_.forEach((p_125191_, p_125192_) -> {
+-            jsonobject.addProperty(p_125191_.m_61708_(), p_125192_);
++         this.f_125169_.forEach((p_240102_1_, p_240102_2_) -> {
++            jsonobject.addProperty(p_240102_1_.m_61708_(), p_240102_2_);
+          });
+          return jsonobject;
+       }
+ 
+       public void m_7619_(StateDefinition<?, ?> p_125172_) {
+-         List<Property<?>> list = this.f_125169_.keySet().stream().filter((p_125175_) -> {
+-            return p_125172_.m_61081_(p_125175_.m_61708_()) != p_125175_;
++         List<Property<?>> list = this.f_125169_.keySet().stream().filter((p_240097_1_) -> {
++            return p_125172_.m_61081_(p_240097_1_.m_61708_()) != p_240097_1_;
+          }).collect(Collectors.toList());
+          if (!list.isEmpty()) {
+             throw new IllegalStateException("Properties " + list + " are missing from " + p_125172_);
+          }
++      }
++   }
++
++   public static class CompositeCondition implements Condition {
++      private final Condition.Operation f_125139_;
++      private final List<Condition> f_125140_;
++
++      private CompositeCondition(Condition.Operation p_125142_, List<Condition> p_125143_) {
++         this.f_125139_ = p_125142_;
++         this.f_125140_ = p_125143_;
++      }
++
++      public void m_7619_(StateDefinition<?, ?> p_125149_) {
++         this.f_125140_.forEach((p_240093_1_) -> {
++            p_240093_1_.m_7619_(p_125149_);
++         });
++      }
++
++      public JsonElement get() {
++         JsonArray jsonarray = new JsonArray();
++         this.f_125140_.stream().map(Supplier::get).forEach(jsonarray::add);
++         JsonObject jsonobject = new JsonObject();
++         jsonobject.add(this.f_125139_.f_125157_, jsonarray);
++         return jsonobject;
+       }
+    }
+ }

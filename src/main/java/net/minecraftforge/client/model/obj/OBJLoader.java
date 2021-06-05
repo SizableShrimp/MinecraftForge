@@ -31,7 +31,6 @@ import net.minecraftforge.client.model.IModelLoader;
 
 import javax.annotation.Nullable;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.*;
 
 public class OBJLoader implements IModelLoader<OBJModel>

@@ -1,0 +1,50 @@
+--- a/net/minecraft/world/phys/shapes/EntityCollisionContext.java
++++ b/net/minecraft/world/phys/shapes/EntityCollisionContext.java
+@@ -12,7 +_,7 @@
+ import net.minecraft.world.level.material.FluidState;
+ 
+ public class EntityCollisionContext implements CollisionContext {
+-   protected static final CollisionContext f_82865_ = new EntityCollisionContext(false, -Double.MAX_VALUE, Items.f_41852_, (p_82891_) -> {
++   protected static final CollisionContext f_82865_ = new EntityCollisionContext(false, -Double.MAX_VALUE, Items.f_41852_, (p_237495_0_) -> {
+       return false;
+    }) {
+       public boolean m_6513_(VoxelShape p_82898_, BlockPos p_82899_, boolean p_82900_) {
+@@ -25,15 +_,20 @@
+    private final Predicate<Fluid> f_82869_;
+ 
+    protected EntityCollisionContext(boolean p_82874_, double p_82875_, Item p_82876_, Predicate<Fluid> p_82877_) {
+-      this.f_82866_ = p_82874_;
+-      this.f_82867_ = p_82875_;
+-      this.f_82868_ = p_82876_;
+-      this.f_82869_ = p_82877_;
++       this(null, p_82874_, p_82875_, p_82876_, p_82877_);
++   }
++
++   protected EntityCollisionContext(@javax.annotation.Nullable Entity entity, boolean p_i232177_1_, double p_i232177_2_, Item p_i232177_4_, Predicate<Fluid> p_i232177_5_) {
++      this.entity = entity;
++      this.f_82866_ = p_i232177_1_;
++      this.f_82867_ = p_i232177_2_;
++      this.f_82868_ = p_i232177_4_;
++      this.f_82869_ = p_i232177_5_;
+    }
+ 
+    @Deprecated
+    protected EntityCollisionContext(Entity p_82872_) {
+-      this(p_82872_.m_20164_(), p_82872_.m_20186_(), p_82872_ instanceof LivingEntity ? ((LivingEntity)p_82872_).m_21205_().m_41720_() : Items.f_41852_, p_82872_ instanceof LivingEntity ? ((LivingEntity)p_82872_)::m_7479_ : (p_82881_) -> {
++      this(p_82872_, p_82872_.m_20164_(), p_82872_.m_20186_(), p_82872_ instanceof LivingEntity ? ((LivingEntity)p_82872_).m_21205_().m_41720_() : Items.f_41852_, p_82872_ instanceof LivingEntity ? ((LivingEntity)p_82872_)::m_7479_ : (p_237494_0_) -> {
+          return false;
+       });
+    }
+@@ -52,5 +_,12 @@
+ 
+    public boolean m_6513_(VoxelShape p_82886_, BlockPos p_82887_, boolean p_82888_) {
+       return this.f_82867_ > (double)p_82887_.m_123342_() + p_82886_.m_83297_(Direction.Axis.Y) - (double)1.0E-5F;
++   }
++
++   private final @javax.annotation.Nullable Entity entity;
++
++   @Override
++   public @javax.annotation.Nullable Entity getEntity() {
++      return entity;
+    }
+ }

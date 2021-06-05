@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/levelgen/structure/MineShaftPieces.java
++++ b/net/minecraft/world/level/levelgen/structure/MineShaftPieces.java
+@@ -209,7 +_,7 @@
+ 
+       protected boolean m_5606_(WorldGenLevel p_71407_, BoundingBox p_71408_, Random p_71409_, int p_71410_, int p_71411_, int p_71412_, ResourceLocation p_71413_) {
+          BlockPos blockpos = new BlockPos(this.m_73392_(p_71410_, p_71412_), this.m_73544_(p_71411_), this.m_73525_(p_71410_, p_71412_));
+-         if (p_71408_.m_71051_(blockpos) && p_71407_.m_8055_(blockpos).m_60795_() && !p_71407_.m_8055_(blockpos.m_7495_()).m_60795_()) {
++         if (p_71408_.m_71051_(blockpos) && p_71407_.m_8055_(blockpos).isAir(p_71407_, blockpos) && !p_71407_.m_8055_(blockpos.m_7495_()).isAir(p_71407_, blockpos.m_7495_())) {
+             BlockState blockstate = Blocks.f_50156_.m_49966_().m_61124_(RailBlock.f_55392_, p_71409_.nextBoolean() ? RailShape.NORTH_SOUTH : RailShape.EAST_WEST);
+             this.m_73434_(p_71407_, blockstate, p_71410_, p_71411_, p_71412_, p_71408_);
+             MinecartChest minecartchest = new MinecartChest(p_71407_.m_6018_(), (double)blockpos.m_123341_() + 0.5D, (double)blockpos.m_123342_() + 0.5D, (double)blockpos.m_123343_() + 0.5D);

@@ -23,10 +23,8 @@ import java.util.Optional;
 import java.util.Set;
 import javax.annotation.Nullable;
 
-import net.minecraft.block.*;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.client.particle.ParticleEngine;
-import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
@@ -52,7 +50,6 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

@@ -1,0 +1,35 @@
+--- a/net/minecraft/world/level/block/AttachedStemBlock.java
++++ b/net/minecraft/world/level/block/AttachedStemBlock.java
+@@ -16,15 +_,13 @@
+ import net.minecraft.world.level.block.state.properties.DirectionProperty;
+ import net.minecraft.world.phys.shapes.CollisionContext;
+ import net.minecraft.world.phys.shapes.VoxelShape;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public class AttachedStemBlock extends BushBlock {
+    public static final DirectionProperty f_48830_ = HorizontalDirectionalBlock.f_54117_;
+    private final StemGrownBlock f_48831_;
+    private static final Map<Direction, VoxelShape> f_48832_ = Maps.newEnumMap(ImmutableMap.of(Direction.SOUTH, Block.m_49796_(6.0D, 0.0D, 6.0D, 10.0D, 10.0D, 16.0D), Direction.WEST, Block.m_49796_(0.0D, 0.0D, 6.0D, 10.0D, 10.0D, 10.0D), Direction.NORTH, Block.m_49796_(6.0D, 0.0D, 0.0D, 10.0D, 10.0D, 10.0D), Direction.EAST, Block.m_49796_(6.0D, 0.0D, 6.0D, 16.0D, 10.0D, 10.0D)));
+ 
+-   protected AttachedStemBlock(StemGrownBlock p_48835_, BlockBehaviour.Properties p_48836_) {
++   public AttachedStemBlock(StemGrownBlock p_48835_, BlockBehaviour.Properties p_48836_) {
+       super(p_48836_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_48830_, Direction.NORTH));
+       this.f_48831_ = p_48835_;
+@@ -42,7 +_,6 @@
+       return p_48863_.m_60713_(Blocks.f_50093_);
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    protected Item m_48856_() {
+       if (this.f_48831_ == Blocks.f_50133_) {
+          return Items.f_42577_;
+@@ -51,7 +_,6 @@
+       }
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public ItemStack m_7397_(BlockGetter p_48838_, BlockPos p_48839_, BlockState p_48840_) {
+       return new ItemStack(this.m_48856_());
+    }

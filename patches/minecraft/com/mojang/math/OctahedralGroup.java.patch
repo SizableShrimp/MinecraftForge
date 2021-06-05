@@ -1,0 +1,43 @@
+--- a/com/mojang/math/OctahedralGroup.java
++++ b/com/mojang/math/OctahedralGroup.java
+@@ -71,11 +_,11 @@
+    private final boolean f_56478_;
+    private final boolean f_56479_;
+    private final SymmetricGroup3 f_56480_;
+-   private static final OctahedralGroup[][] f_56481_ = Util.m_137469_(new OctahedralGroup[values().length][values().length], (p_56533_) -> {
+-      Map<Pair<SymmetricGroup3, BooleanList>, OctahedralGroup> map = Arrays.stream(values()).collect(Collectors.toMap((p_56540_) -> {
+-         return Pair.of(p_56540_.f_56480_, p_56540_.m_56534_());
+-      }, (p_56538_) -> {
+-         return p_56538_;
++   private static final OctahedralGroup[][] f_56481_ = Util.m_137469_(new OctahedralGroup[values().length][values().length], (p_235532_0_) -> {
++      Map<Pair<SymmetricGroup3, BooleanList>, OctahedralGroup> map = Arrays.stream(values()).collect(Collectors.toMap((p_235536_0_) -> {
++         return Pair.of(p_235536_0_.f_56480_, p_235536_0_.m_56534_());
++      }, (p_235535_0_) -> {
++         return p_235535_0_;
+       }));
+ 
+       for(OctahedralGroup octahedralgroup : values()) {
+@@ -89,17 +_,17 @@
+                booleanarraylist.add(booleanlist.getBoolean(i) ^ booleanlist1.getBoolean(octahedralgroup.f_56480_.m_109180_(i)));
+             }
+ 
+-            p_56533_[octahedralgroup.ordinal()][octahedralgroup1.ordinal()] = map.get(Pair.of(symmetricgroup3, booleanarraylist));
++            p_235532_0_[octahedralgroup.ordinal()][octahedralgroup1.ordinal()] = map.get(Pair.of(symmetricgroup3, booleanarraylist));
+          }
+       }
+ 
+    });
+-   private static final OctahedralGroup[] f_56482_ = Arrays.stream(values()).map((p_56536_) -> {
+-      return Arrays.stream(values()).filter((p_56525_) -> {
+-         return p_56536_.m_56521_(p_56525_) == IDENTITY;
++   private static final OctahedralGroup[] f_56482_ = Arrays.stream(values()).map((p_235534_0_) -> {
++      return Arrays.stream(values()).filter((p_235528_1_) -> {
++         return p_235534_0_.m_56521_(p_235528_1_) == IDENTITY;
+       }).findAny().get();
+-   }).toArray((p_56520_) -> {
+-      return new OctahedralGroup[p_56520_];
++   }).toArray((p_235526_0_) -> {
++      return new OctahedralGroup[p_235526_0_];
+    });
+ 
+    private OctahedralGroup(String p_56513_, SymmetricGroup3 p_56514_, boolean p_56515_, boolean p_56516_, boolean p_56517_) {

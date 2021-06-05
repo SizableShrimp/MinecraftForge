@@ -1,0 +1,13 @@
+--- a/net/minecraft/server/commands/TeamMsgCommand.java
++++ b/net/minecraft/server/commands/TeamMsgCommand.java
+@@ -22,8 +_,8 @@
+    private static final SimpleCommandExceptionType f_138997_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.teammsg.failed.noteam"));
+ 
+    public static void m_138999_(CommandDispatcher<CommandSourceStack> p_139000_) {
+-      LiteralCommandNode<CommandSourceStack> literalcommandnode = p_139000_.register(Commands.m_82127_("teammsg").then(Commands.m_82129_("message", MessageArgument.m_96832_()).executes((p_139002_) -> {
+-         return m_139003_(p_139002_.getSource(), MessageArgument.m_96835_(p_139002_, "message"));
++      LiteralCommandNode<CommandSourceStack> literalcommandnode = p_139000_.register(Commands.m_82127_("teammsg").then(Commands.m_82129_("message", MessageArgument.m_96832_()).executes((p_218916_0_) -> {
++         return m_139003_(p_218916_0_.getSource(), MessageArgument.m_96835_(p_218916_0_, "message"));
+       })));
+       p_139000_.register(Commands.m_82127_("tm").redirect(literalcommandnode));
+    }

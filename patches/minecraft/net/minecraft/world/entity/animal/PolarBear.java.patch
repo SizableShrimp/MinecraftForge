@@ -1,0 +1,49 @@
+--- a/net/minecraft/world/entity/animal/PolarBear.java
++++ b/net/minecraft/world/entity/animal/PolarBear.java
+@@ -35,11 +_,8 @@
+ import net.minecraft.world.entity.ai.goal.FloatGoal;
+ import net.minecraft.world.entity.ai.goal.FollowParentGoal;
+ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+-import net.minecraft.world.entity.ai.goal.PanicGoal;
+ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+ import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+ import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
+ import net.minecraft.world.entity.player.Player;
+@@ -106,6 +_,7 @@
+ 
+    public void m_7378_(CompoundTag p_29541_) {
+       super.m_7378_(p_29541_);
++      if(!f_19853_.f_46443_) //FORGE: allow this entity to be read from nbt on client. (Fixes MC-189565)
+       this.m_21663_((ServerLevel)this.f_19853_, p_29541_);
+    }
+ 
+@@ -258,7 +_,7 @@
+       }
+    }
+ 
+-   class PolarBearHurtByTargetGoal extends HurtByTargetGoal {
++   class PolarBearHurtByTargetGoal extends net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal {
+       public PolarBearHurtByTargetGoal() {
+          super(PolarBear.this);
+       }
+@@ -280,7 +_,7 @@
+       }
+    }
+ 
+-   class PolarBearMeleeAttackGoal extends MeleeAttackGoal {
++   class PolarBearMeleeAttackGoal extends net.minecraft.world.entity.ai.goal.MeleeAttackGoal {
+       public PolarBearMeleeAttackGoal() {
+          super(PolarBear.this, 1.25D, true);
+       }
+@@ -318,7 +_,7 @@
+       }
+    }
+ 
+-   class PolarBearPanicGoal extends PanicGoal {
++   class PolarBearPanicGoal extends net.minecraft.world.entity.ai.goal.PanicGoal {
+       public PolarBearPanicGoal() {
+          super(PolarBear.this, 2.0D);
+       }

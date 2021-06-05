@@ -1,0 +1,25 @@
+--- a/net/minecraft/util/datafix/schemas/V100.java
++++ b/net/minecraft/util/datafix/schemas/V100.java
+@@ -33,7 +_,7 @@
+       m_17335_(p_17350_, map, "Slime");
+       m_17335_(p_17350_, map, "Ghast");
+       m_17335_(p_17350_, map, "PigZombie");
+-      p_17350_.register(map, "Enderman", (p_17348_) -> {
++      p_17350_.register(map, "Enderman", (p_206609_1_) -> {
+          return DSL.optionalFields("carried", References.f_16787_.in(p_17350_), m_17330_(p_17350_));
+       });
+       m_17335_(p_17350_, map, "CaveSpider");
+@@ -56,11 +_,11 @@
+       m_17335_(p_17350_, map, "SnowMan");
+       m_17335_(p_17350_, map, "Ozelot");
+       m_17335_(p_17350_, map, "VillagerGolem");
+-      p_17350_.register(map, "EntityHorse", (p_17343_) -> {
++      p_17350_.register(map, "EntityHorse", (p_206612_1_) -> {
+          return DSL.optionalFields("Items", DSL.list(References.f_16782_.in(p_17350_)), "ArmorItem", References.f_16782_.in(p_17350_), "SaddleItem", References.f_16782_.in(p_17350_), m_17330_(p_17350_));
+       });
+       m_17335_(p_17350_, map, "Rabbit");
+-      p_17350_.register(map, "Villager", (p_17334_) -> {
++      p_17350_.register(map, "Villager", (p_206608_1_) -> {
+          return DSL.optionalFields("Inventory", DSL.list(References.f_16782_.in(p_17350_)), "Offers", DSL.optionalFields("Recipes", DSL.list(DSL.optionalFields("buy", References.f_16782_.in(p_17350_), "buyB", References.f_16782_.in(p_17350_), "sell", References.f_16782_.in(p_17350_)))), m_17330_(p_17350_));
+       });
+       m_17335_(p_17350_, map, "Shulker");

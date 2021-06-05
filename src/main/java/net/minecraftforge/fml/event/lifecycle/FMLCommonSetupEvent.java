@@ -21,8 +21,6 @@ package net.minecraftforge.fml.event.lifecycle;
 
 import net.minecraftforge.fml.ModContainer;
 
-import java.util.function.Consumer;
-
 /**
  * This is the first of four commonly called events during mod initialization.
  *

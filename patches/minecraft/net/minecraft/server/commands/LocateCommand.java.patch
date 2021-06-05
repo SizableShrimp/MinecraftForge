@@ -1,0 +1,40 @@
+--- a/net/minecraft/server/commands/LocateCommand.java
++++ b/net/minecraft/server/commands/LocateCommand.java
+@@ -21,15 +_,22 @@
+    private static final SimpleCommandExceptionType f_137851_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.locate.failed"));
+ 
+    public static void m_137858_(CommandDispatcher<CommandSourceStack> p_137859_) {
+-      LiteralArgumentBuilder<CommandSourceStack> literalargumentbuilder = Commands.m_82127_("locate").requires((p_137861_) -> {
+-         return p_137861_.m_6761_(2);
++      LiteralArgumentBuilder<CommandSourceStack> literalargumentbuilder = Commands.m_82127_("locate").requires((p_198533_0_) -> {
++         return p_198533_0_.m_6761_(2);
+       });
+ 
++      if (false)
+       for(Entry<String, StructureFeature<?>> entry : StructureFeature.f_67012_.entrySet()) {
+-         literalargumentbuilder = literalargumentbuilder.then(Commands.m_82127_(entry.getKey()).executes((p_137876_) -> {
+-            return m_137862_(p_137876_.getSource(), entry.getValue());
++         literalargumentbuilder = literalargumentbuilder.then(Commands.m_82127_(entry.getKey()).executes((p_241056_1_) -> {
++            return m_137862_(p_241056_1_.getSource(), entry.getValue());
+          }));
+       }
++      else {
++      for (StructureFeature<?> structurefeatureFeature : net.minecraftforge.registries.ForgeRegistries.STRUCTURE_FEATURES) {
++         String name = structurefeatureFeature.getRegistryName().toString().replace("minecraft:", "");
++         literalargumentbuilder = literalargumentbuilder.then(Commands.m_82127_(name)
++               .executes(ctx -> m_137862_(ctx.getSource(), structurefeatureFeature)));
++      }}
+ 
+       p_137859_.register(literalargumentbuilder);
+    }
+@@ -46,8 +_,8 @@
+ 
+    public static int m_137865_(CommandSourceStack p_137866_, String p_137867_, BlockPos p_137868_, BlockPos p_137869_, String p_137870_) {
+       int i = Mth.m_14143_(m_137853_(p_137868_.m_123341_(), p_137868_.m_123343_(), p_137869_.m_123341_(), p_137869_.m_123343_()));
+-      Component component = ComponentUtils.m_130748_(new TranslatableComponent("chat.coordinates", p_137869_.m_123341_(), "~", p_137869_.m_123343_())).m_130938_((p_137873_) -> {
+-         return p_137873_.m_131140_(ChatFormatting.GREEN).m_131142_(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + p_137869_.m_123341_() + " ~ " + p_137869_.m_123343_())).m_131144_(new HoverEvent(HoverEvent.Action.f_130831_, new TranslatableComponent("chat.coordinates.tooltip")));
++      Component component = ComponentUtils.m_130748_(new TranslatableComponent("chat.coordinates", p_137869_.m_123341_(), "~", p_137869_.m_123343_())).m_130938_((p_241055_1_) -> {
++         return p_241055_1_.m_131140_(ChatFormatting.GREEN).m_131142_(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + p_137869_.m_123341_() + " ~ " + p_137869_.m_123343_())).m_131144_(new HoverEvent(HoverEvent.Action.f_130831_, new TranslatableComponent("chat.coordinates.tooltip")));
+       });
+       p_137866_.m_81354_(new TranslatableComponent(p_137870_, p_137867_, component, i), false);
+       return i;

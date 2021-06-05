@@ -1,0 +1,15 @@
+--- a/net/minecraft/client/gui/screens/OutOfMemoryScreen.java
++++ b/net/minecraft/client/gui/screens/OutOfMemoryScreen.java
+@@ -14,10 +_,10 @@
+    }
+ 
+    protected void m_7856_() {
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 155, this.f_96544_ / 4 + 120 + 12, 150, 20, new TranslatableComponent("gui.toTitle"), (p_96304_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 155, this.f_96544_ / 4 + 120 + 12, 150, 20, new TranslatableComponent("gui.toTitle"), (p_213048_1_) -> {
+          this.f_96541_.m_91152_(new TitleScreen());
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 155 + 160, this.f_96544_ / 4 + 120 + 12, 150, 20, new TranslatableComponent("menu.quit"), (p_96300_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 155 + 160, this.f_96544_ / 4 + 120 + 12, 150, 20, new TranslatableComponent("menu.quit"), (p_213047_1_) -> {
+          this.f_96541_.m_91395_();
+       }));
+    }

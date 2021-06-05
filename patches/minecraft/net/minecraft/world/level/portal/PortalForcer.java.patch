@@ -1,0 +1,47 @@
+--- a/net/minecraft/world/level/portal/PortalForcer.java
++++ b/net/minecraft/world/level/portal/PortalForcer.java
+@@ -19,8 +_,8 @@
+ import net.minecraft.world.level.border.WorldBorder;
+ import net.minecraft.world.level.levelgen.Heightmap;
+ 
+-public class PortalForcer {
+-   private final ServerLevel f_77648_;
++public class PortalForcer implements net.minecraftforge.common.util.ITeleporter {
++   protected final ServerLevel f_77648_;
+ 
+    public PortalForcer(ServerLevel p_77650_) {
+       this.f_77648_ = p_77650_;
+@@ -30,21 +_,21 @@
+       PoiManager poimanager = this.f_77648_.m_8904_();
+       int i = p_77671_ ? 16 : 128;
+       poimanager.m_27056_(this.f_77648_, p_77670_, i);
+-      Optional<PoiRecord> optional = poimanager.m_27166_((p_77654_) -> {
+-         return p_77654_ == PoiType.f_27350_;
+-      }, p_77670_, i, PoiManager.Occupancy.ANY).sorted(Comparator.<PoiRecord>comparingDouble((p_77660_) -> {
+-         return p_77660_.m_27257_().m_123331_(p_77670_);
+-      }).thenComparingInt((p_77675_) -> {
+-         return p_77675_.m_27257_().m_123342_();
+-      })).filter((p_77673_) -> {
+-         return this.f_77648_.m_8055_(p_77673_.m_27257_()).m_61138_(BlockStateProperties.f_61364_);
++      Optional<PoiRecord> optional = poimanager.m_27166_((p_242952_0_) -> {
++         return p_242952_0_ == PoiType.f_27350_;
++      }, p_77670_, i, PoiManager.Occupancy.ANY).sorted(Comparator.<PoiRecord>comparingDouble((p_242954_1_) -> {
++         return p_242954_1_.m_27257_().m_123331_(p_77670_);
++      }).thenComparingInt((p_242959_0_) -> {
++         return p_242959_0_.m_27257_().m_123342_();
++      })).filter((p_242958_1_) -> {
++         return this.f_77648_.m_8055_(p_242958_1_.m_27257_()).m_61138_(BlockStateProperties.f_61364_);
+       }).findFirst();
+-      return optional.map((p_77652_) -> {
+-         BlockPos blockpos = p_77652_.m_27257_();
++      return optional.map((p_242951_1_) -> {
++         BlockPos blockpos = p_242951_1_.m_27257_();
+          this.f_77648_.m_7726_().m_8387_(TicketType.f_9447_, new ChunkPos(blockpos), 3, blockpos);
+          BlockState blockstate = this.f_77648_.m_8055_(blockpos);
+-         return BlockUtil.m_124334_(blockpos, blockstate.m_61143_(BlockStateProperties.f_61364_), 21, Direction.Axis.Y, 21, (p_77657_) -> {
+-            return this.f_77648_.m_8055_(p_77657_) == blockstate;
++         return BlockUtil.m_124334_(blockpos, blockstate.m_61143_(BlockStateProperties.f_61364_), 21, Direction.Axis.Y, 21, (p_242953_2_) -> {
++            return this.f_77648_.m_8055_(p_242953_2_) == blockstate;
+          });
+       });
+    }

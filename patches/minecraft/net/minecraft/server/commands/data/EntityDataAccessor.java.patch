@@ -1,0 +1,20 @@
+--- a/net/minecraft/server/commands/data/EntityDataAccessor.java
++++ b/net/minecraft/server/commands/data/EntityDataAccessor.java
+@@ -21,14 +_,14 @@
+ 
+ public class EntityDataAccessor implements DataAccessor {
+    private static final SimpleCommandExceptionType f_139506_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.data.entity.invalid"));
+-   public static final Function<String, DataCommands.DataProvider> f_139505_ = (p_139517_) -> {
++   public static final Function<String, DataCommands.DataProvider> f_139505_ = (p_218922_0_) -> {
+       return new DataCommands.DataProvider() {
+          public DataAccessor m_7018_(CommandContext<CommandSourceStack> p_139530_) throws CommandSyntaxException {
+-            return new EntityDataAccessor(EntityArgument.m_91452_(p_139530_, p_139517_));
++            return new EntityDataAccessor(EntityArgument.m_91452_(p_139530_, p_218922_0_));
+          }
+ 
+          public ArgumentBuilder<CommandSourceStack, ?> m_7621_(ArgumentBuilder<CommandSourceStack, ?> p_139527_, Function<ArgumentBuilder<CommandSourceStack, ?>, ArgumentBuilder<CommandSourceStack, ?>> p_139528_) {
+-            return p_139527_.then(Commands.m_82127_("entity").then((ArgumentBuilder)p_139528_.apply(Commands.m_82129_(p_139517_, EntityArgument.m_91449_()))));
++            return p_139527_.then(Commands.m_82127_("entity").then((ArgumentBuilder)p_139528_.apply(Commands.m_82129_(p_218922_0_, EntityArgument.m_91449_()))));
+          }
+       };
+    };

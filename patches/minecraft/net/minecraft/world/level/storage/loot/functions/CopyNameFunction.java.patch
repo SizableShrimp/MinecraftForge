@@ -1,0 +1,47 @@
+--- a/net/minecraft/world/level/storage/loot/functions/CopyNameFunction.java
++++ b/net/minecraft/world/level/storage/loot/functions/CopyNameFunction.java
+@@ -42,11 +_,23 @@
+    }
+ 
+    public static LootItemConditionalFunction.Builder<?> m_80187_(CopyNameFunction.NameSource p_80188_) {
+-      return m_80683_((p_80191_) -> {
+-         return new CopyNameFunction(p_80191_, p_80188_);
++      return m_80683_((p_215891_1_) -> {
++         return new CopyNameFunction(p_215891_1_, p_80188_);
+       });
+    }
+ 
++   public static class Serializer extends LootItemConditionalFunction.Serializer<CopyNameFunction> {
++      public void m_6170_(JsonObject p_80219_, CopyNameFunction p_80220_, JsonSerializationContext p_80221_) {
++         super.m_6170_(p_80219_, p_80220_, p_80221_);
++         p_80219_.addProperty("source", p_80220_.f_80175_.f_80199_);
++      }
++
++      public CopyNameFunction m_6821_(JsonObject p_80215_, JsonDeserializationContext p_80216_, LootItemCondition[] p_80217_) {
++         CopyNameFunction.NameSource copynamefunction$namesource = CopyNameFunction.NameSource.m_80208_(GsonHelper.m_13906_(p_80215_, "source"));
++         return new CopyNameFunction(p_80217_, copynamefunction$namesource);
++      }
++   }
++
+    public static enum NameSource {
+       THIS("this", LootContextParams.f_81455_),
+       KILLER("killer", LootContextParams.f_81458_),
+@@ -69,18 +_,6 @@
+          }
+ 
+          throw new IllegalArgumentException("Invalid name source " + p_80209_);
+-      }
+-   }
+-
+-   public static class Serializer extends LootItemConditionalFunction.Serializer<CopyNameFunction> {
+-      public void m_6170_(JsonObject p_80219_, CopyNameFunction p_80220_, JsonSerializationContext p_80221_) {
+-         super.m_6170_(p_80219_, p_80220_, p_80221_);
+-         p_80219_.addProperty("source", p_80220_.f_80175_.f_80199_);
+-      }
+-
+-      public CopyNameFunction m_6821_(JsonObject p_80215_, JsonDeserializationContext p_80216_, LootItemCondition[] p_80217_) {
+-         CopyNameFunction.NameSource copynamefunction$namesource = CopyNameFunction.NameSource.m_80208_(GsonHelper.m_13906_(p_80215_, "source"));
+-         return new CopyNameFunction(p_80217_, copynamefunction$namesource);
+       }
+    }
+ }

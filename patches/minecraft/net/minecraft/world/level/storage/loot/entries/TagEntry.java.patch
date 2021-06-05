@@ -1,0 +1,24 @@
+--- a/net/minecraft/world/level/storage/loot/entries/TagEntry.java
++++ b/net/minecraft/world/level/storage/loot/entries/TagEntry.java
+@@ -30,8 +_,8 @@
+    }
+ 
+    public void m_6948_(Consumer<ItemStack> p_79854_, LootContext p_79855_) {
+-      this.f_79821_.m_6497_().forEach((p_79852_) -> {
+-         p_79854_.accept(new ItemStack(p_79852_));
++      this.f_79821_.m_6497_().forEach((p_216174_1_) -> {
++         p_79854_.accept(new ItemStack(p_216174_1_));
+       });
+    }
+ 
+@@ -56,8 +_,8 @@
+    }
+ 
+    public static LootPoolSingletonContainer.Builder<?> m_79856_(Tag<Item> p_79857_) {
+-      return m_79687_((p_79841_, p_79842_, p_79843_, p_79844_) -> {
+-         return new TagEntry(p_79857_, true, p_79841_, p_79842_, p_79843_, p_79844_);
++      return m_79687_((p_216177_1_, p_216177_2_, p_216177_3_, p_216177_4_) -> {
++         return new TagEntry(p_79857_, true, p_216177_1_, p_216177_2_, p_216177_3_, p_216177_4_);
+       });
+    }
+ 

@@ -1,0 +1,30 @@
+--- a/net/minecraft/world/item/crafting/BookCloningRecipe.java
++++ b/net/minecraft/world/item/crafting/BookCloningRecipe.java
+@@ -8,8 +_,6 @@
+ import net.minecraft.world.item.Items;
+ import net.minecraft.world.item.WrittenBookItem;
+ import net.minecraft.world.level.Level;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public class BookCloningRecipe extends CustomRecipe {
+    public BookCloningRecipe(ResourceLocation p_43802_) {
+@@ -81,8 +_,8 @@
+ 
+       for(int i = 0; i < nonnulllist.size(); ++i) {
+          ItemStack itemstack = p_43820_.m_8020_(i);
+-         if (itemstack.m_41720_().m_41470_()) {
+-            nonnulllist.set(i, new ItemStack(itemstack.m_41720_().m_41469_()));
++         if (itemstack.hasContainerItem()) {
++            nonnulllist.set(i, itemstack.getContainerItem());
+          } else if (itemstack.m_41720_() instanceof WrittenBookItem) {
+             ItemStack itemstack1 = itemstack.m_41777_();
+             itemstack1.m_41764_(1);
+@@ -98,7 +_,6 @@
+       return RecipeSerializer.f_44079_;
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public boolean m_8004_(int p_43804_, int p_43805_) {
+       return p_43804_ >= 3 && p_43805_ >= 3;
+    }

@@ -23,9 +23,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.item.*;
 import net.minecraft.core.Direction;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

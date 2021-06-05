@@ -1,0 +1,123 @@
+--- a/net/minecraft/world/level/chunk/storage/ChunkSerializer.java
++++ b/net/minecraft/world/level/chunk/storage/ChunkSerializer.java
+@@ -69,11 +_,11 @@
+ 
+       ChunkBiomeContainer chunkbiomecontainer = new ChunkBiomeContainer(p_63458_.m_5962_().m_123090_(Registry.f_122885_), p_63461_, biomesource, compoundtag.m_128425_("Biomes", 11) ? compoundtag.m_128465_("Biomes") : null);
+       UpgradeData upgradedata = compoundtag.m_128425_("UpgradeData", 10) ? new UpgradeData(compoundtag.m_128469_("UpgradeData")) : UpgradeData.f_63320_;
+-      ProtoTickList<Block> prototicklist = new ProtoTickList<>((p_63475_) -> {
+-         return p_63475_ == null || p_63475_.m_49966_().m_60795_();
++      ProtoTickList<Block> prototicklist = new ProtoTickList<>((p_222652_0_) -> {
++         return p_222652_0_ == null || p_222652_0_.m_49966_().m_60795_();
+       }, p_63461_, compoundtag.m_128437_("ToBeTicked", 9));
+-      ProtoTickList<Fluid> prototicklist1 = new ProtoTickList<>((p_63484_) -> {
+-         return p_63484_ == null || p_63484_ == Fluids.f_76191_;
++      ProtoTickList<Fluid> prototicklist1 = new ProtoTickList<>((p_222646_0_) -> {
++         return p_222646_0_ == null || p_222646_0_ == Fluids.f_76191_;
+       }, p_63461_, compoundtag.m_128437_("LiquidsToBeTicked", 9));
+       boolean flag = compoundtag.m_128471_("isLightOn");
+       ListTag listtag = compoundtag.m_128437_("Sections", 10);
+@@ -129,9 +_,10 @@
+             ticklist1 = prototicklist1;
+          }
+ 
+-         chunkaccess = new LevelChunk(p_63458_.m_6018_(), p_63461_, chunkbiomecontainer, upgradedata, ticklist, ticklist1, k1, alevelchunksection, (p_63494_) -> {
+-            m_63487_(compoundtag, p_63494_);
++         chunkaccess = new LevelChunk(p_63458_.m_6018_(), p_63461_, chunkbiomecontainer, upgradedata, ticklist, ticklist1, k1, alevelchunksection, (p_222648_1_) -> {
++            m_63487_(compoundtag, p_222648_1_);
+          });
++         if (compoundtag.m_128441_("ForgeCaps")) ((LevelChunk)chunkaccess).readCapsFromNBT(compoundtag.m_128469_("ForgeCaps"));
+       } else {
+          ProtoChunk protochunk = new ProtoChunk(p_63461_, upgradedata, alevelchunksection, prototicklist, prototicklist1);
+          protochunk.m_7329_(chunkbiomecontainer);
+@@ -144,7 +_,7 @@
+ 
+          if (!flag && protochunk.m_6415_().m_62427_(ChunkStatus.f_62323_)) {
+             for(BlockPos blockpos : BlockPos.m_121976_(p_63461_.m_45604_(), 0, p_63461_.m_45605_(), p_63461_.m_45608_(), 255, p_63461_.m_45609_())) {
+-               if (chunkaccess.m_8055_(blockpos).m_60791_() != 0) {
++               if (chunkaccess.m_8055_(blockpos).getLightValue(chunkaccess, blockpos) != 0) {
+                   protochunk.m_63277_(blockpos);
+                }
+             }
+@@ -167,7 +_,7 @@
+       Heightmap.m_64256_(chunkaccess, enumset);
+       CompoundTag compoundtag4 = compoundtag.m_128469_("Structures");
+       chunkaccess.m_8040_(m_63479_(p_63459_, compoundtag4, p_63458_.m_7328_()));
+-      chunkaccess.m_7946_(m_63471_(p_63461_, compoundtag4));
++      net.minecraftforge.common.ForgeHooks.fixNullStructureReferences(chunkaccess, m_63471_(p_63461_, compoundtag4));
+       if (compoundtag.m_128471_("shouldSave")) {
+          chunkaccess.m_8092_(true);
+       }
+@@ -183,6 +_,7 @@
+       }
+ 
+       if (chunkstatus$chunktype == ChunkStatus.ChunkType.LEVELCHUNK) {
++         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.world.ChunkDataEvent.Load(chunkaccess, p_63462_, chunkstatus$chunktype));
+          return new ImposterProtoChunk((LevelChunk)chunkaccess);
+       } else {
+          ProtoChunk protochunk1 = (ProtoChunk)chunkaccess;
+@@ -216,6 +_,8 @@
+             protochunk1.m_63189_(generationstep$carving, BitSet.valueOf(compoundtag5.m_128463_(s1)));
+          }
+ 
++         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.world.ChunkDataEvent.Load(chunkaccess, p_63462_, chunkstatus$chunktype));
++
+          return protochunk1;
+       }
+    }
+@@ -243,8 +_,8 @@
+ 
+       for(int i = -1; i < 17; ++i) {
+          int j = i;
+-         LevelChunkSection levelchunksection = Arrays.stream(alevelchunksection).filter((p_63453_) -> {
+-            return p_63453_ != null && p_63453_.m_63017_() >> 4 == j;
++         LevelChunkSection levelchunksection = Arrays.stream(alevelchunksection).filter((p_222657_1_) -> {
++            return p_222657_1_ != null && p_222657_1_.m_63017_() >> 4 == j;
+          }).findFirst().orElse(LevelChunk.f_62770_);
+          DataLayer datalayer = levellightengine.m_75814_(LightLayer.BLOCK).m_8079_(SectionPos.m_123196_(chunkpos, j));
+          DataLayer datalayer1 = levellightengine.m_75814_(LightLayer.SKY).m_8079_(SectionPos.m_123196_(chunkpos, j));
+@@ -295,11 +_,21 @@
+          for(int k = 0; k < levelchunk.m_62955_().length; ++k) {
+             for(Entity entity : levelchunk.m_62955_()[k]) {
+                CompoundTag compoundtag3 = new CompoundTag();
++               try {
+                if (entity.m_20223_(compoundtag3)) {
+                   levelchunk.m_62920_(true);
+                   listtag2.add(compoundtag3);
+                }
++               } catch (Exception e) {
++                  LogManager.getLogger().error("An Entity type {} has thrown an exception trying to write state. It will not persist. Report this to the mod author", entity.m_6095_(), e);
++               }
+             }
++         }
++         try {
++             final CompoundTag capTag = levelchunk.writeCapsToNBT();
++             if (capTag != null) compoundtag1.m_128365_("ForgeCaps", capTag);
++         } catch (Exception exception) {
++             LogManager.getLogger().error("A capability provider has thrown an exception trying to write state. It will not persist. Report this to the mod author", exception);
+          }
+       } else {
+          ProtoChunk protochunk = (ProtoChunk)p_63456_;
+@@ -367,9 +_,9 @@
+ 
+       for(int i = 0; i < listtag.size(); ++i) {
+          CompoundTag compoundtag = listtag.m_128728_(i);
+-         EntityType.m_20645_(compoundtag, level, (p_63478_) -> {
+-            p_63489_.m_6286_(p_63478_);
+-            return p_63478_;
++         EntityType.m_20645_(compoundtag, level, (p_222655_1_) -> {
++            p_63489_.m_6286_(p_222655_1_);
++            return p_222655_1_;
+          });
+          p_63489_.m_62920_(true);
+       }
+@@ -436,8 +_,8 @@
+       CompoundTag compoundtag = p_63473_.m_128469_("References");
+ 
+       for(String s : compoundtag.m_128431_()) {
+-         map.put(StructureFeature.f_67012_.get(s.toLowerCase(Locale.ROOT)), new LongOpenHashSet(Arrays.stream(compoundtag.m_128467_(s)).filter((p_63466_) -> {
+-            ChunkPos chunkpos = new ChunkPos(p_63466_);
++         map.put(StructureFeature.f_67012_.get(s.toLowerCase(Locale.ROOT)), new LongOpenHashSet(Arrays.stream(compoundtag.m_128467_(s)).filter((p_227074_2_) -> {
++            ChunkPos chunkpos = new ChunkPos(p_227074_2_);
+             if (chunkpos.m_45594_(p_63472_) > 8) {
+                f_63449_.warn("Found invalid structure reference [ {} @ {} ] for chunk {}.", s, chunkpos, p_63472_);
+                return false;

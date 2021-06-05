@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/StructureVoidBlock.java
++++ b/net/minecraft/world/level/block/StructureVoidBlock.java
+@@ -13,7 +_,7 @@
+ public class StructureVoidBlock extends Block {
+    private static final VoxelShape f_57147_ = Block.m_49796_(5.0D, 5.0D, 5.0D, 11.0D, 11.0D, 11.0D);
+ 
+-   protected StructureVoidBlock(BlockBehaviour.Properties p_57150_) {
++   public StructureVoidBlock(BlockBehaviour.Properties p_57150_) {
+       super(p_57150_);
+    }
+ 

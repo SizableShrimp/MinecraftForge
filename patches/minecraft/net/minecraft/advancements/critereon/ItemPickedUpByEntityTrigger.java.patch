@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/ItemPickedUpByEntityTrigger.java
++++ b/net/minecraft/advancements/critereon/ItemPickedUpByEntityTrigger.java
+@@ -22,8 +_,8 @@
+ 
+    public void m_44363_(ServerPlayer p_44364_, ItemStack p_44365_, Entity p_44366_) {
+       LootContext lootcontext = EntityPredicate.m_36616_(p_44364_, p_44366_);
+-      this.m_66234_(p_44364_, (p_44371_) -> {
+-         return p_44371_.m_44387_(p_44364_, p_44365_, lootcontext);
++      this.m_66234_(p_44364_, (p_234831_3_) -> {
++         return p_234831_3_.m_44387_(p_44364_, p_44365_, lootcontext);
+       });
+    }
+ 

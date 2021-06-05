@@ -1,0 +1,24 @@
+--- a/net/minecraft/advancements/critereon/InventoryChangeTrigger.java
++++ b/net/minecraft/advancements/critereon/InventoryChangeTrigger.java
+@@ -51,8 +_,8 @@
+    }
+ 
+    private void m_43153_(ServerPlayer p_43154_, Inventory p_43155_, ItemStack p_43156_, int p_43157_, int p_43158_, int p_43159_) {
+-      this.m_66234_(p_43154_, (p_43166_) -> {
+-         return p_43166_.m_43186_(p_43155_, p_43156_, p_43157_, p_43158_, p_43159_);
++      this.m_66234_(p_43154_, (p_234802_5_) -> {
++         return p_234802_5_.m_43186_(p_43155_, p_43156_, p_43157_, p_43158_, p_43159_);
+       });
+    }
+ 
+@@ -129,8 +_,8 @@
+ 
+                   ItemStack itemstack = p_43187_.m_8020_(k);
+                   if (!itemstack.m_41619_()) {
+-                     list.removeIf((p_43194_) -> {
+-                        return p_43194_.m_45049_(itemstack);
++                     list.removeIf((p_234806_1_) -> {
++                        return p_234806_1_.m_45049_(itemstack);
+                      });
+                   }
+                }

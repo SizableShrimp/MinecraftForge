@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/trunkplacers/FancyTrunkPlacer.java
++++ b/net/minecraft/world/level/levelgen/feature/trunkplacers/FancyTrunkPlacer.java
+@@ -18,8 +_,8 @@
+ import net.minecraft.world.level.levelgen.structure.BoundingBox;
+ 
+ public class FancyTrunkPlacer extends TrunkPlacer {
+-   public static final Codec<FancyTrunkPlacer> f_70091_ = RecordCodecBuilder.create((p_70136_) -> {
+-      return m_70305_(p_70136_).apply(p_70136_, FancyTrunkPlacer::new);
++   public static final Codec<FancyTrunkPlacer> f_70091_ = RecordCodecBuilder.create((p_236891_0_) -> {
++      return m_70305_(p_236891_0_).apply(p_236891_0_, FancyTrunkPlacer::new);
+    });
+ 
+    public FancyTrunkPlacer(int p_70094_, int p_70095_, int p_70096_) {

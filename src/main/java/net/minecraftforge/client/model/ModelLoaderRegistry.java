@@ -26,7 +26,6 @@ import com.google.common.collect.Sets;
 import com.google.gson.*;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -36,7 +35,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.resources.ResourceLocation;
 import com.mojang.math.Transformation;
-import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.geometry.IModelGeometry;
 import net.minecraftforge.client.model.geometry.ISimpleModelGeometry;
 import net.minecraftforge.client.model.obj.OBJLoader;
@@ -99,7 +97,7 @@ public class ModelLoaderRegistry
         // Minecraft recreates the ModelBakery on resource reload, but this should only run once during init.
         if (!registryFrozen)
         {
-            net.minecraftforge.fml.ModLoader.get().postEvent(new ModelRegistryEvent());
+            net.minecraftforge.fml.ModLoader.get().postEvent(new net.minecraftforge.client.event.ModelRegistryEvent());
             registryFrozen = true;
         }
     }

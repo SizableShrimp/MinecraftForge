@@ -1,0 +1,24 @@
+--- a/net/minecraft/world/entity/ai/behavior/LookAtTargetSink.java
++++ b/net/minecraft/world/entity/ai/behavior/LookAtTargetSink.java
+@@ -12,8 +_,8 @@
+    }
+ 
+    protected boolean m_6737_(ServerLevel p_23481_, Mob p_23482_, long p_23483_) {
+-      return p_23482_.m_6274_().m_21952_(MemoryModuleType.f_26371_).filter((p_23497_) -> {
+-         return p_23497_.m_6826_(p_23482_);
++      return p_23482_.m_6274_().m_21952_(MemoryModuleType.f_26371_).filter((p_220485_1_) -> {
++         return p_220485_1_.m_6826_(p_23482_);
+       }).isPresent();
+    }
+ 
+@@ -22,8 +_,8 @@
+    }
+ 
+    protected void m_6725_(ServerLevel p_23503_, Mob p_23504_, long p_23505_) {
+-      p_23504_.m_6274_().m_21952_(MemoryModuleType.f_26371_).ifPresent((p_23486_) -> {
+-         p_23504_.m_21563_().m_24964_(p_23486_.m_7024_());
++      p_23504_.m_6274_().m_21952_(MemoryModuleType.f_26371_).ifPresent((p_220484_1_) -> {
++         p_23504_.m_21563_().m_24964_(p_220484_1_.m_7024_());
+       });
+    }
+ }

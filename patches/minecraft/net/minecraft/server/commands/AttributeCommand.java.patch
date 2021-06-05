@@ -1,0 +1,87 @@
+--- a/net/minecraft/server/commands/AttributeCommand.java
++++ b/net/minecraft/server/commands/AttributeCommand.java
+@@ -25,47 +_,47 @@
+ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+ 
+ public class AttributeCommand {
+-   private static final SuggestionProvider<CommandSourceStack> f_136433_ = (p_136449_, p_136450_) -> {
+-      return SharedSuggestionProvider.m_82926_(Registry.f_122866_.m_6566_(), p_136450_);
++   private static final SuggestionProvider<CommandSourceStack> f_136433_ = (p_241005_0_, p_241005_1_) -> {
++      return SharedSuggestionProvider.m_82926_(Registry.f_122866_.m_6566_(), p_241005_1_);
+    };
+-   private static final DynamicCommandExceptionType f_136434_ = new DynamicCommandExceptionType((p_136478_) -> {
+-      return new TranslatableComponent("commands.attribute.failed.entity", p_136478_);
+-   });
+-   private static final Dynamic2CommandExceptionType f_136435_ = new Dynamic2CommandExceptionType((p_136480_, p_136481_) -> {
+-      return new TranslatableComponent("commands.attribute.failed.no_attribute", p_136480_, p_136481_);
+-   });
+-   private static final Dynamic3CommandExceptionType f_136436_ = new Dynamic3CommandExceptionType((p_136497_, p_136498_, p_136499_) -> {
+-      return new TranslatableComponent("commands.attribute.failed.no_modifier", p_136498_, p_136497_, p_136499_);
+-   });
+-   private static final Dynamic3CommandExceptionType f_136437_ = new Dynamic3CommandExceptionType((p_136483_, p_136484_, p_136485_) -> {
+-      return new TranslatableComponent("commands.attribute.failed.modifier_already_present", p_136485_, p_136484_, p_136483_);
++   private static final DynamicCommandExceptionType f_136434_ = new DynamicCommandExceptionType((p_241011_0_) -> {
++      return new TranslatableComponent("commands.attribute.failed.entity", p_241011_0_);
++   });
++   private static final Dynamic2CommandExceptionType f_136435_ = new Dynamic2CommandExceptionType((p_241012_0_, p_241012_1_) -> {
++      return new TranslatableComponent("commands.attribute.failed.no_attribute", p_241012_0_, p_241012_1_);
++   });
++   private static final Dynamic3CommandExceptionType f_136436_ = new Dynamic3CommandExceptionType((p_241017_0_, p_241017_1_, p_241017_2_) -> {
++      return new TranslatableComponent("commands.attribute.failed.no_modifier", p_241017_1_, p_241017_0_, p_241017_2_);
++   });
++   private static final Dynamic3CommandExceptionType f_136437_ = new Dynamic3CommandExceptionType((p_241013_0_, p_241013_1_, p_241013_2_) -> {
++      return new TranslatableComponent("commands.attribute.failed.modifier_already_present", p_241013_2_, p_241013_1_, p_241013_0_);
+    });
+ 
+    public static void m_136444_(CommandDispatcher<CommandSourceStack> p_136445_) {
+-      p_136445_.register(Commands.m_82127_("attribute").requires((p_136452_) -> {
+-         return p_136452_.m_6761_(2);
+-      }).then(Commands.m_82129_("target", EntityArgument.m_91449_()).then(Commands.m_82129_("attribute", ResourceLocationArgument.m_106984_()).suggests(f_136433_).then(Commands.m_82127_("get").executes((p_136522_) -> {
+-         return m_136453_(p_136522_.getSource(), EntityArgument.m_91452_(p_136522_, "target"), ResourceLocationArgument.m_107006_(p_136522_, "attribute"), 1.0D);
+-      }).then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).executes((p_136520_) -> {
+-         return m_136453_(p_136520_.getSource(), EntityArgument.m_91452_(p_136520_, "target"), ResourceLocationArgument.m_107006_(p_136520_, "attribute"), DoubleArgumentType.getDouble(p_136520_, "scale"));
+-      }))).then(Commands.m_82127_("base").then(Commands.m_82127_("set").then(Commands.m_82129_("value", DoubleArgumentType.doubleArg()).executes((p_136518_) -> {
+-         return m_136502_(p_136518_.getSource(), EntityArgument.m_91452_(p_136518_, "target"), ResourceLocationArgument.m_107006_(p_136518_, "attribute"), DoubleArgumentType.getDouble(p_136518_, "value"));
+-      }))).then(Commands.m_82127_("get").executes((p_136516_) -> {
+-         return m_136491_(p_136516_.getSource(), EntityArgument.m_91452_(p_136516_, "target"), ResourceLocationArgument.m_107006_(p_136516_, "attribute"), 1.0D);
+-      }).then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).executes((p_136514_) -> {
+-         return m_136491_(p_136514_.getSource(), EntityArgument.m_91452_(p_136514_, "target"), ResourceLocationArgument.m_107006_(p_136514_, "attribute"), DoubleArgumentType.getDouble(p_136514_, "scale"));
+-      })))).then(Commands.m_82127_("modifier").then(Commands.m_82127_("add").then(Commands.m_82129_("uuid", UuidArgument.m_113850_()).then(Commands.m_82129_("name", StringArgumentType.string()).then(Commands.m_82129_("value", DoubleArgumentType.doubleArg()).then(Commands.m_82127_("add").executes((p_136512_) -> {
+-         return m_136469_(p_136512_.getSource(), EntityArgument.m_91452_(p_136512_, "target"), ResourceLocationArgument.m_107006_(p_136512_, "attribute"), UuidArgument.m_113853_(p_136512_, "uuid"), StringArgumentType.getString(p_136512_, "name"), DoubleArgumentType.getDouble(p_136512_, "value"), AttributeModifier.Operation.ADDITION);
+-      })).then(Commands.m_82127_("multiply").executes((p_136510_) -> {
+-         return m_136469_(p_136510_.getSource(), EntityArgument.m_91452_(p_136510_, "target"), ResourceLocationArgument.m_107006_(p_136510_, "attribute"), UuidArgument.m_113853_(p_136510_, "uuid"), StringArgumentType.getString(p_136510_, "name"), DoubleArgumentType.getDouble(p_136510_, "value"), AttributeModifier.Operation.MULTIPLY_TOTAL);
+-      })).then(Commands.m_82127_("multiply_base").executes((p_136508_) -> {
+-         return m_136469_(p_136508_.getSource(), EntityArgument.m_91452_(p_136508_, "target"), ResourceLocationArgument.m_107006_(p_136508_, "attribute"), UuidArgument.m_113853_(p_136508_, "uuid"), StringArgumentType.getString(p_136508_, "name"), DoubleArgumentType.getDouble(p_136508_, "value"), AttributeModifier.Operation.MULTIPLY_BASE);
+-      })))))).then(Commands.m_82127_("remove").then(Commands.m_82129_("uuid", UuidArgument.m_113850_()).executes((p_136501_) -> {
+-         return m_136458_(p_136501_.getSource(), EntityArgument.m_91452_(p_136501_, "target"), ResourceLocationArgument.m_107006_(p_136501_, "attribute"), UuidArgument.m_113853_(p_136501_, "uuid"));
+-      }))).then(Commands.m_82127_("value").then(Commands.m_82127_("get").then(Commands.m_82129_("uuid", UuidArgument.m_113850_()).executes((p_136490_) -> {
+-         return m_136463_(p_136490_.getSource(), EntityArgument.m_91452_(p_136490_, "target"), ResourceLocationArgument.m_107006_(p_136490_, "attribute"), UuidArgument.m_113853_(p_136490_, "uuid"), 1.0D);
+-      }).then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).executes((p_136447_) -> {
+-         return m_136463_(p_136447_.getSource(), EntityArgument.m_91452_(p_136447_, "target"), ResourceLocationArgument.m_107006_(p_136447_, "attribute"), UuidArgument.m_113853_(p_136447_, "uuid"), DoubleArgumentType.getDouble(p_136447_, "scale"));
++      p_136445_.register(Commands.m_82127_("attribute").requires((p_241006_0_) -> {
++         return p_241006_0_.m_6761_(2);
++      }).then(Commands.m_82129_("target", EntityArgument.m_91449_()).then(Commands.m_82129_("attribute", ResourceLocationArgument.m_106984_()).suggests(f_136433_).then(Commands.m_82127_("get").executes((p_241027_0_) -> {
++         return m_136453_(p_241027_0_.getSource(), EntityArgument.m_91452_(p_241027_0_, "target"), ResourceLocationArgument.m_107006_(p_241027_0_, "attribute"), 1.0D);
++      }).then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).executes((p_241026_0_) -> {
++         return m_136453_(p_241026_0_.getSource(), EntityArgument.m_91452_(p_241026_0_, "target"), ResourceLocationArgument.m_107006_(p_241026_0_, "attribute"), DoubleArgumentType.getDouble(p_241026_0_, "scale"));
++      }))).then(Commands.m_82127_("base").then(Commands.m_82127_("set").then(Commands.m_82129_("value", DoubleArgumentType.doubleArg()).executes((p_241025_0_) -> {
++         return m_136502_(p_241025_0_.getSource(), EntityArgument.m_91452_(p_241025_0_, "target"), ResourceLocationArgument.m_107006_(p_241025_0_, "attribute"), DoubleArgumentType.getDouble(p_241025_0_, "value"));
++      }))).then(Commands.m_82127_("get").executes((p_241024_0_) -> {
++         return m_136491_(p_241024_0_.getSource(), EntityArgument.m_91452_(p_241024_0_, "target"), ResourceLocationArgument.m_107006_(p_241024_0_, "attribute"), 1.0D);
++      }).then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).executes((p_241023_0_) -> {
++         return m_136491_(p_241023_0_.getSource(), EntityArgument.m_91452_(p_241023_0_, "target"), ResourceLocationArgument.m_107006_(p_241023_0_, "attribute"), DoubleArgumentType.getDouble(p_241023_0_, "scale"));
++      })))).then(Commands.m_82127_("modifier").then(Commands.m_82127_("add").then(Commands.m_82129_("uuid", UuidArgument.m_113850_()).then(Commands.m_82129_("name", StringArgumentType.string()).then(Commands.m_82129_("value", DoubleArgumentType.doubleArg()).then(Commands.m_82127_("add").executes((p_241022_0_) -> {
++         return m_136469_(p_241022_0_.getSource(), EntityArgument.m_91452_(p_241022_0_, "target"), ResourceLocationArgument.m_107006_(p_241022_0_, "attribute"), UuidArgument.m_113853_(p_241022_0_, "uuid"), StringArgumentType.getString(p_241022_0_, "name"), DoubleArgumentType.getDouble(p_241022_0_, "value"), AttributeModifier.Operation.ADDITION);
++      })).then(Commands.m_82127_("multiply").executes((p_241021_0_) -> {
++         return m_136469_(p_241021_0_.getSource(), EntityArgument.m_91452_(p_241021_0_, "target"), ResourceLocationArgument.m_107006_(p_241021_0_, "attribute"), UuidArgument.m_113853_(p_241021_0_, "uuid"), StringArgumentType.getString(p_241021_0_, "name"), DoubleArgumentType.getDouble(p_241021_0_, "value"), AttributeModifier.Operation.MULTIPLY_TOTAL);
++      })).then(Commands.m_82127_("multiply_base").executes((p_241020_0_) -> {
++         return m_136469_(p_241020_0_.getSource(), EntityArgument.m_91452_(p_241020_0_, "target"), ResourceLocationArgument.m_107006_(p_241020_0_, "attribute"), UuidArgument.m_113853_(p_241020_0_, "uuid"), StringArgumentType.getString(p_241020_0_, "name"), DoubleArgumentType.getDouble(p_241020_0_, "value"), AttributeModifier.Operation.MULTIPLY_BASE);
++      })))))).then(Commands.m_82127_("remove").then(Commands.m_82129_("uuid", UuidArgument.m_113850_()).executes((p_241018_0_) -> {
++         return m_136458_(p_241018_0_.getSource(), EntityArgument.m_91452_(p_241018_0_, "target"), ResourceLocationArgument.m_107006_(p_241018_0_, "attribute"), UuidArgument.m_113853_(p_241018_0_, "uuid"));
++      }))).then(Commands.m_82127_("value").then(Commands.m_82127_("get").then(Commands.m_82129_("uuid", UuidArgument.m_113850_()).executes((p_241015_0_) -> {
++         return m_136463_(p_241015_0_.getSource(), EntityArgument.m_91452_(p_241015_0_, "target"), ResourceLocationArgument.m_107006_(p_241015_0_, "attribute"), UuidArgument.m_113853_(p_241015_0_, "uuid"), 1.0D);
++      }).then(Commands.m_82129_("scale", DoubleArgumentType.doubleArg()).executes((p_241004_0_) -> {
++         return m_136463_(p_241004_0_.getSource(), EntityArgument.m_91452_(p_241004_0_, "target"), ResourceLocationArgument.m_107006_(p_241004_0_, "attribute"), UuidArgument.m_113853_(p_241004_0_, "uuid"), DoubleArgumentType.getDouble(p_241004_0_, "scale"));
+       })))))))));
+    }
+ 

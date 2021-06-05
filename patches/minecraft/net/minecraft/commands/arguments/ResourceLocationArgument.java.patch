@@ -1,0 +1,31 @@
+--- a/net/minecraft/commands/arguments/ResourceLocationArgument.java
++++ b/net/minecraft/commands/arguments/ResourceLocationArgument.java
+@@ -20,17 +_,17 @@
+ 
+ public class ResourceLocationArgument implements ArgumentType<ResourceLocation> {
+    private static final Collection<String> f_106977_ = Arrays.asList("foo", "foo:bar", "012");
+-   private static final DynamicCommandExceptionType f_106978_ = new DynamicCommandExceptionType((p_107010_) -> {
+-      return new TranslatableComponent("advancement.advancementNotFound", p_107010_);
+-   });
+-   private static final DynamicCommandExceptionType f_106979_ = new DynamicCommandExceptionType((p_107005_) -> {
+-      return new TranslatableComponent("recipe.notFound", p_107005_);
+-   });
+-   private static final DynamicCommandExceptionType f_106980_ = new DynamicCommandExceptionType((p_106998_) -> {
+-      return new TranslatableComponent("predicate.unknown", p_106998_);
+-   });
+-   private static final DynamicCommandExceptionType f_106981_ = new DynamicCommandExceptionType((p_106991_) -> {
+-      return new TranslatableComponent("attribute.unknown", p_106991_);
++   private static final DynamicCommandExceptionType f_106978_ = new DynamicCommandExceptionType((p_208676_0_) -> {
++      return new TranslatableComponent("advancement.advancementNotFound", p_208676_0_);
++   });
++   private static final DynamicCommandExceptionType f_106979_ = new DynamicCommandExceptionType((p_208677_0_) -> {
++      return new TranslatableComponent("recipe.notFound", p_208677_0_);
++   });
++   private static final DynamicCommandExceptionType f_106980_ = new DynamicCommandExceptionType((p_208674_0_) -> {
++      return new TranslatableComponent("predicate.unknown", p_208674_0_);
++   });
++   private static final DynamicCommandExceptionType f_106981_ = new DynamicCommandExceptionType((p_239091_0_) -> {
++      return new TranslatableComponent("attribute.unknown", p_239091_0_);
+    });
+ 
+    public static ResourceLocationArgument m_106984_() {

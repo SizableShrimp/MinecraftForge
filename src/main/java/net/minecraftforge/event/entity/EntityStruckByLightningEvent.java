@@ -19,9 +19,6 @@
 
 package net.minecraftforge.event.entity;
 
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LightningBolt;
 
@@ -39,7 +36,7 @@ import net.minecraft.world.entity.LightningBolt;
  * <br>
  * This event is fired on the {@link MinecraftForge#EVENT_BUS}.<br>
  **/
-@Cancelable
+@net.minecraftforge.eventbus.api.Cancelable
 public class EntityStruckByLightningEvent extends EntityEvent
 {
     private final LightningBolt lightning;

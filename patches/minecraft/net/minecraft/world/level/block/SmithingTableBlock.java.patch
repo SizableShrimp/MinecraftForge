@@ -1,0 +1,19 @@
+--- a/net/minecraft/world/level/block/SmithingTableBlock.java
++++ b/net/minecraft/world/level/block/SmithingTableBlock.java
+@@ -19,13 +_,13 @@
+ public class SmithingTableBlock extends CraftingTableBlock {
+    private static final Component f_56417_ = new TranslatableComponent("container.upgrade");
+ 
+-   protected SmithingTableBlock(BlockBehaviour.Properties p_56420_) {
++   public SmithingTableBlock(BlockBehaviour.Properties p_56420_) {
+       super(p_56420_);
+    }
+ 
+    public MenuProvider m_7246_(BlockState p_56435_, Level p_56436_, BlockPos p_56437_) {
+-      return new SimpleMenuProvider((p_56424_, p_56425_, p_56426_) -> {
+-         return new SmithingMenu(p_56424_, p_56425_, ContainerLevelAccess.m_39289_(p_56436_, p_56437_));
++      return new SimpleMenuProvider((p_235576_2_, p_235576_3_, p_235576_4_) -> {
++         return new SmithingMenu(p_235576_2_, p_235576_3_, ContainerLevelAccess.m_39289_(p_56436_, p_56437_));
+       }, f_56417_);
+    }
+ 

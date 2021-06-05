@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/BlockPileConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/BlockPileConfiguration.java
+@@ -4,8 +_,8 @@
+ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+ 
+ public class BlockPileConfiguration implements FeatureConfiguration {
+-   public static final Codec<BlockPileConfiguration> f_67539_ = BlockStateProvider.f_68747_.fieldOf("state_provider").xmap(BlockPileConfiguration::new, (p_67545_) -> {
+-      return p_67545_.f_67540_;
++   public static final Codec<BlockPileConfiguration> f_67539_ = BlockStateProvider.f_68747_.fieldOf("state_provider").xmap(BlockPileConfiguration::new, (p_236454_0_) -> {
++      return p_236454_0_.f_67540_;
+    }).codec();
+    public final BlockStateProvider f_67540_;
+ 

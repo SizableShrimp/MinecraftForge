@@ -1,0 +1,49 @@
+--- a/net/minecraft/server/dedicated/Settings.java
++++ b/net/minecraft/server/dedicated/Settings.java
+@@ -39,7 +_,7 @@
+ 
+    public void m_139876_(Path p_139877_) {
+       try (OutputStream outputstream = Files.newOutputStream(p_139877_)) {
+-         this.f_139798_.store(outputstream, "Minecraft server properties");
++         net.minecraftforge.common.util.SortedProperties.store(f_139798_, outputstream, "Minecraft server properties");
+       } catch (IOException ioexception) {
+          f_139797_.error("Failed to store properties to file: " + p_139877_);
+       }
+@@ -47,9 +_,9 @@
+    }
+ 
+    private static <V extends Number> Function<String, V> m_139841_(Function<String, V> p_139842_) {
+-      return (p_139845_) -> {
++      return (p_218975_1_) -> {
+          try {
+-            return p_139842_.apply(p_139845_);
++            return p_139842_.apply(p_218975_1_);
+          } catch (NumberFormatException numberformatexception) {
+             return (V)null;
+          }
+@@ -57,11 +_,11 @@
+    }
+ 
+    protected static <V> Function<String, V> m_139850_(IntFunction<V> p_139851_, Function<String, V> p_139852_) {
+-      return (p_139856_) -> {
++      return (p_218971_2_) -> {
+          try {
+-            return p_139851_.apply(Integer.parseInt(p_139856_));
++            return p_139851_.apply(Integer.parseInt(p_218971_2_));
+          } catch (NumberFormatException numberformatexception) {
+-            return p_139852_.apply(p_139856_);
++            return p_139852_.apply(p_218971_2_);
+          }
+       };
+    }
+@@ -97,8 +_,8 @@
+    }
+ 
+    protected <V> V m_139826_(String p_139827_, Function<String, V> p_139828_, UnaryOperator<V> p_139829_, Function<V, String> p_139830_, V p_139831_) {
+-      return this.m_139821_(p_139827_, (p_139849_) -> {
+-         V v = p_139828_.apply(p_139849_);
++      return this.m_139821_(p_139827_, (p_218972_2_) -> {
++         V v = p_139828_.apply(p_218972_2_);
+          return (V)(v != null ? p_139829_.apply(v) : null);
+       }, p_139830_, p_139831_);
+    }

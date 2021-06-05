@@ -1,0 +1,42 @@
+--- a/net/minecraft/util/datafix/fixes/ItemBannerColorFix.java
++++ b/net/minecraft/util/datafix/fixes/ItemBannerColorFix.java
+@@ -25,11 +_,11 @@
+       OpticFinder<Pair<String, String>> opticfinder = DSL.fieldFinder("id", DSL.named(References.f_16788_.typeName(), NamespacedSchema.m_17310_()));
+       OpticFinder<?> opticfinder1 = type.findField("tag");
+       OpticFinder<?> opticfinder2 = opticfinder1.type().findField("BlockEntityTag");
+-      return this.fixTypeEverywhereTyped("ItemBannerColorFix", type, (p_15924_) -> {
+-         Optional<Pair<String, String>> optional = p_15924_.getOptional(opticfinder);
++      return this.fixTypeEverywhereTyped("ItemBannerColorFix", type, (p_207466_3_) -> {
++         Optional<Pair<String, String>> optional = p_207466_3_.getOptional(opticfinder);
+          if (optional.isPresent() && Objects.equals(optional.get().getSecond(), "minecraft:banner")) {
+-            Dynamic<?> dynamic = p_15924_.get(DSL.remainderFinder());
+-            Optional<? extends Typed<?>> optional1 = p_15924_.getOptionalTyped(opticfinder1);
++            Dynamic<?> dynamic = p_207466_3_.get(DSL.remainderFinder());
++            Optional<? extends Typed<?>> optional1 = p_207466_3_.getOptionalTyped(opticfinder1);
+             if (optional1.isPresent()) {
+                Typed<?> typed = optional1.get();
+                Optional<? extends Typed<?>> optional2 = typed.getOptionalTyped(opticfinder2);
+@@ -44,19 +_,19 @@
+                         Dynamic<?> dynamic3 = optional3.get();
+                         Dynamic<?> dynamic4 = dynamic3.createMap(ImmutableMap.of(dynamic3.createString("Lore"), dynamic3.createList(Stream.of(dynamic3.createString("(+NBT")))));
+                         if (Objects.equals(dynamic3, dynamic4)) {
+-                           return p_15924_.set(DSL.remainderFinder(), dynamic);
++                           return p_207466_3_.set(DSL.remainderFinder(), dynamic);
+                         }
+                      }
+ 
+                      dynamic2.remove("Base");
+-                     return p_15924_.set(DSL.remainderFinder(), dynamic).set(opticfinder1, typed.set(opticfinder2, typed1.set(DSL.remainderFinder(), dynamic2)));
++                     return p_207466_3_.set(DSL.remainderFinder(), dynamic).set(opticfinder1, typed.set(opticfinder2, typed1.set(DSL.remainderFinder(), dynamic2)));
+                   }
+                }
+             }
+ 
+-            return p_15924_.set(DSL.remainderFinder(), dynamic);
++            return p_207466_3_.set(DSL.remainderFinder(), dynamic);
+          } else {
+-            return p_15924_;
++            return p_207466_3_;
+          }
+       });
+    }

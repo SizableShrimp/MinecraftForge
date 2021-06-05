@@ -1,0 +1,13 @@
+--- a/net/minecraft/client/model/ParrotModel.java
++++ b/net/minecraft/client/model/ParrotModel.java
+@@ -80,8 +_,8 @@
+    public void m_103223_(PoseStack p_103224_, VertexConsumer p_103225_, int p_103226_, int p_103227_, float p_103228_, float p_103229_, float p_103230_, float p_103231_, int p_103232_) {
+       this.m_103239_(ParrotModel.State.ON_SHOULDER);
+       this.m_103241_(ParrotModel.State.ON_SHOULDER, p_103232_, p_103228_, p_103229_, 0.0F, p_103230_, p_103231_);
+-      this.m_6195_().forEach((p_103238_) -> {
+-         p_103238_.m_104301_(p_103224_, p_103225_, p_103226_, p_103227_);
++      this.m_6195_().forEach((p_228285_4_) -> {
++         p_228285_4_.m_104301_(p_103224_, p_103225_, p_103226_, p_103227_);
+       });
+    }
+ 

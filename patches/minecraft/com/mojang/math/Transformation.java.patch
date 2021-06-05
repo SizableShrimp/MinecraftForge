@@ -1,0 +1,61 @@
+--- a/com/mojang/math/Transformation.java
++++ b/com/mojang/math/Transformation.java
+@@ -9,7 +_,7 @@
+ import org.apache.commons.lang3.tuple.Triple;
+ 
+ @OnlyIn(Dist.CLIENT)
+-public final class Transformation {
++public final class Transformation implements net.minecraftforge.client.extensions.IForgeTransformationMatrix {
+    private final Matrix4f f_121078_;
+    private boolean f_121079_;
+    @Nullable
+@@ -50,14 +_,14 @@
+       return f_121084_;
+    }
+ 
+-   public Transformation m_121096_(Transformation p_121097_) {
++   public Transformation compose(Transformation p_121097_) {
+       Matrix4f matrix4f = this.m_121104_();
+       matrix4f.m_27644_(p_121097_.m_121104_());
+       return new Transformation(matrix4f);
+    }
+ 
+    @Nullable
+-   public Transformation m_121103_() {
++   public Transformation inverse() {
+       if (this == f_121084_) {
+          return this;
+       } else {
+@@ -133,4 +_,32 @@
+    public int hashCode() {
+       return Objects.hash(this.f_121078_);
+    }
++
++    // FORGE START
++    public Vector3f getTranslation() {
++        m_121106_();
++        return f_121080_.m_122281_();
++    }
++    public Vector3f getScale() {
++        m_121106_();
++        return f_121082_.m_122281_();
++    }
++
++    public Quaternion getRightRot() {
++        m_121106_();
++        return f_121083_.m_80161_();
++    }
++
++    private Matrix3f normalTransform = null;
++    public Matrix3f getNormalMatrix() {
++        checkNormalTransform();
++        return normalTransform;
++    }
++    private void checkNormalTransform() {
++        if (normalTransform == null) {
++            normalTransform = new Matrix3f(f_121078_);
++            normalTransform.m_8187_();
++            normalTransform.m_8155_();
++        }
++    }
+ }

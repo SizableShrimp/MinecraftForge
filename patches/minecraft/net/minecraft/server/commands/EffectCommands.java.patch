@@ -1,0 +1,41 @@
+--- a/net/minecraft/server/commands/EffectCommands.java
++++ b/net/minecraft/server/commands/EffectCommands.java
+@@ -24,22 +_,22 @@
+    private static final SimpleCommandExceptionType f_136951_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.effect.clear.specific.failed"));
+ 
+    public static void m_136953_(CommandDispatcher<CommandSourceStack> p_136954_) {
+-      p_136954_.register(Commands.m_82127_("effect").requires((p_136958_) -> {
+-         return p_136958_.m_6761_(2);
+-      }).then(Commands.m_82127_("clear").executes((p_136984_) -> {
+-         return m_136959_(p_136984_.getSource(), ImmutableList.of(p_136984_.getSource().m_81374_()));
+-      }).then(Commands.m_82129_("targets", EntityArgument.m_91460_()).executes((p_136982_) -> {
+-         return m_136959_(p_136982_.getSource(), EntityArgument.m_91461_(p_136982_, "targets"));
+-      }).then(Commands.m_82129_("effect", MobEffectArgument.m_98426_()).executes((p_136980_) -> {
+-         return m_136962_(p_136980_.getSource(), EntityArgument.m_91461_(p_136980_, "targets"), MobEffectArgument.m_98429_(p_136980_, "effect"));
+-      })))).then(Commands.m_82127_("give").then(Commands.m_82129_("targets", EntityArgument.m_91460_()).then(Commands.m_82129_("effect", MobEffectArgument.m_98426_()).executes((p_136978_) -> {
+-         return m_136966_(p_136978_.getSource(), EntityArgument.m_91461_(p_136978_, "targets"), MobEffectArgument.m_98429_(p_136978_, "effect"), (Integer)null, 0, true);
+-      }).then(Commands.m_82129_("seconds", IntegerArgumentType.integer(1, 1000000)).executes((p_136976_) -> {
+-         return m_136966_(p_136976_.getSource(), EntityArgument.m_91461_(p_136976_, "targets"), MobEffectArgument.m_98429_(p_136976_, "effect"), IntegerArgumentType.getInteger(p_136976_, "seconds"), 0, true);
+-      }).then(Commands.m_82129_("amplifier", IntegerArgumentType.integer(0, 255)).executes((p_136974_) -> {
+-         return m_136966_(p_136974_.getSource(), EntityArgument.m_91461_(p_136974_, "targets"), MobEffectArgument.m_98429_(p_136974_, "effect"), IntegerArgumentType.getInteger(p_136974_, "seconds"), IntegerArgumentType.getInteger(p_136974_, "amplifier"), true);
+-      }).then(Commands.m_82129_("hideParticles", BoolArgumentType.bool()).executes((p_136956_) -> {
+-         return m_136966_(p_136956_.getSource(), EntityArgument.m_91461_(p_136956_, "targets"), MobEffectArgument.m_98429_(p_136956_, "effect"), IntegerArgumentType.getInteger(p_136956_, "seconds"), IntegerArgumentType.getInteger(p_136956_, "amplifier"), !BoolArgumentType.getBool(p_136956_, "hideParticles"));
++      p_136954_.register(Commands.m_82127_("effect").requires((p_198359_0_) -> {
++         return p_198359_0_.m_6761_(2);
++      }).then(Commands.m_82127_("clear").executes((p_198352_0_) -> {
++         return m_136959_(p_198352_0_.getSource(), ImmutableList.of(p_198352_0_.getSource().m_81374_()));
++      }).then(Commands.m_82129_("targets", EntityArgument.m_91460_()).executes((p_198356_0_) -> {
++         return m_136959_(p_198356_0_.getSource(), EntityArgument.m_91461_(p_198356_0_, "targets"));
++      }).then(Commands.m_82129_("effect", MobEffectArgument.m_98426_()).executes((p_198351_0_) -> {
++         return m_136962_(p_198351_0_.getSource(), EntityArgument.m_91461_(p_198351_0_, "targets"), MobEffectArgument.m_98429_(p_198351_0_, "effect"));
++      })))).then(Commands.m_82127_("give").then(Commands.m_82129_("targets", EntityArgument.m_91460_()).then(Commands.m_82129_("effect", MobEffectArgument.m_98426_()).executes((p_198357_0_) -> {
++         return m_136966_(p_198357_0_.getSource(), EntityArgument.m_91461_(p_198357_0_, "targets"), MobEffectArgument.m_98429_(p_198357_0_, "effect"), (Integer)null, 0, true);
++      }).then(Commands.m_82129_("seconds", IntegerArgumentType.integer(1, 1000000)).executes((p_198350_0_) -> {
++         return m_136966_(p_198350_0_.getSource(), EntityArgument.m_91461_(p_198350_0_, "targets"), MobEffectArgument.m_98429_(p_198350_0_, "effect"), IntegerArgumentType.getInteger(p_198350_0_, "seconds"), 0, true);
++      }).then(Commands.m_82129_("amplifier", IntegerArgumentType.integer(0, 255)).executes((p_198358_0_) -> {
++         return m_136966_(p_198358_0_.getSource(), EntityArgument.m_91461_(p_198358_0_, "targets"), MobEffectArgument.m_98429_(p_198358_0_, "effect"), IntegerArgumentType.getInteger(p_198358_0_, "seconds"), IntegerArgumentType.getInteger(p_198358_0_, "amplifier"), true);
++      }).then(Commands.m_82129_("hideParticles", BoolArgumentType.bool()).executes((p_229759_0_) -> {
++         return m_136966_(p_229759_0_.getSource(), EntityArgument.m_91461_(p_229759_0_, "targets"), MobEffectArgument.m_98429_(p_229759_0_, "effect"), IntegerArgumentType.getInteger(p_229759_0_, "seconds"), IntegerArgumentType.getInteger(p_229759_0_, "amplifier"), !BoolArgumentType.getBool(p_229759_0_, "hideParticles"));
+       }))))))));
+    }
+ 

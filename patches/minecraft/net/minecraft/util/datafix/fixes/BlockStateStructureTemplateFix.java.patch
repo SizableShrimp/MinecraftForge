@@ -1,0 +1,13 @@
+--- a/net/minecraft/util/datafix/fixes/BlockStateStructureTemplateFix.java
++++ b/net/minecraft/util/datafix/fixes/BlockStateStructureTemplateFix.java
+@@ -11,8 +_,8 @@
+    }
+ 
+    public TypeRewriteRule makeRule() {
+-      return this.fixTypeEverywhereTyped("BlockStateStructureTemplateFix", this.getInputSchema().getType(References.f_16783_), (p_15004_) -> {
+-         return p_15004_.update(DSL.remainderFinder(), BlockStateData::m_14946_);
++      return this.fixTypeEverywhereTyped("BlockStateStructureTemplateFix", this.getInputSchema().getType(References.f_16783_), (p_207440_0_) -> {
++         return p_207440_0_.update(DSL.remainderFinder(), BlockStateData::m_14946_);
+       });
+    }
+ }

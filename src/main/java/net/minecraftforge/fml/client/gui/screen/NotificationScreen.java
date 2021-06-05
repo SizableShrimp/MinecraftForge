@@ -1,4 +1,4 @@
-package net.minecraftforge.fml.client.gui.screen;/*
+/*
  * Minecraft Forge
  * Copyright (c) 2016-2021.
  *
@@ -19,14 +19,6 @@ package net.minecraftforge.fml.client.gui.screen;/*
 
 /*
 package net.minecraftforge.fml.client.gui.screen;
-
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.client.gui.ScrollPanel;
 
 public class NotificationScreen extends Screen
 {

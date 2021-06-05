@@ -1,0 +1,46 @@
+--- a/com/mojang/blaze3d/platform/GLX.java
++++ b/com/mojang/blaze3d/platform/GLX.java
+@@ -32,16 +_,16 @@
+    private static final Logger f_69332_ = LogManager.getLogger();
+    private static String f_69334_ = "";
+    private static String f_69335_;
+-   private static final Map<Integer, String> f_69333_ = m_69370_(Maps.newHashMap(), (p_69369_) -> {
+-      p_69369_.put(0, "No error");
+-      p_69369_.put(1280, "Enum parameter is invalid for this function");
+-      p_69369_.put(1281, "Parameter is invalid for this function");
+-      p_69369_.put(1282, "Current state is invalid for this function");
+-      p_69369_.put(1283, "Stack overflow");
+-      p_69369_.put(1284, "Stack underflow");
+-      p_69369_.put(1285, "Out of memory");
+-      p_69369_.put(1286, "Operation on incomplete framebuffer");
+-      p_69369_.put(1286, "Operation on incomplete framebuffer");
++   private static final Map<Integer, String> f_69333_ = m_69370_(Maps.newHashMap(), (p_229878_0_) -> {
++      p_229878_0_.put(0, "No error");
++      p_229878_0_.put(1280, "Enum parameter is invalid for this function");
++      p_229878_0_.put(1281, "Parameter is invalid for this function");
++      p_229878_0_.put(1282, "Current state is invalid for this function");
++      p_229878_0_.put(1283, "Stack overflow");
++      p_229878_0_.put(1284, "Stack underflow");
++      p_229878_0_.put(1285, "Out of memory");
++      p_229878_0_.put(1286, "Operation on incomplete framebuffer");
++      p_229878_0_.put(1286, "Operation on incomplete framebuffer");
+    });
+ 
+    public static String m_69359_() {
+@@ -67,12 +_,12 @@
+ 
+    public static LongSupplier m_69346_() {
+       RenderSystem.m_69393_(RenderSystem::m_69583_);
+-      Window.m_85407_((p_69361_, p_69362_) -> {
+-         throw new IllegalStateException(String.format("GLFW error before init: [0x%X]%s", p_69361_, p_69362_));
++      Window.m_85407_((p_229879_0_, p_229879_1_) -> {
++         throw new IllegalStateException(String.format("GLFW error before init: [0x%X]%s", p_229879_0_, p_229879_1_));
+       });
+       List<String> list = Lists.newArrayList();
+-      GLFWErrorCallback glfwerrorcallback = GLFW.glfwSetErrorCallback((p_69365_, p_69366_) -> {
+-         list.add(String.format("GLFW error during init: [0x%X]%s", p_69365_, p_69366_));
++      GLFWErrorCallback glfwerrorcallback = GLFW.glfwSetErrorCallback((p_229880_1_, p_229880_2_) -> {
++         list.add(String.format("GLFW error during init: [0x%X]%s", p_229880_1_, p_229880_2_));
+       });
+       if (!GLFW.glfwInit()) {
+          throw new IllegalStateException("Failed to initialize GLFW, errors: " + Joiner.on(",").join(list));

@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/entity/ai/gossip/GossipType.java
++++ b/net/minecraft/world/entity/ai/gossip/GossipType.java
+@@ -18,8 +_,8 @@
+    public final int f_26275_;
+    public final int f_26276_;
+    public final int f_26277_;
+-   private static final Map<String, GossipType> f_26278_ = Stream.of(values()).collect(ImmutableMap.toImmutableMap((p_26290_) -> {
+-      return p_26290_.f_26273_;
++   private static final Map<String, GossipType> f_26278_ = Stream.of(values()).collect(ImmutableMap.toImmutableMap((p_220930_0_) -> {
++      return p_220930_0_.f_26273_;
+    }, Function.identity()));
+ 
+    private GossipType(String p_26284_, int p_26285_, int p_26286_, int p_26287_, int p_26288_) {

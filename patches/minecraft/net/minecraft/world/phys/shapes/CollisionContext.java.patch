@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/phys/shapes/CollisionContext.java
++++ b/net/minecraft/world/phys/shapes/CollisionContext.java
+@@ -6,7 +_,7 @@
+ import net.minecraft.world.level.material.FlowingFluid;
+ import net.minecraft.world.level.material.FluidState;
+ 
+-public interface CollisionContext {
++public interface CollisionContext extends net.minecraftforge.common.extensions.IForgeSelectionContext {
+    static CollisionContext m_82749_() {
+       return EntityCollisionContext.f_82865_;
+    }

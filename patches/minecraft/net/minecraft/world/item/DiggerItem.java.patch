@@ -1,0 +1,37 @@
+--- a/net/minecraft/world/item/DiggerItem.java
++++ b/net/minecraft/world/item/DiggerItem.java
+@@ -20,7 +_,7 @@
+    private final float f_40981_;
+    private final Multimap<Attribute, AttributeModifier> f_40982_;
+ 
+-   protected DiggerItem(float p_40984_, float p_40985_, Tier p_40986_, Set<Block> p_40987_, Item.Properties p_40988_) {
++   public DiggerItem(float p_40984_, float p_40985_, Tier p_40986_, Set<Block> p_40987_, Item.Properties p_40988_) {
+       super(p_40986_, p_40988_);
+       this.f_40979_ = p_40987_;
+       this.f_40980_ = p_40986_.m_6624_();
+@@ -32,20 +_,21 @@
+    }
+ 
+    public float m_8102_(ItemStack p_41004_, BlockState p_41005_) {
++      if (getToolTypes(p_41004_).stream().anyMatch(e -> p_41005_.isToolEffective(e))) return f_40980_;
+       return this.f_40979_.contains(p_41005_.m_60734_()) ? this.f_40980_ : 1.0F;
+    }
+ 
+    public boolean m_7579_(ItemStack p_40994_, LivingEntity p_40995_, LivingEntity p_40996_) {
+-      p_40994_.m_41622_(2, p_40996_, (p_41007_) -> {
+-         p_41007_.m_21166_(EquipmentSlot.MAINHAND);
++      p_40994_.m_41622_(2, p_40996_, (p_220039_0_) -> {
++         p_220039_0_.m_21166_(EquipmentSlot.MAINHAND);
+       });
+       return true;
+    }
+ 
+    public boolean m_6813_(ItemStack p_40998_, Level p_40999_, BlockState p_41000_, BlockPos p_41001_, LivingEntity p_41002_) {
+       if (!p_40999_.f_46443_ && p_41000_.m_60800_(p_40999_, p_41001_) != 0.0F) {
+-         p_40998_.m_41622_(1, p_41002_, (p_40992_) -> {
+-            p_40992_.m_21166_(EquipmentSlot.MAINHAND);
++         p_40998_.m_41622_(1, p_41002_, (p_220038_0_) -> {
++            p_220038_0_.m_21166_(EquipmentSlot.MAINHAND);
+          });
+       }
+ 

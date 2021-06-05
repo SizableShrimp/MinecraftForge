@@ -1,0 +1,61 @@
+--- a/net/minecraft/world/phys/shapes/VoxelShape.java
++++ b/net/minecraft/world/phys/shapes/VoxelShape.java
+@@ -59,16 +_,16 @@
+ 
+    public VoxelShape m_83296_() {
+       VoxelShape[] avoxelshape = new VoxelShape[]{Shapes.m_83040_()};
+-      this.m_83286_((p_83275_, p_83276_, p_83277_, p_83278_, p_83279_, p_83280_) -> {
+-         avoxelshape[0] = Shapes.m_83148_(avoxelshape[0], Shapes.m_83048_(p_83275_, p_83276_, p_83277_, p_83278_, p_83279_, p_83280_), BooleanOp.f_82695_);
++      this.m_83286_((p_197763_1_, p_197763_3_, p_197763_5_, p_197763_7_, p_197763_9_, p_197763_11_) -> {
++         avoxelshape[0] = Shapes.m_83148_(avoxelshape[0], Shapes.m_83048_(p_197763_1_, p_197763_3_, p_197763_5_, p_197763_7_, p_197763_9_, p_197763_11_), BooleanOp.f_82695_);
+       });
+       return avoxelshape[0];
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
+    public void m_83224_(Shapes.DoubleLineConsumer p_83225_) {
+-      this.f_83211_.m_82819_((p_83228_, p_83229_, p_83230_, p_83231_, p_83232_, p_83233_) -> {
+-         p_83225_.m_83161_(this.m_83256_(Direction.Axis.X, p_83228_), this.m_83256_(Direction.Axis.Y, p_83229_), this.m_83256_(Direction.Axis.Z, p_83230_), this.m_83256_(Direction.Axis.X, p_83231_), this.m_83256_(Direction.Axis.Y, p_83232_), this.m_83256_(Direction.Axis.Z, p_83233_));
++      this.f_83211_.m_82819_((p_197750_2_, p_197750_3_, p_197750_4_, p_197750_5_, p_197750_6_, p_197750_7_) -> {
++         p_83225_.m_83161_(this.m_83256_(Direction.Axis.X, p_197750_2_), this.m_83256_(Direction.Axis.Y, p_197750_3_), this.m_83256_(Direction.Axis.Z, p_197750_4_), this.m_83256_(Direction.Axis.X, p_197750_5_), this.m_83256_(Direction.Axis.Y, p_197750_6_), this.m_83256_(Direction.Axis.Z, p_197750_7_));
+       }, true);
+    }
+ 
+@@ -76,15 +_,15 @@
+       DoubleList doublelist = this.m_7700_(Direction.Axis.X);
+       DoubleList doublelist1 = this.m_7700_(Direction.Axis.Y);
+       DoubleList doublelist2 = this.m_7700_(Direction.Axis.Z);
+-      this.f_83211_.m_82832_((p_83239_, p_83240_, p_83241_, p_83242_, p_83243_, p_83244_) -> {
+-         p_83287_.m_83161_(doublelist.getDouble(p_83239_), doublelist1.getDouble(p_83240_), doublelist2.getDouble(p_83241_), doublelist.getDouble(p_83242_), doublelist1.getDouble(p_83243_), doublelist2.getDouble(p_83244_));
++      this.f_83211_.m_82832_((p_224789_4_, p_224789_5_, p_224789_6_, p_224789_7_, p_224789_8_, p_224789_9_) -> {
++         p_83287_.m_83161_(doublelist.getDouble(p_224789_4_), doublelist1.getDouble(p_224789_5_), doublelist2.getDouble(p_224789_6_), doublelist.getDouble(p_224789_7_), doublelist1.getDouble(p_224789_8_), doublelist2.getDouble(p_224789_9_));
+       }, true);
+    }
+ 
+    public List<AABB> m_83299_() {
+       List<AABB> list = Lists.newArrayList();
+-      this.m_83286_((p_83267_, p_83268_, p_83269_, p_83270_, p_83271_, p_83272_) -> {
+-         list.add(new AABB(p_83267_, p_83268_, p_83269_, p_83270_, p_83271_, p_83272_));
++      this.m_83286_((p_203431_1_, p_203431_3_, p_203431_5_, p_203431_7_, p_203431_9_, p_203431_11_) -> {
++         list.add(new AABB(p_203431_1_, p_203431_3_, p_203431_5_, p_203431_7_, p_203431_9_, p_203431_11_));
+       });
+       return list;
+    }
+@@ -100,13 +_,13 @@
+    }
+ 
+    protected int m_6595_(Direction.Axis p_83250_, double p_83251_) {
+-      return Mth.m_14049_(0, this.f_83211_.m_82850_(p_83250_) + 1, (p_83255_) -> {
+-         if (p_83255_ < 0) {
++      return Mth.m_14049_(0, this.f_83211_.m_82850_(p_83250_) + 1, (p_197761_4_) -> {
++         if (p_197761_4_ < 0) {
+             return false;
+-         } else if (p_83255_ > this.f_83211_.m_82850_(p_83250_)) {
++         } else if (p_197761_4_ > this.f_83211_.m_82850_(p_83250_)) {
+             return true;
+          } else {
+-            return p_83251_ < this.m_83256_(p_83250_, p_83255_);
++            return p_83251_ < this.m_83256_(p_83250_, p_197761_4_);
+          }
+       }) - 1;
+    }

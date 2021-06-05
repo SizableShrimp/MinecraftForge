@@ -1,0 +1,170 @@
+--- a/net/minecraft/world/entity/ai/village/poi/PoiManager.java
++++ b/net/minecraft/world/entity/ai/village/poi/PoiManager.java
+@@ -58,26 +_,26 @@
+ 
+    public Stream<PoiRecord> m_27166_(Predicate<PoiType> p_27167_, BlockPos p_27168_, int p_27169_, PoiManager.Occupancy p_27170_) {
+       int i = Math.floorDiv(p_27169_, 16) + 1;
+-      return ChunkPos.m_45596_(new ChunkPos(p_27168_), i).flatMap((p_27109_) -> {
+-         return this.m_27117_(p_27167_, p_27109_, p_27170_);
+-      }).filter((p_27159_) -> {
+-         BlockPos blockpos = p_27159_.m_27257_();
++      return ChunkPos.m_45596_(new ChunkPos(p_27168_), i).flatMap((p_226350_3_) -> {
++         return this.m_27117_(p_27167_, p_226350_3_, p_27170_);
++      }).filter((p_242322_2_) -> {
++         BlockPos blockpos = p_242322_2_.m_27257_();
+          return Math.abs(blockpos.m_123341_() - p_27168_.m_123341_()) <= p_27169_ && Math.abs(blockpos.m_123343_() - p_27168_.m_123343_()) <= p_27169_;
+       });
+    }
+ 
+    public Stream<PoiRecord> m_27181_(Predicate<PoiType> p_27182_, BlockPos p_27183_, int p_27184_, PoiManager.Occupancy p_27185_) {
+       int i = p_27184_ * p_27184_;
+-      return this.m_27166_(p_27182_, p_27183_, p_27184_, p_27185_).filter((p_27084_) -> {
+-         return p_27084_.m_27257_().m_123331_(p_27183_) <= (double)i;
++      return this.m_27166_(p_27182_, p_27183_, p_27184_, p_27185_).filter((p_226349_2_) -> {
++         return p_226349_2_.m_27257_().m_123331_(p_27183_) <= (double)i;
+       });
+    }
+ 
+    public Stream<PoiRecord> m_27117_(Predicate<PoiType> p_27118_, ChunkPos p_27119_, PoiManager.Occupancy p_27120_) {
+-      return IntStream.range(0, 16).boxed().map((p_27052_) -> {
+-         return this.m_63823_(SectionPos.m_123196_(p_27119_, p_27052_).m_123252_());
+-      }).filter(Optional::isPresent).flatMap((p_27113_) -> {
+-         return p_27113_.get().m_27304_(p_27118_, p_27120_);
++      return IntStream.range(0, 16).boxed().map((p_219149_2_) -> {
++         return this.m_63823_(SectionPos.m_123196_(p_27119_, p_219149_2_).m_123252_());
++      }).filter(Optional::isPresent).flatMap((p_241393_2_) -> {
++         return p_241393_2_.get().m_27304_(p_27118_, p_27120_);
+       });
+    }
+ 
+@@ -86,8 +_,8 @@
+    }
+ 
+    public Stream<BlockPos> m_27171_(Predicate<PoiType> p_27172_, Predicate<BlockPos> p_27173_, BlockPos p_27174_, int p_27175_, PoiManager.Occupancy p_27176_) {
+-      return this.m_27138_(p_27172_, p_27173_, p_27174_, p_27175_, p_27176_).sorted(Comparator.comparingDouble((p_27162_) -> {
+-         return p_27162_.m_123331_(p_27174_);
++      return this.m_27138_(p_27172_, p_27173_, p_27174_, p_27175_, p_27176_).sorted(Comparator.comparingDouble((p_242323_1_) -> {
++         return p_242323_1_.m_123331_(p_27174_);
+       }));
+    }
+ 
+@@ -96,25 +_,25 @@
+    }
+ 
+    public Optional<BlockPos> m_27192_(Predicate<PoiType> p_27193_, BlockPos p_27194_, int p_27195_, PoiManager.Occupancy p_27196_) {
+-      return this.m_27181_(p_27193_, p_27194_, p_27195_, p_27196_).map(PoiRecord::m_27257_).min(Comparator.comparingDouble((p_27090_) -> {
+-         return p_27090_.m_123331_(p_27194_);
++      return this.m_27181_(p_27193_, p_27194_, p_27195_, p_27196_).map(PoiRecord::m_27257_).min(Comparator.comparingDouble((p_219160_1_) -> {
++         return p_219160_1_.m_123331_(p_27194_);
+       }));
+    }
+ 
+    public Optional<BlockPos> m_27133_(Predicate<PoiType> p_27134_, Predicate<BlockPos> p_27135_, BlockPos p_27136_, int p_27137_) {
+-      return this.m_27181_(p_27134_, p_27136_, p_27137_, PoiManager.Occupancy.HAS_SPACE).filter((p_27165_) -> {
+-         return p_27135_.test(p_27165_.m_27257_());
+-      }).findFirst().map((p_27041_) -> {
+-         p_27041_.m_27247_();
+-         return p_27041_.m_27257_();
++      return this.m_27181_(p_27134_, p_27136_, p_27137_, PoiManager.Occupancy.HAS_SPACE).filter((p_219129_1_) -> {
++         return p_27135_.test(p_219129_1_.m_27257_());
++      }).findFirst().map((p_219152_0_) -> {
++         p_219152_0_.m_27247_();
++         return p_219152_0_.m_27257_();
+       });
+    }
+ 
+    public Optional<BlockPos> m_27126_(Predicate<PoiType> p_27127_, Predicate<BlockPos> p_27128_, PoiManager.Occupancy p_27129_, BlockPos p_27130_, int p_27131_, Random p_27132_) {
+       List<PoiRecord> list = this.m_27181_(p_27127_, p_27130_, p_27131_, p_27129_).collect(Collectors.toList());
+       Collections.shuffle(list, p_27132_);
+-      return list.stream().filter((p_27116_) -> {
+-         return p_27128_.test(p_27116_.m_27257_());
++      return list.stream().filter((p_234143_1_) -> {
++         return p_27128_.test(p_234143_1_.m_27257_());
+       }).findFirst().map(PoiRecord::m_27257_);
+    }
+ 
+@@ -123,8 +_,8 @@
+    }
+ 
+    public boolean m_27091_(BlockPos p_27092_, Predicate<PoiType> p_27093_) {
+-      return this.m_63823_(SectionPos.m_123199_(p_27092_).m_123252_()).map((p_27097_) -> {
+-         return p_27097_.m_27288_(p_27092_, p_27093_);
++      return this.m_63823_(SectionPos.m_123199_(p_27092_).m_123252_()).map((p_234141_2_) -> {
++         return p_234141_2_.m_27288_(p_27092_, p_27093_);
+       }).orElse(false);
+    }
+ 
+@@ -140,8 +_,8 @@
+ 
+    private boolean m_27197_(long p_27198_) {
+       Optional<PoiSection> optional = this.m_63818_(p_27198_);
+-      return optional == null ? false : optional.map((p_27043_) -> {
+-         return p_27043_.m_27304_(PoiType.f_27330_, PoiManager.Occupancy.IS_OCCUPIED).count() > 0L;
++      return optional == null ? false : optional.map((p_234134_0_) -> {
++         return p_234134_0_.m_27304_(PoiType.f_27330_, PoiManager.Occupancy.IS_OCCUPIED).count() > 0L;
+       }).orElse(false);
+    }
+ 
+@@ -161,10 +_,10 @@
+ 
+    public void m_27047_(ChunkPos p_27048_, LevelChunkSection p_27049_) {
+       SectionPos sectionpos = SectionPos.m_123196_(p_27048_, p_27049_.m_63017_() >> 4);
+-      Util.m_137521_(this.m_63823_(sectionpos.m_123252_()), (p_27068_) -> {
+-         p_27068_.m_27302_((p_27151_) -> {
++      Util.m_137521_(this.m_63823_(sectionpos.m_123252_()), (p_234138_3_) -> {
++         p_234138_3_.m_27302_((p_234145_3_) -> {
+             if (m_27060_(p_27049_)) {
+-               this.m_27069_(p_27049_, sectionpos, p_27151_);
++               this.m_27069_(p_27049_, sectionpos, p_234145_3_);
+             }
+ 
+          });
+@@ -182,25 +_,25 @@
+    }
+ 
+    private void m_27069_(LevelChunkSection p_27070_, SectionPos p_27071_, BiConsumer<BlockPos, PoiType> p_27072_) {
+-      p_27071_.m_123253_().forEach((p_27076_) -> {
+-         BlockState blockstate = p_27070_.m_62982_(SectionPos.m_123207_(p_27076_.m_123341_()), SectionPos.m_123207_(p_27076_.m_123342_()), SectionPos.m_123207_(p_27076_.m_123343_()));
+-         PoiType.m_27390_(blockstate).ifPresent((p_27103_) -> {
+-            p_27072_.accept(p_27076_, p_27103_);
++      p_27071_.m_123253_().forEach((p_234139_2_) -> {
++         BlockState blockstate = p_27070_.m_62982_(SectionPos.m_123207_(p_234139_2_.m_123341_()), SectionPos.m_123207_(p_234139_2_.m_123342_()), SectionPos.m_123207_(p_234139_2_.m_123343_()));
++         PoiType.m_27390_(blockstate).ifPresent((p_234142_2_) -> {
++            p_27072_.accept(p_234139_2_, p_234142_2_);
+          });
+       });
+    }
+ 
+    public void m_27056_(LevelReader p_27057_, BlockPos p_27058_, int p_27059_) {
+-      SectionPos.m_123215_(new ChunkPos(p_27058_), Math.floorDiv(p_27059_, 16)).map((p_27180_) -> {
+-         return Pair.of(p_27180_, this.m_63823_(p_27180_.m_123252_()));
+-      }).filter((p_27153_) -> {
+-         return !p_27153_.getSecond().map(PoiSection::m_27272_).orElse(false);
+-      }).map((p_27078_) -> {
+-         return p_27078_.getFirst().m_123251_();
+-      }).filter((p_27147_) -> {
+-         return this.f_27030_.add(p_27147_.m_45588_());
+-      }).forEach((p_27055_) -> {
+-         p_27057_.m_46819_(p_27055_.f_45578_, p_27055_.f_45579_, ChunkStatus.f_62314_);
++      SectionPos.m_123215_(new ChunkPos(p_27058_), Math.floorDiv(p_27059_, 16)).map((p_234147_1_) -> {
++         return Pair.of(p_234147_1_, this.m_63823_(p_234147_1_.m_123252_()));
++      }).filter((p_234146_0_) -> {
++         return !p_234146_0_.getSecond().map(PoiSection::m_27272_).orElse(false);
++      }).map((p_234140_0_) -> {
++         return p_234140_0_.getFirst().m_123251_();
++      }).filter((p_234144_1_) -> {
++         return this.f_27030_.add(p_234144_1_.m_45588_());
++      }).forEach((p_234136_1_) -> {
++         p_27057_.m_46819_(p_234136_1_.f_45578_, p_234136_1_.f_45579_, ChunkStatus.f_62314_);
+       });
+    }
+ 
+@@ -237,7 +_,7 @@
+    public static enum Occupancy {
+       HAS_SPACE(PoiRecord::m_27253_),
+       IS_OCCUPIED(PoiRecord::m_27254_),
+-      ANY((p_27223_) -> {
++      ANY((p_221036_0_) -> {
+          return true;
+       });
+ 

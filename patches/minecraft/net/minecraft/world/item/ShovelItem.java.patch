@@ -1,0 +1,45 @@
+--- a/net/minecraft/world/item/ShovelItem.java
++++ b/net/minecraft/world/item/ShovelItem.java
+@@ -23,7 +_,7 @@
+    protected static final Map<Block, BlockState> f_43110_ = Maps.newHashMap(ImmutableMap.of(Blocks.f_50440_, Blocks.f_50445_.m_49966_()));
+ 
+    public ShovelItem(Tier p_43114_, float p_43115_, float p_43116_, Item.Properties p_43117_) {
+-      super(p_43115_, p_43116_, p_43114_, f_43111_, p_43117_);
++      super(p_43115_, p_43116_, p_43114_, f_43111_, p_43117_.addToolType(net.minecraftforge.common.ToolType.SHOVEL, p_43114_.m_6604_()));
+    }
+ 
+    public boolean m_8096_(BlockState p_43124_) {
+@@ -38,9 +_,9 @@
+          return InteractionResult.PASS;
+       } else {
+          Player player = p_43119_.m_43723_();
+-         BlockState blockstate1 = f_43110_.get(blockstate.m_60734_());
++         BlockState blockstate1 = blockstate.getToolModifiedState(level, blockpos, player, p_43119_.m_43722_(), net.minecraftforge.common.ToolType.SHOVEL);
+          BlockState blockstate2 = null;
+-         if (blockstate1 != null && level.m_8055_(blockpos.m_7494_()).m_60795_()) {
++         if (blockstate1 != null && level.m_46859_(blockpos.m_7494_())) {
+             level.m_5594_(player, blockpos, SoundEvents.f_12406_, SoundSource.BLOCKS, 1.0F, 1.0F);
+             blockstate2 = blockstate1;
+          } else if (blockstate.m_60734_() instanceof CampfireBlock && blockstate.m_61143_(CampfireBlock.f_51227_)) {
+@@ -56,8 +_,8 @@
+             if (!level.f_46443_) {
+                level.m_7731_(blockpos, blockstate2, 11);
+                if (player != null) {
+-                  p_43119_.m_43722_().m_41622_(1, player, (p_43122_) -> {
+-                     p_43122_.m_21190_(p_43119_.m_43724_());
++                  p_43119_.m_43722_().m_41622_(1, player, (p_220041_1_) -> {
++                     p_220041_1_.m_21190_(p_43119_.m_43724_());
+                   });
+                }
+             }
+@@ -67,5 +_,10 @@
+             return InteractionResult.PASS;
+          }
+       }
++   }
++
++   @javax.annotation.Nullable
++   public static BlockState getShovelPathingState(BlockState originalState) {
++      return f_43110_.get(originalState.m_60734_());
+    }
+ }

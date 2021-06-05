@@ -1,0 +1,41 @@
+--- a/net/minecraft/nbt/NbtIo.java
++++ b/net/minecraft/nbt/NbtIo.java
+@@ -18,8 +_,6 @@
+ import net.minecraft.CrashReport;
+ import net.minecraft.CrashReportCategory;
+ import net.minecraft.ReportedException;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public class NbtIo {
+    public static CompoundTag m_128937_(File p_128938_) throws IOException {
+@@ -54,7 +_,6 @@
+ 
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public static void m_128955_(CompoundTag p_128956_, File p_128957_) throws IOException {
+       try (
+          FileOutputStream fileoutputstream = new FileOutputStream(p_128957_);
+@@ -66,7 +_,6 @@
+    }
+ 
+    @Nullable
+-   @OnlyIn(Dist.CLIENT)
+    public static CompoundTag m_128953_(File p_128954_) throws IOException {
+       if (!p_128954_.exists()) {
+          return null;
+@@ -110,10 +_,12 @@
+ 
+    private static Tag m_128930_(DataInput p_128931_, int p_128932_, NbtAccounter p_128933_) throws IOException {
+       byte b0 = p_128931_.readByte();
++      p_128933_.m_6800_(8); // Forge: Count everything!
+       if (b0 == 0) {
+          return EndTag.f_128534_;
+       } else {
+-         p_128931_.readUTF();
++         p_128933_.readUTF(p_128931_.readUTF()); //Forge: Count this string.
++         p_128933_.m_6800_(32); //Forge: 4 extra bytes for the object allocation.
+ 
+          try {
+             return TagTypes.m_129397_(b0).m_7300_(p_128931_, p_128932_, p_128933_);

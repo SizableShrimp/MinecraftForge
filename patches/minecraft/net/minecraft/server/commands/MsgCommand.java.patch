@@ -1,0 +1,30 @@
+--- a/net/minecraft/server/commands/MsgCommand.java
++++ b/net/minecraft/server/commands/MsgCommand.java
+@@ -18,8 +_,8 @@
+ 
+ public class MsgCommand {
+    public static void m_138060_(CommandDispatcher<CommandSourceStack> p_138061_) {
+-      LiteralCommandNode<CommandSourceStack> literalcommandnode = p_138061_.register(Commands.m_82127_("msg").then(Commands.m_82129_("targets", EntityArgument.m_91470_()).then(Commands.m_82129_("message", MessageArgument.m_96832_()).executes((p_138063_) -> {
+-         return m_138064_(p_138063_.getSource(), EntityArgument.m_91477_(p_138063_, "targets"), MessageArgument.m_96835_(p_138063_, "message"));
++      LiteralCommandNode<CommandSourceStack> literalcommandnode = p_138061_.register(Commands.m_82127_("msg").then(Commands.m_82129_("targets", EntityArgument.m_91470_()).then(Commands.m_82129_("message", MessageArgument.m_96832_()).executes((p_198539_0_) -> {
++         return m_138064_(p_198539_0_.getSource(), EntityArgument.m_91477_(p_198539_0_, "targets"), MessageArgument.m_96835_(p_198539_0_, "message"));
+       }))));
+       p_138061_.register(Commands.m_82127_("tell").redirect(literalcommandnode));
+       p_138061_.register(Commands.m_82127_("w").redirect(literalcommandnode));
+@@ -31,12 +_,12 @@
+       Consumer<Component> consumer;
+       if (entity instanceof ServerPlayer) {
+          ServerPlayer serverplayer = (ServerPlayer)entity;
+-         consumer = (p_138059_) -> {
+-            serverplayer.m_6352_((new TranslatableComponent("commands.message.display.outgoing", p_138059_, p_138067_)).m_130944_(new ChatFormatting[]{ChatFormatting.GRAY, ChatFormatting.ITALIC}), serverplayer.m_20148_());
++         consumer = (p_244374_2_) -> {
++            serverplayer.m_6352_((new TranslatableComponent("commands.message.display.outgoing", p_244374_2_, p_138067_)).m_130944_(new ChatFormatting[]{ChatFormatting.GRAY, ChatFormatting.ITALIC}), serverplayer.m_20148_());
+          };
+       } else {
+-         consumer = (p_138071_) -> {
+-            p_138065_.m_81354_((new TranslatableComponent("commands.message.display.outgoing", p_138071_, p_138067_)).m_130944_(new ChatFormatting[]{ChatFormatting.GRAY, ChatFormatting.ITALIC}), false);
++         consumer = (p_244375_2_) -> {
++            p_138065_.m_81354_((new TranslatableComponent("commands.message.display.outgoing", p_244375_2_, p_138067_)).m_130944_(new ChatFormatting[]{ChatFormatting.GRAY, ChatFormatting.ITALIC}), false);
+          };
+       }
+ 

@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/BrewedPotionTrigger.java
++++ b/net/minecraft/advancements/critereon/BrewedPotionTrigger.java
+@@ -29,8 +_,8 @@
+    }
+ 
+    public void m_19120_(ServerPlayer p_19121_, Potion p_19122_) {
+-      this.m_66234_(p_19121_, (p_19125_) -> {
+-         return p_19125_.m_19141_(p_19122_);
++      this.m_66234_(p_19121_, (p_226301_1_) -> {
++         return p_226301_1_.m_19141_(p_19122_);
+       });
+    }
+ 

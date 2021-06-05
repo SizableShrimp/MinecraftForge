@@ -1,0 +1,28 @@
+--- a/net/minecraft/server/commands/PublishCommand.java
++++ b/net/minecraft/server/commands/PublishCommand.java
+@@ -12,17 +_,17 @@
+ 
+ public class PublishCommand {
+    private static final SimpleCommandExceptionType f_138181_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.publish.failed"));
+-   private static final DynamicCommandExceptionType f_138182_ = new DynamicCommandExceptionType((p_138194_) -> {
+-      return new TranslatableComponent("commands.publish.alreadyPublished", p_138194_);
++   private static final DynamicCommandExceptionType f_138182_ = new DynamicCommandExceptionType((p_208900_0_) -> {
++      return new TranslatableComponent("commands.publish.alreadyPublished", p_208900_0_);
+    });
+ 
+    public static void m_138184_(CommandDispatcher<CommandSourceStack> p_138185_) {
+-      p_138185_.register(Commands.m_82127_("publish").requires((p_138189_) -> {
+-         return p_138189_.m_6761_(4);
+-      }).executes((p_138196_) -> {
+-         return m_138190_(p_138196_.getSource(), HttpUtil.m_13939_());
+-      }).then(Commands.m_82129_("port", IntegerArgumentType.integer(0, 65535)).executes((p_138187_) -> {
+-         return m_138190_(p_138187_.getSource(), IntegerArgumentType.getInteger(p_138187_, "port"));
++      p_138185_.register(Commands.m_82127_("publish").requires((p_198583_0_) -> {
++         return p_198583_0_.m_6761_(4);
++      }).executes((p_198580_0_) -> {
++         return m_138190_(p_198580_0_.getSource(), HttpUtil.m_13939_());
++      }).then(Commands.m_82129_("port", IntegerArgumentType.integer(0, 65535)).executes((p_198582_0_) -> {
++         return m_138190_(p_198582_0_.getSource(), IntegerArgumentType.getInteger(p_198582_0_, "port"));
+       })));
+    }
+ 

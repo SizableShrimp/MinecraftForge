@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/JigsawBlock.java
++++ b/net/minecraft/world/level/block/JigsawBlock.java
+@@ -23,7 +_,7 @@
+ public class JigsawBlock extends Block implements EntityBlock {
+    public static final EnumProperty<FrontAndTop> f_54222_ = BlockStateProperties.f_61375_;
+ 
+-   protected JigsawBlock(BlockBehaviour.Properties p_54225_) {
++   public JigsawBlock(BlockBehaviour.Properties p_54225_) {
+       super(p_54225_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_54222_, FrontAndTop.NORTH_UP));
+    }

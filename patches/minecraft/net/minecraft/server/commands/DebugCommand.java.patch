@@ -1,0 +1,32 @@
+--- a/net/minecraft/server/commands/DebugCommand.java
++++ b/net/minecraft/server/commands/DebugCommand.java
+@@ -29,19 +_,19 @@
+    private static final SimpleCommandExceptionType f_136901_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.debug.notRunning"));
+    private static final SimpleCommandExceptionType f_136902_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.debug.alreadyRunning"));
+    @Nullable
+-   private static final FileSystemProvider f_136903_ = FileSystemProvider.installedProviders().stream().filter((p_136912_) -> {
+-      return p_136912_.getScheme().equalsIgnoreCase("jar");
++   private static final FileSystemProvider f_136903_ = FileSystemProvider.installedProviders().stream().filter((p_225386_0_) -> {
++      return p_225386_0_.getScheme().equalsIgnoreCase("jar");
+    }).findFirst().orElse((FileSystemProvider)null);
+ 
+    public static void m_136905_(CommandDispatcher<CommandSourceStack> p_136906_) {
+-      p_136906_.register(Commands.m_82127_("debug").requires((p_136922_) -> {
+-         return p_136922_.m_6761_(3);
+-      }).then(Commands.m_82127_("start").executes((p_136918_) -> {
+-         return m_136909_(p_136918_.getSource());
+-      })).then(Commands.m_82127_("stop").executes((p_136914_) -> {
+-         return m_136915_(p_136914_.getSource());
+-      })).then(Commands.m_82127_("report").executes((p_136908_) -> {
+-         return m_136919_(p_136908_.getSource());
++      p_136906_.register(Commands.m_82127_("debug").requires((p_198332_0_) -> {
++         return p_198332_0_.m_6761_(3);
++      }).then(Commands.m_82127_("start").executes((p_198329_0_) -> {
++         return m_136909_(p_198329_0_.getSource());
++      })).then(Commands.m_82127_("stop").executes((p_198333_0_) -> {
++         return m_136915_(p_198333_0_.getSource());
++      })).then(Commands.m_82127_("report").executes((p_225388_0_) -> {
++         return m_136919_(p_225388_0_.getSource());
+       })));
+    }
+ 

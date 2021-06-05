@@ -1,0 +1,84 @@
+--- a/net/minecraft/server/level/WorldGenRegion.java
++++ b/net/minecraft/server/level/WorldGenRegion.java
+@@ -28,7 +_,6 @@
+ import net.minecraft.world.level.biome.BiomeManager;
+ import net.minecraft.world.level.block.Block;
+ import net.minecraft.world.level.block.Blocks;
+-import net.minecraft.world.level.block.EntityBlock;
+ import net.minecraft.world.level.block.entity.BlockEntity;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.level.border.WorldBorder;
+@@ -60,11 +_,11 @@
+    private final LevelData f_9481_;
+    private final Random f_9482_;
+    private final DimensionType f_9483_;
+-   private final TickList<Block> f_9484_ = new WorldGenTickList<>((p_9597_) -> {
+-      return this.m_46865_(p_9597_).m_5782_();
++   private final TickList<Block> f_9484_ = new WorldGenTickList<>((p_205335_1_) -> {
++      return this.m_46865_(p_205335_1_).m_5782_();
+    });
+-   private final TickList<Fluid> f_9485_ = new WorldGenTickList<>((p_9595_) -> {
+-      return this.m_46865_(p_9595_).m_5783_();
++   private final TickList<Fluid> f_9485_ = new WorldGenTickList<>((p_205334_1_) -> {
++      return this.m_46865_(p_205334_1_).m_5783_();
+    });
+    private final BiomeManager f_9486_;
+    private final ChunkPos f_9487_;
+@@ -172,11 +_,11 @@
+ 
+    public boolean m_7740_(BlockPos p_9550_, boolean p_9551_, @Nullable Entity p_9552_, int p_9553_) {
+       BlockState blockstate = this.m_8055_(p_9550_);
+-      if (blockstate.m_60795_()) {
++      if (blockstate.isAir(this, p_9550_)) {
+          return false;
+       } else {
+          if (p_9551_) {
+-            BlockEntity blockentity = blockstate.m_60734_().m_60588_() ? this.m_7702_(p_9550_) : null;
++            BlockEntity blockentity = blockstate.hasTileEntity() ? this.m_7702_(p_9550_) : null;
+             Block.m_49881_(blockstate, this.f_9479_, p_9550_, blockentity, p_9552_, ItemStack.f_41583_);
+          }
+ 
+@@ -196,11 +_,11 @@
+          if (compoundtag != null) {
+             if ("DUMMY".equals(compoundtag.m_128461_("id"))) {
+                Block block = blockstate.m_60734_();
+-               if (!(block instanceof EntityBlock)) {
++               if (!blockstate.hasTileEntity()) {
+                   return null;
+                }
+ 
+-               blockentity = ((EntityBlock)block).m_6194_(this.f_9479_);
++               blockentity = blockstate.createTileEntity(this.f_9479_);
+             } else {
+                blockentity = BlockEntity.m_58891_(blockstate, compoundtag);
+             }
+@@ -211,7 +_,7 @@
+             }
+          }
+ 
+-         if (blockstate.m_60734_() instanceof EntityBlock) {
++         if (blockstate.hasTileEntity()) {
+             f_9474_.warn("Tried to access a block entity before it was created. {}", (Object)p_9582_);
+          }
+ 
+@@ -227,9 +_,9 @@
+       }
+ 
+       Block block = p_9540_.m_60734_();
+-      if (block.m_60588_()) {
++      if (p_9540_.hasTileEntity()) {
+          if (chunkaccess.m_6415_().m_62494_() == ChunkStatus.ChunkType.LEVELCHUNK) {
+-            chunkaccess.m_7460_(p_9539_, ((EntityBlock)block).m_6194_(this));
++            chunkaccess.m_7460_(p_9539_, p_9540_.createTileEntity(this));
+          } else {
+             CompoundTag compoundtag = new CompoundTag();
+             compoundtag.m_128405_("x", p_9539_.m_123341_());
+@@ -238,7 +_,7 @@
+             compoundtag.m_128359_("id", "DUMMY");
+             chunkaccess.m_5604_(compoundtag);
+          }
+-      } else if (blockstate != null && blockstate.m_60734_().m_60588_()) {
++      } else if (blockstate != null && blockstate.hasTileEntity()) {
+          chunkaccess.m_8114_(p_9539_);
+       }
+ 

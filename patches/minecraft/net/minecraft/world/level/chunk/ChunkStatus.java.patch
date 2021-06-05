@@ -1,0 +1,191 @@
+--- a/net/minecraft/world/level/chunk/ChunkStatus.java
++++ b/net/minecraft/world/level/chunk/ChunkStatus.java
+@@ -22,80 +_,80 @@
+ import net.minecraft.world.level.levelgen.Heightmap;
+ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
+ 
+-public class ChunkStatus {
++public class ChunkStatus extends net.minecraftforge.registries.ForgeRegistryEntry<ChunkStatus> {
+    private static final EnumSet<Heightmap.Types> f_62327_ = EnumSet.of(Heightmap.Types.OCEAN_FLOOR_WG, Heightmap.Types.WORLD_SURFACE_WG);
+    private static final EnumSet<Heightmap.Types> f_62328_ = EnumSet.of(Heightmap.Types.OCEAN_FLOOR, Heightmap.Types.WORLD_SURFACE, Heightmap.Types.MOTION_BLOCKING, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES);
+-   private static final ChunkStatus.LoadingTask f_62329_ = (p_62461_, p_62462_, p_62463_, p_62464_, p_62465_, p_62466_) -> {
+-      if (p_62466_ instanceof ProtoChunk && !p_62466_.m_6415_().m_62427_(p_62461_)) {
+-         ((ProtoChunk)p_62466_).m_7150_(p_62461_);
++   private static final ChunkStatus.LoadingTask f_62329_ = (p_222588_0_, p_222588_1_, p_222588_2_, p_222588_3_, p_222588_4_, p_222588_5_) -> {
++      if (p_222588_5_ instanceof ProtoChunk && !p_222588_5_.m_6415_().m_62427_(p_222588_0_)) {
++         ((ProtoChunk)p_222588_5_).m_7150_(p_222588_0_);
+       }
+ 
+-      return CompletableFuture.completedFuture(Either.left(p_62466_));
++      return CompletableFuture.completedFuture(Either.left(p_222588_5_));
+    };
+-   public static final ChunkStatus f_62314_ = m_62414_("empty", (ChunkStatus)null, -1, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_62507_, p_62508_, p_62509_, p_62510_) -> {
+-   });
+-   public static final ChunkStatus f_62315_ = m_62399_("structure_starts", f_62314_, 0, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_62474_, p_62475_, p_62476_, p_62477_, p_62478_, p_62479_, p_62480_, p_62481_) -> {
+-      if (!p_62481_.m_6415_().m_62427_(p_62474_)) {
+-         if (p_62475_.m_7654_().m_129910_().m_5961_().m_64657_()) {
+-            p_62476_.m_62199_(p_62475_.m_5962_(), p_62475_.m_8595_(), p_62481_, p_62477_, p_62475_.m_7328_());
+-         }
+-
+-         if (p_62481_ instanceof ProtoChunk) {
+-            ((ProtoChunk)p_62481_).m_7150_(p_62474_);
+-         }
+-      }
+-
+-      return CompletableFuture.completedFuture(Either.left(p_62481_));
+-   });
+-   public static final ChunkStatus f_62316_ = m_62414_("structure_references", f_62315_, 8, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_62502_, p_62503_, p_62504_, p_62505_) -> {
+-      WorldGenRegion worldgenregion = new WorldGenRegion(p_62502_, p_62504_);
+-      p_62503_.m_62177_(worldgenregion, p_62502_.m_8595_().m_47272_(worldgenregion), p_62505_);
+-   });
+-   public static final ChunkStatus f_62317_ = m_62414_("biomes", f_62316_, 0, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_62496_, p_62497_, p_62498_, p_62499_) -> {
+-      p_62497_.m_62196_(p_62496_.m_5962_().m_123090_(Registry.f_122885_), p_62499_);
+-   });
+-   public static final ChunkStatus f_62318_ = m_62414_("noise", f_62317_, 8, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_62490_, p_62491_, p_62492_, p_62493_) -> {
+-      WorldGenRegion worldgenregion = new WorldGenRegion(p_62490_, p_62492_);
+-      p_62491_.m_7195_(worldgenregion, p_62490_.m_8595_().m_47272_(worldgenregion), p_62493_);
+-   });
+-   public static final ChunkStatus f_62319_ = m_62414_("surface", f_62318_, 0, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_62484_, p_62485_, p_62486_, p_62487_) -> {
+-      p_62485_.m_7338_(new WorldGenRegion(p_62484_, p_62486_), p_62487_);
+-   });
+-   public static final ChunkStatus f_62320_ = m_62414_("carvers", f_62319_, 0, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_62469_, p_62470_, p_62471_, p_62472_) -> {
+-      p_62470_.m_6013_(p_62469_.m_7328_(), p_62469_.m_7062_(), p_62472_, GenerationStep.Carving.AIR);
+-   });
+-   public static final ChunkStatus f_62321_ = m_62414_("liquid_carvers", f_62320_, 0, f_62328_, ChunkStatus.ChunkType.PROTOCHUNK, (p_62447_, p_62448_, p_62449_, p_62450_) -> {
+-      p_62448_.m_6013_(p_62447_.m_7328_(), p_62447_.m_7062_(), p_62450_, GenerationStep.Carving.LIQUID);
+-   });
+-   public static final ChunkStatus f_62322_ = m_62399_("features", f_62321_, 8, f_62328_, ChunkStatus.ChunkType.PROTOCHUNK, (p_62452_, p_62453_, p_62454_, p_62455_, p_62456_, p_62457_, p_62458_, p_62459_) -> {
+-      ProtoChunk protochunk = (ProtoChunk)p_62459_;
+-      protochunk.m_63209_(p_62456_);
+-      if (!p_62459_.m_6415_().m_62427_(p_62452_)) {
+-         Heightmap.m_64256_(p_62459_, EnumSet.of(Heightmap.Types.MOTION_BLOCKING, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Heightmap.Types.OCEAN_FLOOR, Heightmap.Types.WORLD_SURFACE));
+-         WorldGenRegion worldgenregion = new WorldGenRegion(p_62453_, p_62458_);
+-         p_62454_.m_7399_(worldgenregion, p_62453_.m_8595_().m_47272_(worldgenregion));
+-         protochunk.m_7150_(p_62452_);
+-      }
+-
+-      return CompletableFuture.completedFuture(Either.left(p_62459_));
+-   });
+-   public static final ChunkStatus f_62323_ = m_62406_("light", f_62322_, 1, f_62328_, ChunkStatus.ChunkType.PROTOCHUNK, (p_62430_, p_62431_, p_62432_, p_62433_, p_62434_, p_62435_, p_62436_, p_62437_) -> {
+-      return m_62388_(p_62430_, p_62434_, p_62437_);
+-   }, (p_62439_, p_62440_, p_62441_, p_62442_, p_62443_, p_62444_) -> {
+-      return m_62388_(p_62439_, p_62442_, p_62444_);
+-   });
+-   public static final ChunkStatus f_62324_ = m_62414_("spawn", f_62323_, 0, f_62328_, ChunkStatus.ChunkType.PROTOCHUNK, (p_62423_, p_62424_, p_62425_, p_62426_) -> {
+-      p_62424_.m_6929_(new WorldGenRegion(p_62423_, p_62425_));
+-   });
+-   public static final ChunkStatus f_62325_ = m_62414_("heightmaps", f_62324_, 0, f_62328_, ChunkStatus.ChunkType.PROTOCHUNK, (p_62360_, p_62361_, p_62362_, p_62363_) -> {
+-   });
+-   public static final ChunkStatus f_62326_ = m_62406_("full", f_62325_, 0, f_62328_, ChunkStatus.ChunkType.LEVELCHUNK, (p_62373_, p_62374_, p_62375_, p_62376_, p_62377_, p_62378_, p_62379_, p_62380_) -> {
+-      return (CompletableFuture)p_62378_.apply(p_62380_);
+-   }, (p_62382_, p_62383_, p_62384_, p_62385_, p_62386_, p_62387_) -> {
+-      return (CompletableFuture)p_62386_.apply(p_62387_);
++   public static final ChunkStatus f_62314_ = m_62414_("empty", (ChunkStatus)null, -1, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_223194_0_, p_223194_1_, p_223194_2_, p_223194_3_) -> {
++   });
++   public static final ChunkStatus f_62315_ = m_62399_("structure_starts", f_62314_, 0, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_222586_0_, p_222586_1_, p_222586_2_, p_222586_3_, p_222586_4_, p_222586_5_, p_222586_6_, p_222586_7_) -> {
++      if (!p_222586_7_.m_6415_().m_62427_(p_222586_0_)) {
++         if (p_222586_1_.m_7654_().m_129910_().m_5961_().m_64657_()) {
++            p_222586_2_.m_62199_(p_222586_1_.m_5962_(), p_222586_1_.m_8595_(), p_222586_7_, p_222586_3_, p_222586_1_.m_7328_());
++         }
++
++         if (p_222586_7_ instanceof ProtoChunk) {
++            ((ProtoChunk)p_222586_7_).m_7150_(p_222586_0_);
++         }
++      }
++
++      return CompletableFuture.completedFuture(Either.left(p_222586_7_));
++   });
++   public static final ChunkStatus f_62316_ = m_62414_("structure_references", f_62315_, 8, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_222587_0_, p_222587_1_, p_222587_2_, p_222587_3_) -> {
++      WorldGenRegion worldgenregion = new WorldGenRegion(p_222587_0_, p_222587_2_);
++      p_222587_1_.m_62177_(worldgenregion, p_222587_0_.m_8595_().m_47272_(worldgenregion), p_222587_3_);
++   });
++   public static final ChunkStatus f_62317_ = m_62414_("biomes", f_62316_, 0, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_222594_0_, p_222594_1_, p_222594_2_, p_222594_3_) -> {
++      p_222594_1_.m_62196_(p_222594_0_.m_5962_().m_123090_(Registry.f_122885_), p_222594_3_);
++   });
++   public static final ChunkStatus f_62318_ = m_62414_("noise", f_62317_, 8, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_222592_0_, p_222592_1_, p_222592_2_, p_222592_3_) -> {
++      WorldGenRegion worldgenregion = new WorldGenRegion(p_222592_0_, p_222592_2_);
++      p_222592_1_.m_7195_(worldgenregion, p_222592_0_.m_8595_().m_47272_(worldgenregion), p_222592_3_);
++   });
++   public static final ChunkStatus f_62319_ = m_62414_("surface", f_62318_, 0, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_222589_0_, p_222589_1_, p_222589_2_, p_222589_3_) -> {
++      p_222589_1_.m_7338_(new WorldGenRegion(p_222589_0_, p_222589_2_), p_222589_3_);
++   });
++   public static final ChunkStatus f_62320_ = m_62414_("carvers", f_62319_, 0, f_62327_, ChunkStatus.ChunkType.PROTOCHUNK, (p_222590_0_, p_222590_1_, p_222590_2_, p_222590_3_) -> {
++      p_222590_1_.m_6013_(p_222590_0_.m_7328_(), p_222590_0_.m_7062_(), p_222590_3_, GenerationStep.Carving.AIR);
++   });
++   public static final ChunkStatus f_62321_ = m_62414_("liquid_carvers", f_62320_, 0, f_62328_, ChunkStatus.ChunkType.PROTOCHUNK, (p_222601_0_, p_222601_1_, p_222601_2_, p_222601_3_) -> {
++      p_222601_1_.m_6013_(p_222601_0_.m_7328_(), p_222601_0_.m_7062_(), p_222601_3_, GenerationStep.Carving.LIQUID);
++   });
++   public static final ChunkStatus f_62322_ = m_62399_("features", f_62321_, 8, f_62328_, ChunkStatus.ChunkType.PROTOCHUNK, (p_222605_0_, p_222605_1_, p_222605_2_, p_222605_3_, p_222605_4_, p_222605_5_, p_222605_6_, p_222605_7_) -> {
++      ProtoChunk protochunk = (ProtoChunk)p_222605_7_;
++      protochunk.m_63209_(p_222605_4_);
++      if (!p_222605_7_.m_6415_().m_62427_(p_222605_0_)) {
++         Heightmap.m_64256_(p_222605_7_, EnumSet.of(Heightmap.Types.MOTION_BLOCKING, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Heightmap.Types.OCEAN_FLOOR, Heightmap.Types.WORLD_SURFACE));
++         WorldGenRegion worldgenregion = new WorldGenRegion(p_222605_1_, p_222605_6_);
++         p_222605_2_.m_7399_(worldgenregion, p_222605_1_.m_8595_().m_47272_(worldgenregion));
++         protochunk.m_7150_(p_222605_0_);
++      }
++
++      return CompletableFuture.completedFuture(Either.left(p_222605_7_));
++   });
++   public static final ChunkStatus f_62323_ = m_62406_("light", f_62322_, 1, f_62328_, ChunkStatus.ChunkType.PROTOCHUNK, (p_222604_0_, p_222604_1_, p_222604_2_, p_222604_3_, p_222604_4_, p_222604_5_, p_222604_6_, p_222604_7_) -> {
++      return m_62388_(p_222604_0_, p_222604_4_, p_222604_7_);
++   }, (p_223195_0_, p_223195_1_, p_223195_2_, p_223195_3_, p_223195_4_, p_223195_5_) -> {
++      return m_62388_(p_223195_0_, p_223195_3_, p_223195_5_);
++   });
++   public static final ChunkStatus f_62324_ = m_62414_("spawn", f_62323_, 0, f_62328_, ChunkStatus.ChunkType.PROTOCHUNK, (p_222602_0_, p_222602_1_, p_222602_2_, p_222602_3_) -> {
++      p_222602_1_.m_6929_(new WorldGenRegion(p_222602_0_, p_222602_2_));
++   });
++   public static final ChunkStatus f_62325_ = m_62414_("heightmaps", f_62324_, 0, f_62328_, ChunkStatus.ChunkType.PROTOCHUNK, (p_222603_0_, p_222603_1_, p_222603_2_, p_222603_3_) -> {
++   });
++   public static final ChunkStatus f_62326_ = m_62406_("full", f_62325_, 0, f_62328_, ChunkStatus.ChunkType.LEVELCHUNK, (p_222598_0_, p_222598_1_, p_222598_2_, p_222598_3_, p_222598_4_, p_222598_5_, p_222598_6_, p_222598_7_) -> {
++      return p_222598_5_.apply(p_222598_7_);
++   }, (p_223205_0_, p_223205_1_, p_223205_2_, p_223205_3_, p_223205_4_, p_223205_5_) -> {
++      return p_223205_4_.apply(p_223205_5_);
+    });
+    private static final List<ChunkStatus> f_62330_ = ImmutableList.of(f_62326_, f_62322_, f_62321_, f_62315_, f_62315_, f_62315_, f_62315_, f_62315_, f_62315_, f_62315_, f_62315_);
+-   private static final IntList f_62331_ = Util.m_137469_(new IntArrayList(m_62349_().size()), (p_62396_) -> {
++   private static final IntList f_62331_ = Util.m_137469_(new IntArrayList(m_62349_().size()), (p_223202_0_) -> {
+       int i = 0;
+ 
+       for(int j = m_62349_().size() - 1; j >= 0; --j) {
+@@ -103,7 +_,7 @@
+             ++i;
+          }
+ 
+-         p_62396_.add(0, i);
++         p_223202_0_.add(0, i);
+       }
+ 
+    });
+@@ -170,7 +_,7 @@
+       return f_62331_.getInt(p_62371_.m_62445_());
+    }
+ 
+-   ChunkStatus(String p_62342_, @Nullable ChunkStatus p_62343_, int p_62344_, EnumSet<Heightmap.Types> p_62345_, ChunkStatus.ChunkType p_62346_, ChunkStatus.GenerationTask p_62347_, ChunkStatus.LoadingTask p_62348_) {
++   public ChunkStatus(String p_62342_, @Nullable ChunkStatus p_62343_, int p_62344_, EnumSet<Heightmap.Types> p_62345_, ChunkStatus.ChunkType p_62346_, ChunkStatus.GenerationTask p_62347_, ChunkStatus.LoadingTask p_62348_) {
+       this.f_62332_ = p_62342_;
+       this.f_62334_ = p_62343_ == null ? this : p_62343_;
+       this.f_62335_ = p_62347_;
+@@ -225,11 +_,6 @@
+       return Registry.f_122833_.m_7981_(this).toString();
+    }
+ 
+-   public static enum ChunkType {
+-      PROTOCHUNK,
+-      LEVELCHUNK;
+-   }
+-
+    interface GenerationTask {
+       CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>> m_6975_(ChunkStatus p_62522_, ServerLevel p_62523_, ChunkGenerator p_62524_, StructureManager p_62525_, ThreadedLevelLightEngine p_62526_, Function<ChunkAccess, CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>>> p_62527_, List<ChunkAccess> p_62528_, ChunkAccess p_62529_);
+    }
+@@ -251,5 +_,10 @@
+       }
+ 
+       void m_62537_(ServerLevel p_62538_, ChunkGenerator p_62539_, List<ChunkAccess> p_62540_, ChunkAccess p_62541_);
++   }
++
++   public static enum ChunkType {
++      PROTOCHUNK,
++      LEVELCHUNK;
+    }
+ }

@@ -1,0 +1,53 @@
+--- a/net/minecraft/world/item/BoneMealItem.java
++++ b/net/minecraft/world/item/BoneMealItem.java
+@@ -31,7 +_,7 @@
+       Level level = p_40637_.m_43725_();
+       BlockPos blockpos = p_40637_.m_8083_();
+       BlockPos blockpos1 = blockpos.m_121945_(p_40637_.m_43719_());
+-      if (m_40627_(p_40637_.m_43722_(), level, blockpos)) {
++      if (applyBonemeal(p_40637_.m_43722_(), level, blockpos, p_40637_.m_43723_())) {
+          if (!level.f_46443_) {
+             level.m_46796_(2005, blockpos, 0);
+          }
+@@ -52,17 +_,26 @@
+       }
+    }
+ 
++   @Deprecated //Forge: Use Player/Hand version
+    public static boolean m_40627_(ItemStack p_40628_, Level p_40629_, BlockPos p_40630_) {
+-      BlockState blockstate = p_40629_.m_8055_(p_40630_);
++      if (p_40629_ instanceof net.minecraft.server.level.ServerLevel)
++         return applyBonemeal(p_40628_, p_40629_, p_40630_, net.minecraftforge.common.util.FakePlayerFactory.getMinecraft((net.minecraft.server.level.ServerLevel)p_40629_));
++      return false;
++   }
++
++   public static boolean applyBonemeal(ItemStack p_195966_0_, Level p_195966_1_, BlockPos p_195966_2_, net.minecraft.world.entity.player.Player player) {
++      BlockState blockstate = p_195966_1_.m_8055_(p_195966_2_);
++      int hook = net.minecraftforge.event.ForgeEventFactory.onApplyBonemeal(player, p_195966_1_, p_195966_2_, blockstate, p_195966_0_);
++      if (hook != 0) return hook > 0;
+       if (blockstate.m_60734_() instanceof BonemealableBlock) {
+          BonemealableBlock bonemealableblock = (BonemealableBlock)blockstate.m_60734_();
+-         if (bonemealableblock.m_7370_(p_40629_, p_40630_, blockstate, p_40629_.f_46443_)) {
+-            if (p_40629_ instanceof ServerLevel) {
+-               if (bonemealableblock.m_5491_(p_40629_, p_40629_.f_46441_, p_40630_, blockstate)) {
+-                  bonemealableblock.m_7719_((ServerLevel)p_40629_, p_40629_.f_46441_, p_40630_, blockstate);
++         if (bonemealableblock.m_7370_(p_195966_1_, p_195966_2_, blockstate, p_195966_1_.f_46443_)) {
++            if (p_195966_1_ instanceof ServerLevel) {
++               if (bonemealableblock.m_5491_(p_195966_1_, p_195966_1_.f_46441_, p_195966_2_, blockstate)) {
++                  bonemealableblock.m_7719_((ServerLevel)p_195966_1_, p_195966_1_.f_46441_, p_195966_2_, blockstate);
+                }
+ 
+-               p_40628_.m_41774_(1);
++               p_195966_0_.m_41774_(1);
+             }
+ 
+             return true;
+@@ -129,7 +_,7 @@
+       }
+ 
+       BlockState blockstate = p_40639_.m_8055_(p_40640_);
+-      if (!blockstate.m_60795_()) {
++      if (!blockstate.isAir(p_40639_, p_40640_)) {
+          double d0 = 0.5D;
+          double d1;
+          if (blockstate.m_60713_(Blocks.f_49990_)) {

@@ -28,7 +28,6 @@ import com.google.gson.JsonObject;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.core.Direction;
@@ -62,7 +61,7 @@ public class SeparatePerspectiveModel implements IModelGeometry<SeparatePerspect
     }
 
     @Override
-    public BakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform, ItemOverrides overrides, ResourceLocation modelLocation)
+    public net.minecraft.client.resources.model.BakedModel bake(IModelConfiguration owner, ModelBakery bakery, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelTransform, ItemOverrides overrides, ResourceLocation modelLocation)
     {
         return new BakedModel(
                 owner.useSmoothLighting(), owner.isShadedInGui(), owner.isSideLit(),
@@ -84,17 +83,17 @@ public class SeparatePerspectiveModel implements IModelGeometry<SeparatePerspect
         return textures;
     }
 
-    public static class BakedModel implements BakedModel
+    public static class BakedModel implements net.minecraft.client.resources.model.BakedModel
     {
         private final boolean isAmbientOcclusion;
         private final boolean isGui3d;
         private final boolean isSideLit;
         private final TextureAtlasSprite particle;
         private final ItemOverrides overrides;
-        private final BakedModel baseModel;
-        private final ImmutableMap<ItemTransforms.TransformType, BakedModel> perspectives;
+        private final net.minecraft.client.resources.model.BakedModel baseModel;
+        private final ImmutableMap<ItemTransforms.TransformType, net.minecraft.client.resources.model.BakedModel> perspectives;
 
-        public BakedModel(boolean isAmbientOcclusion, boolean isGui3d, boolean isSideLit, TextureAtlasSprite particle, ItemOverrides overrides, BakedModel baseModel, ImmutableMap<ItemTransforms.TransformType, BakedModel> perspectives)
+        public BakedModel(boolean isAmbientOcclusion, boolean isGui3d, boolean isSideLit, TextureAtlasSprite particle, ItemOverrides overrides, net.minecraft.client.resources.model.BakedModel baseModel, ImmutableMap<ItemTransforms.TransformType, net.minecraft.client.resources.model.BakedModel> perspectives)
         {
             this.isAmbientOcclusion = isAmbientOcclusion;
             this.isGui3d = isGui3d;
@@ -160,11 +159,11 @@ public class SeparatePerspectiveModel implements IModelGeometry<SeparatePerspect
         }
 
         @Override
-        public BakedModel handlePerspective(ItemTransforms.TransformType cameraTransformType, PoseStack mat)
+        public net.minecraft.client.resources.model.BakedModel handlePerspective(ItemTransforms.TransformType cameraTransformType, PoseStack mat)
         {
             if (perspectives.containsKey(cameraTransformType))
             {
-                BakedModel p = perspectives.get(cameraTransformType);
+                net.minecraft.client.resources.model.BakedModel p = perspectives.get(cameraTransformType);
                 return p.handlePerspective(cameraTransformType, mat);
             }
             return baseModel.handlePerspective(cameraTransformType, mat);

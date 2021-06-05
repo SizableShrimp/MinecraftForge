@@ -1,0 +1,18 @@
+--- a/net/minecraft/world/level/levelgen/surfacebuilders/NetherCappedSurfaceBuilder.java
++++ b/net/minecraft/world/level/levelgen/surfacebuilders/NetherCappedSurfaceBuilder.java
+@@ -32,11 +_,11 @@
+       int i1 = (int)(p_75007_ / 3.0D + 3.0D + p_75001_.nextDouble() * 0.25D);
+       double d0 = 0.03125D;
+       boolean flag = this.f_74987_.m_75408_((double)p_75004_ * 0.03125D, 109.0D, (double)p_75005_ * 0.03125D) * 75.0D + p_75001_.nextDouble() > 0.0D;
+-      BlockState blockstate = this.f_74986_.entrySet().stream().max(Comparator.comparing((p_75030_) -> {
+-         return p_75030_.getValue().m_75408_((double)p_75004_, (double)p_75010_, (double)p_75005_);
++      BlockState blockstate = this.f_74986_.entrySet().stream().max(Comparator.comparing((p_237176_3_) -> {
++         return p_237176_3_.getValue().m_75408_((double)p_75004_, (double)p_75010_, (double)p_75005_);
+       })).get().getKey();
+-      BlockState blockstate1 = this.f_74985_.entrySet().stream().max(Comparator.comparing((p_74994_) -> {
+-         return p_74994_.getValue().m_75408_((double)p_75004_, (double)p_75010_, (double)p_75005_);
++      BlockState blockstate1 = this.f_74985_.entrySet().stream().max(Comparator.comparing((p_237174_3_) -> {
++         return p_237174_3_.getValue().m_75408_((double)p_75004_, (double)p_75010_, (double)p_75005_);
+       })).get().getKey();
+       BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+       BlockState blockstate2 = p_75002_.m_8055_(blockpos$mutableblockpos.m_122178_(j, 128, k));

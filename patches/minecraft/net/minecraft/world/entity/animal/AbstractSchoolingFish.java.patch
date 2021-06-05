@@ -1,0 +1,17 @@
+--- a/net/minecraft/world/entity/animal/AbstractSchoolingFish.java
++++ b/net/minecraft/world/entity/animal/AbstractSchoolingFish.java
+@@ -91,10 +_,10 @@
+    }
+ 
+    public void m_27533_(Stream<AbstractSchoolingFish> p_27534_) {
+-      p_27534_.limit((long)(this.m_6031_() - this.f_27521_)).filter((p_27538_) -> {
+-         return p_27538_ != this;
+-      }).forEach((p_27536_) -> {
+-         p_27536_.m_27525_(this);
++      p_27534_.limit((long)(this.m_6031_() - this.f_27521_)).filter((p_212801_1_) -> {
++         return p_212801_1_ != this;
++      }).forEach((p_212804_1_) -> {
++         p_212804_1_.m_27525_(this);
+       });
+    }
+ 

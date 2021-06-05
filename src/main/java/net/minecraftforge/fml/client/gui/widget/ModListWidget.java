@@ -76,7 +76,7 @@ public class ModListWidget extends ObjectSelectionList<ModListWidget.ModEntry>
         this.parent.renderBackground(mStack);
     }
 
-    public class ModEntry extends Entry<ModEntry> {
+    public class ModEntry extends ObjectSelectionList.Entry<ModEntry> {
         private final ModInfo modInfo;
         private final ModListScreen parent;
 

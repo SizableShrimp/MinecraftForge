@@ -1,0 +1,51 @@
+--- a/net/minecraft/client/resources/model/WeightedBakedModel.java
++++ b/net/minecraft/client/resources/model/WeightedBakedModel.java
+@@ -15,7 +_,7 @@
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ @OnlyIn(Dist.CLIENT)
+-public class WeightedBakedModel implements BakedModel {
++public class WeightedBakedModel implements net.minecraftforge.client.model.data.IDynamicBakedModel {
+    private final int f_119540_;
+    private final List<WeightedBakedModel.WeightedModel> f_119541_;
+    private final BakedModel f_119542_;
+@@ -26,14 +_,20 @@
+       this.f_119542_ = (p_119544_.get(0)).f_119562_;
+    }
+ 
+-   public List<BakedQuad> m_6840_(@Nullable BlockState p_119547_, @Nullable Direction p_119548_, Random p_119549_) {
+-      return (WeighedRandom.m_14472_(this.f_119541_, Math.abs((int)p_119549_.nextLong()) % this.f_119540_)).f_119562_.m_6840_(p_119547_, p_119548_, p_119549_);
++   // FORGE: Implement our overloads (here and below) so child models can have custom logic 
++   public List<BakedQuad> getQuads(@Nullable BlockState p_200117_1_, @Nullable Direction p_200117_2_, Random p_200117_3_, net.minecraftforge.client.model.data.IModelData modelData) {
++      return (WeighedRandom.m_14472_(this.f_119541_, Math.abs((int)p_200117_3_.nextLong()) % this.f_119540_)).f_119562_.getQuads(p_200117_1_, p_200117_2_, p_200117_3_, modelData);
+    }
+ 
+    public boolean m_7541_() {
+       return this.f_119542_.m_7541_();
+    }
+ 
++   @Override
++   public boolean isAmbientOcclusion(BlockState state) {
++      return this.f_119542_.isAmbientOcclusion(state);
++   }
++
+    public boolean m_7539_() {
+       return this.f_119542_.m_7539_();
+    }
+@@ -50,8 +_,16 @@
+       return this.f_119542_.m_6160_();
+    }
+ 
++   public TextureAtlasSprite getParticleTexture(net.minecraftforge.client.model.data.IModelData modelData) {
++      return this.f_119542_.getParticleTexture(modelData);
++   }
++
+    public ItemTransforms m_7442_() {
+       return this.f_119542_.m_7442_();
++   }
++
++   public BakedModel handlePerspective(net.minecraft.client.renderer.block.model.ItemTransforms.TransformType transformType, com.mojang.blaze3d.vertex.PoseStack matrixStack) {
++      return this.f_119542_.handlePerspective(transformType, matrixStack);
+    }
+ 
+    public ItemOverrides m_7343_() {

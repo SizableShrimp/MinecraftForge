@@ -1,0 +1,25 @@
+--- a/net/minecraft/server/commands/SetWorldSpawnCommand.java
++++ b/net/minecraft/server/commands/SetWorldSpawnCommand.java
+@@ -10,14 +_,14 @@
+ 
+ public class SetWorldSpawnCommand {
+    public static void m_138660_(CommandDispatcher<CommandSourceStack> p_138661_) {
+-      p_138661_.register(Commands.m_82127_("setworldspawn").requires((p_138665_) -> {
+-         return p_138665_.m_6761_(2);
+-      }).executes((p_138673_) -> {
+-         return m_138666_(p_138673_.getSource(), new BlockPos(p_138673_.getSource().m_81371_()), 0.0F);
+-      }).then(Commands.m_82129_("pos", BlockPosArgument.m_118239_()).executes((p_138671_) -> {
+-         return m_138666_(p_138671_.getSource(), BlockPosArgument.m_118245_(p_138671_, "pos"), 0.0F);
+-      }).then(Commands.m_82129_("angle", AngleArgument.m_83807_()).executes((p_138663_) -> {
+-         return m_138666_(p_138663_.getSource(), BlockPosArgument.m_118245_(p_138663_, "pos"), AngleArgument.m_83810_(p_138663_, "angle"));
++      p_138661_.register(Commands.m_82127_("setworldspawn").requires((p_198704_0_) -> {
++         return p_198704_0_.m_6761_(2);
++      }).executes((p_198700_0_) -> {
++         return m_138666_(p_198700_0_.getSource(), new BlockPos(p_198700_0_.getSource().m_81371_()), 0.0F);
++      }).then(Commands.m_82129_("pos", BlockPosArgument.m_118239_()).executes((p_198703_0_) -> {
++         return m_138666_(p_198703_0_.getSource(), BlockPosArgument.m_118245_(p_198703_0_, "pos"), 0.0F);
++      }).then(Commands.m_82129_("angle", AngleArgument.m_83807_()).executes((p_244377_0_) -> {
++         return m_138666_(p_244377_0_.getSource(), BlockPosArgument.m_118245_(p_244377_0_, "pos"), AngleArgument.m_83810_(p_244377_0_, "angle"));
+       }))));
+    }
+ 

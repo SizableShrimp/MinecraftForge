@@ -1,0 +1,30 @@
+--- a/net/minecraft/world/entity/ai/behavior/GoToPotentialJobSite.java
++++ b/net/minecraft/world/entity/ai/behavior/GoToPotentialJobSite.java
+@@ -21,8 +_,8 @@
+    }
+ 
+    protected boolean m_6114_(ServerLevel p_23103_, Villager p_23104_) {
+-      return p_23104_.m_6274_().m_21968_().map((p_23115_) -> {
+-         return p_23115_ == Activity.f_37979_ || p_23115_ == Activity.f_37980_ || p_23115_ == Activity.f_37981_;
++      return p_23104_.m_6274_().m_21968_().map((p_233904_0_) -> {
++         return p_233904_0_ == Activity.f_37979_ || p_233904_0_ == Activity.f_37980_ || p_233904_0_ == Activity.f_37981_;
+       }).orElse(true);
+    }
+ 
+@@ -36,12 +_,12 @@
+ 
+    protected void m_6732_(ServerLevel p_23129_, Villager p_23130_, long p_23131_) {
+       Optional<GlobalPos> optional = p_23130_.m_6274_().m_21952_(MemoryModuleType.f_26361_);
+-      optional.ifPresent((p_23111_) -> {
+-         BlockPos blockpos = p_23111_.m_122646_();
+-         ServerLevel serverlevel = p_23129_.m_7654_().m_129880_(p_23111_.m_122640_());
++      optional.ifPresent((p_233905_1_) -> {
++         BlockPos blockpos = p_233905_1_.m_122646_();
++         ServerLevel serverlevel = p_23129_.m_7654_().m_129880_(p_233905_1_.m_122640_());
+          if (serverlevel != null) {
+             PoiManager poimanager = serverlevel.m_8904_();
+-            if (poimanager.m_27091_(blockpos, (p_23113_) -> {
++            if (poimanager.m_27091_(blockpos, (p_241377_0_) -> {
+                return true;
+             })) {
+                poimanager.m_27154_(blockpos);

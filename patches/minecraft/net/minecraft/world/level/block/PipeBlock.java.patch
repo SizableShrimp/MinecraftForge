@@ -1,0 +1,28 @@
+--- a/net/minecraft/world/level/block/PipeBlock.java
++++ b/net/minecraft/world/level/block/PipeBlock.java
+@@ -22,17 +_,17 @@
+    public static final BooleanProperty f_55151_ = BlockStateProperties.f_61371_;
+    public static final BooleanProperty f_55152_ = BlockStateProperties.f_61366_;
+    public static final BooleanProperty f_55153_ = BlockStateProperties.f_61367_;
+-   public static final Map<Direction, BooleanProperty> f_55154_ = Util.m_137469_(Maps.newEnumMap(Direction.class), (p_55164_) -> {
+-      p_55164_.put(Direction.NORTH, f_55148_);
+-      p_55164_.put(Direction.EAST, f_55149_);
+-      p_55164_.put(Direction.SOUTH, f_55150_);
+-      p_55164_.put(Direction.WEST, f_55151_);
+-      p_55164_.put(Direction.UP, f_55152_);
+-      p_55164_.put(Direction.DOWN, f_55153_);
++   public static final Map<Direction, BooleanProperty> f_55154_ = Util.m_137469_(Maps.newEnumMap(Direction.class), (p_203421_0_) -> {
++      p_203421_0_.put(Direction.NORTH, f_55148_);
++      p_203421_0_.put(Direction.EAST, f_55149_);
++      p_203421_0_.put(Direction.SOUTH, f_55150_);
++      p_203421_0_.put(Direction.WEST, f_55151_);
++      p_203421_0_.put(Direction.UP, f_55152_);
++      p_203421_0_.put(Direction.DOWN, f_55153_);
+    });
+    protected final VoxelShape[] f_55155_;
+ 
+-   protected PipeBlock(float p_55159_, BlockBehaviour.Properties p_55160_) {
++   public PipeBlock(float p_55159_, BlockBehaviour.Properties p_55160_) {
+       super(p_55160_);
+       this.f_55155_ = this.m_55161_(p_55159_);
+    }

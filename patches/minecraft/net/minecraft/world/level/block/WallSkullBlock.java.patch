@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/WallSkullBlock.java
++++ b/net/minecraft/world/level/block/WallSkullBlock.java
+@@ -18,7 +_,7 @@
+    public static final DirectionProperty f_58097_ = HorizontalDirectionalBlock.f_54117_;
+    private static final Map<Direction, VoxelShape> f_58098_ = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.m_49796_(4.0D, 4.0D, 8.0D, 12.0D, 12.0D, 16.0D), Direction.SOUTH, Block.m_49796_(4.0D, 4.0D, 0.0D, 12.0D, 12.0D, 8.0D), Direction.EAST, Block.m_49796_(0.0D, 4.0D, 4.0D, 8.0D, 12.0D, 12.0D), Direction.WEST, Block.m_49796_(8.0D, 4.0D, 4.0D, 16.0D, 12.0D, 12.0D)));
+ 
+-   protected WallSkullBlock(SkullBlock.Type p_58101_, BlockBehaviour.Properties p_58102_) {
++   public WallSkullBlock(SkullBlock.Type p_58101_, BlockBehaviour.Properties p_58102_) {
+       super(p_58101_, p_58102_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_58097_, Direction.NORTH));
+    }

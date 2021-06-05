@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/NetherTravelTrigger.java
++++ b/net/minecraft/advancements/critereon/NetherTravelTrigger.java
+@@ -21,8 +_,8 @@
+    }
+ 
+    public void m_58439_(ServerPlayer p_58440_, Vec3 p_58441_) {
+-      this.m_66234_(p_58440_, (p_58445_) -> {
+-         return p_58445_.m_58463_(p_58440_.m_9236_(), p_58441_, p_58440_.m_20185_(), p_58440_.m_20186_(), p_58440_.m_20189_());
++      this.m_66234_(p_58440_, (p_226945_2_) -> {
++         return p_226945_2_.m_58463_(p_58440_.m_9236_(), p_58441_, p_58440_.m_20185_(), p_58440_.m_20186_(), p_58440_.m_20189_());
+       });
+    }
+ 

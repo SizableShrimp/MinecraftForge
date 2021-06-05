@@ -1,0 +1,116 @@
+--- a/net/minecraft/world/level/biome/BiomeGenerationSettings.java
++++ b/net/minecraft/world/level/biome/BiomeGenerationSettings.java
+@@ -34,19 +_,20 @@
+    public static final BiomeGenerationSettings f_47777_ = new BiomeGenerationSettings(() -> {
+       return SurfaceBuilders.f_127291_;
+    }, ImmutableMap.of(), ImmutableList.of(), ImmutableList.of());
+-   public static final MapCodec<BiomeGenerationSettings> f_47778_ = RecordCodecBuilder.mapCodec((p_47814_) -> {
+-      return p_47814_.group(ConfiguredSurfaceBuilder.f_74763_.fieldOf("surface_builder").forGetter((p_47823_) -> {
+-         return p_47823_.f_47779_;
+-      }), Codec.simpleMap(GenerationStep.Carving.f_64194_, ConfiguredWorldCarver.f_64848_.promotePartial(Util.m_137489_("Carver: ", f_47776_::error)), StringRepresentable.m_14357_(GenerationStep.Carving.values())).fieldOf("carvers").forGetter((p_47820_) -> {
+-         return p_47820_.f_47780_;
+-      }), ConfiguredFeature.f_65375_.promotePartial(Util.m_137489_("Feature: ", f_47776_::error)).listOf().fieldOf("features").forGetter((p_47817_) -> {
+-         return p_47817_.f_47781_;
+-      }), ConfiguredStructureFeature.f_65402_.promotePartial(Util.m_137489_("Structure start: ", f_47776_::error)).fieldOf("starts").forGetter((p_47798_) -> {
+-         return p_47798_.f_47782_;
+-      })).apply(p_47814_, BiomeGenerationSettings::new);
++   public static final MapCodec<BiomeGenerationSettings> f_47778_ = RecordCodecBuilder.mapCodec((p_242495_0_) -> {
++      return p_242495_0_.group(ConfiguredSurfaceBuilder.f_74763_.fieldOf("surface_builder").forGetter((p_242501_0_) -> {
++         return p_242501_0_.f_47779_;
++      }), Codec.simpleMap(GenerationStep.Carving.f_64194_, ConfiguredWorldCarver.f_64848_.promotePartial(Util.m_137489_("Carver: ", f_47776_::error)), StringRepresentable.m_14357_(GenerationStep.Carving.values())).fieldOf("carvers").forGetter((p_242499_0_) -> {
++         return p_242499_0_.f_47780_;
++      }), ConfiguredFeature.f_65375_.promotePartial(Util.m_137489_("Feature: ", f_47776_::error)).listOf().fieldOf("features").forGetter((p_242497_0_) -> {
++         return p_242497_0_.f_47781_;
++      }), ConfiguredStructureFeature.f_65402_.promotePartial(Util.m_137489_("Structure start: ", f_47776_::error)).fieldOf("starts").forGetter((p_242488_0_) -> {
++         return p_242488_0_.f_47782_;
++      })).apply(p_242495_0_, BiomeGenerationSettings::new);
+    });
+    private final Supplier<ConfiguredSurfaceBuilder<?>> f_47779_;
+    private final Map<GenerationStep.Carving, List<Supplier<ConfiguredWorldCarver<?>>>> f_47780_;
++   private final java.util.Set<GenerationStep.Carving> carversView;
+    private final List<List<Supplier<ConfiguredFeature<?, ?>>>> f_47781_;
+    private final List<Supplier<ConfiguredStructureFeature<?, ?>>> f_47782_;
+    private final List<ConfiguredFeature<?, ?>> f_47783_;
+@@ -56,18 +_,23 @@
+       this.f_47780_ = p_47787_;
+       this.f_47781_ = p_47788_;
+       this.f_47782_ = p_47789_;
+-      this.f_47783_ = p_47788_.stream().flatMap(Collection::stream).map(Supplier::get).flatMap(ConfiguredFeature::m_65398_).filter((p_47802_) -> {
+-         return p_47802_.f_65377_ == Feature.f_65761_;
++      this.f_47783_ = p_47788_.stream().flatMap(Collection::stream).map(Supplier::get).flatMap(ConfiguredFeature::m_65398_).filter((p_242490_0_) -> {
++         return p_242490_0_.f_65377_ == Feature.f_65761_;
+       }).collect(ImmutableList.toImmutableList());
++      this.carversView = java.util.Collections.unmodifiableSet(f_47780_.keySet());
+    }
+ 
+    public List<Supplier<ConfiguredWorldCarver<?>>> m_47799_(GenerationStep.Carving p_47800_) {
+       return this.f_47780_.getOrDefault(p_47800_, ImmutableList.of());
+    }
+ 
++   public java.util.Set<GenerationStep.Carving> getCarvingStages() {
++       return this.carversView;
++   }
++
+    public boolean m_47808_(StructureFeature<?> p_47809_) {
+-      return this.f_47782_.stream().anyMatch((p_47812_) -> {
+-         return (p_47812_.get()).f_65403_ == p_47809_;
++      return this.f_47782_.stream().anyMatch((p_242494_1_) -> {
++         return (p_242494_1_.get()).f_65403_ == p_47809_;
+       });
+    }
+ 
+@@ -76,8 +_,8 @@
+    }
+ 
+    public ConfiguredStructureFeature<?, ?> m_47803_(ConfiguredStructureFeature<?, ?> p_47804_) {
+-      return DataFixUtils.orElse(this.f_47782_.stream().map(Supplier::get).filter((p_47807_) -> {
+-         return p_47807_.f_65403_ == p_47804_.f_65403_;
++      return DataFixUtils.orElse(this.f_47782_.stream().map(Supplier::get).filter((p_242492_1_) -> {
++         return p_242492_1_.f_65403_ == p_47804_.f_65403_;
+       }).findAny(), p_47804_);
+    }
+ 
+@@ -98,10 +_,10 @@
+    }
+ 
+    public static class Builder {
+-      private Optional<Supplier<ConfiguredSurfaceBuilder<?>>> f_47826_ = Optional.empty();
+-      private final Map<GenerationStep.Carving, List<Supplier<ConfiguredWorldCarver<?>>>> f_47827_ = Maps.newLinkedHashMap();
+-      private final List<List<Supplier<ConfiguredFeature<?, ?>>>> f_47828_ = Lists.newArrayList();
+-      private final List<Supplier<ConfiguredStructureFeature<?, ?>>> f_47829_ = Lists.newArrayList();
++      protected Optional<Supplier<ConfiguredSurfaceBuilder<?>>> f_47826_ = Optional.empty();
++      protected final Map<GenerationStep.Carving, List<Supplier<ConfiguredWorldCarver<?>>>> f_47827_ = Maps.newLinkedHashMap();
++      protected final List<List<Supplier<ConfiguredFeature<?, ?>>>> f_47828_ = Lists.newArrayList();
++      protected final List<Supplier<ConfiguredStructureFeature<?, ?>>> f_47829_ = Lists.newArrayList();
+ 
+       public BiomeGenerationSettings.Builder m_47851_(ConfiguredSurfaceBuilder<?> p_47852_) {
+          return this.m_47855_(() -> {
+@@ -127,7 +_,7 @@
+       }
+ 
+       public <C extends CarverConfiguration> BiomeGenerationSettings.Builder m_47839_(GenerationStep.Carving p_47840_, ConfiguredWorldCarver<C> p_47841_) {
+-         this.f_47827_.computeIfAbsent(p_47840_, (p_47838_) -> {
++         this.f_47827_.computeIfAbsent(p_47840_, (p_242511_0_) -> {
+             return Lists.newArrayList();
+          }).add(() -> {
+             return p_47841_;
+@@ -142,7 +_,7 @@
+          return this;
+       }
+ 
+-      private void m_47832_(int p_47833_) {
++      protected void m_47832_(int p_47833_) {
+          while(this.f_47828_.size() <= p_47833_) {
+             this.f_47828_.add(Lists.newArrayList());
+          }
+@@ -152,8 +_,8 @@
+       public BiomeGenerationSettings m_47831_() {
+          return new BiomeGenerationSettings(this.f_47826_.orElseThrow(() -> {
+             return new IllegalStateException("Missing surface builder");
+-         }), this.f_47827_.entrySet().stream().collect(ImmutableMap.toImmutableMap(Entry::getKey, (p_47854_) -> {
+-            return ImmutableList.copyOf((Collection)p_47854_.getValue());
++         }), this.f_47827_.entrySet().stream().collect(ImmutableMap.toImmutableMap(Entry::getKey, (p_242518_0_) -> {
++            return ImmutableList.copyOf((Collection)p_242518_0_.getValue());
+          })), this.f_47828_.stream().map(ImmutableList::copyOf).collect(ImmutableList.toImmutableList()), ImmutableList.copyOf(this.f_47829_));
+       }
+    }

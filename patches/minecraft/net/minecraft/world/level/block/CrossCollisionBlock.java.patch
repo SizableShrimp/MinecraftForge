@@ -1,0 +1,47 @@
+--- a/net/minecraft/world/level/block/CrossCollisionBlock.java
++++ b/net/minecraft/world/level/block/CrossCollisionBlock.java
+@@ -24,14 +_,14 @@
+    public static final BooleanProperty f_52311_ = PipeBlock.f_55150_;
+    public static final BooleanProperty f_52312_ = PipeBlock.f_55151_;
+    public static final BooleanProperty f_52313_ = BlockStateProperties.f_61362_;
+-   protected static final Map<Direction, BooleanProperty> f_52314_ = PipeBlock.f_55154_.entrySet().stream().filter((p_52346_) -> {
+-      return p_52346_.getKey().m_122434_().m_122479_();
++   protected static final Map<Direction, BooleanProperty> f_52314_ = PipeBlock.f_55154_.entrySet().stream().filter((p_199775_0_) -> {
++      return p_199775_0_.getKey().m_122434_().m_122479_();
+    }).collect(Util.m_137448_());
+    protected final VoxelShape[] f_52315_;
+    protected final VoxelShape[] f_52316_;
+    private final Object2IntMap<BlockState> f_52317_ = new Object2IntOpenHashMap<>();
+ 
+-   protected CrossCollisionBlock(float p_52320_, float p_52321_, float p_52322_, float p_52323_, float p_52324_, BlockBehaviour.Properties p_52325_) {
++   public CrossCollisionBlock(float p_52320_, float p_52321_, float p_52322_, float p_52323_, float p_52324_, BlockBehaviour.Properties p_52325_) {
+       super(p_52325_);
+       this.f_52315_ = this.m_52326_(p_52320_, p_52321_, p_52324_, 0.0F, p_52324_);
+       this.f_52316_ = this.m_52326_(p_52320_, p_52321_, p_52322_, 0.0F, p_52323_);
+@@ -80,21 +_,21 @@
+    }
+ 
+    protected int m_52363_(BlockState p_52364_) {
+-      return this.f_52317_.computeIntIfAbsent(p_52364_, (p_52366_) -> {
++      return this.f_52317_.computeIntIfAbsent(p_52364_, (p_223007_0_) -> {
+          int i = 0;
+-         if (p_52366_.m_61143_(f_52309_)) {
++         if (p_223007_0_.m_61143_(f_52309_)) {
+             i |= m_52343_(Direction.NORTH);
+          }
+ 
+-         if (p_52366_.m_61143_(f_52310_)) {
++         if (p_223007_0_.m_61143_(f_52310_)) {
+             i |= m_52343_(Direction.EAST);
+          }
+ 
+-         if (p_52366_.m_61143_(f_52311_)) {
++         if (p_223007_0_.m_61143_(f_52311_)) {
+             i |= m_52343_(Direction.SOUTH);
+          }
+ 
+-         if (p_52366_.m_61143_(f_52312_)) {
++         if (p_223007_0_.m_61143_(f_52312_)) {
+             i |= m_52343_(Direction.WEST);
+          }
+ 

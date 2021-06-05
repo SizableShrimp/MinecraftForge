@@ -1,0 +1,17 @@
+--- a/net/minecraft/data/models/model/ModelTemplates.java
++++ b/net/minecraft/data/models/model/ModelTemplates.java
+@@ -70,10 +_,10 @@
+    public static final ModelTemplate f_125675_ = m_125719_("template_glass_pane_side_alt", "_side_alt", TextureSlot.f_125888_, TextureSlot.f_125889_);
+    public static final ModelTemplate f_125676_ = m_125723_("template_command_block", TextureSlot.f_125873_, TextureSlot.f_125874_, TextureSlot.f_125875_);
+    public static final ModelTemplate f_125677_ = m_125723_("template_anvil", TextureSlot.f_125872_);
+-   public static final ModelTemplate[] f_125678_ = IntStream.range(0, 8).mapToObj((p_125729_) -> {
+-      return m_125719_("stem_growth" + p_125729_, "_stage" + p_125729_, TextureSlot.f_125891_);
+-   }).toArray((p_125718_) -> {
+-      return new ModelTemplate[p_125718_];
++   public static final ModelTemplate[] f_125678_ = IntStream.range(0, 8).mapToObj((p_240335_0_) -> {
++      return m_125719_("stem_growth" + p_240335_0_, "_stage" + p_240335_0_, TextureSlot.f_125891_);
++   }).toArray((p_240331_0_) -> {
++      return new ModelTemplate[p_240331_0_];
+    });
+    public static final ModelTemplate f_125679_ = m_125723_("stem_fruit", TextureSlot.f_125891_, TextureSlot.f_125892_);
+    public static final ModelTemplate f_125680_ = m_125723_("crop", TextureSlot.f_125856_);

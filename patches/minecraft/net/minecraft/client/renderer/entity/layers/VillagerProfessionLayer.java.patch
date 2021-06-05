@@ -1,0 +1,30 @@
+--- a/net/minecraft/client/renderer/entity/layers/VillagerProfessionLayer.java
++++ b/net/minecraft/client/renderer/entity/layers/VillagerProfessionLayer.java
+@@ -30,12 +_,12 @@
+ 
+ @OnlyIn(Dist.CLIENT)
+ public class VillagerProfessionLayer<T extends LivingEntity & VillagerDataHolder, M extends EntityModel<T> & VillagerHeadModel> extends RenderLayer<T, M> implements ResourceManagerReloadListener {
+-   private static final Int2ObjectMap<ResourceLocation> f_117622_ = Util.m_137469_(new Int2ObjectOpenHashMap<>(), (p_117657_) -> {
+-      p_117657_.put(1, new ResourceLocation("stone"));
+-      p_117657_.put(2, new ResourceLocation("iron"));
+-      p_117657_.put(3, new ResourceLocation("gold"));
+-      p_117657_.put(4, new ResourceLocation("emerald"));
+-      p_117657_.put(5, new ResourceLocation("diamond"));
++   private static final Int2ObjectMap<ResourceLocation> f_117622_ = Util.m_137469_(new Int2ObjectOpenHashMap<>(), (p_215348_0_) -> {
++      p_215348_0_.put(1, new ResourceLocation("stone"));
++      p_215348_0_.put(2, new ResourceLocation("iron"));
++      p_215348_0_.put(3, new ResourceLocation("gold"));
++      p_215348_0_.put(4, new ResourceLocation("emerald"));
++      p_215348_0_.put(5, new ResourceLocation("diamond"));
+    });
+    private final Object2ObjectMap<VillagerType, VillagerMetaDataSection.Hat> f_117623_ = new Object2ObjectOpenHashMap<>();
+    private final Object2ObjectMap<VillagerProfession, VillagerMetaDataSection.Hat> f_117624_ = new Object2ObjectOpenHashMap<>();
+@@ -78,7 +_,7 @@
+    }
+ 
+    public <K> VillagerMetaDataSection.Hat m_117658_(Object2ObjectMap<K, VillagerMetaDataSection.Hat> p_117659_, String p_117660_, DefaultedRegistry<K> p_117661_, K p_117662_) {
+-      return p_117659_.computeIfAbsent(p_117662_, (p_117667_) -> {
++      return p_117659_.computeIfAbsent(p_117662_, (p_215349_4_) -> {
+          try (Resource resource = this.f_117625_.m_6296_(this.m_117668_(p_117660_, p_117661_.m_7981_(p_117662_)))) {
+             VillagerMetaDataSection villagermetadatasection = resource.m_5507_(VillagerMetaDataSection.f_119065_);
+             if (villagermetadatasection != null) {

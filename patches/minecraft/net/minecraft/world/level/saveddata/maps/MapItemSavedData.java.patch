@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/saveddata/maps/MapItemSavedData.java
++++ b/net/minecraft/world/level/saveddata/maps/MapItemSavedData.java
+@@ -100,8 +_,8 @@
+    }
+ 
+    public CompoundTag m_7176_(CompoundTag p_77956_) {
+-      ResourceLocation.f_135803_.encodeStart(NbtOps.f_128958_, this.f_77887_.m_135782_()).resultOrPartial(f_77895_::error).ifPresent((p_77954_) -> {
+-         p_77956_.m_128365_("dimension", p_77954_);
++      ResourceLocation.f_135803_.encodeStart(NbtOps.f_128958_, this.f_77887_.m_135782_()).resultOrPartial(f_77895_::error).ifPresent((p_237242_1_) -> {
++         p_77956_.m_128365_("dimension", p_237242_1_);
+       });
+       p_77956_.m_128405_("xCenter", this.f_77885_);
+       p_77956_.m_128405_("zCenter", this.f_77886_);

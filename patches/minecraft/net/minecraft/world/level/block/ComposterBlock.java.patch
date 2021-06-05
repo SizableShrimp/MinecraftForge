@@ -1,0 +1,102 @@
+--- a/net/minecraft/world/level/block/ComposterBlock.java
++++ b/net/minecraft/world/level/block/ComposterBlock.java
+@@ -42,12 +_,12 @@
+    public static final IntegerProperty f_51913_ = BlockStateProperties.f_61419_;
+    public static final Object2FloatMap<ItemLike> f_51914_ = new Object2FloatOpenHashMap<>();
+    private static final VoxelShape f_51915_ = Shapes.m_83144_();
+-   private static final VoxelShape[] f_51916_ = Util.m_137469_(new VoxelShape[9], (p_51967_) -> {
++   private static final VoxelShape[] f_51916_ = Util.m_137469_(new VoxelShape[9], (p_220291_0_) -> {
+       for(int i = 0; i < 8; ++i) {
+-         p_51967_[i] = Shapes.m_83113_(f_51915_, Block.m_49796_(2.0D, (double)Math.max(2, 1 + i * 2), 2.0D, 14.0D, 16.0D, 14.0D), BooleanOp.f_82685_);
++         p_220291_0_[i] = Shapes.m_83113_(f_51915_, Block.m_49796_(2.0D, (double)Math.max(2, 1 + i * 2), 2.0D, 14.0D, 16.0D, 14.0D), BooleanOp.f_82685_);
+       }
+ 
+-      p_51967_[8] = p_51967_[7];
++      p_220291_0_[8] = p_220291_0_[7];
+    });
+ 
+    public static void m_51988_() {
+@@ -306,6 +_,41 @@
+       }
+    }
+ 
++   static class OutputContainer extends SimpleContainer implements WorldlyContainer {
++      private final BlockState f_52037_;
++      private final LevelAccessor f_52038_;
++      private final BlockPos f_52039_;
++      private boolean f_52040_;
++
++      public OutputContainer(BlockState p_52042_, LevelAccessor p_52043_, BlockPos p_52044_, ItemStack p_52045_) {
++         super(p_52045_);
++         this.f_52037_ = p_52042_;
++         this.f_52038_ = p_52043_;
++         this.f_52039_ = p_52044_;
++      }
++
++      public int m_6893_() {
++         return 1;
++      }
++
++      public int[] m_7071_(Direction p_52053_) {
++         return p_52053_ == Direction.DOWN ? new int[]{0} : new int[0];
++      }
++
++      public boolean m_7155_(int p_52049_, ItemStack p_52050_, @Nullable Direction p_52051_) {
++         return false;
++      }
++
++      public boolean m_7157_(int p_52055_, ItemStack p_52056_, Direction p_52057_) {
++         return !this.f_52040_ && p_52057_ == Direction.DOWN && p_52056_.m_41720_() == Items.f_42499_;
++      }
++
++      public void m_6596_() {
++         ComposterBlock.m_52002_(this.f_52037_, this.f_52038_, this.f_52039_);
++         this.f_52040_ = true;
++      }
++   }
++
+    static class InputContainer extends SimpleContainer implements WorldlyContainer {
+       private final BlockState f_52017_;
+       private final LevelAccessor f_52018_;
+@@ -344,41 +_,6 @@
+             this.m_8016_(0);
+          }
+ 
+-      }
+-   }
+-
+-   static class OutputContainer extends SimpleContainer implements WorldlyContainer {
+-      private final BlockState f_52037_;
+-      private final LevelAccessor f_52038_;
+-      private final BlockPos f_52039_;
+-      private boolean f_52040_;
+-
+-      public OutputContainer(BlockState p_52042_, LevelAccessor p_52043_, BlockPos p_52044_, ItemStack p_52045_) {
+-         super(p_52045_);
+-         this.f_52037_ = p_52042_;
+-         this.f_52038_ = p_52043_;
+-         this.f_52039_ = p_52044_;
+-      }
+-
+-      public int m_6893_() {
+-         return 1;
+-      }
+-
+-      public int[] m_7071_(Direction p_52053_) {
+-         return p_52053_ == Direction.DOWN ? new int[]{0} : new int[0];
+-      }
+-
+-      public boolean m_7155_(int p_52049_, ItemStack p_52050_, @Nullable Direction p_52051_) {
+-         return false;
+-      }
+-
+-      public boolean m_7157_(int p_52055_, ItemStack p_52056_, Direction p_52057_) {
+-         return !this.f_52040_ && p_52057_ == Direction.DOWN && p_52056_.m_41720_() == Items.f_42499_;
+-      }
+-
+-      public void m_6596_() {
+-         ComposterBlock.m_52002_(this.f_52037_, this.f_52038_, this.f_52039_);
+-         this.f_52040_ = true;
+       }
+    }
+ }

@@ -1,0 +1,11 @@
+--- a/net/minecraft/client/renderer/debug/CollisionBoxRenderer.java
++++ b/net/minecraft/client/renderer/debug/CollisionBoxRenderer.java
+@@ -30,7 +_,7 @@
+       if (d0 - this.f_113401_ > 1.0E8D) {
+          this.f_113401_ = d0;
+          Entity entity = this.f_113400_.f_91063_.m_109153_().m_90592_();
+-         this.f_113402_ = entity.f_19853_.m_7786_(entity, entity.m_20191_().m_82400_(6.0D), (p_113406_) -> {
++         this.f_113402_ = entity.f_19853_.m_7786_(entity, entity.m_20191_().m_82400_(6.0D), (p_239370_0_) -> {
+             return true;
+          }).collect(Collectors.toList());
+       }

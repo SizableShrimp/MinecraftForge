@@ -1,0 +1,45 @@
+--- a/net/minecraft/world/entity/ExperienceOrb.java
++++ b/net/minecraft/world/entity/ExperienceOrb.java
+@@ -22,7 +_,7 @@
+    public int f_20767_;
+    public int f_20768_;
+    private int f_20769_ = 5;
+-   private int f_20770_;
++   public int f_20770_;
+    private Player f_20771_;
+    private int f_20765_;
+ 
+@@ -94,7 +_,8 @@
+       this.m_6478_(MoverType.SELF, this.m_20184_());
+       float f = 0.98F;
+       if (this.f_19861_) {
+-         f = this.f_19853_.m_8055_(new BlockPos(this.m_20185_(), this.m_20186_() - 1.0D, this.m_20189_())).m_60734_().m_49958_() * 0.98F;
++         BlockPos pos =new BlockPos(this.m_20185_(), this.m_20186_() - 1.0D, this.m_20189_());
++         f = this.f_19853_.m_8055_(pos).getSlipperiness(this.f_19853_, pos, this) * 0.98F;
+       }
+ 
+       this.m_20256_(this.m_20184_().m_82542_((double)f, 0.98D, (double)f));
+@@ -119,6 +_,7 @@
+    }
+ 
+    public boolean m_6469_(DamageSource p_20785_, float p_20786_) {
++      if (this.f_19853_.f_46443_ || this.f_19866_) return false; //Forge: Fixes MC-53850
+       if (this.m_6673_(p_20785_)) {
+          return false;
+       } else {
+@@ -147,13 +_,14 @@
+    public void m_6123_(Player p_20792_) {
+       if (!this.f_19853_.f_46443_) {
+          if (this.f_20768_ == 0 && p_20792_.f_36101_ == 0) {
++            if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.player.PlayerXpEvent.PickupXp(p_20792_, this))) return;
+             p_20792_.f_36101_ = 2;
+             p_20792_.m_7938_(this, 1);
+             Entry<EquipmentSlot, ItemStack> entry = EnchantmentHelper.m_44839_(Enchantments.f_44962_, p_20792_, ItemStack::m_41768_);
+             if (entry != null) {
+                ItemStack itemstack = entry.getValue();
+                if (!itemstack.m_41619_() && itemstack.m_41768_()) {
+-                  int i = Math.min(this.m_20798_(this.f_20770_), itemstack.m_41773_());
++                  int i = Math.min((int)(this.f_20770_ * itemstack.getXpRepairRatio()), itemstack.m_41773_());
+                   this.f_20770_ -= this.m_20793_(i);
+                   itemstack.m_41721_(itemstack.m_41773_() - i);
+                }

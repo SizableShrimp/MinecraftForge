@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/PlayerHeadBlock.java
++++ b/net/minecraft/world/level/block/PlayerHeadBlock.java
+@@ -16,7 +_,7 @@
+ import org.apache.commons.lang3.StringUtils;
+ 
+ public class PlayerHeadBlock extends SkullBlock {
+-   protected PlayerHeadBlock(BlockBehaviour.Properties p_55177_) {
++   public PlayerHeadBlock(BlockBehaviour.Properties p_55177_) {
+       super(SkullBlock.Types.PLAYER, p_55177_);
+    }
+ 

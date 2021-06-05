@@ -1,0 +1,24 @@
+--- a/net/minecraft/world/entity/ai/behavior/AssignProfessionFromJobSite.java
++++ b/net/minecraft/world/entity/ai/behavior/AssignProfessionFromJobSite.java
+@@ -29,14 +_,14 @@
+       p_22453_.m_7605_(p_22454_, (byte)14);
+       if (p_22454_.m_7141_().m_35571_() == VillagerProfession.f_35585_) {
+          MinecraftServer minecraftserver = p_22453_.m_7654_();
+-         Optional.ofNullable(minecraftserver.m_129880_(globalpos.m_122640_())).flatMap((p_22467_) -> {
+-            return p_22467_.m_8904_().m_27177_(globalpos.m_122646_());
+-         }).flatMap((p_22457_) -> {
+-            return Registry.f_122869_.m_123024_().filter((p_22460_) -> {
+-               return p_22460_.m_35622_() == p_22457_;
++         Optional.ofNullable(minecraftserver.m_129880_(globalpos.m_122640_())).flatMap((p_241376_1_) -> {
++            return p_241376_1_.m_8904_().m_27177_(globalpos.m_122646_());
++         }).flatMap((p_220390_0_) -> {
++            return Registry.f_122869_.m_123024_().filter((p_220389_1_) -> {
++               return p_220389_1_.m_35622_() == p_220390_0_;
+             }).findFirst();
+-         }).ifPresent((p_22464_) -> {
+-            p_22454_.m_35436_(p_22454_.m_7141_().m_35565_(p_22464_));
++         }).ifPresent((p_220388_2_) -> {
++            p_22454_.m_35436_(p_22454_.m_7141_().m_35565_(p_220388_2_));
+             p_22454_.m_35483_(p_22453_);
+          });
+       }

@@ -1,0 +1,24 @@
+--- a/net/minecraft/world/entity/ai/sensing/NearestBedSensor.java
++++ b/net/minecraft/world/entity/ai/sensing/NearestBedSensor.java
+@@ -33,8 +_,8 @@
+          this.f_26677_ = 0;
+          this.f_26678_ = p_26685_.m_46467_() + (long)p_26685_.m_5822_().nextInt(20);
+          PoiManager poimanager = p_26685_.m_8904_();
+-         Predicate<BlockPos> predicate = (p_26688_) -> {
+-            long i = p_26688_.m_121878_();
++         Predicate<BlockPos> predicate = (p_225469_1_) -> {
++            long i = p_225469_1_.m_121878_();
+             if (this.f_26676_.containsKey(i)) {
+                return false;
+             } else if (++this.f_26677_ >= 5) {
+@@ -53,8 +_,8 @@
+                p_26686_.m_6274_().m_21879_(MemoryModuleType.f_26380_, blockpos);
+             }
+          } else if (this.f_26677_ < 5) {
+-            this.f_26676_.long2LongEntrySet().removeIf((p_26690_) -> {
+-               return p_26690_.getLongValue() < this.f_26678_;
++            this.f_26676_.long2LongEntrySet().removeIf((p_225470_1_) -> {
++               return p_225470_1_.getLongValue() < this.f_26678_;
+             });
+          }
+ 

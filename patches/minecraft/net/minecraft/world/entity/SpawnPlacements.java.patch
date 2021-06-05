@@ -1,0 +1,39 @@
+--- a/net/minecraft/world/entity/SpawnPlacements.java
++++ b/net/minecraft/world/entity/SpawnPlacements.java
+@@ -38,7 +_,7 @@
+ public class SpawnPlacements {
+    private static final Map<EntityType<?>, SpawnPlacements.Data> f_21750_ = Maps.newHashMap();
+ 
+-   private static <T extends Mob> void m_21754_(EntityType<T> p_21755_, SpawnPlacements.Type p_21756_, Heightmap.Types p_21757_, SpawnPlacements.SpawnPredicate<T> p_21758_) {
++   public static <T extends Mob> void m_21754_(EntityType<T> p_21755_, SpawnPlacements.Type p_21756_, Heightmap.Types p_21757_, SpawnPlacements.SpawnPredicate<T> p_21758_) {
+       SpawnPlacements.Data spawnplacements$data = f_21750_.put(p_21755_, new SpawnPlacements.Data(p_21757_, p_21756_, p_21758_));
+       if (spawnplacements$data != null) {
+          throw new IllegalStateException("Duplicate registration for type " + Registry.f_122826_.m_7981_(p_21755_));
+@@ -147,10 +_,26 @@
+       boolean m_21780_(EntityType<T> p_21781_, ServerLevelAccessor p_21782_, MobSpawnType p_21783_, BlockPos p_21784_, Random p_21785_);
+    }
+ 
+-   public static enum Type {
++   public static enum Type implements net.minecraftforge.common.IExtensibleEnum {
+       ON_GROUND,
+       IN_WATER,
+       NO_RESTRICTIONS,
+       IN_LAVA;
++
++      public static Type create(String name, net.minecraftforge.common.util.TriPredicate<net.minecraft.world.level.LevelReader, BlockPos, EntityType<? extends Mob>> predicate) {
++          throw new IllegalStateException("Enum not extended");
++      }
++
++      private net.minecraftforge.common.util.TriPredicate<net.minecraft.world.level.LevelReader, BlockPos, EntityType<?>> predicate;
++      private Type() { this(null); }
++      private Type(net.minecraftforge.common.util.TriPredicate<net.minecraft.world.level.LevelReader, BlockPos, EntityType<?>> predicate) {
++          this.predicate = predicate;
++      }
++
++      public boolean canSpawnAt(net.minecraft.world.level.LevelReader world, BlockPos pos, EntityType<?> type) {
++          if (this == NO_RESTRICTIONS) return true;
++          if (predicate == null) return net.minecraft.world.level.NaturalSpawner.canSpawnAtBody(this, world, pos, type);
++          return predicate.test(world, pos, type);
++      }
+    }
+ }

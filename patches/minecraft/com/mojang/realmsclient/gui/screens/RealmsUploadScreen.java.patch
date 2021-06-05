@@ -1,0 +1,38 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsUploadScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsUploadScreen.java
+@@ -81,11 +_,11 @@
+ 
+    public void m_7856_() {
+       this.f_96541_.f_91068_.m_90926_(true);
+-      this.f_90060_ = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 42, 200, 20, CommonComponents.f_130660_, (p_90118_) -> {
++      this.f_90060_ = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 42, 200, 20, CommonComponents.f_130660_, (p_238087_1_) -> {
+          this.m_90127_();
+       }));
+       this.f_90060_.f_93624_ = false;
+-      this.f_90061_ = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 42, 200, 20, CommonComponents.f_130656_, (p_90104_) -> {
++      this.f_90061_ = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 42, 200, 20, CommonComponents.f_130656_, (p_238084_1_) -> {
+          this.m_90128_();
+       }));
+       if (!this.f_90059_) {
+@@ -287,16 +_,16 @@
+                if (this.m_90105_(file1)) {
+                   this.f_90078_ = new TranslatableComponent("mco.upload.uploading", this.f_90072_.m_78361_());
+                   FileUpload fileupload = new FileUpload(file1, this.f_90073_, this.f_90074_, uploadinfo, this.f_96541_.m_91094_(), SharedConstants.m_136187_().getName(), this.f_90075_);
+-                  fileupload.m_87084_((p_90094_) -> {
+-                     if (p_90094_.f_90133_ >= 200 && p_90094_.f_90133_ < 300) {
++                  fileupload.m_87084_((p_238082_3_) -> {
++                     if (p_238082_3_.f_90133_ >= 200 && p_238082_3_.f_90133_ < 300) {
+                         this.f_90057_ = true;
+                         this.f_90078_ = new TranslatableComponent("mco.upload.done");
+                         this.f_90060_.m_93666_(CommonComponents.f_130655_);
+                         UploadTokenCache.m_90297_(i);
+-                     } else if (p_90094_.f_90133_ == 400 && p_90094_.f_90134_ != null) {
+-                        this.m_90112_(new TranslatableComponent("mco.upload.failed", p_90094_.f_90134_));
++                     } else if (p_238082_3_.f_90133_ == 400 && p_238082_3_.f_90134_ != null) {
++                        this.m_90112_(new TranslatableComponent("mco.upload.failed", p_238082_3_.f_90134_));
+                      } else {
+-                        this.m_90112_(new TranslatableComponent("mco.upload.failed", p_90094_.f_90133_));
++                        this.m_90112_(new TranslatableComponent("mco.upload.failed", p_238082_3_.f_90133_));
+                      }
+ 
+                   });

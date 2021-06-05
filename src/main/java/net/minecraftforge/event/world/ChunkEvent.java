@@ -21,7 +21,6 @@ package net.minecraftforge.event.world;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraftforge.common.MinecraftForge;
 
 /**
  * ChunkEvent is fired when an event involving a chunk occurs.<br>

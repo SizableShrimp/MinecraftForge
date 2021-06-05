@@ -1,0 +1,20 @@
+--- a/net/minecraft/world/level/block/RedstoneTorchBlock.java
++++ b/net/minecraft/world/level/block/RedstoneTorchBlock.java
+@@ -23,7 +_,7 @@
+    public static final BooleanProperty f_55674_ = BlockStateProperties.f_61443_;
+    private static final Map<BlockGetter, List<RedstoneTorchBlock.Toggle>> f_55675_ = new WeakHashMap<>();
+ 
+-   protected RedstoneTorchBlock(BlockBehaviour.Properties p_55678_) {
++   public RedstoneTorchBlock(BlockBehaviour.Properties p_55678_) {
+       super(p_55678_, DustParticleOptions.f_123656_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_55674_, Boolean.valueOf(true)));
+    }
+@@ -104,7 +_,7 @@
+    }
+ 
+    private static boolean m_55684_(Level p_55685_, BlockPos p_55686_, boolean p_55687_) {
+-      List<RedstoneTorchBlock.Toggle> list = f_55675_.computeIfAbsent(p_55685_, (p_55680_) -> {
++      List<RedstoneTorchBlock.Toggle> list = f_55675_.computeIfAbsent(p_55685_, (p_220288_0_) -> {
+          return Lists.newArrayList();
+       });
+       if (p_55687_) {

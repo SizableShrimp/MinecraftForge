@@ -1,0 +1,22 @@
+--- a/net/minecraft/client/renderer/EffectInstance.java
++++ b/net/minecraft/client/renderer/EffectInstance.java
+@@ -56,7 +_,8 @@
+    private final Program f_108938_;
+ 
+    public EffectInstance(ResourceManager p_108941_, String p_108942_) throws IOException {
+-      ResourceLocation resourcelocation = new ResourceLocation("shaders/program/" + p_108942_ + ".json");
++      ResourceLocation rl = ResourceLocation.m_135820_(p_108942_);
++      ResourceLocation resourcelocation = new ResourceLocation(rl.m_135827_(), "shaders/program/" + rl.m_135815_() + ".json");
+       this.f_108932_ = p_108942_;
+       Resource resource = null;
+ 
+@@ -154,7 +_,8 @@
+    public static Program m_108944_(ResourceManager p_108945_, Program.Type p_108946_, String p_108947_) throws IOException {
+       Program program = p_108946_.m_85570_().get(p_108947_);
+       if (program == null) {
+-         ResourceLocation resourcelocation = new ResourceLocation("shaders/program/" + p_108947_ + p_108946_.m_85569_());
++         ResourceLocation rl = ResourceLocation.m_135820_(p_108947_);
++         ResourceLocation resourcelocation = new ResourceLocation(rl.m_135827_(), "shaders/program/" + rl.m_135815_() + p_108946_.m_85569_());
+          Resource resource = p_108945_.m_6296_(resourcelocation);
+ 
+          try {

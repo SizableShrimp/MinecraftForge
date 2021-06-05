@@ -1,0 +1,168 @@
+--- a/net/minecraft/world/level/NaturalSpawner.java
++++ b/net/minecraft/world/level/NaturalSpawner.java
+@@ -48,10 +_,10 @@
+ public final class NaturalSpawner {
+    private static final Logger f_46977_ = LogManager.getLogger();
+    private static final int f_46978_ = (int)Math.pow(17.0D, 2.0D);
+-   private static final MobCategory[] f_46979_ = Stream.of(MobCategory.values()).filter((p_47037_) -> {
+-      return p_47037_ != MobCategory.MISC;
+-   }).toArray((p_46983_) -> {
+-      return new MobCategory[p_46983_];
++   private static final MobCategory[] f_46979_ = Stream.of(MobCategory.values()).filter((p_234965_0_) -> {
++      return p_234965_0_ != MobCategory.MISC;
++   }).toArray((p_234963_0_) -> {
++      return new MobCategory[p_234963_0_];
+    });
+ 
+    public static NaturalSpawner.SpawnState m_46984_(int p_46985_, Iterable<Entity> p_46986_, NaturalSpawner.ChunkGetter p_46987_) {
+@@ -76,12 +_,12 @@
+          } while(mob.m_21532_() || mob.m_8023_());
+ 
+          final Entity entity_f = entity;
+-         MobCategory mobcategory = entity.m_6095_().m_20674_();
++         MobCategory mobcategory = entity.getClassification(true);
+          if (mobcategory != MobCategory.MISC) {
+             BlockPos blockpos = entity.m_20183_();
+             long i = ChunkPos.m_45589_(blockpos.m_123341_() >> 4, blockpos.m_123343_() >> 4);
+-            p_46987_.m_47103_(i, (p_47091_) -> {
+-               MobSpawnSettings.MobSpawnCost mobspawnsettings$mobspawncost = m_47095_(blockpos, p_47091_).m_47518_().m_48345_(entity_f.m_6095_());
++            p_46987_.m_47103_(i, (p_234971_5_) -> {
++               MobSpawnSettings.MobSpawnCost mobspawnsettings$mobspawncost = m_47095_(blockpos, p_234971_5_).m_47518_().m_48345_(entity_f.m_6095_());
+                if (mobspawnsettings$mobspawncost != null) {
+                   potentialcalculator.m_47192_(entity_f.m_20183_(), mobspawnsettings$mobspawncost.m_48400_());
+                }
+@@ -101,10 +_,10 @@
+ 
+       for(MobCategory mobcategory : f_46979_) {
+          if ((p_47033_ || !mobcategory.m_21609_()) && (p_47034_ || mobcategory.m_21609_()) && (p_47035_ || !mobcategory.m_21610_()) && p_47032_.m_47134_(mobcategory)) {
+-            m_47045_(mobcategory, p_47030_, p_47031_, (p_47072_, p_47073_, p_47074_) -> {
+-               return p_47032_.m_47127_(p_47072_, p_47073_, p_47074_);
+-            }, (p_47077_, p_47078_) -> {
+-               p_47032_.m_47131_(p_47077_, p_47078_);
++            m_47045_(mobcategory, p_47030_, p_47031_, (p_234969_1_, p_234969_2_, p_234969_3_) -> {
++               return p_47032_.m_47127_(p_234969_1_, p_234969_2_, p_234969_3_);
++            }, (p_234970_1_, p_234970_2_) -> {
++               p_47032_.m_47131_(p_234970_1_, p_234970_2_);
+             });
+          }
+       }
+@@ -163,13 +_,15 @@
+                         }
+ 
+                         mob.m_7678_(d0, (double)i, d1, p_47040_.f_46441_.nextFloat() * 360.0F, 0.0F);
+-                        if (m_46991_(p_47040_, mob, d2)) {
++                        int canSpawn = net.minecraftforge.common.ForgeHooks.canEntitySpawn(mob, p_47040_, d0, i, d1, null, MobSpawnType.NATURAL);
++                        if (canSpawn != -1 && (canSpawn == 1 || m_46991_(p_47040_, mob, d2))) {
++                           if (!net.minecraftforge.event.ForgeEventFactory.doSpecialSpawn(mob, p_47040_, (float)d0, (float)i, (float)d1, null, MobSpawnType.NATURAL))
+                            spawngroupdata = mob.m_6518_(p_47040_, p_47040_.m_6436_(mob.m_20183_()), MobSpawnType.NATURAL, spawngroupdata, (CompoundTag)null);
+                            ++j;
+                            ++l1;
+                            p_47040_.m_47205_(mob);
+                            p_47044_.m_47100_(mob, p_47041_);
+-                           if (j >= mob.m_5792_()) {
++                           if (j >= net.minecraftforge.event.ForgeEventFactory.getMaxSpawnPackSize(mob)) {
+                               return;
+                            }
+ 
+@@ -247,6 +_,7 @@
+          return null;
+       } else {
+          List<MobSpawnSettings.SpawnerData> list = m_47010_(p_47018_, p_47019_, p_47020_, p_47021_, p_47023_, biome);
++         list = net.minecraftforge.event.ForgeEventFactory.getPotentialSpawns(p_47018_, p_47021_, p_47023_, list);
+          return list.isEmpty() ? null : WeighedRandom.m_14475_(p_47022_, list);
+       }
+    }
+@@ -286,26 +_,31 @@
+       if (p_47052_ == SpawnPlacements.Type.NO_RESTRICTIONS) {
+          return true;
+       } else if (p_47055_ != null && p_47053_.m_6857_().m_61937_(p_47054_)) {
+-         BlockState blockstate = p_47053_.m_8055_(p_47054_);
+-         FluidState fluidstate = p_47053_.m_6425_(p_47054_);
+-         BlockPos blockpos = p_47054_.m_7494_();
+-         BlockPos blockpos1 = p_47054_.m_7495_();
+-         switch(p_47052_) {
++         return p_47052_.canSpawnAt(p_47053_, p_47054_, p_47055_);
++      }
++      return false;
++   }
++
++   public static boolean canSpawnAtBody(SpawnPlacements.Type p_209382_0_, LevelReader p_209382_1_, BlockPos p_209382_2_, @Nullable EntityType<?> p_209382_3_) {
++      {
++         BlockState blockstate = p_209382_1_.m_8055_(p_209382_2_);
++         FluidState fluidstate = p_209382_1_.m_6425_(p_209382_2_);
++         BlockPos blockpos = p_209382_2_.m_7494_();
++         BlockPos blockpos1 = p_209382_2_.m_7495_();
++         switch(p_209382_0_) {
+          case IN_WATER:
+-            return fluidstate.m_76153_(FluidTags.f_13131_) && p_47053_.m_6425_(blockpos1).m_76153_(FluidTags.f_13131_) && !p_47053_.m_8055_(blockpos).m_60796_(p_47053_, blockpos);
++            return fluidstate.m_76153_(FluidTags.f_13131_) && p_209382_1_.m_6425_(blockpos1).m_76153_(FluidTags.f_13131_) && !p_209382_1_.m_8055_(blockpos).m_60796_(p_209382_1_, blockpos);
+          case IN_LAVA:
+             return fluidstate.m_76153_(FluidTags.f_13132_);
+          case ON_GROUND:
+          default:
+-            BlockState blockstate1 = p_47053_.m_8055_(blockpos1);
+-            if (!blockstate1.m_60643_(p_47053_, blockpos1, p_47055_)) {
++            BlockState blockstate1 = p_209382_1_.m_8055_(blockpos1);
++            if (!blockstate1.canCreatureSpawn(p_209382_1_, blockpos1, p_209382_0_, p_209382_3_)) {
+                return false;
+             } else {
+-               return m_47056_(p_47053_, p_47054_, blockstate, fluidstate, p_47055_) && m_47056_(p_47053_, blockpos, p_47053_.m_8055_(blockpos), p_47053_.m_6425_(blockpos), p_47055_);
++               return m_47056_(p_209382_1_, p_209382_2_, blockstate, fluidstate, p_209382_3_) && m_47056_(p_209382_1_, blockpos, p_209382_1_.m_8055_(blockpos), p_209382_1_.m_6425_(blockpos), p_209382_3_);
+             }
+          }
+-      } else {
+-         return false;
+       }
+    }
+ 
+@@ -349,6 +_,7 @@
+                      entity.m_7678_(d0, (double)blockpos.m_123342_(), d1, p_47084_.nextFloat() * 360.0F, 0.0F);
+                      if (entity instanceof Mob) {
+                         Mob mob = (Mob)entity;
++                        if (net.minecraftforge.common.ForgeHooks.canEntitySpawn(mob, p_47080_, d0, blockpos.m_123342_(), d1, null, MobSpawnType.CHUNK_GENERATION) == -1) continue;
+                         if (mob.m_5545_(p_47080_, MobSpawnType.CHUNK_GENERATION) && mob.m_6914_(p_47080_)) {
+                            spawngroupdata = mob.m_6518_(p_47080_, p_47080_.m_6436_(mob.m_20183_()), MobSpawnType.CHUNK_GENERATION, spawngroupdata, (CompoundTag)null);
+                            p_47080_.m_47205_(mob);
+@@ -392,21 +_,6 @@
+       return blockpos$mutableblockpos.m_7949_();
+    }
+ 
+-   @FunctionalInterface
+-   public interface AfterSpawnCallback {
+-      void m_47100_(Mob p_47101_, ChunkAccess p_47102_);
+-   }
+-
+-   @FunctionalInterface
+-   public interface ChunkGetter {
+-      void m_47103_(long p_47104_, Consumer<LevelChunk> p_47105_);
+-   }
+-
+-   @FunctionalInterface
+-   public interface SpawnPredicate {
+-      boolean m_47106_(EntityType<?> p_47107_, BlockPos p_47108_, ChunkAccess p_47109_);
+-   }
+-
+    public static class SpawnState {
+       private final int f_47110_;
+       private final Object2IntOpenHashMap<MobCategory> f_47111_;
+@@ -472,5 +_,20 @@
+          int i = p_47135_.m_21608_() * this.f_47110_ / NaturalSpawner.f_46978_;
+          return this.f_47111_.getInt(p_47135_) < i;
+       }
++   }
++
++   @FunctionalInterface
++   public interface SpawnPredicate {
++      boolean m_47106_(EntityType<?> p_47107_, BlockPos p_47108_, ChunkAccess p_47109_);
++   }
++
++   @FunctionalInterface
++   public interface ChunkGetter {
++      void m_47103_(long p_47104_, Consumer<LevelChunk> p_47105_);
++   }
++
++   @FunctionalInterface
++   public interface AfterSpawnCallback {
++      void m_47100_(Mob p_47101_, ChunkAccess p_47102_);
+    }
+ }

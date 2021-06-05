@@ -1,0 +1,59 @@
+--- a/net/minecraft/server/commands/ScheduleCommand.java
++++ b/net/minecraft/server/commands/ScheduleCommand.java
+@@ -25,24 +_,24 @@
+ 
+ public class ScheduleCommand {
+    private static final SimpleCommandExceptionType f_138415_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.schedule.same_tick"));
+-   private static final DynamicCommandExceptionType f_138416_ = new DynamicCommandExceptionType((p_138437_) -> {
+-      return new TranslatableComponent("commands.schedule.cleared.failure", p_138437_);
++   private static final DynamicCommandExceptionType f_138416_ = new DynamicCommandExceptionType((p_229818_0_) -> {
++      return new TranslatableComponent("commands.schedule.cleared.failure", p_229818_0_);
+    });
+-   private static final SuggestionProvider<CommandSourceStack> f_138417_ = (p_138424_, p_138425_) -> {
+-      return SharedSuggestionProvider.m_82970_(p_138424_.getSource().m_81377_().m_129910_().m_5996_().m_7540_().m_82251_(), p_138425_);
++   private static final SuggestionProvider<CommandSourceStack> f_138417_ = (p_229814_0_, p_229814_1_) -> {
++      return SharedSuggestionProvider.m_82970_(p_229814_0_.getSource().m_81377_().m_129910_().m_5996_().m_7540_().m_82251_(), p_229814_1_);
+    };
+ 
+    public static void m_138419_(CommandDispatcher<CommandSourceStack> p_138420_) {
+-      p_138420_.register(Commands.m_82127_("schedule").requires((p_138427_) -> {
+-         return p_138427_.m_6761_(2);
+-      }).then(Commands.m_82127_("function").then(Commands.m_82129_("function", FunctionArgument.m_120907_()).suggests(FunctionCommand.f_137712_).then(Commands.m_82129_("time", TimeArgument.m_113037_()).executes((p_138459_) -> {
+-         return m_138428_(p_138459_.getSource(), FunctionArgument.m_120920_(p_138459_, "function"), IntegerArgumentType.getInteger(p_138459_, "time"), true);
+-      }).then(Commands.m_82127_("append").executes((p_138457_) -> {
+-         return m_138428_(p_138457_.getSource(), FunctionArgument.m_120920_(p_138457_, "function"), IntegerArgumentType.getInteger(p_138457_, "time"), false);
+-      })).then(Commands.m_82127_("replace").executes((p_138455_) -> {
+-         return m_138428_(p_138455_.getSource(), FunctionArgument.m_120920_(p_138455_, "function"), IntegerArgumentType.getInteger(p_138455_, "time"), true);
+-      }))))).then(Commands.m_82127_("clear").then(Commands.m_82129_("function", StringArgumentType.greedyString()).suggests(f_138417_).executes((p_138422_) -> {
+-         return m_138433_(p_138422_.getSource(), StringArgumentType.getString(p_138422_, "function"));
++      p_138420_.register(Commands.m_82127_("schedule").requires((p_229815_0_) -> {
++         return p_229815_0_.m_6761_(2);
++      }).then(Commands.m_82127_("function").then(Commands.m_82129_("function", FunctionArgument.m_120907_()).suggests(FunctionCommand.f_137712_).then(Commands.m_82129_("time", TimeArgument.m_113037_()).executes((p_229823_0_) -> {
++         return m_138428_(p_229823_0_.getSource(), FunctionArgument.m_120920_(p_229823_0_, "function"), IntegerArgumentType.getInteger(p_229823_0_, "time"), true);
++      }).then(Commands.m_82127_("append").executes((p_229822_0_) -> {
++         return m_138428_(p_229822_0_.getSource(), FunctionArgument.m_120920_(p_229822_0_, "function"), IntegerArgumentType.getInteger(p_229822_0_, "time"), false);
++      })).then(Commands.m_82127_("replace").executes((p_229821_0_) -> {
++         return m_138428_(p_229821_0_.getSource(), FunctionArgument.m_120920_(p_229821_0_, "function"), IntegerArgumentType.getInteger(p_229821_0_, "time"), true);
++      }))))).then(Commands.m_82127_("clear").then(Commands.m_82129_("function", StringArgumentType.greedyString()).suggests(f_138417_).executes((p_229813_0_) -> {
++         return m_138433_(p_229813_0_.getSource(), StringArgumentType.getString(p_229813_0_, "function"));
+       }))));
+    }
+ 
+@@ -53,7 +_,7 @@
+          long i = p_138429_.m_81372_().m_46467_() + (long)p_138431_;
+          ResourceLocation resourcelocation = p_138430_.getFirst();
+          TimerQueue<MinecraftServer> timerqueue = p_138429_.m_81377_().m_129910_().m_5996_().m_7540_();
+-         p_138430_.getSecond().ifLeft((p_138453_) -> {
++         p_138430_.getSecond().ifLeft((p_229820_7_) -> {
+             String s = resourcelocation.toString();
+             if (p_138432_) {
+                timerqueue.m_82259_(s);
+@@ -61,7 +_,7 @@
+ 
+             timerqueue.m_82261_(s, i, new FunctionCallback(resourcelocation));
+             p_138429_.m_81354_(new TranslatableComponent("commands.schedule.created.function", resourcelocation, p_138431_, i), true);
+-         }).ifRight((p_138445_) -> {
++         }).ifRight((p_229819_7_) -> {
+             String s = "#" + resourcelocation.toString();
+             if (p_138432_) {
+                timerqueue.m_82259_(s);

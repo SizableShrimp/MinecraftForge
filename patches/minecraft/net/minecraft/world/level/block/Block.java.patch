@@ -1,0 +1,207 @@
+--- a/net/minecraft/world/level/block/Block.java
++++ b/net/minecraft/world/level/block/Block.java
+@@ -55,9 +_,10 @@
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ 
+-public class Block extends BlockBehaviour implements ItemLike {
++public class Block extends BlockBehaviour implements ItemLike, net.minecraftforge.common.extensions.IForgeBlock {
+    protected static final Logger f_49790_ = LogManager.getLogger();
+-   public static final IdMapper<BlockState> f_49791_ = new IdMapper<>();
++   @Deprecated //Forge: Do not use, use GameRegistry
++   public static final IdMapper<BlockState> f_49791_ = net.minecraftforge.registries.GameData.getBlockStateIDMap();
+    private static final LoadingCache<VoxelShape, Boolean> f_49785_ = CacheBuilder.newBuilder().maximumSize(512L).weakKeys().build(new CacheLoader<VoxelShape, Boolean>() {
+       public Boolean load(VoxelShape p_49972_) {
+          return !Shapes.m_83157_(Shapes.m_83144_(), p_49972_, BooleanOp.f_82687_);
+@@ -152,6 +_,8 @@
+       super(p_49795_);
+       StateDefinition.Builder<Block, BlockState> builder = new StateDefinition.Builder<>(this);
+       this.m_7926_(builder);
++      this.harvestLevel = p_49795_.getHarvestLevel();
++      this.harvestTool = p_49795_.getHarvestTool();
+       this.f_49792_ = builder.m_61101_(Block::m_49966_, BlockState::new);
+       this.m_49959_(this.f_49792_.m_61090_());
+    }
+@@ -233,8 +_,8 @@
+ 
+    public static void m_49950_(BlockState p_49951_, Level p_49952_, BlockPos p_49953_) {
+       if (p_49952_ instanceof ServerLevel) {
+-         m_49869_(p_49951_, (ServerLevel)p_49952_, p_49953_, (BlockEntity)null).forEach((p_49944_) -> {
+-            m_49840_(p_49952_, p_49953_, p_49944_);
++         m_49869_(p_49951_, (ServerLevel)p_49952_, p_49953_, (BlockEntity)null).forEach((p_220079_2_) -> {
++            m_49840_(p_49952_, p_49953_, p_220079_2_);
+          });
+          p_49951_.m_60612_((ServerLevel)p_49952_, p_49953_, ItemStack.f_41583_);
+       }
+@@ -243,8 +_,8 @@
+ 
+    public static void m_49892_(BlockState p_49893_, LevelAccessor p_49894_, BlockPos p_49895_, @Nullable BlockEntity p_49896_) {
+       if (p_49894_ instanceof ServerLevel) {
+-         m_49869_(p_49893_, (ServerLevel)p_49894_, p_49895_, p_49896_).forEach((p_49859_) -> {
+-            m_49840_((ServerLevel)p_49894_, p_49895_, p_49859_);
++         m_49869_(p_49893_, (ServerLevel)p_49894_, p_49895_, p_49896_).forEach((p_220061_2_) -> {
++            m_49840_((ServerLevel)p_49894_, p_49895_, p_220061_2_);
+          });
+          p_49893_.m_60612_((ServerLevel)p_49894_, p_49895_, ItemStack.f_41583_);
+       }
+@@ -253,8 +_,8 @@
+ 
+    public static void m_49881_(BlockState p_49882_, Level p_49883_, BlockPos p_49884_, @Nullable BlockEntity p_49885_, Entity p_49886_, ItemStack p_49887_) {
+       if (p_49883_ instanceof ServerLevel) {
+-         m_49874_(p_49882_, (ServerLevel)p_49883_, p_49884_, p_49885_, p_49886_, p_49887_).forEach((p_49925_) -> {
+-            m_49840_(p_49883_, p_49884_, p_49925_);
++         m_49874_(p_49882_, (ServerLevel)p_49883_, p_49884_, p_49885_, p_49886_, p_49887_).forEach((p_220057_2_) -> {
++            m_49840_(p_49883_, p_49884_, p_220057_2_);
+          });
+          p_49882_.m_60612_((ServerLevel)p_49883_, p_49884_, p_49887_);
+       }
+@@ -262,7 +_,7 @@
+    }
+ 
+    public static void m_49840_(Level p_49841_, BlockPos p_49842_, ItemStack p_49843_) {
+-      if (!p_49841_.f_46443_ && !p_49843_.m_41619_() && p_49841_.m_46469_().m_46207_(GameRules.f_46136_)) {
++      if (!p_49841_.f_46443_ && !p_49843_.m_41619_() && p_49841_.m_46469_().m_46207_(GameRules.f_46136_) && !p_49841_.restoringBlockSnapshots) {
+          float f = 0.5F;
+          double d0 = (double)(p_49841_.f_46441_.nextFloat() * 0.5F) + 0.25D;
+          double d1 = (double)(p_49841_.f_46441_.nextFloat() * 0.5F) + 0.25D;
+@@ -273,8 +_,8 @@
+       }
+    }
+ 
+-   protected void m_49805_(ServerLevel p_49806_, BlockPos p_49807_, int p_49808_) {
+-      if (p_49806_.m_46469_().m_46207_(GameRules.f_46136_)) {
++   public void m_49805_(ServerLevel p_49806_, BlockPos p_49807_, int p_49808_) {
++      if (p_49806_.m_46469_().m_46207_(GameRules.f_46136_) && !p_49806_.restoringBlockSnapshots) {
+          while(p_49808_ > 0) {
+             int i = ExperienceOrb.m_20782_(p_49808_);
+             p_49808_ -= i;
+@@ -284,6 +_,7 @@
+ 
+    }
+ 
++   @Deprecated //Forge: Use more sensitive version
+    public float m_7325_() {
+       return this.f_60444_;
+    }
+@@ -333,7 +_,7 @@
+       p_49822_.m_20256_(p_49822_.m_20184_().m_82542_(1.0D, 0.0D, 1.0D));
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
++   @Deprecated //Forge: Use more sensitive version
+    public ItemStack m_7397_(BlockGetter p_49823_, BlockPos p_49824_, BlockState p_49825_) {
+       return new ItemStack(this);
+    }
+@@ -365,6 +_,7 @@
+    public void m_6273_(Level p_49939_, BlockPos p_49940_) {
+    }
+ 
++   @Deprecated //Forge: Use more sensitive version
+    public boolean m_6903_(Explosion p_49826_) {
+       return true;
+    }
+@@ -384,6 +_,7 @@
+       return this.f_49786_;
+    }
+ 
++   @Deprecated //Forge: Use more sensitive version {@link IForgeBlockState#getSoundType(IWorldReader, BlockPos, Entity) }
+    public SoundType m_49962_(BlockState p_49963_) {
+       return this.f_60446_;
+    }
+@@ -393,7 +_,7 @@
+          this.f_49788_ = Item.m_41439_(this);
+       }
+ 
+-      return this.f_49788_;
++      return this.f_49788_.delegate.get(); //Forge: Vanilla caches the items, update with registry replacements.
+    }
+ 
+    public boolean m_49967_() {
+@@ -401,7 +_,7 @@
+    }
+ 
+    public String toString() {
+-      return "Block{" + Registry.f_122824_.m_7981_(this) + "}";
++      return "Block{" + getRegistryName() + "}";
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
+@@ -411,6 +_,78 @@
+    protected Block m_7374_() {
+       return this;
+    }
++
++   /* ======================================== FORGE START =====================================*/
++   protected Random RANDOM = new Random();
++   private net.minecraftforge.common.ToolType harvestTool;
++   private int harvestLevel;
++   private final net.minecraftforge.common.util.ReverseTagWrapper<Block> reverseTags = new net.minecraftforge.common.util.ReverseTagWrapper<>(this, BlockTags::m_13115_);
++
++   @Nullable
++   @Override
++   public net.minecraftforge.common.ToolType getHarvestTool(BlockState state) {
++      return harvestTool; //TODO: RE-Evaluate
++   }
++
++   @Override
++   public int getHarvestLevel(BlockState state) {
++     return harvestLevel; //TODO: RE-Evaluate
++   }
++
++   @Override
++   public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, net.minecraftforge.common.IPlantable plantable) {
++      BlockState plant = plantable.getPlant(world, pos.m_121945_(facing));
++      net.minecraftforge.common.PlantType type = plantable.getPlantType(world, pos.m_121945_(facing));
++
++      if (plant.m_60734_() == Blocks.f_50128_)
++         return state.m_60713_(Blocks.f_50128_) || state.m_60713_(Blocks.f_49992_) || state.m_60713_(Blocks.f_49993_);
++
++      if (plant.m_60734_() == Blocks.f_50130_ && this == Blocks.f_50130_)
++         return true;
++
++      if (plantable instanceof BushBlock && ((BushBlock)plantable).m_6266_(state, world, pos))
++         return true;
++
++      if (net.minecraftforge.common.PlantType.DESERT.equals(type)) {
++         return this.getBlock() == Blocks.f_49992_ || this.getBlock() == Blocks.f_50352_ || this.getBlock() instanceof GlazedTerracottaBlock;
++      } else if (net.minecraftforge.common.PlantType.NETHER.equals(type)) {
++         return this.getBlock() == Blocks.f_50135_;
++      } else if (net.minecraftforge.common.PlantType.CROP.equals(type)) {
++         return state.m_60713_(Blocks.f_50093_);
++      } else if (net.minecraftforge.common.PlantType.CAVE.equals(type)) {
++         return state.m_60783_(world, pos, Direction.UP);
++      } else if (net.minecraftforge.common.PlantType.PLAINS.equals(type)) {
++         return this.getBlock() == Blocks.f_50440_ || net.minecraftforge.common.Tags.Blocks.DIRT.m_8110_(this) || this.getBlock() == Blocks.f_50093_;
++      } else if (net.minecraftforge.common.PlantType.WATER.equals(type)) {
++         return state.m_60767_() == net.minecraft.world.level.material.Material.f_76305_; //&& state.getValue(BlockLiquidWrapper)
++      } else if (net.minecraftforge.common.PlantType.BEACH.equals(type)) {
++         boolean isBeach = state.m_60713_(Blocks.f_50440_) || net.minecraftforge.common.Tags.Blocks.DIRT.m_8110_(this) || state.m_60713_(Blocks.f_49992_) || state.m_60713_(Blocks.f_49993_);
++         boolean hasWater = false;
++         for (Direction face : Direction.Plane.HORIZONTAL) {
++             BlockState blockState = world.m_8055_(pos.m_121945_(face));
++             net.minecraft.world.level.material.FluidState fluidState = world.m_6425_(pos.m_121945_(face));
++             hasWater |= blockState.m_60713_(Blocks.f_50449_);
++             hasWater |= fluidState.m_76153_(net.minecraft.tags.FluidTags.f_13131_);
++             if (hasWater)
++                break; //No point continuing.
++         }
++         return isBeach && hasWater;
++      }
++      return false;
++  }
++
++  @Override
++  public final java.util.Set<net.minecraft.resources.ResourceLocation> getTags() {
++     return reverseTags.getTagNames();
++  }
++
++  static {
++      net.minecraftforge.common.ForgeHooks.setBlockToolSetter((block, tool, level) -> {
++            block.harvestTool = tool;
++            block.harvestLevel = level;
++      });
++  }
++   /* ========================================= FORGE END ======================================*/
+ 
+    public static final class BlockStatePairKey {
+       private final BlockState f_49980_;

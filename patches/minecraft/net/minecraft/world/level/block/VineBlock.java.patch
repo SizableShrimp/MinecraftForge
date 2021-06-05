@@ -1,0 +1,49 @@
+--- a/net/minecraft/world/level/block/VineBlock.java
++++ b/net/minecraft/world/level/block/VineBlock.java
+@@ -22,14 +_,14 @@
+ import net.minecraft.world.phys.shapes.Shapes;
+ import net.minecraft.world.phys.shapes.VoxelShape;
+ 
+-public class VineBlock extends Block {
++public class VineBlock extends Block implements net.minecraftforge.common.IForgeShearable {
+    public static final BooleanProperty f_57833_ = PipeBlock.f_55152_;
+    public static final BooleanProperty f_57834_ = PipeBlock.f_55148_;
+    public static final BooleanProperty f_57835_ = PipeBlock.f_55149_;
+    public static final BooleanProperty f_57836_ = PipeBlock.f_55150_;
+    public static final BooleanProperty f_57837_ = PipeBlock.f_55151_;
+-   public static final Map<Direction, BooleanProperty> f_57838_ = PipeBlock.f_55154_.entrySet().stream().filter((p_57886_) -> {
+-      return p_57886_.getKey() != Direction.DOWN;
++   public static final Map<Direction, BooleanProperty> f_57838_ = PipeBlock.f_55154_.entrySet().stream().filter((p_199782_0_) -> {
++      return p_199782_0_.getKey() != Direction.DOWN;
+    }).collect(Util.m_137448_());
+    private static final VoxelShape f_57839_ = Block.m_49796_(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+    private static final VoxelShape f_57840_ = Block.m_49796_(0.0D, 0.0D, 0.0D, 1.0D, 16.0D, 16.0D);
+@@ -152,14 +_,14 @@
+    }
+ 
+    public void m_7455_(BlockState p_57892_, ServerLevel p_57893_, BlockPos p_57894_, Random p_57895_) {
+-      if (p_57893_.f_46441_.nextInt(4) == 0) {
++      if (p_57893_.f_46441_.nextInt(4) == 0 && p_57893_.isAreaLoaded(p_57894_, 4)) { // Forge: check area to prevent loading unloaded chunks
+          Direction direction = Direction.m_122404_(p_57895_);
+          BlockPos blockpos = p_57894_.m_7494_();
+          if (direction.m_122434_().m_122479_() && !p_57892_.m_61143_(m_57883_(direction))) {
+             if (this.m_57850_(p_57893_, p_57894_)) {
+                BlockPos blockpos4 = p_57894_.m_121945_(direction);
+                BlockState blockstate4 = p_57893_.m_8055_(blockpos4);
+-               if (blockstate4.m_60795_()) {
++               if (blockstate4.isAir(p_57893_, blockpos4)) {
+                   Direction direction3 = direction.m_122427_();
+                   Direction direction4 = direction.m_122428_();
+                   boolean flag = p_57892_.m_61143_(m_57883_(direction3));
+@@ -216,8 +_,9 @@
+             if (p_57894_.m_123342_() > 0) {
+                BlockPos blockpos1 = p_57894_.m_7495_();
+                BlockState blockstate = p_57893_.m_8055_(blockpos1);
+-               if (blockstate.m_60795_() || blockstate.m_60713_(this)) {
+-                  BlockState blockstate1 = blockstate.m_60795_() ? this.m_49966_() : blockstate;
++               boolean isAir = blockstate.isAir(p_57893_, blockpos1);
++               if (isAir || blockstate.m_60713_(this)) {
++                  BlockState blockstate1 = isAir ? this.m_49966_() : blockstate;
+                   BlockState blockstate2 = this.m_57870_(p_57892_, blockstate1, p_57895_);
+                   if (blockstate1 != blockstate2 && this.m_57911_(blockstate2)) {
+                      p_57893_.m_7731_(blockpos1, blockstate2, 2);

@@ -1,0 +1,178 @@
+--- a/net/minecraft/util/datafix/schemas/V704.java
++++ b/net/minecraft/util/datafix/schemas/V704.java
+@@ -16,78 +_,78 @@
+ import net.minecraft.util.datafix.fixes.References;
+ 
+ public class V704 extends Schema {
+-   protected static final Map<String, String> f_18032_ = DataFixUtils.make(Maps.newHashMap(), (p_18048_) -> {
+-      p_18048_.put("minecraft:furnace", "minecraft:furnace");
+-      p_18048_.put("minecraft:lit_furnace", "minecraft:furnace");
+-      p_18048_.put("minecraft:chest", "minecraft:chest");
+-      p_18048_.put("minecraft:trapped_chest", "minecraft:chest");
+-      p_18048_.put("minecraft:ender_chest", "minecraft:ender_chest");
+-      p_18048_.put("minecraft:jukebox", "minecraft:jukebox");
+-      p_18048_.put("minecraft:dispenser", "minecraft:dispenser");
+-      p_18048_.put("minecraft:dropper", "minecraft:dropper");
+-      p_18048_.put("minecraft:sign", "minecraft:sign");
+-      p_18048_.put("minecraft:mob_spawner", "minecraft:mob_spawner");
+-      p_18048_.put("minecraft:noteblock", "minecraft:noteblock");
+-      p_18048_.put("minecraft:brewing_stand", "minecraft:brewing_stand");
+-      p_18048_.put("minecraft:enhanting_table", "minecraft:enchanting_table");
+-      p_18048_.put("minecraft:command_block", "minecraft:command_block");
+-      p_18048_.put("minecraft:beacon", "minecraft:beacon");
+-      p_18048_.put("minecraft:skull", "minecraft:skull");
+-      p_18048_.put("minecraft:daylight_detector", "minecraft:daylight_detector");
+-      p_18048_.put("minecraft:hopper", "minecraft:hopper");
+-      p_18048_.put("minecraft:banner", "minecraft:banner");
+-      p_18048_.put("minecraft:flower_pot", "minecraft:flower_pot");
+-      p_18048_.put("minecraft:repeating_command_block", "minecraft:command_block");
+-      p_18048_.put("minecraft:chain_command_block", "minecraft:command_block");
+-      p_18048_.put("minecraft:shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:white_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:orange_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:magenta_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:light_blue_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:yellow_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:lime_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:pink_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:gray_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:silver_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:cyan_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:purple_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:blue_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:brown_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:green_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:red_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:black_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:bed", "minecraft:bed");
+-      p_18048_.put("minecraft:light_gray_shulker_box", "minecraft:shulker_box");
+-      p_18048_.put("minecraft:banner", "minecraft:banner");
+-      p_18048_.put("minecraft:white_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:orange_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:magenta_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:light_blue_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:yellow_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:lime_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:pink_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:gray_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:silver_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:cyan_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:purple_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:blue_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:brown_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:green_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:red_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:black_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:standing_sign", "minecraft:sign");
+-      p_18048_.put("minecraft:wall_sign", "minecraft:sign");
+-      p_18048_.put("minecraft:piston_head", "minecraft:piston");
+-      p_18048_.put("minecraft:daylight_detector_inverted", "minecraft:daylight_detector");
+-      p_18048_.put("minecraft:unpowered_comparator", "minecraft:comparator");
+-      p_18048_.put("minecraft:powered_comparator", "minecraft:comparator");
+-      p_18048_.put("minecraft:wall_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:standing_banner", "minecraft:banner");
+-      p_18048_.put("minecraft:structure_block", "minecraft:structure_block");
+-      p_18048_.put("minecraft:end_portal", "minecraft:end_portal");
+-      p_18048_.put("minecraft:end_gateway", "minecraft:end_gateway");
+-      p_18048_.put("minecraft:sign", "minecraft:sign");
+-      p_18048_.put("minecraft:shield", "minecraft:banner");
++   protected static final Map<String, String> f_18032_ = DataFixUtils.make(Maps.newHashMap(), (p_209318_0_) -> {
++      p_209318_0_.put("minecraft:furnace", "minecraft:furnace");
++      p_209318_0_.put("minecraft:lit_furnace", "minecraft:furnace");
++      p_209318_0_.put("minecraft:chest", "minecraft:chest");
++      p_209318_0_.put("minecraft:trapped_chest", "minecraft:chest");
++      p_209318_0_.put("minecraft:ender_chest", "minecraft:ender_chest");
++      p_209318_0_.put("minecraft:jukebox", "minecraft:jukebox");
++      p_209318_0_.put("minecraft:dispenser", "minecraft:dispenser");
++      p_209318_0_.put("minecraft:dropper", "minecraft:dropper");
++      p_209318_0_.put("minecraft:sign", "minecraft:sign");
++      p_209318_0_.put("minecraft:mob_spawner", "minecraft:mob_spawner");
++      p_209318_0_.put("minecraft:noteblock", "minecraft:noteblock");
++      p_209318_0_.put("minecraft:brewing_stand", "minecraft:brewing_stand");
++      p_209318_0_.put("minecraft:enhanting_table", "minecraft:enchanting_table");
++      p_209318_0_.put("minecraft:command_block", "minecraft:command_block");
++      p_209318_0_.put("minecraft:beacon", "minecraft:beacon");
++      p_209318_0_.put("minecraft:skull", "minecraft:skull");
++      p_209318_0_.put("minecraft:daylight_detector", "minecraft:daylight_detector");
++      p_209318_0_.put("minecraft:hopper", "minecraft:hopper");
++      p_209318_0_.put("minecraft:banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:flower_pot", "minecraft:flower_pot");
++      p_209318_0_.put("minecraft:repeating_command_block", "minecraft:command_block");
++      p_209318_0_.put("minecraft:chain_command_block", "minecraft:command_block");
++      p_209318_0_.put("minecraft:shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:white_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:orange_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:magenta_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:light_blue_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:yellow_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:lime_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:pink_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:gray_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:silver_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:cyan_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:purple_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:blue_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:brown_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:green_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:red_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:black_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:bed", "minecraft:bed");
++      p_209318_0_.put("minecraft:light_gray_shulker_box", "minecraft:shulker_box");
++      p_209318_0_.put("minecraft:banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:white_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:orange_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:magenta_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:light_blue_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:yellow_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:lime_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:pink_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:gray_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:silver_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:cyan_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:purple_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:blue_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:brown_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:green_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:red_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:black_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:standing_sign", "minecraft:sign");
++      p_209318_0_.put("minecraft:wall_sign", "minecraft:sign");
++      p_209318_0_.put("minecraft:piston_head", "minecraft:piston");
++      p_209318_0_.put("minecraft:daylight_detector_inverted", "minecraft:daylight_detector");
++      p_209318_0_.put("minecraft:unpowered_comparator", "minecraft:comparator");
++      p_209318_0_.put("minecraft:powered_comparator", "minecraft:comparator");
++      p_209318_0_.put("minecraft:wall_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:standing_banner", "minecraft:banner");
++      p_209318_0_.put("minecraft:structure_block", "minecraft:structure_block");
++      p_209318_0_.put("minecraft:end_portal", "minecraft:end_portal");
++      p_209318_0_.put("minecraft:end_gateway", "minecraft:end_gateway");
++      p_209318_0_.put("minecraft:sign", "minecraft:sign");
++      p_209318_0_.put("minecraft:shield", "minecraft:banner");
+    });
+    protected static final HookFunction f_18033_ = new HookFunction() {
+       public <T> T apply(DynamicOps<T> p_18070_, T p_18071_) {
+@@ -114,13 +_,13 @@
+       m_18043_(p_18063_, map, "minecraft:furnace");
+       m_18043_(p_18063_, map, "minecraft:chest");
+       p_18063_.registerSimple(map, "minecraft:ender_chest");
+-      p_18063_.register(map, "minecraft:jukebox", (p_18058_) -> {
++      p_18063_.register(map, "minecraft:jukebox", (p_206641_1_) -> {
+          return DSL.optionalFields("RecordItem", References.f_16782_.in(p_18063_));
+       });
+       m_18043_(p_18063_, map, "minecraft:dispenser");
+       m_18043_(p_18063_, map, "minecraft:dropper");
+       p_18063_.registerSimple(map, "minecraft:sign");
+-      p_18063_.register(map, "minecraft:mob_spawner", (p_18055_) -> {
++      p_18063_.register(map, "minecraft:mob_spawner", (p_206646_1_) -> {
+          return References.f_16789_.in(p_18063_);
+       });
+       p_18063_.registerSimple(map, "minecraft:noteblock");
+@@ -133,7 +_,7 @@
+       p_18063_.registerSimple(map, "minecraft:daylight_detector");
+       m_18043_(p_18063_, map, "minecraft:hopper");
+       p_18063_.registerSimple(map, "minecraft:comparator");
+-      p_18063_.register(map, "minecraft:flower_pot", (p_18042_) -> {
++      p_18063_.register(map, "minecraft:flower_pot", (p_206640_1_) -> {
+          return DSL.optionalFields("Item", DSL.or(DSL.constType(DSL.intType()), References.f_16788_.in(p_18063_)));
+       });
+       p_18063_.registerSimple(map, "minecraft:banner");

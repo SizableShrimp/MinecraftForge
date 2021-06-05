@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/ScaffoldingBlock.java
++++ b/net/minecraft/world/level/block/ScaffoldingBlock.java
+@@ -31,7 +_,7 @@
+    public static final BooleanProperty f_56013_ = BlockStateProperties.f_61362_;
+    public static final BooleanProperty f_56014_ = BlockStateProperties.f_61427_;
+ 
+-   protected ScaffoldingBlock(BlockBehaviour.Properties p_56021_) {
++   public ScaffoldingBlock(BlockBehaviour.Properties p_56021_) {
+       super(p_56021_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_56012_, Integer.valueOf(7)).m_61124_(f_56013_, Boolean.valueOf(false)).m_61124_(f_56014_, Boolean.valueOf(false)));
+    }

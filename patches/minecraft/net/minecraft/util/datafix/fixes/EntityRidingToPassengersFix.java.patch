@@ -1,0 +1,35 @@
+--- a/net/minecraft/util/datafix/fixes/EntityRidingToPassengersFix.java
++++ b/net/minecraft/util/datafix/fixes/EntityRidingToPassengersFix.java
+@@ -45,17 +_,17 @@
+          OpticFinder<NewEntityTree> opticfinder2 = DSL.typeFinder(p_15645_);
+          Type<?> type4 = p_15642_.getType(References.f_16772_);
+          Type<?> type5 = p_15643_.getType(References.f_16772_);
+-         return TypeRewriteRule.seq(this.fixTypeEverywhere("EntityRidingToPassengerFix", type, type1, (p_15653_) -> {
+-            return (p_15661_) -> {
++         return TypeRewriteRule.seq(this.fixTypeEverywhere("EntityRidingToPassengerFix", type, type1, (p_209760_5_) -> {
++            return (p_208042_6_) -> {
+                Optional<Pair<String, Pair<Either<List<NewEntityTree>, Unit>, Entity>>> optional = Optional.empty();
+-               Pair<String, Pair<Either<OldEntityTree, Unit>, Entity>> pair = p_15661_;
++               Pair<String, Pair<Either<OldEntityTree, Unit>, Entity>> pair = p_208042_6_;
+ 
+                while(true) {
+-                  Either<List<NewEntityTree>, Unit> either = DataFixUtils.orElse(optional.map((p_15667_) -> {
+-                     Typed<NewEntityTree> typed = p_15645_.pointTyped(p_15653_).orElseThrow(() -> {
++                  Either<List<NewEntityTree>, Unit> either = DataFixUtils.orElse(optional.map((p_208037_4_) -> {
++                     Typed<NewEntityTree> typed = p_15645_.pointTyped(p_209760_5_).orElseThrow(() -> {
+                         return new IllegalStateException("Could not create new entity tree");
+                      });
+-                     NewEntityTree newentitytree = typed.set(opticfinder1, p_15667_).getOptional(opticfinder2).orElseThrow(() -> {
++                     NewEntityTree newentitytree = typed.set(opticfinder1, p_208037_4_).getOptional(opticfinder2).orElseThrow(() -> {
+                         return new IllegalStateException("Should always have an entity tree here");
+                      });
+                      return Either.left(ImmutableList.of(newentitytree));
+@@ -68,7 +_,7 @@
+                      });
+                   }
+ 
+-                  pair = (new Typed<>(p_15644_, p_15653_, optional1.get())).getOptional(opticfinder).orElseThrow(() -> {
++                  pair = (new Typed<>(p_15644_, p_209760_5_, optional1.get())).getOptional(opticfinder).orElseThrow(() -> {
+                      return new IllegalStateException("Should always have an entity here");
+                   });
+                }

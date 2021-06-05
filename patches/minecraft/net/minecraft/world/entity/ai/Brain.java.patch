@@ -1,0 +1,161 @@
+--- a/net/minecraft/world/entity/ai/Brain.java
++++ b/net/minecraft/world/entity/ai/Brain.java
+@@ -61,21 +_,21 @@
+       final MutableObject<Codec<Brain<E>>> mutableobject = new MutableObject<>();
+       mutableobject.setValue((new MapCodec<Brain<E>>() {
+          public <T> Stream<T> keys(DynamicOps<T> p_22029_) {
+-            return p_21947_.stream().flatMap((p_22020_) -> {
+-               return Util.m_137519_(p_22020_.m_26387_().map((p_21995_) -> {
+-                  return Registry.f_122871_.m_7981_(p_22020_);
++            return p_21947_.stream().flatMap((p_233734_0_) -> {
++               return Util.m_137519_(p_233734_0_.m_26387_().map((p_233727_1_) -> {
++                  return Registry.f_122871_.m_7981_(p_233734_0_);
+                }));
+-            }).map((p_22018_) -> {
+-               return p_22029_.createString(p_22018_.toString());
++            }).map((p_233733_1_) -> {
++               return p_22029_.createString(p_233733_1_.toString());
+             });
+          }
+ 
+          public <T> DataResult<Brain<E>> decode(DynamicOps<T> p_22022_, MapLike<T> p_22023_) {
+             MutableObject<DataResult<Builder<Brain.MemoryValue<?>>>> mutableobject1 = new MutableObject<>(DataResult.success(ImmutableList.builder()));
+-            p_22023_.entries().forEach((p_22015_) -> {
+-               DataResult<MemoryModuleType<?>> dataresult = Registry.f_122871_.parse(p_22022_, p_22015_.getFirst());
+-               DataResult<? extends Brain.MemoryValue<?>> dataresult1 = dataresult.flatMap((p_22003_) -> {
+-                  return this.m_21996_(p_22003_, p_22022_, (T)p_22015_.getSecond());
++            p_22023_.entries().forEach((p_233732_3_) -> {
++               DataResult<MemoryModuleType<?>> dataresult = Registry.f_122871_.parse(p_22022_, p_233732_3_.getFirst());
++               DataResult<? extends Brain.MemoryValue<?>> dataresult1 = dataresult.flatMap((p_233729_3_) -> {
++                  return this.m_21996_(p_233729_3_, p_22022_, (T)p_233732_3_.getSecond());
+                });
+                mutableobject1.setValue(mutableobject1.getValue().apply2(Builder::add, dataresult1));
+             });
+@@ -86,16 +_,16 @@
+          private <T, U> DataResult<Brain.MemoryValue<U>> m_21996_(MemoryModuleType<U> p_21997_, DynamicOps<T> p_21998_, T p_21999_) {
+             return p_21997_.m_26387_().map(DataResult::success).orElseGet(() -> {
+                return DataResult.error("No codec for memory: " + p_21997_);
+-            }).flatMap((p_22011_) -> {
+-               return p_22011_.parse(p_21998_, p_21999_);
+-            }).map((p_21992_) -> {
+-               return new Brain.MemoryValue<>(p_21997_, Optional.of(p_21992_));
++            }).flatMap((p_233731_2_) -> {
++               return p_233731_2_.parse(p_21998_, p_21999_);
++            }).map((p_233726_1_) -> {
++               return new Brain.MemoryValue<>(p_21997_, Optional.of(p_233726_1_));
+             });
+          }
+ 
+          public <T> RecordBuilder<T> encode(Brain<E> p_21985_, DynamicOps<T> p_21986_, RecordBuilder<T> p_21987_) {
+-            p_21985_.m_21975_().forEach((p_22007_) -> {
+-               p_22007_.m_22047_(p_21986_, p_21987_);
++            p_21985_.m_21975_().forEach((p_233730_2_) -> {
++               p_233730_2_.m_22047_(p_21986_, p_21987_);
+             });
+             return p_21987_;
+          }
+@@ -131,8 +_,8 @@
+    }
+ 
+    private Stream<Brain.MemoryValue<?>> m_21975_() {
+-      return this.f_21843_.entrySet().stream().map((p_21929_) -> {
+-         return Brain.MemoryValue.m_22059_(p_21929_.getKey(), p_21929_.getValue());
++      return this.f_21843_.entrySet().stream().map((p_233707_0_) -> {
++         return Brain.MemoryValue.m_22059_(p_233707_0_.getKey(), p_233707_0_.getValue());
+       });
+    }
+ 
+@@ -168,12 +_,12 @@
+    }
+ 
+    public <U> Optional<U> m_21952_(MemoryModuleType<U> p_21953_) {
+-      return (Optional<U>)this.f_21843_.get(p_21953_).map(ExpirableValue::m_26319_);
++      return (Optional<U>) this.f_21843_.get(p_21953_).map(ExpirableValue::m_26319_);
+    }
+ 
+    public <U> boolean m_21938_(MemoryModuleType<U> p_21939_, U p_21940_) {
+-      return !this.m_21874_(p_21939_) ? false : this.m_21952_(p_21939_).filter((p_21922_) -> {
+-         return p_21922_.equals(p_21940_);
++      return !this.m_21874_(p_21939_) ? false : this.m_21952_(p_21939_).filter((p_233704_1_) -> {
++         return p_233704_1_.equals(p_21940_);
+       }).isPresent();
+    }
+ 
+@@ -311,9 +_,9 @@
+       }
+ 
+       for(Pair<Integer, ? extends Behavior<? super E>> pair : p_21909_) {
+-         this.f_21845_.computeIfAbsent(pair.getFirst(), (p_21917_) -> {
++         this.f_21845_.computeIfAbsent(pair.getFirst(), (p_233703_0_) -> {
+             return Maps.newHashMap();
+-         }).computeIfAbsent(p_21908_, (p_21972_) -> {
++         }).computeIfAbsent(p_21908_, (p_233717_0_) -> {
+             return Sets.newLinkedHashSet();
+          }).add(pair.getSecond());
+       }
+@@ -431,32 +_,6 @@
+       return builder.build();
+    }
+ 
+-   static final class MemoryValue<U> {
+-      private final MemoryModuleType<U> f_22030_;
+-      private final Optional<? extends ExpirableValue<U>> f_22031_;
+-
+-      private static <U> Brain.MemoryValue<U> m_22059_(MemoryModuleType<U> p_22060_, Optional<? extends ExpirableValue<?>> p_22061_) {
+-         return new Brain.MemoryValue<>(p_22060_, (Optional<? extends ExpirableValue<U>>)p_22061_);
+-      }
+-
+-      private MemoryValue(MemoryModuleType<U> p_22033_, Optional<? extends ExpirableValue<U>> p_22034_) {
+-         this.f_22030_ = p_22033_;
+-         this.f_22031_ = p_22034_;
+-      }
+-
+-      private void m_22042_(Brain<?> p_22043_) {
+-         p_22043_.m_21941_(this.f_22030_, this.f_22031_);
+-      }
+-
+-      public <T> void m_22047_(DynamicOps<T> p_22048_, RecordBuilder<T> p_22049_) {
+-         this.f_22030_.m_26387_().ifPresent((p_22053_) -> {
+-            this.f_22031_.ifPresent((p_22058_) -> {
+-               p_22049_.add(Registry.f_122871_.encodeStart(p_22048_, this.f_22030_), p_22053_.encodeStart(p_22048_, p_22058_));
+-            });
+-         });
+-      }
+-   }
+-
+    public static final class Provider<E extends LivingEntity> {
+       private final Collection<? extends MemoryModuleType<?>> f_22062_;
+       private final Collection<? extends SensorType<? extends Sensor<? super E>>> f_22063_;
+@@ -472,6 +_,32 @@
+          return this.f_22064_.parse(p_22074_).resultOrPartial(Brain.f_21841_::error).orElseGet(() -> {
+             return new Brain<>(this.f_22062_, this.f_22063_, ImmutableList.of(), () -> {
+                return this.f_22064_;
++            });
++         });
++      }
++   }
++
++   static final class MemoryValue<U> {
++      private final MemoryModuleType<U> f_22030_;
++      private final Optional<? extends ExpirableValue<U>> f_22031_;
++
++      private static <U> Brain.MemoryValue<U> m_22059_(MemoryModuleType<U> p_22060_, Optional<? extends ExpirableValue<?>> p_22061_) {
++         return new Brain.MemoryValue<>(p_22060_, (Optional<? extends ExpirableValue<U>>) p_22061_);
++      }
++
++      private MemoryValue(MemoryModuleType<U> p_22033_, Optional<? extends ExpirableValue<U>> p_22034_) {
++         this.f_22030_ = p_22033_;
++         this.f_22031_ = p_22034_;
++      }
++
++      private void m_22042_(Brain<?> p_22043_) {
++         p_22043_.m_21941_(this.f_22030_, this.f_22031_);
++      }
++
++      public <T> void m_22047_(DynamicOps<T> p_22048_, RecordBuilder<T> p_22049_) {
++         this.f_22030_.m_26387_().ifPresent((p_233741_3_) -> {
++            this.f_22031_.ifPresent((p_233742_4_) -> {
++               p_22049_.add(Registry.f_122871_.encodeStart(p_22048_, this.f_22030_), p_233741_3_.encodeStart(p_22048_, p_233742_4_));
+             });
+          });
+       }

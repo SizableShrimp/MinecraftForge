@@ -1,0 +1,166 @@
+--- a/net/minecraft/util/datafix/schemas/V1460.java
++++ b/net/minecraft/util/datafix/schemas/V1460.java
+@@ -30,23 +_,23 @@
+       Map<String, Supplier<TypeTemplate>> map = Maps.newHashMap();
+       p_17658_.registerSimple(map, "minecraft:area_effect_cloud");
+       m_17560_(p_17658_, map, "minecraft:armor_stand");
+-      p_17658_.register(map, "minecraft:arrow", (p_17683_) -> {
++      p_17658_.register(map, "minecraft:arrow", (p_206552_1_) -> {
+          return DSL.optionalFields("inBlockState", References.f_16783_.in(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:bat");
+       m_17560_(p_17658_, map, "minecraft:blaze");
+       p_17658_.registerSimple(map, "minecraft:boat");
+       m_17560_(p_17658_, map, "minecraft:cave_spider");
+-      p_17658_.register(map, "minecraft:chest_minecart", (p_17680_) -> {
++      p_17658_.register(map, "minecraft:chest_minecart", (p_206546_1_) -> {
+          return DSL.optionalFields("DisplayState", References.f_16783_.in(p_17658_), "Items", DSL.list(References.f_16782_.in(p_17658_)));
+       });
+       m_17560_(p_17658_, map, "minecraft:chicken");
+-      p_17658_.register(map, "minecraft:commandblock_minecart", (p_17677_) -> {
++      p_17658_.register(map, "minecraft:commandblock_minecart", (p_206529_1_) -> {
+          return DSL.optionalFields("DisplayState", References.f_16783_.in(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:cow");
+       m_17560_(p_17658_, map, "minecraft:creeper");
+-      p_17658_.register(map, "minecraft:donkey", (p_17674_) -> {
++      p_17658_.register(map, "minecraft:donkey", (p_206533_1_) -> {
+          return DSL.optionalFields("Items", DSL.list(References.f_16782_.in(p_17658_)), "SaddleItem", References.f_16782_.in(p_17658_), V100.m_17330_(p_17658_));
+       });
+       p_17658_.registerSimple(map, "minecraft:dragon_fireball");
+@@ -54,7 +_,7 @@
+       m_17560_(p_17658_, map, "minecraft:elder_guardian");
+       p_17658_.registerSimple(map, "minecraft:ender_crystal");
+       m_17560_(p_17658_, map, "minecraft:ender_dragon");
+-      p_17658_.register(map, "minecraft:enderman", (p_17671_) -> {
++      p_17658_.register(map, "minecraft:enderman", (p_206523_1_) -> {
+          return DSL.optionalFields("carriedBlockState", References.f_16783_.in(p_17658_), V100.m_17330_(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:endermite");
+@@ -62,44 +_,44 @@
+       p_17658_.registerSimple(map, "minecraft:evocation_fangs");
+       m_17560_(p_17658_, map, "minecraft:evocation_illager");
+       p_17658_.registerSimple(map, "minecraft:eye_of_ender_signal");
+-      p_17658_.register(map, "minecraft:falling_block", (p_17668_) -> {
++      p_17658_.register(map, "minecraft:falling_block", (p_206524_1_) -> {
+          return DSL.optionalFields("BlockState", References.f_16783_.in(p_17658_), "TileEntityData", References.f_16781_.in(p_17658_));
+       });
+       p_17658_.registerSimple(map, "minecraft:fireball");
+-      p_17658_.register(map, "minecraft:fireworks_rocket", (p_17665_) -> {
++      p_17658_.register(map, "minecraft:fireworks_rocket", (p_206554_1_) -> {
+          return DSL.optionalFields("FireworksItem", References.f_16782_.in(p_17658_));
+       });
+-      p_17658_.register(map, "minecraft:furnace_minecart", (p_17654_) -> {
++      p_17658_.register(map, "minecraft:furnace_minecart", (p_206515_1_) -> {
+          return DSL.optionalFields("DisplayState", References.f_16783_.in(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:ghast");
+       m_17560_(p_17658_, map, "minecraft:giant");
+       m_17560_(p_17658_, map, "minecraft:guardian");
+-      p_17658_.register(map, "minecraft:hopper_minecart", (p_17651_) -> {
++      p_17658_.register(map, "minecraft:hopper_minecart", (p_206541_1_) -> {
+          return DSL.optionalFields("DisplayState", References.f_16783_.in(p_17658_), "Items", DSL.list(References.f_16782_.in(p_17658_)));
+       });
+-      p_17658_.register(map, "minecraft:horse", (p_17648_) -> {
++      p_17658_.register(map, "minecraft:horse", (p_206545_1_) -> {
+          return DSL.optionalFields("ArmorItem", References.f_16782_.in(p_17658_), "SaddleItem", References.f_16782_.in(p_17658_), V100.m_17330_(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:husk");
+       p_17658_.registerSimple(map, "minecraft:illusion_illager");
+-      p_17658_.register(map, "minecraft:item", (p_17645_) -> {
++      p_17658_.register(map, "minecraft:item", (p_206520_1_) -> {
+          return DSL.optionalFields("Item", References.f_16782_.in(p_17658_));
+       });
+-      p_17658_.register(map, "minecraft:item_frame", (p_17642_) -> {
++      p_17658_.register(map, "minecraft:item_frame", (p_206535_1_) -> {
+          return DSL.optionalFields("Item", References.f_16782_.in(p_17658_));
+       });
+       p_17658_.registerSimple(map, "minecraft:leash_knot");
+-      p_17658_.register(map, "minecraft:llama", (p_17639_) -> {
++      p_17658_.register(map, "minecraft:llama", (p_209327_1_) -> {
+          return DSL.optionalFields("Items", DSL.list(References.f_16782_.in(p_17658_)), "SaddleItem", References.f_16782_.in(p_17658_), "DecorItem", References.f_16782_.in(p_17658_), V100.m_17330_(p_17658_));
+       });
+       p_17658_.registerSimple(map, "minecraft:llama_spit");
+       m_17560_(p_17658_, map, "minecraft:magma_cube");
+-      p_17658_.register(map, "minecraft:minecart", (p_17634_) -> {
++      p_17658_.register(map, "minecraft:minecart", (p_206555_1_) -> {
+          return DSL.optionalFields("DisplayState", References.f_16783_.in(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:mooshroom");
+-      p_17658_.register(map, "minecraft:mule", (p_17629_) -> {
++      p_17658_.register(map, "minecraft:mule", (p_206526_1_) -> {
+          return DSL.optionalFields("Items", DSL.list(References.f_16782_.in(p_17658_)), "SaddleItem", References.f_16782_.in(p_17658_), V100.m_17330_(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:ocelot");
+@@ -107,7 +_,7 @@
+       p_17658_.registerSimple(map, "minecraft:parrot");
+       m_17560_(p_17658_, map, "minecraft:pig");
+       m_17560_(p_17658_, map, "minecraft:polar_bear");
+-      p_17658_.register(map, "minecraft:potion", (p_17624_) -> {
++      p_17658_.register(map, "minecraft:potion", (p_206542_1_) -> {
+          return DSL.optionalFields("Potion", References.f_16782_.in(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:rabbit");
+@@ -116,28 +_,28 @@
+       p_17658_.registerSimple(map, "minecraft:shulker_bullet");
+       m_17560_(p_17658_, map, "minecraft:silverfish");
+       m_17560_(p_17658_, map, "minecraft:skeleton");
+-      p_17658_.register(map, "minecraft:skeleton_horse", (p_17619_) -> {
++      p_17658_.register(map, "minecraft:skeleton_horse", (p_206516_1_) -> {
+          return DSL.optionalFields("SaddleItem", References.f_16782_.in(p_17658_), V100.m_17330_(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:slime");
+       p_17658_.registerSimple(map, "minecraft:small_fireball");
+       p_17658_.registerSimple(map, "minecraft:snowball");
+       m_17560_(p_17658_, map, "minecraft:snowman");
+-      p_17658_.register(map, "minecraft:spawner_minecart", (p_17614_) -> {
++      p_17658_.register(map, "minecraft:spawner_minecart", (p_206527_1_) -> {
+          return DSL.optionalFields("DisplayState", References.f_16783_.in(p_17658_), References.f_16789_.in(p_17658_));
+       });
+-      p_17658_.register(map, "minecraft:spectral_arrow", (p_17609_) -> {
++      p_17658_.register(map, "minecraft:spectral_arrow", (p_206522_1_) -> {
+          return DSL.optionalFields("inBlockState", References.f_16783_.in(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:spider");
+       m_17560_(p_17658_, map, "minecraft:squid");
+       m_17560_(p_17658_, map, "minecraft:stray");
+       p_17658_.registerSimple(map, "minecraft:tnt");
+-      p_17658_.register(map, "minecraft:tnt_minecart", (p_17604_) -> {
++      p_17658_.register(map, "minecraft:tnt_minecart", (p_206551_1_) -> {
+          return DSL.optionalFields("DisplayState", References.f_16783_.in(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:vex");
+-      p_17658_.register(map, "minecraft:villager", (p_17598_) -> {
++      p_17658_.register(map, "minecraft:villager", (p_206534_1_) -> {
+          return DSL.optionalFields("Inventory", DSL.list(References.f_16782_.in(p_17658_)), "Offers", DSL.optionalFields("Recipes", DSL.list(DSL.optionalFields("buy", References.f_16782_.in(p_17658_), "buyB", References.f_16782_.in(p_17658_), "sell", References.f_16782_.in(p_17658_)))), V100.m_17330_(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:villager_golem");
+@@ -150,7 +_,7 @@
+       p_17658_.registerSimple(map, "minecraft:xp_bottle");
+       p_17658_.registerSimple(map, "minecraft:xp_orb");
+       m_17560_(p_17658_, map, "minecraft:zombie");
+-      p_17658_.register(map, "minecraft:zombie_horse", (p_17592_) -> {
++      p_17658_.register(map, "minecraft:zombie_horse", (p_206521_1_) -> {
+          return DSL.optionalFields("SaddleItem", References.f_16782_.in(p_17658_), V100.m_17330_(p_17658_));
+       });
+       m_17560_(p_17658_, map, "minecraft:zombie_pigman");
+@@ -164,16 +_,16 @@
+       m_17575_(p_17656_, map, "minecraft:chest");
+       m_17575_(p_17656_, map, "minecraft:trapped_chest");
+       p_17656_.registerSimple(map, "minecraft:ender_chest");
+-      p_17656_.register(map, "minecraft:jukebox", (p_17586_) -> {
++      p_17656_.register(map, "minecraft:jukebox", (p_206549_1_) -> {
+          return DSL.optionalFields("RecordItem", References.f_16782_.in(p_17656_));
+       });
+       m_17575_(p_17656_, map, "minecraft:dispenser");
+       m_17575_(p_17656_, map, "minecraft:dropper");
+       p_17656_.registerSimple(map, "minecraft:sign");
+-      p_17656_.register(map, "minecraft:mob_spawner", (p_17574_) -> {
++      p_17656_.register(map, "minecraft:mob_spawner", (p_206530_1_) -> {
+          return References.f_16789_.in(p_17656_);
+       });
+-      p_17656_.register(map, "minecraft:piston", (p_17559_) -> {
++      p_17656_.register(map, "minecraft:piston", (p_206518_1_) -> {
+          return DSL.optionalFields("blockState", References.f_16783_.in(p_17656_));
+       });
+       m_17575_(p_17656_, map, "minecraft:brewing_stand");

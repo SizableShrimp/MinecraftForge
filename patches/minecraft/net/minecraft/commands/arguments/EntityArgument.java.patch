@@ -1,0 +1,15 @@
+--- a/net/minecraft/commands/arguments/EntityArgument.java
++++ b/net/minecraft/commands/arguments/EntityArgument.java
+@@ -121,10 +_,10 @@
+          } catch (CommandSyntaxException commandsyntaxexception) {
+          }
+ 
+-         return entityselectorparser.m_121249_(p_91483_, (p_91457_) -> {
++         return entityselectorparser.m_121249_(p_91483_, (p_201942_2_) -> {
+             Collection<String> collection = sharedsuggestionprovider.m_5982_();
+             Iterable<String> iterable = (Iterable<String>)(this.f_91444_ ? collection : Iterables.concat(collection, sharedsuggestionprovider.m_6264_()));
+-            SharedSuggestionProvider.m_82970_(iterable, p_91457_);
++            SharedSuggestionProvider.m_82970_(iterable, p_201942_2_);
+          });
+       } else {
+          return Suggestions.empty();

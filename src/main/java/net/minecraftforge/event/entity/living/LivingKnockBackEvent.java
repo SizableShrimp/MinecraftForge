@@ -19,11 +19,7 @@
 
 package net.minecraftforge.event.entity.living;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Cancelable;
 
 /**
@@ -41,7 +37,7 @@ import net.minecraftforge.eventbus.api.Cancelable;
  * {@link #ratioX} contains the x ratio of the knock back. <br>
  * {@link #ratioZ} contains the z ratio of the knock back. <br>
  * <br>
- * This event is {@link Cancelable}.<br>
+ * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
  * If this event is canceled, the entity is not knocked back.<br>
  * <br>
  * This event does not have a result. {@link HasResult}<br>

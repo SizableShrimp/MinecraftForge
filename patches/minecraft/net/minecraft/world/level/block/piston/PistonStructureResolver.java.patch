@@ -1,0 +1,90 @@
+--- a/net/minecraft/world/level/block/piston/PistonStructureResolver.java
++++ b/net/minecraft/world/level/block/piston/PistonStructureResolver.java
+@@ -5,8 +_,6 @@
+ import net.minecraft.core.BlockPos;
+ import net.minecraft.core.Direction;
+ import net.minecraft.world.level.Level;
+-import net.minecraft.world.level.block.Block;
+-import net.minecraft.world.level.block.Blocks;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.level.material.PushReaction;
+ 
+@@ -51,7 +_,7 @@
+       } else {
+          for(int i = 0; i < this.f_60414_.size(); ++i) {
+             BlockPos blockpos = this.f_60414_.get(i);
+-            if (m_60426_(this.f_60409_.m_8055_(blockpos).m_60734_()) && !this.m_60431_(blockpos)) {
++            if (this.f_60409_.m_8055_(blockpos).isStickyBlock() && !this.m_60431_(blockpos)) {
+                return false;
+             }
+          }
+@@ -60,24 +_,9 @@
+       }
+    }
+ 
+-   private static boolean m_60426_(Block p_60427_) {
+-      return p_60427_ == Blocks.f_50374_ || p_60427_ == Blocks.f_50719_;
+-   }
+-
+-   private static boolean m_60428_(Block p_60429_, Block p_60430_) {
+-      if (p_60429_ == Blocks.f_50719_ && p_60430_ == Blocks.f_50374_) {
+-         return false;
+-      } else if (p_60429_ == Blocks.f_50374_ && p_60430_ == Blocks.f_50719_) {
+-         return false;
+-      } else {
+-         return m_60426_(p_60429_) || m_60426_(p_60430_);
+-      }
+-   }
+-
+    private boolean m_60433_(BlockPos p_60434_, Direction p_60435_) {
+       BlockState blockstate = this.f_60409_.m_8055_(p_60434_);
+-      Block block = blockstate.m_60734_();
+-      if (blockstate.m_60795_()) {
++      if (f_60409_.m_46859_(p_60434_)) {
+          return true;
+       } else if (!PistonBaseBlock.m_60204_(blockstate, this.f_60409_, p_60434_, this.f_60413_, false, p_60435_)) {
+          return true;
+@@ -90,12 +_,12 @@
+          if (i + this.f_60414_.size() > 12) {
+             return false;
+          } else {
+-            while(m_60426_(block)) {
++            BlockState oldState;
++            while(blockstate.isStickyBlock()) {
+                BlockPos blockpos = p_60434_.m_5484_(this.f_60413_.m_122424_(), i);
+-               Block block1 = block;
++               oldState = blockstate;
+                blockstate = this.f_60409_.m_8055_(blockpos);
+-               block = blockstate.m_60734_();
+-               if (blockstate.m_60795_() || !m_60428_(block1, block) || !PistonBaseBlock.m_60204_(blockstate, this.f_60409_, blockpos, this.f_60413_, false, this.f_60413_.m_122424_()) || blockpos.equals(this.f_60410_)) {
++               if (blockstate.isAir(this.f_60409_, blockpos) || !oldState.canStickTo(blockstate) || !PistonBaseBlock.m_60204_(blockstate, this.f_60409_, blockpos, this.f_60413_, false, this.f_60413_.m_122424_()) || blockpos.equals(this.f_60410_)) {
+                   break;
+                }
+ 
+@@ -122,7 +_,7 @@
+ 
+                   for(int k = 0; k <= j + l; ++k) {
+                      BlockPos blockpos2 = this.f_60414_.get(k);
+-                     if (m_60426_(this.f_60409_.m_8055_(blockpos2).m_60734_()) && !this.m_60431_(blockpos2)) {
++                     if (this.f_60409_.m_8055_(blockpos2).isStickyBlock() && !this.m_60431_(blockpos2)) {
+                         return false;
+                      }
+                   }
+@@ -131,7 +_,7 @@
+                }
+ 
+                blockstate = this.f_60409_.m_8055_(blockpos1);
+-               if (blockstate.m_60795_()) {
++               if (blockstate.isAir(f_60409_, blockpos1)) {
+                   return true;
+                }
+ 
+@@ -176,7 +_,7 @@
+          if (direction.m_122434_() != this.f_60413_.m_122434_()) {
+             BlockPos blockpos = p_60432_.m_121945_(direction);
+             BlockState blockstate1 = this.f_60409_.m_8055_(blockpos);
+-            if (m_60428_(blockstate1.m_60734_(), blockstate.m_60734_()) && !this.m_60433_(blockpos, direction)) {
++            if (blockstate1.canStickTo(blockstate) && !this.m_60433_(blockpos, direction)) {
+                return false;
+             }
+          }

@@ -1,0 +1,153 @@
+--- a/net/minecraft/world/level/levelgen/structure/StrongholdPieces.java
++++ b/net/minecraft/world/level/levelgen/structure/StrongholdPieces.java
+@@ -922,29 +_,6 @@
+       }
+    }
+ 
+-   static class SmoothStoneSelector extends StructurePiece.BlockSelector {
+-      private SmoothStoneSelector() {
+-      }
+-
+-      public void m_7889_(Random p_73188_, int p_73189_, int p_73190_, int p_73191_, boolean p_73192_) {
+-         if (p_73192_) {
+-            float f = p_73188_.nextFloat();
+-            if (f < 0.2F) {
+-               this.f_73553_ = Blocks.f_50224_.m_49966_();
+-            } else if (f < 0.5F) {
+-               this.f_73553_ = Blocks.f_50223_.m_49966_();
+-            } else if (f < 0.55F) {
+-               this.f_73553_ = Blocks.f_50176_.m_49966_();
+-            } else {
+-               this.f_73553_ = Blocks.f_50222_.m_49966_();
+-            }
+-         } else {
+-            this.f_73553_ = Blocks.f_50627_.m_49966_();
+-         }
+-
+-      }
+-   }
+-
+    public static class StairsDown extends StrongholdPieces.StrongholdPiece {
+       private final boolean f_73193_;
+ 
+@@ -1036,6 +_,71 @@
+       }
+    }
+ 
++   public static class StraightStairsDown extends StrongholdPieces.StrongholdPiece {
++      public StraightStairsDown(int p_73276_, Random p_73277_, BoundingBox p_73278_, Direction p_73279_) {
++         super(StructurePieceType.f_67111_, p_73276_);
++         this.m_73519_(p_73279_);
++         this.f_73303_ = this.m_73326_(p_73277_);
++         this.f_73383_ = p_73278_;
++      }
++
++      public StraightStairsDown(StructureManager p_73281_, CompoundTag p_73282_) {
++         super(StructurePieceType.f_67111_, p_73282_);
++      }
++
++      public void m_6811_(StructurePiece p_73292_, List<StructurePiece> p_73293_, Random p_73294_) {
++         this.m_73320_((StrongholdPieces.StartPiece)p_73292_, p_73293_, p_73294_, 1, 1);
++      }
++
++      public static StrongholdPieces.StraightStairsDown m_73295_(List<StructurePiece> p_73296_, Random p_73297_, int p_73298_, int p_73299_, int p_73300_, Direction p_73301_, int p_73302_) {
++         BoundingBox boundingbox = BoundingBox.m_71031_(p_73298_, p_73299_, p_73300_, -1, -7, 0, 5, 11, 8, p_73301_);
++         return m_73318_(boundingbox) && StructurePiece.m_73521_(p_73296_, boundingbox) == null ? new StrongholdPieces.StraightStairsDown(p_73302_, p_73297_, boundingbox, p_73301_) : null;
++      }
++
++      public boolean m_7832_(WorldGenLevel p_73284_, StructureFeatureManager p_73285_, ChunkGenerator p_73286_, Random p_73287_, BoundingBox p_73288_, ChunkPos p_73289_, BlockPos p_73290_) {
++         this.m_73464_(p_73284_, p_73288_, 0, 0, 0, 4, 10, 7, true, p_73287_, StrongholdPieces.f_72855_);
++         this.m_73310_(p_73284_, p_73287_, p_73288_, this.f_73303_, 1, 7, 0);
++         this.m_73310_(p_73284_, p_73287_, p_73288_, StrongholdPieces.StrongholdPiece.SmallDoorType.OPENING, 1, 1, 7);
++         BlockState blockstate = Blocks.f_50157_.m_49966_().m_61124_(StairBlock.f_56841_, Direction.SOUTH);
++
++         for(int i = 0; i < 6; ++i) {
++            this.m_73434_(p_73284_, blockstate, 1, 6 - i, 1 + i, p_73288_);
++            this.m_73434_(p_73284_, blockstate, 2, 6 - i, 1 + i, p_73288_);
++            this.m_73434_(p_73284_, blockstate, 3, 6 - i, 1 + i, p_73288_);
++            if (i < 5) {
++               this.m_73434_(p_73284_, Blocks.f_50222_.m_49966_(), 1, 5 - i, 1 + i, p_73288_);
++               this.m_73434_(p_73284_, Blocks.f_50222_.m_49966_(), 2, 5 - i, 1 + i, p_73288_);
++               this.m_73434_(p_73284_, Blocks.f_50222_.m_49966_(), 3, 5 - i, 1 + i, p_73288_);
++            }
++         }
++
++         return true;
++      }
++   }
++
++   static class SmoothStoneSelector extends StructurePiece.BlockSelector {
++      private SmoothStoneSelector() {
++      }
++
++      public void m_7889_(Random p_73188_, int p_73189_, int p_73190_, int p_73191_, boolean p_73192_) {
++         if (p_73192_) {
++            float f = p_73188_.nextFloat();
++            if (f < 0.2F) {
++               this.f_73553_ = Blocks.f_50224_.m_49966_();
++            } else if (f < 0.5F) {
++               this.f_73553_ = Blocks.f_50223_.m_49966_();
++            } else if (f < 0.55F) {
++               this.f_73553_ = Blocks.f_50176_.m_49966_();
++            } else {
++               this.f_73553_ = Blocks.f_50222_.m_49966_();
++            }
++         } else {
++            this.f_73553_ = Blocks.f_50627_.m_49966_();
++         }
++
++      }
++   }
++
+    public static class Straight extends StrongholdPieces.StrongholdPiece {
+       private final boolean f_73243_;
+       private final boolean f_73244_;
+@@ -1094,48 +_,6 @@
+ 
+          if (this.f_73244_) {
+             this.m_73441_(p_73254_, p_73258_, 4, 1, 2, 4, 3, 4, f_73382_, f_73382_, false);
+-         }
+-
+-         return true;
+-      }
+-   }
+-
+-   public static class StraightStairsDown extends StrongholdPieces.StrongholdPiece {
+-      public StraightStairsDown(int p_73276_, Random p_73277_, BoundingBox p_73278_, Direction p_73279_) {
+-         super(StructurePieceType.f_67111_, p_73276_);
+-         this.m_73519_(p_73279_);
+-         this.f_73303_ = this.m_73326_(p_73277_);
+-         this.f_73383_ = p_73278_;
+-      }
+-
+-      public StraightStairsDown(StructureManager p_73281_, CompoundTag p_73282_) {
+-         super(StructurePieceType.f_67111_, p_73282_);
+-      }
+-
+-      public void m_6811_(StructurePiece p_73292_, List<StructurePiece> p_73293_, Random p_73294_) {
+-         this.m_73320_((StrongholdPieces.StartPiece)p_73292_, p_73293_, p_73294_, 1, 1);
+-      }
+-
+-      public static StrongholdPieces.StraightStairsDown m_73295_(List<StructurePiece> p_73296_, Random p_73297_, int p_73298_, int p_73299_, int p_73300_, Direction p_73301_, int p_73302_) {
+-         BoundingBox boundingbox = BoundingBox.m_71031_(p_73298_, p_73299_, p_73300_, -1, -7, 0, 5, 11, 8, p_73301_);
+-         return m_73318_(boundingbox) && StructurePiece.m_73521_(p_73296_, boundingbox) == null ? new StrongholdPieces.StraightStairsDown(p_73302_, p_73297_, boundingbox, p_73301_) : null;
+-      }
+-
+-      public boolean m_7832_(WorldGenLevel p_73284_, StructureFeatureManager p_73285_, ChunkGenerator p_73286_, Random p_73287_, BoundingBox p_73288_, ChunkPos p_73289_, BlockPos p_73290_) {
+-         this.m_73464_(p_73284_, p_73288_, 0, 0, 0, 4, 10, 7, true, p_73287_, StrongholdPieces.f_72855_);
+-         this.m_73310_(p_73284_, p_73287_, p_73288_, this.f_73303_, 1, 7, 0);
+-         this.m_73310_(p_73284_, p_73287_, p_73288_, StrongholdPieces.StrongholdPiece.SmallDoorType.OPENING, 1, 1, 7);
+-         BlockState blockstate = Blocks.f_50157_.m_49966_().m_61124_(StairBlock.f_56841_, Direction.SOUTH);
+-
+-         for(int i = 0; i < 6; ++i) {
+-            this.m_73434_(p_73284_, blockstate, 1, 6 - i, 1 + i, p_73288_);
+-            this.m_73434_(p_73284_, blockstate, 2, 6 - i, 1 + i, p_73288_);
+-            this.m_73434_(p_73284_, blockstate, 3, 6 - i, 1 + i, p_73288_);
+-            if (i < 5) {
+-               this.m_73434_(p_73284_, Blocks.f_50222_.m_49966_(), 1, 5 - i, 1 + i, p_73288_);
+-               this.m_73434_(p_73284_, Blocks.f_50222_.m_49966_(), 2, 5 - i, 1 + i, p_73288_);
+-               this.m_73434_(p_73284_, Blocks.f_50222_.m_49966_(), 3, 5 - i, 1 + i, p_73288_);
+-            }
+          }
+ 
+          return true;

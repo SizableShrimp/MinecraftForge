@@ -1,0 +1,47 @@
+--- a/net/minecraft/client/gui/components/AbstractSelectionList.java
++++ b/net/minecraft/client/gui/components/AbstractSelectionList.java
+@@ -7,7 +_,6 @@
+ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+ import com.mojang.blaze3d.vertex.PoseStack;
+ import com.mojang.blaze3d.vertex.Tesselator;
+-import java.util.AbstractList;
+ import java.util.Collection;
+ import java.util.List;
+ import java.util.Objects;
+@@ -370,7 +_,7 @@
+    }
+ 
+    protected void m_6778_(AbstractSelectionList.SelectionDirection p_93463_) {
+-      this.m_93464_(p_93463_, (p_93510_) -> {
++      this.m_93464_(p_93463_, (p_241573_0_) -> {
+          return true;
+       });
+    }
+@@ -492,10 +_,17 @@
+       p_93506_.f_93521_ = this;
+    }
+ 
++   public int getWidth() { return this.f_93388_; }
++   public int getHeight() { return this.f_93389_; }
++   public int getTop() { return this.f_93390_; }
++   public int getBottom() { return this.f_93391_; }
++   public int getLeft() { return this.f_93393_; }
++   public int getRight() { return this.f_93392_; }
++
+    @OnlyIn(Dist.CLIENT)
+    public abstract static class Entry<E extends AbstractSelectionList.Entry<E>> implements GuiEventListener {
+       @Deprecated
+-      private AbstractSelectionList<E> f_93521_;
++      protected AbstractSelectionList<E> f_93521_;
+ 
+       public abstract void m_6311_(PoseStack p_93523_, int p_93524_, int p_93525_, int p_93526_, int p_93527_, int p_93528_, int p_93529_, int p_93530_, boolean p_93531_, float p_93532_);
+ 
+@@ -511,7 +_,7 @@
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
+-   class TrackedList extends AbstractList<E> {
++   class TrackedList extends java.util.AbstractList<E> {
+       private final List<E> f_93550_ = Lists.newArrayList();
+ 
+       private TrackedList() {

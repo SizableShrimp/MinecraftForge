@@ -1,0 +1,10 @@
+--- a/net/minecraft/world/level/block/EntityBlock.java
++++ b/net/minecraft/world/level/block/EntityBlock.java
+@@ -4,6 +_,7 @@
+ import net.minecraft.world.level.BlockGetter;
+ import net.minecraft.world.level.block.entity.BlockEntity;
+ 
++@Deprecated //Forge: Do not use, use BlockState.hasTileEntity/Block.createTileEntity
+ public interface EntityBlock {
+    @Nullable
+    BlockEntity m_6194_(BlockGetter p_53178_);

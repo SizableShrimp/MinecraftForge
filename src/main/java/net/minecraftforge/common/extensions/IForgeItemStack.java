@@ -40,7 +40,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ToolType;

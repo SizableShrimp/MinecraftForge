@@ -1,0 +1,62 @@
+--- a/net/minecraft/client/gui/screens/PauseScreen.java
++++ b/net/minecraft/client/gui/screens/PauseScreen.java
+@@ -31,46 +_,46 @@
+    private void m_96338_() {
+       int i = -16;
+       int j = 98;
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 102, this.f_96544_ / 4 + 24 + -16, 204, 20, new TranslatableComponent("menu.returnToGame"), (p_96337_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 102, this.f_96544_ / 4 + 24 + -16, 204, 20, new TranslatableComponent("menu.returnToGame"), (p_213070_1_) -> {
+          this.f_96541_.m_91152_((Screen)null);
+          this.f_96541_.f_91067_.m_91601_();
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 102, this.f_96544_ / 4 + 48 + -16, 98, 20, new TranslatableComponent("gui.advancements"), (p_96335_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 102, this.f_96544_ / 4 + 48 + -16, 98, 20, new TranslatableComponent("gui.advancements"), (p_213065_1_) -> {
+          this.f_96541_.m_91152_(new AdvancementsScreen(this.f_96541_.f_91074_.f_108617_.m_105145_()));
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ / 4 + 48 + -16, 98, 20, new TranslatableComponent("gui.stats"), (p_96333_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ / 4 + 48 + -16, 98, 20, new TranslatableComponent("gui.stats"), (p_213066_1_) -> {
+          this.f_96541_.m_91152_(new StatsScreen(this, this.f_96541_.f_91074_.m_108630_()));
+       }));
+       String s = SharedConstants.m_136187_().isStable() ? "https://aka.ms/javafeedback?ref=game" : "https://aka.ms/snapshotfeedback?ref=game";
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 102, this.f_96544_ / 4 + 72 + -16, 98, 20, new TranslatableComponent("menu.sendFeedback"), (p_96318_) -> {
+-         this.f_96541_.m_91152_(new ConfirmLinkScreen((p_96326_) -> {
+-            if (p_96326_) {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 102, this.f_96544_ / 4 + 72 + -16, 98, 20, new TranslatableComponent("menu.sendFeedback"), (p_213072_2_) -> {
++         this.f_96541_.m_91152_(new ConfirmLinkScreen((p_213069_2_) -> {
++            if (p_213069_2_) {
+                Util.m_137581_().m_137646_(s);
+             }
+ 
+             this.f_96541_.m_91152_(this);
+          }, s, true));
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ / 4 + 72 + -16, 98, 20, new TranslatableComponent("menu.reportBugs"), (p_96331_) -> {
+-         this.f_96541_.m_91152_(new ConfirmLinkScreen((p_96328_) -> {
+-            if (p_96328_) {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ / 4 + 72 + -16, 98, 20, new TranslatableComponent("menu.reportBugs"), (p_213063_1_) -> {
++         this.f_96541_.m_91152_(new ConfirmLinkScreen((p_213064_1_) -> {
++            if (p_213064_1_) {
+                Util.m_137581_().m_137646_("https://aka.ms/snapshotbugs?ref=game");
+             }
+ 
+             this.f_96541_.m_91152_(this);
+          }, "https://aka.ms/snapshotbugs?ref=game", true));
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 102, this.f_96544_ / 4 + 96 + -16, 98, 20, new TranslatableComponent("menu.options"), (p_96323_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 102, this.f_96544_ / 4 + 96 + -16, 98, 20, new TranslatableComponent("menu.options"), (p_213071_1_) -> {
+          this.f_96541_.m_91152_(new OptionsScreen(this, this.f_96541_.f_91066_));
+       }));
+-      Button button = this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ / 4 + 96 + -16, 98, 20, new TranslatableComponent("menu.shareToLan"), (p_96321_) -> {
++      Button button = this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ / 4 + 96 + -16, 98, 20, new TranslatableComponent("menu.shareToLan"), (p_213068_1_) -> {
+          this.f_96541_.m_91152_(new ShareToLanScreen(this));
+       }));
+       button.f_93623_ = this.f_96541_.m_91091_() && !this.f_96541_.m_91092_().m_6992_();
+-      Button button1 = this.m_7082_(new Button(this.f_96543_ / 2 - 102, this.f_96544_ / 4 + 120 + -16, 204, 20, new TranslatableComponent("menu.returnToMenu"), (p_96315_) -> {
++      Button button1 = this.m_7082_(new Button(this.f_96543_ / 2 - 102, this.f_96544_ / 4 + 120 + -16, 204, 20, new TranslatableComponent("menu.returnToMenu"), (p_213067_1_) -> {
+          boolean flag = this.f_96541_.m_91090_();
+          boolean flag1 = this.f_96541_.m_91294_();
+-         p_96315_.f_93623_ = false;
++         p_213067_1_.f_93623_ = false;
+          this.f_96541_.f_91073_.m_7462_();
+          if (flag) {
+             this.f_96541_.m_91320_(new GenericDirtMessageScreen(new TranslatableComponent("menu.savingLevel")));

@@ -22,7 +22,6 @@ package net.minecraftforge.event.entity.player;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Player.BedSleepingProblem;
 import net.minecraft.core.BlockPos;
-import net.minecraftforge.common.MinecraftForge;
 
 import java.util.Optional;
 

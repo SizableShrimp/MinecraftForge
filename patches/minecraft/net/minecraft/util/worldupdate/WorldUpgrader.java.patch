@@ -1,0 +1,24 @@
+--- a/net/minecraft/util/worldupdate/WorldUpgrader.java
++++ b/net/minecraft/util/worldupdate/WorldUpgrader.java
+@@ -61,8 +_,8 @@
+       this.f_18801_ = p_18816_;
+       this.f_18813_ = new DimensionDataStorage(new File(this.f_18801_.m_78299_(Level.f_46428_), "data"), p_18817_);
+       this.f_18802_ = f_18798_.newThread(this::m_18838_);
+-      this.f_18802_.setUncaughtExceptionHandler((p_18825_, p_18826_) -> {
+-         f_18797_.error("Error upgrading world", p_18826_);
++      this.f_18802_.setUncaughtExceptionHandler((p_219956_1_, p_219956_2_) -> {
++         f_18797_.error("Error upgrading world", p_219956_2_);
+          this.f_18811_ = new TranslatableComponent("optimizeWorld.stage.failed");
+          this.f_18805_ = true;
+       });
+@@ -193,8 +_,8 @@
+    private List<ChunkPos> m_18830_(ResourceKey<Level> p_18831_) {
+       File file1 = this.f_18801_.m_78299_(p_18831_);
+       File file2 = new File(file1, "region");
+-      File[] afile = file2.listFiles((p_18822_, p_18823_) -> {
+-         return p_18823_.endsWith(".mca");
++      File[] afile = file2.listFiles((p_219954_0_, p_219954_1_) -> {
++         return p_219954_1_.endsWith(".mca");
+       });
+       if (afile == null) {
+          return ImmutableList.of();

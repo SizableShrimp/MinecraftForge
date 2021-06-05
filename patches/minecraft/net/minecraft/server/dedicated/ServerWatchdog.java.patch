@@ -1,0 +1,22 @@
+--- a/net/minecraft/server/dedicated/ServerWatchdog.java
++++ b/net/minecraft/server/dedicated/ServerWatchdog.java
+@@ -40,7 +_,7 @@
+             ThreadMXBean threadmxbean = ManagementFactory.getThreadMXBean();
+             ThreadInfo[] athreadinfo = threadmxbean.dumpAllThreads(true, true);
+             StringBuilder stringbuilder = new StringBuilder();
+-            Error error = new Error("Watchdog");
++            Error error = new Error(String.format("ServerHangWatchdog detected that a single server tick took %.2f seconds (should be max 0.05)", k / 1000F)); // Forge: don't just make a crash report with a seemingly-inexplicable Error
+ 
+             for(ThreadInfo threadinfo : athreadinfo) {
+                if (threadinfo.getThreadId() == this.f_139782_.m_6304_().getId()) {
+@@ -60,8 +_,8 @@
+                return this.f_139782_.m_129910_().m_5470_().m_46170_(GameRules.f_46143_).toString();
+             });
+             crashreportcategory1.m_128165_("Level stats", () -> {
+-               return Streams.stream(this.f_139782_.m_129785_()).map((p_139789_) -> {
+-                  return p_139789_.m_46472_() + ": " + p_139789_.m_8590_();
++               return Streams.stream(this.f_139782_.m_129785_()).map((p_244716_0_) -> {
++                  return p_244716_0_.m_46472_() + ": " + p_244716_0_.m_8590_();
+                }).collect(Collectors.joining(",\n"));
+             });
+             Bootstrap.m_135875_("Crash report:\n" + crashreport.m_127526_());

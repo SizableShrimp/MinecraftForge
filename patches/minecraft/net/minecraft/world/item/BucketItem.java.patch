@@ -1,0 +1,87 @@
+--- a/net/minecraft/world/item/BucketItem.java
++++ b/net/minecraft/world/item/BucketItem.java
+@@ -31,14 +_,28 @@
+ public class BucketItem extends Item {
+    private final Fluid f_40687_;
+ 
++   // Forge: Use the other constructor that takes a Supplier
++   @Deprecated
+    public BucketItem(Fluid p_40689_, Item.Properties p_40690_) {
+       super(p_40690_);
+       this.f_40687_ = p_40689_;
++      this.fluidSupplier = p_40689_.delegate;
++   }
++
++   /**
++    * @param supplier A fluid supplier such as {@link net.minecraftforge.fml.RegistryObject<Fluid>}
++    */
++   public BucketItem(java.util.function.Supplier<? extends Fluid> supplier, Item.Properties builder) {
++      super(builder);
++      this.f_40687_ = null;
++      this.fluidSupplier = supplier;
+    }
+ 
+    public InteractionResultHolder<ItemStack> m_7203_(Level p_40703_, Player p_40704_, InteractionHand p_40705_) {
+       ItemStack itemstack = p_40704_.m_21120_(p_40705_);
+       HitResult hitresult = m_41435_(p_40703_, p_40704_, this.f_40687_ == Fluids.f_76191_ ? ClipContext.Fluid.SOURCE_ONLY : ClipContext.Fluid.NONE);
++      InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onBucketUse(p_40704_, p_40703_, itemstack, hitresult);
++      if (ret != null) return ret;
+       if (hitresult.m_6662_() == HitResult.Type.MISS) {
+          return InteractionResultHolder.m_19098_(itemstack);
+       } else if (hitresult.m_6662_() != HitResult.Type.BLOCK) {
+@@ -55,7 +_,10 @@
+                   Fluid fluid = ((BucketPickup)blockstate1.m_60734_()).m_5935_(p_40703_, blockpos, blockstate1);
+                   if (fluid != Fluids.f_76191_) {
+                      p_40704_.m_36246_(Stats.f_12982_.m_12902_(this));
+-                     p_40704_.m_5496_(fluid.m_76108_(FluidTags.f_13132_) ? SoundEvents.f_11783_ : SoundEvents.f_11781_, 1.0F, 1.0F);
++
++                     SoundEvent soundevent = this.f_40687_.getAttributes().getFillSound();
++                     if (soundevent == null) soundevent = fluid.m_76108_(FluidTags.f_13132_) ? SoundEvents.f_11783_ : SoundEvents.f_11781_;
++                     p_40704_.m_5496_(soundevent, 1.0F, 1.0F);
+                      ItemStack itemstack1 = ItemUtils.m_41813_(itemstack, p_40704_, new ItemStack(fluid.m_6859_()));
+                      if (!p_40703_.f_46443_) {
+                         CriteriaTriggers.f_10576_.m_38772_((ServerPlayer)p_40704_, new ItemStack(fluid.m_6859_()));
+@@ -68,7 +_,7 @@
+                return InteractionResultHolder.m_19100_(itemstack);
+             } else {
+                BlockState blockstate = p_40703_.m_8055_(blockpos);
+-               BlockPos blockpos2 = blockstate.m_60734_() instanceof LiquidBlockContainer && this.f_40687_ == Fluids.f_76193_ ? blockpos : blockpos1;
++               BlockPos blockpos2 = canBlockContainFluid(p_40703_, blockpos, blockstate) ? blockpos : blockpos1;
+                if (this.m_40691_(p_40704_, p_40703_, blockpos2, blockhitresult)) {
+                   this.m_6660_(p_40703_, itemstack, blockpos2);
+                   if (p_40704_ instanceof ServerPlayer) {
+@@ -116,7 +_,7 @@
+             }
+ 
+             return true;
+-         } else if (block instanceof LiquidBlockContainer && this.f_40687_ == Fluids.f_76193_) {
++         } else if (block instanceof LiquidBlockContainer && ((LiquidBlockContainer)block).m_6044_(p_40693_,p_40694_,blockstate,f_40687_)) {
+             ((LiquidBlockContainer)block).m_7361_(p_40693_, p_40694_, blockstate, ((FlowingFluid)this.f_40687_).m_76068_(false));
+             this.m_7718_(p_40692_, p_40693_, p_40694_);
+             return true;
+@@ -136,7 +_,24 @@
+    }
+ 
+    protected void m_7718_(@Nullable Player p_40696_, LevelAccessor p_40697_, BlockPos p_40698_) {
+-      SoundEvent soundevent = this.f_40687_.m_76108_(FluidTags.f_13132_) ? SoundEvents.f_11780_ : SoundEvents.f_11778_;
++      SoundEvent soundevent = this.f_40687_.getAttributes().getEmptySound();
++      if(soundevent == null) soundevent = this.f_40687_.m_76108_(FluidTags.f_13132_) ? SoundEvents.f_11780_ : SoundEvents.f_11778_;
+       p_40697_.m_5594_(p_40696_, p_40698_, soundevent, SoundSource.BLOCKS, 1.0F, 1.0F);
++   }
++
++   @Override
++   public net.minecraftforge.common.capabilities.ICapabilityProvider initCapabilities(ItemStack stack, @Nullable net.minecraft.nbt.CompoundTag nbt) {
++      if (this.getClass() == BucketItem.class)
++         return new net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper(stack);
++      else
++         return super.initCapabilities(stack, nbt);
++   }
++
++   private final java.util.function.Supplier<? extends Fluid> fluidSupplier;
++   public Fluid getFluid() { return fluidSupplier.get(); }
++
++   private boolean canBlockContainFluid(Level worldIn, BlockPos posIn, BlockState blockstate)
++   {
++      return blockstate.m_60734_() instanceof LiquidBlockContainer && ((LiquidBlockContainer)blockstate.m_60734_()).m_6044_(worldIn, posIn, blockstate, this.f_40687_);
+    }
+ }

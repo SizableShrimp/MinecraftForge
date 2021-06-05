@@ -1,0 +1,30 @@
+--- a/net/minecraft/world/level/chunk/LevelChunkSection.java
++++ b/net/minecraft/world/level/chunk/LevelChunkSection.java
+@@ -114,19 +_,19 @@
+       this.f_62969_ = 0;
+       this.f_62970_ = 0;
+       this.f_62971_ = 0;
+-      this.f_62972_.m_63099_((p_62998_, p_62999_) -> {
+-         FluidState fluidstate = p_62998_.m_60819_();
+-         if (!p_62998_.m_60795_()) {
+-            this.f_62969_ = (short)(this.f_62969_ + p_62999_);
+-            if (p_62998_.m_60823_()) {
+-               this.f_62970_ = (short)(this.f_62970_ + p_62999_);
++      this.f_62972_.m_63099_((p_225496_1_, p_225496_2_) -> {
++         FluidState fluidstate = p_225496_1_.m_60819_();
++         if (!p_225496_1_.m_60795_()) {
++            this.f_62969_ = (short)(this.f_62969_ + p_225496_2_);
++            if (p_225496_1_.m_60823_()) {
++               this.f_62970_ = (short)(this.f_62970_ + p_225496_2_);
+             }
+          }
+ 
+          if (!fluidstate.m_76178_()) {
+-            this.f_62969_ = (short)(this.f_62969_ + p_62999_);
++            this.f_62969_ = (short)(this.f_62969_ + p_225496_2_);
+             if (fluidstate.m_76187_()) {
+-               this.f_62971_ = (short)(this.f_62971_ + p_62999_);
++               this.f_62971_ = (short)(this.f_62971_ + p_225496_2_);
+             }
+          }
+ 

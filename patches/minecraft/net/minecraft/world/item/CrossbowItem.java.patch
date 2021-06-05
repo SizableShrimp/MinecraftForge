@@ -1,0 +1,24 @@
+--- a/net/minecraft/world/item/CrossbowItem.java
++++ b/net/minecraft/world/item/CrossbowItem.java
+@@ -177,8 +_,8 @@
+    }
+ 
+    public static boolean m_40871_(ItemStack p_40872_, Item p_40873_) {
+-      return m_40941_(p_40872_).stream().anyMatch((p_40870_) -> {
+-         return p_40870_.m_41720_() == p_40873_;
++      return m_40941_(p_40872_).stream().anyMatch((p_220010_1_) -> {
++         return p_220010_1_.m_41720_() == p_40873_;
+       });
+    }
+ 
+@@ -207,8 +_,8 @@
+             projectile.m_6686_((double)vector3f.m_122239_(), (double)vector3f.m_122260_(), (double)vector3f.m_122269_(), p_40902_, p_40903_);
+          }
+ 
+-         p_40898_.m_41622_(flag ? 3 : 1, p_40896_, (p_40858_) -> {
+-            p_40858_.m_21190_(p_40897_);
++         p_40898_.m_41622_(flag ? 3 : 1, p_40896_, (p_220017_1_) -> {
++            p_220017_1_.m_21190_(p_40897_);
+          });
+          p_40895_.m_7967_(projectile);
+          p_40895_.m_6263_((Player)null, p_40896_.m_20185_(), p_40896_.m_20186_(), p_40896_.m_20189_(), SoundEvents.f_11847_, SoundSource.PLAYERS, 1.0F, p_40900_);

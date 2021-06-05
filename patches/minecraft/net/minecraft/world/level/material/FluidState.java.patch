@@ -1,0 +1,19 @@
+--- a/net/minecraft/world/level/material/FluidState.java
++++ b/net/minecraft/world/level/material/FluidState.java
+@@ -20,7 +_,7 @@
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+-public final class FluidState extends StateHolder<Fluid, FluidState> {
++public final class FluidState extends StateHolder<Fluid, FluidState> implements net.minecraftforge.common.extensions.IForgeFluidState {
+    public static final Codec<FluidState> f_76146_ = m_61127_(Registry.f_122822_, Fluid::m_76145_).stable();
+ 
+    public FluidState(Fluid p_76149_, ImmutableMap<Property<?>, Comparable<?>> p_76150_, MapCodec<FluidState> p_76151_) {
+@@ -101,6 +_,7 @@
+       return this.m_76152_().m_76108_(p_76154_);
+    }
+ 
++   @Deprecated //Forge: Use more sensitive version
+    public float m_76190_() {
+       return this.m_76152_().m_6752_();
+    }

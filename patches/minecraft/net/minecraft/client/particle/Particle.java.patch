@@ -1,8 +1,8 @@
 --- a/net/minecraft/client/particle/Particle.java
 +++ b/net/minecraft/client/particle/Particle.java
 @@ -208,4 +_,12 @@
-    public void func_187108_a(AxisAlignedBB p_187108_1_) {
-       this.field_187120_G = p_187108_1_;
+    public void m_107259_(AABB p_107260_) {
+       this.f_107207_ = p_107260_;
     }
 +
 +   /**

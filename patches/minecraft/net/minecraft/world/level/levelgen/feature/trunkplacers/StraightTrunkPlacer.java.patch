@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/trunkplacers/StraightTrunkPlacer.java
++++ b/net/minecraft/world/level/levelgen/feature/trunkplacers/StraightTrunkPlacer.java
+@@ -13,8 +_,8 @@
+ import net.minecraft.world.level.levelgen.structure.BoundingBox;
+ 
+ public class StraightTrunkPlacer extends TrunkPlacer {
+-   public static final Codec<StraightTrunkPlacer> f_70245_ = RecordCodecBuilder.create((p_70261_) -> {
+-      return m_70305_(p_70261_).apply(p_70261_, StraightTrunkPlacer::new);
++   public static final Codec<StraightTrunkPlacer> f_70245_ = RecordCodecBuilder.create((p_236904_0_) -> {
++      return m_70305_(p_236904_0_).apply(p_236904_0_, StraightTrunkPlacer::new);
+    });
+ 
+    public StraightTrunkPlacer(int p_70248_, int p_70249_, int p_70250_) {

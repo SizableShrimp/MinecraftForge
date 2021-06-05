@@ -1,0 +1,13 @@
+--- a/net/minecraft/util/datafix/fixes/NamedEntityFix.java
++++ b/net/minecraft/util/datafix/fixes/NamedEntityFix.java
+@@ -22,8 +_,8 @@
+ 
+    public TypeRewriteRule makeRule() {
+       OpticFinder<?> opticfinder = DSL.namedChoice(this.f_16462_, this.getInputSchema().getChoiceType(this.f_16463_, this.f_16462_));
+-      return this.fixTypeEverywhereTyped(this.f_16461_, this.getInputSchema().getType(this.f_16463_), this.getOutputSchema().getType(this.f_16463_), (p_16472_) -> {
+-         return p_16472_.updateTyped(opticfinder, this.getOutputSchema().getChoiceType(this.f_16463_, this.f_16462_), this::m_7504_);
++      return this.fixTypeEverywhereTyped(this.f_16461_, this.getInputSchema().getType(this.f_16463_), this.getOutputSchema().getType(this.f_16463_), (p_206371_2_) -> {
++         return p_206371_2_.updateTyped(opticfinder, this.getOutputSchema().getChoiceType(this.f_16463_, this.f_16462_), this::m_7504_);
+       });
+    }
+ 

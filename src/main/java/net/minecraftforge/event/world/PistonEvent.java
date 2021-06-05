@@ -28,7 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.Cancelable;
 
 /**
- * Base piston event, use {@link Post} and {@link Pre}
+ * Base piston event, use {@link PistonEvent.Post} and {@link PistonEvent.Pre}
  */
 public abstract class PistonEvent extends BlockEvent
 {
@@ -87,7 +87,7 @@ public abstract class PistonEvent extends BlockEvent
     }
 
     /**
-     * Fires after the piston has moved and set surrounding states. This will not fire if {@link Pre} is cancelled.
+     * Fires after the piston has moved and set surrounding states. This will not fire if {@link PistonEvent.Pre} is cancelled.
      */
     public static class Post extends PistonEvent
     {

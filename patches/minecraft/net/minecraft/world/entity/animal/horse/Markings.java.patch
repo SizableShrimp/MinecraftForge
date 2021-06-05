@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/entity/animal/horse/Markings.java
++++ b/net/minecraft/world/entity/animal/horse/Markings.java
+@@ -10,8 +_,8 @@
+    WHITE_DOTS(3),
+    BLACK_DOTS(4);
+ 
+-   private static final Markings[] f_30861_ = Arrays.stream(values()).sorted(Comparator.comparingInt(Markings::m_30869_)).toArray((p_30873_) -> {
+-      return new Markings[p_30873_];
++   private static final Markings[] f_30861_ = Arrays.stream(values()).sorted(Comparator.comparingInt(Markings::m_30869_)).toArray((p_234249_0_) -> {
++      return new Markings[p_234249_0_];
+    });
+    private final int f_30862_;
+ 

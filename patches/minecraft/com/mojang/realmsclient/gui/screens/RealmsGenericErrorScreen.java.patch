@@ -1,18 +1,23 @@
 --- a/com/mojang/realmsclient/gui/screens/RealmsGenericErrorScreen.java
 +++ b/com/mojang/realmsclient/gui/screens/RealmsGenericErrorScreen.java
-@@ -63,6 +_,15 @@
+@@ -58,10 +_,19 @@
+ 
+    public void m_7856_() {
+       NarrationHelper.m_120670_(this.f_88666_.getString() + ": " + this.f_88667_.getString());
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 52, 200, 20, new TextComponent("Ok"), (p_88686_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 52, 200, 20, new TextComponent("Ok"), (p_237840_1_) -> {
+          this.f_96541_.m_91152_(this.f_88665_);
        }));
     }
- 
++
 +    @Override
-+    public boolean func_231046_a_(int key, int scanCode, int modifiers) {
++    public boolean m_7933_(int key, int scanCode, int modifiers) {
 +        if (key == org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE) {
-+            field_230706_i_.func_147108_a(this.field_224228_a);
++            f_96541_.m_91152_(this.f_88665_);
 +            return true;
 +        }
-+        return super.func_231046_a_(key, scanCode, modifiers);
++        return super.m_7933_(key, scanCode, modifiers);
 +    }
-+
-    public void func_230430_a_(MatrixStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
-       this.func_230446_a_(p_230430_1_);
-       func_238472_a_(p_230430_1_, this.field_230712_o_, this.field_224229_b, this.field_230708_k_ / 2, 80, 16777215);
+ 
+    public void m_6305_(PoseStack p_88679_, int p_88680_, int p_88681_, float p_88682_) {
+       this.m_7333_(p_88679_);

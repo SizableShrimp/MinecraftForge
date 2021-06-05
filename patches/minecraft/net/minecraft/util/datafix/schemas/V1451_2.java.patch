@@ -1,0 +1,11 @@
+--- a/net/minecraft/util/datafix/schemas/V1451_2.java
++++ b/net/minecraft/util/datafix/schemas/V1451_2.java
+@@ -14,7 +_,7 @@
+ 
+    public Map<String, Supplier<TypeTemplate>> registerBlockEntities(Schema p_17442_) {
+       Map<String, Supplier<TypeTemplate>> map = super.registerBlockEntities(p_17442_);
+-      p_17442_.register(map, "minecraft:piston", (p_17440_) -> {
++      p_17442_.register(map, "minecraft:piston", (p_206510_1_) -> {
+          return DSL.optionalFields("blockState", References.f_16783_.in(p_17442_));
+       });
+       return map;

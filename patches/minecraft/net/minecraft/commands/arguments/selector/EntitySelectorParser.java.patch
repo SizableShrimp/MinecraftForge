@@ -1,0 +1,150 @@
+--- a/net/minecraft/commands/arguments/selector/EntitySelectorParser.java
++++ b/net/minecraft/commands/arguments/selector/EntitySelectorParser.java
+@@ -31,32 +_,32 @@
+ 
+ public class EntitySelectorParser {
+    public static final SimpleCommandExceptionType f_121190_ = new SimpleCommandExceptionType(new TranslatableComponent("argument.entity.invalid"));
+-   public static final DynamicCommandExceptionType f_121191_ = new DynamicCommandExceptionType((p_121301_) -> {
+-      return new TranslatableComponent("argument.entity.selector.unknown", p_121301_);
++   public static final DynamicCommandExceptionType f_121191_ = new DynamicCommandExceptionType((p_208703_0_) -> {
++      return new TranslatableComponent("argument.entity.selector.unknown", p_208703_0_);
+    });
+    public static final SimpleCommandExceptionType f_121192_ = new SimpleCommandExceptionType(new TranslatableComponent("argument.entity.selector.not_allowed"));
+    public static final SimpleCommandExceptionType f_121193_ = new SimpleCommandExceptionType(new TranslatableComponent("argument.entity.selector.missing"));
+    public static final SimpleCommandExceptionType f_121194_ = new SimpleCommandExceptionType(new TranslatableComponent("argument.entity.options.unterminated"));
+-   public static final DynamicCommandExceptionType f_121195_ = new DynamicCommandExceptionType((p_121267_) -> {
+-      return new TranslatableComponent("argument.entity.options.valueless", p_121267_);
++   public static final DynamicCommandExceptionType f_121195_ = new DynamicCommandExceptionType((p_208711_0_) -> {
++      return new TranslatableComponent("argument.entity.options.valueless", p_208711_0_);
+    });
+-   public static final BiConsumer<Vec3, List<? extends Entity>> f_121196_ = (p_121326_, p_121327_) -> {
+-   };
+-   public static final BiConsumer<Vec3, List<? extends Entity>> f_121197_ = (p_121313_, p_121314_) -> {
+-      p_121314_.sort((p_121295_, p_121296_) -> {
+-         return Doubles.compare(p_121295_.m_20238_(p_121313_), p_121296_.m_20238_(p_121313_));
+-      });
+-   };
+-   public static final BiConsumer<Vec3, List<? extends Entity>> f_121198_ = (p_121298_, p_121299_) -> {
+-      p_121299_.sort((p_121261_, p_121262_) -> {
+-         return Doubles.compare(p_121262_.m_20238_(p_121298_), p_121261_.m_20238_(p_121298_));
+-      });
+-   };
+-   public static final BiConsumer<Vec3, List<? extends Entity>> f_121199_ = (p_121264_, p_121265_) -> {
+-      Collections.shuffle(p_121265_);
+-   };
+-   public static final BiFunction<SuggestionsBuilder, Consumer<SuggestionsBuilder>, CompletableFuture<Suggestions>> f_121200_ = (p_121363_, p_121364_) -> {
+-      return p_121363_.buildFuture();
++   public static final BiConsumer<Vec3, List<? extends Entity>> f_121196_ = (p_197402_0_, p_197402_1_) -> {
++   };
++   public static final BiConsumer<Vec3, List<? extends Entity>> f_121197_ = (p_197392_0_, p_197392_1_) -> {
++      p_197392_1_.sort((p_197393_1_, p_197393_2_) -> {
++         return Doubles.compare(p_197393_1_.m_20238_(p_197392_0_), p_197393_2_.m_20238_(p_197392_0_));
++      });
++   };
++   public static final BiConsumer<Vec3, List<? extends Entity>> f_121198_ = (p_197383_0_, p_197383_1_) -> {
++      p_197383_1_.sort((p_197369_1_, p_197369_2_) -> {
++         return Doubles.compare(p_197369_2_.m_20238_(p_197383_0_), p_197369_1_.m_20238_(p_197383_0_));
++      });
++   };
++   public static final BiConsumer<Vec3, List<? extends Entity>> f_121199_ = (p_197368_0_, p_197368_1_) -> {
++      Collections.shuffle(p_197368_1_);
++   };
++   public static final BiFunction<SuggestionsBuilder, Consumer<SuggestionsBuilder>, CompletableFuture<Suggestions>> f_121200_ = (p_201342_0_, p_201342_1_) -> {
++      return p_201342_0_.buildFuture();
+    };
+    private final StringReader f_121201_;
+    private final boolean f_121202_;
+@@ -79,7 +_,7 @@
+    private Double f_121213_;
+    private WrappedMinMaxBounds f_121214_ = WrappedMinMaxBounds.f_75350_;
+    private WrappedMinMaxBounds f_121215_ = WrappedMinMaxBounds.f_75350_;
+-   private Predicate<Entity> f_121170_ = (p_121321_) -> {
++   private Predicate<Entity> f_121170_ = (p_197375_0_) -> {
+       return true;
+    };
+    private BiConsumer<Vec3, List<? extends Entity>> f_121171_ = f_121196_;
+@@ -129,12 +_,12 @@
+ 
+       Function<Vec3, Vec3> function;
+       if (this.f_121208_ == null && this.f_121209_ == null && this.f_121210_ == null) {
+-         function = (p_121292_) -> {
+-            return p_121292_;
++         function = (p_197379_0_) -> {
++            return p_197379_0_;
+          };
+       } else {
+-         function = (p_121258_) -> {
+-            return new Vec3(this.f_121208_ == null ? p_121258_.f_82479_ : this.f_121208_, this.f_121209_ == null ? p_121258_.f_82480_ : this.f_121209_, this.f_121210_ == null ? p_121258_.f_82481_ : this.f_121210_);
++         function = (p_197367_1_) -> {
++            return new Vec3(this.f_121208_ == null ? p_197367_1_.f_82479_ : this.f_121208_, this.f_121209_ == null ? p_197367_1_.f_82480_ : this.f_121209_, this.f_121210_ == null ? p_197367_1_.f_82481_ : this.f_121210_);
+          };
+       }
+ 
+@@ -154,22 +_,22 @@
+       return new AABB(d0, d1, d2, d3, d4, d5);
+    }
+ 
+-   private void m_121229_() {
++   public void m_121229_() {
+       if (this.f_121214_ != WrappedMinMaxBounds.f_75350_) {
+-         this.f_121170_ = this.f_121170_.and(this.m_121254_(this.f_121214_, (p_121308_) -> {
+-            return (double)p_121308_.f_19858_;
++         this.f_121170_ = this.f_121170_.and(this.m_121254_(this.f_121214_, (p_197386_0_) -> {
++            return (double)p_197386_0_.f_19858_;
+          }));
+       }
+ 
+       if (this.f_121215_ != WrappedMinMaxBounds.f_75350_) {
+-         this.f_121170_ = this.f_121170_.and(this.m_121254_(this.f_121215_, (p_121285_) -> {
+-            return (double)p_121285_.f_19857_;
++         this.f_121170_ = this.f_121170_.and(this.m_121254_(this.f_121215_, (p_197385_0_) -> {
++            return (double)p_197385_0_.f_19857_;
+          }));
+       }
+ 
+       if (!this.f_121207_.m_55327_()) {
+-         this.f_121170_ = this.f_121170_.and((p_121240_) -> {
+-            return !(p_121240_ instanceof ServerPlayer) ? false : this.f_121207_.m_55390_(((ServerPlayer)p_121240_).f_36078_);
++         this.f_121170_ = this.f_121170_.and((p_197371_1_) -> {
++            return !(p_197371_1_ instanceof ServerPlayer) ? false : this.f_121207_.m_55390_(((ServerPlayer)p_197371_1_).f_36078_);
+          });
+       }
+ 
+@@ -178,8 +_,8 @@
+    private Predicate<Entity> m_121254_(WrappedMinMaxBounds p_121255_, ToDoubleFunction<Entity> p_121256_) {
+       double d0 = (double)Mth.m_14177_(p_121255_.m_75358_() == null ? 0.0F : p_121255_.m_75358_());
+       double d1 = (double)Mth.m_14177_(p_121255_.m_75366_() == null ? 359.0F : p_121255_.m_75366_());
+-      return (p_121278_) -> {
+-         double d2 = Mth.m_14175_(p_121256_.applyAsDouble(p_121278_));
++      return (p_197374_5_) -> {
++         double d2 = Mth.m_14175_(p_121256_.applyAsDouble(p_197374_5_));
+          if (d0 > d1) {
+             return d2 >= d0 || d2 <= d1;
+          } else {
+@@ -261,7 +_,7 @@
+       this.f_121203_ = 1;
+    }
+ 
+-   protected void m_121317_() throws CommandSyntaxException {
++   public void m_121317_() throws CommandSyntaxException {
+       this.f_121176_ = this::m_121347_;
+       this.f_121201_.skipWhitespace();
+ 
+@@ -449,6 +_,9 @@
+          }
+ 
+          this.f_121201_.skip();
++         EntitySelector forgeSelector = net.minecraftforge.common.command.EntitySelectorManager.parseSelector(this);
++         if (forgeSelector != null)
++            return forgeSelector;
+          this.m_121281_();
+       } else {
+          this.m_121304_();
+@@ -464,6 +_,7 @@
+       p_121248_.suggest("@r", new TranslatableComponent("argument.entity.selector.randomPlayer"));
+       p_121248_.suggest("@s", new TranslatableComponent("argument.entity.selector.self"));
+       p_121248_.suggest("@e", new TranslatableComponent("argument.entity.selector.allEntities"));
++      net.minecraftforge.common.command.EntitySelectorManager.fillSelectorSuggestions(p_121248_);
+    }
+ 
+    private CompletableFuture<Suggestions> m_121286_(SuggestionsBuilder p_121287_, Consumer<SuggestionsBuilder> p_121288_) {

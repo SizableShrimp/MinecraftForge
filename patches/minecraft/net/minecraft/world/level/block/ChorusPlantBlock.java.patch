@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/ChorusPlantBlock.java
++++ b/net/minecraft/world/level/block/ChorusPlantBlock.java
+@@ -14,7 +_,7 @@
+ import net.minecraft.world.level.pathfinder.PathComputationType;
+ 
+ public class ChorusPlantBlock extends PipeBlock {
+-   protected ChorusPlantBlock(BlockBehaviour.Properties p_51707_) {
++   public ChorusPlantBlock(BlockBehaviour.Properties p_51707_) {
+       super(0.3125F, p_51707_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_55148_, Boolean.valueOf(false)).m_61124_(f_55149_, Boolean.valueOf(false)).m_61124_(f_55150_, Boolean.valueOf(false)).m_61124_(f_55151_, Boolean.valueOf(false)).m_61124_(f_55152_, Boolean.valueOf(false)).m_61124_(f_55153_, Boolean.valueOf(false)));
+    }

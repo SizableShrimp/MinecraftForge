@@ -1,0 +1,13 @@
+--- a/com/mojang/blaze3d/platform/GlDebug.java
++++ b/com/mojang/blaze3d/platform/GlDebug.java
+@@ -98,8 +_,8 @@
+    }
+ 
+    private static void m_84046_(int p_84047_, String p_84048_) {
+-      f_84031_.merge(p_84047_, p_84048_, (p_84053_, p_84054_) -> {
+-         return p_84053_ + "/" + p_84054_;
++      f_84031_.merge(p_84047_, p_84048_, (p_209249_0_, p_209249_1_) -> {
++         return p_209249_0_ + "/" + p_209249_1_;
+       });
+    }
+ 

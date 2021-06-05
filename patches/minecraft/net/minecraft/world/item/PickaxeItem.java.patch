@@ -1,0 +1,35 @@
+--- a/net/minecraft/world/item/PickaxeItem.java
++++ b/net/minecraft/world/item/PickaxeItem.java
+@@ -10,26 +_,17 @@
+ public class PickaxeItem extends DiggerItem {
+    private static final Set<Block> f_42958_ = ImmutableSet.of(Blocks.f_50285_, Blocks.f_49997_, Blocks.f_50652_, Blocks.f_50031_, Blocks.f_50090_, Blocks.f_50089_, Blocks.f_50030_, Blocks.f_50074_, Blocks.f_49995_, Blocks.f_49998_, Blocks.f_50126_, Blocks.f_50075_, Blocks.f_49996_, Blocks.f_50060_, Blocks.f_50059_, Blocks.f_50079_, Blocks.f_50134_, Blocks.f_50354_, Blocks.f_50568_, Blocks.f_50156_, Blocks.f_50173_, Blocks.f_50062_, Blocks.f_50063_, Blocks.f_50064_, Blocks.f_50395_, Blocks.f_50396_, Blocks.f_50394_, Blocks.f_50069_, Blocks.f_50122_, Blocks.f_50175_, Blocks.f_50228_, Blocks.f_50281_, Blocks.f_50334_, Blocks.f_50387_, Blocks.f_50404_, Blocks.f_50405_, Blocks.f_50406_, Blocks.f_50408_, Blocks.f_50409_, Blocks.f_50410_, Blocks.f_50411_, Blocks.f_50412_, Blocks.f_50413_, Blocks.f_50467_, Blocks.f_50469_, Blocks.f_50472_, Blocks.f_50473_, Blocks.f_50471_, Blocks.f_50470_, Blocks.f_50124_, Blocks.f_50165_, Blocks.f_50643_, Blocks.f_50644_, Blocks.f_50645_, Blocks.f_50646_, Blocks.f_50647_, Blocks.f_50648_, Blocks.f_50649_, Blocks.f_50650_, Blocks.f_50651_, Blocks.f_50600_, Blocks.f_50601_, Blocks.f_50602_, Blocks.f_50603_, Blocks.f_50456_, Blocks.f_50525_, Blocks.f_50521_, Blocks.f_50522_, Blocks.f_50466_, Blocks.f_50464_, Blocks.f_50523_, Blocks.f_50460_, Blocks.f_50465_, Blocks.f_50462_, Blocks.f_50459_, Blocks.f_50458_, Blocks.f_50463_, Blocks.f_50520_, Blocks.f_50524_, Blocks.f_50457_, Blocks.f_50461_, Blocks.f_50039_, Blocks.f_50032_, Blocks.f_50040_);
+ 
+-   protected PickaxeItem(Tier p_42961_, int p_42962_, float p_42963_, Item.Properties p_42964_) {
+-      super((float)p_42962_, p_42963_, p_42961_, f_42958_, p_42964_);
++   public PickaxeItem(Tier p_42961_, int p_42962_, float p_42963_, Item.Properties p_42964_) {
++      super((float)p_42962_, p_42963_, p_42961_, f_42958_, p_42964_.addToolType(net.minecraftforge.common.ToolType.PICKAXE, p_42961_.m_6604_()));
+    }
+ 
+    public boolean m_8096_(BlockState p_42969_) {
+       int i = this.m_43314_().m_6604_();
+-      if (!p_42969_.m_60713_(Blocks.f_50080_) && !p_42969_.m_60713_(Blocks.f_50723_) && !p_42969_.m_60713_(Blocks.f_50721_) && !p_42969_.m_60713_(Blocks.f_50724_) && !p_42969_.m_60713_(Blocks.f_50722_)) {
+-         if (!p_42969_.m_60713_(Blocks.f_50090_) && !p_42969_.m_60713_(Blocks.f_50089_) && !p_42969_.m_60713_(Blocks.f_50264_) && !p_42969_.m_60713_(Blocks.f_50268_) && !p_42969_.m_60713_(Blocks.f_50074_) && !p_42969_.m_60713_(Blocks.f_49995_) && !p_42969_.m_60713_(Blocks.f_50173_)) {
+-            if (!p_42969_.m_60713_(Blocks.f_50075_) && !p_42969_.m_60713_(Blocks.f_49996_) && !p_42969_.m_60713_(Blocks.f_50060_) && !p_42969_.m_60713_(Blocks.f_50059_)) {
+-               Material material = p_42969_.m_60767_();
+-               return material == Material.f_76278_ || material == Material.f_76279_ || material == Material.f_76281_ || p_42969_.m_60713_(Blocks.f_49998_);
+-            } else {
+-               return i >= 1;
+-            }
+-         } else {
+-            return i >= 2;
+-         }
+-      } else {
+-         return i >= 3;
++      if (p_42969_.getHarvestTool() == net.minecraftforge.common.ToolType.PICKAXE) {
++         return i >= p_42969_.getHarvestLevel();
+       }
++      Material material = p_42969_.m_60767_();
++      return material == Material.f_76278_ || material == Material.f_76279_ || material == Material.f_76281_;
+    }
+ 
+    public float m_8102_(ItemStack p_42966_, BlockState p_42967_) {

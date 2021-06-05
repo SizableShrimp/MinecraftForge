@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/entity/monster/WitherSkeleton.java
++++ b/net/minecraft/world/entity/monster/WitherSkeleton.java
+@@ -49,7 +_,7 @@
+       return SoundEvents.f_12560_;
+    }
+ 
+-   SoundEvent m_7878_() {
++   protected SoundEvent m_7878_() {
+       return SoundEvents.f_12562_;
+    }
+ 

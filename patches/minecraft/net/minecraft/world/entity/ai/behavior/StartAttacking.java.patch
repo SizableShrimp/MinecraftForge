@@ -1,0 +1,22 @@
+--- a/net/minecraft/world/entity/ai/behavior/StartAttacking.java
++++ b/net/minecraft/world/entity/ai/behavior/StartAttacking.java
+@@ -21,7 +_,7 @@
+    }
+ 
+    public StartAttacking(Function<E, Optional<? extends LivingEntity>> p_24193_) {
+-      this((p_24212_) -> {
++      this((p_233975_0_) -> {
+          return true;
+       }, p_24193_);
+    }
+@@ -36,8 +_,8 @@
+    }
+ 
+    protected void m_6735_(ServerLevel p_24208_, E p_24209_, long p_24210_) {
+-      this.f_24191_.apply(p_24209_).ifPresent((p_24218_) -> {
+-         this.m_24213_(p_24209_, p_24218_);
++      this.f_24191_.apply(p_24209_).ifPresent((p_233977_2_) -> {
++         this.m_24213_(p_24209_, p_233977_2_);
+       });
+    }
+ 

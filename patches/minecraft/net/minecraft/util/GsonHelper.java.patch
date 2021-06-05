@@ -1,0 +1,19 @@
+--- a/net/minecraft/util/GsonHelper.java
++++ b/net/minecraft/util/GsonHelper.java
+@@ -20,7 +_,6 @@
+ import net.minecraft.world.item.Item;
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.api.distmarker.OnlyIn;
+-import org.apache.commons.lang3.StringUtils;
+ 
+ public class GsonHelper {
+    private static final Gson f_13765_ = (new GsonBuilder()).create();
+@@ -252,7 +_,7 @@
+    }
+ 
+    public static String m_13883_(JsonElement p_13884_) {
+-      String s = StringUtils.abbreviateMiddle(String.valueOf((Object)p_13884_), "...", 10);
++      String s = org.apache.commons.lang3.StringUtils.abbreviateMiddle(String.valueOf((Object)p_13884_), "...", 10);
+       if (p_13884_ == null) {
+          return "null (missing)";
+       } else if (p_13884_.isJsonNull()) {

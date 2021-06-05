@@ -1,0 +1,15 @@
+--- a/net/minecraft/server/packs/repository/FolderRepositorySource.java
++++ b/net/minecraft/server/packs/repository/FolderRepositorySource.java
+@@ -9,9 +_,9 @@
+ import net.minecraft.server.packs.PackResources;
+ 
+ public class FolderRepositorySource implements RepositorySource {
+-   private static final FileFilter f_10381_ = (p_10398_) -> {
+-      boolean flag = p_10398_.isFile() && p_10398_.getName().endsWith(".zip");
+-      boolean flag1 = p_10398_.isDirectory() && (new File(p_10398_, "pack.mcmeta")).isFile();
++   private static final FileFilter f_10381_ = (p_195731_0_) -> {
++      boolean flag = p_195731_0_.isFile() && p_195731_0_.getName().endsWith(".zip");
++      boolean flag1 = p_195731_0_.isDirectory() && (new File(p_195731_0_, "pack.mcmeta")).isFile();
+       return flag || flag1;
+    };
+    private final File f_10382_;

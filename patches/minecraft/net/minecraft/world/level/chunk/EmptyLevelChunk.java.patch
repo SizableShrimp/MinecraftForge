@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/chunk/EmptyLevelChunk.java
++++ b/net/minecraft/world/level/chunk/EmptyLevelChunk.java
+@@ -22,8 +_,8 @@
+ import net.minecraft.world.phys.AABB;
+ 
+ public class EmptyLevelChunk extends LevelChunk {
+-   private static final Biome[] f_62581_ = Util.m_137469_(new Biome[ChunkBiomeContainer.f_62105_], (p_62617_) -> {
+-      Arrays.fill(p_62617_, Biomes.f_127321_);
++   private static final Biome[] f_62581_ = Util.m_137469_(new Biome[ChunkBiomeContainer.f_62105_], (p_203406_0_) -> {
++      Arrays.fill(p_203406_0_, Biomes.f_127321_);
+    });
+ 
+    public EmptyLevelChunk(Level p_62584_, ChunkPos p_62585_) {

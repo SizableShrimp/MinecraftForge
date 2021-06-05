@@ -1,0 +1,11 @@
+--- a/net/minecraft/util/datafix/schemas/V1906.java
++++ b/net/minecraft/util/datafix/schemas/V1906.java
+@@ -17,7 +_,7 @@
+       m_17775_(p_17780_, map, "minecraft:barrel");
+       m_17775_(p_17780_, map, "minecraft:smoker");
+       m_17775_(p_17780_, map, "minecraft:blast_furnace");
+-      p_17780_.register(map, "minecraft:lectern", (p_17774_) -> {
++      p_17780_.register(map, "minecraft:lectern", (p_219882_1_) -> {
+          return DSL.optionalFields("Book", References.f_16782_.in(p_17780_));
+       });
+       p_17780_.registerSimple(map, "minecraft:bell");

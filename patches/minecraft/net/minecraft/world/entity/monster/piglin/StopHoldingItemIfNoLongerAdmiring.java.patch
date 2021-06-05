@@ -1,0 +1,19 @@
+--- a/net/minecraft/world/entity/monster/piglin/StopHoldingItemIfNoLongerAdmiring.java
++++ b/net/minecraft/world/entity/monster/piglin/StopHoldingItemIfNoLongerAdmiring.java
+@@ -5,7 +_,6 @@
+ import net.minecraft.world.entity.ai.behavior.Behavior;
+ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+ import net.minecraft.world.entity.ai.memory.MemoryStatus;
+-import net.minecraft.world.item.Items;
+ 
+ public class StopHoldingItemIfNoLongerAdmiring<E extends Piglin> extends Behavior<E> {
+    public StopHoldingItemIfNoLongerAdmiring() {
+@@ -13,7 +_,7 @@
+    }
+ 
+    protected boolean m_6114_(ServerLevel p_35255_, E p_35256_) {
+-      return !p_35256_.m_21206_().m_41619_() && p_35256_.m_21206_().m_41720_() != Items.f_42740_;
++      return !p_35256_.m_21206_().m_41619_() && !p_35256_.m_21206_().isShield(p_35256_);
+    }
+ 
+    protected void m_6735_(ServerLevel p_35258_, E p_35259_, long p_35260_) {

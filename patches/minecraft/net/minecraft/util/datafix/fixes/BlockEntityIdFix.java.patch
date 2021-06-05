@@ -1,0 +1,72 @@
+--- a/net/minecraft/util/datafix/fixes/BlockEntityIdFix.java
++++ b/net/minecraft/util/datafix/fixes/BlockEntityIdFix.java
+@@ -10,30 +_,30 @@
+ import java.util.Map;
+ 
+ public class BlockEntityIdFix extends DataFix {
+-   private static final Map<String, String> f_14827_ = DataFixUtils.make(Maps.newHashMap(), (p_14839_) -> {
+-      p_14839_.put("Airportal", "minecraft:end_portal");
+-      p_14839_.put("Banner", "minecraft:banner");
+-      p_14839_.put("Beacon", "minecraft:beacon");
+-      p_14839_.put("Cauldron", "minecraft:brewing_stand");
+-      p_14839_.put("Chest", "minecraft:chest");
+-      p_14839_.put("Comparator", "minecraft:comparator");
+-      p_14839_.put("Control", "minecraft:command_block");
+-      p_14839_.put("DLDetector", "minecraft:daylight_detector");
+-      p_14839_.put("Dropper", "minecraft:dropper");
+-      p_14839_.put("EnchantTable", "minecraft:enchanting_table");
+-      p_14839_.put("EndGateway", "minecraft:end_gateway");
+-      p_14839_.put("EnderChest", "minecraft:ender_chest");
+-      p_14839_.put("FlowerPot", "minecraft:flower_pot");
+-      p_14839_.put("Furnace", "minecraft:furnace");
+-      p_14839_.put("Hopper", "minecraft:hopper");
+-      p_14839_.put("MobSpawner", "minecraft:mob_spawner");
+-      p_14839_.put("Music", "minecraft:noteblock");
+-      p_14839_.put("Piston", "minecraft:piston");
+-      p_14839_.put("RecordPlayer", "minecraft:jukebox");
+-      p_14839_.put("Sign", "minecraft:sign");
+-      p_14839_.put("Skull", "minecraft:skull");
+-      p_14839_.put("Structure", "minecraft:structure_block");
+-      p_14839_.put("Trap", "minecraft:dispenser");
++   private static final Map<String, String> f_14827_ = DataFixUtils.make(Maps.newHashMap(), (p_209293_0_) -> {
++      p_209293_0_.put("Airportal", "minecraft:end_portal");
++      p_209293_0_.put("Banner", "minecraft:banner");
++      p_209293_0_.put("Beacon", "minecraft:beacon");
++      p_209293_0_.put("Cauldron", "minecraft:brewing_stand");
++      p_209293_0_.put("Chest", "minecraft:chest");
++      p_209293_0_.put("Comparator", "minecraft:comparator");
++      p_209293_0_.put("Control", "minecraft:command_block");
++      p_209293_0_.put("DLDetector", "minecraft:daylight_detector");
++      p_209293_0_.put("Dropper", "minecraft:dropper");
++      p_209293_0_.put("EnchantTable", "minecraft:enchanting_table");
++      p_209293_0_.put("EndGateway", "minecraft:end_gateway");
++      p_209293_0_.put("EnderChest", "minecraft:ender_chest");
++      p_209293_0_.put("FlowerPot", "minecraft:flower_pot");
++      p_209293_0_.put("Furnace", "minecraft:furnace");
++      p_209293_0_.put("Hopper", "minecraft:hopper");
++      p_209293_0_.put("MobSpawner", "minecraft:mob_spawner");
++      p_209293_0_.put("Music", "minecraft:noteblock");
++      p_209293_0_.put("Piston", "minecraft:piston");
++      p_209293_0_.put("RecordPlayer", "minecraft:jukebox");
++      p_209293_0_.put("Sign", "minecraft:sign");
++      p_209293_0_.put("Skull", "minecraft:skull");
++      p_209293_0_.put("Structure", "minecraft:structure_block");
++      p_209293_0_.put("Trap", "minecraft:dispenser");
+    });
+ 
+    public BlockEntityIdFix(Schema p_14830_, boolean p_14831_) {
+@@ -45,10 +_,10 @@
+       Type<?> type1 = this.getOutputSchema().getType(References.f_16782_);
+       TaggedChoiceType<String> taggedchoicetype = (TaggedChoiceType<String>)this.getInputSchema().findChoiceType(References.f_16781_);
+       TaggedChoiceType<String> taggedchoicetype1 = (TaggedChoiceType<String>)this.getOutputSchema().findChoiceType(References.f_16781_);
+-      return TypeRewriteRule.seq(this.convertUnchecked("item stack block entity name hook converter", type, type1), this.fixTypeEverywhere("BlockEntityIdFix", taggedchoicetype, taggedchoicetype1, (p_14835_) -> {
+-         return (p_14833_) -> {
+-            return p_14833_.mapFirst((p_14837_) -> {
+-               return f_14827_.getOrDefault(p_14837_, p_14837_);
++      return TypeRewriteRule.seq(this.convertUnchecked("item stack block entity name hook converter", type, type1), this.fixTypeEverywhere("BlockEntityIdFix", taggedchoicetype, taggedchoicetype1, (p_209700_0_) -> {
++         return (p_206301_0_) -> {
++            return p_206301_0_.mapFirst((p_206302_0_) -> {
++               return f_14827_.getOrDefault(p_206302_0_, p_206302_0_);
+             });
+          };
+       }));

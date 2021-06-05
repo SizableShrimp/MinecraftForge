@@ -1,0 +1,25 @@
+--- a/net/minecraft/server/ServerAdvancementManager.java
++++ b/net/minecraft/server/ServerAdvancementManager.java
+@@ -35,13 +_,17 @@
+ 
+    protected void m_5787_(Map<ResourceLocation, JsonElement> p_136034_, ResourceManager p_136035_, ProfilerFiller p_136036_) {
+       Map<ResourceLocation, Advancement.Builder> map = Maps.newHashMap();
+-      p_136034_.forEach((p_136039_, p_136040_) -> {
++      p_136034_.forEach((p_240923_2_, p_240923_3_) -> {
+          try {
+-            JsonObject jsonobject = GsonHelper.m_13918_(p_136040_, "advancement");
+-            Advancement.Builder advancement$builder = Advancement.Builder.m_138380_(jsonobject, new DeserializationContext(p_136039_, this.f_136024_));
+-            map.put(p_136039_, advancement$builder);
++            JsonObject jsonobject = GsonHelper.m_13918_(p_240923_3_, "advancement");
++            Advancement.Builder advancement$builder = Advancement.Builder.m_138380_(jsonobject, new DeserializationContext(p_240923_2_, this.f_136024_));
++            if (advancement$builder == null) {
++                f_136021_.debug("Skipping loading advancement {} as it's conditions were not met", p_240923_2_);
++                return;
++            }
++            map.put(p_240923_2_, advancement$builder);
+          } catch (IllegalArgumentException | JsonParseException jsonparseexception) {
+-            f_136021_.error("Parsing error loading custom advancement {}: {}", p_136039_, jsonparseexception.getMessage());
++            f_136021_.error("Parsing error loading custom advancement {}: {}", p_240923_2_, jsonparseexception.getMessage());
+          }
+ 
+       });

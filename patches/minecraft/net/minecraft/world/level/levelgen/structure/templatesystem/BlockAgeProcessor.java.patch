@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/structure/templatesystem/BlockAgeProcessor.java
++++ b/net/minecraft/world/level/levelgen/structure/templatesystem/BlockAgeProcessor.java
+@@ -14,8 +_,8 @@
+ import net.minecraft.world.level.block.state.properties.Half;
+ 
+ public class BlockAgeProcessor extends StructureProcessor {
+-   public static final Codec<BlockAgeProcessor> f_74009_ = Codec.FLOAT.fieldOf("mossiness").xmap(BlockAgeProcessor::new, (p_74023_) -> {
+-      return p_74023_.f_74010_;
++   public static final Codec<BlockAgeProcessor> f_74009_ = Codec.FLOAT.fieldOf("mossiness").xmap(BlockAgeProcessor::new, (p_237064_0_) -> {
++      return p_237064_0_.f_74010_;
+    }).codec();
+    private final float f_74010_;
+ 

@@ -1,0 +1,60 @@
+--- a/net/minecraft/server/packs/resources/SimpleReloadableResourceManager.java
++++ b/net/minecraft/server/packs/resources/SimpleReloadableResourceManager.java
+@@ -53,7 +_,6 @@
+ 
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public Set<String> m_7187_() {
+       return this.f_10873_;
+    }
+@@ -67,7 +_,6 @@
+       }
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public boolean m_7165_(ResourceLocation p_10903_) {
+       ResourceManager resourcemanager = this.f_10870_.get(p_10903_.m_135827_());
+       return resourcemanager != null ? resourcemanager.m_7165_(p_10903_) : false;
+@@ -145,6 +_,20 @@
+       return this.f_10874_.stream();
+    }
+ 
++   public static class ResourcePackLoadingFailure extends RuntimeException {
++      private final PackResources f_10917_;
++
++      public ResourcePackLoadingFailure(PackResources p_10919_, Throwable p_10920_) {
++         super(p_10919_.m_8017_(), p_10920_);
++         this.f_10917_ = p_10919_;
++      }
++
++      @OnlyIn(Dist.CLIENT)
++      public PackResources m_10921_() {
++         return this.f_10917_;
++      }
++   }
++
+    static class FailingReloadInstance implements ReloadInstance {
+       private final SimpleReloadableResourceManager.ResourcePackLoadingFailure f_10908_;
+       private final CompletableFuture<Unit> f_10909_;
+@@ -177,20 +_,6 @@
+       @OnlyIn(Dist.CLIENT)
+       public void m_7748_() {
+          throw this.f_10908_;
+-      }
+-   }
+-
+-   public static class ResourcePackLoadingFailure extends RuntimeException {
+-      private final PackResources f_10917_;
+-
+-      public ResourcePackLoadingFailure(PackResources p_10919_, Throwable p_10920_) {
+-         super(p_10919_.m_8017_(), p_10920_);
+-         this.f_10917_ = p_10919_;
+-      }
+-
+-      @OnlyIn(Dist.CLIENT)
+-      public PackResources m_10921_() {
+-         return this.f_10917_;
+       }
+    }
+ }

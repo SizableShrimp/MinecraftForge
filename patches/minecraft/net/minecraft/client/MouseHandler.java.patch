@@ -1,0 +1,137 @@
+--- a/net/minecraft/client/MouseHandler.java
++++ b/net/minecraft/client/MouseHandler.java
+@@ -70,6 +_,7 @@
+             this.f_91510_ = -1;
+          }
+ 
++         if (net.minecraftforge.client.ForgeHooksClient.onRawMouseClicked(p_91532_, p_91533_, p_91534_)) return;
+          boolean[] aboolean = new boolean[]{false};
+          if (this.f_91503_.f_91081_ == null) {
+             if (this.f_91503_.f_91080_ == null) {
+@@ -81,11 +_,15 @@
+                double d1 = this.f_91508_ * (double)this.f_91503_.m_91268_().m_85446_() / (double)this.f_91503_.m_91268_().m_85444_();
+                if (flag) {
+                   Screen.m_96579_(() -> {
+-                     aboolean[0] = this.f_91503_.f_91080_.m_6375_(d0, d1, i);
++                     aboolean[0] = net.minecraftforge.client.ForgeHooksClient.onGuiMouseClickedPre(this.f_91503_.f_91080_, d0, d1, i);
++                     if (!aboolean[0]) aboolean[0] = this.f_91503_.f_91080_.m_6375_(d0, d1, i);
++                     if (!aboolean[0]) aboolean[0] = net.minecraftforge.client.ForgeHooksClient.onGuiMouseClickedPost(this.f_91503_.f_91080_, d0, d1, i);
+                   }, "mouseClicked event handler", this.f_91503_.f_91080_.getClass().getCanonicalName());
+                } else {
+                   Screen.m_96579_(() -> {
+-                     aboolean[0] = this.f_91503_.f_91080_.m_6348_(d0, d1, i);
++                     aboolean[0] = net.minecraftforge.client.ForgeHooksClient.onGuiMouseReleasedPre(this.f_91503_.f_91080_, d0, d1, i);
++                     if (!aboolean[0]) aboolean[0] = this.f_91503_.f_91080_.m_6348_(d0, d1, i);
++                     if (!aboolean[0]) aboolean[0] = net.minecraftforge.client.ForgeHooksClient.onGuiMouseReleasedPost(this.f_91503_.f_91080_, d0, d1, i);
+                   }, "mouseReleased event handler", this.f_91503_.f_91080_.getClass().getCanonicalName());
+                }
+             }
+@@ -109,7 +_,7 @@
+                }
+             }
+          }
+-
++         net.minecraftforge.client.ForgeHooksClient.fireMouseInput(p_91532_, p_91533_, p_91534_);
+       }
+    }
+ 
+@@ -120,7 +_,9 @@
+             if (this.f_91503_.f_91080_ != null) {
+                double d1 = this.f_91507_ * (double)this.f_91503_.m_91268_().m_85445_() / (double)this.f_91503_.m_91268_().m_85443_();
+                double d2 = this.f_91508_ * (double)this.f_91503_.m_91268_().m_85446_() / (double)this.f_91503_.m_91268_().m_85444_();
+-               this.f_91503_.f_91080_.m_6050_(d1, d2, d0);
++               if (net.minecraftforge.client.ForgeHooksClient.onGuiMouseScrollPre(this, this.f_91503_.f_91080_, d0)) return;
++               if (this.f_91503_.f_91080_.m_6050_(d1, d2, d0)) return;
++               net.minecraftforge.client.ForgeHooksClient.onGuiMouseScrollPost(this, this.f_91503_.f_91080_, d0);
+             } else if (this.f_91503_.f_91074_ != null) {
+                if (this.f_91518_ != 0.0D && Math.signum(d0) != Math.signum(this.f_91518_)) {
+                   this.f_91518_ = 0.0D;
+@@ -133,6 +_,7 @@
+                }
+ 
+                this.f_91518_ -= (double)f1;
++               if (net.minecraftforge.client.ForgeHooksClient.onMouseScroll(this, d0)) return;
+                if (this.f_91503_.f_91074_.m_5833_()) {
+                   if (this.f_91503_.f_91065_.m_93085_().m_94768_()) {
+                      this.f_91503_.f_91065_.m_93085_().m_94769_((double)(-f1));
+@@ -157,27 +_,27 @@
+    }
+ 
+    public void m_91524_(long p_91525_) {
+-      InputConstants.m_84838_(p_91525_, (p_91591_, p_91592_, p_91593_) -> {
+-         this.f_91503_.execute(() -> {
+-            this.m_91561_(p_91591_, p_91592_, p_91593_);
+-         });
+-      }, (p_91566_, p_91567_, p_91568_, p_91569_) -> {
+-         this.f_91503_.execute(() -> {
+-            this.m_91530_(p_91566_, p_91567_, p_91568_, p_91569_);
+-         });
+-      }, (p_91576_, p_91577_, p_91578_) -> {
+-         this.f_91503_.execute(() -> {
+-            this.m_91526_(p_91576_, p_91577_, p_91578_);
+-         });
+-      }, (p_91536_, p_91537_, p_91538_) -> {
+-         Path[] apath = new Path[p_91537_];
++      InputConstants.m_84838_(p_91525_, (p_228032_1_, p_228032_3_, p_228032_5_) -> {
++         this.f_91503_.execute(() -> {
++            this.m_91561_(p_228032_1_, p_228032_3_, p_228032_5_);
++         });
++      }, (p_228028_1_, p_228028_3_, p_228028_4_, p_228028_5_) -> {
++         this.f_91503_.execute(() -> {
++            this.m_91530_(p_228028_1_, p_228028_3_, p_228028_4_, p_228028_5_);
++         });
++      }, (p_228029_1_, p_228029_3_, p_228029_5_) -> {
++         this.f_91503_.execute(() -> {
++            this.m_91526_(p_228029_1_, p_228029_3_, p_228029_5_);
++         });
++      }, (p_238227_1_, p_238227_3_, p_238227_4_) -> {
++         Path[] apath = new Path[p_238227_3_];
+ 
+-         for(int i = 0; i < p_91537_; ++i) {
+-            apath[i] = Paths.get(GLFWDropCallback.getName(p_91538_, i));
++         for(int i = 0; i < p_238227_3_; ++i) {
++            apath[i] = Paths.get(GLFWDropCallback.getName(p_238227_4_, i));
+          }
+ 
+          this.f_91503_.execute(() -> {
+-            this.m_91539_(p_91536_, Arrays.asList(apath));
++            this.m_91539_(p_238227_1_, Arrays.asList(apath));
+          });
+       });
+    }
+@@ -201,7 +_,9 @@
+                double d2 = (p_91563_ - this.f_91507_) * (double)this.f_91503_.m_91268_().m_85445_() / (double)this.f_91503_.m_91268_().m_85443_();
+                double d3 = (p_91564_ - this.f_91508_) * (double)this.f_91503_.m_91268_().m_85446_() / (double)this.f_91503_.m_91268_().m_85444_();
+                Screen.m_96579_(() -> {
+-                  guieventlistener.m_7979_(d0, d1, this.f_91510_, d2, d3);
++                  if (net.minecraftforge.client.ForgeHooksClient.onGuiMouseDragPre(this.f_91503_.f_91080_, d0, d1, this.f_91510_, d2, d3)) return;
++                  if (guieventlistener.m_7979_(d0, d1, this.f_91510_, d2, d3)) return;
++                  net.minecraftforge.client.ForgeHooksClient.onGuiMouseDragPost(this.f_91503_.f_91080_, d0, d1, this.f_91510_, d2, d3);
+                }, "mouseDragged event handler", guieventlistener.getClass().getCanonicalName());
+             }
+          }
+@@ -266,12 +_,24 @@
+       return this.f_91506_;
+    }
+ 
++   public boolean isMiddleDown() {
++      return this.f_91505_;
++   }
++
+    public double m_91589_() {
+       return this.f_91507_;
+    }
+ 
+    public double m_91594_() {
+       return this.f_91508_;
++   }
++
++   public double getXVelocity() {
++      return this.f_91516_;
++   }
++
++   public double getYVelocity() {
++      return this.f_91517_;
+    }
+ 
+    public void m_91599_() {

@@ -1,0 +1,15 @@
+--- a/net/minecraft/client/renderer/entity/layers/ParrotOnShoulderLayer.java
++++ b/net/minecraft/client/renderer/entity/layers/ParrotOnShoulderLayer.java
+@@ -29,9 +_,9 @@
+ 
+    private void m_117317_(PoseStack p_117318_, MultiBufferSource p_117319_, int p_117320_, T p_117321_, float p_117322_, float p_117323_, float p_117324_, float p_117325_, boolean p_117326_) {
+       CompoundTag compoundtag = p_117326_ ? p_117321_.m_36331_() : p_117321_.m_36332_();
+-      EntityType.m_20632_(compoundtag.m_128461_("id")).filter((p_117294_) -> {
+-         return p_117294_ == EntityType.f_20508_;
+-      }).ifPresent((p_117338_) -> {
++      EntityType.m_20632_(compoundtag.m_128461_("id")).filter((p_215344_0_) -> {
++         return p_215344_0_ == EntityType.f_20508_;
++      }).ifPresent((p_229137_11_) -> {
+          p_117318_.m_85836_();
+          p_117318_.m_85837_(p_117326_ ? (double)0.4F : (double)-0.4F, p_117321_.m_6047_() ? (double)-1.3F : -1.5D, 0.0D);
+          VertexConsumer vertexconsumer = p_117319_.m_6299_(this.f_117290_.m_103119_(ParrotRenderer.f_115648_[compoundtag.m_128451_("Variant")]));

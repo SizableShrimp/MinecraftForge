@@ -1,0 +1,85 @@
+--- a/net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator.java
++++ b/net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator.java
+@@ -49,30 +_,30 @@
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public final class NoiseBasedChunkGenerator extends ChunkGenerator {
+-   public static final Codec<NoiseBasedChunkGenerator> f_64314_ = RecordCodecBuilder.create((p_64405_) -> {
+-      return p_64405_.group(BiomeSource.f_47888_.fieldOf("biome_source").forGetter((p_64427_) -> {
+-         return p_64427_.f_62137_;
+-      }), Codec.LONG.fieldOf("seed").stable().forGetter((p_64420_) -> {
+-         return p_64420_.f_64333_;
+-      }), NoiseGeneratorSettings.f_64431_.fieldOf("settings").forGetter((p_64403_) -> {
+-         return p_64403_.f_64318_;
+-      })).apply(p_64405_, p_64405_.stable(NoiseBasedChunkGenerator::new));
++   public static final Codec<NoiseBasedChunkGenerator> f_64314_ = RecordCodecBuilder.create((p_236091_0_) -> {
++      return p_236091_0_.group(BiomeSource.f_47888_.fieldOf("biome_source").forGetter((p_236096_0_) -> {
++         return p_236096_0_.f_62137_;
++      }), Codec.LONG.fieldOf("seed").stable().forGetter((p_236093_0_) -> {
++         return p_236093_0_.f_64333_;
++      }), NoiseGeneratorSettings.f_64431_.fieldOf("settings").forGetter((p_236090_0_) -> {
++         return p_236090_0_.f_64318_;
++      })).apply(p_236091_0_, p_236091_0_.stable(NoiseBasedChunkGenerator::new));
+    });
+-   private static final float[] f_64319_ = Util.m_137469_(new float[13824], (p_64422_) -> {
++   private static final float[] f_64319_ = Util.m_137469_(new float[13824], (p_236094_0_) -> {
+       for(int i = 0; i < 24; ++i) {
+          for(int j = 0; j < 24; ++j) {
+             for(int k = 0; k < 24; ++k) {
+-               p_64422_[i * 24 * 24 + j * 24 + k] = (float)m_64415_(j - 12, k - 12, i - 12);
++               p_236094_0_[i * 24 * 24 + j * 24 + k] = (float)m_64415_(j - 12, k - 12, i - 12);
+             }
+          }
+       }
+ 
+    });
+-   private static final float[] f_64320_ = Util.m_137469_(new float[25], (p_64411_) -> {
++   private static final float[] f_64320_ = Util.m_137469_(new float[25], (p_236092_0_) -> {
+       for(int i = -2; i <= 2; ++i) {
+          for(int j = -2; j <= 2; ++j) {
+             float f = 10.0F / Mth.m_14116_((float)(i * i + j * j) + 0.2F);
+-            p_64411_[i + 2 + (j + 2) * 5] = f;
++            p_236092_0_[i + 2 + (j + 2) * 5] = f;
+          }
+       }
+ 
+@@ -416,8 +_,8 @@
+       int l = j << 4;
+ 
+       for(StructureFeature<?> structurefeature : StructureFeature.f_67031_) {
+-         p_64392_.m_47289_(SectionPos.m_123196_(chunkpos, 0), structurefeature).forEach((p_64389_) -> {
+-            for(StructurePiece structurepiece1 : p_64389_.m_73602_()) {
++         p_64392_.m_47289_(SectionPos.m_123196_(chunkpos, 0), structurefeature).forEach((p_236089_5_) -> {
++            for(StructurePiece structurepiece1 : p_236089_5_.m_73602_()) {
+                if (structurepiece1.m_73411_(chunkpos, 12)) {
+                   if (structurepiece1 instanceof PoolElementStructurePiece) {
+                      PoolElementStructurePiece poolelementstructurepiece = (PoolElementStructurePiece)structurepiece1;
+@@ -530,8 +_,8 @@
+                         objectlistiterator1.back(objectlist1.size());
+                         BlockState blockstate = this.m_64346_(d18, i2);
+                         if (blockstate != f_64321_) {
+-                           if (blockstate.m_60791_() != 0) {
+-                              blockpos$mutableblockpos.m_122178_(i3, i2, l3);
++                           blockpos$mutableblockpos.m_122178_(i3, i2, l3);
++                           if (blockstate.getLightValue(protochunk, blockpos$mutableblockpos) != 0) {
+                               protochunk.m_63277_(blockpos$mutableblockpos);
+                            }
+ 
+@@ -587,6 +_,9 @@
+    }
+ 
+    public List<MobSpawnSettings.SpawnerData> m_7694_(Biome p_64395_, StructureFeatureManager p_64396_, MobCategory p_64397_, BlockPos p_64398_) {
++      List<MobSpawnSettings.SpawnerData> spawns = net.minecraftforge.common.world.StructureSpawnManager.getStructureSpawns(p_64396_, p_64397_, p_64398_);
++      if (spawns != null) return spawns;
++      if (false) {//Forge: We handle these hardcoded cases above in StructureSpawnManager#getStructureSpawns, but allow for insideOnly to be changed and allow for creatures to be spawned in ones other than just the witch hut
+       if (p_64396_.m_47285_(p_64398_, true, StructureFeature.f_67021_).m_73603_()) {
+          if (p_64397_ == MobCategory.MONSTER) {
+             return StructureFeature.f_67021_.m_7963_();
+@@ -609,6 +_,7 @@
+          if (p_64396_.m_47285_(p_64398_, true, StructureFeature.f_67025_).m_73603_()) {
+             return StructureFeature.f_67025_.m_7963_();
+          }
++      }
+       }
+ 
+       return super.m_7694_(p_64395_, p_64396_, p_64397_, p_64398_);

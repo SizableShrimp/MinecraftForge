@@ -1,0 +1,28 @@
+--- a/net/minecraft/util/datafix/fixes/EntityPaintingItemFrameDirectionFix.java
++++ b/net/minecraft/util/datafix/fixes/EntityPaintingItemFrameDirectionFix.java
+@@ -45,17 +_,17 @@
+       Type<?> type1 = this.getInputSchema().getChoiceType(References.f_16786_, "ItemFrame");
+       OpticFinder<?> opticfinder1 = DSL.namedChoice("ItemFrame", type1);
+       Type<?> type2 = this.getInputSchema().getType(References.f_16786_);
+-      TypeRewriteRule typerewriterule = this.fixTypeEverywhereTyped("EntityPaintingFix", type2, (p_15516_) -> {
+-         return p_15516_.updateTyped(opticfinder, type, (p_15518_) -> {
+-            return p_15518_.update(DSL.remainderFinder(), (p_15520_) -> {
+-               return this.m_15509_(p_15520_, true, false);
++      TypeRewriteRule typerewriterule = this.fixTypeEverywhereTyped("EntityPaintingFix", type2, (p_206332_3_) -> {
++         return p_206332_3_.updateTyped(opticfinder, type, (p_206330_1_) -> {
++            return p_206330_1_.update(DSL.remainderFinder(), (p_207457_1_) -> {
++               return this.m_15509_(p_207457_1_, true, false);
+             });
+          });
+       });
+-      TypeRewriteRule typerewriterule1 = this.fixTypeEverywhereTyped("EntityItemFrameFix", type2, (p_15504_) -> {
+-         return p_15504_.updateTyped(opticfinder1, type1, (p_15506_) -> {
+-            return p_15506_.update(DSL.remainderFinder(), (p_15508_) -> {
+-               return this.m_15509_(p_15508_, false, true);
++      TypeRewriteRule typerewriterule1 = this.fixTypeEverywhereTyped("EntityItemFrameFix", type2, (p_206331_3_) -> {
++         return p_206331_3_.updateTyped(opticfinder1, type1, (p_206329_1_) -> {
++            return p_206329_1_.update(DSL.remainderFinder(), (p_207455_1_) -> {
++               return this.m_15509_(p_207455_1_, false, true);
+             });
+          });
+       });

@@ -1,0 +1,23 @@
+--- a/net/minecraft/client/renderer/FaceInfo.java
++++ b/net/minecraft/client/renderer/FaceInfo.java
+@@ -14,13 +_,13 @@
+    WEST(new FaceInfo.VertexInfo(FaceInfo.Constants.f_108996_, FaceInfo.Constants.f_108992_, FaceInfo.Constants.f_108994_), new FaceInfo.VertexInfo(FaceInfo.Constants.f_108996_, FaceInfo.Constants.f_108995_, FaceInfo.Constants.f_108994_), new FaceInfo.VertexInfo(FaceInfo.Constants.f_108996_, FaceInfo.Constants.f_108995_, FaceInfo.Constants.f_108991_), new FaceInfo.VertexInfo(FaceInfo.Constants.f_108996_, FaceInfo.Constants.f_108992_, FaceInfo.Constants.f_108991_)),
+    EAST(new FaceInfo.VertexInfo(FaceInfo.Constants.f_108993_, FaceInfo.Constants.f_108992_, FaceInfo.Constants.f_108991_), new FaceInfo.VertexInfo(FaceInfo.Constants.f_108993_, FaceInfo.Constants.f_108995_, FaceInfo.Constants.f_108991_), new FaceInfo.VertexInfo(FaceInfo.Constants.f_108993_, FaceInfo.Constants.f_108995_, FaceInfo.Constants.f_108994_), new FaceInfo.VertexInfo(FaceInfo.Constants.f_108993_, FaceInfo.Constants.f_108992_, FaceInfo.Constants.f_108994_));
+ 
+-   private static final FaceInfo[] f_108974_ = Util.m_137469_(new FaceInfo[6], (p_108987_) -> {
+-      p_108987_[FaceInfo.Constants.f_108995_] = DOWN;
+-      p_108987_[FaceInfo.Constants.f_108992_] = UP;
+-      p_108987_[FaceInfo.Constants.f_108994_] = NORTH;
+-      p_108987_[FaceInfo.Constants.f_108991_] = SOUTH;
+-      p_108987_[FaceInfo.Constants.f_108996_] = WEST;
+-      p_108987_[FaceInfo.Constants.f_108993_] = EAST;
++   private static final FaceInfo[] f_108974_ = Util.m_137469_(new FaceInfo[6], (p_209235_0_) -> {
++      p_209235_0_[FaceInfo.Constants.f_108995_] = DOWN;
++      p_209235_0_[FaceInfo.Constants.f_108992_] = UP;
++      p_209235_0_[FaceInfo.Constants.f_108994_] = NORTH;
++      p_209235_0_[FaceInfo.Constants.f_108991_] = SOUTH;
++      p_209235_0_[FaceInfo.Constants.f_108996_] = WEST;
++      p_209235_0_[FaceInfo.Constants.f_108993_] = EAST;
+    });
+    private final FaceInfo.VertexInfo[] f_108975_;
+ 

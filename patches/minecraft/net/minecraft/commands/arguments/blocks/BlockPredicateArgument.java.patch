@@ -1,0 +1,30 @@
+--- a/net/minecraft/commands/arguments/blocks/BlockPredicateArgument.java
++++ b/net/minecraft/commands/arguments/blocks/BlockPredicateArgument.java
+@@ -31,8 +_,8 @@
+ 
+ public class BlockPredicateArgument implements ArgumentType<BlockPredicateArgument.Result> {
+    private static final Collection<String> f_115566_ = Arrays.asList("stone", "minecraft:stone", "stone[foo=bar]", "#stone", "#stone[foo=bar]{baz=nbt}");
+-   private static final DynamicCommandExceptionType f_115567_ = new DynamicCommandExceptionType((p_115580_) -> {
+-      return new TranslatableComponent("arguments.block.tag.unknown", p_115580_);
++   private static final DynamicCommandExceptionType f_115567_ = new DynamicCommandExceptionType((p_208682_0_) -> {
++      return new TranslatableComponent("arguments.block.tag.unknown", p_208682_0_);
+    });
+ 
+    public static BlockPredicateArgument m_115570_() {
+@@ -43,13 +_,13 @@
+       BlockStateParser blockstateparser = (new BlockStateParser(p_115572_, true)).m_116806_(true);
+       if (blockstateparser.m_116808_() != null) {
+          BlockPredicateArgument.BlockPredicate blockpredicateargument$blockpredicate = new BlockPredicateArgument.BlockPredicate(blockstateparser.m_116808_(), blockstateparser.m_116764_().keySet(), blockstateparser.m_116815_());
+-         return (p_115578_) -> {
++         return (p_199823_1_) -> {
+             return blockpredicateargument$blockpredicate;
+          };
+       } else {
+          ResourceLocation resourcelocation = blockstateparser.m_116822_();
+-         return (p_115584_) -> {
+-            Tag<Block> tag = p_115584_.m_5883_().m_13404_(resourcelocation);
++         return (p_199822_2_) -> {
++            Tag<Block> tag = p_199822_2_.m_5883_().m_13404_(resourcelocation);
+             if (tag == null) {
+                throw f_115567_.create(resourcelocation.toString());
+             } else {

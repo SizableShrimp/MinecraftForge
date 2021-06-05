@@ -1,0 +1,24 @@
+--- a/net/minecraft/core/particles/ItemParticleOption.java
++++ b/net/minecraft/core/particles/ItemParticleOption.java
+@@ -28,16 +_,16 @@
+    private final ItemStack f_123702_;
+ 
+    public static Codec<ItemParticleOption> m_123710_(ParticleType<ItemParticleOption> p_123711_) {
+-      return ItemStack.f_41582_.xmap((p_123714_) -> {
+-         return new ItemParticleOption(p_123711_, p_123714_);
+-      }, (p_123709_) -> {
+-         return p_123709_.f_123702_;
++      return ItemStack.f_41582_.xmap((p_239810_1_) -> {
++         return new ItemParticleOption(p_123711_, p_239810_1_);
++      }, (p_239808_0_) -> {
++         return p_239808_0_.f_123702_;
+       });
+    }
+ 
+    public ItemParticleOption(ParticleType<ItemParticleOption> p_123705_, ItemStack p_123706_) {
+       this.f_123701_ = p_123705_;
+-      this.f_123702_ = p_123706_;
++      this.f_123702_ = p_123706_.m_41777_(); //Forge: Fix stack updating after the fact causing particle changes.
+    }
+ 
+    public void m_7711_(FriendlyByteBuf p_123716_) {

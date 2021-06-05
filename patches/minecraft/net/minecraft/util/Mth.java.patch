@@ -1,0 +1,15 @@
+--- a/net/minecraft/util/Mth.java
++++ b/net/minecraft/util/Mth.java
+@@ -11,9 +_,9 @@
+ 
+ public class Mth {
+    public static final float f_13994_ = m_14116_(2.0F);
+-   private static final float[] f_13995_ = Util.m_137469_(new float[65536], (p_14077_) -> {
+-      for(int i = 0; i < p_14077_.length; ++i) {
+-         p_14077_[i] = (float)Math.sin((double)i * Math.PI * 2.0D / 65536.0D);
++   private static final float[] f_13995_ = Util.m_137469_(new float[65536], (p_203445_0_) -> {
++      for(int i = 0; i < p_203445_0_.length; ++i) {
++         p_203445_0_[i] = (float)Math.sin((double)i * Math.PI * 2.0D / 65536.0D);
+       }
+ 
+    });

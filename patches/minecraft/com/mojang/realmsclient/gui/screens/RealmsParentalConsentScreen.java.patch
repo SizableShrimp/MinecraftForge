@@ -1,0 +1,19 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsParentalConsentScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsParentalConsentScreen.java
+@@ -30,13 +_,13 @@
+       int i = Math.max(this.f_96547_.m_92852_(component), this.f_96547_.m_92852_(component1)) + 30;
+       Component component2 = new TranslatableComponent("mco.account.privacy.info");
+       int j = (int)((double)this.f_96547_.m_92852_(component2) * 1.2D);
+-      this.m_7082_(new Button(this.f_96543_ / 2 - j / 2, m_120774_(11), j, 20, component2, (p_88873_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - j / 2, m_120774_(11), j, 20, component2, (p_237862_0_) -> {
+          Util.m_137581_().m_137646_("https://aka.ms/MinecraftGDPR");
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - (i + 5), m_120774_(13), i, 20, component, (p_88871_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - (i + 5), m_120774_(13), i, 20, component, (p_237861_0_) -> {
+          Util.m_137581_().m_137646_("https://aka.ms/UpdateMojangAccount");
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 5, m_120774_(13), i, 20, component1, (p_88868_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 5, m_120774_(13), i, 20, component1, (p_237860_1_) -> {
+          this.f_96541_.m_91152_(this.f_88857_);
+       }));
+       this.f_88858_ = MultiLineLabel.m_94341_(this.f_96547_, f_88856_, (int)Math.round((double)this.f_96543_ * 0.9D));

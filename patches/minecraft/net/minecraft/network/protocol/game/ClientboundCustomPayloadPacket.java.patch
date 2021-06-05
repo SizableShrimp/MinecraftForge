@@ -1,0 +1,11 @@
+--- a/net/minecraft/network/protocol/game/ClientboundCustomPayloadPacket.java
++++ b/net/minecraft/network/protocol/game/ClientboundCustomPayloadPacket.java
+@@ -7,7 +_,7 @@
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+-public class ClientboundCustomPayloadPacket implements Packet<ClientGamePacketListener> {
++public class ClientboundCustomPayloadPacket implements Packet<ClientGamePacketListener>, net.minecraftforge.fml.network.ICustomPacket<ClientboundCustomPayloadPacket> {
+    public static final ResourceLocation f_132012_ = new ResourceLocation("brand");
+    public static final ResourceLocation f_132013_ = new ResourceLocation("debug/path");
+    public static final ResourceLocation f_132014_ = new ResourceLocation("debug/neighbors_update");

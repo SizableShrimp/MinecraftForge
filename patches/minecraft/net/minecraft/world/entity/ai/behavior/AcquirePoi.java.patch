@@ -1,0 +1,45 @@
+--- a/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
++++ b/net/minecraft/world/entity/ai/behavior/AcquirePoi.java
+@@ -64,11 +_,11 @@
+    protected void m_6735_(ServerLevel p_22350_, PathfinderMob p_22351_, long p_22352_) {
+       this.f_22320_ = p_22352_ + 20L + (long)p_22350_.m_5822_().nextInt(20);
+       PoiManager poimanager = p_22350_.m_8904_();
+-      this.f_22321_.long2ObjectEntrySet().removeIf((p_22338_) -> {
+-         return !p_22338_.getValue().m_22382_(p_22352_);
++      this.f_22321_.long2ObjectEntrySet().removeIf((p_241362_2_) -> {
++         return !p_241362_2_.getValue().m_22382_(p_22352_);
+       });
+-      Predicate<BlockPos> predicate = (p_22335_) -> {
+-         AcquirePoi.JitteredLinearRetry acquirepoi$jitteredlinearretry = this.f_22321_.get(p_22335_.m_121878_());
++      Predicate<BlockPos> predicate = (p_220603_3_) -> {
++         AcquirePoi.JitteredLinearRetry acquirepoi$jitteredlinearretry = this.f_22321_.get(p_220603_3_.m_121878_());
+          if (acquirepoi$jitteredlinearretry == null) {
+             return true;
+          } else if (!acquirepoi$jitteredlinearretry.m_22384_(p_22352_)) {
+@@ -82,20 +_,20 @@
+       Path path = p_22351_.m_21573_().m_26548_(set, this.f_22316_.m_27397_());
+       if (path != null && path.m_77403_()) {
+          BlockPos blockpos1 = path.m_77406_();
+-         poimanager.m_27177_(blockpos1).ifPresent((p_22369_) -> {
+-            poimanager.m_27133_(this.f_22316_.m_27392_(), (p_22372_) -> {
+-               return p_22372_.equals(blockpos1);
++         poimanager.m_27177_(blockpos1).ifPresent((p_225441_5_) -> {
++            poimanager.m_27133_(this.f_22316_.m_27392_(), (p_225442_1_) -> {
++               return p_225442_1_.equals(blockpos1);
+             }, blockpos1, 1);
+             p_22351_.m_6274_().m_21879_(this.f_22317_, GlobalPos.m_122643_(p_22350_.m_46472_(), blockpos1));
+-            this.f_22319_.ifPresent((p_22356_) -> {
+-               p_22350_.m_7605_(p_22351_, p_22356_);
++            this.f_22319_.ifPresent((p_242291_2_) -> {
++               p_22350_.m_7605_(p_22351_, p_242291_2_);
+             });
+             this.f_22321_.clear();
+             DebugPackets.m_133719_(p_22350_, blockpos1);
+          });
+       } else {
+          for(BlockPos blockpos : set) {
+-            this.f_22321_.computeIfAbsent(blockpos.m_121878_(), (p_22360_) -> {
++            this.f_22321_.computeIfAbsent(blockpos.m_121878_(), (p_241363_3_) -> {
+                return new AcquirePoi.JitteredLinearRetry(p_22351_.f_19853_.f_46441_, p_22352_);
+             });
+          }

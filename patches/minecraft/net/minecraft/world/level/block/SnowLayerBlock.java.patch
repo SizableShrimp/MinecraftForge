@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/SnowLayerBlock.java
++++ b/net/minecraft/world/level/block/SnowLayerBlock.java
+@@ -24,7 +_,7 @@
+    public static final IntegerProperty f_56581_ = BlockStateProperties.f_61417_;
+    protected static final VoxelShape[] f_56582_ = new VoxelShape[]{Shapes.m_83040_(), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D), Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
+ 
+-   protected SnowLayerBlock(BlockBehaviour.Properties p_56585_) {
++   public SnowLayerBlock(BlockBehaviour.Properties p_56585_) {
+       super(p_56585_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_56581_, Integer.valueOf(1)));
+    }

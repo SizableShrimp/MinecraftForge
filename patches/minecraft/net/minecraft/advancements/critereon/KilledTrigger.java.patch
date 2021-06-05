@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/KilledTrigger.java
++++ b/net/minecraft/advancements/critereon/KilledTrigger.java
+@@ -25,8 +_,8 @@
+ 
+    public void m_48104_(ServerPlayer p_48105_, Entity p_48106_, DamageSource p_48107_) {
+       LootContext lootcontext = EntityPredicate.m_36616_(p_48105_, p_48106_);
+-      this.m_66234_(p_48105_, (p_48112_) -> {
+-         return p_48112_.m_48130_(p_48105_, lootcontext, p_48107_);
++      this.m_66234_(p_48105_, (p_226846_3_) -> {
++         return p_226846_3_.m_48130_(p_48105_, lootcontext, p_48107_);
+       });
+    }
+ 

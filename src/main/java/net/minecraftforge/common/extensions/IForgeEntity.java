@@ -20,12 +20,10 @@
 package net.minecraftforge.common.extensions;
 
 import java.util.Collection;
-import java.util.Collections;
 import javax.annotation.Nullable;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.decoration.LeashFenceKnotEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.vehicle.Boat;

@@ -1,0 +1,28 @@
+--- a/net/minecraft/world/level/levelgen/feature/IceSpikeFeature.java
++++ b/net/minecraft/world/level/levelgen/feature/IceSpikeFeature.java
+@@ -43,14 +_,14 @@
+                   if ((i1 == 0 && j1 == 0 || !(f1 * f1 + f2 * f2 > f * f)) && (i1 != -l && i1 != l && j1 != -l && j1 != l || !(p_66013_.nextFloat() > 0.75F))) {
+                      BlockState blockstate = p_66011_.m_8055_(p_66014_.m_7918_(i1, k, j1));
+                      Block block = blockstate.m_60734_();
+-                     if (blockstate.m_60795_() || m_65813_(block) || block == Blocks.f_50127_ || block == Blocks.f_50126_) {
++                     if (blockstate.isAir(p_66011_, p_66014_.m_7918_(i1, k, j1)) || m_65813_(block) || block == Blocks.f_50127_ || block == Blocks.f_50126_) {
+                         this.m_5974_(p_66011_, p_66014_.m_7918_(i1, k, j1), Blocks.f_50354_.m_49966_());
+                      }
+ 
+                      if (k != 0 && l > 1) {
+                         blockstate = p_66011_.m_8055_(p_66014_.m_7918_(i1, -k, j1));
+                         block = blockstate.m_60734_();
+-                        if (blockstate.m_60795_() || m_65813_(block) || block == Blocks.f_50127_ || block == Blocks.f_50126_) {
++                        if (blockstate.isAir(p_66011_, p_66014_.m_7918_(i1, -k, j1)) || m_65813_(block) || block == Blocks.f_50127_ || block == Blocks.f_50126_) {
+                            this.m_5974_(p_66011_, p_66014_.m_7918_(i1, -k, j1), Blocks.f_50354_.m_49966_());
+                         }
+                      }
+@@ -77,7 +_,7 @@
+                while(blockpos.m_123342_() > 50) {
+                   BlockState blockstate1 = p_66011_.m_8055_(blockpos);
+                   Block block1 = blockstate1.m_60734_();
+-                  if (!blockstate1.m_60795_() && !m_65813_(block1) && block1 != Blocks.f_50127_ && block1 != Blocks.f_50126_ && block1 != Blocks.f_50354_) {
++                  if (!blockstate1.isAir(p_66011_, blockpos) && !m_65813_(block1) && block1 != Blocks.f_50127_ && block1 != Blocks.f_50126_ && block1 != Blocks.f_50354_) {
+                      break;
+                   }
+ 

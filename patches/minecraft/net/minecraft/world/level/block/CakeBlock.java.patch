@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/CakeBlock.java
++++ b/net/minecraft/world/level/block/CakeBlock.java
+@@ -25,7 +_,7 @@
+    public static final IntegerProperty f_51180_ = BlockStateProperties.f_61412_;
+    protected static final VoxelShape[] f_51181_ = new VoxelShape[]{Block.m_49796_(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D), Block.m_49796_(3.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D), Block.m_49796_(5.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D), Block.m_49796_(7.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D), Block.m_49796_(9.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D), Block.m_49796_(11.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D), Block.m_49796_(13.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D)};
+ 
+-   protected CakeBlock(BlockBehaviour.Properties p_51184_) {
++   public CakeBlock(BlockBehaviour.Properties p_51184_) {
+       super(p_51184_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_51180_, Integer.valueOf(0)));
+    }

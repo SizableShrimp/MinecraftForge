@@ -1,0 +1,53 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsBackupInfoScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsBackupInfoScreen.java
+@@ -32,7 +_,7 @@
+ 
+    public void m_7856_() {
+       this.f_96541_.f_91068_.m_90926_(true);
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 120 + 24, 200, 20, CommonComponents.f_130660_, (p_88066_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 120 + 24, 200, 20, CommonComponents.f_130660_, (p_237731_1_) -> {
+          this.f_96541_.m_91152_(this.f_88044_);
+       }));
+       this.f_88046_ = new RealmsBackupInfoScreen.BackupInfoList(this.f_96541_);
+@@ -86,20 +_,6 @@
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
+-   class BackupInfoList extends ObjectSelectionList<RealmsBackupInfoScreen.BackupInfoListEntry> {
+-      public BackupInfoList(Minecraft p_88082_) {
+-         super(p_88082_, RealmsBackupInfoScreen.this.f_96543_, RealmsBackupInfoScreen.this.f_96544_, 32, RealmsBackupInfoScreen.this.f_96544_ - 64, 36);
+-         this.m_93471_(false);
+-         if (RealmsBackupInfoScreen.this.f_88045_.f_87393_ != null) {
+-            RealmsBackupInfoScreen.this.f_88045_.f_87393_.forEach((p_88084_, p_88085_) -> {
+-               this.m_7085_(RealmsBackupInfoScreen.this.new BackupInfoListEntry(p_88084_, p_88085_));
+-            });
+-         }
+-
+-      }
+-   }
+-
+-   @OnlyIn(Dist.CLIENT)
+    class BackupInfoListEntry extends ObjectSelectionList.Entry<RealmsBackupInfoScreen.BackupInfoListEntry> {
+       private final String f_88087_;
+       private final String f_88088_;
+@@ -113,6 +_,20 @@
+          Font font = RealmsBackupInfoScreen.this.f_96541_.f_91062_;
+          GuiComponent.m_93236_(p_88094_, font, this.f_88087_, p_88097_, p_88096_, 10526880);
+          GuiComponent.m_93243_(p_88094_, font, RealmsBackupInfoScreen.this.m_88067_(this.f_88087_, this.f_88088_), p_88097_, p_88096_ + 12, 16777215);
++      }
++   }
++
++   @OnlyIn(Dist.CLIENT)
++   class BackupInfoList extends ObjectSelectionList<RealmsBackupInfoScreen.BackupInfoListEntry> {
++      public BackupInfoList(Minecraft p_88082_) {
++         super(p_88082_, RealmsBackupInfoScreen.this.f_96543_, RealmsBackupInfoScreen.this.f_96544_, 32, RealmsBackupInfoScreen.this.f_96544_ - 64, 36);
++         this.m_93471_(false);
++         if (RealmsBackupInfoScreen.this.f_88045_.f_87393_ != null) {
++            RealmsBackupInfoScreen.this.f_88045_.f_87393_.forEach((p_237736_1_, p_237736_2_) -> {
++               this.m_7085_(RealmsBackupInfoScreen.this.new BackupInfoListEntry(p_237736_1_, p_237736_2_));
++            });
++         }
++
+       }
+    }
+ }

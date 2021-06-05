@@ -1,0 +1,25 @@
+--- a/net/minecraft/server/commands/TriggerCommand.java
++++ b/net/minecraft/server/commands/TriggerCommand.java
+@@ -26,14 +_,14 @@
+    private static final SimpleCommandExceptionType f_139136_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.trigger.failed.invalid"));
+ 
+    public static void m_139141_(CommandDispatcher<CommandSourceStack> p_139142_) {
+-      p_139142_.register(Commands.m_82127_("trigger").then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).suggests((p_139146_, p_139147_) -> {
+-         return m_139148_(p_139146_.getSource(), p_139147_);
+-      }).executes((p_139165_) -> {
+-         return m_139151_(p_139165_.getSource(), m_139138_(p_139165_.getSource().m_81375_(), ObjectiveArgument.m_101960_(p_139165_, "objective")));
+-      }).then(Commands.m_82127_("add").then(Commands.m_82129_("value", IntegerArgumentType.integer()).executes((p_139159_) -> {
+-         return m_139154_(p_139159_.getSource(), m_139138_(p_139159_.getSource().m_81375_(), ObjectiveArgument.m_101960_(p_139159_, "objective")), IntegerArgumentType.getInteger(p_139159_, "value"));
+-      }))).then(Commands.m_82127_("set").then(Commands.m_82129_("value", IntegerArgumentType.integer()).executes((p_139144_) -> {
+-         return m_139160_(p_139144_.getSource(), m_139138_(p_139144_.getSource().m_81375_(), ObjectiveArgument.m_101960_(p_139144_, "objective")), IntegerArgumentType.getInteger(p_139144_, "value"));
++      p_139142_.register(Commands.m_82127_("trigger").then(Commands.m_82129_("objective", ObjectiveArgument.m_101957_()).suggests((p_198853_0_, p_198853_1_) -> {
++         return m_139148_(p_198853_0_.getSource(), p_198853_1_);
++      }).executes((p_198854_0_) -> {
++         return m_139151_(p_198854_0_.getSource(), m_139138_(p_198854_0_.getSource().m_81375_(), ObjectiveArgument.m_101960_(p_198854_0_, "objective")));
++      }).then(Commands.m_82127_("add").then(Commands.m_82129_("value", IntegerArgumentType.integer()).executes((p_198849_0_) -> {
++         return m_139154_(p_198849_0_.getSource(), m_139138_(p_198849_0_.getSource().m_81375_(), ObjectiveArgument.m_101960_(p_198849_0_, "objective")), IntegerArgumentType.getInteger(p_198849_0_, "value"));
++      }))).then(Commands.m_82127_("set").then(Commands.m_82129_("value", IntegerArgumentType.integer()).executes((p_198855_0_) -> {
++         return m_139160_(p_198855_0_.getSource(), m_139138_(p_198855_0_.getSource().m_81375_(), ObjectiveArgument.m_101960_(p_198855_0_, "objective")), IntegerArgumentType.getInteger(p_198855_0_, "value"));
+       })))));
+    }
+ 

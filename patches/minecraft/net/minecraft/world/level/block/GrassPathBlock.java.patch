@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/GrassPathBlock.java
++++ b/net/minecraft/world/level/block/GrassPathBlock.java
+@@ -17,7 +_,7 @@
+ public class GrassPathBlock extends Block {
+    protected static final VoxelShape f_53701_ = FarmBlock.f_53244_;
+ 
+-   protected GrassPathBlock(BlockBehaviour.Properties p_53704_) {
++   public GrassPathBlock(BlockBehaviour.Properties p_53704_) {
+       super(p_53704_);
+    }
+ 

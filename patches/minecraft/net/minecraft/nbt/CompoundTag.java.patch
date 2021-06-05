@@ -1,0 +1,48 @@
+--- a/net/minecraft/nbt/CompoundTag.java
++++ b/net/minecraft/nbt/CompoundTag.java
+@@ -29,11 +_,11 @@
+ import org.apache.logging.log4j.Logger;
+ 
+ public class CompoundTag implements Tag {
+-   public static final Codec<CompoundTag> f_128325_ = Codec.PASSTHROUGH.comapFlatMap((p_128336_) -> {
+-      Tag tag = p_128336_.convert(NbtOps.f_128958_).getValue();
++   public static final Codec<CompoundTag> f_128325_ = Codec.PASSTHROUGH.comapFlatMap((p_240598_0_) -> {
++      Tag tag = p_240598_0_.convert(NbtOps.f_128958_).getValue();
+       return tag instanceof CompoundTag ? DataResult.success((CompoundTag)tag) : DataResult.error("Not a compound tag: " + tag);
+-   }, (p_128412_) -> {
+-      return new Dynamic<>(NbtOps.f_128958_, p_128412_);
++   }, (p_240599_0_) -> {
++      return new Dynamic<>(NbtOps.f_128958_, p_240599_0_);
+    });
+    private static final Logger f_128327_ = LogManager.getLogger();
+    private static final Pattern f_128328_ = Pattern.compile("[A-Za-z0-9._+-]+");
+@@ -49,6 +_,7 @@
+             while((b0 = CompoundTag.m_128420_(p_128485_, p_128487_)) != 0) {
+                String s = CompoundTag.m_128432_(p_128485_, p_128487_);
+                p_128487_.m_6800_((long)(224 + 16 * s.length()));
++               p_128487_.m_6800_(32); //Forge: 4 extra bytes for the object allocation.
+                Tag tag = CompoundTag.m_128413_(TagTypes.m_129397_(b0), s, p_128485_, p_128486_ + 1, p_128487_);
+                if (map.put(s, tag) != null) {
+                   p_128487_.m_6800_(288L);
+@@ -104,6 +_,7 @@
+ 
+    @Nullable
+    public Tag m_128365_(String p_128366_, Tag p_128367_) {
++      if (p_128367_ == null) throw new IllegalArgumentException("Invalid null NBT value with key " + p_128366_);
+       return this.f_128329_.put(p_128366_, p_128367_);
+    }
+ 
+@@ -408,11 +_,12 @@
+    }
+ 
+    private static byte m_128420_(DataInput p_128421_, NbtAccounter p_128422_) throws IOException {
++      p_128422_.m_6800_(8);
+       return p_128421_.readByte();
+    }
+ 
+    private static String m_128432_(DataInput p_128433_, NbtAccounter p_128434_) throws IOException {
+-      return p_128433_.readUTF();
++      return p_128434_.readUTF(p_128433_.readUTF());
+    }
+ 
+    private static Tag m_128413_(TagType<?> p_128414_, String p_128415_, DataInput p_128416_, int p_128417_, NbtAccounter p_128418_) {

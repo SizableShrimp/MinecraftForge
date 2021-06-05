@@ -1,0 +1,90 @@
+--- a/net/minecraft/server/level/ChunkHolder.java
++++ b/net/minecraft/server/level/ChunkHolder.java
+@@ -189,8 +_,8 @@
+                   LevelChunkSection levelchunksection = p_140055_.m_7103_()[sectionpos.m_123342_()];
+                   ClientboundSectionBlocksUpdatePacket clientboundsectionblocksupdatepacket = new ClientboundSectionBlocksUpdatePacket(sectionpos, shortset, levelchunksection, this.f_140018_);
+                   this.m_140063_(clientboundsectionblocksupdatepacket, false);
+-                  clientboundsectionblocksupdatepacket.m_132992_((p_140078_, p_140079_) -> {
+-                     this.m_140032_(level, p_140078_, p_140079_);
++                  clientboundsectionblocksupdatepacket.m_132992_((p_244387_2_, p_244387_3_) -> {
++                     this.m_140032_(level, p_244387_2_, p_244387_3_);
+                   });
+                }
+ 
+@@ -203,7 +_,7 @@
+    }
+ 
+    private void m_140032_(Level p_140033_, BlockPos p_140034_, BlockState p_140035_) {
+-      if (p_140035_.m_60734_().m_60588_()) {
++      if (p_140035_.hasTileEntity()) {
+          this.m_140029_(p_140033_, p_140034_);
+       }
+ 
+@@ -221,8 +_,8 @@
+    }
+ 
+    private void m_140063_(Packet<?> p_140064_, boolean p_140065_) {
+-      this.f_140016_.m_5960_(this.f_140009_, p_140065_).forEach((p_140062_) -> {
+-         p_140062_.f_8906_.m_9829_(p_140064_);
++      this.f_140016_.m_5960_(this.f_140009_, p_140065_).forEach((p_219304_1_) -> {
++         p_219304_1_.f_8906_.m_9829_(p_140064_);
+       });
+    }
+ 
+@@ -247,11 +_,11 @@
+    }
+ 
+    private void m_140058_(CompletableFuture<? extends Either<? extends ChunkAccess, ChunkHolder.ChunkLoadingFailure>> p_140059_) {
+-      this.f_140005_ = this.f_140005_.thenCombine(p_140059_, (p_140042_, p_140043_) -> {
+-         return p_140043_.map((p_140040_) -> {
+-            return p_140040_;
+-         }, (p_140046_) -> {
+-            return p_140042_;
++      this.f_140005_ = this.f_140005_.thenCombine(p_140059_, (p_219295_0_, p_219295_1_) -> {
++         return p_219295_1_.map((p_219283_0_) -> {
++            return p_219283_0_;
++         }, (p_219288_1_) -> {
++            return p_219295_0_;
+          });
+       });
+    }
+@@ -316,8 +_,8 @@
+       if (flag5 && !flag6) {
+          CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> completablefuture1 = this.f_140002_;
+          this.f_140002_ = f_139998_;
+-         this.m_140058_(completablefuture1.thenApply((p_140072_) -> {
+-            return p_140072_.ifLeft(p_140069_::m_140270_);
++         this.m_140058_(completablefuture1.thenApply((p_222982_1_) -> {
++            return p_222982_1_.ifLeft(p_140069_::m_140270_);
+          }));
+       }
+ 
+@@ -391,6 +_,14 @@
+       };
+    }
+ 
++   public interface LevelChangeListener {
++      void m_6250_(ChunkPos p_140119_, IntSupplier p_140120_, int p_140121_, IntConsumer p_140122_);
++   }
++
++   public interface PlayerProvider {
++      Stream<ServerPlayer> m_5960_(ChunkPos p_140123_, boolean p_140124_);
++   }
++
+    public static enum FullChunkStatus {
+       INACCESSIBLE,
+       BORDER,
+@@ -400,13 +_,5 @@
+       public boolean m_140114_(ChunkHolder.FullChunkStatus p_140115_) {
+          return this.ordinal() >= p_140115_.ordinal();
+       }
+-   }
+-
+-   public interface LevelChangeListener {
+-      void m_6250_(ChunkPos p_140119_, IntSupplier p_140120_, int p_140121_, IntConsumer p_140122_);
+-   }
+-
+-   public interface PlayerProvider {
+-      Stream<ServerPlayer> m_5960_(ChunkPos p_140123_, boolean p_140124_);
+    }
+ }

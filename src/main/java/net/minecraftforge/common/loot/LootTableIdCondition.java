@@ -32,7 +32,7 @@ import net.minecraft.resources.ResourceLocation;
 public class LootTableIdCondition implements LootItemCondition
 {
     // TODO Forge Registry at some point?
-    public static final LootItemConditionType LOOT_TABLE_ID = new LootItemConditionType(new Serializer());
+    public static final LootItemConditionType LOOT_TABLE_ID = new LootItemConditionType(new LootTableIdCondition.Serializer());
     public static final ResourceLocation UNKNOWN_LOOT_TABLE = new ResourceLocation("forge", "unknown_loot_table");
 
     private final ResourceLocation targetLootTableId;
@@ -76,7 +76,7 @@ public class LootTableIdCondition implements LootItemCondition
         }
     }
 
-    public static class Serializer implements Serializer<LootTableIdCondition>
+    public static class Serializer implements net.minecraft.world.level.storage.loot.Serializer<LootTableIdCondition>
     {
         @Override
         public void serialize(JsonObject object, LootTableIdCondition instance, JsonSerializationContext ctx)

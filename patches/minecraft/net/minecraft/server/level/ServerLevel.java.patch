@@ -1,0 +1,407 @@
+--- a/net/minecraft/server/level/ServerLevel.java
++++ b/net/minecraft/server/level/ServerLevel.java
+@@ -87,7 +_,6 @@
+ import net.minecraft.world.entity.animal.Animal;
+ import net.minecraft.world.entity.animal.WaterAnimal;
+ import net.minecraft.world.entity.animal.horse.SkeletonHorse;
+-import net.minecraft.world.entity.boss.EnderDragonPart;
+ import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+ import net.minecraft.world.entity.npc.Npc;
+ import net.minecraft.world.entity.player.Player;
+@@ -143,7 +_,7 @@
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ 
+-public class ServerLevel extends Level implements WorldGenLevel {
++public class ServerLevel extends Level implements WorldGenLevel, net.minecraftforge.common.extensions.IForgeWorldServer {
+    public static final BlockPos f_8562_ = new BlockPos(100, 50, 0);
+    private static final Logger f_8566_ = LogManager.getLogger();
+    private final Int2ObjectMap<Entity> f_8567_ = new Int2ObjectLinkedOpenHashMap<>();
+@@ -158,11 +_,11 @@
+    private boolean f_8550_;
+    private int f_8551_;
+    private final PortalForcer f_8552_;
+-   private final ServerTickList<Block> f_8553_ = new ServerTickList<>(this, (p_8711_) -> {
+-      return p_8711_ == null || p_8711_.m_49966_().m_60795_();
++   private final ServerTickList<Block> f_8553_ = new ServerTickList<>(this, (p_205341_0_) -> {
++      return p_205341_0_ == null || p_205341_0_.m_49966_().m_60795_();
+    }, Registry.f_122824_::m_7981_, this::m_8821_);
+-   private final ServerTickList<Fluid> f_8554_ = new ServerTickList<>(this, (p_8728_) -> {
+-      return p_8728_ == null || p_8728_ == Fluids.f_76191_;
++   private final ServerTickList<Fluid> f_8554_ = new ServerTickList<>(this, (p_205774_0_) -> {
++      return p_205774_0_ == null || p_205774_0_ == Fluids.f_76191_;
+    }, Registry.f_122822_::m_7981_, this::m_8700_);
+    private final Set<PathNavigation> f_8555_ = Sets.newHashSet();
+    protected final Raids f_8565_;
+@@ -173,6 +_,7 @@
+    private final EndDragonFight f_8559_;
+    private final StructureFeatureManager f_8560_;
+    private final boolean f_8561_;
++   private net.minecraftforge.common.util.WorldCapabilityData capabilityData;
+ 
+    public ServerLevel(MinecraftServer p_8571_, Executor p_8572_, LevelStorageSource.LevelStorageAccess p_8573_, ServerLevelData p_8574_, ResourceKey<Level> p_8575_, DimensionType p_8576_, ChunkProgressListener p_8577_, ChunkGenerator p_8578_, boolean p_8579_, long p_8580_, List<CustomSpawner> p_8581_, boolean p_8582_) {
+       super(p_8574_, p_8575_, p_8576_, p_8571_::m_129905_, false, p_8579_, p_8580_);
+@@ -200,7 +_,7 @@
+       } else {
+          this.f_8559_ = null;
+       }
+-
++      this.initCapabilities();
+    }
+ 
+    public void m_8606_(int p_8607_, int p_8608_, boolean p_8609_, boolean p_8610_) {
+@@ -296,24 +_,28 @@
+          this.f_8548_.m_6846_().m_11270_(new ClientboundGameEventPacket(ClientboundGameEventPacket.f_132161_, this.f_46440_), this.m_46472_());
+       }
+ 
++      /* The function in use here has been replaced in order to only send the weather info to players in the correct dimension,
++       * rather than to all players on the server. This is what causes the client-side rain, as the
++       * client believes that it has started raining locally, rather than in another dimension.
++       */
+       if (flag != this.m_46471_()) {
+          if (flag) {
+-            this.f_8548_.m_6846_().m_11268_(new ClientboundGameEventPacket(ClientboundGameEventPacket.f_132155_, 0.0F));
++            this.f_8548_.m_6846_().m_11270_(new ClientboundGameEventPacket(ClientboundGameEventPacket.f_132155_, 0.0F), this.m_46472_());
+          } else {
+-            this.f_8548_.m_6846_().m_11268_(new ClientboundGameEventPacket(ClientboundGameEventPacket.f_132154_, 0.0F));
++            this.f_8548_.m_6846_().m_11270_(new ClientboundGameEventPacket(ClientboundGameEventPacket.f_132154_, 0.0F), this.m_46472_());
+          }
+ 
+-         this.f_8548_.m_6846_().m_11268_(new ClientboundGameEventPacket(ClientboundGameEventPacket.f_132160_, this.f_46438_));
+-         this.f_8548_.m_6846_().m_11268_(new ClientboundGameEventPacket(ClientboundGameEventPacket.f_132161_, this.f_46440_));
++         this.f_8548_.m_6846_().m_11270_(new ClientboundGameEventPacket(ClientboundGameEventPacket.f_132160_, this.f_46438_), this.m_46472_());
++         this.f_8548_.m_6846_().m_11270_(new ClientboundGameEventPacket(ClientboundGameEventPacket.f_132161_, this.f_46440_), this.m_46472_());
+       }
+ 
+-      if (this.f_8550_ && this.f_8546_.stream().noneMatch((p_8863_) -> {
+-         return !p_8863_.m_5833_() && !p_8863_.m_36317_();
++      if (this.f_8550_ && this.f_8546_.stream().noneMatch((p_241132_0_) -> {
++         return !p_241132_0_.m_5833_() && !p_241132_0_.m_36317_();
+       })) {
+          this.f_8550_ = false;
+          if (this.m_46469_().m_46207_(GameRules.f_46140_)) {
+-            long l = this.f_46442_.m_6792_() + 24000L;
+-            this.m_8615_(l - l % 24000L);
++            long l = this.m_46468_() + 24000L;
++            this.m_8615_(net.minecraftforge.event.ForgeEventFactory.onSleepFinished(this, l - l % 24000L, this.m_46468_()));
+          }
+ 
+          this.m_8804_();
+@@ -338,7 +_,7 @@
+       this.m_8807_();
+       this.f_8557_ = false;
+       profilerfiller.m_6182_("entities");
+-      boolean flag3 = !this.f_8546_.isEmpty() || !this.m_8902_().isEmpty();
++      boolean flag3 = !this.f_8546_.isEmpty() || net.minecraftforge.common.world.ForgeChunkManager.hasForcedChunks(this); //Forge: Replace vanilla's has forced chunk check with forge's that checks both the vanilla and forge added ones
+       if (flag3) {
+          this.m_8886_();
+       }
+@@ -395,7 +_,7 @@
+             }
+ 
+             profilerfiller.m_6180_("tick");
+-            if (!entity1.f_19866_ && !(entity1 instanceof EnderDragonPart)) {
++            if (!entity1.f_19866_ && !(entity1 instanceof net.minecraftforge.entity.PartEntity)) {
+                this.m_46653_(this::m_8647_, entity1);
+             }
+ 
+@@ -404,7 +_,7 @@
+             if (entity1.f_19866_) {
+                this.m_8884_(entity1);
+                objectiterator.remove();
+-               this.m_8864_(entity1);
++               this.removeEntityComplete(entity1, entity1 instanceof ServerPlayer); //Forge: Keep cap data until revive. Every other entity removes directly.
+             }
+ 
+             profilerfiller.m_7238_();
+@@ -438,8 +_,8 @@
+    }
+ 
+    private void m_8804_() {
+-      this.f_8546_.stream().filter(LivingEntity::m_5803_).collect(Collectors.toList()).forEach((p_8859_) -> {
+-         p_8859_.m_6145_(false, false);
++      this.f_8546_.stream().filter(LivingEntity::m_5803_).collect(Collectors.toList()).forEach((p_241131_0_) -> {
++         p_241131_0_.m_6145_(false, false);
+       });
+    }
+ 
+@@ -475,6 +_,7 @@
+          BlockPos blockpos2 = this.m_5452_(Heightmap.Types.MOTION_BLOCKING, this.m_46496_(i, 0, j, 15));
+          BlockPos blockpos3 = blockpos2.m_7495_();
+          Biome biome = this.m_46857_(blockpos2);
++         if (this.isAreaLoaded(blockpos2, 1)) // Forge: check area to avoid loading neighbors in unloaded chunks
+          if (biome.m_47477_(this, blockpos3)) {
+             this.m_46597_(blockpos3, Blocks.f_50126_.m_49966_());
+          }
+@@ -519,8 +_,8 @@
+    protected BlockPos m_8731_(BlockPos p_8732_) {
+       BlockPos blockpos = this.m_5452_(Heightmap.Types.MOTION_BLOCKING, p_8732_);
+       AABB aabb = (new AABB(blockpos, new BlockPos(blockpos.m_123341_(), this.m_45546_(), blockpos.m_123343_()))).m_82400_(3.0D);
+-      List<LivingEntity> list = this.m_6443_(LivingEntity.class, aabb, (p_8669_) -> {
+-         return p_8669_ != null && p_8669_.m_6084_() && this.m_45527_(p_8669_.m_20183_());
++      List<LivingEntity> list = this.m_6443_(LivingEntity.class, aabb, (p_241115_1_) -> {
++         return p_241115_1_ != null && p_241115_1_.m_6084_() && this.m_45527_(p_241115_1_.m_20183_());
+       });
+       if (!list.isEmpty()) {
+          return list.get(this.f_46441_.nextInt(list.size())).m_20183_();
+@@ -598,9 +_,10 @@
+             ++p_8648_.f_19797_;
+             ProfilerFiller profilerfiller = this.m_46473_();
+             profilerfiller.m_6521_(() -> {
+-               return Registry.f_122826_.m_7981_(p_8648_.m_6095_()).toString();
++               return p_8648_.m_6095_().getRegistryName() == null ? p_8648_.m_6095_().toString() : p_8648_.m_6095_().getRegistryName().toString();
+             });
+             profilerfiller.m_6174_("tickNonPassenger");
++            if (p_8648_.canUpdate())
+             p_8648_.m_8119_();
+             profilerfiller.m_7238_();
+          }
+@@ -687,6 +_,7 @@
+             p_8644_.m_6307_(new TranslatableComponent("menu.savingChunks"));
+          }
+ 
++         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.world.WorldEvent.Save(this));
+          serverchunkcache.m_8419_(p_8645_);
+       }
+    }
+@@ -777,6 +_,7 @@
+    }
+ 
+    private void m_8853_(ServerPlayer p_8854_) {
++      if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.EntityJoinWorldEvent(p_8854_, this))) return;
+       Entity entity = this.f_8568_.get(p_8854_.m_20148_());
+       if (entity != null) {
+          f_8566_.warn("Force-added player with duplicate UUID {}", (Object)p_8854_.m_20148_().toString());
+@@ -801,6 +_,7 @@
+       } else if (this.m_8876_(p_8873_)) {
+          return false;
+       } else {
++         if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.EntityJoinWorldEvent(p_8873_, this))) return false;
+          ChunkAccess chunkaccess = this.m_6522_(Mth.m_14107_(p_8873_.m_20185_() / 16.0D), Mth.m_14107_(p_8873_.m_20189_() / 16.0D), ChunkStatus.f_62326_, p_8873_.f_19852_);
+          if (!(chunkaccess instanceof LevelChunk)) {
+             return false;
+@@ -816,6 +_,7 @@
+       if (this.m_8876_(p_8856_)) {
+          return false;
+       } else {
++         if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.EntityJoinWorldEvent(p_8856_, this))) return false;
+          this.m_8880_(p_8856_);
+          return true;
+       }
+@@ -879,25 +_,32 @@
+ 
+    }
+ 
++   @Deprecated //Forge: Use removeEntityComplete(entity,boolean)
+    public void m_8864_(Entity p_8865_) {
+-      if (p_8865_ instanceof EnderDragon) {
+-         for(EnderDragonPart enderdragonpart : ((EnderDragon)p_8865_).m_31156_()) {
+-            enderdragonpart.m_6091_();
++      removeEntityComplete(p_8865_, false);
++   }
++   public void removeEntityComplete(Entity p_217484_1_, boolean keepData) {
++      if (p_217484_1_.isMultipartEntity()) {
++         for(net.minecraftforge.entity.PartEntity<?> enderdragonpartentity : p_217484_1_.getParts()) {
++            enderdragonpartentity.remove(keepData);
+          }
+       }
++      p_217484_1_.remove(keepData);
+ 
+-      this.f_8568_.remove(p_8865_.m_20148_());
+-      this.m_7726_().m_8443_(p_8865_);
+-      if (p_8865_ instanceof ServerPlayer) {
+-         ServerPlayer serverplayer = (ServerPlayer)p_8865_;
++      this.f_8568_.remove(p_217484_1_.m_20148_());
++      this.m_7726_().m_8443_(p_217484_1_);
++      if (p_217484_1_ instanceof ServerPlayer) {
++         ServerPlayer serverplayer = (ServerPlayer)p_217484_1_;
+          this.f_8546_.remove(serverplayer);
+       }
+ 
+-      this.m_6188_().m_83420_(p_8865_);
+-      if (p_8865_ instanceof Mob) {
+-         this.f_8555_.remove(((Mob)p_8865_).m_21573_());
++      this.m_6188_().m_83420_(p_217484_1_);
++      if (p_217484_1_ instanceof Mob) {
++         this.f_8555_.remove(((Mob)p_217484_1_).m_21573_());
+       }
+ 
++      p_217484_1_.onRemovedFromWorld();
++      net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.EntityLeaveWorldEvent(p_217484_1_, this));
+    }
+ 
+    private void m_8880_(Entity p_8881_) {
+@@ -905,9 +_,9 @@
+          this.f_8545_.add(p_8881_);
+       } else {
+          this.f_8567_.put(p_8881_.m_19879_(), p_8881_);
+-         if (p_8881_ instanceof EnderDragon) {
+-            for(EnderDragonPart enderdragonpart : ((EnderDragon)p_8881_).m_31156_()) {
+-               this.f_8567_.put(enderdragonpart.m_19879_(), enderdragonpart);
++         if (p_8881_.isMultipartEntity()) {
++            for(net.minecraftforge.entity.PartEntity<?> enderdragonpartentity : p_8881_.getParts()) {
++               this.f_8567_.put(enderdragonpartentity.m_19879_(), enderdragonpartentity);
+             }
+          }
+ 
+@@ -918,15 +_,19 @@
+          }
+       }
+ 
++      p_8881_.onAddedToWorld();
+    }
+ 
+    public void m_8867_(Entity p_8868_) {
++      removeEntity(p_8868_, false);
++   }
++   public void removeEntity(Entity p_217467_1_, boolean keepData) {
+       if (this.f_8563_) {
+          throw (IllegalStateException)Util.m_137570_(new IllegalStateException("Removing entity while ticking!"));
+       } else {
+-         this.m_8884_(p_8868_);
+-         this.f_8567_.remove(p_8868_.m_19879_());
+-         this.m_8864_(p_8868_);
++         this.m_8884_(p_217467_1_);
++         this.f_8567_.remove(p_217467_1_.m_19879_());
++         this.removeEntityComplete(p_217467_1_, keepData);
+       }
+    }
+ 
+@@ -939,8 +_,11 @@
+    }
+ 
+    public void m_8849_(ServerPlayer p_8850_) {
+-      p_8850_.m_6091_();
+-      this.m_8867_(p_8850_);
++      removePlayer(p_8850_, false);
++   }
++   public void removePlayer(ServerPlayer p_217434_1_, boolean keepData) {
++      p_217434_1_.remove(keepData);
++      this.removeEntity(p_217434_1_, keepData);
+       this.m_8878_();
+    }
+ 
+@@ -959,10 +_,20 @@
+    }
+ 
+    public void m_6263_(@Nullable Player p_8675_, double p_8676_, double p_8677_, double p_8678_, SoundEvent p_8679_, SoundSource p_8680_, float p_8681_, float p_8682_) {
++      net.minecraftforge.event.entity.PlaySoundAtEntityEvent event = net.minecraftforge.event.ForgeEventFactory.onPlaySoundAtEntity(p_8675_, p_8679_, p_8680_, p_8681_, p_8682_);
++      if (event.isCanceled() || event.getSound() == null) return;
++      p_8679_ = event.getSound();
++      p_8680_ = event.getCategory();
++      p_8681_ = event.getVolume();
+       this.f_8548_.m_6846_().m_11241_(p_8675_, p_8676_, p_8677_, p_8678_, p_8681_ > 1.0F ? (double)(16.0F * p_8681_) : 16.0D, this.m_46472_(), new ClientboundSoundPacket(p_8679_, p_8680_, p_8676_, p_8677_, p_8678_, p_8681_, p_8682_));
+    }
+ 
+    public void m_6269_(@Nullable Player p_8689_, Entity p_8690_, SoundEvent p_8691_, SoundSource p_8692_, float p_8693_, float p_8694_) {
++      net.minecraftforge.event.entity.PlaySoundAtEntityEvent event = net.minecraftforge.event.ForgeEventFactory.onPlaySoundAtEntity(p_8689_, p_8691_, p_8692_, p_8693_, p_8694_);
++      if (event.isCanceled() || event.getSound() == null) return;
++      p_8691_ = event.getSound();
++      p_8692_ = event.getCategory();
++      p_8693_ = event.getVolume();
+       this.f_8548_.m_6846_().m_11241_(p_8689_, p_8690_.m_20185_(), p_8690_.m_20186_(), p_8690_.m_20189_(), p_8693_ > 1.0F ? (double)(16.0F * p_8693_) : 16.0D, this.m_46472_(), new ClientboundSoundEntityPacket(p_8691_, p_8692_, p_8690_, p_8693_, p_8694_));
+    }
+ 
+@@ -998,6 +_,7 @@
+ 
+    public Explosion m_7703_(@Nullable Entity p_8653_, @Nullable DamageSource p_8654_, @Nullable ExplosionDamageCalculator p_8655_, double p_8656_, double p_8657_, double p_8658_, float p_8659_, boolean p_8660_, Explosion.BlockInteraction p_8661_) {
+       Explosion explosion = new Explosion(this, p_8653_, p_8654_, p_8655_, p_8656_, p_8657_, p_8658_, p_8659_, p_8660_, p_8661_);
++      if (net.minecraftforge.event.ForgeEventFactory.onExplosionStart(this, explosion)) return explosion;
+       explosion.m_46061_();
+       explosion.m_46075_(false);
+       if (p_8661_ == Explosion.BlockInteraction.NONE) {
+@@ -1103,8 +_,8 @@
+ 
+    @Nullable
+    public BlockPos m_8705_(Biome p_8706_, BlockPos p_8707_, int p_8708_, int p_8709_) {
+-      return this.m_7726_().m_8481_().m_62218_().m_7754_(p_8707_.m_123341_(), p_8707_.m_123342_(), p_8707_.m_123343_(), p_8708_, p_8709_, (p_8704_) -> {
+-         return p_8704_ == p_8706_;
++      return this.m_7726_().m_8481_().m_62218_().m_7754_(p_8707_.m_123341_(), p_8707_.m_123342_(), p_8707_.m_123343_(), p_8708_, p_8709_, (p_242102_1_) -> {
++         return p_242102_1_ == p_8706_;
+       }, this.f_46441_, true);
+    }
+ 
+@@ -1200,15 +_,15 @@
+       Optional<PoiType> optional1 = PoiType.m_27390_(p_8753_);
+       if (!Objects.equals(optional, optional1)) {
+          BlockPos blockpos = p_8751_.m_7949_();
+-         optional.ifPresent((p_8840_) -> {
++         optional.ifPresent((p_241130_2_) -> {
+             this.m_7654_().execute(() -> {
+                this.m_8904_().m_27079_(blockpos);
+                DebugPackets.m_133716_(this, blockpos);
+             });
+          });
+-         optional1.ifPresent((p_8741_) -> {
++         optional1.ifPresent((p_217476_2_) -> {
+             this.m_7654_().execute(() -> {
+-               this.m_8904_().m_27085_(blockpos, p_8741_);
++               this.m_8904_().m_27085_(blockpos, p_217476_2_);
+                DebugPackets.m_133679_(this, blockpos);
+             });
+          });
+@@ -1326,8 +_,8 @@
+ 
+    @VisibleForTesting
+    public void m_8722_(BoundingBox p_8723_) {
+-      this.f_8556_.removeIf((p_8726_) -> {
+-         return p_8723_.m_71051_(p_8726_.m_45538_());
++      this.f_8556_.removeIf((p_241118_1_) -> {
++         return p_8723_.m_71051_(p_241118_1_.m_45538_());
+       });
+    }
+ 
+@@ -1374,10 +_,10 @@
+ 
+    @VisibleForTesting
+    public String m_8590_() {
+-      return String.format("players: %s, entities: %d [%s], block_entities: %d [%s], block_ticks: %d, fluid_ticks: %d, chunk_source: %s", this.f_8546_.size(), this.f_8567_.size(), m_8788_(this.f_8567_.values(), (p_8889_) -> {
+-         return Registry.f_122826_.m_7981_(p_8889_.m_6095_());
+-      }), this.f_46432_.size(), m_8788_(this.f_46432_, (p_8824_) -> {
+-         return Registry.f_122830_.m_7981_(p_8824_.m_58903_());
++      return String.format("players: %s, entities: %d [%s], block_entities: %d [%s], block_ticks: %d, fluid_ticks: %d, chunk_source: %s", this.f_8546_.size(), this.f_8567_.size(), m_8788_(this.f_8567_.values(), (p_244527_0_) -> {
++         return Registry.f_122826_.m_7981_(p_244527_0_.m_6095_());
++      }), this.f_46432_.size(), m_8788_(this.f_46432_, (p_244526_0_) -> {
++         return Registry.f_122830_.m_7981_(p_244526_0_.m_58903_());
+       }), this.m_6219_().m_47220_(), this.m_6217_().m_47220_(), this.m_46464_());
+    }
+ 
+@@ -1390,8 +_,8 @@
+             object2intopenhashmap.addTo(resourcelocation, 1);
+          }
+ 
+-         return object2intopenhashmap.object2IntEntrySet().stream().sorted(Comparator.comparing(it.unimi.dsi.fastutil.objects.Object2IntMap.Entry<ResourceLocation>::getIntValue).reversed()).limit(5L).map((p_8778_) -> {
+-            return p_8778_.getKey() + ":" + p_8778_.getIntValue();
++         return object2intopenhashmap.object2IntEntrySet().stream().sorted(Comparator.comparing(it.unimi.dsi.fastutil.objects.Object2IntMap.Entry<ResourceLocation>::getIntValue).reversed()).limit(5L).map((p_244523_0_) -> {
++            return p_244523_0_.getKey() + ":" + p_244523_0_.getIntValue();
+          }).collect(Collectors.joining(","));
+       } catch (Exception exception) {
+          return "";
+@@ -1403,11 +_,21 @@
+       int i = blockpos.m_123341_();
+       int j = blockpos.m_123342_() - 2;
+       int k = blockpos.m_123343_();
+-      BlockPos.m_121976_(i - 2, j + 1, k - 2, i + 2, j + 3, k + 2).forEach((p_8816_) -> {
+-         p_8618_.m_46597_(p_8816_, Blocks.f_50016_.m_49966_());
+-      });
+-      BlockPos.m_121976_(i - 2, j, k - 2, i + 2, j, k + 2).forEach((p_8621_) -> {
+-         p_8618_.m_46597_(p_8621_, Blocks.f_50080_.m_49966_());
+-      });
++      BlockPos.m_121976_(i - 2, j + 1, k - 2, i + 2, j + 3, k + 2).forEach((p_244430_1_) -> {
++         p_8618_.m_46597_(p_244430_1_, Blocks.f_50016_.m_49966_());
++      });
++      BlockPos.m_121976_(i - 2, j, k - 2, i + 2, j, k + 2).forEach((p_241122_1_) -> {
++         p_8618_.m_46597_(p_241122_1_, Blocks.f_50080_.m_49966_());
++      });
++   }
++
++   protected void initCapabilities() {
++      this.gatherCapabilities();
++      capabilityData = this.m_8895_().m_78161_(() -> new net.minecraftforge.common.util.WorldCapabilityData(getCapabilities()), net.minecraftforge.common.util.WorldCapabilityData.ID);
++      capabilityData.setCapabilities(getCapabilities());
++   }
++
++   public java.util.stream.Stream<Entity> getEntities() {
++       return f_8567_.values().stream();
+    }
+ }

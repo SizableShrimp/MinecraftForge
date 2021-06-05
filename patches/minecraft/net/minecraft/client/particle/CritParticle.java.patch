@@ -1,0 +1,46 @@
+--- a/net/minecraft/client/particle/CritParticle.java
++++ b/net/minecraft/client/particle/CritParticle.java
+@@ -73,6 +_,21 @@
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
++   public static class Provider implements ParticleProvider<SimpleParticleType> {
++      private final SpriteSet f_105981_;
++
++      public Provider(SpriteSet p_105983_) {
++         this.f_105981_ = p_105983_;
++      }
++
++      public Particle m_6966_(SimpleParticleType p_105994_, ClientLevel p_105995_, double p_105996_, double p_105997_, double p_105998_, double p_105999_, double p_106000_, double p_106001_) {
++         CritParticle critparticle = new CritParticle(p_105995_, p_105996_, p_105997_, p_105998_, p_105999_, p_106000_, p_106001_);
++         critparticle.m_108335_(this.f_105981_);
++         return critparticle;
++      }
++   }
++
++   @OnlyIn(Dist.CLIENT)
+    public static class MagicProvider implements ParticleProvider<SimpleParticleType> {
+       private final SpriteSet f_105960_;
+ 
+@@ -85,21 +_,6 @@
+          critparticle.f_107227_ *= 0.3F;
+          critparticle.f_107228_ *= 0.8F;
+          critparticle.m_108335_(this.f_105960_);
+-         return critparticle;
+-      }
+-   }
+-
+-   @OnlyIn(Dist.CLIENT)
+-   public static class Provider implements ParticleProvider<SimpleParticleType> {
+-      private final SpriteSet f_105981_;
+-
+-      public Provider(SpriteSet p_105983_) {
+-         this.f_105981_ = p_105983_;
+-      }
+-
+-      public Particle m_6966_(SimpleParticleType p_105994_, ClientLevel p_105995_, double p_105996_, double p_105997_, double p_105998_, double p_105999_, double p_106000_, double p_106001_) {
+-         CritParticle critparticle = new CritParticle(p_105995_, p_105996_, p_105997_, p_105998_, p_105999_, p_106000_, p_106001_);
+-         critparticle.m_108335_(this.f_105981_);
+          return critparticle;
+       }
+    }

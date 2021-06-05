@@ -1,0 +1,20 @@
+--- a/net/minecraft/core/Vec3i.java
++++ b/net/minecraft/core/Vec3i.java
+@@ -11,12 +_,12 @@
+ 
+ @Immutable
+ public class Vec3i implements Comparable<Vec3i> {
+-   public static final Codec<Vec3i> f_123287_ = Codec.INT_STREAM.comapFlatMap((p_123318_) -> {
+-      return Util.m_137539_(p_123318_, 3).map((p_123320_) -> {
+-         return new Vec3i(p_123320_[0], p_123320_[1], p_123320_[2]);
++   public static final Codec<Vec3i> f_123287_ = Codec.INT_STREAM.comapFlatMap((p_239783_0_) -> {
++      return Util.m_137539_(p_239783_0_, 3).map((p_239784_0_) -> {
++         return new Vec3i(p_239784_0_[0], p_239784_0_[1], p_239784_0_[2]);
+       });
+-   }, (p_123313_) -> {
+-      return IntStream.of(p_123313_.m_123341_(), p_123313_.m_123342_(), p_123313_.m_123343_());
++   }, (p_239782_0_) -> {
++      return IntStream.of(p_239782_0_.m_123341_(), p_239782_0_.m_123342_(), p_239782_0_.m_123343_());
+    });
+    public static final Vec3i f_123288_ = new Vec3i(0, 0, 0);
+    private int f_123285_;

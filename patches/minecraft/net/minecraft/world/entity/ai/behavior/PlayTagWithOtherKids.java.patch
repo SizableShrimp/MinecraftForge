@@ -1,0 +1,57 @@
+--- a/net/minecraft/world/entity/ai/behavior/PlayTagWithOtherKids.java
++++ b/net/minecraft/world/entity/ai/behavior/PlayTagWithOtherKids.java
+@@ -37,8 +_,8 @@
+          if (optional.isPresent()) {
+             m_23649_(p_23633_, optional.get());
+          } else {
+-            this.m_23647_(p_23633_).ifPresent((p_23666_) -> {
+-               m_23649_(p_23633_, p_23666_);
++            this.m_23647_(p_23633_).ifPresent((p_220506_1_) -> {
++               m_23649_(p_23633_, p_220506_1_);
+             });
+          }
+       }
+@@ -68,16 +_,16 @@
+ 
+    private Optional<LivingEntity> m_23662_(PathfinderMob p_23663_) {
+       Map<LivingEntity, Integer> map = this.m_23672_(p_23663_);
+-      return map.entrySet().stream().sorted(Comparator.comparingInt(Entry::getValue)).filter((p_23653_) -> {
+-         return p_23653_.getValue() > 0 && p_23653_.getValue() <= 5;
++      return map.entrySet().stream().sorted(Comparator.comparingInt(Entry::getValue)).filter((p_220504_0_) -> {
++         return p_220504_0_.getValue() > 0 && p_220504_0_.getValue() <= 5;
+       }).map(Entry::getKey).findFirst();
+    }
+ 
+    private Map<LivingEntity, Integer> m_23672_(PathfinderMob p_23673_) {
+       Map<LivingEntity, Integer> map = Maps.newHashMap();
+-      this.m_23674_(p_23673_).stream().filter(this::m_23667_).forEach((p_23656_) -> {
+-         Integer integer = map.compute(this.m_23639_(p_23656_), (p_23645_, p_23646_) -> {
+-            return p_23646_ == null ? 1 : p_23646_ + 1;
++      this.m_23674_(p_23673_).stream().filter(this::m_23667_).forEach((p_220509_2_) -> {
++         Integer integer = map.compute(this.m_23639_(p_220509_2_), (p_220511_0_, p_220511_1_) -> {
++            return p_220511_1_ == null ? 1 : p_220511_1_ + 1;
+          });
+       });
+       return map;
+@@ -93,8 +_,8 @@
+ 
+    @Nullable
+    private LivingEntity m_23657_(LivingEntity p_23658_) {
+-      return p_23658_.m_6274_().m_21952_(MemoryModuleType.f_26366_).get().stream().filter((p_23671_) -> {
+-         return this.m_23641_(p_23658_, p_23671_);
++      return p_23658_.m_6274_().m_21952_(MemoryModuleType.f_26366_).get().stream().filter((p_220507_2_) -> {
++         return this.m_23641_(p_23658_, p_220507_2_);
+       }).findAny().orElse((LivingEntity)null);
+    }
+ 
+@@ -103,8 +_,8 @@
+    }
+ 
+    private boolean m_23641_(LivingEntity p_23642_, LivingEntity p_23643_) {
+-      return p_23643_.m_6274_().m_21952_(MemoryModuleType.f_26374_).filter((p_23661_) -> {
+-         return p_23661_ == p_23642_;
++      return p_23643_.m_6274_().m_21952_(MemoryModuleType.f_26374_).filter((p_220496_1_) -> {
++         return p_220496_1_ == p_23642_;
+       }).isPresent();
+    }
+ 

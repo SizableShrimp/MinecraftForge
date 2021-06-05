@@ -1,0 +1,29 @@
+--- a/net/minecraft/core/particles/DustParticleOptions.java
++++ b/net/minecraft/core/particles/DustParticleOptions.java
+@@ -13,16 +_,16 @@
+ 
+ public class DustParticleOptions implements ParticleOptions {
+    public static final DustParticleOptions f_123656_ = new DustParticleOptions(1.0F, 0.0F, 0.0F, 1.0F);
+-   public static final Codec<DustParticleOptions> f_123657_ = RecordCodecBuilder.create((p_123671_) -> {
+-      return p_123671_.group(Codec.FLOAT.fieldOf("r").forGetter((p_123684_) -> {
+-         return p_123684_.f_123659_;
+-      }), Codec.FLOAT.fieldOf("g").forGetter((p_123681_) -> {
+-         return p_123681_.f_123660_;
+-      }), Codec.FLOAT.fieldOf("b").forGetter((p_123678_) -> {
+-         return p_123678_.f_123661_;
+-      }), Codec.FLOAT.fieldOf("scale").forGetter((p_123673_) -> {
+-         return p_123673_.f_123662_;
+-      })).apply(p_123671_, DustParticleOptions::new);
++   public static final Codec<DustParticleOptions> f_123657_ = RecordCodecBuilder.create((p_239803_0_) -> {
++      return p_239803_0_.group(Codec.FLOAT.fieldOf("r").forGetter((p_239807_0_) -> {
++         return p_239807_0_.f_123659_;
++      }), Codec.FLOAT.fieldOf("g").forGetter((p_239806_0_) -> {
++         return p_239806_0_.f_123660_;
++      }), Codec.FLOAT.fieldOf("b").forGetter((p_239805_0_) -> {
++         return p_239805_0_.f_123661_;
++      }), Codec.FLOAT.fieldOf("scale").forGetter((p_239804_0_) -> {
++         return p_239804_0_.f_123662_;
++      })).apply(p_239803_0_, DustParticleOptions::new);
+    });
+    public static final ParticleOptions.Deserializer<DustParticleOptions> f_123658_ = new ParticleOptions.Deserializer<DustParticleOptions>() {
+       public DustParticleOptions m_5739_(ParticleType<DustParticleOptions> p_123689_, StringReader p_123690_) throws CommandSyntaxException {

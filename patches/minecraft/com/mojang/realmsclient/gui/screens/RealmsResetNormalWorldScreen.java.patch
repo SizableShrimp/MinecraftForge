@@ -1,0 +1,27 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsResetNormalWorldScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsResetNormalWorldScreen.java
+@@ -40,18 +_,18 @@
+       this.f_89270_.m_94199_(32);
+       this.m_7787_(this.f_89270_);
+       this.m_94718_(this.f_89270_);
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 102, m_120774_(4), 205, 20, this.m_89298_(), (p_89296_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 102, m_120774_(4), 205, 20, this.m_89298_(), (p_237936_1_) -> {
+          this.f_89272_ = (this.f_89272_ + 1) % f_89267_.length;
+-         p_89296_.m_93666_(this.m_89298_());
++         p_237936_1_.m_93666_(this.m_89298_());
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 102, m_120774_(6) - 2, 205, 20, this.m_89299_(), (p_89293_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 102, m_120774_(6) - 2, 205, 20, this.m_89299_(), (p_237935_1_) -> {
+          this.f_89271_ = !this.f_89271_;
+-         p_89293_.m_93666_(this.m_89299_());
++         p_237935_1_.m_93666_(this.m_89299_());
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 102, m_120774_(12), 97, 20, this.f_89273_, (p_89291_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 102, m_120774_(12), 97, 20, this.f_89273_, (p_237934_1_) -> {
+          this.f_89268_.m_89364_(new RealmsResetWorldScreen.ResetWorldInfo(this.f_89270_.m_94155_(), this.f_89272_, this.f_89271_));
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 8, m_120774_(12), 97, 20, CommonComponents.f_130660_, (p_89288_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 8, m_120774_(12), 97, 20, CommonComponents.f_130660_, (p_237933_1_) -> {
+          this.f_96541_.m_91152_(this.f_89268_);
+       }));
+       this.m_120772_();

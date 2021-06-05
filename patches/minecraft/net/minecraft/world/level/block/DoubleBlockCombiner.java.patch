@@ -1,0 +1,27 @@
+--- a/net/minecraft/world/level/block/DoubleBlockCombiner.java
++++ b/net/minecraft/world/level/block/DoubleBlockCombiner.java
+@@ -47,12 +_,6 @@
+       }
+    }
+ 
+-   public static enum BlockType {
+-      SINGLE,
+-      FIRST,
+-      SECOND;
+-   }
+-
+    public interface Combiner<S, T> {
+       T m_6959_(S p_52843_, S p_52844_);
+ 
+@@ -89,5 +_,11 @@
+             return p_52857_.m_7693_(this.f_52853_);
+          }
+       }
++   }
++
++   public static enum BlockType {
++      SINGLE,
++      FIRST,
++      SECOND;
+    }
+ }

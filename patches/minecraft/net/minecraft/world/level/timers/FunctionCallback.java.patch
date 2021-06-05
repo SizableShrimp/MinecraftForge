@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/timers/FunctionCallback.java
++++ b/net/minecraft/world/level/timers/FunctionCallback.java
+@@ -14,8 +_,8 @@
+ 
+    public void m_5821_(MinecraftServer p_82172_, TimerQueue<MinecraftServer> p_82173_, long p_82174_) {
+       ServerFunctionManager serverfunctionmanager = p_82172_.m_129890_();
+-      serverfunctionmanager.m_136118_(this.f_82162_).ifPresent((p_82177_) -> {
+-         serverfunctionmanager.m_136112_(p_82177_, serverfunctionmanager.m_136129_());
++      serverfunctionmanager.m_136118_(this.f_82162_).ifPresent((p_216316_1_) -> {
++         serverfunctionmanager.m_136112_(p_216316_1_, serverfunctionmanager.m_136129_());
+       });
+    }
+ 

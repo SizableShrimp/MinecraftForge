@@ -19,7 +19,6 @@
 
 package net.minecraftforge.fml.network;
 
-import net.minecraft.network.NetworkManager;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.network.event.EventNetworkChannel;
@@ -259,7 +258,7 @@ public class NetworkRegistry
 
     /**
      * Retrieve the {@link LoginPayload} list for dispatch during {@link FMLHandshakeHandler#tickLogin(NetworkManager)} handling.
-     * Dispatches {@link NetworkEvent.GatherLoginPayloadsEvent} to each {@link NetworkInstance}.
+     * Dispatches {@link net.minecraftforge.fml.network.NetworkEvent.GatherLoginPayloadsEvent} to each {@link NetworkInstance}.
      *
      * @return The {@link LoginPayload} list
      * @param direction the network direction for the request - only gathers for LOGIN_TO_CLIENT
@@ -314,7 +313,7 @@ public class NetworkRegistry
 
     /**
      * Tracks individual outbound messages for dispatch to clients during login handling. Gathered by dispatching
-     * {@link NetworkEvent.GatherLoginPayloadsEvent} during early connection handling.
+     * {@link net.minecraftforge.fml.network.NetworkEvent.GatherLoginPayloadsEvent} during early connection handling.
      */
     public static class LoginPayload {
         /**

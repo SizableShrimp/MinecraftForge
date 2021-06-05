@@ -1,0 +1,436 @@
+--- a/net/minecraft/server/level/ChunkMap.java
++++ b/net/minecraft/server/level/ChunkMap.java
+@@ -62,7 +_,6 @@
+ import net.minecraft.world.entity.EntityType;
+ import net.minecraft.world.entity.Mob;
+ import net.minecraft.world.entity.ai.village.poi.PoiManager;
+-import net.minecraft.world.entity.boss.EnderDragonPart;
+ import net.minecraft.world.entity.player.Player;
+ import net.minecraft.world.level.ChunkPos;
+ import net.minecraft.world.level.GameRules;
+@@ -236,11 +_,11 @@
+       }
+ 
+       CompletableFuture<List<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>>> completablefuture1 = Util.m_137567_(list);
+-      return completablefuture1.thenApply((p_140173_) -> {
++      return completablefuture1.thenApply((p_219227_4_) -> {
+          List<ChunkAccess> list1 = Lists.newArrayList();
+          int k1 = 0;
+ 
+-         for(final Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure> either : p_140173_) {
++         for(final Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure> either : p_219227_4_) {
+             Optional<ChunkAccess> optional = either.left();
+             if (!optional.isPresent()) {
+                final int l1 = k1;
+@@ -260,11 +_,11 @@
+    }
+ 
+    public CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> m_140336_(ChunkPos p_140337_) {
+-      return this.m_140210_(p_140337_, 2, (p_140370_) -> {
++      return this.m_140210_(p_140337_, 2, (p_219218_0_) -> {
+          return ChunkStatus.f_62326_;
+-      }).thenApplyAsync((p_140382_) -> {
+-         return p_140382_.mapLeft((p_140352_) -> {
+-            return (LevelChunk)p_140352_.get(p_140352_.size() / 2);
++      }).thenApplyAsync((p_219242_0_) -> {
++         return p_219242_0_.mapLeft((p_219238_0_) -> {
++            return (LevelChunk)p_219238_0_.get(p_219238_0_.size() / 2);
+          });
+       }, this.f_140135_);
+    }
+@@ -319,17 +_,17 @@
+ 
+          do {
+             mutableboolean.setFalse();
+-            list.stream().map((p_140420_) -> {
++            list.stream().map((p_222974_1_) -> {
+                CompletableFuture<ChunkAccess> completablefuture;
+                do {
+-                  completablefuture = p_140420_.m_140090_();
++                  completablefuture = p_222974_1_.m_140090_();
+                   this.f_140135_.m_18701_(completablefuture::isDone);
+-               } while(completablefuture != p_140420_.m_140090_());
++               } while(completablefuture != p_222974_1_.m_140090_());
+ 
+                return completablefuture.join();
+-            }).filter((p_140400_) -> {
+-               return p_140400_ instanceof ImposterProtoChunk || p_140400_ instanceof LevelChunk;
+-            }).filter(this::m_140258_).forEach((p_140284_) -> {
++            }).filter((p_222952_0_) -> {
++               return p_222952_0_ instanceof ImposterProtoChunk || p_222952_0_ instanceof LevelChunk;
++            }).filter(this::m_140258_).forEach((p_222959_1_) -> {
+                mutableboolean.setTrue();
+             });
+          } while(mutableboolean.isTrue());
+@@ -340,11 +_,11 @@
+          this.m_63514_();
+          f_140128_.info("ThreadedAnvilChunkStorage ({}): All chunks are saved", (Object)this.f_140148_.getName());
+       } else {
+-         this.f_140130_.values().stream().filter(ChunkHolder::m_140095_).forEach((p_140412_) -> {
+-            ChunkAccess chunkaccess = p_140412_.m_140090_().getNow((ChunkAccess)null);
++         this.f_140130_.values().stream().filter(ChunkHolder::m_140095_).forEach((p_222965_1_) -> {
++            ChunkAccess chunkaccess = p_222965_1_.m_140090_().getNow((ChunkAccess)null);
+             if (chunkaccess instanceof ImposterProtoChunk || chunkaccess instanceof LevelChunk) {
+                this.m_140258_(chunkaccess);
+-               p_140412_.m_140096_();
++               p_222965_1_.m_140096_();
+             }
+ 
+          });
+@@ -387,31 +_,32 @@
+ 
+    private void m_140181_(long p_140182_, ChunkHolder p_140183_) {
+       CompletableFuture<ChunkAccess> completablefuture = p_140183_.m_140090_();
+-      completablefuture.thenAcceptAsync((p_140309_) -> {
++      completablefuture.thenAcceptAsync((p_219185_5_) -> {
+          CompletableFuture<ChunkAccess> completablefuture1 = p_140183_.m_140090_();
+          if (completablefuture1 != completablefuture) {
+             this.m_140181_(p_140182_, p_140183_);
+          } else {
+-            if (this.f_140131_.remove(p_140182_, p_140183_) && p_140309_ != null) {
+-               if (p_140309_ instanceof LevelChunk) {
+-                  ((LevelChunk)p_140309_).m_62913_(false);
++            if (this.f_140131_.remove(p_140182_, p_140183_) && p_219185_5_ != null) {
++               if (p_219185_5_ instanceof LevelChunk) {
++                  ((LevelChunk)p_219185_5_).m_62913_(false);
++                  net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.world.ChunkEvent.Unload((LevelChunk)p_219185_5_));
+                }
+ 
+-               this.m_140258_(p_140309_);
+-               if (this.f_140132_.remove(p_140182_) && p_140309_ instanceof LevelChunk) {
+-                  LevelChunk levelchunk = (LevelChunk)p_140309_;
++               this.m_140258_(p_219185_5_);
++               if (this.f_140132_.remove(p_140182_) && p_219185_5_ instanceof LevelChunk) {
++                  LevelChunk levelchunk = (LevelChunk)p_219185_5_;
+                   this.f_140133_.m_8712_(levelchunk);
+                }
+ 
+-               this.f_140134_.m_9330_(p_140309_.m_7697_());
++               this.f_140134_.m_9330_(p_219185_5_.m_7697_());
+                this.f_140134_.m_9409_();
+-               this.f_140144_.m_5511_(p_140309_.m_7697_(), (ChunkStatus)null);
++               this.f_140144_.m_5511_(p_219185_5_.m_7697_(), (ChunkStatus)null);
+             }
+ 
+          }
+-      }, this.f_140125_::add).whenComplete((p_140303_, p_140304_) -> {
+-         if (p_140304_ != null) {
+-            f_140128_.error("Failed to save chunk " + p_140183_.m_140092_(), p_140304_);
++      }, this.f_140125_::add).whenComplete((p_223171_1_, p_223171_2_) -> {
++         if (p_223171_2_ != null) {
++            f_140128_.error("Failed to save chunk " + p_140183_.m_140092_(), p_223171_2_);
+          }
+ 
+       });
+@@ -433,10 +_,10 @@
+          return this.m_140417_(chunkpos);
+       } else {
+          CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>> completablefuture = p_140293_.m_140049_(p_140294_.m_62482_(), this);
+-         return completablefuture.thenComposeAsync((p_140269_) -> {
+-            Optional<ChunkAccess> optional = p_140269_.left();
++         return completablefuture.thenComposeAsync((p_223180_4_) -> {
++            Optional<ChunkAccess> optional = p_223180_4_.left();
+             if (!optional.isPresent()) {
+-               return CompletableFuture.completedFuture(p_140269_);
++               return CompletableFuture.completedFuture(p_223180_4_);
+             } else {
+                if (p_140294_ == ChunkStatus.f_62323_) {
+                   this.f_140145_.m_140792_(TicketType.f_9446_, chunkpos, 33 + ChunkStatus.m_62370_(ChunkStatus.f_62322_), chunkpos);
+@@ -448,7 +_,7 @@
+                   if (p_140294_ == ChunkStatus.f_62323_) {
+                      completablefuture1 = this.m_140360_(p_140293_, p_140294_);
+                   } else {
+-                     completablefuture1 = p_140294_.m_62364_(this.f_140133_, this.f_140147_, this.f_140134_, (p_140387_) -> {
++                     completablefuture1 = p_140294_.m_62364_(this.f_140133_, this.f_140147_, this.f_140134_, (p_223175_2_) -> {
+                         return this.m_140383_(p_140293_);
+                      }, chunkaccess);
+                   }
+@@ -506,18 +_,18 @@
+ 
+    private CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>> m_140360_(ChunkHolder p_140361_, ChunkStatus p_140362_) {
+       ChunkPos chunkpos = p_140361_.m_140092_();
+-      CompletableFuture<Either<List<ChunkAccess>, ChunkHolder.ChunkLoadingFailure>> completablefuture = this.m_140210_(chunkpos, p_140362_.m_62488_(), (p_140346_) -> {
+-         return this.m_140262_(p_140362_, p_140346_);
++      CompletableFuture<Either<List<ChunkAccess>, ChunkHolder.ChunkLoadingFailure>> completablefuture = this.m_140210_(chunkpos, p_140362_.m_62488_(), (p_219195_2_) -> {
++         return this.m_140262_(p_140362_, p_219195_2_);
+       });
+       this.f_140133_.m_46473_().m_6525_(() -> {
+          return "chunkGenerate " + p_140362_.m_62467_();
+       });
+-      return completablefuture.thenComposeAsync((p_140245_) -> {
+-         return p_140245_.map((p_140250_) -> {
++      return completablefuture.thenComposeAsync((p_219235_4_) -> {
++         return p_219235_4_.map((p_223148_4_) -> {
+             try {
+-               CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>> completablefuture1 = p_140362_.m_62352_(this.f_140133_, this.f_140136_, this.f_140147_, this.f_140134_, (p_140359_) -> {
++               CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>> completablefuture1 = p_140362_.m_62352_(this.f_140133_, this.f_140136_, this.f_140147_, this.f_140134_, (p_222954_2_) -> {
+                   return this.m_140383_(p_140361_);
+-               }, p_140250_);
++               }, p_223148_4_);
+                this.f_140144_.m_5511_(chunkpos, p_140362_);
+                return completablefuture1;
+             } catch (Exception exception) {
+@@ -528,12 +_,12 @@
+                crashreportcategory.m_128159_("Generator", this.f_140136_);
+                throw new ReportedException(crashreport);
+             }
+-         }, (p_140240_) -> {
++         }, (p_219211_2_) -> {
+             this.m_140375_(chunkpos);
+-            return CompletableFuture.completedFuture(Either.right(p_140240_));
++            return CompletableFuture.completedFuture(Either.right(p_219211_2_));
+          });
+-      }, (p_140415_) -> {
+-         this.f_140142_.m_6937_(ChunkTaskPriorityQueueSorter.m_140642_(p_140361_, p_140415_));
++      }, (p_219216_2_) -> {
++         this.f_140142_.m_6937_(ChunkTaskPriorityQueueSorter.m_140642_(p_140361_, p_219216_2_));
+       });
+    }
+ 
+@@ -558,15 +_,15 @@
+ 
+    private CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>> m_140383_(ChunkHolder p_140384_) {
+       CompletableFuture<Either<ChunkAccess, ChunkHolder.ChunkLoadingFailure>> completablefuture = p_140384_.m_140047_(ChunkStatus.f_62326_.m_62482_());
+-      return completablefuture.thenApplyAsync((p_140297_) -> {
++      return completablefuture.thenApplyAsync((p_219193_2_) -> {
+          ChunkStatus chunkstatus = ChunkHolder.m_140074_(p_140384_.m_140093_());
+-         return !chunkstatus.m_62427_(ChunkStatus.f_62326_) ? ChunkHolder.f_139995_ : p_140297_.mapLeft((p_140291_) -> {
++         return !chunkstatus.m_62427_(ChunkStatus.f_62326_) ? ChunkHolder.f_139995_ : p_219193_2_.mapLeft((p_219237_2_) -> {
+             ChunkPos chunkpos = p_140384_.m_140092_();
+             LevelChunk levelchunk;
+-            if (p_140291_ instanceof ImposterProtoChunk) {
+-               levelchunk = ((ImposterProtoChunk)p_140291_).m_62768_();
++            if (p_219237_2_ instanceof ImposterProtoChunk) {
++               levelchunk = ((ImposterProtoChunk)p_219237_2_).m_62768_();
+             } else {
+-               levelchunk = new LevelChunk(this.f_140133_, (ProtoChunk)p_140291_);
++               levelchunk = new LevelChunk(this.f_140133_, (ProtoChunk)p_219237_2_);
+                p_140384_.m_140052_(new ImposterProtoChunk(levelchunk));
+             }
+ 
+@@ -596,53 +_,54 @@
+                if (list != null) {
+                   list.forEach(levelchunk::m_6368_);
+                }
++               net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.world.ChunkEvent.Load(levelchunk));
+             }
+ 
+             return levelchunk;
+          });
+-      }, (p_140407_) -> {
+-         this.f_140143_.m_6937_(ChunkTaskPriorityQueueSorter.m_140624_(p_140407_, p_140384_.m_140092_().m_45588_(), p_140384_::m_140093_));
++      }, (p_219228_2_) -> {
++         this.f_140143_.m_6937_(ChunkTaskPriorityQueueSorter.m_140624_(p_219228_2_, p_140384_.m_140092_().m_45588_(), p_140384_::m_140093_));
+       });
+    }
+ 
+    public CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> m_140287_(ChunkHolder p_140288_) {
+       ChunkPos chunkpos = p_140288_.m_140092_();
+-      CompletableFuture<Either<List<ChunkAccess>, ChunkHolder.ChunkLoadingFailure>> completablefuture = this.m_140210_(chunkpos, 1, (p_140326_) -> {
++      CompletableFuture<Either<List<ChunkAccess>, ChunkHolder.ChunkLoadingFailure>> completablefuture = this.m_140210_(chunkpos, 1, (p_219172_0_) -> {
+          return ChunkStatus.f_62326_;
+       });
+-      CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> completablefuture1 = completablefuture.thenApplyAsync((p_140350_) -> {
+-         return p_140350_.flatMap((p_140277_) -> {
+-            LevelChunk levelchunk = (LevelChunk)p_140277_.get(p_140277_.size() / 2);
++      CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> completablefuture1 = completablefuture.thenApplyAsync((p_219239_0_) -> {
++         return p_219239_0_.flatMap((p_219208_0_) -> {
++            LevelChunk levelchunk = (LevelChunk)p_219208_0_.get(p_219208_0_.size() / 2);
+             levelchunk.m_62812_();
+             return Either.left(levelchunk);
+          });
+-      }, (p_140390_) -> {
+-         this.f_140143_.m_6937_(ChunkTaskPriorityQueueSorter.m_140642_(p_140288_, p_140390_));
++      }, (p_219230_2_) -> {
++         this.f_140143_.m_6937_(ChunkTaskPriorityQueueSorter.m_140642_(p_140288_, p_219230_2_));
+       });
+-      completablefuture1.thenAcceptAsync((p_140237_) -> {
+-         p_140237_.mapLeft((p_140234_) -> {
++      completablefuture1.thenAcceptAsync((p_219176_2_) -> {
++         p_219176_2_.mapLeft((p_219196_2_) -> {
+             this.f_140146_.getAndIncrement();
+-            Packet<?>[] packet = new Packet[2];
+-            this.m_5960_(chunkpos, false).forEach((p_140323_) -> {
+-               this.m_140195_(p_140323_, packet, p_140234_);
++            Packet<?>[] ipacket = new Packet[2];
++            this.m_5960_(chunkpos, false).forEach((p_219233_3_) -> {
++               this.m_140195_(p_219233_3_, ipacket, p_219196_2_);
+             });
+-            return Either.left(p_140234_);
++            return Either.left(p_219196_2_);
+          });
+-      }, (p_140365_) -> {
+-         this.f_140143_.m_6937_(ChunkTaskPriorityQueueSorter.m_140642_(p_140288_, p_140365_));
++      }, (p_219202_2_) -> {
++         this.f_140143_.m_6937_(ChunkTaskPriorityQueueSorter.m_140642_(p_140288_, p_219202_2_));
+       });
+       return completablefuture1;
+    }
+ 
+    public CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> m_140355_(ChunkHolder p_140356_) {
+-      return p_140356_.m_140049_(ChunkStatus.f_62326_, this).thenApplyAsync((p_140273_) -> {
+-         return p_140273_.mapLeft((p_140378_) -> {
+-            LevelChunk levelchunk = (LevelChunk)p_140378_;
++      return p_140356_.m_140049_(ChunkStatus.f_62326_, this).thenApplyAsync((p_222976_0_) -> {
++         return p_222976_0_.mapLeft((p_222955_0_) -> {
++            LevelChunk levelchunk = (LevelChunk)p_222955_0_;
+             levelchunk.m_62813_();
+             return levelchunk;
+          });
+-      }, (p_140300_) -> {
+-         this.f_140143_.m_6937_(ChunkTaskPriorityQueueSorter.m_140642_(p_140356_, p_140300_));
++      }, (p_222962_2_) -> {
++         this.f_140143_.m_6937_(ChunkTaskPriorityQueueSorter.m_140642_(p_140356_, p_222962_2_));
+       });
+    }
+ 
+@@ -673,6 +_,7 @@
+ 
+             this.f_140133_.m_46473_().m_6174_("chunkSave");
+             CompoundTag compoundtag = ChunkSerializer.m_63454_(this.f_140133_, p_140259_);
++            net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.world.ChunkDataEvent.Save(p_140259_, p_140259_.getWorldForge() != null ? p_140259_.getWorldForge() : this.f_140133_, compoundtag));
+             this.m_63502_(chunkpos, compoundtag);
+             this.m_140229_(chunkpos, chunkstatus.m_62494_());
+             return true;
+@@ -715,12 +_,12 @@
+ 
+          for(ChunkHolder chunkholder : this.f_140129_.values()) {
+             ChunkPos chunkpos = chunkholder.m_140092_();
+-            Packet<?>[] packet = new Packet[2];
+-            this.m_5960_(chunkpos, false).forEach((p_140218_) -> {
+-               int k = m_140338_(chunkpos, p_140218_, true);
++            Packet<?>[] ipacket = new Packet[2];
++            this.m_5960_(chunkpos, false).forEach((p_219224_4_) -> {
++               int k = m_140338_(chunkpos, p_219224_4_, true);
+                boolean flag = k <= j;
+                boolean flag1 = k <= this.f_140126_;
+-               this.m_140186_(p_140218_, chunkpos, packet, flag, flag1);
++               this.m_140186_(p_219224_4_, chunkpos, ipacket, flag, flag1);
+             });
+          }
+       }
+@@ -729,6 +_,7 @@
+ 
+    protected void m_140186_(ServerPlayer p_140187_, ChunkPos p_140188_, Packet<?>[] p_140189_, boolean p_140190_, boolean p_140191_) {
+       if (p_140187_.f_19853_ == this.f_140133_) {
++         net.minecraftforge.event.ForgeEventFactory.fireChunkWatch(p_140190_, p_140191_, p_140187_, p_140188_, this.f_140133_);
+          if (p_140191_ && !p_140190_) {
+             ChunkHolder chunkholder = this.m_140327_(p_140188_.m_45588_());
+             if (chunkholder != null) {
+@@ -767,13 +_,13 @@
+          ChunkPos chunkpos = new ChunkPos(entry.getLongKey());
+          ChunkHolder chunkholder = entry.getValue();
+          Optional<ChunkAccess> optional = Optional.ofNullable(chunkholder.m_140089_());
+-         Optional<LevelChunk> optional1 = optional.flatMap((p_140343_) -> {
+-            return p_140343_ instanceof LevelChunk ? Optional.of((LevelChunk)p_140343_) : Optional.empty();
++         Optional<LevelChunk> optional1 = optional.flatMap((p_225407_0_) -> {
++            return p_225407_0_ instanceof LevelChunk ? Optional.of((LevelChunk)p_225407_0_) : Optional.empty();
+          });
+-         csvoutput.m_13624_(chunkpos.f_45578_, chunkpos.f_45579_, chunkholder.m_140093_(), optional.isPresent(), optional.map(ChunkAccess::m_6415_).orElse((ChunkStatus)null), optional1.map(LevelChunk::m_6708_).orElse((ChunkHolder.FullChunkStatus)null), m_140278_(chunkholder.m_140082_()), m_140278_(chunkholder.m_140026_()), m_140278_(chunkholder.m_140073_()), this.f_140145_.m_140838_(entry.getLongKey()), !this.m_140397_(chunkpos), optional1.map((p_140410_) -> {
+-            return Stream.of(p_140410_.m_62955_()).mapToInt(ClassInstanceMultiMap::size).sum();
+-         }).orElse(0), optional1.map((p_140402_) -> {
+-            return p_140402_.m_62954_().size();
++         csvoutput.m_13624_(chunkpos.f_45578_, chunkpos.f_45579_, chunkholder.m_140093_(), optional.isPresent(), optional.map(ChunkAccess::m_6415_).orElse((ChunkStatus)null), optional1.map(LevelChunk::m_6708_).orElse((ChunkHolder.FullChunkStatus)null), m_140278_(chunkholder.m_140082_()), m_140278_(chunkholder.m_140026_()), m_140278_(chunkholder.m_140073_()), this.f_140145_.m_140838_(entry.getLongKey()), !this.m_140397_(chunkpos), optional1.map((p_225401_0_) -> {
++            return Stream.of(p_225401_0_.m_62955_()).mapToInt(ClassInstanceMultiMap::size).sum();
++         }).orElse(0), optional1.map((p_225405_0_) -> {
++            return p_225405_0_.m_62954_().size();
+          }).orElse(0));
+       }
+ 
+@@ -782,9 +_,9 @@
+    private static String m_140278_(CompletableFuture<Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>> p_140279_) {
+       try {
+          Either<LevelChunk, ChunkHolder.ChunkLoadingFailure> either = p_140279_.getNow((Either<LevelChunk, ChunkHolder.ChunkLoadingFailure>)null);
+-         return either != null ? either.map((p_140380_) -> {
++         return either != null ? either.map((p_225408_0_) -> {
+             return "done";
+-         }, (p_140286_) -> {
++         }, (p_225400_0_) -> {
+             return "unloaded";
+          }) : "not completed";
+       } catch (CompletionException completionexception) {
+@@ -802,8 +_,8 @@
+ 
+    boolean m_140397_(ChunkPos p_140398_) {
+       long i = p_140398_.m_45588_();
+-      return !this.f_140145_.m_140847_(i) ? true : this.f_140149_.m_8243_(i).noneMatch((p_140221_) -> {
+-         return !p_140221_.m_5833_() && m_140226_(p_140398_, p_140221_) < 16384.0D;
++      return !this.f_140145_.m_140847_(i) ? true : this.f_140149_.m_8243_(i).noneMatch((p_219201_1_) -> {
++         return !p_219201_1_.m_5833_() && m_140226_(p_140398_, p_219201_1_) < 16384.0D;
+       });
+    }
+ 
+@@ -926,8 +_,8 @@
+    }
+ 
+    public Stream<ServerPlayer> m_5960_(ChunkPos p_140252_, boolean p_140253_) {
+-      return this.f_140149_.m_8243_(p_140252_.m_45588_()).filter((p_140257_) -> {
+-         int i = m_140338_(p_140252_, p_140257_, true);
++      return this.f_140149_.m_8243_(p_140252_.m_45588_()).filter((p_219192_3_) -> {
++         int i = m_140338_(p_140252_, p_219192_3_, true);
+          if (i > this.f_140126_) {
+             return false;
+          } else {
+@@ -937,7 +_,7 @@
+    }
+ 
+    protected void m_140199_(Entity p_140200_) {
+-      if (!(p_140200_ instanceof EnderDragonPart)) {
++      if (!(p_140200_ instanceof net.minecraftforge.entity.PartEntity)) {
+          EntityType<?> entitytype = p_140200_.m_6095_();
+          int i = entitytype.m_20681_() * 16;
+          int j = entitytype.m_20682_();
+@@ -1072,26 +_,6 @@
+       });
+    }
+ 
+-   class DistanceManager extends net.minecraft.server.level.DistanceManager {
+-      protected DistanceManager(Executor p_140459_, Executor p_140460_) {
+-         super(p_140459_, p_140460_);
+-      }
+-
+-      protected boolean m_7009_(long p_140462_) {
+-         return ChunkMap.this.f_140139_.contains(p_140462_);
+-      }
+-
+-      @Nullable
+-      protected ChunkHolder m_7316_(long p_140469_) {
+-         return ChunkMap.this.m_140174_(p_140469_);
+-      }
+-
+-      @Nullable
+-      protected ChunkHolder m_7288_(long p_140464_, int p_140465_, @Nullable ChunkHolder p_140466_, int p_140467_) {
+-         return ChunkMap.this.m_140176_(p_140464_, p_140465_, p_140466_, p_140467_);
+-      }
+-   }
+-
+    class TrackedEntity {
+       private final ServerEntity f_140471_;
+       private final Entity f_140472_;
+@@ -1195,6 +_,26 @@
+             this.m_140497_(serverplayer);
+          }
+ 
++      }
++   }
++
++   class DistanceManager extends net.minecraft.server.level.DistanceManager {
++      protected DistanceManager(Executor p_140459_, Executor p_140460_) {
++         super(p_140459_, p_140460_);
++      }
++
++      protected boolean m_7009_(long p_140462_) {
++         return ChunkMap.this.f_140139_.contains(p_140462_);
++      }
++
++      @Nullable
++      protected ChunkHolder m_7316_(long p_140469_) {
++         return ChunkMap.this.m_140174_(p_140469_);
++      }
++
++      @Nullable
++      protected ChunkHolder m_7288_(long p_140464_, int p_140465_, @Nullable ChunkHolder p_140466_, int p_140467_) {
++         return ChunkMap.this.m_140176_(p_140464_, p_140465_, p_140466_, p_140467_);
+       }
+    }
+ }

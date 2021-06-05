@@ -1,0 +1,270 @@
+--- a/net/minecraft/world/entity/animal/Bee.java
++++ b/net/minecraft/world/entity/animal/Bee.java
+@@ -74,7 +_,6 @@
+ import net.minecraft.world.level.block.SweetBerryBushBlock;
+ import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
+ import net.minecraft.world.level.block.entity.BlockEntity;
+-import net.minecraft.world.level.block.entity.BlockEntityType;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+ import net.minecraft.world.level.block.state.properties.IntegerProperty;
+@@ -184,6 +_,7 @@
+       this.f_27710_ = p_27793_.m_128451_("TicksSincePollination");
+       this.f_27711_ = p_27793_.m_128451_("CannotEnterHiveTicks");
+       this.f_27712_ = p_27793_.m_128451_("CropsGrownSincePollination");
++      if(!f_19853_.f_46443_) //FORGE: allow this entity to be read from nbt on client. (Fixes MC-189565)
+       this.m_21663_((ServerLevel)this.f_19853_, p_27793_);
+    }
+ 
+@@ -425,7 +_,7 @@
+          return false;
+       } else {
+          BlockEntity blockentity = this.f_19853_.m_7702_(this.f_27698_);
+-         return blockentity != null && blockentity.m_58903_() == BlockEntityType.f_58912_;
++         return blockentity instanceof BeehiveBlockEntity;
+       }
+    }
+ 
+@@ -577,34 +_,20 @@
+       return p_27817_.m_123314_(this.m_20183_(), (double)p_27818_);
+    }
+ 
+-   abstract class BaseBeeGoal extends Goal {
+-      private BaseBeeGoal() {
+-      }
+-
+-      public abstract boolean m_7989_();
+-
+-      public abstract boolean m_8011_();
+-
+-      public boolean m_8036_() {
+-         return this.m_7989_() && !Bee.this.m_21660_();
+-      }
+-
+-      public boolean m_8045_() {
+-         return this.m_8011_() && !Bee.this.m_21660_();
+-      }
+-   }
+-
+-   class BeeAttackGoal extends MeleeAttackGoal {
+-      BeeAttackGoal(PathfinderMob p_27960_, double p_27961_, boolean p_27962_) {
+-         super(p_27960_, p_27961_, p_27962_);
+-      }
+-
+-      public boolean m_8036_() {
+-         return super.m_8036_() && Bee.this.m_21660_() && !Bee.this.m_27857_();
+-      }
+-
+-      public boolean m_8045_() {
+-         return super.m_8045_() && Bee.this.m_21660_() && !Bee.this.m_27857_();
++   class BeeHurtByOtherGoal extends HurtByTargetGoal {
++      BeeHurtByOtherGoal(Bee p_28033_) {
++         super(p_28033_);
++      }
++
++      public boolean m_8045_() {
++         return Bee.this.m_21660_() && super.m_8045_();
++      }
++
++      protected void m_5766_(Mob p_28035_, LivingEntity p_28036_) {
++         if (p_28035_ instanceof Bee && this.f_26135_.m_7331_(p_28036_)) {
++            p_28035_.m_6710_(p_28036_);
++         }
++
+       }
+    }
+ 
+@@ -633,6 +_,22 @@
+       }
+    }
+ 
++   class BeeLookControl extends LookControl {
++      BeeLookControl(Mob p_28059_) {
++         super(p_28059_);
++      }
++
++      public void m_8128_() {
++         if (!Bee.this.m_21660_()) {
++            super.m_8128_();
++         }
++      }
++
++      protected boolean m_8106_() {
++         return !Bee.this.f_27699_.m_28086_();
++      }
++   }
++
+    class BeeEnterHiveGoal extends Bee.BaseBeeGoal {
+       private BeeEnterHiveGoal() {
+       }
+@@ -881,91 +_,33 @@
+       }
+    }
+ 
+-   class BeeHurtByOtherGoal extends HurtByTargetGoal {
+-      BeeHurtByOtherGoal(Bee p_28033_) {
+-         super(p_28033_);
++   abstract class BaseBeeGoal extends Goal {
++      private BaseBeeGoal() {
++      }
++
++      public abstract boolean m_7989_();
++
++      public abstract boolean m_8011_();
++
++      public boolean m_8036_() {
++         return this.m_7989_() && !Bee.this.m_21660_();
+       }
+ 
+       public boolean m_8045_() {
+-         return Bee.this.m_21660_() && super.m_8045_();
+-      }
+-
+-      protected void m_5766_(Mob p_28035_, LivingEntity p_28036_) {
+-         if (p_28035_ instanceof Bee && this.f_26135_.m_7331_(p_28036_)) {
+-            p_28035_.m_6710_(p_28036_);
+-         }
+-
+-      }
+-   }
+-
+-   class BeeLocateHiveGoal extends Bee.BaseBeeGoal {
+-      private BeeLocateHiveGoal() {
+-      }
+-
+-      public boolean m_7989_() {
+-         return Bee.this.f_27713_ == 0 && !Bee.this.m_27854_() && Bee.this.m_27866_();
+-      }
+-
+-      public boolean m_8011_() {
+-         return false;
+-      }
+-
+-      public void m_8056_() {
+-         Bee.this.f_27713_ = 200;
+-         List<BlockPos> list = this.m_28055_();
+-         if (!list.isEmpty()) {
+-            for(BlockPos blockpos : list) {
+-               if (!Bee.this.f_27700_.m_27993_(blockpos)) {
+-                  Bee.this.f_27698_ = blockpos;
+-                  return;
+-               }
+-            }
+-
+-            Bee.this.f_27700_.m_28006_();
+-            Bee.this.f_27698_ = list.get(0);
+-         }
+-      }
+-
+-      private List<BlockPos> m_28055_() {
+-         BlockPos blockpos = Bee.this.m_20183_();
+-         PoiManager poimanager = ((ServerLevel)Bee.this.f_19853_).m_8904_();
+-         Stream<PoiRecord> stream = poimanager.m_27181_((p_28045_) -> {
+-            return p_28045_ == PoiType.f_27348_ || p_28045_ == PoiType.f_27349_;
+-         }, blockpos, 20, PoiManager.Occupancy.ANY);
+-         return stream.map(PoiRecord::m_27257_).filter((p_28048_) -> {
+-            return Bee.this.m_27884_(p_28048_);
+-         }).sorted(Comparator.comparingDouble((p_28051_) -> {
+-            return p_28051_.m_123331_(blockpos);
+-         })).collect(Collectors.toList());
+-      }
+-   }
+-
+-   class BeeLookControl extends LookControl {
+-      BeeLookControl(Mob p_28059_) {
+-         super(p_28059_);
+-      }
+-
+-      public void m_8128_() {
+-         if (!Bee.this.m_21660_()) {
+-            super.m_8128_();
+-         }
+-      }
+-
+-      protected boolean m_8106_() {
+-         return !Bee.this.f_27699_.m_28086_();
++         return this.m_8011_() && !Bee.this.m_21660_();
+       }
+    }
+ 
+    class BeePollinateGoal extends Bee.BaseBeeGoal {
+-      private final Predicate<BlockState> f_28063_ = (p_28074_) -> {
+-         if (p_28074_.m_60620_(BlockTags.f_13040_)) {
+-            if (p_28074_.m_60713_(Blocks.f_50355_)) {
+-               return p_28074_.m_61143_(DoublePlantBlock.f_52858_) == DoubleBlockHalf.UPPER;
++      private final Predicate<BlockState> f_28063_ = (p_226499_0_) -> {
++         if (p_226499_0_.m_60620_(BlockTags.f_13040_)) {
++            if (p_226499_0_.m_60713_(Blocks.f_50355_)) {
++               return p_226499_0_.m_61143_(DoublePlantBlock.f_52858_) == DoubleBlockHalf.UPPER;
+             } else {
+                return true;
+             }
+          } else {
+-            return p_28074_.m_60620_(BlockTags.f_13037_);
++            return p_226499_0_.m_60620_(BlockTags.f_13037_);
+          }
+       };
+       private int f_28064_ = 0;
+@@ -1122,6 +_,62 @@
+          }
+ 
+          return Optional.empty();
++      }
++   }
++
++   class BeeAttackGoal extends MeleeAttackGoal {
++      BeeAttackGoal(PathfinderMob p_27960_, double p_27961_, boolean p_27962_) {
++         super(p_27960_, p_27961_, p_27962_);
++      }
++
++      public boolean m_8036_() {
++         return super.m_8036_() && Bee.this.m_21660_() && !Bee.this.m_27857_();
++      }
++
++      public boolean m_8045_() {
++         return super.m_8045_() && Bee.this.m_21660_() && !Bee.this.m_27857_();
++      }
++   }
++
++   class BeeLocateHiveGoal extends Bee.BaseBeeGoal {
++      private BeeLocateHiveGoal() {
++      }
++
++      public boolean m_7989_() {
++         return Bee.this.f_27713_ == 0 && !Bee.this.m_27854_() && Bee.this.m_27866_();
++      }
++
++      public boolean m_8011_() {
++         return false;
++      }
++
++      public void m_8056_() {
++         Bee.this.f_27713_ = 200;
++         List<BlockPos> list = this.m_28055_();
++         if (!list.isEmpty()) {
++            for(BlockPos blockpos : list) {
++               if (!Bee.this.f_27700_.m_27993_(blockpos)) {
++                  Bee.this.f_27698_ = blockpos;
++                  return;
++               }
++            }
++
++            Bee.this.f_27700_.m_28006_();
++            Bee.this.f_27698_ = list.get(0);
++         }
++      }
++
++      private List<BlockPos> m_28055_() {
++         BlockPos blockpos = Bee.this.m_20183_();
++         PoiManager poimanager = ((ServerLevel)Bee.this.f_19853_).m_8904_();
++         Stream<PoiRecord> stream = poimanager.m_27181_((p_226486_0_) -> {
++            return p_226486_0_ == PoiType.f_27348_ || p_226486_0_ == PoiType.f_27349_;
++         }, blockpos, 20, PoiManager.Occupancy.ANY);
++         return stream.map(PoiRecord::m_27257_).filter((p_226487_1_) -> {
++            return Bee.this.m_27884_(p_226487_1_);
++         }).sorted(Comparator.comparingDouble((p_226488_1_) -> {
++            return p_226488_1_.m_123331_(blockpos);
++         })).collect(Collectors.toList());
+       }
+    }
+ 

@@ -28,9 +28,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Font;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.eventbus.api.Cancelable;
-import net.minecraftforge.eventbus.api.Event;
 
 /**
  * A set of events which are fired at various points during tooltip rendering.
@@ -39,12 +36,12 @@ import net.minecraftforge.eventbus.api.Event;
  * <p>
  * Do not use this event directly, use one of the subclasses:
  * <ul>
- * <li>{@link Pre}</li>
- * <li>{@link PostBackground}</li>
- * <li>{@link PostText}</li>
+ * <li>{@link RenderTooltipEvent.Pre}</li>
+ * <li>{@link RenderTooltipEvent.PostBackground}</li>
+ * <li>{@link RenderTooltipEvent.PostText}</li>
  * </ul>
  */
-public abstract class RenderTooltipEvent extends Event
+public abstract class RenderTooltipEvent extends net.minecraftforge.eventbus.api.Event
 {
     @Nonnull
     protected final ItemStack stack;
@@ -74,7 +71,7 @@ public abstract class RenderTooltipEvent extends Event
     }
     
     /**
-     * The lines to be drawn. May change between {@link Pre} and {@link Post}.
+     * The lines to be drawn. May change between {@link RenderTooltipEvent.Pre} and {@link RenderTooltipEvent.Post}.
      * 
      * @return An <i>unmodifiable</i> list of strings. Use {@link ItemTooltipEvent} to modify tooltip text.
      */
@@ -122,7 +119,7 @@ public abstract class RenderTooltipEvent extends Event
      * <p>
      * This event is {@link Cancelable}.
      */
-    @Cancelable
+    @net.minecraftforge.eventbus.api.Cancelable
     public static class Pre extends RenderTooltipEvent
     {
         private int screenWidth;
@@ -203,8 +200,8 @@ public abstract class RenderTooltipEvent extends Event
      * <p>
      * Do not use this event directly, use one of its subclasses:
      * <ul>
-     * <li>{@link PostBackground}</li>
-     * <li>{@link PostText}</li>
+     * <li>{@link RenderTooltipEvent.PostBackground}</li>
+     * <li>{@link RenderTooltipEvent.PostText}</li>
      * </ul>
      */
     protected static abstract class Post extends RenderTooltipEvent

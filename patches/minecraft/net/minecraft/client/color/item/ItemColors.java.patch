@@ -1,0 +1,93 @@
+--- a/net/minecraft/client/color/item/ItemColors.java
++++ b/net/minecraft/client/color/item/ItemColors.java
+@@ -2,8 +_,6 @@
+ 
+ import net.minecraft.client.color.block.BlockColors;
+ import net.minecraft.core.BlockPos;
+-import net.minecraft.core.IdMapper;
+-import net.minecraft.core.Registry;
+ import net.minecraft.nbt.CompoundTag;
+ import net.minecraft.world.item.BlockItem;
+ import net.minecraft.world.item.DyeableLeatherItem;
+@@ -23,21 +_,22 @@
+ 
+ @OnlyIn(Dist.CLIENT)
+ public class ItemColors {
+-   private final IdMapper<ItemColor> f_92674_ = new IdMapper<>(32);
++   // FORGE: Use RegistryDelegates as non-Vanilla item ids are not constant
++   private final java.util.Map<net.minecraftforge.registries.IRegistryDelegate<Item>, ItemColor> f_92674_ = new java.util.HashMap<>();
+ 
+    public static ItemColors m_92683_(BlockColors p_92684_) {
+       ItemColors itemcolors = new ItemColors();
+-      itemcolors.m_92689_((p_92708_, p_92709_) -> {
+-         return p_92709_ > 0 ? -1 : ((DyeableLeatherItem)p_92708_.m_41720_()).m_41121_(p_92708_);
++      itemcolors.m_92689_((p_210239_0_, p_210239_1_) -> {
++         return p_210239_1_ > 0 ? -1 : ((DyeableLeatherItem)p_210239_0_.m_41720_()).m_41121_(p_210239_0_);
+       }, Items.f_42407_, Items.f_42408_, Items.f_42462_, Items.f_42463_, Items.f_42654_);
+-      itemcolors.m_92689_((p_92705_, p_92706_) -> {
++      itemcolors.m_92689_((p_210236_0_, p_210236_1_) -> {
+          return GrassColor.m_46415_(0.5D, 1.0D);
+       }, Blocks.f_50359_, Blocks.f_50360_);
+-      itemcolors.m_92689_((p_92702_, p_92703_) -> {
+-         if (p_92703_ != 1) {
++      itemcolors.m_92689_((p_210241_0_, p_210241_1_) -> {
++         if (p_210241_1_ != 1) {
+             return -1;
+          } else {
+-            CompoundTag compoundtag = p_92702_.m_41737_("Explosion");
++            CompoundTag compoundtag = p_210241_0_.m_41737_("Explosion");
+             int[] aint = compoundtag != null && compoundtag.m_128425_("Colors", 11) ? compoundtag.m_128465_("Colors") : null;
+             if (aint != null && aint.length != 0) {
+                if (aint.length == 1) {
+@@ -63,37 +_,38 @@
+             }
+          }
+       }, Items.f_42689_);
+-      itemcolors.m_92689_((p_92699_, p_92700_) -> {
+-         return p_92700_ > 0 ? -1 : PotionUtils.m_43575_(p_92699_);
++      itemcolors.m_92689_((p_210238_0_, p_210238_1_) -> {
++         return p_210238_1_ > 0 ? -1 : PotionUtils.m_43575_(p_210238_0_);
+       }, Items.f_42589_, Items.f_42736_, Items.f_42739_);
+ 
+       for(SpawnEggItem spawneggitem : SpawnEggItem.m_43233_()) {
+-         itemcolors.m_92689_((p_92681_, p_92682_) -> {
+-            return spawneggitem.m_43211_(p_92682_);
++         itemcolors.m_92689_((p_198141_1_, p_198141_2_) -> {
++            return spawneggitem.m_43211_(p_198141_2_);
+          }, spawneggitem);
+       }
+ 
+-      itemcolors.m_92689_((p_92687_, p_92688_) -> {
+-         BlockState blockstate = ((BlockItem)p_92687_.m_41720_()).m_40614_().m_49966_();
+-         return p_92684_.m_92577_(blockstate, (BlockAndTintGetter)null, (BlockPos)null, p_92688_);
++      itemcolors.m_92689_((p_210235_1_, p_210235_2_) -> {
++         BlockState blockstate = ((BlockItem)p_210235_1_.m_41720_()).m_40614_().m_49966_();
++         return p_92684_.m_92577_(blockstate, (BlockAndTintGetter)null, (BlockPos)null, p_210235_2_);
+       }, Blocks.f_50440_, Blocks.f_50034_, Blocks.f_50035_, Blocks.f_50191_, Blocks.f_50050_, Blocks.f_50051_, Blocks.f_50052_, Blocks.f_50053_, Blocks.f_50054_, Blocks.f_50055_, Blocks.f_50196_);
+-      itemcolors.m_92689_((p_92696_, p_92697_) -> {
+-         return p_92697_ == 0 ? PotionUtils.m_43575_(p_92696_) : -1;
++      itemcolors.m_92689_((p_210242_0_, p_210242_1_) -> {
++         return p_210242_1_ == 0 ? PotionUtils.m_43575_(p_210242_0_) : -1;
+       }, Items.f_42738_);
+-      itemcolors.m_92689_((p_92693_, p_92694_) -> {
+-         return p_92694_ == 0 ? -1 : MapItem.m_42918_(p_92693_);
++      itemcolors.m_92689_((p_210237_0_, p_210237_1_) -> {
++         return p_210237_1_ == 0 ? -1 : MapItem.m_42918_(p_210237_0_);
+       }, Items.f_42573_);
++      net.minecraftforge.client.ForgeHooksClient.onItemColorsInit(itemcolors, p_92684_);
+       return itemcolors;
+    }
+ 
+    public int m_92676_(ItemStack p_92677_, int p_92678_) {
+-      ItemColor itemcolor = this.f_92674_.m_7942_(Registry.f_122827_.m_7447_(p_92677_.m_41720_()));
++      ItemColor itemcolor = this.f_92674_.get(p_92677_.m_41720_().delegate);
+       return itemcolor == null ? -1 : itemcolor.m_92671_(p_92677_, p_92678_);
+    }
+ 
+    public void m_92689_(ItemColor p_92690_, ItemLike... p_92691_) {
+       for(ItemLike itemlike : p_92691_) {
+-         this.f_92674_.m_122664_(p_92690_, Item.m_41393_(itemlike.m_5456_()));
++         this.f_92674_.put(itemlike.m_5456_().delegate, p_92690_);
+       }
+ 
+    }

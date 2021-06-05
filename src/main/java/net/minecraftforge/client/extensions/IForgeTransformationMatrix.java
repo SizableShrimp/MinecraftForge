@@ -21,7 +21,6 @@ package net.minecraftforge.client.extensions;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.core.Direction;
-import net.minecraft.util.math.vector.*;
 
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Transformation;

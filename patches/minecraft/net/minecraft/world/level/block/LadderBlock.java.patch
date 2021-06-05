@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/LadderBlock.java
++++ b/net/minecraft/world/level/block/LadderBlock.java
+@@ -26,7 +_,7 @@
+    protected static final VoxelShape f_54341_ = Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 3.0D);
+    protected static final VoxelShape f_54342_ = Block.m_49796_(0.0D, 0.0D, 13.0D, 16.0D, 16.0D, 16.0D);
+ 
+-   protected LadderBlock(BlockBehaviour.Properties p_54345_) {
++   public LadderBlock(BlockBehaviour.Properties p_54345_) {
+       super(p_54345_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_54337_, Direction.NORTH).m_61124_(f_54338_, Boolean.valueOf(false)));
+    }

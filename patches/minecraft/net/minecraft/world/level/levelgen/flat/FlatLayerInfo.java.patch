@@ -1,0 +1,17 @@
+--- a/net/minecraft/world/level/levelgen/flat/FlatLayerInfo.java
++++ b/net/minecraft/world/level/levelgen/flat/FlatLayerInfo.java
+@@ -8,10 +_,10 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class FlatLayerInfo {
+-   public static final Codec<FlatLayerInfo> f_70329_ = RecordCodecBuilder.create((p_70341_) -> {
+-      return p_70341_.group(Codec.intRange(0, 256).fieldOf("height").forGetter(FlatLayerInfo::m_70337_), Registry.f_122824_.fieldOf("block").orElse(Blocks.f_50016_).forGetter((p_70343_) -> {
+-         return p_70343_.m_70344_().m_60734_();
+-      })).apply(p_70341_, FlatLayerInfo::new);
++   public static final Codec<FlatLayerInfo> f_70329_ = RecordCodecBuilder.create((p_236930_0_) -> {
++      return p_236930_0_.group(Codec.intRange(0, 256).fieldOf("height").forGetter(FlatLayerInfo::m_70337_), Registry.f_122824_.fieldOf("block").orElse(Blocks.f_50016_).forGetter((p_236931_0_) -> {
++         return p_236931_0_.m_70344_().m_60734_();
++      })).apply(p_236930_0_, FlatLayerInfo::new);
+    });
+    private final BlockState f_70330_;
+    private final int f_70331_;

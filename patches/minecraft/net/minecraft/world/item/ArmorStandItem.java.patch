@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/item/ArmorStandItem.java
++++ b/net/minecraft/world/item/ArmorStandItem.java
+@@ -37,7 +_,7 @@
+          ItemStack itemstack = p_40510_.m_43722_();
+          Vec3 vec3 = Vec3.m_82539_(blockpos);
+          AABB aabb = EntityType.f_20529_.m_20680_().m_20384_(vec3.m_7096_(), vec3.m_7098_(), vec3.m_7094_());
+-         if (level.m_45768_((Entity)null, aabb, (p_40505_) -> {
++         if (level.m_45768_((Entity)null, aabb, (p_242390_0_) -> {
+             return true;
+          }) && level.m_45933_((Entity)null, aabb).isEmpty()) {
+             if (level instanceof ServerLevel) {

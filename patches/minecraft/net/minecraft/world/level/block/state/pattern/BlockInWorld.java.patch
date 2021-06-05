@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/block/state/pattern/BlockInWorld.java
++++ b/net/minecraft/world/level/block/state/pattern/BlockInWorld.java
+@@ -48,8 +_,8 @@
+    }
+ 
+    public static Predicate<BlockInWorld> m_61169_(Predicate<BlockState> p_61170_) {
+-      return (p_61173_) -> {
+-         return p_61173_ != null && p_61170_.test(p_61173_.m_61168_());
++      return (p_201002_1_) -> {
++         return p_201002_1_ != null && p_61170_.test(p_201002_1_.m_61168_());
+       };
+    }
+ }

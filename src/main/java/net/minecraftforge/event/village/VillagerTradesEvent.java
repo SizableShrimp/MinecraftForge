@@ -22,13 +22,9 @@ package net.minecraftforge.event.village;
 import java.util.List;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import net.minecraft.entity.merchant.villager.VillagerData;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
-import net.minecraftforge.common.BasicTrade;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 
 /**
  * VillagerTradesEvent is fired during the {@link FMLServerAboutToStartEvent}.  It is used to gather the trade lists for each profession.

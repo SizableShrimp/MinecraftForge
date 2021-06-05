@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/TameAnimalTrigger.java
++++ b/net/minecraft/advancements/critereon/TameAnimalTrigger.java
+@@ -20,8 +_,8 @@
+ 
+    public void m_68829_(ServerPlayer p_68830_, Animal p_68831_) {
+       LootContext lootcontext = EntityPredicate.m_36616_(p_68830_, p_68831_);
+-      this.m_66234_(p_68830_, (p_68838_) -> {
+-         return p_68838_.m_68852_(lootcontext);
++      this.m_66234_(p_68830_, (p_227251_1_) -> {
++         return p_227251_1_.m_68852_(lootcontext);
+       });
+    }
+ 

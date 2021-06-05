@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/ConstructBeaconTrigger.java
++++ b/net/minecraft/advancements/critereon/ConstructBeaconTrigger.java
+@@ -18,8 +_,8 @@
+    }
+ 
+    public void m_22746_(ServerPlayer p_22747_, BeaconBlockEntity p_22748_) {
+-      this.m_66234_(p_22747_, (p_22751_) -> {
+-         return p_22751_.m_22767_(p_22748_);
++      this.m_66234_(p_22747_, (p_226308_1_) -> {
++         return p_226308_1_.m_22767_(p_22748_);
+       });
+    }
+ 

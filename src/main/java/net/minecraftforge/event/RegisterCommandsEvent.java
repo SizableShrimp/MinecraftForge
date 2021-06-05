@@ -20,9 +20,6 @@
 package net.minecraftforge.event;
 
 import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.command.*;
-import net.minecraft.resources.*;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
 
 

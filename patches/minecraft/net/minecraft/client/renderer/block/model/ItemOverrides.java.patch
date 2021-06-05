@@ -1,0 +1,50 @@
+--- a/net/minecraft/client/renderer/block/model/ItemOverrides.java
++++ b/net/minecraft/client/renderer/block/model/ItemOverrides.java
+@@ -10,6 +_,7 @@
+ import net.minecraft.client.multiplayer.ClientLevel;
+ import net.minecraft.client.resources.model.BakedModel;
+ import net.minecraft.client.resources.model.BlockModelRotation;
++import net.minecraft.client.resources.model.Material;
+ import net.minecraft.client.resources.model.ModelBakery;
+ import net.minecraft.client.resources.model.UnbakedModel;
+ import net.minecraft.resources.ResourceLocation;
+@@ -24,19 +_,23 @@
+    private final List<ItemOverride> f_111735_ = Lists.newArrayList();
+    private final List<BakedModel> f_111736_;
+ 
+-   private ItemOverrides() {
++   protected ItemOverrides() {
+       this.f_111736_ = Collections.emptyList();
+    }
+ 
++   @Deprecated //Forge: Use IUnbakedModel, add texture getter
+    public ItemOverrides(ModelBakery p_111740_, BlockModel p_111741_, Function<ResourceLocation, UnbakedModel> p_111742_, List<ItemOverride> p_111743_) {
+-      this.f_111736_ = p_111743_.stream().map((p_111753_) -> {
+-         UnbakedModel unbakedmodel = p_111742_.apply(p_111753_.m_111718_());
+-         return Objects.equals(unbakedmodel, p_111741_) ? null : p_111740_.m_119349_(p_111753_.m_111718_(), BlockModelRotation.X0_Y0);
++      this(p_111740_, (UnbakedModel)p_111741_, p_111742_, p_111740_.getSpriteMap()::m_117971_, p_111743_);
++   }
++   public ItemOverrides(ModelBakery p_i50984_1_, UnbakedModel p_i50984_2_, Function<ResourceLocation, UnbakedModel> p_i50984_3_, Function<Material, net.minecraft.client.renderer.texture.TextureAtlasSprite> textureGetter, List<ItemOverride> p_i50984_4_) {
++      this.f_111736_ = p_i50984_4_.stream().map((p_217649_3_) -> {
++         UnbakedModel unbakedmodel = p_i50984_3_.apply(p_217649_3_.m_111718_());
++         return Objects.equals(unbakedmodel, p_i50984_2_) ? null : p_i50984_1_.getBakedModel(p_217649_3_.m_111718_(), BlockModelRotation.X0_Y0, textureGetter);
+       }).collect(Collectors.toList());
+       Collections.reverse(this.f_111736_);
+ 
+-      for(int i = p_111743_.size() - 1; i >= 0; --i) {
+-         this.f_111735_.add(p_111743_.get(i));
++      for(int i = p_i50984_4_.size() - 1; i >= 0; --i) {
++         this.f_111735_.add(p_i50984_4_.get(i));
+       }
+ 
+    }
+@@ -58,5 +_,9 @@
+       }
+ 
+       return p_111745_;
++   }
++
++   public com.google.common.collect.ImmutableList<ItemOverride> getOverrides() {
++      return com.google.common.collect.ImmutableList.copyOf(f_111735_);
+    }
+ }

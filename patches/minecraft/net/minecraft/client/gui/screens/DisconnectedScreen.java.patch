@@ -1,0 +1,11 @@
+--- a/net/minecraft/client/gui/screens/DisconnectedScreen.java
++++ b/net/minecraft/client/gui/screens/DisconnectedScreen.java
+@@ -28,7 +_,7 @@
+    protected void m_7856_() {
+       this.f_95989_ = MultiLineLabel.m_94341_(this.f_96547_, this.f_95988_, this.f_96543_ - 50);
+       this.f_95991_ = this.f_95989_.m_5770_() * 9;
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 100, Math.min(this.f_96544_ / 2 + this.f_95991_ / 2 + 9, this.f_96544_ - 30), 200, 20, new TranslatableComponent("gui.toMenu"), (p_96002_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 100, Math.min(this.f_96544_ / 2 + this.f_95991_ / 2 + 9, this.f_96544_ - 30), 200, 20, new TranslatableComponent("gui.toMenu"), (p_213033_1_) -> {
+          this.f_96541_.m_91152_(this.f_95990_);
+       }));
+    }

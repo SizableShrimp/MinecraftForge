@@ -1,0 +1,143 @@
+--- a/net/minecraft/world/level/biome/MobSpawnSettings.java
++++ b/net/minecraft/world/level/biome/MobSpawnSettings.java
+@@ -24,41 +_,53 @@
+ 
+ public class MobSpawnSettings {
+    public static final Logger f_48325_ = LogManager.getLogger();
+-   public static final MobSpawnSettings f_48326_ = new MobSpawnSettings(0.1F, Stream.of(MobCategory.values()).collect(ImmutableMap.toImmutableMap((p_48359_) -> {
+-      return p_48359_;
+-   }, (p_48355_) -> {
++   public static final MobSpawnSettings f_48326_ = new MobSpawnSettings(0.1F, Stream.of(MobCategory.values()).collect(ImmutableMap.toImmutableMap((p_242565_0_) -> {
++      return p_242565_0_;
++   }, (p_242563_0_) -> {
+       return ImmutableList.of();
+    })), ImmutableMap.of(), false);
+-   public static final MapCodec<MobSpawnSettings> f_48327_ = RecordCodecBuilder.mapCodec((p_48352_) -> {
+-      return p_48352_.group(Codec.FLOAT.optionalFieldOf("creature_spawn_probability", Float.valueOf(0.1F)).forGetter((p_48361_) -> {
+-         return p_48361_.f_48328_;
+-      }), Codec.simpleMap(MobCategory.f_21584_, MobSpawnSettings.SpawnerData.f_48403_.listOf().promotePartial(Util.m_137489_("Spawn data: ", f_48325_::error)), StringRepresentable.m_14357_(MobCategory.values())).fieldOf("spawners").forGetter((p_48357_) -> {
+-         return p_48357_.f_48329_;
+-      }), Codec.simpleMap(Registry.f_122826_, MobSpawnSettings.MobSpawnCost.f_48384_, Registry.f_122826_).fieldOf("spawn_costs").forGetter((p_48350_) -> {
+-         return p_48350_.f_48330_;
+-      }), Codec.BOOL.fieldOf("player_spawn_friendly").orElse(false).forGetter(MobSpawnSettings::m_48353_)).apply(p_48352_, MobSpawnSettings::new);
++   public static final MapCodec<MobSpawnSettings> f_48327_ = RecordCodecBuilder.mapCodec((p_242561_0_) -> {
++      return p_242561_0_.group(Codec.FLOAT.optionalFieldOf("creature_spawn_probability", Float.valueOf(0.1F)).forGetter((p_242566_0_) -> {
++         return p_242566_0_.f_48328_;
++      }), Codec.simpleMap(MobCategory.f_21584_, MobSpawnSettings.SpawnerData.f_48403_.listOf().promotePartial(Util.m_137489_("Spawn data: ", f_48325_::error)), StringRepresentable.m_14357_(MobCategory.values())).fieldOf("spawners").forGetter((p_242564_0_) -> {
++         return p_242564_0_.f_48329_;
++      }), Codec.simpleMap(Registry.f_122826_, MobSpawnSettings.MobSpawnCost.f_48384_, Registry.f_122826_).fieldOf("spawn_costs").forGetter((p_242560_0_) -> {
++         return p_242560_0_.f_48330_;
++      }), Codec.BOOL.fieldOf("player_spawn_friendly").orElse(false).forGetter(MobSpawnSettings::m_48353_)).apply(p_242561_0_, MobSpawnSettings::new);
+    });
+    private final float f_48328_;
+    private final Map<MobCategory, List<MobSpawnSettings.SpawnerData>> f_48329_;
+    private final Map<EntityType<?>, MobSpawnSettings.MobSpawnCost> f_48330_;
+    private final boolean f_48331_;
++   private final java.util.Set<MobCategory> typesView;
++   private final java.util.Set<EntityType<?>> costView;
+ 
+    private MobSpawnSettings(float p_48334_, Map<MobCategory, List<MobSpawnSettings.SpawnerData>> p_48335_, Map<EntityType<?>, MobSpawnSettings.MobSpawnCost> p_48336_, boolean p_48337_) {
+       this.f_48328_ = p_48334_;
+       this.f_48329_ = p_48335_;
+       this.f_48330_ = p_48336_;
+       this.f_48331_ = p_48337_;
++      this.typesView = java.util.Collections.unmodifiableSet(this.f_48329_.keySet());
++      this.costView = java.util.Collections.unmodifiableSet(this.f_48330_.keySet());
+    }
+ 
+    public List<MobSpawnSettings.SpawnerData> m_48347_(MobCategory p_48348_) {
+       return this.f_48329_.getOrDefault(p_48348_, ImmutableList.of());
+    }
+ 
++   public java.util.Set<MobCategory> getSpawnerTypes() {
++       return this.typesView;
++   }
++
+    @Nullable
+    public MobSpawnSettings.MobSpawnCost m_48345_(EntityType<?> p_48346_) {
+       return this.f_48330_.get(p_48346_);
+    }
+ 
++   public java.util.Set<EntityType<?>> getEntityTypes() {
++       return this.costView;
++   }
++
+    public float m_48344_() {
+       return this.f_48328_;
+    }
+@@ -68,14 +_,14 @@
+    }
+ 
+    public static class Builder {
+-      private final Map<MobCategory, List<MobSpawnSettings.SpawnerData>> f_48362_ = Stream.of(MobCategory.values()).collect(ImmutableMap.toImmutableMap((p_48383_) -> {
+-         return p_48383_;
+-      }, (p_48375_) -> {
++      protected final Map<MobCategory, List<MobSpawnSettings.SpawnerData>> f_48362_ = Stream.of(MobCategory.values()).collect(ImmutableMap.toImmutableMap((p_242578_0_) -> {
++         return p_242578_0_;
++      }, (p_242574_0_) -> {
+          return Lists.newArrayList();
+       }));
+-      private final Map<EntityType<?>, MobSpawnSettings.MobSpawnCost> f_48363_ = Maps.newLinkedHashMap();
+-      private float f_48364_ = 0.1F;
+-      private boolean f_48365_;
++      protected final Map<EntityType<?>, MobSpawnSettings.MobSpawnCost> f_48363_ = Maps.newLinkedHashMap();
++      protected float f_48364_ = 0.1F;
++      protected boolean f_48365_;
+ 
+       public MobSpawnSettings.Builder m_48376_(MobCategory p_48377_, MobSpawnSettings.SpawnerData p_48378_) {
+          this.f_48362_.get(p_48377_).add(p_48378_);
+@@ -98,19 +_,19 @@
+       }
+ 
+       public MobSpawnSettings m_48381_() {
+-         return new MobSpawnSettings(this.f_48364_, this.f_48362_.entrySet().stream().collect(ImmutableMap.toImmutableMap(Entry::getKey, (p_48380_) -> {
+-            return ImmutableList.copyOf((Collection)p_48380_.getValue());
++         return new MobSpawnSettings(this.f_48364_, this.f_48362_.entrySet().stream().collect(ImmutableMap.toImmutableMap(Entry::getKey, (p_242576_0_) -> {
++            return ImmutableList.copyOf((Collection)p_242576_0_.getValue());
+          })), ImmutableMap.copyOf(this.f_48363_), this.f_48365_);
+       }
+    }
+ 
+    public static class MobSpawnCost {
+-      public static final Codec<MobSpawnSettings.MobSpawnCost> f_48384_ = RecordCodecBuilder.create((p_48399_) -> {
+-         return p_48399_.group(Codec.DOUBLE.fieldOf("energy_budget").forGetter((p_48402_) -> {
+-            return p_48402_.f_48385_;
+-         }), Codec.DOUBLE.fieldOf("charge").forGetter((p_48397_) -> {
+-            return p_48397_.f_48386_;
+-         })).apply(p_48399_, MobSpawnSettings.MobSpawnCost::new);
++      public static final Codec<MobSpawnSettings.MobSpawnCost> f_48384_ = RecordCodecBuilder.create((p_242584_0_) -> {
++         return p_242584_0_.group(Codec.DOUBLE.fieldOf("energy_budget").forGetter((p_242586_0_) -> {
++            return p_242586_0_.f_48385_;
++         }), Codec.DOUBLE.fieldOf("charge").forGetter((p_242583_0_) -> {
++            return p_242583_0_.f_48386_;
++         })).apply(p_242584_0_, MobSpawnSettings.MobSpawnCost::new);
+       });
+       private final double f_48385_;
+       private final double f_48386_;
+@@ -130,16 +_,16 @@
+    }
+ 
+    public static class SpawnerData extends WeighedRandom.WeighedRandomItem {
+-      public static final Codec<MobSpawnSettings.SpawnerData> f_48403_ = RecordCodecBuilder.create((p_48416_) -> {
+-         return p_48416_.group(Registry.f_122826_.fieldOf("type").forGetter((p_48422_) -> {
+-            return p_48422_.f_48404_;
+-         }), Codec.INT.fieldOf("weight").forGetter((p_48420_) -> {
+-            return p_48420_.f_14482_;
+-         }), Codec.INT.fieldOf("minCount").forGetter((p_48418_) -> {
+-            return p_48418_.f_48405_;
+-         }), Codec.INT.fieldOf("maxCount").forGetter((p_48414_) -> {
+-            return p_48414_.f_48406_;
+-         })).apply(p_48416_, MobSpawnSettings.SpawnerData::new);
++      public static final Codec<MobSpawnSettings.SpawnerData> f_48403_ = RecordCodecBuilder.create((p_242592_0_) -> {
++         return p_242592_0_.group(Registry.f_122826_.fieldOf("type").forGetter((p_242595_0_) -> {
++            return p_242595_0_.f_48404_;
++         }), Codec.INT.fieldOf("weight").forGetter((p_242594_0_) -> {
++            return p_242594_0_.f_14482_;
++         }), Codec.INT.fieldOf("minCount").forGetter((p_242593_0_) -> {
++            return p_242593_0_.f_48405_;
++         }), Codec.INT.fieldOf("maxCount").forGetter((p_242591_0_) -> {
++            return p_242591_0_.f_48406_;
++         })).apply(p_242592_0_, MobSpawnSettings.SpawnerData::new);
+       });
+       public final EntityType<?> f_48404_;
+       public final int f_48405_;

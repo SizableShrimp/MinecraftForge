@@ -21,9 +21,6 @@ package net.minecraftforge.event.entity.living;
 
 import javax.annotation.Nullable;
 import net.minecraft.world.level.BaseSpawner;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.LevelAccessor;

@@ -1,0 +1,22 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsSubscriptionInfoScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsSubscriptionInfoScreen.java
+@@ -54,16 +_,16 @@
+       this.m_89989_(this.f_89975_.f_87473_);
+       NarrationHelper.m_120672_(f_89964_.getString(), f_89965_.getString(), this.f_89961_, f_89966_.getString(), this.f_89960_.getString());
+       this.f_96541_.f_91068_.m_90926_(true);
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 100, m_120774_(6), 200, 20, new TranslatableComponent("mco.configure.world.subscription.extend"), (p_90010_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 100, m_120774_(6), 200, 20, new TranslatableComponent("mco.configure.world.subscription.extend"), (p_238073_1_) -> {
+          String s = "https://aka.ms/ExtendJavaRealms?subscriptionId=" + this.f_89975_.f_87474_ + "&profileId=" + this.f_96541_.m_91094_().m_92545_();
+          this.f_96541_.f_91068_.m_90911_(s);
+          Util.m_137581_().m_137646_(s);
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 100, m_120774_(12), 200, 20, CommonComponents.f_130660_, (p_90006_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 100, m_120774_(12), 200, 20, CommonComponents.f_130660_, (p_238071_1_) -> {
+          this.f_96541_.m_91152_(this.f_89974_);
+       }));
+       if (this.f_89975_.f_87482_) {
+-         this.m_7082_(new Button(this.f_96543_ / 2 - 100, m_120774_(10), 200, 20, new TranslatableComponent("mco.configure.world.delete.button"), (p_89999_) -> {
++         this.m_7082_(new Button(this.f_96543_ / 2 - 100, m_120774_(10), 200, 20, new TranslatableComponent("mco.configure.world.delete.button"), (p_238069_1_) -> {
+             Component component = new TranslatableComponent("mco.configure.world.delete.question.line1");
+             Component component1 = new TranslatableComponent("mco.configure.world.delete.question.line2");
+             this.f_96541_.m_91152_(new RealmsLongConfirmationScreen(this::m_90011_, RealmsLongConfirmationScreen.Type.Warning, component, component1, true));

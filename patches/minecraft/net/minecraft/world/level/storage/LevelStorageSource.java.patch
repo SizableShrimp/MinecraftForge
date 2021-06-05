@@ -1,0 +1,120 @@
+--- a/net/minecraft/world/level/storage/LevelStorageSource.java
++++ b/net/minecraft/world/level/storage/LevelStorageSource.java
+@@ -94,7 +_,7 @@
+          }
+       }
+ 
+-      Dynamic<T> dynamic1 = p_78206_.update(References.f_16795_, dynamic, p_78207_, SharedConstants.m_136187_().getWorldVersion());
++      Dynamic<T> dynamic1 = net.minecraftforge.common.ForgeHooks.fixUpDimensionsData(p_78206_.update(References.f_16795_, dynamic, p_78207_, SharedConstants.m_136187_().getWorldVersion()));
+       DataResult<WorldGenSettings> dataresult = WorldGenSettings.f_64600_.parse(dynamic1);
+       return Pair.of(dataresult.resultOrPartial(Util.m_137489_("WorldGenSettings: ", f_78191_::error)).orElseGet(() -> {
+          Registry<DimensionType> registry = RegistryLookupCodec.m_135622_(Registry.f_122818_).codec().parse(dynamic1).resultOrPartial(Util.m_137489_("Dimension type registry: ", f_78191_::error)).orElseThrow(() -> {
+@@ -181,33 +_,40 @@
+    }
+ 
+    private static BiFunction<File, DataFixer, PrimaryLevelData> m_78247_(DynamicOps<Tag> p_78248_, DataPackConfig p_78249_) {
+-      return (p_78214_, p_78215_) -> {
++       return getReader(p_78248_, p_78249_, null);
++   }
++
++   private static BiFunction<File, DataFixer, PrimaryLevelData> getReader(DynamicOps<Tag> p_237270_0_, DataPackConfig p_237270_1_, @Nullable LevelStorageAccess levelSave) {
++      return (p_242976_2_, p_242976_3_) -> {
+          try {
+-            CompoundTag compoundtag = NbtIo.m_128937_(p_78214_);
++            CompoundTag compoundtag = NbtIo.m_128937_(p_242976_2_);
+             CompoundTag compoundtag1 = compoundtag.m_128469_("Data");
+             CompoundTag compoundtag2 = compoundtag1.m_128425_("Player", 10) ? compoundtag1.m_128469_("Player") : null;
+             compoundtag1.m_128473_("Player");
+             int i = compoundtag1.m_128425_("DataVersion", 99) ? compoundtag1.m_128451_("DataVersion") : -1;
+-            Dynamic<Tag> dynamic = p_78215_.update(DataFixTypes.LEVEL.m_14504_(), new Dynamic<>(p_78248_, compoundtag1), i, SharedConstants.m_136187_().getWorldVersion());
+-            Pair<WorldGenSettings, Lifecycle> pair = m_78204_(dynamic, p_78215_, i);
++            Dynamic<Tag> dynamic = p_242976_3_.update(DataFixTypes.LEVEL.m_14504_(), new Dynamic<>(p_237270_0_, compoundtag1), i, SharedConstants.m_136187_().getWorldVersion());
++            Pair<WorldGenSettings, Lifecycle> pair = m_78204_(dynamic, p_242976_3_, i);
+             LevelVersion levelversion = LevelVersion.m_78390_(dynamic);
+-            LevelSettings levelsettings = LevelSettings.m_46924_(dynamic, p_78249_);
+-            return PrimaryLevelData.m_78530_(dynamic, p_78215_, i, compoundtag2, levelsettings, levelversion, pair.getFirst(), pair.getSecond());
++            LevelSettings levelsettings = LevelSettings.m_46924_(dynamic, p_237270_1_);
++            PrimaryLevelData info = PrimaryLevelData.m_78530_(dynamic, p_242976_3_, i, compoundtag2, levelsettings, levelversion, pair.getFirst(), pair.getSecond());
++            if (levelSave != null)
++                net.minecraftforge.fml.WorldPersistenceHooks.handleWorldDataLoad(levelSave, info, compoundtag);
++            return info;
+          } catch (Exception exception) {
+-            f_78191_.error("Exception reading {}", p_78214_, exception);
++            f_78191_.error("Exception reading {}", p_242976_2_, exception);
+             return null;
+          }
+       };
+    }
+ 
+    private BiFunction<File, DataFixer, LevelSummary> m_78232_(File p_78233_, boolean p_78234_) {
+-      return (p_78238_, p_78239_) -> {
++      return (p_242977_3_, p_242977_4_) -> {
+          try {
+-            CompoundTag compoundtag = NbtIo.m_128937_(p_78238_);
++            CompoundTag compoundtag = NbtIo.m_128937_(p_242977_3_);
+             CompoundTag compoundtag1 = compoundtag.m_128469_("Data");
+             compoundtag1.m_128473_("Player");
+             int i = compoundtag1.m_128425_("DataVersion", 99) ? compoundtag1.m_128451_("DataVersion") : -1;
+-            Dynamic<Tag> dynamic = p_78239_.update(DataFixTypes.LEVEL.m_14504_(), new Dynamic<>(NbtOps.f_128958_, compoundtag1), i, SharedConstants.m_136187_().getWorldVersion());
++            Dynamic<Tag> dynamic = p_242977_4_.update(DataFixTypes.LEVEL.m_14504_(), new Dynamic<>(NbtOps.f_128958_, compoundtag1), i, SharedConstants.m_136187_().getWorldVersion());
+             LevelVersion levelversion = LevelVersion.m_78390_(dynamic);
+             int j = levelversion.m_78389_();
+             if (j != 19132 && j != 19133) {
+@@ -220,7 +_,7 @@
+                return new LevelSummary(levelsettings, levelversion, p_78233_.getName(), flag, p_78234_, file1);
+             }
+          } catch (Exception exception) {
+-            f_78191_.error("Exception reading {}", p_78238_, exception);
++            f_78191_.error("Exception reading {}", p_242977_3_, exception);
+             return null;
+          }
+       };
+@@ -274,8 +_,8 @@
+       }
+ 
+       public Path m_78283_(LevelResource p_78284_) {
+-         return this.f_78273_.computeIfAbsent(p_78284_, (p_78303_) -> {
+-            return this.f_78271_.resolve(p_78303_.m_78187_());
++         return this.f_78273_.computeIfAbsent(p_78284_, (p_237293_1_) -> {
++            return this.f_78271_.resolve(p_237293_1_.m_78187_());
+          });
+       }
+ 
+@@ -313,14 +_,14 @@
+       @Nullable
+       public WorldData m_78280_(DynamicOps<Tag> p_78281_, DataPackConfig p_78282_) {
+          this.m_78313_();
+-         return LevelStorageSource.this.m_78229_(this.f_78271_.toFile(), LevelStorageSource.m_78247_(p_78281_, p_78282_));
++         return LevelStorageSource.this.m_78229_(this.f_78271_.toFile(), LevelStorageSource.getReader(p_78281_, p_78282_, this));
+       }
+ 
+       @Nullable
+       public DataPackConfig m_78309_() {
+          this.m_78313_();
+-         return LevelStorageSource.this.m_78229_(this.f_78271_.toFile(), (p_78295_, p_78296_) -> {
+-            return LevelStorageSource.m_78252_(p_78295_, p_78296_);
++         return LevelStorageSource.this.m_78229_(this.f_78271_.toFile(), (p_237289_0_, p_237289_1_) -> {
++            return LevelStorageSource.m_78252_(p_237289_0_, p_237289_1_);
+          });
+       }
+ 
+@@ -334,6 +_,8 @@
+          CompoundTag compoundtag1 = new CompoundTag();
+          compoundtag1.m_128365_("Data", compoundtag);
+ 
++         net.minecraftforge.fml.WorldPersistenceHooks.handleWorldDataSave(this, p_78292_, compoundtag1);
++
+          try {
+             File file2 = File.createTempFile("level", ".dat", file1);
+             NbtIo.m_128944_(compoundtag1, file2);
+@@ -349,6 +_,10 @@
+       public File m_78310_() {
+          this.m_78313_();
+          return this.f_78271_.resolve("icon.png").toFile();
++      }
++
++      public Path getWorldDir() {
++          return f_78271_;
+       }
+ 
+       @OnlyIn(Dist.CLIENT)

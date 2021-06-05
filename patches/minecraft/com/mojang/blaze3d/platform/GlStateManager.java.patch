@@ -1,20 +1,105 @@
 --- a/com/mojang/blaze3d/platform/GlStateManager.java
 +++ b/com/mojang/blaze3d/platform/GlStateManager.java
-@@ -572,10 +_,17 @@
-       GL13.glClientActiveTexture(p_227747_0_);
+@@ -26,15 +_,15 @@
+ 
+ @OnlyIn(Dist.CLIENT)
+ public class GlStateManager {
+-   private static final FloatBuffer f_84061_ = GLX.m_69370_(MemoryUtil.memAllocFloat(16), (p_84364_) -> {
+-      DebugMemoryUntracker.m_84001_(MemoryUtil.memAddress(p_84364_));
++   private static final FloatBuffer f_84061_ = GLX.m_69370_(MemoryUtil.memAllocFloat(16), (p_209238_0_) -> {
++      DebugMemoryUntracker.m_84001_(MemoryUtil.memAddress(p_209238_0_));
+    });
+    private static final GlStateManager.AlphaState f_84062_ = new GlStateManager.AlphaState();
+    private static final GlStateManager.BooleanState f_84063_ = new GlStateManager.BooleanState(2896);
+-   private static final GlStateManager.BooleanState[] f_84064_ = IntStream.range(0, 8).mapToObj((p_84105_) -> {
+-      return new GlStateManager.BooleanState(16384 + p_84105_);
+-   }).toArray((p_84102_) -> {
+-      return new GlStateManager.BooleanState[p_84102_];
++   private static final GlStateManager.BooleanState[] f_84064_ = IntStream.range(0, 8).mapToObj((p_227620_0_) -> {
++      return new GlStateManager.BooleanState(16384 + p_227620_0_);
++   }).toArray((p_227618_0_) -> {
++      return new GlStateManager.BooleanState[p_227618_0_];
+    });
+    private static final GlStateManager.ColorMaterialState f_84065_ = new GlStateManager.ColorMaterialState();
+    private static final GlStateManager.BlendState f_84066_ = new GlStateManager.BlendState();
+@@ -48,10 +_,10 @@
+    private static final GlStateManager.ScissorState f_84074_ = new GlStateManager.ScissorState();
+    private static final FloatBuffer f_84075_ = MemoryTracker.m_84934_(4);
+    private static int f_84076_;
+-   private static final GlStateManager.TextureState[] f_84077_ = IntStream.range(0, 12).mapToObj((p_84099_) -> {
++   private static final GlStateManager.TextureState[] f_84077_ = IntStream.range(0, 12).mapToObj((p_227616_0_) -> {
+       return new GlStateManager.TextureState();
+-   }).toArray((p_84096_) -> {
+-      return new GlStateManager.TextureState[p_84096_];
++   }).toArray((p_227614_0_) -> {
++      return new GlStateManager.TextureState[p_227614_0_];
+    });
+    private static int f_84078_ = 7425;
+    private static final GlStateManager.BooleanState f_84079_ = new GlStateManager.BooleanState(32826);
+@@ -569,10 +_,17 @@
+       GL13.glClientActiveTexture(p_84521_);
     }
  
 +   /* Stores the last values sent into glMultiTexCoord2f */
 +   public static float lastBrightnessX = 0.0f;
 +   public static float lastBrightnessY = 0.0f;
     @Deprecated
-    public static void func_227640_a_(int p_227640_0_, float p_227640_1_, float p_227640_2_) {
-       RenderSystem.assertThread(RenderSystem::isOnRenderThread);
-       GL13.glMultiTexCoord2f(p_227640_0_, p_227640_1_, p_227640_2_);
-+      if (p_227640_0_ == GL13.GL_TEXTURE1) {
-+          lastBrightnessX = p_227640_1_;
-+          lastBrightnessY = p_227640_2_;
+    public static void m_84153_(int p_84154_, float p_84155_, float p_84156_) {
+       RenderSystem.m_69393_(RenderSystem::m_69586_);
+       GL13.glMultiTexCoord2f(p_84154_, p_84155_, p_84156_);
++      if (p_84154_ == GL13.GL_TEXTURE1) {
++          lastBrightnessX = p_84155_;
++          lastBrightnessY = p_84156_;
 +       }
     }
  
-    public static void func_227706_d_(int p_227706_0_, int p_227706_1_, int p_227706_2_, int p_227706_3_) {
+    public static void m_84388_(int p_84389_, int p_84390_, int p_84391_, int p_84392_) {
+@@ -1447,20 +_,6 @@
+       }
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+-   public static enum FboBlitMode {
+-      BASE,
+-      EXT,
+-      NONE;
+-   }
+-
+-   @OnlyIn(Dist.CLIENT)
+-   public static enum FboMode {
+-      BASE,
+-      ARB,
+-      EXT;
+-   }
+-
+    @Deprecated
+    @OnlyIn(Dist.CLIENT)
+    public static enum FogMode {
+@@ -1489,6 +_,13 @@
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
++   public static enum FboMode {
++      BASE,
++      ARB,
++      EXT;
++   }
++
++   @OnlyIn(Dist.CLIENT)
+    public static enum LogicOp {
+       AND(5377),
+       AND_INVERTED(5380),
+@@ -1578,6 +_,13 @@
+ 
+       private StencilState() {
+       }
++   }
++
++   @OnlyIn(Dist.CLIENT)
++   public static enum FboBlitMode {
++      BASE,
++      EXT,
++      NONE;
+    }
+ 
+    @Deprecated

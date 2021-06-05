@@ -1,0 +1,275 @@
+--- a/net/minecraft/world/level/block/state/BlockBehaviour.java
++++ b/net/minecraft/world/level/block/state/BlockBehaviour.java
+@@ -12,7 +_,6 @@
+ import javax.annotation.Nullable;
+ import net.minecraft.core.BlockPos;
+ import net.minecraft.core.Direction;
+-import net.minecraft.core.Registry;
+ import net.minecraft.network.protocol.game.DebugPackets;
+ import net.minecraft.resources.ResourceLocation;
+ import net.minecraft.server.level.ServerLevel;
+@@ -35,12 +_,8 @@
+ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.LevelAccessor;
+ import net.minecraft.world.level.LevelReader;
+-import net.minecraft.world.level.block.Block;
+-import net.minecraft.world.level.block.EntityBlock;
+ import net.minecraft.world.level.block.Mirror;
+-import net.minecraft.world.level.block.RenderShape;
+ import net.minecraft.world.level.block.Rotation;
+-import net.minecraft.world.level.block.SoundType;
+ import net.minecraft.world.level.block.SupportType;
+ import net.minecraft.world.level.block.state.properties.Property;
+ import net.minecraft.world.level.material.Fluid;
+@@ -63,7 +_,13 @@
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+-public abstract class BlockBehaviour {
++//TODO, Delegates are weird here now, because Block extends this.
++import net.minecraft.world.level.block.Block;
++import net.minecraft.world.level.block.EntityBlock;
++import net.minecraft.world.level.block.RenderShape;
++import net.minecraft.world.level.block.SoundType;
++
++public abstract class BlockBehaviour extends net.minecraftforge.registries.ForgeRegistryEntry<Block> {
+    protected static final Direction[] f_60441_ = new Direction[]{Direction.WEST, Direction.EAST, Direction.NORTH, Direction.SOUTH, Direction.DOWN, Direction.UP};
+    protected final Material f_60442_;
+    protected final boolean f_60443_;
+@@ -90,6 +_,8 @@
+       this.f_60449_ = p_60452_.f_60893_;
+       this.f_60438_ = p_60452_.f_60903_;
+       this.f_60439_ = p_60452_;
++      final ResourceLocation lootTableCache = p_60452_.f_60894_;
++      this.lootTableSupplier = lootTableCache != null ? () -> lootTableCache : p_60452_.lootTableSupplier != null ? p_60452_.lootTableSupplier : () -> new ResourceLocation(this.getRegistryName().m_135827_(), "blocks/" + this.getRegistryName().m_135815_());
+    }
+ 
+    @Deprecated
+@@ -132,7 +_,7 @@
+ 
+    @Deprecated
+    public void m_6810_(BlockState p_60515_, Level p_60516_, BlockPos p_60517_, BlockState p_60518_, boolean p_60519_) {
+-      if (this.m_60588_() && !p_60515_.m_60713_(p_60518_.m_60734_())) {
++      if (p_60515_.hasTileEntity() && (!p_60515_.m_60713_(p_60518_.m_60734_()) || !p_60518_.hasTileEntity())) {
+          p_60516_.m_46747_(p_60517_);
+       }
+ 
+@@ -194,7 +_,7 @@
+ 
+    @Deprecated
+    public boolean m_6864_(BlockState p_60470_, BlockPlaceContext p_60471_) {
+-      return this.f_60442_.m_76336_() && (p_60471_.m_43722_().m_41619_() || p_60471_.m_43722_().m_41720_() != this.m_5456_());
++      return p_60470_.m_60767_().m_76336_() && (p_60471_.m_43722_().m_41619_() || p_60471_.m_43722_().m_41720_() != this.m_5456_());
+    }
+ 
+    @Deprecated
+@@ -297,8 +_,8 @@
+       if (f == -1.0F) {
+          return 0.0F;
+       } else {
+-         int i = p_60467_.m_36298_(p_60466_) ? 30 : 100;
+-         return p_60467_.m_36281_(p_60466_) / f / (float)i;
++         int i = net.minecraftforge.common.ForgeHooks.canHarvestBlock(p_60466_, p_60467_, p_60468_, p_60469_) ? 30 : 100;
++         return p_60467_.getDigSpeed(p_60466_, p_60469_) / f / (float)i;
+       }
+    }
+ 
+@@ -324,14 +_,14 @@
+       return 0;
+    }
+ 
++   @Deprecated //Forge: Use state.hasTileEntity()
+    public final boolean m_60588_() {
+       return this instanceof EntityBlock;
+    }
+ 
+    public final ResourceLocation m_60589_() {
+       if (this.f_60440_ == null) {
+-         ResourceLocation resourcelocation = Registry.f_122824_.m_7981_(this.m_7374_());
+-         this.f_60440_ = new ResourceLocation(resourcelocation.m_135827_(), "blocks/" + resourcelocation.m_135815_());
++         this.f_60440_ = this.lootTableSupplier.get();
+       }
+ 
+       return this.f_60440_;
+@@ -349,6 +_,14 @@
+       return this.f_60439_.f_60883_.apply(this.m_7374_().m_49966_());
+    }
+ 
++   protected boolean isAir(BlockState state) {
++      return ((BlockStateBase)state).f_60596_;
++   }
++
++   /* ======================================== FORGE START ===================================== */
++   private final java.util.function.Supplier<ResourceLocation> lootTableSupplier;
++   /* ========================================= FORGE END ====================================== */
++
+    public abstract static class BlockStateBase extends StateHolder<Block, BlockState> {
+       private final int f_60594_;
+       private final boolean f_60595_;
+@@ -427,18 +_,24 @@
+          return this.f_60595_;
+       }
+ 
++      /** @deprecated use {@link BlockState#getLightValue(IBlockReader, BlockPos)} */
++      @Deprecated
+       public int m_60791_() {
+          return this.f_60594_;
+       }
+ 
++      /** @deprecated use {@link BlockState#isAir(IBlockReader, BlockPos)} until 1.17, at which point this method will be undreprecated. See https://github.com/MinecraftForge/MinecraftForge/issues/7409 for more details */
++      @Deprecated
+       public boolean m_60795_() {
+-         return this.f_60596_;
++         return this.m_60734_().isAir((BlockState)this);
+       }
+ 
+       public MaterialColor m_60780_(BlockGetter p_60781_, BlockPos p_60782_) {
+          return this.f_60598_;
+       }
+ 
++      /** @deprecated use {@link BlockState#rotate(IWorld, BlockPos, Rotation)} */
++      @Deprecated
+       public BlockState m_60717_(Rotation p_60718_) {
+          return this.m_60734_().m_6843_(this.m_7160_(), p_60718_);
+       }
+@@ -749,8 +_,8 @@
+             }
+ 
+             this.f_60842_ = block.m_5939_(p_60853_, EmptyBlockGetter.INSTANCE, BlockPos.f_121853_, CollisionContext.m_82749_());
+-            this.f_60843_ = Arrays.stream(Direction.Axis.values()).anyMatch((p_60860_) -> {
+-               return this.f_60842_.m_83288_(p_60860_) < 0.0D || this.f_60842_.m_83297_(p_60860_) > 1.0D;
++            this.f_60843_ = Arrays.stream(Direction.Axis.values()).anyMatch((p_235796_1_) -> {
++               return this.f_60842_.m_83288_(p_235796_1_) < 0.0D || this.f_60842_.m_83297_(p_235796_1_) > 1.0D;
+             });
+             this.f_60850_ = new boolean[f_60845_.length * f_60846_];
+ 
+@@ -773,6 +_,14 @@
+       }
+    }
+ 
++   public interface StateArgumentPredicate<A> {
++      boolean m_61030_(BlockState p_61031_, BlockGetter p_61032_, BlockPos p_61033_, A p_61034_);
++   }
++
++   public interface StatePredicate {
++      boolean m_61035_(BlockState p_61036_, BlockGetter p_61037_, BlockPos p_61038_);
++   }
++
+    public static enum OffsetType {
+       NONE,
+       XZ,
+@@ -784,7 +_,7 @@
+       private Function<BlockState, MaterialColor> f_60883_;
+       private boolean f_60884_ = true;
+       private SoundType f_60885_ = SoundType.f_56742_;
+-      private ToIntFunction<BlockState> f_60886_ = (p_60929_) -> {
++      private ToIntFunction<BlockState> f_60886_ = (p_235830_0_) -> {
+          return 0;
+       };
+       private float f_60887_;
+@@ -797,26 +_,29 @@
+       private ResourceLocation f_60894_;
+       private boolean f_60895_ = true;
+       private boolean f_60896_;
+-      private BlockBehaviour.StateArgumentPredicate<EntityType<?>> f_60897_ = (p_60935_, p_60936_, p_60937_, p_60938_) -> {
+-         return p_60935_.m_60783_(p_60936_, p_60937_, Direction.UP) && p_60935_.m_60791_() < 14;
+-      };
+-      private BlockBehaviour.StatePredicate f_60898_ = (p_60985_, p_60986_, p_60987_) -> {
+-         return p_60985_.m_60767_().m_76337_() && p_60985_.m_60838_(p_60986_, p_60987_);
+-      };
+-      private BlockBehaviour.StatePredicate f_60899_ = (p_60974_, p_60975_, p_60976_) -> {
+-         return this.f_60882_.m_76334_() && p_60974_.m_60838_(p_60975_, p_60976_);
++      private int harvestLevel = -1;
++      private net.minecraftforge.common.ToolType harvestTool;
++      private java.util.function.Supplier<ResourceLocation> lootTableSupplier;
++      private BlockBehaviour.StateArgumentPredicate<EntityType<?>> f_60897_ = (p_235832_0_, p_235832_1_, p_235832_2_, p_235832_3_) -> {
++         return p_235832_0_.m_60783_(p_235832_1_, p_235832_2_, Direction.UP) && p_235832_0_.getLightValue(p_235832_1_, p_235832_2_) < 14;
++      };
++      private BlockBehaviour.StatePredicate f_60898_ = (p_235853_0_, p_235853_1_, p_235853_2_) -> {
++         return p_235853_0_.m_60767_().m_76337_() && p_235853_0_.m_60838_(p_235853_1_, p_235853_2_);
++      };
++      private BlockBehaviour.StatePredicate f_60899_ = (p_235848_1_, p_235848_2_, p_235848_3_) -> {
++         return this.f_60882_.m_76334_() && p_235848_1_.m_60838_(p_235848_2_, p_235848_3_);
+       };
+       private BlockBehaviour.StatePredicate f_60900_ = this.f_60899_;
+-      private BlockBehaviour.StatePredicate f_60901_ = (p_60963_, p_60964_, p_60965_) -> {
++      private BlockBehaviour.StatePredicate f_60901_ = (p_235843_0_, p_235843_1_, p_235843_2_) -> {
+          return false;
+       };
+-      private BlockBehaviour.StatePredicate f_60902_ = (p_60931_, p_60932_, p_60933_) -> {
++      private BlockBehaviour.StatePredicate f_60902_ = (p_235831_0_, p_235831_1_, p_235831_2_) -> {
+          return false;
+       };
+       private boolean f_60903_;
+ 
+       private Properties(Material p_60905_, MaterialColor p_60906_) {
+-         this(p_60905_, (p_60952_) -> {
++         this(p_60905_, (p_235837_1_) -> {
+             return p_60906_;
+          });
+       }
+@@ -858,6 +_,8 @@
+          blockbehaviour$properties.f_60895_ = p_60927_.f_60439_.f_60895_;
+          blockbehaviour$properties.f_60896_ = p_60927_.f_60439_.f_60896_;
+          blockbehaviour$properties.f_60889_ = p_60927_.f_60439_.f_60889_;
++         blockbehaviour$properties.harvestLevel = p_60927_.f_60439_.harvestLevel;
++         blockbehaviour$properties.harvestTool = p_60927_.f_60439_.harvestTool;
+          return blockbehaviour$properties;
+       }
+ 
+@@ -872,6 +_,24 @@
+          return this;
+       }
+ 
++      public BlockBehaviour.Properties harvestLevel(int harvestLevel) {
++         this.harvestLevel = harvestLevel;
++         return this;
++      }
++
++      public BlockBehaviour.Properties harvestTool(net.minecraftforge.common.ToolType harvestTool) {
++         this.harvestTool = harvestTool;
++         return this;
++      }
++
++      public int getHarvestLevel() {
++         return this.harvestLevel;
++      }
++
++      public net.minecraftforge.common.ToolType getHarvestTool() {
++         return this.harvestTool;
++      }
++
+       public BlockBehaviour.Properties m_60911_(float p_60912_) {
+          this.f_60891_ = p_60912_;
+          return this;
+@@ -927,9 +_,15 @@
+          return this;
+       }
+ 
++      @Deprecated // FORGE: Use the variant that takes a Supplier below
+       public BlockBehaviour.Properties m_60916_(Block p_60917_) {
+-         this.f_60894_ = p_60917_.m_60589_();
++         this.lootTableSupplier = () -> p_60917_.delegate.get().m_60589_();
+          return this;
++      }
++
++      public BlockBehaviour.Properties lootFrom(java.util.function.Supplier<? extends Block> blockIn) {
++          this.lootTableSupplier = () -> blockIn.get().m_60589_();
++          return this;
+       }
+ 
+       public BlockBehaviour.Properties m_60996_() {
+@@ -971,13 +_,5 @@
+          this.f_60889_ = true;
+          return this;
+       }
+-   }
+-
+-   public interface StateArgumentPredicate<A> {
+-      boolean m_61030_(BlockState p_61031_, BlockGetter p_61032_, BlockPos p_61033_, A p_61034_);
+-   }
+-
+-   public interface StatePredicate {
+-      boolean m_61035_(BlockState p_61036_, BlockGetter p_61037_, BlockPos p_61038_);
+    }
+ }

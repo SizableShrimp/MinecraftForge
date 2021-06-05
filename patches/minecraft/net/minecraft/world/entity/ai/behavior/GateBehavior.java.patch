@@ -1,0 +1,96 @@
+--- a/net/minecraft/world/entity/ai/behavior/GateBehavior.java
++++ b/net/minecraft/world/entity/ai/behavior/GateBehavior.java
+@@ -22,16 +_,16 @@
+       this.f_22868_ = p_22874_;
+       this.f_22869_ = p_22875_;
+       this.f_22870_ = p_22876_;
+-      p_22877_.forEach((p_22892_) -> {
+-         this.f_22871_.m_24727_(p_22892_.getFirst(), p_22892_.getSecond());
++      p_22877_.forEach((p_220411_1_) -> {
++         this.f_22871_.m_24727_(p_220411_1_.getFirst(), p_220411_1_.getSecond());
+       });
+    }
+ 
+    protected boolean m_6737_(ServerLevel p_22894_, E p_22895_, long p_22896_) {
+-      return this.f_22871_.m_24738_().filter((p_22920_) -> {
+-         return p_22920_.m_22536_() == Behavior.Status.RUNNING;
+-      }).anyMatch((p_22912_) -> {
+-         return p_22912_.m_6737_(p_22894_, p_22895_, p_22896_);
++      return this.f_22871_.m_24738_().filter((p_220414_0_) -> {
++         return p_220414_0_.m_22536_() == Behavior.Status.RUNNING;
++      }).anyMatch((p_220413_4_) -> {
++         return p_220413_4_.m_6737_(p_22894_, p_22895_, p_22896_);
+       });
+    }
+ 
+@@ -45,31 +_,31 @@
+    }
+ 
+    protected void m_6725_(ServerLevel p_22916_, E p_22917_, long p_22918_) {
+-      this.f_22871_.m_24738_().filter((p_22914_) -> {
+-         return p_22914_.m_22536_() == Behavior.Status.RUNNING;
+-      }).forEach((p_22901_) -> {
+-         p_22901_.m_22558_(p_22916_, p_22917_, p_22918_);
++      this.f_22871_.m_24738_().filter((p_220408_0_) -> {
++         return p_220408_0_.m_22536_() == Behavior.Status.RUNNING;
++      }).forEach((p_220409_4_) -> {
++         p_220409_4_.m_22558_(p_22916_, p_22917_, p_22918_);
+       });
+    }
+ 
+    protected void m_6732_(ServerLevel p_22905_, E p_22906_, long p_22907_) {
+-      this.f_22871_.m_24738_().filter((p_22903_) -> {
+-         return p_22903_.m_22536_() == Behavior.Status.RUNNING;
+-      }).forEach((p_22888_) -> {
+-         p_22888_.m_22562_(p_22905_, p_22906_, p_22907_);
++      this.f_22871_.m_24738_().filter((p_220407_0_) -> {
++         return p_220407_0_.m_22536_() == Behavior.Status.RUNNING;
++      }).forEach((p_220412_4_) -> {
++         p_220412_4_.m_22562_(p_22905_, p_22906_, p_22907_);
+       });
+       this.f_22868_.forEach(p_22906_.m_6274_()::m_21936_);
+    }
+ 
+    public String toString() {
+-      Set<? extends Behavior<? super E>> set = this.f_22871_.m_24738_().filter((p_22890_) -> {
+-         return p_22890_.m_22536_() == Behavior.Status.RUNNING;
++      Set<? extends Behavior<? super E>> set = this.f_22871_.m_24738_().filter((p_220410_0_) -> {
++         return p_220410_0_.m_22536_() == Behavior.Status.RUNNING;
+       }).collect(Collectors.toSet());
+       return "(" + this.getClass().getSimpleName() + "): " + set;
+    }
+ 
+    static enum OrderPolicy {
+-      ORDERED((p_22934_) -> {
++      ORDERED((p_220627_0_) -> {
+       }),
+       SHUFFLED(WeightedList::m_24720_);
+ 
+@@ -87,19 +_,19 @@
+    static enum RunningPolicy {
+       RUN_ONE {
+          public <E extends LivingEntity> void m_5730_(WeightedList<Behavior<? super E>> p_22967_, ServerLevel p_22968_, E p_22969_, long p_22970_) {
+-            p_22967_.m_24738_().filter((p_22965_) -> {
+-               return p_22965_.m_22536_() == Behavior.Status.STOPPED;
+-            }).filter((p_22963_) -> {
+-               return p_22963_.m_22554_(p_22968_, p_22969_, p_22970_);
++            p_22967_.m_24738_().filter((p_220634_0_) -> {
++               return p_220634_0_.m_22536_() == Behavior.Status.STOPPED;
++            }).filter((p_220633_4_) -> {
++               return p_220633_4_.m_22554_(p_22968_, p_22969_, p_22970_);
+             }).findFirst();
+          }
+       },
+       TRY_ALL {
+          public <E extends LivingEntity> void m_5730_(WeightedList<Behavior<? super E>> p_22982_, ServerLevel p_22983_, E p_22984_, long p_22985_) {
+-            p_22982_.m_24738_().filter((p_22980_) -> {
+-               return p_22980_.m_22536_() == Behavior.Status.STOPPED;
+-            }).forEach((p_22978_) -> {
+-               p_22978_.m_22554_(p_22983_, p_22984_, p_22985_);
++            p_22982_.m_24738_().filter((p_220632_0_) -> {
++               return p_220632_0_.m_22536_() == Behavior.Status.STOPPED;
++            }).forEach((p_220631_4_) -> {
++               p_220631_4_.m_22554_(p_22983_, p_22984_, p_22985_);
+             });
+          }
+       };

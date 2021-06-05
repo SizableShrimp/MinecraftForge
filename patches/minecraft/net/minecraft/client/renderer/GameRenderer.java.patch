@@ -1,61 +1,78 @@
 --- a/net/minecraft/client/renderer/GameRenderer.java
 +++ b/net/minecraft/client/renderer/GameRenderer.java
-@@ -135,6 +_,8 @@
-          this.func_175069_a(new ResourceLocation("shaders/post/spider.json"));
-       } else if (p_175066_1_ instanceof EndermanEntity) {
-          this.func_175069_a(new ResourceLocation("shaders/post/invert.json"));
+@@ -138,11 +_,13 @@
+          this.m_109128_(new ResourceLocation("shaders/post/spider.json"));
+       } else if (p_109107_ instanceof EnderMan) {
+          this.m_109128_(new ResourceLocation("shaders/post/invert.json"));
 +      } else {
-+         net.minecraftforge.client.ForgeHooksClient.loadEntityShader(p_175066_1_, this);
++         net.minecraftforge.client.ForgeHooksClient.loadEntityShader(p_109107_, this);
        }
  
     }
-@@ -310,7 +_,7 @@
+ 
+-   private void m_109128_(ResourceLocation p_109129_) {
++   public void m_109128_(ResourceLocation p_109129_) {
+       if (this.f_109050_ != null) {
+          this.f_109050_.close();
+       }
+@@ -252,8 +_,8 @@
+             Vec3 vec32 = vec3.m_82520_(vec31.f_82479_ * d0, vec31.f_82480_ * d0, vec31.f_82481_ * d0);
+             float f = 1.0F;
+             AABB aabb = entity.m_20191_().m_82369_(vec31.m_82490_(d0)).m_82377_(1.0D, 1.0D, 1.0D);
+-            EntityHitResult entityhitresult = ProjectileUtil.m_37287_(entity, vec3, vec32, aabb, (p_109137_) -> {
+-               return !p_109137_.m_5833_() && p_109137_.m_6087_();
++            EntityHitResult entityhitresult = ProjectileUtil.m_37287_(entity, vec3, vec32, aabb, (p_215312_0_) -> {
++               return !p_215312_0_.m_5833_() && p_215312_0_.m_6087_();
+             }, d1);
+             if (entityhitresult != null) {
+                Entity entity1 = entityhitresult.m_82443_();
+@@ -313,7 +_,7 @@
              d0 = d0 * 60.0D / 70.0D;
           }
  
 -         return d0;
-+         return net.minecraftforge.client.ForgeHooksClient.getFOVModifier(this, p_215311_1_, p_215311_2_, d0);
++         return net.minecraftforge.client.ForgeHooksClient.getFOVModifier(this, p_109142_, p_109143_, d0);
        }
     }
  
-@@ -439,6 +_,7 @@
-                RenderSystem.loadIdentity();
-                this.field_147707_d.func_148018_a(p_195458_1_);
-                RenderSystem.popMatrix();
-+               RenderSystem.enableTexture(); //FORGE: Fix MC-194675
+@@ -442,6 +_,7 @@
+                RenderSystem.m_69834_();
+                this.f_109050_.m_110023_(p_109094_);
+                RenderSystem.m_69867_();
++               RenderSystem.m_69493_(); //FORGE: Fix MC-194675
              }
  
-             this.field_78531_r.func_147110_a().func_147610_a(true);
-@@ -486,7 +_,7 @@
+             this.f_109059_.m_91385_().m_83947_(true);
+@@ -489,7 +_,7 @@
              }
-          } else if (this.field_78531_r.field_71462_r != null) {
+          } else if (this.f_109059_.f_91080_ != null) {
              try {
--               this.field_78531_r.field_71462_r.func_230430_a_(matrixstack, i, j, this.field_78531_r.func_193989_ak());
-+               net.minecraftforge.client.ForgeHooksClient.drawScreen(this.field_78531_r.field_71462_r, matrixstack, i, j, this.field_78531_r.func_193989_ak());
+-               this.f_109059_.f_91080_.m_6305_(posestack, i, j, this.f_109059_.m_91297_());
++               net.minecraftforge.client.ForgeHooksClient.drawScreen(this.f_109059_.f_91080_, posestack, i, j, this.f_109059_.m_91297_());
              } catch (Throwable throwable) {
-                CrashReport crashreport1 = CrashReport.func_85055_a(throwable, "Rendering screen");
-                CrashReportCategory crashreportcategory1 = crashreport1.func_85058_a("Screen render details");
-@@ -595,9 +_,16 @@
-       Matrix4f matrix4f = matrixstack.func_227866_c_().func_227870_a_();
-       this.func_228379_a_(matrix4f);
-       activerenderinfo.func_216772_a(this.field_78531_r.field_71441_e, (Entity)(this.field_78531_r.func_175606_aa() == null ? this.field_78531_r.field_71439_g : this.field_78531_r.func_175606_aa()), !this.field_78531_r.field_71474_y.func_243230_g().func_243192_a(), this.field_78531_r.field_71474_y.func_243230_g().func_243193_b(), p_228378_1_);
+                CrashReport crashreport1 = CrashReport.m_127521_(throwable, "Rendering screen");
+                CrashReportCategory crashreportcategory1 = crashreport1.m_127514_("Screen render details");
+@@ -598,9 +_,16 @@
+       Matrix4f matrix4f = posestack.m_85850_().m_85861_();
+       this.m_109111_(matrix4f);
+       camera.m_90575_(this.f_109059_.f_91073_, (Entity)(this.f_109059_.m_91288_() == null ? this.f_109059_.f_91074_ : this.f_109059_.m_91288_()), !this.f_109059_.f_91066_.m_92176_().m_90612_(), this.f_109059_.f_91066_.m_92176_().m_90613_(), p_109090_);
 +
-+      net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup cameraSetup = net.minecraftforge.client.ForgeHooksClient.onCameraSetup(this, activerenderinfo, p_228378_1_);
-+      activerenderinfo.setAnglesInternal(cameraSetup.getYaw(), cameraSetup.getPitch());
-+      p_228378_4_.func_227863_a_(Vector3f.field_229183_f_.func_229187_a_(cameraSetup.getRoll()));
++      net.minecraftforge.client.event.EntityViewRenderEvent.CameraSetup cameraSetup = net.minecraftforge.client.ForgeHooksClient.onCameraSetup(this, camera, p_109090_);
++      camera.setAnglesInternal(cameraSetup.getYaw(), cameraSetup.getPitch());
++      p_109092_.m_85845_(Vector3f.f_122227_.m_122240_(cameraSetup.getRoll()));
 +
-       p_228378_4_.func_227863_a_(Vector3f.field_229179_b_.func_229187_a_(activerenderinfo.func_216777_e()));
-       p_228378_4_.func_227863_a_(Vector3f.field_229181_d_.func_229187_a_(activerenderinfo.func_216778_f() + 180.0F));
-       this.field_78531_r.field_71438_f.func_228426_a_(p_228378_4_, p_228378_1_, p_228378_2_, flag, activerenderinfo, this, this.field_78513_d, matrix4f);
-+      this.field_78531_r.func_213239_aq().func_219895_b("forge_render_last");
-+      net.minecraftforge.client.ForgeHooksClient.dispatchRenderLast(this.field_78531_r.field_71438_f, p_228378_4_, p_228378_1_, matrix4f, p_228378_2_);
-       this.field_78531_r.func_213239_aq().func_219895_b("hand");
-       if (this.field_175074_C) {
-          RenderSystem.clear(256, Minecraft.field_142025_a);
-@@ -708,5 +_,10 @@
+       p_109092_.m_85845_(Vector3f.f_122223_.m_122240_(camera.m_90589_()));
+       p_109092_.m_85845_(Vector3f.f_122225_.m_122240_(camera.m_90590_() + 180.0F));
+       this.f_109059_.f_91060_.m_109599_(p_109092_, p_109090_, p_109091_, flag, camera, this, this.f_109074_, matrix4f);
++      this.f_109059_.m_91307_().m_6182_("forge_render_last");
++      net.minecraftforge.client.ForgeHooksClient.dispatchRenderLast(this.f_109059_.f_91060_, p_109092_, p_109090_, matrix4f, p_109091_);
+       this.f_109059_.m_91307_().m_6182_("hand");
+       if (this.f_109070_) {
+          RenderSystem.m_69421_(256, Minecraft.f_91002_);
+@@ -711,5 +_,10 @@
  
-    public OverlayTexture func_228385_m_() {
-       return this.field_228375_t_;
+    public OverlayTexture m_109155_() {
+       return this.f_109075_;
 +   }
 +
 +   @Override

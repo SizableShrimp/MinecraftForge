@@ -1,0 +1,25 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/SpikeConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/SpikeConfiguration.java
+@@ -9,14 +_,14 @@
+ import net.minecraft.world.level.levelgen.feature.SpikeFeature;
+ 
+ public class SpikeConfiguration implements FeatureConfiguration {
+-   public static final Codec<SpikeConfiguration> f_68099_ = RecordCodecBuilder.create((p_68115_) -> {
+-      return p_68115_.group(Codec.BOOL.fieldOf("crystal_invulnerable").orElse(false).forGetter((p_68121_) -> {
+-         return p_68121_.f_68100_;
+-      }), SpikeFeature.EndSpike.f_66872_.listOf().fieldOf("spikes").forGetter((p_68118_) -> {
+-         return p_68118_.f_68101_;
+-      }), BlockPos.f_121852_.optionalFieldOf("crystal_beam_target").forGetter((p_68113_) -> {
+-         return Optional.ofNullable(p_68113_.f_68102_);
+-      })).apply(p_68115_, SpikeConfiguration::new);
++   public static final Codec<SpikeConfiguration> f_68099_ = RecordCodecBuilder.create((p_236645_0_) -> {
++      return p_236645_0_.group(Codec.BOOL.fieldOf("crystal_invulnerable").orElse(false).forGetter((p_236648_0_) -> {
++         return p_236648_0_.f_68100_;
++      }), SpikeFeature.EndSpike.f_66872_.listOf().fieldOf("spikes").forGetter((p_236647_0_) -> {
++         return p_236647_0_.f_68101_;
++      }), BlockPos.f_121852_.optionalFieldOf("crystal_beam_target").forGetter((p_236646_0_) -> {
++         return Optional.ofNullable(p_236646_0_.f_68102_);
++      })).apply(p_236645_0_, SpikeConfiguration::new);
+    });
+    private final boolean f_68100_;
+    private final List<SpikeFeature.EndSpike> f_68101_;

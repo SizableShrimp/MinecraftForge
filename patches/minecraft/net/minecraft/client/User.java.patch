@@ -1,0 +1,60 @@
+--- a/net/minecraft/client/User.java
++++ b/net/minecraft/client/User.java
+@@ -18,8 +_,22 @@
+    private final String f_92536_;
+    private final String f_92537_;
+    private final User.Type f_92538_;
++   /** Forge: Cache of the local session's GameProfile properties. */
++   private com.mojang.authlib.properties.PropertyMap properties;
+ 
+    public User(String p_92540_, String p_92541_, String p_92542_, String p_92543_) {
++      if (p_92540_ == null || p_92540_.isEmpty()) {
++         p_92540_ = "MissingName";
++         p_92541_ = p_92542_ = "NotValid";
++         org.apache.logging.log4j.Logger logger = org.apache.logging.log4j.LogManager.getLogger(getClass().getName());
++         logger.log(org.apache.logging.log4j.Level.WARN, "=========================================================");
++         logger.log(org.apache.logging.log4j.Level.WARN, "WARNING!! the username was not set for this session, typically");
++         logger.log(org.apache.logging.log4j.Level.WARN, "this means you installed Forge incorrectly. We have set your");
++         logger.log(org.apache.logging.log4j.Level.WARN, "name to \"MissingName\" and your session to nothing. Please");
++         logger.log(org.apache.logging.log4j.Level.WARN, "check your installation and post a console log from the launcher");
++         logger.log(org.apache.logging.log4j.Level.WARN, "when asking for help!");
++         logger.log(org.apache.logging.log4j.Level.WARN, "=========================================================");
++      }
+       this.f_92535_ = p_92540_;
+       this.f_92536_ = p_92541_;
+       this.f_92537_ = p_92542_;
+@@ -45,19 +_,31 @@
+    public GameProfile m_92548_() {
+       try {
+          UUID uuid = UUIDTypeAdapter.fromString(this.m_92545_());
+-         return new GameProfile(uuid, this.m_92546_());
++         GameProfile ret = new GameProfile(uuid, this.m_92546_());    //Forge: Adds cached GameProfile properties to returned GameProfile.
++         if (properties != null) ret.getProperties().putAll(properties); // Helps to cut down on calls to the session service,
++         return ret;                                                     // which helps to fix MC-52974.
+       } catch (IllegalArgumentException illegalargumentexception) {
+          return new GameProfile((UUID)null, this.m_92546_());
+       }
+    }
+ 
++   //For internal use only. Modders should never need to use this.
++   public void setProperties(com.mojang.authlib.properties.PropertyMap properties) {
++       if (this.properties == null)
++           this.properties = properties;
++   }
++
++   public boolean hasCachedProperties() {
++       return properties != null;
++   }
++
+    @OnlyIn(Dist.CLIENT)
+    public static enum Type {
+       LEGACY("legacy"),
+       MOJANG("mojang");
+ 
+-      private static final Map<String, User.Type> f_92551_ = Arrays.stream(values()).collect(Collectors.toMap((p_92560_) -> {
+-         return p_92560_.f_92552_;
++      private static final Map<String, User.Type> f_92551_ = Arrays.stream(values()).collect(Collectors.toMap((p_199876_0_) -> {
++         return p_199876_0_.f_92552_;
+       }, Function.identity()));
+       private final String f_92552_;
+ 

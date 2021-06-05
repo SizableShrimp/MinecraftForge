@@ -1,0 +1,137 @@
+--- a/net/minecraft/client/renderer/item/ItemProperties.java
++++ b/net/minecraft/client/renderer/item/ItemProperties.java
+@@ -35,11 +_,11 @@
+    private static final Map<ResourceLocation, ItemPropertyFunction> f_117820_ = Maps.newHashMap();
+    private static final ResourceLocation f_117821_ = new ResourceLocation("damaged");
+    private static final ResourceLocation f_117822_ = new ResourceLocation("damage");
+-   private static final ItemPropertyFunction f_117823_ = (p_117896_, p_117897_, p_117898_) -> {
+-      return p_117896_.m_41768_() ? 1.0F : 0.0F;
++   private static final ItemPropertyFunction f_117823_ = (p_239434_0_, p_239434_1_, p_239434_2_) -> {
++      return p_239434_0_.m_41768_() ? 1.0F : 0.0F;
+    };
+-   private static final ItemPropertyFunction f_117824_ = (p_117892_, p_117893_, p_117894_) -> {
+-      return Mth.m_14036_((float)p_117892_.m_41773_() / (float)p_117892_.m_41776_(), 0.0F, 1.0F);
++   private static final ItemPropertyFunction f_117824_ = (p_239433_0_, p_239433_1_, p_239433_2_) -> {
++      return Mth.m_14036_((float)p_239433_0_.m_41773_() / (float)p_239433_0_.m_41776_(), 0.0F, 1.0F);
+    };
+    private static final Map<Item, Map<ResourceLocation, ItemPropertyFunction>> f_117825_ = Maps.newHashMap();
+ 
+@@ -48,8 +_,8 @@
+       return p_117842_;
+    }
+ 
+-   private static void m_117832_(Item p_117833_, ResourceLocation p_117834_, ItemPropertyFunction p_117835_) {
+-      f_117825_.computeIfAbsent(p_117833_, (p_117828_) -> {
++   public static void m_117832_(Item p_117833_, ResourceLocation p_117834_, ItemPropertyFunction p_117835_) {
++      f_117825_.computeIfAbsent(p_117833_, (p_239416_0_) -> {
+          return Maps.newHashMap();
+       }).put(p_117834_, p_117835_);
+    }
+@@ -76,24 +_,24 @@
+    }
+ 
+    static {
+-      m_117840_(new ResourceLocation("lefthanded"), (p_117888_, p_117889_, p_117890_) -> {
+-         return p_117890_ != null && p_117890_.m_5737_() != HumanoidArm.RIGHT ? 1.0F : 0.0F;
+-      });
+-      m_117840_(new ResourceLocation("cooldown"), (p_117884_, p_117885_, p_117886_) -> {
+-         return p_117886_ instanceof Player ? ((Player)p_117886_).m_36335_().m_41521_(p_117884_.m_41720_(), 0.0F) : 0.0F;
+-      });
+-      m_117840_(new ResourceLocation("custom_model_data"), (p_117880_, p_117881_, p_117882_) -> {
+-         return p_117880_.m_41782_() ? (float)p_117880_.m_41783_().m_128451_("CustomModelData") : 0.0F;
+-      });
+-      m_117832_(Items.f_42411_, new ResourceLocation("pull"), (p_117876_, p_117877_, p_117878_) -> {
+-         if (p_117878_ == null) {
++      m_117840_(new ResourceLocation("lefthanded"), (p_239432_0_, p_239432_1_, p_239432_2_) -> {
++         return p_239432_2_ != null && p_239432_2_.m_5737_() != HumanoidArm.RIGHT ? 1.0F : 0.0F;
++      });
++      m_117840_(new ResourceLocation("cooldown"), (p_239431_0_, p_239431_1_, p_239431_2_) -> {
++         return p_239431_2_ instanceof Player ? ((Player)p_239431_2_).m_36335_().m_41521_(p_239431_0_.m_41720_(), 0.0F) : 0.0F;
++      });
++      m_117840_(new ResourceLocation("custom_model_data"), (p_239430_0_, p_239430_1_, p_239430_2_) -> {
++         return p_239430_0_.m_41782_() ? (float)p_239430_0_.m_41783_().m_128451_("CustomModelData") : 0.0F;
++      });
++      m_117832_(Items.f_42411_, new ResourceLocation("pull"), (p_239429_0_, p_239429_1_, p_239429_2_) -> {
++         if (p_239429_2_ == null) {
+             return 0.0F;
+          } else {
+-            return p_117878_.m_21211_() != p_117876_ ? 0.0F : (float)(p_117876_.m_41779_() - p_117878_.m_21212_()) / 20.0F;
++            return p_239429_2_.m_21211_() != p_239429_0_ ? 0.0F : (float)(p_239429_0_.m_41779_() - p_239429_2_.m_21212_()) / 20.0F;
+          }
+       });
+-      m_117832_(Items.f_42411_, new ResourceLocation("pulling"), (p_117872_, p_117873_, p_117874_) -> {
+-         return p_117874_ != null && p_117874_.m_6117_() && p_117874_.m_21211_() == p_117872_ ? 1.0F : 0.0F;
++      m_117832_(Items.f_42411_, new ResourceLocation("pulling"), (p_239428_0_, p_239428_1_, p_239428_2_) -> {
++         return p_239428_2_ != null && p_239428_2_.m_6117_() && p_239428_2_.m_21211_() == p_239428_0_ ? 1.0F : 0.0F;
+       });
+       m_117832_(Items.f_42524_, new ResourceLocation("time"), new ItemPropertyFunction() {
+          private double f_117899_;
+@@ -220,43 +_,43 @@
+             return Math.atan2(p_117919_.m_7094_() - p_117920_.m_20189_(), p_117919_.m_7096_() - p_117920_.m_20185_());
+          }
+       });
+-      m_117832_(Items.f_42717_, new ResourceLocation("pull"), (p_117868_, p_117869_, p_117870_) -> {
+-         if (p_117870_ == null) {
++      m_117832_(Items.f_42717_, new ResourceLocation("pull"), (p_239427_0_, p_239427_1_, p_239427_2_) -> {
++         if (p_239427_2_ == null) {
+             return 0.0F;
+          } else {
+-            return CrossbowItem.m_40932_(p_117868_) ? 0.0F : (float)(p_117868_.m_41779_() - p_117870_.m_21212_()) / (float)CrossbowItem.m_40939_(p_117868_);
++            return CrossbowItem.m_40932_(p_239427_0_) ? 0.0F : (float)(p_239427_0_.m_41779_() - p_239427_2_.m_21212_()) / (float)CrossbowItem.m_40939_(p_239427_0_);
+          }
+       });
+-      m_117832_(Items.f_42717_, new ResourceLocation("pulling"), (p_117864_, p_117865_, p_117866_) -> {
+-         return p_117866_ != null && p_117866_.m_6117_() && p_117866_.m_21211_() == p_117864_ && !CrossbowItem.m_40932_(p_117864_) ? 1.0F : 0.0F;
+-      });
+-      m_117832_(Items.f_42717_, new ResourceLocation("charged"), (p_117860_, p_117861_, p_117862_) -> {
+-         return p_117862_ != null && CrossbowItem.m_40932_(p_117860_) ? 1.0F : 0.0F;
+-      });
+-      m_117832_(Items.f_42717_, new ResourceLocation("firework"), (p_117856_, p_117857_, p_117858_) -> {
+-         return p_117858_ != null && CrossbowItem.m_40932_(p_117856_) && CrossbowItem.m_40871_(p_117856_, Items.f_42688_) ? 1.0F : 0.0F;
+-      });
+-      m_117832_(Items.f_42741_, new ResourceLocation("broken"), (p_117852_, p_117853_, p_117854_) -> {
+-         return ElytraItem.m_41140_(p_117852_) ? 0.0F : 1.0F;
+-      });
+-      m_117832_(Items.f_42523_, new ResourceLocation("cast"), (p_117848_, p_117849_, p_117850_) -> {
+-         if (p_117850_ == null) {
++      m_117832_(Items.f_42717_, new ResourceLocation("pulling"), (p_239426_0_, p_239426_1_, p_239426_2_) -> {
++         return p_239426_2_ != null && p_239426_2_.m_6117_() && p_239426_2_.m_21211_() == p_239426_0_ && !CrossbowItem.m_40932_(p_239426_0_) ? 1.0F : 0.0F;
++      });
++      m_117832_(Items.f_42717_, new ResourceLocation("charged"), (p_239425_0_, p_239425_1_, p_239425_2_) -> {
++         return p_239425_2_ != null && CrossbowItem.m_40932_(p_239425_0_) ? 1.0F : 0.0F;
++      });
++      m_117832_(Items.f_42717_, new ResourceLocation("firework"), (p_239424_0_, p_239424_1_, p_239424_2_) -> {
++         return p_239424_2_ != null && CrossbowItem.m_40932_(p_239424_0_) && CrossbowItem.m_40871_(p_239424_0_, Items.f_42688_) ? 1.0F : 0.0F;
++      });
++      m_117832_(Items.f_42741_, new ResourceLocation("broken"), (p_239423_0_, p_239423_1_, p_239423_2_) -> {
++         return ElytraItem.m_41140_(p_239423_0_) ? 0.0F : 1.0F;
++      });
++      m_117832_(Items.f_42523_, new ResourceLocation("cast"), (p_239422_0_, p_239422_1_, p_239422_2_) -> {
++         if (p_239422_2_ == null) {
+             return 0.0F;
+          } else {
+-            boolean flag = p_117850_.m_21205_() == p_117848_;
+-            boolean flag1 = p_117850_.m_21206_() == p_117848_;
+-            if (p_117850_.m_21205_().m_41720_() instanceof FishingRodItem) {
++            boolean flag = p_239422_2_.m_21205_() == p_239422_0_;
++            boolean flag1 = p_239422_2_.m_21206_() == p_239422_0_;
++            if (p_239422_2_.m_21205_().m_41720_() instanceof FishingRodItem) {
+                flag1 = false;
+             }
+ 
+-            return (flag || flag1) && p_117850_ instanceof Player && ((Player)p_117850_).f_36083_ != null ? 1.0F : 0.0F;
++            return (flag || flag1) && p_239422_2_ instanceof Player && ((Player)p_239422_2_).f_36083_ != null ? 1.0F : 0.0F;
+          }
+       });
+-      m_117832_(Items.f_42740_, new ResourceLocation("blocking"), (p_117844_, p_117845_, p_117846_) -> {
+-         return p_117846_ != null && p_117846_.m_6117_() && p_117846_.m_21211_() == p_117844_ ? 1.0F : 0.0F;
++      m_117832_(Items.f_42740_, new ResourceLocation("blocking"), (p_239421_0_, p_239421_1_, p_239421_2_) -> {
++         return p_239421_2_ != null && p_239421_2_.m_6117_() && p_239421_2_.m_21211_() == p_239421_0_ ? 1.0F : 0.0F;
+       });
+-      m_117832_(Items.f_42713_, new ResourceLocation("throwing"), (p_117837_, p_117838_, p_117839_) -> {
+-         return p_117839_ != null && p_117839_.m_6117_() && p_117839_.m_21211_() == p_117837_ ? 1.0F : 0.0F;
++      m_117832_(Items.f_42713_, new ResourceLocation("throwing"), (p_239419_0_, p_239419_1_, p_239419_2_) -> {
++         return p_239419_2_ != null && p_239419_2_.m_6117_() && p_239419_2_.m_21211_() == p_239419_0_ ? 1.0F : 0.0F;
+       });
+    }
+ 

@@ -1,0 +1,125 @@
+--- a/net/minecraft/client/gui/screens/worldselection/WorldGenSettingsComponent.java
++++ b/net/minecraft/client/gui/screens/worldselection/WorldGenSettingsComponent.java
+@@ -85,15 +_,15 @@
+       this.f_101387_ = p_101430_.f_96543_;
+       this.f_101388_ = new EditBox(this.f_101386_, this.f_101387_ / 2 - 100, 60, 200, 20, new TranslatableComponent("selectWorld.enterSeed"));
+       this.f_101388_.m_94144_(m_101447_(this.f_101396_));
+-      this.f_101388_.m_94151_((p_101465_) -> {
++      this.f_101388_.m_94151_((p_239058_1_) -> {
+          this.f_101396_ = this.m_101471_();
+       });
+       p_101430_.m_7787_(this.f_101388_);
+       int i = this.f_101387_ / 2 - 155;
+       int j = this.f_101387_ / 2 + 5;
+-      this.f_101389_ = p_101430_.m_7082_(new Button(i, 100, 150, 20, new TranslatableComponent("selectWorld.mapFeatures"), (p_101458_) -> {
++      this.f_101389_ = p_101430_.m_7082_(new Button(i, 100, 150, 20, new TranslatableComponent("selectWorld.mapFeatures"), (p_239056_1_) -> {
+          this.f_101394_ = this.f_101394_.m_64672_();
+-         p_101458_.m_93687_(250);
++         p_239056_1_.m_93687_(250);
+       }) {
+          public Component m_6035_() {
+             return CommonComponents.m_130663_(super.m_6035_(), WorldGenSettingsComponent.this.f_101394_.m_64657_());
+@@ -104,7 +_,7 @@
+          }
+       });
+       this.f_101389_.f_93624_ = false;
+-      this.f_101390_ = p_101430_.m_7082_(new Button(j, 100, 150, 20, new TranslatableComponent("selectWorld.mapType"), (p_101439_) -> {
++      this.f_101390_ = p_101430_.m_7082_(new Button(j, 100, 150, 20, new TranslatableComponent("selectWorld.mapType"), (p_239050_2_) -> {
+          while(true) {
+             if (this.f_101395_.isPresent()) {
+                int k = WorldPreset.f_101508_.indexOf(this.f_101395_.get()) + 1;
+@@ -121,7 +_,7 @@
+             }
+ 
+             p_101430_.m_100964_();
+-            p_101439_.m_93687_(250);
++            p_239050_2_.m_93687_(250);
+             return;
+          }
+       }) {
+@@ -135,24 +_,25 @@
+       });
+       this.f_101390_.f_93624_ = false;
+       this.f_101390_.f_93623_ = this.f_101395_.isPresent();
+-      this.f_101391_ = p_101430_.m_7082_(new Button(j, 120, 150, 20, new TranslatableComponent("selectWorld.customizeType"), (p_101414_) -> {
++      this.f_101391_ = p_101430_.m_7082_(new Button(j, 120, 150, 20, new TranslatableComponent("selectWorld.customizeType"), (p_239044_3_) -> {
+          WorldPreset.PresetEditor worldpreset$preseteditor = WorldPreset.f_101509_.get(this.f_101395_);
++         worldpreset$preseteditor = net.minecraftforge.client.ForgeHooksClient.getBiomeGeneratorTypeScreenFactory(this.f_101395_, worldpreset$preseteditor);
+          if (worldpreset$preseteditor != null) {
+             p_101431_.m_91152_(worldpreset$preseteditor.m_101642_(p_101430_, this.f_101394_));
+          }
+ 
+       }));
+       this.f_101391_.f_93624_ = false;
+-      this.f_101380_ = p_101430_.m_7082_(new Button(i, 151, 150, 20, new TranslatableComponent("selectWorld.bonusItems"), (p_101428_) -> {
++      this.f_101380_ = p_101430_.m_7082_(new Button(i, 151, 150, 20, new TranslatableComponent("selectWorld.bonusItems"), (p_239047_1_) -> {
+          this.f_101394_ = this.f_101394_.m_64673_();
+-         p_101428_.m_93687_(250);
++         p_239047_1_.m_93687_(250);
+       }) {
+          public Component m_6035_() {
+             return CommonComponents.m_130663_(super.m_6035_(), WorldGenSettingsComponent.this.f_101394_.m_64660_() && !p_101430_.f_100845_);
+          }
+       });
+       this.f_101380_.f_93624_ = false;
+-      this.f_101392_ = p_101430_.m_7082_(new Button(i, 185, 150, 20, new TranslatableComponent("selectWorld.import_worldgen_settings"), (p_101436_) -> {
++      this.f_101392_ = p_101430_.m_7082_(new Button(i, 185, 150, 20, new TranslatableComponent("selectWorld.import_worldgen_settings"), (p_239049_3_) -> {
+          TranslatableComponent translatablecomponent = new TranslatableComponent("selectWorld.import_worldgen_settings.select_file");
+          String s = TinyFileDialogs.tinyfd_openFileDialog(translatablecomponent.getString(), (CharSequence)null, (PointerBuffer)null, (CharSequence)null, false);
+          if (s != null) {
+@@ -195,16 +_,16 @@
+ 
+             serverresources.close();
+             Lifecycle lifecycle = dataresult.lifecycle();
+-            dataresult.resultOrPartial(f_101381_::error).ifPresent((p_101426_) -> {
+-               BooleanConsumer booleanconsumer = (p_101420_) -> {
++            dataresult.resultOrPartial(f_101381_::error).ifPresent((p_239046_5_) -> {
++               BooleanConsumer booleanconsumer = (p_239045_5_) -> {
+                   p_101431_.m_91152_(p_101430_);
+-                  if (p_101420_) {
+-                     this.m_101442_(registryaccess$registryholder, p_101426_);
++                  if (p_239045_5_) {
++                     this.m_101442_(registryaccess$registryholder, p_239046_5_);
+                   }
+ 
+                };
+                if (lifecycle == Lifecycle.stable()) {
+-                  this.m_101442_(registryaccess$registryholder, p_101426_);
++                  this.m_101442_(registryaccess$registryholder, p_239046_5_);
+                } else if (lifecycle == Lifecycle.experimental()) {
+                   p_101431_.m_91152_(new ConfirmScreen(booleanconsumer, new TranslatableComponent("selectWorld.import_worldgen_settings.experimental.title"), new TranslatableComponent("selectWorld.import_worldgen_settings.experimental.question")));
+                } else {
+@@ -243,7 +_,7 @@
+ 
+    }
+ 
+-   protected void m_101404_(WorldGenSettings p_101405_) {
++   public void m_101404_(WorldGenSettings p_101405_) {
+       this.f_101394_ = p_101405_;
+    }
+ 
+@@ -295,7 +_,7 @@
+       } else {
+          this.f_101389_.f_93624_ = p_101467_;
+          this.f_101380_.f_93624_ = p_101467_;
+-         this.f_101391_.f_93624_ = p_101467_ && WorldPreset.f_101509_.containsKey(this.f_101395_);
++         this.f_101391_.f_93624_ = p_101467_ && (WorldPreset.f_101509_.containsKey(this.f_101395_) || net.minecraftforge.client.ForgeHooksClient.hasBiomeGeneratorSettingsOptionsScreen(this.f_101395_));
+          this.f_101392_.f_93624_ = p_101467_;
+       }
+ 
+@@ -310,11 +_,11 @@
+       RegistryAccess.RegistryHolder registryaccess$registryholder = RegistryAccess.m_123086_();
+       RegistryWriteOps<JsonElement> registrywriteops = RegistryWriteOps.m_135767_(JsonOps.INSTANCE, this.f_101393_);
+       RegistryReadOps<JsonElement> registryreadops = RegistryReadOps.m_135651_(JsonOps.INSTANCE, p_101453_.m_136178_(), registryaccess$registryholder);
+-      DataResult<WorldGenSettings> dataresult = WorldGenSettings.f_64600_.encodeStart(registrywriteops, this.f_101394_).flatMap((p_101451_) -> {
+-         return WorldGenSettings.f_64600_.parse(registryreadops, p_101451_);
++      DataResult<WorldGenSettings> dataresult = WorldGenSettings.f_64600_.encodeStart(registrywriteops, this.f_101394_).flatMap((p_243446_1_) -> {
++         return WorldGenSettings.f_64600_.parse(registryreadops, p_243446_1_);
+       });
+-      dataresult.resultOrPartial(Util.m_137489_("Error parsing worldgen settings after loading data packs: ", f_101381_::error)).ifPresent((p_101463_) -> {
+-         this.f_101394_ = p_101463_;
++      dataresult.resultOrPartial(Util.m_137489_("Error parsing worldgen settings after loading data packs: ", f_101381_::error)).ifPresent((p_243448_2_) -> {
++         this.f_101394_ = p_243448_2_;
+          this.f_101393_ = registryaccess$registryholder;
+       });
+    }

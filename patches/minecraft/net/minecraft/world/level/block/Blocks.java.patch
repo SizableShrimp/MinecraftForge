@@ -1,0 +1,316 @@
+--- a/net/minecraft/world/level/block/Blocks.java
++++ b/net/minecraft/world/level/block/Blocks.java
+@@ -31,6 +_,7 @@
+ import net.minecraft.world.level.material.Material;
+ import net.minecraft.world.level.material.MaterialColor;
+ 
++@net.minecraftforge.registries.ObjectHolder("minecraft")
+ public class Blocks {
+    public static final Block f_50016_ = m_50795_("air", new AirBlock(BlockBehaviour.Properties.m_60939_(Material.f_76296_).m_60910_().m_60993_().m_60996_()));
+    public static final Block f_50069_ = m_50795_("stone", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76409_).m_60999_().m_60913_(1.5F, 6.0F)));
+@@ -59,7 +_,7 @@
+    public static final Block f_50751_ = m_50795_("dark_oak_sapling", new SaplingBlock(new DarkOakTreeGrower(), BlockBehaviour.Properties.m_60939_(Material.f_76300_).m_60910_().m_60977_().m_60966_().m_60918_(SoundType.f_56740_)));
+    public static final Block f_50752_ = m_50795_("bedrock", new Block(BlockBehaviour.Properties.m_60939_(Material.f_76278_).m_60913_(-1.0F, 3600000.0F).m_60993_().m_60922_(Blocks::m_50778_)));
+    public static final Block f_49990_ = m_50795_("water", new LiquidBlock(Fluids.f_76193_, BlockBehaviour.Properties.m_60939_(Material.f_76305_).m_60910_().m_60978_(100.0F).m_60993_()));
+-   public static final Block f_49991_ = m_50795_("lava", new LiquidBlock(Fluids.f_76195_, BlockBehaviour.Properties.m_60939_(Material.f_76307_).m_60910_().m_60977_().m_60978_(100.0F).m_60953_((p_50757_) -> {
++   public static final Block f_49991_ = m_50795_("lava", new LiquidBlock(Fluids.f_76195_, BlockBehaviour.Properties.m_60939_(Material.f_76307_).m_60910_().m_60977_().m_60978_(100.0F).m_60953_((p_235418_0_) -> {
+       return 15;
+    }).m_60993_()));
+    public static final Block f_49992_ = m_50795_("sand", new SandBlock(14406560, BlockBehaviour.Properties.m_60944_(Material.f_76317_, MaterialColor.f_76400_).m_60978_(0.5F).m_60918_(SoundType.f_56746_)));
+@@ -125,7 +_,7 @@
+    public static final Block f_50027_ = m_50795_("green_bed", m_50764_(DyeColor.GREEN));
+    public static final Block f_50028_ = m_50795_("red_bed", m_50764_(DyeColor.RED));
+    public static final Block f_50029_ = m_50795_("black_bed", m_50764_(DyeColor.BLACK));
+-   public static final Block f_50030_ = m_50795_("powered_rail", new PoweredRailBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60978_(0.7F).m_60918_(SoundType.f_56743_)));
++   public static final Block f_50030_ = m_50795_("powered_rail", new PoweredRailBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60978_(0.7F).m_60918_(SoundType.f_56743_), true));
+    public static final Block f_50031_ = m_50795_("detector_rail", new DetectorRailBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60978_(0.7F).m_60918_(SoundType.f_56743_)));
+    public static final Block f_50032_ = m_50795_("sticky_piston", m_50798_(true));
+    public static final Block f_50033_ = m_50795_("cobweb", new WebBlock(BlockBehaviour.Properties.m_60939_(Material.f_76311_).m_60910_().m_60999_().m_60978_(4.0F)));
+@@ -166,7 +_,7 @@
+    public static final Block f_50121_ = m_50795_("cornflower", new FlowerBlock(MobEffects.f_19603_, 6, BlockBehaviour.Properties.m_60939_(Material.f_76300_).m_60910_().m_60966_().m_60918_(SoundType.f_56740_)));
+    public static final Block f_50070_ = m_50795_("wither_rose", new WitherRoseBlock(MobEffects.f_19615_, BlockBehaviour.Properties.m_60939_(Material.f_76300_).m_60910_().m_60966_().m_60918_(SoundType.f_56740_)));
+    public static final Block f_50071_ = m_50795_("lily_of_the_valley", new FlowerBlock(MobEffects.f_19614_, 12, BlockBehaviour.Properties.m_60939_(Material.f_76300_).m_60910_().m_60966_().m_60918_(SoundType.f_56740_)));
+-   public static final Block f_50072_ = m_50795_("brown_mushroom", new MushroomBlock(BlockBehaviour.Properties.m_60944_(Material.f_76300_, MaterialColor.f_76362_).m_60910_().m_60977_().m_60966_().m_60918_(SoundType.f_56740_).m_60953_((p_50755_) -> {
++   public static final Block f_50072_ = m_50795_("brown_mushroom", new MushroomBlock(BlockBehaviour.Properties.m_60944_(Material.f_76300_, MaterialColor.f_76362_).m_60910_().m_60977_().m_60966_().m_60918_(SoundType.f_56740_).m_60953_((p_235417_0_) -> {
+       return 1;
+    }).m_60982_(Blocks::m_50774_)));
+    public static final Block f_50073_ = m_50795_("red_mushroom", new MushroomBlock(BlockBehaviour.Properties.m_60944_(Material.f_76300_, MaterialColor.f_76364_).m_60910_().m_60977_().m_60966_().m_60918_(SoundType.f_56740_).m_60982_(Blocks::m_50774_)));
+@@ -177,16 +_,16 @@
+    public static final Block f_50078_ = m_50795_("bookshelf", new Block(BlockBehaviour.Properties.m_60939_(Material.f_76320_).m_60978_(1.5F).m_60918_(SoundType.f_56736_)));
+    public static final Block f_50079_ = m_50795_("mossy_cobblestone", new Block(BlockBehaviour.Properties.m_60939_(Material.f_76278_).m_60999_().m_60913_(2.0F, 6.0F)));
+    public static final Block f_50080_ = m_50795_("obsidian", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76365_).m_60999_().m_60913_(50.0F, 1200.0F)));
+-   public static final Block f_50081_ = m_50795_("torch", new TorchBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60966_().m_60953_((p_50892_) -> {
++   public static final Block f_50081_ = m_50795_("torch", new TorchBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60966_().m_60953_((p_235470_0_) -> {
+       return 14;
+    }).m_60918_(SoundType.f_56736_), ParticleTypes.f_123744_));
+-   public static final Block f_50082_ = m_50795_("wall_torch", new WallTorchBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60966_().m_60953_((p_50890_) -> {
++   public static final Block f_50082_ = m_50795_("wall_torch", new WallTorchBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60966_().m_60953_((p_235469_0_) -> {
+       return 14;
+    }).m_60918_(SoundType.f_56736_).m_60916_(f_50081_), ParticleTypes.f_123744_));
+-   public static final Block f_50083_ = m_50795_("fire", new FireBlock(BlockBehaviour.Properties.m_60944_(Material.f_76309_, MaterialColor.f_76402_).m_60910_().m_60966_().m_60953_((p_50888_) -> {
++   public static final Block f_50083_ = m_50795_("fire", new FireBlock(BlockBehaviour.Properties.m_60944_(Material.f_76309_, MaterialColor.f_76402_).m_60910_().m_60966_().m_60953_((p_235468_0_) -> {
+       return 15;
+    }).m_60918_(SoundType.f_56745_)));
+-   public static final Block f_50084_ = m_50795_("soul_fire", new SoulFireBlock(BlockBehaviour.Properties.m_60944_(Material.f_76309_, MaterialColor.f_76415_).m_60910_().m_60966_().m_60953_((p_50886_) -> {
++   public static final Block f_50084_ = m_50795_("soul_fire", new SoulFireBlock(BlockBehaviour.Properties.m_60944_(Material.f_76309_, MaterialColor.f_76415_).m_60910_().m_60966_().m_60953_((p_235467_0_) -> {
+       return 10;
+    }).m_60918_(SoundType.f_56745_)));
+    public static final Block f_50085_ = m_50795_("spawner", new SpawnerBlock(BlockBehaviour.Properties.m_60939_(Material.f_76278_).m_60999_().m_60978_(5.0F).m_60918_(SoundType.f_56743_).m_60955_()));
+@@ -231,8 +_,8 @@
+    public static final Block f_50123_ = m_50795_("redstone_wall_torch", new RedstoneWallTorchBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60966_().m_60953_(m_50759_(7)).m_60918_(SoundType.f_56736_).m_60916_(f_50174_)));
+    public static final Block f_50124_ = m_50795_("stone_button", new StoneButtonBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60978_(0.5F)));
+    public static final Block f_50125_ = m_50795_("snow", new SnowLayerBlock(BlockBehaviour.Properties.m_60939_(Material.f_76308_).m_60977_().m_60978_(0.1F).m_60999_().m_60918_(SoundType.f_56747_)));
+-   public static final Block f_50126_ = m_50795_("ice", new IceBlock(BlockBehaviour.Properties.m_60939_(Material.f_76276_).m_60911_(0.98F).m_60977_().m_60978_(0.5F).m_60918_(SoundType.f_56744_).m_60955_().m_60922_((p_50849_, p_50850_, p_50851_, p_50852_) -> {
+-      return p_50852_ == EntityType.f_20514_;
++   public static final Block f_50126_ = m_50795_("ice", new IceBlock(BlockBehaviour.Properties.m_60939_(Material.f_76276_).m_60911_(0.98F).m_60977_().m_60978_(0.5F).m_60918_(SoundType.f_56744_).m_60955_().m_60922_((p_235450_0_, p_235450_1_, p_235450_2_, p_235450_3_) -> {
++      return p_235450_3_ == EntityType.f_20514_;
+    })));
+    public static final Block f_50127_ = m_50795_("snow_block", new Block(BlockBehaviour.Properties.m_60939_(Material.f_76280_).m_60999_().m_60978_(0.2F).m_60918_(SoundType.f_56747_)));
+    public static final Block f_50128_ = m_50795_("cactus", new CactusBlock(BlockBehaviour.Properties.m_60939_(Material.f_76277_).m_60977_().m_60978_(0.4F).m_60918_(SoundType.f_56745_)));
+@@ -246,20 +_,20 @@
+    public static final Block f_50136_ = m_50795_("soul_soil", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76314_, MaterialColor.f_76362_).m_60978_(0.5F).m_60918_(SoundType.f_56717_)));
+    public static final Block f_50137_ = m_50795_("basalt", new RotatedPillarBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76365_).m_60999_().m_60913_(1.25F, 4.2F).m_60918_(SoundType.f_56718_)));
+    public static final Block f_50138_ = m_50795_("polished_basalt", new RotatedPillarBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76365_).m_60999_().m_60913_(1.25F, 4.2F).m_60918_(SoundType.f_56718_)));
+-   public static final Block f_50139_ = m_50795_("soul_torch", new TorchBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60966_().m_60953_((p_50884_) -> {
++   public static final Block f_50139_ = m_50795_("soul_torch", new TorchBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60966_().m_60953_((p_235466_0_) -> {
+       return 10;
+    }).m_60918_(SoundType.f_56736_), ParticleTypes.f_123745_));
+-   public static final Block f_50140_ = m_50795_("soul_wall_torch", new WallTorchBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60966_().m_60953_((p_50882_) -> {
++   public static final Block f_50140_ = m_50795_("soul_wall_torch", new WallTorchBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_().m_60966_().m_60953_((p_235465_0_) -> {
+       return 10;
+    }).m_60918_(SoundType.f_56736_).m_60916_(f_50139_), ParticleTypes.f_123745_));
+-   public static final Block f_50141_ = m_50795_("glowstone", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76275_, MaterialColor.f_76400_).m_60978_(0.3F).m_60918_(SoundType.f_56744_).m_60953_((p_50880_) -> {
++   public static final Block f_50141_ = m_50795_("glowstone", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76275_, MaterialColor.f_76400_).m_60978_(0.3F).m_60918_(SoundType.f_56744_).m_60953_((p_235464_0_) -> {
+       return 15;
+    })));
+-   public static final Block f_50142_ = m_50795_("nether_portal", new NetherPortalBlock(BlockBehaviour.Properties.m_60939_(Material.f_76298_).m_60910_().m_60977_().m_60978_(-1.0F).m_60918_(SoundType.f_56744_).m_60953_((p_50878_) -> {
++   public static final Block f_50142_ = m_50795_("nether_portal", new NetherPortalBlock(BlockBehaviour.Properties.m_60939_(Material.f_76298_).m_60910_().m_60977_().m_60978_(-1.0F).m_60918_(SoundType.f_56744_).m_60953_((p_235463_0_) -> {
+       return 11;
+    })));
+    public static final Block f_50143_ = m_50795_("carved_pumpkin", new CarvedPumpkinBlock(BlockBehaviour.Properties.m_60944_(Material.f_76285_, MaterialColor.f_76413_).m_60978_(1.0F).m_60918_(SoundType.f_56736_).m_60922_(Blocks::m_50809_)));
+-   public static final Block f_50144_ = m_50795_("jack_o_lantern", new CarvedPumpkinBlock(BlockBehaviour.Properties.m_60944_(Material.f_76285_, MaterialColor.f_76413_).m_60978_(1.0F).m_60918_(SoundType.f_56736_).m_60953_((p_50876_) -> {
++   public static final Block f_50144_ = m_50795_("jack_o_lantern", new CarvedPumpkinBlock(BlockBehaviour.Properties.m_60944_(Material.f_76285_, MaterialColor.f_76413_).m_60978_(1.0F).m_60918_(SoundType.f_56736_).m_60953_((p_235462_0_) -> {
+       return 15;
+    }).m_60922_(Blocks::m_50809_)));
+    public static final Block f_50145_ = m_50795_("cake", new CakeBlock(BlockBehaviour.Properties.m_60939_(Material.f_76287_).m_60978_(0.5F).m_60918_(SoundType.f_56745_)));
+@@ -318,25 +_,25 @@
+    public static final Block f_50199_ = m_50795_("nether_brick_stairs", new StairBlock(f_50197_.m_49966_(), BlockBehaviour.Properties.m_60926_(f_50197_)));
+    public static final Block f_50200_ = m_50795_("nether_wart", new NetherWartBlock(BlockBehaviour.Properties.m_60944_(Material.f_76300_, MaterialColor.f_76364_).m_60910_().m_60977_().m_60918_(SoundType.f_56761_)));
+    public static final Block f_50201_ = m_50795_("enchanting_table", new EnchantmentTableBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76364_).m_60999_().m_60913_(5.0F, 1200.0F)));
+-   public static final Block f_50255_ = m_50795_("brewing_stand", new BrewingStandBlock(BlockBehaviour.Properties.m_60939_(Material.f_76279_).m_60999_().m_60978_(0.5F).m_60953_((p_50874_) -> {
++   public static final Block f_50255_ = m_50795_("brewing_stand", new BrewingStandBlock(BlockBehaviour.Properties.m_60939_(Material.f_76279_).m_60999_().m_60978_(0.5F).m_60953_((p_235461_0_) -> {
+       return 1;
+    }).m_60955_()));
+    public static final Block f_50256_ = m_50795_("cauldron", new CauldronBlock(BlockBehaviour.Properties.m_60944_(Material.f_76279_, MaterialColor.f_76409_).m_60999_().m_60978_(2.0F).m_60955_()));
+-   public static final Block f_50257_ = m_50795_("end_portal", new EndPortalBlock(BlockBehaviour.Properties.m_60944_(Material.f_76298_, MaterialColor.f_76365_).m_60910_().m_60953_((p_50872_) -> {
++   public static final Block f_50257_ = m_50795_("end_portal", new EndPortalBlock(BlockBehaviour.Properties.m_60944_(Material.f_76298_, MaterialColor.f_76365_).m_60910_().m_60953_((p_235460_0_) -> {
+       return 15;
+    }).m_60913_(-1.0F, 3600000.0F).m_60993_()));
+-   public static final Block f_50258_ = m_50795_("end_portal_frame", new EndPortalFrameBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76363_).m_60918_(SoundType.f_56744_).m_60953_((p_50870_) -> {
++   public static final Block f_50258_ = m_50795_("end_portal_frame", new EndPortalFrameBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76363_).m_60918_(SoundType.f_56744_).m_60953_((p_235459_0_) -> {
+       return 1;
+    }).m_60913_(-1.0F, 3600000.0F).m_60993_()));
+    public static final Block f_50259_ = m_50795_("end_stone", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76400_).m_60999_().m_60913_(3.0F, 9.0F)));
+-   public static final Block f_50260_ = m_50795_("dragon_egg", new DragonEggBlock(BlockBehaviour.Properties.m_60944_(Material.f_76286_, MaterialColor.f_76365_).m_60913_(3.0F, 9.0F).m_60953_((p_50868_) -> {
++   public static final Block f_50260_ = m_50795_("dragon_egg", new DragonEggBlock(BlockBehaviour.Properties.m_60944_(Material.f_76286_, MaterialColor.f_76365_).m_60913_(3.0F, 9.0F).m_60953_((p_235458_0_) -> {
+       return 1;
+    }).m_60955_()));
+    public static final Block f_50261_ = m_50795_("redstone_lamp", new RedstoneLampBlock(BlockBehaviour.Properties.m_60939_(Material.f_76312_).m_60953_(m_50759_(15)).m_60978_(0.3F).m_60918_(SoundType.f_56744_).m_60922_(Blocks::m_50809_)));
+    public static final Block f_50262_ = m_50795_("cocoa", new CocoaBlock(BlockBehaviour.Properties.m_60939_(Material.f_76300_).m_60977_().m_60913_(0.2F, 3.0F).m_60918_(SoundType.f_56736_).m_60955_()));
+    public static final Block f_50263_ = m_50795_("sandstone_stairs", new StairBlock(f_50062_.m_49966_(), BlockBehaviour.Properties.m_60926_(f_50062_)));
+    public static final Block f_50264_ = m_50795_("emerald_ore", new OreBlock(BlockBehaviour.Properties.m_60939_(Material.f_76278_).m_60999_().m_60913_(3.0F, 3.0F)));
+-   public static final Block f_50265_ = m_50795_("ender_chest", new EnderChestBlock(BlockBehaviour.Properties.m_60939_(Material.f_76278_).m_60999_().m_60913_(22.5F, 600.0F).m_60953_((p_50866_) -> {
++   public static final Block f_50265_ = m_50795_("ender_chest", new EnderChestBlock(BlockBehaviour.Properties.m_60939_(Material.f_76278_).m_60999_().m_60913_(22.5F, 600.0F).m_60953_((p_235457_0_) -> {
+       return 7;
+    })));
+    public static final Block f_50266_ = m_50795_("tripwire_hook", new TripWireHookBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60910_()));
+@@ -346,7 +_,7 @@
+    public static final Block f_50270_ = m_50795_("birch_stairs", new StairBlock(f_50742_.m_49966_(), BlockBehaviour.Properties.m_60926_(f_50742_)));
+    public static final Block f_50271_ = m_50795_("jungle_stairs", new StairBlock(f_50743_.m_49966_(), BlockBehaviour.Properties.m_60926_(f_50743_)));
+    public static final Block f_50272_ = m_50795_("command_block", new CommandBlock(BlockBehaviour.Properties.m_60944_(Material.f_76279_, MaterialColor.f_76362_).m_60999_().m_60913_(-1.0F, 3600000.0F).m_60993_()));
+-   public static final Block f_50273_ = m_50795_("beacon", new BeaconBlock(BlockBehaviour.Properties.m_60944_(Material.f_76275_, MaterialColor.f_76367_).m_60978_(3.0F).m_60953_((p_50864_) -> {
++   public static final Block f_50273_ = m_50795_("beacon", new BeaconBlock(BlockBehaviour.Properties.m_60944_(Material.f_76275_, MaterialColor.f_76367_).m_60978_(3.0F).m_60953_((p_235456_0_) -> {
+       return 15;
+    }).m_60955_().m_60924_(Blocks::m_50805_)));
+    public static final Block f_50274_ = m_50795_("cobblestone_wall", new WallBlock(BlockBehaviour.Properties.m_60926_(f_50652_)));
+@@ -459,7 +_,7 @@
+    public static final Block f_50383_ = m_50795_("prismarine_slab", new SlabBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76421_).m_60999_().m_60913_(1.5F, 6.0F)));
+    public static final Block f_50384_ = m_50795_("prismarine_brick_slab", new SlabBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76367_).m_60999_().m_60913_(1.5F, 6.0F)));
+    public static final Block f_50385_ = m_50795_("dark_prismarine_slab", new SlabBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76367_).m_60999_().m_60913_(1.5F, 6.0F)));
+-   public static final Block f_50386_ = m_50795_("sea_lantern", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76275_, MaterialColor.f_76412_).m_60978_(0.3F).m_60918_(SoundType.f_56744_).m_60953_((p_50862_) -> {
++   public static final Block f_50386_ = m_50795_("sea_lantern", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76275_, MaterialColor.f_76412_).m_60978_(0.3F).m_60918_(SoundType.f_56744_).m_60953_((p_235455_0_) -> {
+       return 15;
+    })));
+    public static final Block f_50335_ = m_50795_("hay_block", new HayBlock(BlockBehaviour.Properties.m_60944_(Material.f_76315_, MaterialColor.f_76416_).m_60978_(0.5F).m_60918_(SoundType.f_56740_)));
+@@ -562,7 +_,7 @@
+    public static final Block f_50486_ = m_50795_("jungle_door", new DoorBlock(BlockBehaviour.Properties.m_60944_(Material.f_76320_, f_50743_.m_60590_()).m_60978_(3.0F).m_60918_(SoundType.f_56736_).m_60955_()));
+    public static final Block f_50487_ = m_50795_("acacia_door", new DoorBlock(BlockBehaviour.Properties.m_60944_(Material.f_76320_, f_50744_.m_60590_()).m_60978_(3.0F).m_60918_(SoundType.f_56736_).m_60955_()));
+    public static final Block f_50488_ = m_50795_("dark_oak_door", new DoorBlock(BlockBehaviour.Properties.m_60944_(Material.f_76320_, f_50745_.m_60590_()).m_60978_(3.0F).m_60918_(SoundType.f_56736_).m_60955_()));
+-   public static final Block f_50489_ = m_50795_("end_rod", new EndRodBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60966_().m_60953_((p_50860_) -> {
++   public static final Block f_50489_ = m_50795_("end_rod", new EndRodBlock(BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60966_().m_60953_((p_235454_0_) -> {
+       return 14;
+    }).m_60918_(SoundType.f_56736_).m_60955_()));
+    public static final Block f_50490_ = m_50795_("chorus_plant", new ChorusPlantBlock(BlockBehaviour.Properties.m_60944_(Material.f_76300_, MaterialColor.f_76422_).m_60978_(0.4F).m_60918_(SoundType.f_56736_).m_60955_()));
+@@ -573,18 +_,18 @@
+    public static final Block f_50443_ = m_50795_("end_stone_bricks", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76400_).m_60999_().m_60913_(3.0F, 9.0F)));
+    public static final Block f_50444_ = m_50795_("beetroots", new BeetrootBlock(BlockBehaviour.Properties.m_60939_(Material.f_76300_).m_60910_().m_60977_().m_60966_().m_60918_(SoundType.f_56758_)));
+    public static final Block f_50445_ = m_50795_("grass_path", new GrassPathBlock(BlockBehaviour.Properties.m_60939_(Material.f_76314_).m_60978_(0.65F).m_60918_(SoundType.f_56740_).m_60971_(Blocks::m_50774_).m_60960_(Blocks::m_50774_)));
+-   public static final Block f_50446_ = m_50795_("end_gateway", new EndGatewayBlock(BlockBehaviour.Properties.m_60944_(Material.f_76298_, MaterialColor.f_76365_).m_60910_().m_60953_((p_50858_) -> {
++   public static final Block f_50446_ = m_50795_("end_gateway", new EndGatewayBlock(BlockBehaviour.Properties.m_60944_(Material.f_76298_, MaterialColor.f_76365_).m_60910_().m_60953_((p_235453_0_) -> {
+       return 15;
+    }).m_60913_(-1.0F, 3600000.0F).m_60993_()));
+    public static final Block f_50447_ = m_50795_("repeating_command_block", new CommandBlock(BlockBehaviour.Properties.m_60944_(Material.f_76279_, MaterialColor.f_76422_).m_60999_().m_60913_(-1.0F, 3600000.0F).m_60993_()));
+    public static final Block f_50448_ = m_50795_("chain_command_block", new CommandBlock(BlockBehaviour.Properties.m_60944_(Material.f_76279_, MaterialColor.f_76363_).m_60999_().m_60913_(-1.0F, 3600000.0F).m_60993_()));
+-   public static final Block f_50449_ = m_50795_("frosted_ice", new FrostedIceBlock(BlockBehaviour.Properties.m_60939_(Material.f_76276_).m_60911_(0.98F).m_60977_().m_60978_(0.5F).m_60918_(SoundType.f_56744_).m_60955_().m_60922_((p_50842_, p_50843_, p_50844_, p_50845_) -> {
+-      return p_50845_ == EntityType.f_20514_;
++   public static final Block f_50449_ = m_50795_("frosted_ice", new FrostedIceBlock(BlockBehaviour.Properties.m_60939_(Material.f_76276_).m_60911_(0.98F).m_60977_().m_60978_(0.5F).m_60918_(SoundType.f_56744_).m_60955_().m_60922_((p_235448_0_, p_235448_1_, p_235448_2_, p_235448_3_) -> {
++      return p_235448_3_ == EntityType.f_20514_;
+    })));
+-   public static final Block f_50450_ = m_50795_("magma_block", new MagmaBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76371_).m_60999_().m_60953_((p_50856_) -> {
++   public static final Block f_50450_ = m_50795_("magma_block", new MagmaBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76371_).m_60999_().m_60953_((p_235452_0_) -> {
+       return 3;
+-   }).m_60977_().m_60978_(0.5F).m_60922_((p_50834_, p_50835_, p_50836_, p_50837_) -> {
+-      return p_50837_.m_20672_();
++   }).m_60977_().m_60978_(0.5F).m_60922_((p_235445_0_, p_235445_1_, p_235445_2_, p_235445_3_) -> {
++      return p_235445_3_.m_20672_();
+    }).m_60982_(Blocks::m_50774_).m_60991_(Blocks::m_50774_)));
+    public static final Block f_50451_ = m_50795_("nether_wart_block", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76315_, MaterialColor.f_76364_).m_60978_(1.0F).m_60918_(SoundType.f_56719_)));
+    public static final Block f_50452_ = m_50795_("red_nether_bricks", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76371_).m_60999_().m_60913_(2.0F, 6.0F).m_60918_(SoundType.f_56721_)));
+@@ -700,11 +_,11 @@
+    public static final Block f_50564_ = m_50795_("bubble_coral_wall_fan", new CoralWallFanBlock(f_50559_, BlockBehaviour.Properties.m_60944_(Material.f_76301_, MaterialColor.f_76422_).m_60910_().m_60966_().m_60918_(SoundType.f_56752_).m_60916_(f_50554_)));
+    public static final Block f_50565_ = m_50795_("fire_coral_wall_fan", new CoralWallFanBlock(f_50560_, BlockBehaviour.Properties.m_60944_(Material.f_76301_, MaterialColor.f_76364_).m_60910_().m_60966_().m_60918_(SoundType.f_56752_).m_60916_(f_50555_)));
+    public static final Block f_50566_ = m_50795_("horn_coral_wall_fan", new CoralWallFanBlock(f_50561_, BlockBehaviour.Properties.m_60944_(Material.f_76301_, MaterialColor.f_76416_).m_60910_().m_60966_().m_60918_(SoundType.f_56752_).m_60916_(f_50556_)));
+-   public static final Block f_50567_ = m_50795_("sea_pickle", new SeaPickleBlock(BlockBehaviour.Properties.m_60944_(Material.f_76301_, MaterialColor.f_76363_).m_60953_((p_50854_) -> {
+-      return SeaPickleBlock.m_56132_(p_50854_) ? 0 : 3 + 3 * p_50854_.m_61143_(SeaPickleBlock.f_56074_);
++   public static final Block f_50567_ = m_50795_("sea_pickle", new SeaPickleBlock(BlockBehaviour.Properties.m_60944_(Material.f_76301_, MaterialColor.f_76363_).m_60953_((p_235451_0_) -> {
++      return SeaPickleBlock.m_56132_(p_235451_0_) ? 0 : 3 + 3 * p_235451_0_.m_61143_(SeaPickleBlock.f_56074_);
+    }).m_60918_(SoundType.f_56750_).m_60955_()));
+    public static final Block f_50568_ = m_50795_("blue_ice", new HalfTransparentBlock(BlockBehaviour.Properties.m_60939_(Material.f_76316_).m_60978_(2.8F).m_60911_(0.989F).m_60918_(SoundType.f_56744_)));
+-   public static final Block f_50569_ = m_50795_("conduit", new ConduitBlock(BlockBehaviour.Properties.m_60944_(Material.f_76275_, MaterialColor.f_76367_).m_60978_(3.0F).m_60953_((p_50847_) -> {
++   public static final Block f_50569_ = m_50795_("conduit", new ConduitBlock(BlockBehaviour.Properties.m_60944_(Material.f_76275_, MaterialColor.f_76367_).m_60978_(3.0F).m_60953_((p_235449_0_) -> {
+       return 15;
+    }).m_60955_()));
+    public static final Block f_50570_ = m_50795_("bamboo_sapling", new BambooSaplingBlock(BlockBehaviour.Properties.m_60939_(Material.f_76270_).m_60977_().m_60966_().m_60910_().m_60978_(1.0F).m_60918_(SoundType.f_56755_)));
+@@ -764,10 +_,10 @@
+    public static final Block f_50625_ = m_50795_("smithing_table", new SmithingTableBlock(BlockBehaviour.Properties.m_60939_(Material.f_76320_).m_60978_(2.5F).m_60918_(SoundType.f_56736_)));
+    public static final Block f_50679_ = m_50795_("stonecutter", new StonecutterBlock(BlockBehaviour.Properties.m_60939_(Material.f_76278_).m_60999_().m_60978_(3.5F)));
+    public static final Block f_50680_ = m_50795_("bell", new BellBlock(BlockBehaviour.Properties.m_60944_(Material.f_76279_, MaterialColor.f_76366_).m_60999_().m_60978_(5.0F).m_60918_(SoundType.f_56749_)));
+-   public static final Block f_50681_ = m_50795_("lantern", new Lantern(BlockBehaviour.Properties.m_60939_(Material.f_76279_).m_60999_().m_60978_(3.5F).m_60918_(SoundType.f_56762_).m_60953_((p_50840_) -> {
++   public static final Block f_50681_ = m_50795_("lantern", new Lantern(BlockBehaviour.Properties.m_60939_(Material.f_76279_).m_60999_().m_60978_(3.5F).m_60918_(SoundType.f_56762_).m_60953_((p_235447_0_) -> {
+       return 15;
+    }).m_60955_()));
+-   public static final Block f_50682_ = m_50795_("soul_lantern", new Lantern(BlockBehaviour.Properties.m_60939_(Material.f_76279_).m_60999_().m_60978_(3.5F).m_60918_(SoundType.f_56762_).m_60953_((p_50828_) -> {
++   public static final Block f_50682_ = m_50795_("soul_lantern", new Lantern(BlockBehaviour.Properties.m_60939_(Material.f_76279_).m_60999_().m_60978_(3.5F).m_60918_(SoundType.f_56762_).m_60953_((p_235443_0_) -> {
+       return 10;
+    }).m_60955_()));
+    public static final Block f_50683_ = m_50795_("campfire", new CampfireBlock(true, 1, BlockBehaviour.Properties.m_60944_(Material.f_76320_, MaterialColor.f_76370_).m_60978_(2.0F).m_60918_(SoundType.f_56736_).m_60953_(m_50759_(15)).m_60955_()));
+@@ -792,7 +_,7 @@
+    public static final Block f_50700_ = m_50795_("crimson_fungus", new FungusBlock(BlockBehaviour.Properties.m_60944_(Material.f_76300_, MaterialColor.f_76371_).m_60966_().m_60910_().m_60918_(SoundType.f_56711_), () -> {
+       return Features.f_126943_;
+    }));
+-   public static final Block f_50701_ = m_50795_("shroomlight", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76315_, MaterialColor.f_76364_).m_60978_(1.0F).m_60918_(SoundType.f_56713_).m_60953_((p_50816_) -> {
++   public static final Block f_50701_ = m_50795_("shroomlight", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76315_, MaterialColor.f_76364_).m_60978_(1.0F).m_60918_(SoundType.f_56713_).m_60953_((p_235439_0_) -> {
+       return 15;
+    })));
+    public static final Block f_50702_ = m_50795_("weeping_vines", new WeepingVines(BlockBehaviour.Properties.m_60944_(Material.f_76300_, MaterialColor.f_76371_).m_60977_().m_60910_().m_60966_().m_60918_(SoundType.f_56714_)));
+@@ -832,11 +_,11 @@
+    public static final Block f_50720_ = m_50795_("honeycomb_block", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76313_, MaterialColor.f_76413_).m_60978_(0.6F).m_60918_(SoundType.f_56753_)));
+    public static final Block f_50721_ = m_50795_("netherite_block", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76279_, MaterialColor.f_76365_).m_60999_().m_60913_(50.0F, 1200.0F).m_60918_(SoundType.f_56725_)));
+    public static final Block f_50722_ = m_50795_("ancient_debris", new Block(BlockBehaviour.Properties.m_60944_(Material.f_76279_, MaterialColor.f_76365_).m_60999_().m_60913_(30.0F, 1200.0F).m_60918_(SoundType.f_56726_)));
+-   public static final Block f_50723_ = m_50795_("crying_obsidian", new CryingObsidianBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76365_).m_60999_().m_60913_(50.0F, 1200.0F).m_60953_((p_50804_) -> {
++   public static final Block f_50723_ = m_50795_("crying_obsidian", new CryingObsidianBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76365_).m_60999_().m_60913_(50.0F, 1200.0F).m_60953_((p_235435_0_) -> {
+       return 10;
+    })));
+-   public static final Block f_50724_ = m_50795_("respawn_anchor", new RespawnAnchorBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76365_).m_60999_().m_60913_(50.0F, 1200.0F).m_60953_((p_50773_) -> {
+-      return RespawnAnchorBlock.m_55861_(p_50773_, 15);
++   public static final Block f_50724_ = m_50795_("respawn_anchor", new RespawnAnchorBlock(BlockBehaviour.Properties.m_60944_(Material.f_76278_, MaterialColor.f_76365_).m_60999_().m_60913_(50.0F, 1200.0F).m_60953_((p_235425_0_) -> {
++      return RespawnAnchorBlock.m_55861_(p_235425_0_, 15);
+    })));
+    public static final Block f_50725_ = m_50795_("potted_crimson_fungus", new FlowerPotBlock(f_50700_, BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60966_().m_60955_()));
+    public static final Block f_50726_ = m_50795_("potted_warped_fungus", new FlowerPotBlock(f_50691_, BlockBehaviour.Properties.m_60939_(Material.f_76310_).m_60966_().m_60955_()));
+@@ -865,17 +_,17 @@
+    public static final Block f_50714_ = m_50795_("quartz_bricks", new Block(BlockBehaviour.Properties.m_60926_(f_50333_)));
+ 
+    private static ToIntFunction<BlockState> m_50759_(int p_50760_) {
+-      return (p_50763_) -> {
+-         return p_50763_.m_61143_(BlockStateProperties.f_61443_) ? p_50760_ : 0;
++      return (p_235421_1_) -> {
++         return p_235421_1_.m_61143_(BlockStateProperties.f_61443_) ? p_50760_ : 0;
+       };
+    }
+ 
+    private static Boolean m_50778_(BlockState p_50779_, BlockGetter p_50780_, BlockPos p_50781_, EntityType<?> p_50782_) {
+-      return false;
++      return (boolean)false;
+    }
+ 
+    private static Boolean m_50809_(BlockState p_50810_, BlockGetter p_50811_, BlockPos p_50812_, EntityType<?> p_50813_) {
+-      return true;
++      return (boolean)true;
+    }
+ 
+    private static Boolean m_50821_(BlockState p_50822_, BlockGetter p_50823_, BlockPos p_50824_, EntityType<?> p_50825_) {
+@@ -883,19 +_,19 @@
+    }
+ 
+    private static BedBlock m_50764_(DyeColor p_50765_) {
+-      return new BedBlock(p_50765_, BlockBehaviour.Properties.m_60947_(Material.f_76272_, (p_50771_) -> {
+-         return p_50771_.m_61143_(BedBlock.f_49440_) == BedPart.FOOT ? p_50765_.m_41069_() : MaterialColor.f_76401_;
++      return new BedBlock(p_50765_, BlockBehaviour.Properties.m_60947_(Material.f_76272_, (p_235424_1_) -> {
++         return p_235424_1_.m_61143_(BedBlock.f_49440_) == BedPart.FOOT ? p_50765_.m_41069_() : MaterialColor.f_76401_;
+       }).m_60918_(SoundType.f_56736_).m_60978_(0.2F).m_60955_());
+    }
+ 
+    private static RotatedPillarBlock m_50788_(MaterialColor p_50789_, MaterialColor p_50790_) {
+-      return new RotatedPillarBlock(BlockBehaviour.Properties.m_60947_(Material.f_76320_, (p_50794_) -> {
+-         return p_50794_.m_61143_(RotatedPillarBlock.f_55923_) == Direction.Axis.Y ? p_50789_ : p_50790_;
++      return new RotatedPillarBlock(BlockBehaviour.Properties.m_60947_(Material.f_76320_, (p_235431_2_) -> {
++         return p_235431_2_.m_61143_(RotatedPillarBlock.f_55923_) == Direction.Axis.Y ? p_50789_ : p_50790_;
+       }).m_60978_(2.0F).m_60918_(SoundType.f_56736_));
+    }
+ 
+    private static Block m_50783_(MaterialColor p_50784_) {
+-      return new RotatedPillarBlock(BlockBehaviour.Properties.m_60947_(Material.f_76321_, (p_50787_) -> {
++      return new RotatedPillarBlock(BlockBehaviour.Properties.m_60947_(Material.f_76321_, (p_235429_1_) -> {
+          return p_50784_;
+       }).m_60978_(2.0F).m_60918_(SoundType.f_56763_));
+    }
+@@ -917,8 +_,8 @@
+    }
+ 
+    private static ShulkerBoxBlock m_50766_(DyeColor p_50767_, BlockBehaviour.Properties p_50768_) {
+-      BlockBehaviour.StatePredicate blockbehaviour$statepredicate = (p_50830_, p_50831_, p_50832_) -> {
+-         BlockEntity blockentity = p_50831_.m_7702_(p_50832_);
++      BlockBehaviour.StatePredicate blockbehaviour$statepredicate = (p_235444_0_, p_235444_1_, p_235444_2_) -> {
++         BlockEntity blockentity = p_235444_1_.m_7702_(p_235444_2_);
+          if (!(blockentity instanceof ShulkerBoxBlockEntity)) {
+             return true;
+          } else {
+@@ -930,8 +_,8 @@
+    }
+ 
+    private static PistonBaseBlock m_50798_(boolean p_50799_) {
+-      BlockBehaviour.StatePredicate blockbehaviour$statepredicate = (p_50818_, p_50819_, p_50820_) -> {
+-         return !p_50818_.m_61143_(PistonBaseBlock.f_60153_);
++      BlockBehaviour.StatePredicate blockbehaviour$statepredicate = (p_235440_0_, p_235440_1_, p_235440_2_) -> {
++         return !p_235440_0_.m_61143_(PistonBaseBlock.f_60153_);
+       };
+       return new PistonBaseBlock(p_50799_, BlockBehaviour.Properties.m_60939_(Material.f_76283_).m_60978_(1.5F).m_60924_(Blocks::m_50805_).m_60960_(blockbehaviour$statepredicate).m_60971_(blockbehaviour$statepredicate));
+    }
+@@ -942,16 +_,5 @@
+ 
+    public static void m_50758_() {
+       Block.f_49791_.forEach(BlockBehaviour.BlockStateBase::m_60611_);
+-   }
+-
+-   static {
+-      for(Block block : Registry.f_122824_) {
+-         for(BlockState blockstate : block.m_49965_().m_61056_()) {
+-            Block.f_49791_.m_122667_(blockstate);
+-         }
+-
+-         block.m_60589_();
+-      }
+-
+    }
+ }

@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/stateproviders/RotatedBlockProvider.java
++++ b/net/minecraft/world/level/levelgen/feature/stateproviders/RotatedBlockProvider.java
+@@ -10,8 +_,8 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class RotatedBlockProvider extends BlockStateProvider {
+-   public static final Codec<RotatedBlockProvider> f_68786_ = BlockState.f_61039_.fieldOf("state").xmap(BlockBehaviour.BlockStateBase::m_60734_, Block::m_49966_).xmap(RotatedBlockProvider::new, (p_68793_) -> {
+-      return p_68793_.f_68787_;
++   public static final Codec<RotatedBlockProvider> f_68786_ = BlockState.f_61039_.fieldOf("state").xmap(BlockBehaviour.BlockStateBase::m_60734_, Block::m_49966_).xmap(RotatedBlockProvider::new, (p_236808_0_) -> {
++      return p_236808_0_.f_68787_;
+    }).codec();
+    private final Block f_68787_;
+ 

@@ -1,0 +1,235 @@
+--- a/net/minecraft/world/level/levelgen/structure/WoodlandMansionPieces.java
++++ b/net/minecraft/world/level/levelgen/structure/WoodlandMansionPieces.java
+@@ -67,25 +_,6 @@
+       }
+    }
+ 
+-   abstract static class FloorRoomCollection {
+-      private FloorRoomCollection() {
+-      }
+-
+-      public abstract String m_7668_(Random p_73719_);
+-
+-      public abstract String m_7669_(Random p_73722_);
+-
+-      public abstract String m_5900_(Random p_73720_, boolean p_73721_);
+-
+-      public abstract String m_5899_(Random p_73723_, boolean p_73724_);
+-
+-      public abstract String m_7672_(Random p_73725_);
+-
+-      public abstract String m_7661_(Random p_73726_);
+-
+-      public abstract String m_7676_(Random p_73727_);
+-   }
+-
+    static class MansionGrid {
+       private final Random f_73728_;
+       private final WoodlandMansionPieces.SimpleGrid f_73729_;
+@@ -356,6 +_,92 @@
+       }
+    }
+ 
++   public static class WoodlandMansionPiece extends TemplateStructurePiece {
++      private final String f_73901_;
++      private final Rotation f_73902_;
++      private final Mirror f_73903_;
++
++      public WoodlandMansionPiece(StructureManager p_73905_, String p_73906_, BlockPos p_73907_, Rotation p_73908_) {
++         this(p_73905_, p_73906_, p_73907_, p_73908_, Mirror.NONE);
++      }
++
++      public WoodlandMansionPiece(StructureManager p_73910_, String p_73911_, BlockPos p_73912_, Rotation p_73913_, Mirror p_73914_) {
++         super(StructurePieceType.f_67131_, 0);
++         this.f_73901_ = p_73911_;
++         this.f_73658_ = p_73912_;
++         this.f_73902_ = p_73913_;
++         this.f_73903_ = p_73914_;
++         this.m_73918_(p_73910_);
++      }
++
++      public WoodlandMansionPiece(StructureManager p_73916_, CompoundTag p_73917_) {
++         super(StructurePieceType.f_67131_, p_73917_);
++         this.f_73901_ = p_73917_.m_128461_("Template");
++         this.f_73902_ = Rotation.valueOf(p_73917_.m_128461_("Rot"));
++         this.f_73903_ = Mirror.valueOf(p_73917_.m_128461_("Mi"));
++         this.m_73918_(p_73916_);
++      }
++
++      private void m_73918_(StructureManager p_73919_) {
++         StructureTemplate structuretemplate = p_73919_.m_74341_(new ResourceLocation("woodland_mansion/" + this.f_73901_));
++         StructurePlaceSettings structureplacesettings = (new StructurePlaceSettings()).m_74392_(true).m_74379_(this.f_73902_).m_74377_(this.f_73903_).m_74383_(BlockIgnoreProcessor.f_74046_);
++         this.m_73679_(structuretemplate, this.f_73658_, structureplacesettings);
++      }
++
++      protected void m_5688_(CompoundTag p_73927_) {
++         super.m_5688_(p_73927_);
++         p_73927_.m_128359_("Template", this.f_73901_);
++         p_73927_.m_128359_("Rot", this.f_73657_.m_74404_().name());
++         p_73927_.m_128359_("Mi", this.f_73657_.m_74401_().name());
++      }
++
++      protected void m_7756_(String p_73921_, BlockPos p_73922_, ServerLevelAccessor p_73923_, Random p_73924_, BoundingBox p_73925_) {
++         if (p_73921_.startsWith("Chest")) {
++            Rotation rotation = this.f_73657_.m_74404_();
++            BlockState blockstate = Blocks.f_50087_.m_49966_();
++            if ("ChestWest".equals(p_73921_)) {
++               blockstate = blockstate.m_61124_(ChestBlock.f_51478_, rotation.m_55954_(Direction.WEST));
++            } else if ("ChestEast".equals(p_73921_)) {
++               blockstate = blockstate.m_61124_(ChestBlock.f_51478_, rotation.m_55954_(Direction.EAST));
++            } else if ("ChestSouth".equals(p_73921_)) {
++               blockstate = blockstate.m_61124_(ChestBlock.f_51478_, rotation.m_55954_(Direction.SOUTH));
++            } else if ("ChestNorth".equals(p_73921_)) {
++               blockstate = blockstate.m_61124_(ChestBlock.f_51478_, rotation.m_55954_(Direction.NORTH));
++            }
++
++            this.m_73420_(p_73923_, p_73925_, p_73924_, p_73922_, BuiltInLootTables.f_78689_, blockstate);
++         } else {
++            AbstractIllager abstractillager;
++            switch(p_73921_) {
++            case "Mage":
++               abstractillager = EntityType.f_20568_.m_20615_(p_73923_.m_6018_());
++               break;
++            case "Warrior":
++               abstractillager = EntityType.f_20493_.m_20615_(p_73923_.m_6018_());
++               break;
++            default:
++               return;
++            }
++
++            abstractillager.m_21530_();
++            abstractillager.m_20035_(p_73922_, 0.0F, 0.0F);
++            abstractillager.m_6518_(p_73923_, p_73923_.m_6436_(abstractillager.m_20183_()), MobSpawnType.STRUCTURE, (SpawnGroupData)null, (CompoundTag)null);
++            p_73923_.m_47205_(abstractillager);
++            p_73923_.m_7731_(p_73922_, Blocks.f_50016_.m_49966_(), 2);
++         }
++
++      }
++   }
++
++   static class PlacementData {
++      public Rotation f_73839_;
++      public BlockPos f_73840_;
++      public String f_73841_;
++
++      private PlacementData() {
++      }
++   }
++
+    static class MansionPiecePlacer {
+       private final StructureManager f_73774_;
+       private final Random f_73775_;
+@@ -843,13 +_,23 @@
+       }
+    }
+ 
+-   static class PlacementData {
+-      public Rotation f_73839_;
+-      public BlockPos f_73840_;
+-      public String f_73841_;
+-
+-      private PlacementData() {
++   abstract static class FloorRoomCollection {
++      private FloorRoomCollection() {
+       }
++
++      public abstract String m_7668_(Random p_73719_);
++
++      public abstract String m_7669_(Random p_73722_);
++
++      public abstract String m_5900_(Random p_73720_, boolean p_73721_);
++
++      public abstract String m_5899_(Random p_73723_, boolean p_73724_);
++
++      public abstract String m_7672_(Random p_73725_);
++
++      public abstract String m_7661_(Random p_73726_);
++
++      public abstract String m_7676_(Random p_73727_);
+    }
+ 
+    static class SecondFloorRoomCollection extends WoodlandMansionPieces.FloorRoomCollection {
+@@ -932,83 +_,6 @@
+ 
+    static class ThirdFloorRoomCollection extends WoodlandMansionPieces.SecondFloorRoomCollection {
+       private ThirdFloorRoomCollection() {
+-      }
+-   }
+-
+-   public static class WoodlandMansionPiece extends TemplateStructurePiece {
+-      private final String f_73901_;
+-      private final Rotation f_73902_;
+-      private final Mirror f_73903_;
+-
+-      public WoodlandMansionPiece(StructureManager p_73905_, String p_73906_, BlockPos p_73907_, Rotation p_73908_) {
+-         this(p_73905_, p_73906_, p_73907_, p_73908_, Mirror.NONE);
+-      }
+-
+-      public WoodlandMansionPiece(StructureManager p_73910_, String p_73911_, BlockPos p_73912_, Rotation p_73913_, Mirror p_73914_) {
+-         super(StructurePieceType.f_67131_, 0);
+-         this.f_73901_ = p_73911_;
+-         this.f_73658_ = p_73912_;
+-         this.f_73902_ = p_73913_;
+-         this.f_73903_ = p_73914_;
+-         this.m_73918_(p_73910_);
+-      }
+-
+-      public WoodlandMansionPiece(StructureManager p_73916_, CompoundTag p_73917_) {
+-         super(StructurePieceType.f_67131_, p_73917_);
+-         this.f_73901_ = p_73917_.m_128461_("Template");
+-         this.f_73902_ = Rotation.valueOf(p_73917_.m_128461_("Rot"));
+-         this.f_73903_ = Mirror.valueOf(p_73917_.m_128461_("Mi"));
+-         this.m_73918_(p_73916_);
+-      }
+-
+-      private void m_73918_(StructureManager p_73919_) {
+-         StructureTemplate structuretemplate = p_73919_.m_74341_(new ResourceLocation("woodland_mansion/" + this.f_73901_));
+-         StructurePlaceSettings structureplacesettings = (new StructurePlaceSettings()).m_74392_(true).m_74379_(this.f_73902_).m_74377_(this.f_73903_).m_74383_(BlockIgnoreProcessor.f_74046_);
+-         this.m_73679_(structuretemplate, this.f_73658_, structureplacesettings);
+-      }
+-
+-      protected void m_5688_(CompoundTag p_73927_) {
+-         super.m_5688_(p_73927_);
+-         p_73927_.m_128359_("Template", this.f_73901_);
+-         p_73927_.m_128359_("Rot", this.f_73657_.m_74404_().name());
+-         p_73927_.m_128359_("Mi", this.f_73657_.m_74401_().name());
+-      }
+-
+-      protected void m_7756_(String p_73921_, BlockPos p_73922_, ServerLevelAccessor p_73923_, Random p_73924_, BoundingBox p_73925_) {
+-         if (p_73921_.startsWith("Chest")) {
+-            Rotation rotation = this.f_73657_.m_74404_();
+-            BlockState blockstate = Blocks.f_50087_.m_49966_();
+-            if ("ChestWest".equals(p_73921_)) {
+-               blockstate = blockstate.m_61124_(ChestBlock.f_51478_, rotation.m_55954_(Direction.WEST));
+-            } else if ("ChestEast".equals(p_73921_)) {
+-               blockstate = blockstate.m_61124_(ChestBlock.f_51478_, rotation.m_55954_(Direction.EAST));
+-            } else if ("ChestSouth".equals(p_73921_)) {
+-               blockstate = blockstate.m_61124_(ChestBlock.f_51478_, rotation.m_55954_(Direction.SOUTH));
+-            } else if ("ChestNorth".equals(p_73921_)) {
+-               blockstate = blockstate.m_61124_(ChestBlock.f_51478_, rotation.m_55954_(Direction.NORTH));
+-            }
+-
+-            this.m_73420_(p_73923_, p_73925_, p_73924_, p_73922_, BuiltInLootTables.f_78689_, blockstate);
+-         } else {
+-            AbstractIllager abstractillager;
+-            switch(p_73921_) {
+-            case "Mage":
+-               abstractillager = EntityType.f_20568_.m_20615_(p_73923_.m_6018_());
+-               break;
+-            case "Warrior":
+-               abstractillager = EntityType.f_20493_.m_20615_(p_73923_.m_6018_());
+-               break;
+-            default:
+-               return;
+-            }
+-
+-            abstractillager.m_21530_();
+-            abstractillager.m_20035_(p_73922_, 0.0F, 0.0F);
+-            abstractillager.m_6518_(p_73923_, p_73923_.m_6436_(abstractillager.m_20183_()), MobSpawnType.STRUCTURE, (SpawnGroupData)null, (CompoundTag)null);
+-            p_73923_.m_47205_(abstractillager);
+-            p_73923_.m_7731_(p_73922_, Blocks.f_50016_.m_49966_(), 2);
+-         }
+-
+       }
+    }
+ }

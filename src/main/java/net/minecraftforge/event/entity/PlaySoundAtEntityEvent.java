@@ -19,11 +19,6 @@
 
 package net.minecraftforge.event.entity;
 
-import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvent;
@@ -47,7 +42,7 @@ import net.minecraft.sounds.SoundEvent;
  * <br>
  * This event is fired on the {@link MinecraftForge#EVENT_BUS}.<br>
  **/
-@Cancelable
+@net.minecraftforge.eventbus.api.Cancelable
 public class PlaySoundAtEntityEvent extends EntityEvent
 {
     private SoundEvent name;

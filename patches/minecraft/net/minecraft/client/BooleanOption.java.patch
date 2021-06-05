@@ -1,0 +1,14 @@
+--- a/net/minecraft/client/BooleanOption.java
++++ b/net/minecraft/client/BooleanOption.java
+@@ -50,9 +_,9 @@
+          this.m_91738_(Minecraft.m_91087_().f_91062_.m_92923_(this.f_90519_, 200));
+       }
+ 
+-      return new OptionButton(p_90533_, p_90534_, p_90535_, 20, this, this.m_90547_(p_90532_), (p_90538_) -> {
++      return new OptionButton(p_90533_, p_90534_, p_90535_, 20, this, this.m_90547_(p_90532_), (p_216745_2_) -> {
+          this.m_90529_(p_90532_);
+-         p_90538_.m_93666_(this.m_90547_(p_90532_));
++         p_216745_2_.m_93666_(this.m_90547_(p_90532_));
+       });
+    }
+ 

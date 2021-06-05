@@ -1,0 +1,105 @@
+--- a/net/minecraft/world/entity/animal/Sheep.java
++++ b/net/minecraft/world/entity/animal/Sheep.java
+@@ -61,28 +_,28 @@
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+-public class Sheep extends Animal implements Shearable {
++public class Sheep extends Animal implements Shearable, net.minecraftforge.common.IForgeShearable {
+    private static final EntityDataAccessor<Byte> f_29799_ = SynchedEntityData.m_135353_(Sheep.class, EntityDataSerializers.f_135027_);
+-   private static final Map<DyeColor, ItemLike> f_29800_ = Util.m_137469_(Maps.newEnumMap(DyeColor.class), (p_29841_) -> {
+-      p_29841_.put(DyeColor.WHITE, Blocks.f_50041_);
+-      p_29841_.put(DyeColor.ORANGE, Blocks.f_50042_);
+-      p_29841_.put(DyeColor.MAGENTA, Blocks.f_50096_);
+-      p_29841_.put(DyeColor.LIGHT_BLUE, Blocks.f_50097_);
+-      p_29841_.put(DyeColor.YELLOW, Blocks.f_50098_);
+-      p_29841_.put(DyeColor.LIME, Blocks.f_50099_);
+-      p_29841_.put(DyeColor.PINK, Blocks.f_50100_);
+-      p_29841_.put(DyeColor.GRAY, Blocks.f_50101_);
+-      p_29841_.put(DyeColor.LIGHT_GRAY, Blocks.f_50102_);
+-      p_29841_.put(DyeColor.CYAN, Blocks.f_50103_);
+-      p_29841_.put(DyeColor.PURPLE, Blocks.f_50104_);
+-      p_29841_.put(DyeColor.BLUE, Blocks.f_50105_);
+-      p_29841_.put(DyeColor.BROWN, Blocks.f_50106_);
+-      p_29841_.put(DyeColor.GREEN, Blocks.f_50107_);
+-      p_29841_.put(DyeColor.RED, Blocks.f_50108_);
+-      p_29841_.put(DyeColor.BLACK, Blocks.f_50109_);
++   private static final Map<DyeColor, ItemLike> f_29800_ = Util.m_137469_(Maps.newEnumMap(DyeColor.class), (p_203402_0_) -> {
++      p_203402_0_.put(DyeColor.WHITE, Blocks.f_50041_);
++      p_203402_0_.put(DyeColor.ORANGE, Blocks.f_50042_);
++      p_203402_0_.put(DyeColor.MAGENTA, Blocks.f_50096_);
++      p_203402_0_.put(DyeColor.LIGHT_BLUE, Blocks.f_50097_);
++      p_203402_0_.put(DyeColor.YELLOW, Blocks.f_50098_);
++      p_203402_0_.put(DyeColor.LIME, Blocks.f_50099_);
++      p_203402_0_.put(DyeColor.PINK, Blocks.f_50100_);
++      p_203402_0_.put(DyeColor.GRAY, Blocks.f_50101_);
++      p_203402_0_.put(DyeColor.LIGHT_GRAY, Blocks.f_50102_);
++      p_203402_0_.put(DyeColor.CYAN, Blocks.f_50103_);
++      p_203402_0_.put(DyeColor.PURPLE, Blocks.f_50104_);
++      p_203402_0_.put(DyeColor.BLUE, Blocks.f_50105_);
++      p_203402_0_.put(DyeColor.BROWN, Blocks.f_50106_);
++      p_203402_0_.put(DyeColor.GREEN, Blocks.f_50107_);
++      p_203402_0_.put(DyeColor.RED, Blocks.f_50108_);
++      p_203402_0_.put(DyeColor.BLACK, Blocks.f_50109_);
+    });
+-   private static final Map<DyeColor, float[]> f_29801_ = Maps.newEnumMap(Arrays.stream(DyeColor.values()).collect(Collectors.toMap((DyeColor p_29868_) -> {
+-      return p_29868_;
++   private static final Map<DyeColor, float[]> f_29801_ = Maps.newEnumMap(Arrays.stream(DyeColor.values()).collect(Collectors.toMap((DyeColor p_200204_0_) -> {
++      return p_200204_0_;
+    }, Sheep::m_29865_)));
+    private int f_29802_;
+    private EatBlockGoal f_29803_;
+@@ -216,11 +_,11 @@
+ 
+    public InteractionResult m_6071_(Player p_29853_, InteractionHand p_29854_) {
+       ItemStack itemstack = p_29853_.m_21120_(p_29854_);
+-      if (itemstack.m_41720_() == Items.f_42574_) {
++      if (false && itemstack.m_41720_() == Items.f_42574_) { //Forge: Moved to onSheared
+          if (!this.f_19853_.f_46443_ && this.m_6220_()) {
+             this.m_5851_(SoundSource.PLAYERS);
+-            itemstack.m_41622_(1, p_29853_, (p_29822_) -> {
+-               p_29822_.m_21190_(p_29854_);
++            itemstack.m_41622_(1, p_29853_, (p_213613_1_) -> {
++               p_213613_1_.m_21190_(p_29854_);
+             });
+             return InteractionResult.SUCCESS;
+          } else {
+@@ -340,8 +_,8 @@
+       DyeColor dyecolor = ((Sheep)p_29824_).m_29874_();
+       DyeColor dyecolor1 = ((Sheep)p_29825_).m_29874_();
+       CraftingContainer craftingcontainer = m_29831_(dyecolor, dyecolor1);
+-      return this.f_19853_.m_7465_().m_44015_(RecipeType.f_44107_, craftingcontainer, this.f_19853_).map((p_29828_) -> {
+-         return p_29828_.m_5874_(craftingcontainer);
++      return this.f_19853_.m_7465_().m_44015_(RecipeType.f_44107_, craftingcontainer, this.f_19853_).map((p_213614_1_) -> {
++         return p_213614_1_.m_5874_(craftingcontainer);
+       }).map(ItemStack::m_41720_).filter(DyeItem.class::isInstance).map(DyeItem.class::cast).map(DyeItem::m_41089_).orElseGet(() -> {
+          return this.f_19853_.f_46441_.nextBoolean() ? dyecolor : dyecolor1;
+       });
+@@ -360,5 +_,27 @@
+ 
+    protected float m_6431_(Pose p_29850_, EntityDimensions p_29851_) {
+       return 0.95F * p_29851_.f_20378_;
++   }
++
++   @Override
++   public boolean isShearable(@javax.annotation.Nonnull ItemStack item, Level world, BlockPos pos) {
++      return m_6220_();
++   }
++
++   @javax.annotation.Nonnull
++   @Override
++   public java.util.List<ItemStack> onSheared(@Nullable Player player, @javax.annotation.Nonnull ItemStack item, Level world, BlockPos pos, int fortune) {
++      world.m_6269_(null, this, SoundEvents.f_12344_, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
++      if (!world.f_46443_) {
++         this.m_29878_(true);
++         int i = 1 + this.f_19796_.nextInt(3);
++
++         java.util.List<ItemStack> items = new java.util.ArrayList<>();
++         for (int j = 0; j < i; ++j) {
++            items.add(new ItemStack(f_29800_.get(this.m_29874_())));
++         }
++         return items;
++      }
++      return java.util.Collections.emptyList();
+    }
+ }

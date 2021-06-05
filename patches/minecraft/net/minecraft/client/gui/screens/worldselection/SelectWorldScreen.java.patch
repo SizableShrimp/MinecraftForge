@@ -1,0 +1,43 @@
+--- a/net/minecraft/client/gui/screens/worldselection/SelectWorldScreen.java
++++ b/net/minecraft/client/gui/screens/worldselection/SelectWorldScreen.java
+@@ -38,9 +_,9 @@
+    protected void m_7856_() {
+       this.f_96541_.f_91068_.m_90926_(true);
+       this.f_101330_ = new EditBox(this.f_96547_, this.f_96543_ / 2 - 100, 22, 200, 20, this.f_101330_, new TranslatableComponent("selectWorld.search"));
+-      this.f_101330_.m_94151_((p_101362_) -> {
++      this.f_101330_.m_94151_((p_214329_1_) -> {
+          this.f_101336_.m_101676_(() -> {
+-            return p_101362_;
++            return p_214329_1_;
+          }, false);
+       });
+       this.f_101336_ = new WorldSelectionList(this, this.f_96541_, this.f_96543_, this.f_96544_, 48, this.f_96544_ - 64, 36, () -> {
+@@ -48,22 +_,22 @@
+       }, this.f_101336_);
+       this.f_96540_.add(this.f_101330_);
+       this.f_96540_.add(this.f_101336_);
+-      this.f_101333_ = this.m_7082_(new Button(this.f_96543_ / 2 - 154, this.f_96544_ - 52, 150, 20, new TranslatableComponent("selectWorld.select"), (p_101378_) -> {
++      this.f_101333_ = this.m_7082_(new Button(this.f_96543_ / 2 - 154, this.f_96544_ - 52, 150, 20, new TranslatableComponent("selectWorld.select"), (p_214325_1_) -> {
+          this.f_101336_.m_101684_().ifPresent(WorldSelectionList.WorldListEntry::m_101704_);
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ - 52, 150, 20, new TranslatableComponent("selectWorld.create"), (p_101376_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ - 52, 150, 20, new TranslatableComponent("selectWorld.create"), (p_214326_1_) -> {
+          this.f_96541_.m_91152_(CreateWorldScreen.m_100898_(this));
+       }));
+-      this.f_101334_ = this.m_7082_(new Button(this.f_96543_ / 2 - 154, this.f_96544_ - 28, 72, 20, new TranslatableComponent("selectWorld.edit"), (p_101373_) -> {
++      this.f_101334_ = this.m_7082_(new Button(this.f_96543_ / 2 - 154, this.f_96544_ - 28, 72, 20, new TranslatableComponent("selectWorld.edit"), (p_214323_1_) -> {
+          this.f_101336_.m_101684_().ifPresent(WorldSelectionList.WorldListEntry::m_101739_);
+       }));
+-      this.f_101332_ = this.m_7082_(new Button(this.f_96543_ / 2 - 76, this.f_96544_ - 28, 72, 20, new TranslatableComponent("selectWorld.delete"), (p_101366_) -> {
++      this.f_101332_ = this.m_7082_(new Button(this.f_96543_ / 2 - 76, this.f_96544_ - 28, 72, 20, new TranslatableComponent("selectWorld.delete"), (p_214330_1_) -> {
+          this.f_101336_.m_101684_().ifPresent(WorldSelectionList.WorldListEntry::m_101738_);
+       }));
+-      this.f_101335_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ - 28, 72, 20, new TranslatableComponent("selectWorld.recreate"), (p_101360_) -> {
++      this.f_101335_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ - 28, 72, 20, new TranslatableComponent("selectWorld.recreate"), (p_214328_1_) -> {
+          this.f_101336_.m_101684_().ifPresent(WorldSelectionList.WorldListEntry::m_101743_);
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 82, this.f_96544_ - 28, 72, 20, CommonComponents.f_130656_, (p_101356_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 82, this.f_96544_ - 28, 72, 20, CommonComponents.f_130656_, (p_214327_1_) -> {
+          this.f_96541_.m_91152_(this.f_101329_);
+       }));
+       this.m_101369_(false);

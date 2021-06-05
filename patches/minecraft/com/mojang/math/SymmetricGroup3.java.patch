@@ -1,0 +1,25 @@
+--- a/com/mojang/math/SymmetricGroup3.java
++++ b/com/mojang/math/SymmetricGroup3.java
+@@ -13,7 +_,7 @@
+ 
+    private final int[] f_109168_;
+    private final Matrix3f f_109169_;
+-   private static final SymmetricGroup3[][] f_109170_ = Util.m_137469_(new SymmetricGroup3[values().length][values().length], (p_109188_) -> {
++   private static final SymmetricGroup3[][] f_109170_ = Util.m_137469_(new SymmetricGroup3[values().length][values().length], (p_239190_0_) -> {
+       for(SymmetricGroup3 symmetricgroup3 : values()) {
+          for(SymmetricGroup3 symmetricgroup31 : values()) {
+             int[] aint = new int[3];
+@@ -22,10 +_,10 @@
+                aint[i] = symmetricgroup3.f_109168_[symmetricgroup31.f_109168_[i]];
+             }
+ 
+-            SymmetricGroup3 symmetricgroup32 = Arrays.stream(values()).filter((p_109186_) -> {
+-               return Arrays.equals(p_109186_.f_109168_, aint);
++            SymmetricGroup3 symmetricgroup32 = Arrays.stream(values()).filter((p_239189_1_) -> {
++               return Arrays.equals(p_239189_1_.f_109168_, aint);
+             }).findFirst().get();
+-            p_109188_[symmetricgroup3.ordinal()][symmetricgroup31.ordinal()] = symmetricgroup32;
++            p_239190_0_[symmetricgroup3.ordinal()][symmetricgroup31.ordinal()] = symmetricgroup32;
+          }
+       }
+ 

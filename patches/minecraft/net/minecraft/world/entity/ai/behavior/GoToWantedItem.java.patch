@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/entity/ai/behavior/GoToWantedItem.java
++++ b/net/minecraft/world/entity/ai/behavior/GoToWantedItem.java
+@@ -14,7 +_,7 @@
+    private final float f_23138_;
+ 
+    public GoToWantedItem(float p_23140_, boolean p_23141_, int p_23142_) {
+-      this((p_23158_) -> {
++      this((p_233910_0_) -> {
+          return true;
+       }, p_23140_, p_23141_, p_23142_);
+    }

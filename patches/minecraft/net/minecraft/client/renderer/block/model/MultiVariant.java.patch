@@ -1,0 +1,22 @@
+--- a/net/minecraft/client/renderer/block/model/MultiVariant.java
++++ b/net/minecraft/client/renderer/block/model/MultiVariant.java
+@@ -57,8 +_,8 @@
+    }
+ 
+    public Collection<Material> m_5500_(Function<ResourceLocation, UnbakedModel> p_111855_, Set<Pair<String, String>> p_111856_) {
+-      return this.m_111848_().stream().map(Variant::m_111883_).distinct().flatMap((p_111860_) -> {
+-         return p_111855_.apply(p_111860_).m_5500_(p_111855_, p_111856_).stream();
++      return this.m_111848_().stream().map(Variant::m_111883_).distinct().flatMap((p_228831_2_) -> {
++         return p_111855_.apply(p_228831_2_).m_5500_(p_111855_, p_111856_).stream();
+       }).collect(Collectors.toSet());
+    }
+ 
+@@ -70,7 +_,7 @@
+          WeightedBakedModel.Builder weightedbakedmodel$builder = new WeightedBakedModel.Builder();
+ 
+          for(Variant variant : this.m_111848_()) {
+-            BakedModel bakedmodel = p_111850_.m_119349_(variant.m_111883_(), variant);
++            BakedModel bakedmodel = p_111850_.getBakedModel(variant.m_111883_(), variant, p_111851_);
+             weightedbakedmodel$builder.m_119559_(bakedmodel, variant.m_111886_());
+          }
+ 

@@ -1,0 +1,28 @@
+--- a/net/minecraft/world/entity/ai/goal/EatBlockGoal.java
++++ b/net/minecraft/world/entity/ai/goal/EatBlockGoal.java
+@@ -4,7 +_,6 @@
+ import java.util.function.Predicate;
+ import net.minecraft.core.BlockPos;
+ import net.minecraft.world.entity.Mob;
+-import net.minecraft.world.level.GameRules;
+ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.block.Block;
+ import net.minecraft.world.level.block.Blocks;
+@@ -59,7 +_,7 @@
+       if (this.f_25204_ == 4) {
+          BlockPos blockpos = this.f_25202_.m_20183_();
+          if (f_25201_.test(this.f_25203_.m_8055_(blockpos))) {
+-            if (this.f_25203_.m_46469_().m_46207_(GameRules.f_46132_)) {
++            if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.f_25203_, this.f_25202_)) {
+                this.f_25203_.m_46961_(blockpos, false);
+             }
+ 
+@@ -67,7 +_,7 @@
+          } else {
+             BlockPos blockpos1 = blockpos.m_7495_();
+             if (this.f_25203_.m_8055_(blockpos1).m_60713_(Blocks.f_50440_)) {
+-               if (this.f_25203_.m_46469_().m_46207_(GameRules.f_46132_)) {
++               if (net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.f_25203_, this.f_25202_)) {
+                   this.f_25203_.m_46796_(2001, blockpos1, Block.m_49956_(Blocks.f_50440_.m_49966_()));
+                   this.f_25203_.m_7731_(blockpos1, Blocks.f_50493_.m_49966_(), 2);
+                }

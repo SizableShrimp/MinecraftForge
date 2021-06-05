@@ -1,0 +1,18 @@
+--- a/net/minecraft/world/entity/npc/WanderingTrader.java
++++ b/net/minecraft/world/entity/npc/WanderingTrader.java
+@@ -57,11 +_,11 @@
+ 
+    protected void m_8099_() {
+       this.f_21345_.m_25352_(0, new FloatGoal(this));
+-      this.f_21345_.m_25352_(0, new UseItemGoal<>(this, PotionUtils.m_43549_(new ItemStack(Items.f_42589_), Potions.f_43605_), SoundEvents.f_12584_, (p_35882_) -> {
+-         return this.f_19853_.m_46462_() && !p_35882_.m_20145_();
++      this.f_21345_.m_25352_(0, new UseItemGoal<>(this, PotionUtils.m_43549_(new ItemStack(Items.f_42589_), Potions.f_43605_), SoundEvents.f_12584_, (p_213733_1_) -> {
++         return this.f_19853_.m_46462_() && !p_213733_1_.m_20145_();
+       }));
+-      this.f_21345_.m_25352_(0, new UseItemGoal<>(this, new ItemStack(Items.f_42455_), SoundEvents.f_12589_, (p_35880_) -> {
+-         return this.f_19853_.m_46461_() && p_35880_.m_20145_();
++      this.f_21345_.m_25352_(0, new UseItemGoal<>(this, new ItemStack(Items.f_42455_), SoundEvents.f_12589_, (p_213736_1_) -> {
++         return this.f_19853_.m_46461_() && p_213736_1_.m_20145_();
+       }));
+       this.f_21345_.m_25352_(1, new TradeWithPlayerGoal(this));
+       this.f_21345_.m_25352_(1, new AvoidEntityGoal<>(this, Zombie.class, 8.0F, 0.5D, 0.5D));

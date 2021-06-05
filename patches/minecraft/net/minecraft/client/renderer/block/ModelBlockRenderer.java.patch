@@ -1,0 +1,297 @@
+--- a/net/minecraft/client/renderer/block/ModelBlockRenderer.java
++++ b/net/minecraft/client/renderer/block/ModelBlockRenderer.java
+@@ -38,65 +_,78 @@
+       this.f_110995_ = p_110999_;
+    }
+ 
++   @Deprecated //Forge: Model data argument
+    public boolean m_111047_(BlockAndTintGetter p_111048_, BakedModel p_111049_, BlockState p_111050_, BlockPos p_111051_, PoseStack p_111052_, VertexConsumer p_111053_, boolean p_111054_, Random p_111055_, long p_111056_, int p_111057_) {
+-      boolean flag = Minecraft.m_91086_() && p_111050_.m_60791_() == 0 && p_111049_.m_7541_();
+-      Vec3 vec3 = p_111050_.m_60824_(p_111048_, p_111051_);
+-      p_111052_.m_85837_(vec3.f_82479_, vec3.f_82480_, vec3.f_82481_);
++       return renderModel(p_111048_, p_111049_, p_111050_, p_111051_, p_111052_, p_111053_, p_111054_, p_111055_, p_111056_, p_111057_, net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
++   }
++   public boolean renderModel(BlockAndTintGetter worldIn, BakedModel modelIn, BlockState stateIn, BlockPos posIn, PoseStack matrixIn, VertexConsumer buffer, boolean checkSides, Random randomIn, long rand, int combinedOverlayIn, net.minecraftforge.client.model.data.IModelData modelData) {
++      boolean flag = Minecraft.m_91086_() && stateIn.getLightValue(worldIn, posIn) == 0 && modelIn.m_7541_();
++      Vec3 vec3 = stateIn.m_60824_(worldIn, posIn);
++      matrixIn.m_85837_(vec3.f_82479_, vec3.f_82480_, vec3.f_82481_);
++      modelData = modelIn.getModelData(worldIn, posIn, stateIn, modelData);
+ 
+       try {
+-         return flag ? this.m_111078_(p_111048_, p_111049_, p_111050_, p_111051_, p_111052_, p_111053_, p_111054_, p_111055_, p_111056_, p_111057_) : this.m_111090_(p_111048_, p_111049_, p_111050_, p_111051_, p_111052_, p_111053_, p_111054_, p_111055_, p_111056_, p_111057_);
++         return flag ? this.renderModelSmooth(worldIn, modelIn, stateIn, posIn, matrixIn, buffer, checkSides, randomIn, rand, combinedOverlayIn, modelData) : this.renderModelFlat(worldIn, modelIn, stateIn, posIn, matrixIn, buffer, checkSides, randomIn, rand, combinedOverlayIn, modelData);
+       } catch (Throwable throwable) {
+          CrashReport crashreport = CrashReport.m_127521_(throwable, "Tesselating block model");
+          CrashReportCategory crashreportcategory = crashreport.m_127514_("Block model being tesselated");
+-         CrashReportCategory.m_128170_(crashreportcategory, p_111051_, p_111050_);
++         CrashReportCategory.m_128170_(crashreportcategory, posIn, stateIn);
+          crashreportcategory.m_128159_("Using AO", flag);
+          throw new ReportedException(crashreport);
+       }
+    }
+ 
++   @Deprecated //Forge: Model data argument
+    public boolean m_111078_(BlockAndTintGetter p_111079_, BakedModel p_111080_, BlockState p_111081_, BlockPos p_111082_, PoseStack p_111083_, VertexConsumer p_111084_, boolean p_111085_, Random p_111086_, long p_111087_, int p_111088_) {
++       return renderModelSmooth(p_111079_, p_111080_, p_111081_, p_111082_, p_111083_, p_111084_, p_111085_, p_111086_, p_111087_, p_111088_, net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
++   }
++   public boolean renderModelSmooth(BlockAndTintGetter worldIn, BakedModel modelIn, BlockState stateIn, BlockPos posIn, PoseStack matrixStackIn, VertexConsumer buffer, boolean checkSides, Random randomIn, long rand, int combinedOverlayIn, net.minecraftforge.client.model.data.IModelData modelData) {
+       boolean flag = false;
+       float[] afloat = new float[Direction.values().length * 2];
+       BitSet bitset = new BitSet(3);
+       ModelBlockRenderer.AmbientOcclusionFace modelblockrenderer$ambientocclusionface = new ModelBlockRenderer.AmbientOcclusionFace();
+ 
+       for(Direction direction : Direction.values()) {
+-         p_111086_.setSeed(p_111087_);
+-         List<BakedQuad> list = p_111080_.m_6840_(p_111081_, direction, p_111086_);
+-         if (!list.isEmpty() && (!p_111085_ || Block.m_49945_(p_111081_, p_111079_, p_111082_, direction))) {
+-            this.m_111012_(p_111079_, p_111081_, p_111082_, p_111083_, p_111084_, list, afloat, bitset, modelblockrenderer$ambientocclusionface, p_111088_);
++         randomIn.setSeed(rand);
++         List<BakedQuad> list = modelIn.getQuads(stateIn, direction, randomIn, modelData);
++         if (!list.isEmpty() && (!checkSides || Block.m_49945_(stateIn, worldIn, posIn, direction))) {
++            this.m_111012_(worldIn, stateIn, posIn, matrixStackIn, buffer, list, afloat, bitset, modelblockrenderer$ambientocclusionface, combinedOverlayIn);
+             flag = true;
+          }
+       }
+ 
+-      p_111086_.setSeed(p_111087_);
+-      List<BakedQuad> list1 = p_111080_.m_6840_(p_111081_, (Direction)null, p_111086_);
++      randomIn.setSeed(rand);
++      List<BakedQuad> list1 = modelIn.getQuads(stateIn, (Direction)null, randomIn, modelData);
+       if (!list1.isEmpty()) {
+-         this.m_111012_(p_111079_, p_111081_, p_111082_, p_111083_, p_111084_, list1, afloat, bitset, modelblockrenderer$ambientocclusionface, p_111088_);
++         this.m_111012_(worldIn, stateIn, posIn, matrixStackIn, buffer, list1, afloat, bitset, modelblockrenderer$ambientocclusionface, combinedOverlayIn);
+          flag = true;
+       }
+ 
+       return flag;
+    }
+ 
++   @Deprecated //Forge: Model data argument
+    public boolean m_111090_(BlockAndTintGetter p_111091_, BakedModel p_111092_, BlockState p_111093_, BlockPos p_111094_, PoseStack p_111095_, VertexConsumer p_111096_, boolean p_111097_, Random p_111098_, long p_111099_, int p_111100_) {
++       return renderModelFlat(p_111091_, p_111092_, p_111093_, p_111094_, p_111095_, p_111096_, p_111097_, p_111098_, p_111099_, p_111100_, net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
++   }
++   public boolean renderModelFlat(BlockAndTintGetter worldIn, BakedModel modelIn, BlockState stateIn, BlockPos posIn, PoseStack matrixStackIn, VertexConsumer buffer, boolean checkSides, Random randomIn, long rand, int combinedOverlayIn, net.minecraftforge.client.model.data.IModelData modelData) {
+       boolean flag = false;
+       BitSet bitset = new BitSet(3);
+ 
+       for(Direction direction : Direction.values()) {
+-         p_111098_.setSeed(p_111099_);
+-         List<BakedQuad> list = p_111092_.m_6840_(p_111093_, direction, p_111098_);
+-         if (!list.isEmpty() && (!p_111097_ || Block.m_49945_(p_111093_, p_111091_, p_111094_, direction))) {
+-            int i = LevelRenderer.m_109537_(p_111091_, p_111093_, p_111094_.m_121945_(direction));
+-            this.m_111001_(p_111091_, p_111093_, p_111094_, i, p_111100_, false, p_111095_, p_111096_, list, bitset);
++         randomIn.setSeed(rand);
++         List<BakedQuad> list = modelIn.getQuads(stateIn, direction, randomIn, modelData);
++         if (!list.isEmpty() && (!checkSides || Block.m_49945_(stateIn, worldIn, posIn, direction))) {
++            int i = LevelRenderer.m_109537_(worldIn, stateIn, posIn.m_121945_(direction));
++            this.m_111001_(worldIn, stateIn, posIn, i, combinedOverlayIn, false, matrixStackIn, buffer, list, bitset);
+             flag = true;
+          }
+       }
+ 
+-      p_111098_.setSeed(p_111099_);
+-      List<BakedQuad> list1 = p_111092_.m_6840_(p_111093_, (Direction)null, p_111098_);
++      randomIn.setSeed(rand);
++      List<BakedQuad> list1 = modelIn.getQuads(stateIn, (Direction)null, randomIn, modelData);
+       if (!list1.isEmpty()) {
+-         this.m_111001_(p_111091_, p_111093_, p_111094_, -1, p_111100_, true, p_111095_, p_111096_, list1, bitset);
++         this.m_111001_(worldIn, stateIn, posIn, -1, combinedOverlayIn, true, matrixStackIn, buffer, list1, bitset);
+          flag = true;
+       }
+ 
+@@ -210,17 +_,21 @@
+ 
+    }
+ 
++   @Deprecated //Forge: Model data argument
+    public void m_111067_(PoseStack.Pose p_111068_, VertexConsumer p_111069_, @Nullable BlockState p_111070_, BakedModel p_111071_, float p_111072_, float p_111073_, float p_111074_, int p_111075_, int p_111076_) {
++      renderModel(p_111068_, p_111069_, p_111070_, p_111071_, p_111072_, p_111073_, p_111074_, p_111075_, p_111076_, net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
++   }
++   public void renderModel(PoseStack.Pose p_228804_1_, VertexConsumer p_228804_2_, @Nullable BlockState p_228804_3_, BakedModel p_228804_4_, float p_228804_5_, float p_228804_6_, float p_228804_7_, int p_228804_8_, int p_228804_9_, net.minecraftforge.client.model.data.IModelData modelData) {
+       Random random = new Random();
+       long i = 42L;
+ 
+       for(Direction direction : Direction.values()) {
+          random.setSeed(42L);
+-         m_111058_(p_111068_, p_111069_, p_111072_, p_111073_, p_111074_, p_111071_.m_6840_(p_111070_, direction, random), p_111075_, p_111076_);
++         m_111058_(p_228804_1_, p_228804_2_, p_228804_5_, p_228804_6_, p_228804_7_, p_228804_4_.getQuads(p_228804_3_, direction, random, modelData), p_228804_8_, p_228804_9_);
+       }
+ 
+       random.setSeed(42L);
+-      m_111058_(p_111068_, p_111069_, p_111072_, p_111073_, p_111074_, p_111071_.m_6840_(p_111070_, (Direction)null, random), p_111075_, p_111076_);
++      m_111058_(p_228804_1_, p_228804_2_, p_228804_5_, p_228804_6_, p_228804_7_, p_228804_4_.getQuads(p_228804_3_, (Direction)null, random, modelData), p_228804_8_, p_228804_9_);
+    }
+ 
+    private static void m_111058_(PoseStack.Pose p_111059_, VertexConsumer p_111060_, float p_111061_, float p_111062_, float p_111063_, List<BakedQuad> p_111064_, int p_111065_, int p_111066_) {
+@@ -252,44 +_,6 @@
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
+-   public static enum AdjacencyInfo {
+-      DOWN(new Direction[]{Direction.WEST, Direction.EAST, Direction.NORTH, Direction.SOUTH}, 0.5F, true, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.SOUTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.SOUTH}),
+-      UP(new Direction[]{Direction.EAST, Direction.WEST, Direction.NORTH, Direction.SOUTH}, 1.0F, true, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.SOUTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.SOUTH}),
+-      NORTH(new Direction[]{Direction.UP, Direction.DOWN, Direction.EAST, Direction.WEST}, 0.8F, true, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_WEST}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_EAST}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_EAST}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_WEST}),
+-      SOUTH(new Direction[]{Direction.WEST, Direction.EAST, Direction.DOWN, Direction.UP}, 0.8F, true, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.WEST}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.WEST}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.EAST}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.EAST}),
+-      WEST(new Direction[]{Direction.UP, Direction.DOWN, Direction.NORTH, Direction.SOUTH}, 0.6F, true, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.SOUTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.SOUTH}),
+-      EAST(new Direction[]{Direction.DOWN, Direction.UP, Direction.NORTH, Direction.SOUTH}, 0.6F, true, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.SOUTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.SOUTH});
+-
+-      private final Direction[] f_111110_;
+-      private final boolean f_111111_;
+-      private final ModelBlockRenderer.SizeInfo[] f_111112_;
+-      private final ModelBlockRenderer.SizeInfo[] f_111113_;
+-      private final ModelBlockRenderer.SizeInfo[] f_111114_;
+-      private final ModelBlockRenderer.SizeInfo[] f_111115_;
+-      private static final ModelBlockRenderer.AdjacencyInfo[] f_111116_ = Util.m_137469_(new ModelBlockRenderer.AdjacencyInfo[6], (p_111134_) -> {
+-         p_111134_[Direction.DOWN.m_122411_()] = DOWN;
+-         p_111134_[Direction.UP.m_122411_()] = UP;
+-         p_111134_[Direction.NORTH.m_122411_()] = NORTH;
+-         p_111134_[Direction.SOUTH.m_122411_()] = SOUTH;
+-         p_111134_[Direction.WEST.m_122411_()] = WEST;
+-         p_111134_[Direction.EAST.m_122411_()] = EAST;
+-      });
+-
+-      private AdjacencyInfo(Direction[] p_111122_, float p_111123_, boolean p_111124_, ModelBlockRenderer.SizeInfo[] p_111125_, ModelBlockRenderer.SizeInfo[] p_111126_, ModelBlockRenderer.SizeInfo[] p_111127_, ModelBlockRenderer.SizeInfo[] p_111128_) {
+-         this.f_111110_ = p_111122_;
+-         this.f_111111_ = p_111124_;
+-         this.f_111112_ = p_111125_;
+-         this.f_111113_ = p_111126_;
+-         this.f_111114_ = p_111127_;
+-         this.f_111115_ = p_111128_;
+-      }
+-
+-      public static ModelBlockRenderer.AdjacencyInfo m_111131_(Direction p_111132_) {
+-         return f_111116_[p_111132_.m_122411_()];
+-      }
+-   }
+-
+-   @OnlyIn(Dist.CLIENT)
+    class AmbientOcclusionFace {
+       private final float[] f_111149_ = new float[4];
+       private final int[] f_111150_ = new int[4];
+@@ -463,40 +_,6 @@
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
+-   static enum AmbientVertexRemap {
+-      DOWN(0, 1, 2, 3),
+-      UP(2, 3, 0, 1),
+-      NORTH(3, 0, 1, 2),
+-      SOUTH(0, 1, 2, 3),
+-      WEST(3, 0, 1, 2),
+-      EAST(1, 2, 3, 0);
+-
+-      private final int f_111185_;
+-      private final int f_111186_;
+-      private final int f_111187_;
+-      private final int f_111188_;
+-      private static final ModelBlockRenderer.AmbientVertexRemap[] f_111189_ = Util.m_137469_(new ModelBlockRenderer.AmbientVertexRemap[6], (p_111204_) -> {
+-         p_111204_[Direction.DOWN.m_122411_()] = DOWN;
+-         p_111204_[Direction.UP.m_122411_()] = UP;
+-         p_111204_[Direction.NORTH.m_122411_()] = NORTH;
+-         p_111204_[Direction.SOUTH.m_122411_()] = SOUTH;
+-         p_111204_[Direction.WEST.m_122411_()] = WEST;
+-         p_111204_[Direction.EAST.m_122411_()] = EAST;
+-      });
+-
+-      private AmbientVertexRemap(int p_111195_, int p_111196_, int p_111197_, int p_111198_) {
+-         this.f_111185_ = p_111195_;
+-         this.f_111186_ = p_111196_;
+-         this.f_111187_ = p_111197_;
+-         this.f_111188_ = p_111198_;
+-      }
+-
+-      public static ModelBlockRenderer.AmbientVertexRemap m_111201_(Direction p_111202_) {
+-         return f_111189_[p_111202_.m_122411_()];
+-      }
+-   }
+-
+-   @OnlyIn(Dist.CLIENT)
+    static class Cache {
+       private boolean f_111214_;
+       private final Long2IntLinkedOpenHashMap f_111215_ = Util.m_137537_(() -> {
+@@ -573,6 +_,44 @@
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
++   public static enum AdjacencyInfo {
++      DOWN(new Direction[]{Direction.WEST, Direction.EAST, Direction.NORTH, Direction.SOUTH}, 0.5F, true, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.SOUTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.SOUTH}),
++      UP(new Direction[]{Direction.EAST, Direction.WEST, Direction.NORTH, Direction.SOUTH}, 1.0F, true, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.SOUTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.SOUTH}),
++      NORTH(new Direction[]{Direction.UP, Direction.DOWN, Direction.EAST, Direction.WEST}, 0.8F, true, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_WEST}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_EAST}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_EAST}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_WEST}),
++      SOUTH(new Direction[]{Direction.WEST, Direction.EAST, Direction.DOWN, Direction.UP}, 0.8F, true, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.WEST}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_WEST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.WEST, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.WEST}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.EAST}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_EAST, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.EAST, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.EAST}),
++      WEST(new Direction[]{Direction.UP, Direction.DOWN, Direction.NORTH, Direction.SOUTH}, 0.6F, true, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.SOUTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.SOUTH}),
++      EAST(new Direction[]{Direction.DOWN, Direction.UP, Direction.NORTH, Direction.SOUTH}, 0.6F, true, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.SOUTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.FLIP_DOWN, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.DOWN, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.NORTH, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_NORTH, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.NORTH}, new ModelBlockRenderer.SizeInfo[]{ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.SOUTH, ModelBlockRenderer.SizeInfo.FLIP_UP, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.FLIP_SOUTH, ModelBlockRenderer.SizeInfo.UP, ModelBlockRenderer.SizeInfo.SOUTH});
++
++      private final Direction[] f_111110_;
++      private final boolean f_111111_;
++      private final ModelBlockRenderer.SizeInfo[] f_111112_;
++      private final ModelBlockRenderer.SizeInfo[] f_111113_;
++      private final ModelBlockRenderer.SizeInfo[] f_111114_;
++      private final ModelBlockRenderer.SizeInfo[] f_111115_;
++      private static final ModelBlockRenderer.AdjacencyInfo[] f_111116_ = Util.m_137469_(new ModelBlockRenderer.AdjacencyInfo[6], (p_209260_0_) -> {
++         p_209260_0_[Direction.DOWN.m_122411_()] = DOWN;
++         p_209260_0_[Direction.UP.m_122411_()] = UP;
++         p_209260_0_[Direction.NORTH.m_122411_()] = NORTH;
++         p_209260_0_[Direction.SOUTH.m_122411_()] = SOUTH;
++         p_209260_0_[Direction.WEST.m_122411_()] = WEST;
++         p_209260_0_[Direction.EAST.m_122411_()] = EAST;
++      });
++
++      private AdjacencyInfo(Direction[] p_111122_, float p_111123_, boolean p_111124_, ModelBlockRenderer.SizeInfo[] p_111125_, ModelBlockRenderer.SizeInfo[] p_111126_, ModelBlockRenderer.SizeInfo[] p_111127_, ModelBlockRenderer.SizeInfo[] p_111128_) {
++         this.f_111110_ = p_111122_;
++         this.f_111111_ = p_111124_;
++         this.f_111112_ = p_111125_;
++         this.f_111113_ = p_111126_;
++         this.f_111114_ = p_111127_;
++         this.f_111115_ = p_111128_;
++      }
++
++      public static ModelBlockRenderer.AdjacencyInfo m_111131_(Direction p_111132_) {
++         return f_111116_[p_111132_.m_122411_()];
++      }
++   }
++
++   @OnlyIn(Dist.CLIENT)
+    public static enum SizeInfo {
+       DOWN(Direction.DOWN, false),
+       UP(Direction.UP, false),
+@@ -591,6 +_,40 @@
+ 
+       private SizeInfo(Direction p_111264_, boolean p_111265_) {
+          this.f_111258_ = p_111264_.m_122411_() + (p_111265_ ? Direction.values().length : 0);
++      }
++   }
++
++   @OnlyIn(Dist.CLIENT)
++   static enum AmbientVertexRemap {
++      DOWN(0, 1, 2, 3),
++      UP(2, 3, 0, 1),
++      NORTH(3, 0, 1, 2),
++      SOUTH(0, 1, 2, 3),
++      WEST(3, 0, 1, 2),
++      EAST(1, 2, 3, 0);
++
++      private final int f_111185_;
++      private final int f_111186_;
++      private final int f_111187_;
++      private final int f_111188_;
++      private static final ModelBlockRenderer.AmbientVertexRemap[] f_111189_ = Util.m_137469_(new ModelBlockRenderer.AmbientVertexRemap[6], (p_209261_0_) -> {
++         p_209261_0_[Direction.DOWN.m_122411_()] = DOWN;
++         p_209261_0_[Direction.UP.m_122411_()] = UP;
++         p_209261_0_[Direction.NORTH.m_122411_()] = NORTH;
++         p_209261_0_[Direction.SOUTH.m_122411_()] = SOUTH;
++         p_209261_0_[Direction.WEST.m_122411_()] = WEST;
++         p_209261_0_[Direction.EAST.m_122411_()] = EAST;
++      });
++
++      private AmbientVertexRemap(int p_111195_, int p_111196_, int p_111197_, int p_111198_) {
++         this.f_111185_ = p_111195_;
++         this.f_111186_ = p_111196_;
++         this.f_111187_ = p_111197_;
++         this.f_111188_ = p_111198_;
++      }
++
++      public static ModelBlockRenderer.AmbientVertexRemap m_111201_(Direction p_111202_) {
++         return f_111189_[p_111202_.m_122411_()];
+       }
+    }
+ }

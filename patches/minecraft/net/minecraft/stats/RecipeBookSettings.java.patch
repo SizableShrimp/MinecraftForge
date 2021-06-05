@@ -1,0 +1,42 @@
+--- a/net/minecraft/stats/RecipeBookSettings.java
++++ b/net/minecraft/stats/RecipeBookSettings.java
+@@ -20,9 +_,9 @@
+    }
+ 
+    public RecipeBookSettings() {
+-      this(Util.m_137469_(Maps.newEnumMap(RecipeBookType.class), (p_12740_) -> {
++      this(Util.m_137469_(Maps.newEnumMap(RecipeBookType.class), (p_242153_0_) -> {
+          for(RecipeBookType recipebooktype : RecipeBookType.values()) {
+-            p_12740_.put(recipebooktype, new RecipeBookSettings.TypeSettings(false, false));
++            p_242153_0_.put(recipebooktype, new RecipeBookSettings.TypeSettings(false, false));
+          }
+ 
+       }));
+@@ -74,19 +_,19 @@
+ 
+    public static RecipeBookSettings m_12741_(CompoundTag p_12742_) {
+       Map<RecipeBookType, RecipeBookSettings.TypeSettings> map = Maps.newEnumMap(RecipeBookType.class);
+-      f_12725_.forEach((p_12750_, p_12751_) -> {
+-         boolean flag = p_12742_.m_128471_(p_12751_.getFirst());
+-         boolean flag1 = p_12742_.m_128471_(p_12751_.getSecond());
+-         map.put(p_12750_, new RecipeBookSettings.TypeSettings(flag, flag1));
++      f_12725_.forEach((p_242156_2_, p_242156_3_) -> {
++         boolean flag = p_12742_.m_128471_(p_242156_3_.getFirst());
++         boolean flag1 = p_12742_.m_128471_(p_242156_3_.getSecond());
++         map.put(p_242156_2_, new RecipeBookSettings.TypeSettings(flag, flag1));
+       });
+       return new RecipeBookSettings(map);
+    }
+ 
+    public void m_12759_(CompoundTag p_12760_) {
+-      f_12725_.forEach((p_12745_, p_12746_) -> {
+-         RecipeBookSettings.TypeSettings recipebooksettings$typesettings = this.f_12726_.get(p_12745_);
+-         p_12760_.m_128379_(p_12746_.getFirst(), recipebooksettings$typesettings.f_12766_);
+-         p_12760_.m_128379_(p_12746_.getSecond(), recipebooksettings$typesettings.f_12767_);
++      f_12725_.forEach((p_242155_2_, p_242155_3_) -> {
++         RecipeBookSettings.TypeSettings recipebooksettings$typesettings = this.f_12726_.get(p_242155_2_);
++         p_12760_.m_128379_(p_242155_3_.getFirst(), recipebooksettings$typesettings.f_12766_);
++         p_12760_.m_128379_(p_242155_3_.getSecond(), recipebooksettings$typesettings.f_12767_);
+       });
+    }
+ 

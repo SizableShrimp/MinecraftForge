@@ -1,0 +1,36 @@
+--- a/net/minecraft/world/level/storage/loot/IntLimiter.java
++++ b/net/minecraft/world/level/storage/loot/IntLimiter.java
+@@ -23,25 +_,25 @@
+       this.f_78856_ = p_78860_;
+       if (p_78859_ == null) {
+          if (p_78860_ == null) {
+-            this.f_78857_ = (p_78886_) -> {
+-               return p_78886_;
++            this.f_78857_ = (p_215845_0_) -> {
++               return p_215845_0_;
+             };
+          } else {
+             int i = p_78860_;
+-            this.f_78857_ = (p_78889_) -> {
+-               return Math.min(i, p_78889_);
++            this.f_78857_ = (p_215844_1_) -> {
++               return Math.min(i, p_215844_1_);
+             };
+          }
+       } else {
+          int k = p_78859_;
+          if (p_78860_ == null) {
+-            this.f_78857_ = (p_78882_) -> {
+-               return Math.max(k, p_78882_);
++            this.f_78857_ = (p_215846_1_) -> {
++               return Math.max(k, p_215846_1_);
+             };
+          } else {
+             int j = p_78860_;
+-            this.f_78857_ = (p_78873_) -> {
+-               return Mth.m_14045_(p_78873_, k, j);
++            this.f_78857_ = (p_215847_2_) -> {
++               return Mth.m_14045_(p_215847_2_, k, j);
+             };
+          }
+       }

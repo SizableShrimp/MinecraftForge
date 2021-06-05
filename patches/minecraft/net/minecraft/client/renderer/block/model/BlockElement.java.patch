@@ -1,0 +1,21 @@
+--- a/net/minecraft/client/renderer/block/model/BlockElement.java
++++ b/net/minecraft/client/renderer/block/model/BlockElement.java
+@@ -44,7 +_,7 @@
+ 
+    }
+ 
+-   private float[] m_111320_(Direction p_111321_) {
++   public float[] m_111320_(Direction p_111321_) {
+       switch(p_111321_) {
+       case DOWN:
+          return new float[]{this.f_111308_.m_122239_(), 16.0F - this.f_111309_.m_122269_(), this.f_111309_.m_122239_(), 16.0F - this.f_111308_.m_122269_()};
+@@ -64,9 +_,6 @@
+ 
+    @OnlyIn(Dist.CLIENT)
+    public static class Deserializer implements JsonDeserializer<BlockElement> {
+-      protected Deserializer() {
+-      }
+-
+       public BlockElement deserialize(JsonElement p_111329_, Type p_111330_, JsonDeserializationContext p_111331_) throws JsonParseException {
+          JsonObject jsonobject = p_111329_.getAsJsonObject();
+          Vector3f vector3f = this.m_111352_(jsonobject);

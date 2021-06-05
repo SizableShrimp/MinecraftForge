@@ -1,0 +1,13 @@
+--- a/net/minecraft/client/sounds/ChannelAccess.java
++++ b/net/minecraft/client/sounds/ChannelAccess.java
+@@ -43,8 +_,8 @@
+ 
+    public void m_120137_(Consumer<Stream<Channel>> p_120138_) {
+       this.f_120123_.execute(() -> {
+-         p_120138_.accept(this.f_120121_.stream().map((p_120134_) -> {
+-            return p_120134_.f_120146_;
++         p_120138_.accept(this.f_120121_.stream().map((p_217896_0_) -> {
++            return p_217896_0_.f_120146_;
+          }).filter(Objects::nonNull));
+       });
+    }

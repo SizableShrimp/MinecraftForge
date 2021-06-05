@@ -1,0 +1,41 @@
+--- a/net/minecraft/commands/synchronization/ArgumentTypes.java
++++ b/net/minecraft/commands/synchronization/ArgumentTypes.java
+@@ -136,7 +_,7 @@
+    }
+ 
+    public static <T extends ArgumentType<?>> void m_121611_(FriendlyByteBuf p_121612_, T p_121613_) {
+-      ArgumentTypes.Entry<T> entry = (ArgumentTypes.Entry<T>)m_121616_(p_121613_);
++      ArgumentTypes.Entry<T> entry = (Entry<T>) m_121616_(p_121613_);
+       if (entry == null) {
+          f_121582_.error("Could not serialize {} ({}) - will not be sent to client!", p_121613_, p_121613_.getClass());
+          p_121612_.m_130085_(new ResourceLocation(""));
+@@ -159,7 +_,7 @@
+    }
+ 
+    private static <T extends ArgumentType<?>> void m_121587_(JsonObject p_121588_, T p_121589_) {
+-      ArgumentTypes.Entry<T> entry = (ArgumentTypes.Entry<T>)m_121616_(p_121589_);
++      ArgumentTypes.Entry<T> entry = (Entry<T>) m_121616_(p_121589_);
+       if (entry == null) {
+          f_121582_.error("Could not serialize argument {} ({})!", p_121589_, p_121589_.getClass());
+          p_121588_.addProperty("type", "unknown");
+@@ -235,8 +_,8 @@
+             p_121599_.add(((ArgumentCommandNode)p_121598_).getType());
+          }
+ 
+-         p_121598_.getChildren().forEach((p_121608_) -> {
+-            m_121597_(p_121608_, p_121599_, p_121600_);
++         p_121598_.getChildren().forEach((p_243513_2_) -> {
++            m_121597_(p_243513_2_, p_121599_, p_121600_);
+          });
+          CommandNode<T> commandnode = p_121598_.getRedirect();
+          if (commandnode != null) {
+@@ -256,5 +_,9 @@
+          this.f_121619_ = p_121623_;
+          this.f_121620_ = p_121624_;
+       }
++   }
++   @javax.annotation.Nullable public static ResourceLocation getId(ArgumentType<?> type) {
++      Entry<?> entry = m_121616_(type);
++      return entry == null ? null : entry.f_121620_;
+    }
+ }

@@ -1,0 +1,61 @@
+--- a/net/minecraft/client/gui/screens/worldselection/WorldPreset.java
++++ b/net/minecraft/client/gui/screens/worldselection/WorldPreset.java
+@@ -93,29 +_,32 @@
+       }
+    };
+    protected static final List<WorldPreset> f_101508_ = Lists.newArrayList(f_101506_, f_101510_, f_101511_, f_101507_, f_101512_, f_101513_, f_101514_, f_101515_);
+-   protected static final Map<Optional<WorldPreset>, WorldPreset.PresetEditor> f_101509_ = ImmutableMap.of(Optional.of(f_101510_), (p_101573_, p_101574_) -> {
+-      ChunkGenerator chunkgenerator = p_101574_.m_64666_();
+-      return new CreateFlatWorldScreen(p_101573_, (p_101536_) -> {
+-         p_101573_.f_100847_.m_101404_(new WorldGenSettings(p_101574_.m_64619_(), p_101574_.m_64657_(), p_101574_.m_64660_(), WorldGenSettings.m_64633_(p_101573_.f_100847_.m_101456_().m_123090_(Registry.f_122818_), p_101574_.m_64663_(), new FlatLevelSource(p_101536_))));
+-      }, chunkgenerator instanceof FlatLevelSource ? ((FlatLevelSource)chunkgenerator).m_64191_() : FlatLevelGeneratorSettings.m_70376_(p_101573_.f_100847_.m_101456_().m_123090_(Registry.f_122885_)));
+-   }, Optional.of(f_101512_), (p_101564_, p_101565_) -> {
+-      return new CreateBuffetWorldScreen(p_101564_, p_101564_.f_100847_.m_101456_(), (p_101569_) -> {
+-         p_101564_.f_100847_.m_101404_(m_101549_(p_101564_.f_100847_.m_101456_(), p_101565_, f_101512_, p_101569_));
+-      }, m_101546_(p_101564_.f_100847_.m_101456_(), p_101565_));
+-   }, Optional.of(f_101513_), (p_101555_, p_101556_) -> {
+-      return new CreateBuffetWorldScreen(p_101555_, p_101555_.f_100847_.m_101456_(), (p_101560_) -> {
+-         p_101555_.f_100847_.m_101404_(m_101549_(p_101555_.f_100847_.m_101456_(), p_101556_, f_101513_, p_101560_));
+-      }, m_101546_(p_101555_.f_100847_.m_101456_(), p_101556_));
+-   }, Optional.of(f_101514_), (p_101527_, p_101528_) -> {
+-      return new CreateBuffetWorldScreen(p_101527_, p_101527_.f_100847_.m_101456_(), (p_101532_) -> {
+-         p_101527_.f_100847_.m_101404_(m_101549_(p_101527_.f_100847_.m_101456_(), p_101528_, f_101514_, p_101532_));
+-      }, m_101546_(p_101527_.f_100847_.m_101456_(), p_101528_));
++   protected static final Map<Optional<WorldPreset>, WorldPreset.PresetEditor> f_101509_ = ImmutableMap.of(Optional.of(f_101510_), (p_239089_0_, p_239089_1_) -> {
++      ChunkGenerator chunkgenerator = p_239089_1_.m_64666_();
++      return new CreateFlatWorldScreen(p_239089_0_, (p_239083_2_) -> {
++         p_239089_0_.f_100847_.m_101404_(new WorldGenSettings(p_239089_1_.m_64619_(), p_239089_1_.m_64657_(), p_239089_1_.m_64660_(), WorldGenSettings.m_64633_(p_239089_0_.f_100847_.m_101456_().m_123090_(Registry.f_122818_), p_239089_1_.m_64663_(), new FlatLevelSource(p_239083_2_))));
++      }, chunkgenerator instanceof FlatLevelSource ? ((FlatLevelSource)chunkgenerator).m_64191_() : FlatLevelGeneratorSettings.m_70376_(p_239089_0_.f_100847_.m_101456_().m_123090_(Registry.f_122885_)));
++   }, Optional.of(f_101512_), (p_239087_0_, p_239087_1_) -> {
++      return new CreateBuffetWorldScreen(p_239087_0_, p_239087_0_.f_100847_.m_101456_(), (p_239088_2_) -> {
++         p_239087_0_.f_100847_.m_101404_(m_101549_(p_239087_0_.f_100847_.m_101456_(), p_239087_1_, f_101512_, p_239088_2_));
++      }, m_101546_(p_239087_0_.f_100847_.m_101456_(), p_239087_1_));
++   }, Optional.of(f_101513_), (p_239085_0_, p_239085_1_) -> {
++      return new CreateBuffetWorldScreen(p_239085_0_, p_239085_0_.f_100847_.m_101456_(), (p_239086_2_) -> {
++         p_239085_0_.f_100847_.m_101404_(m_101549_(p_239085_0_.f_100847_.m_101456_(), p_239085_1_, f_101513_, p_239086_2_));
++      }, m_101546_(p_239085_0_.f_100847_.m_101456_(), p_239085_1_));
++   }, Optional.of(f_101514_), (p_239081_0_, p_239081_1_) -> {
++      return new CreateBuffetWorldScreen(p_239081_0_, p_239081_0_.f_100847_.m_101456_(), (p_239082_2_) -> {
++         p_239081_0_.f_100847_.m_101404_(m_101549_(p_239081_0_.f_100847_.m_101456_(), p_239081_1_, f_101514_, p_239082_2_));
++      }, m_101546_(p_239081_0_.f_100847_.m_101456_(), p_239081_1_));
+    });
+    private final Component f_101516_;
+ 
+    private WorldPreset(String p_101519_) {
+       this.f_101516_ = new TranslatableComponent("generator." + p_101519_);
+    }
++   public WorldPreset(Component displayName) {
++      this.f_101516_ = displayName;
++   }
+ 
+    private static WorldGenSettings m_101549_(RegistryAccess p_101550_, WorldGenSettings p_101551_, WorldPreset p_101552_, Biome p_101553_) {
+       BiomeSource biomesource = new FixedBiomeSource(p_101553_);
+@@ -169,4 +_,8 @@
+    public interface PresetEditor {
+       Screen m_101642_(CreateWorldScreen p_101643_, WorldGenSettings p_101644_);
+    }
++
++   // Forge start
++   // For internal use only, automatically called for all ForgeWorldTypes. Register your ForgeWorldType in the forge registry!
++   public static void registerGenerator(WorldPreset gen) { f_101508_.add(gen); }
+ }

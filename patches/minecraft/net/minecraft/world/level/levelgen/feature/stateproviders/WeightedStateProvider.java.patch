@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/stateproviders/WeightedStateProvider.java
++++ b/net/minecraft/world/level/levelgen/feature/stateproviders/WeightedStateProvider.java
+@@ -8,8 +_,8 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class WeightedStateProvider extends BlockStateProvider {
+-   public static final Codec<WeightedStateProvider> f_68808_ = WeightedList.m_24723_(BlockState.f_61039_).comapFlatMap(WeightedStateProvider::m_68815_, (p_68821_) -> {
+-      return p_68821_.f_68809_;
++   public static final Codec<WeightedStateProvider> f_68808_ = WeightedList.m_24723_(BlockState.f_61039_).comapFlatMap(WeightedStateProvider::m_68815_, (p_236813_0_) -> {
++      return p_236813_0_.f_68809_;
+    }).fieldOf("entries").codec();
+    private final WeightedList<BlockState> f_68809_;
+ 

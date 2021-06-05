@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/inventory/AbstractFurnaceMenu.java
++++ b/net/minecraft/world/inventory/AbstractFurnaceMenu.java
+@@ -65,7 +_,7 @@
+    }
+ 
+    public void m_6951_(boolean p_38982_, Recipe<?> p_38983_, ServerPlayer p_38984_) {
+-      (new ServerPlaceSmeltingRecipe<>(this)).m_135434_(p_38984_, (Recipe<Container>)p_38983_, p_38982_);
++      (new ServerPlaceSmeltingRecipe<>(this)).m_135434_(p_38984_, (Recipe<Container>) p_38983_, p_38982_);
+    }
+ 
+    public boolean m_6032_(Recipe<? super Container> p_38980_) {

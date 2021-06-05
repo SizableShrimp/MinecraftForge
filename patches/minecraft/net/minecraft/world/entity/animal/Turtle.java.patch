@@ -1,0 +1,185 @@
+--- a/net/minecraft/world/entity/animal/Turtle.java
++++ b/net/minecraft/world/entity/animal/Turtle.java
+@@ -39,7 +_,6 @@
+ import net.minecraft.world.entity.ai.goal.Goal;
+ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+ import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
+-import net.minecraft.world.entity.ai.goal.PanicGoal;
+ import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+ import net.minecraft.world.entity.ai.navigation.PathNavigation;
+ import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+@@ -71,8 +_,8 @@
+    private static final EntityDataAccessor<Boolean> f_30127_ = SynchedEntityData.m_135353_(Turtle.class, EntityDataSerializers.f_135035_);
+    private static final EntityDataAccessor<Boolean> f_30128_ = SynchedEntityData.m_135353_(Turtle.class, EntityDataSerializers.f_135035_);
+    private int f_30129_;
+-   public static final Predicate<LivingEntity> f_30122_ = (p_30226_) -> {
+-      return p_30226_.m_6162_() && !p_30226_.m_20069_();
++   public static final Predicate<LivingEntity> f_30122_ = (p_213616_0_) -> {
++      return p_213616_0_.m_6162_() && !p_213616_0_.m_20069_();
+    };
+ 
+    public Turtle(EntityType<? extends Turtle> p_30132_, Level p_30133_) {
+@@ -310,40 +_,6 @@
+       this.m_6469_(DamageSource.f_19306_, Float.MAX_VALUE);
+    }
+ 
+-   static class TurtleBreedGoal extends BreedGoal {
+-      private final Turtle f_30242_;
+-
+-      TurtleBreedGoal(Turtle p_30244_, double p_30245_) {
+-         super(p_30244_, p_30245_);
+-         this.f_30242_ = p_30244_;
+-      }
+-
+-      public boolean m_8036_() {
+-         return super.m_8036_() && !this.f_30242_.m_30205_();
+-      }
+-
+-      protected void m_8026_() {
+-         ServerPlayer serverplayer = this.f_25113_.m_27592_();
+-         if (serverplayer == null && this.f_25115_.m_27592_() != null) {
+-            serverplayer = this.f_25115_.m_27592_();
+-         }
+-
+-         if (serverplayer != null) {
+-            serverplayer.m_36220_(Stats.f_12937_);
+-            CriteriaTriggers.f_10581_.m_18640_(serverplayer, this.f_25113_, this.f_25115_, (AgableMob)null);
+-         }
+-
+-         this.f_30242_.m_30234_(true);
+-         this.f_25113_.m_27594_();
+-         this.f_25115_.m_27594_();
+-         Random random = this.f_25113_.m_21187_();
+-         if (this.f_25114_.m_46469_().m_46207_(GameRules.f_46135_)) {
+-            this.f_25114_.m_7967_(new ExperienceOrb(this.f_25114_, this.f_25113_.m_20185_(), this.f_25113_.m_20186_(), this.f_25113_.m_20189_(), random.nextInt(7) + 1));
+-         }
+-
+-      }
+-   }
+-
+    static class TurtleGoHomeGoal extends Goal {
+       private final Turtle f_30248_;
+       private final double f_30249_;
+@@ -483,6 +_,40 @@
+       }
+    }
+ 
++   static class TurtleBreedGoal extends BreedGoal {
++      private final Turtle f_30242_;
++
++      TurtleBreedGoal(Turtle p_30244_, double p_30245_) {
++         super(p_30244_, p_30245_);
++         this.f_30242_ = p_30244_;
++      }
++
++      public boolean m_8036_() {
++         return super.m_8036_() && !this.f_30242_.m_30205_();
++      }
++
++      protected void m_8026_() {
++         ServerPlayer serverplayer = this.f_25113_.m_27592_();
++         if (serverplayer == null && this.f_25115_.m_27592_() != null) {
++            serverplayer = this.f_25115_.m_27592_();
++         }
++
++         if (serverplayer != null) {
++            serverplayer.m_36220_(Stats.f_12937_);
++            CriteriaTriggers.f_10581_.m_18640_(serverplayer, this.f_25113_, this.f_25115_, (AgableMob)null);
++         }
++
++         this.f_30242_.m_30234_(true);
++         this.f_25113_.m_27594_();
++         this.f_25115_.m_27594_();
++         Random random = this.f_25113_.m_21187_();
++         if (this.f_25114_.m_46469_().m_46207_(GameRules.f_46135_)) {
++            this.f_25114_.m_7967_(new ExperienceOrb(this.f_25114_, this.f_25113_.m_20185_(), this.f_25113_.m_20186_(), this.f_25113_.m_20189_(), random.nextInt(7) + 1));
++         }
++
++      }
++   }
++
+    static class TurtleMoveControl extends MoveControl {
+       private final Turtle f_30284_;
+ 
+@@ -527,28 +_,6 @@
+       }
+    }
+ 
+-   static class TurtlePanicGoal extends PanicGoal {
+-      TurtlePanicGoal(Turtle p_30290_, double p_30291_) {
+-         super(p_30290_, p_30291_);
+-      }
+-
+-      public boolean m_8036_() {
+-         if (this.f_25684_.m_21188_() == null && !this.f_25684_.m_6060_()) {
+-            return false;
+-         } else {
+-            BlockPos blockpos = this.m_25694_(this.f_25684_.f_19853_, this.f_25684_, 7, 4);
+-            if (blockpos != null) {
+-               this.f_25686_ = (double)blockpos.m_123341_();
+-               this.f_25687_ = (double)blockpos.m_123342_();
+-               this.f_25688_ = (double)blockpos.m_123343_();
+-               return true;
+-            } else {
+-               return this.m_25702_();
+-            }
+-         }
+-      }
+-   }
+-
+    static class TurtlePathNavigation extends WaterBoundPathNavigation {
+       TurtlePathNavigation(Turtle p_30294_, Level p_30295_) {
+          super(p_30294_, p_30295_);
+@@ -575,16 +_,25 @@
+       }
+    }
+ 
+-   static class TurtleRandomStrollGoal extends RandomStrollGoal {
+-      private final Turtle f_30301_;
+-
+-      private TurtleRandomStrollGoal(Turtle p_30303_, double p_30304_, int p_30305_) {
+-         super(p_30303_, p_30304_, p_30305_);
+-         this.f_30301_ = p_30303_;
++   static class TurtlePanicGoal extends net.minecraft.world.entity.ai.goal.PanicGoal {
++      TurtlePanicGoal(Turtle p_30290_, double p_30291_) {
++         super(p_30290_, p_30291_);
+       }
+ 
+       public boolean m_8036_() {
+-         return !this.f_25725_.m_20069_() && !this.f_30301_.m_30211_() && !this.f_30301_.m_30205_() ? super.m_8036_() : false;
++         if (this.f_25684_.m_21188_() == null && !this.f_25684_.m_6060_()) {
++            return false;
++         } else {
++            BlockPos blockpos = this.m_25694_(this.f_25684_.f_19853_, this.f_25684_, 7, 4);
++            if (blockpos != null) {
++               this.f_25686_ = (double)blockpos.m_123341_();
++               this.f_25687_ = (double)blockpos.m_123342_();
++               this.f_25688_ = (double)blockpos.m_123343_();
++               return true;
++            } else {
++               return this.m_25702_();
++            }
++         }
+       }
+    }
+ 
+@@ -707,6 +_,19 @@
+       public void m_8041_() {
+          this.f_30329_.m_30240_(false);
+          super.m_8041_();
++      }
++   }
++
++   static class TurtleRandomStrollGoal extends RandomStrollGoal {
++      private final Turtle f_30301_;
++
++      private TurtleRandomStrollGoal(Turtle p_30303_, double p_30304_, int p_30305_) {
++         super(p_30303_, p_30304_, p_30305_);
++         this.f_30301_ = p_30303_;
++      }
++
++      public boolean m_8036_() {
++         return !this.f_25725_.m_20069_() && !this.f_30301_.m_30211_() && !this.f_30301_.m_30205_() ? super.m_8036_() : false;
+       }
+    }
+ }

@@ -1,0 +1,37 @@
+--- a/net/minecraft/world/level/block/entity/ConduitBlockEntity.java
++++ b/net/minecraft/world/level/block/entity/ConduitBlockEntity.java
+@@ -130,10 +_,8 @@
+                   BlockPos blockpos1 = this.f_58858_.m_7918_(j1, k1, l1);
+                   BlockState blockstate = this.f_58857_.m_8055_(blockpos1);
+ 
+-                  for(Block block : f_59184_) {
+-                     if (blockstate.m_60713_(block)) {
+-                        this.f_59188_.add(blockpos1);
+-                     }
++                  if (blockstate.isConduitFrame(this.f_58857_, blockpos1, m_58899_())) {
++                     this.f_59188_.add(blockpos1);
+                   }
+                }
+             }
+@@ -171,8 +_,8 @@
+          this.f_59189_ = this.m_59223_();
+          this.f_59190_ = null;
+       } else if (this.f_59189_ == null) {
+-         List<LivingEntity> list = this.f_58857_.m_6443_(LivingEntity.class, this.m_59222_(), (p_59213_) -> {
+-            return p_59213_ instanceof Enemy && p_59213_.m_20070_();
++         List<LivingEntity> list = this.f_58857_.m_6443_(LivingEntity.class, this.m_59222_(), (p_205033_0_) -> {
++            return p_205033_0_ instanceof Enemy && p_205033_0_.m_20070_();
+          });
+          if (!list.isEmpty()) {
+             this.f_59189_ = list.get(this.f_58857_.f_46441_.nextInt(list.size()));
+@@ -214,8 +_,8 @@
+ 
+    @Nullable
+    private LivingEntity m_59223_() {
+-      List<LivingEntity> list = this.f_58857_.m_6443_(LivingEntity.class, this.m_59222_(), (p_59202_) -> {
+-         return p_59202_.m_20148_().equals(this.f_59190_);
++      List<LivingEntity> list = this.f_58857_.m_6443_(LivingEntity.class, this.m_59222_(), (p_205032_1_) -> {
++         return p_205032_1_.m_20148_().equals(this.f_59190_);
+       });
+       return list.size() == 1 ? list.get(0) : null;
+    }

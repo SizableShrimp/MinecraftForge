@@ -1,0 +1,37 @@
+--- a/net/minecraft/client/gui/screens/CreateBuffetWorldScreen.java
++++ b/net/minecraft/client/gui/screens/CreateBuffetWorldScreen.java
+@@ -48,15 +_,15 @@
+       this.f_96541_.f_91068_.m_90926_(true);
+       this.f_95746_ = new CreateBuffetWorldScreen.BiomeList();
+       this.f_96540_.add(this.f_95746_);
+-      this.f_95748_ = this.m_7082_(new Button(this.f_96543_ / 2 - 155, this.f_96544_ - 28, 150, 20, CommonComponents.f_130655_, (p_95772_) -> {
++      this.f_95748_ = this.m_7082_(new Button(this.f_96543_ / 2 - 155, this.f_96544_ - 28, 150, 20, CommonComponents.f_130655_, (p_241579_1_) -> {
+          this.f_95744_.accept(this.f_95747_);
+          this.f_96541_.m_91152_(this.f_95743_);
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 5, this.f_96544_ - 28, 150, 20, CommonComponents.f_130656_, (p_95761_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 5, this.f_96544_ - 28, 150, 20, CommonComponents.f_130656_, (p_213015_1_) -> {
+          this.f_96541_.m_91152_(this.f_95743_);
+       }));
+-      this.f_95746_.m_6987_(this.f_95746_.m_6702_().stream().filter((p_95763_) -> {
+-         return Objects.equals(p_95763_.f_95792_, this.f_95747_);
++      this.f_95746_.m_6987_(this.f_95746_.m_6702_().stream().filter((p_241578_1_) -> {
++         return Objects.equals(p_241578_1_.f_95792_, this.f_95747_);
+       }).findFirst().orElse((CreateBuffetWorldScreen.BiomeList.Entry)null));
+    }
+ 
+@@ -76,10 +_,10 @@
+    class BiomeList extends ObjectSelectionList<CreateBuffetWorldScreen.BiomeList.Entry> {
+       private BiomeList() {
+          super(CreateBuffetWorldScreen.this.f_96541_, CreateBuffetWorldScreen.this.f_96543_, CreateBuffetWorldScreen.this.f_96544_, 40, CreateBuffetWorldScreen.this.f_96544_ - 37, 16);
+-         CreateBuffetWorldScreen.this.f_95745_.m_6579_().stream().sorted(Comparator.comparing((p_95790_) -> {
+-            return p_95790_.getKey().m_135782_().toString();
+-         })).forEach((p_95787_) -> {
+-            this.m_7085_(new CreateBuffetWorldScreen.BiomeList.Entry(p_95787_.getValue()));
++         CreateBuffetWorldScreen.this.f_95745_.m_6579_().stream().sorted(Comparator.comparing((p_238598_0_) -> {
++            return p_238598_0_.getKey().m_135782_().toString();
++         })).forEach((p_238597_1_) -> {
++            this.m_7085_(new CreateBuffetWorldScreen.BiomeList.Entry(p_238597_1_.getValue()));
+          });
+       }
+ 

@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/Difficulty.java
++++ b/net/minecraft/world/Difficulty.java
+@@ -14,8 +_,8 @@
+    NORMAL(2, "normal"),
+    HARD(3, "hard");
+ 
+-   private static final Difficulty[] f_19018_ = Arrays.stream(values()).sorted(Comparator.comparingInt(Difficulty::m_19028_)).toArray((p_19035_) -> {
+-      return new Difficulty[p_19035_];
++   private static final Difficulty[] f_19018_ = Arrays.stream(values()).sorted(Comparator.comparingInt(Difficulty::m_19028_)).toArray((p_199928_0_) -> {
++      return new Difficulty[p_199928_0_];
+    });
+    private final int f_19019_;
+    private final String f_19020_;

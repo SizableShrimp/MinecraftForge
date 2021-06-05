@@ -26,7 +26,6 @@ import com.google.gson.*;
 import net.minecraft.util.Mth;
 
 import net.minecraft.client.renderer.block.model.ItemTransform;
-import net.minecraft.util.math.vector.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 

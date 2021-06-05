@@ -1,0 +1,30 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/RandomFeatureConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/RandomFeatureConfiguration.java
+@@ -9,11 +_,11 @@
+ import net.minecraft.world.level.levelgen.feature.WeightedConfiguredFeature;
+ 
+ public class RandomFeatureConfiguration implements FeatureConfiguration {
+-   public static final Codec<RandomFeatureConfiguration> f_67881_ = RecordCodecBuilder.create((p_67898_) -> {
+-      return p_67898_.apply2(RandomFeatureConfiguration::new, WeightedConfiguredFeature.f_67403_.listOf().fieldOf("features").forGetter((p_67901_) -> {
+-         return p_67901_.f_67882_;
+-      }), ConfiguredFeature.f_65374_.fieldOf("default").forGetter((p_67896_) -> {
+-         return p_67896_.f_67883_;
++   public static final Codec<RandomFeatureConfiguration> f_67881_ = RecordCodecBuilder.create((p_236585_0_) -> {
++      return p_236585_0_.apply2(RandomFeatureConfiguration::new, WeightedConfiguredFeature.f_67403_.listOf().fieldOf("features").forGetter((p_236586_0_) -> {
++         return p_236586_0_.f_67882_;
++      }), ConfiguredFeature.f_65374_.fieldOf("default").forGetter((p_236584_0_) -> {
++         return p_236584_0_.f_67883_;
+       }));
+    });
+    public final List<WeightedConfiguredFeature> f_67882_;
+@@ -31,8 +_,8 @@
+    }
+ 
+    public Stream<ConfiguredFeature<?, ?>> m_7817_() {
+-      return Stream.concat(this.f_67882_.stream().flatMap((p_67894_) -> {
+-         return p_67894_.f_67404_.get().m_65398_();
++      return Stream.concat(this.f_67882_.stream().flatMap((p_242812_0_) -> {
++         return p_242812_0_.f_67404_.get().m_65398_();
+       }), this.f_67883_.get().m_65398_());
+    }
+ }

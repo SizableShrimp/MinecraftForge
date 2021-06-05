@@ -1,0 +1,13 @@
+--- a/net/minecraft/commands/arguments/MobEffectArgument.java
++++ b/net/minecraft/commands/arguments/MobEffectArgument.java
+@@ -19,8 +_,8 @@
+ 
+ public class MobEffectArgument implements ArgumentType<MobEffect> {
+    private static final Collection<String> f_98423_ = Arrays.asList("spooky", "effect");
+-   public static final DynamicCommandExceptionType f_98422_ = new DynamicCommandExceptionType((p_98433_) -> {
+-      return new TranslatableComponent("effect.effectNotFound", p_98433_);
++   public static final DynamicCommandExceptionType f_98422_ = new DynamicCommandExceptionType((p_208663_0_) -> {
++      return new TranslatableComponent("effect.effectNotFound", p_208663_0_);
+    });
+ 
+    public static MobEffectArgument m_98426_() {

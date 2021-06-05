@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/storage/loot/functions/SetItemDamageFunction.java
++++ b/net/minecraft/world/level/storage/loot/functions/SetItemDamageFunction.java
+@@ -37,8 +_,8 @@
+    }
+ 
+    public static LootItemConditionalFunction.Builder<?> m_81050_(RandomValueBounds p_81051_) {
+-      return m_80683_((p_81054_) -> {
+-         return new SetItemDamageFunction(p_81054_, p_81051_);
++      return m_80683_((p_215930_1_) -> {
++         return new SetItemDamageFunction(p_215930_1_, p_81051_);
+       });
+    }
+ 

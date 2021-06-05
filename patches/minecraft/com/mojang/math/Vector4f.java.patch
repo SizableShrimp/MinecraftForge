@@ -1,0 +1,30 @@
+--- a/com/mojang/math/Vector4f.java
++++ b/com/mojang/math/Vector4f.java
+@@ -1,10 +_,7 @@
+ package com.mojang.math;
+ 
+ import net.minecraft.util.Mth;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+-@OnlyIn(Dist.CLIENT)
+ public class Vector4f {
+    private float f_123589_;
+    private float f_123590_;
+@@ -128,4 +_,16 @@
+    public String toString() {
+       return "[" + this.f_123589_ + ", " + this.f_123590_ + ", " + this.f_123591_ + ", " + this.f_123592_ + "]";
+    }
++
++    // Forge start
++    public void set(float[] values) {
++        this.f_123589_ = values[0];
++        this.f_123590_ = values[1];
++        this.f_123591_ = values[2];
++        this.f_123592_ = values[3];
++    }
++    public void setX(float x) { this.f_123589_ = x; }
++    public void setY(float y) { this.f_123590_ = y; }
++    public void setZ(float z) { this.f_123591_ = z; }
++    public void setW(float z) { this.f_123592_ = z; }
+ }

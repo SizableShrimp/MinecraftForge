@@ -25,7 +25,6 @@ import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
 import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.eventbus.api.EventPriority;
 
 import javax.annotation.Nullable;
 
@@ -34,7 +33,7 @@ import javax.annotation.Nullable;
  * It allows mods to edit a biome (like add a mob spawn) before it gets used for worldgen.
  *
  * In order to maintain the most compatibility possible with other mods' modifications to a biome,
- * the event should be assigned a {@link EventPriority} as follows:
+ * the event should be assigned a {@link net.minecraftforge.eventbus.api.EventPriority} as follows:
  *
  * - Additions to any list/map contained in a biome : {@link EventPriority#HIGH}
  * - Removals to any list/map contained in a biome : {@link EventPriority#NORMAL}

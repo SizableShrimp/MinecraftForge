@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/lighting/LayerLightSectionStorage.java
++++ b/net/minecraft/world/level/lighting/LayerLightSectionStorage.java
+@@ -153,8 +_,8 @@
+ 
+    protected void m_75764_(LayerLightEngine<?, ?> p_75765_, long p_75766_) {
+       if (p_75765_.m_75598_() < 8192) {
+-         p_75765_.m_75581_((p_75753_) -> {
+-            return SectionPos.m_123235_(p_75753_) == p_75766_;
++         p_75765_.m_75581_((p_227469_2_) -> {
++            return SectionPos.m_123235_(p_227469_2_) == p_75766_;
+          });
+       } else {
+          int i = SectionPos.m_123223_(SectionPos.m_123213_(p_75766_));

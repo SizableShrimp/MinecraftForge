@@ -1,0 +1,17 @@
+--- a/net/minecraft/world/scores/Score.java
++++ b/net/minecraft/world/scores/Score.java
+@@ -4,11 +_,11 @@
+ import javax.annotation.Nullable;
+ 
+ public class Score {
+-   public static final Comparator<Score> f_83380_ = (p_83396_, p_83397_) -> {
+-      if (p_83396_.m_83400_() > p_83397_.m_83400_()) {
++   public static final Comparator<Score> f_83380_ = (p_210221_0_, p_210221_1_) -> {
++      if (p_210221_0_.m_83400_() > p_210221_1_.m_83400_()) {
+          return 1;
+       } else {
+-         return p_83396_.m_83400_() < p_83397_.m_83400_() ? -1 : p_83397_.m_83405_().compareToIgnoreCase(p_83396_.m_83405_());
++         return p_210221_0_.m_83400_() < p_210221_1_.m_83400_() ? -1 : p_210221_1_.m_83405_().compareToIgnoreCase(p_210221_0_.m_83405_());
+       }
+    };
+    private final Scoreboard f_83381_;

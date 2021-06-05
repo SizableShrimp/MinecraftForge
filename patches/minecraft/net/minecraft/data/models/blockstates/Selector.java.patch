@@ -1,0 +1,13 @@
+--- a/net/minecraft/data/models/blockstates/Selector.java
++++ b/net/minecraft/data/models/blockstates/Selector.java
+@@ -8,8 +_,8 @@
+ 
+ public final class Selector {
+    private static final Selector f_125479_ = new Selector(ImmutableList.of());
+-   private static final Comparator<Property.Value<?>> f_125480_ = Comparator.comparing((p_125494_) -> {
+-      return p_125494_.m_61721_().m_61708_();
++   private static final Comparator<Property.Value<?>> f_125480_ = Comparator.comparing((p_240192_0_) -> {
++      return p_240192_0_.m_61721_().m_61708_();
+    });
+    private final List<Property.Value<?>> f_125481_;
+ 

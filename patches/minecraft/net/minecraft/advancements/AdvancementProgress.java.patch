@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/AdvancementProgress.java
++++ b/net/minecraft/advancements/AdvancementProgress.java
+@@ -28,8 +_,8 @@
+ 
+    public void m_8198_(Map<String, Criterion> p_8199_, String[][] p_8200_) {
+       Set<String> set = p_8199_.keySet();
+-      this.f_8190_.entrySet().removeIf((p_8203_) -> {
+-         return !set.contains(p_8203_.getKey());
++      this.f_8190_.entrySet().removeIf((p_209539_1_) -> {
++         return !set.contains(p_209539_1_.getKey());
+       });
+ 
+       for(String s : set) {

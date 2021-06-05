@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/levelgen/placement/CountNoiseDecorator.java
++++ b/net/minecraft/world/level/levelgen/placement/CountNoiseDecorator.java
+@@ -16,7 +_,7 @@
+    public Stream<BlockPos> m_7887_(DecorationContext p_70511_, Random p_70512_, NoiseDependantDecoratorConfiguration p_70513_, BlockPos p_70514_) {
+       double d0 = Biome.f_47433_.m_75449_((double)p_70514_.m_123341_() / 200.0D, (double)p_70514_.m_123343_() / 200.0D, false);
+       int i = d0 < p_70513_.f_67794_ ? p_70513_.f_67795_ : p_70513_.f_67796_;
+-      return IntStream.range(0, i).mapToObj((p_70517_) -> {
++      return IntStream.range(0, i).mapToObj((p_242879_1_) -> {
+          return p_70514_;
+       });
+    }

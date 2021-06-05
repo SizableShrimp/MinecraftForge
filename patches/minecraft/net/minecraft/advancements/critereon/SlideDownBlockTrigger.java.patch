@@ -1,0 +1,24 @@
+--- a/net/minecraft/advancements/critereon/SlideDownBlockTrigger.java
++++ b/net/minecraft/advancements/critereon/SlideDownBlockTrigger.java
+@@ -21,8 +_,8 @@
+       Block block = m_66987_(p_66990_);
+       StatePropertiesPredicate statepropertiespredicate = StatePropertiesPredicate.m_67679_(p_66990_.get("state"));
+       if (block != null) {
+-         statepropertiespredicate.m_67672_(block.m_49965_(), (p_66983_) -> {
+-            throw new JsonSyntaxException("Block " + block + " has no property " + p_66983_);
++         statepropertiespredicate.m_67672_(block.m_49965_(), (p_227148_1_) -> {
++            throw new JsonSyntaxException("Block " + block + " has no property " + p_227148_1_);
+          });
+       }
+ 
+@@ -42,8 +_,8 @@
+    }
+ 
+    public void m_66978_(ServerPlayer p_66979_, BlockState p_66980_) {
+-      this.m_66234_(p_66979_, (p_66986_) -> {
+-         return p_66986_.m_67008_(p_66980_);
++      this.m_66234_(p_66979_, (p_227149_1_) -> {
++         return p_227149_1_.m_67008_(p_66980_);
+       });
+    }
+ 

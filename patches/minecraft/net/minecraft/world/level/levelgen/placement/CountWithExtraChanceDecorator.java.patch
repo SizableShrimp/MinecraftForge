@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/levelgen/placement/CountWithExtraChanceDecorator.java
++++ b/net/minecraft/world/level/levelgen/placement/CountWithExtraChanceDecorator.java
+@@ -13,7 +_,7 @@
+ 
+    public Stream<BlockPos> m_6193_(Random p_70528_, FrequencyWithExtraChanceDecoratorConfiguration p_70529_, BlockPos p_70530_) {
+       int i = p_70529_.f_70724_ + (p_70528_.nextFloat() < p_70529_.f_70725_ ? p_70529_.f_70726_ : 0);
+-      return IntStream.range(0, i).mapToObj((p_70522_) -> {
++      return IntStream.range(0, i).mapToObj((p_242880_1_) -> {
+          return p_70530_;
+       });
+    }

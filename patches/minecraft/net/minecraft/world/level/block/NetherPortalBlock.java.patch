@@ -1,0 +1,10 @@
+--- a/net/minecraft/world/level/block/NetherPortalBlock.java
++++ b/net/minecraft/world/level/block/NetherPortalBlock.java
+@@ -106,7 +_,6 @@
+ 
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public ItemStack m_7397_(BlockGetter p_54911_, BlockPos p_54912_, BlockState p_54913_) {
+       return ItemStack.f_41583_;
+    }

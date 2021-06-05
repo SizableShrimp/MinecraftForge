@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/LeverBlock.java
++++ b/net/minecraft/world/level/block/LeverBlock.java
+@@ -35,7 +_,7 @@
+    protected static final VoxelShape f_54629_ = Block.m_49796_(5.0D, 10.0D, 4.0D, 11.0D, 16.0D, 12.0D);
+    protected static final VoxelShape f_54630_ = Block.m_49796_(4.0D, 10.0D, 5.0D, 12.0D, 16.0D, 11.0D);
+ 
+-   protected LeverBlock(BlockBehaviour.Properties p_54633_) {
++   public LeverBlock(BlockBehaviour.Properties p_54633_) {
+       super(p_54633_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_54117_, Direction.NORTH).m_61124_(f_54622_, Boolean.valueOf(false)).m_61124_(f_53179_, AttachFace.WALL));
+    }

@@ -24,7 +24,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fml.network.*;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -142,7 +141,7 @@ public class SimpleChannel
     }
 
     /**
-     * Build a new MessageBuilder. The type should implement {@link IntSupplier} if it is a login
+     * Build a new MessageBuilder. The type should implement {@link java.util.function.IntSupplier} if it is a login
      * packet.
      * @param type Type of message
      * @param id id in the indexed codec
@@ -154,7 +153,7 @@ public class SimpleChannel
     }
 
     /**
-     * Build a new MessageBuilder. The type should implement {@link IntSupplier} if it is a login
+     * Build a new MessageBuilder. The type should implement {@link java.util.function.IntSupplier} if it is a login
      * packet.
      * @param type Type of message
      * @param id id in the indexed codec

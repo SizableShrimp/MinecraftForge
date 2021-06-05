@@ -1,0 +1,13 @@
+--- a/net/minecraft/data/info/RegistryDumpReport.java
++++ b/net/minecraft/data/info/RegistryDumpReport.java
+@@ -23,8 +_,8 @@
+ 
+    public void m_6865_(HashCache p_124061_) throws IOException {
+       JsonObject jsonobject = new JsonObject();
+-      Registry.f_122897_.m_6566_().forEach((p_124057_) -> {
+-         jsonobject.add(p_124057_.toString(), m_124058_(Registry.f_122897_.m_7745_(p_124057_)));
++      Registry.f_122897_.m_6566_().forEach((p_218431_1_) -> {
++         jsonobject.add(p_218431_1_.toString(), m_124058_(Registry.f_122897_.m_7745_(p_218431_1_)));
+       });
+       Path path = this.f_124050_.m_123916_().resolve("reports/registries.json");
+       DataProvider.m_123920_(f_124049_, p_124061_, jsonobject, path);

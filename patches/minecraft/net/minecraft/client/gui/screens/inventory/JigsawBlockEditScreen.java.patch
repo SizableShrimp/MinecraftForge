@@ -1,0 +1,69 @@
+--- a/net/minecraft/client/gui/screens/inventory/JigsawBlockEditScreen.java
++++ b/net/minecraft/client/gui/screens/inventory/JigsawBlockEditScreen.java
+@@ -76,21 +_,21 @@
+       this.f_98941_ = new EditBox(this.f_96547_, this.f_96543_ / 2 - 152, 20, 300, 20, new TranslatableComponent("jigsaw_block.pool"));
+       this.f_98941_.m_94199_(128);
+       this.f_98941_.m_94144_(this.f_98938_.m_59444_().toString());
+-      this.f_98941_.m_94151_((p_98986_) -> {
++      this.f_98941_.m_94151_((p_238833_1_) -> {
+          this.m_98994_();
+       });
+       this.f_96540_.add(this.f_98941_);
+       this.f_98939_ = new EditBox(this.f_96547_, this.f_96543_ / 2 - 152, 55, 300, 20, new TranslatableComponent("jigsaw_block.name"));
+       this.f_98939_.m_94199_(128);
+       this.f_98939_.m_94144_(this.f_98938_.m_59442_().toString());
+-      this.f_98939_.m_94151_((p_98981_) -> {
++      this.f_98939_.m_94151_((p_238830_1_) -> {
+          this.m_98994_();
+       });
+       this.f_96540_.add(this.f_98939_);
+       this.f_98940_ = new EditBox(this.f_96547_, this.f_96543_ / 2 - 152, 90, 300, 20, new TranslatableComponent("jigsaw_block.target"));
+       this.f_98940_.m_94199_(128);
+       this.f_98940_.m_94144_(this.f_98938_.m_59443_().toString());
+-      this.f_98940_.m_94151_((p_98977_) -> {
++      this.f_98940_.m_94151_((p_214254_1_) -> {
+          this.m_98994_();
+       });
+       this.f_96540_.add(this.f_98940_);
+@@ -100,11 +_,11 @@
+       this.f_96540_.add(this.f_98942_);
+       this.f_98932_ = this.f_98938_.m_59446_();
+       int i = this.f_96547_.m_92852_(f_98933_) + 10;
+-      this.f_98945_ = this.m_7082_(new Button(this.f_96543_ / 2 - 152 + i, 150, 300 - i, 20, this.m_98995_(), (p_98989_) -> {
++      this.f_98945_ = this.m_7082_(new Button(this.f_96543_ / 2 - 152 + i, 150, 300 - i, 20, this.m_98995_(), (p_238834_1_) -> {
+          JigsawBlockEntity.JointType[] ajigsawblockentity$jointtype = JigsawBlockEntity.JointType.values();
+          int j = (this.f_98932_.ordinal() + 1) % ajigsawblockentity$jointtype.length;
+          this.f_98932_ = ajigsawblockentity$jointtype[j];
+-         p_98989_.m_93666_(this.m_98995_());
++         p_238834_1_.m_93666_(this.m_98995_());
+       }));
+       boolean flag = JigsawBlock.m_54250_(this.f_98938_.m_58900_()).m_122434_().m_122478_();
+       this.f_98945_.f_93623_ = flag;
+@@ -122,22 +_,22 @@
+             JigsawBlockEditScreen.this.f_98943_ = Mth.m_14107_(Mth.m_14085_(0.0D, 7.0D, this.f_93577_));
+          }
+       });
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 50, 180, 100, 20, new TranslatableComponent("jigsaw_block.keep_jigsaws"), (p_98984_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 50, 180, 100, 20, new TranslatableComponent("jigsaw_block.keep_jigsaws"), (p_238832_1_) -> {
+          this.f_98944_ = !this.f_98944_;
+-         p_98984_.m_93687_(250);
++         p_238832_1_.m_93687_(250);
+       }) {
+          public Component m_6035_() {
+             return CommonComponents.m_130663_(super.m_6035_(), JigsawBlockEditScreen.this.f_98944_);
+          }
+       });
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 54, 180, 100, 20, new TranslatableComponent("jigsaw_block.generate"), (p_98979_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 54, 180, 100, 20, new TranslatableComponent("jigsaw_block.generate"), (p_238831_1_) -> {
+          this.m_98990_();
+          this.m_98993_();
+       }));
+-      this.f_98946_ = this.m_7082_(new Button(this.f_96543_ / 2 - 4 - 150, 210, 150, 20, CommonComponents.f_130655_, (p_98973_) -> {
++      this.f_98946_ = this.m_7082_(new Button(this.f_96543_ / 2 - 4 - 150, 210, 150, 20, CommonComponents.f_130655_, (p_238828_1_) -> {
+          this.m_98990_();
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 4, 210, 150, 20, CommonComponents.f_130656_, (p_98964_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 4, 210, 150, 20, CommonComponents.f_130656_, (p_238825_1_) -> {
+          this.m_98991_();
+       }));
+       this.m_94718_(this.f_98941_);

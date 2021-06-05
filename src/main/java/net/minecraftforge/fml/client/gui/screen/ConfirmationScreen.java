@@ -1,4 +1,4 @@
-package net.minecraftforge.fml.client.gui.screen;/*
+/*
  * Minecraft Forge
  * Copyright (c) 2016-2021.
  *
@@ -19,11 +19,6 @@ package net.minecraftforge.fml.client.gui.screen;/*
 
 /*
 package net.minecraftforge.fml.client.gui.screen;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.fml.ForgeI18n;
-import net.minecraftforge.fml.StartupQuery;
 
 public class ConfirmationScreen extends NotificationScreen
 {

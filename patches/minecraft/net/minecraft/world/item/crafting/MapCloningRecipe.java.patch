@@ -1,0 +1,19 @@
+--- a/net/minecraft/world/item/crafting/MapCloningRecipe.java
++++ b/net/minecraft/world/item/crafting/MapCloningRecipe.java
+@@ -5,8 +_,6 @@
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
+ import net.minecraft.world.level.Level;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public class MapCloningRecipe extends CustomRecipe {
+    public MapCloningRecipe(ResourceLocation p_43968_) {
+@@ -71,7 +_,6 @@
+       }
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public boolean m_8004_(int p_43970_, int p_43971_) {
+       return p_43970_ >= 3 && p_43971_ >= 3;
+    }

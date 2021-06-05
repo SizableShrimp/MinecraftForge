@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/LeavesBlock.java
++++ b/net/minecraft/world/level/block/LeavesBlock.java
+@@ -21,7 +_,7 @@
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+-public class LeavesBlock extends Block {
++public class LeavesBlock extends Block implements net.minecraftforge.common.IForgeShearable {
+    public static final IntegerProperty f_54418_ = BlockStateProperties.f_61414_;
+    public static final BooleanProperty f_54419_ = BlockStateProperties.f_61447_;
+ 

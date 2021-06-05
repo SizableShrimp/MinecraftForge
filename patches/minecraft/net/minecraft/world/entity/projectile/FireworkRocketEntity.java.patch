@@ -1,0 +1,27 @@
+--- a/net/minecraft/world/entity/projectile/FireworkRocketEntity.java
++++ b/net/minecraft/world/entity/projectile/FireworkRocketEntity.java
+@@ -101,8 +_,8 @@
+       super.m_8119_();
+       if (this.m_37088_()) {
+          if (this.f_37024_ == null) {
+-            this.f_19804_.m_135370_(f_37020_).ifPresent((p_37067_) -> {
+-               Entity entity = this.f_19853_.m_6815_(p_37067_);
++            this.f_19804_.m_135370_(f_37020_).ifPresent((p_213891_1_) -> {
++               Entity entity = this.f_19853_.m_6815_(p_213891_1_);
+                if (entity instanceof LivingEntity) {
+                   this.f_37024_ = (LivingEntity)entity;
+                }
+@@ -153,6 +_,13 @@
+          this.m_37080_();
+       }
+ 
++   }
++
++   @Override
++   protected void m_6532_(HitResult result) {
++      if (result.m_6662_() == HitResult.Type.MISS || !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, result)) {
++         super.m_6532_(result);
++      }
+    }
+ 
+    private void m_37080_() {

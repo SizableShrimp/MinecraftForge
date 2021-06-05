@@ -1,0 +1,11 @@
+--- a/net/minecraft/client/renderer/blockentity/BedRenderer.java
++++ b/net/minecraft/client/renderer/blockentity/BedRenderer.java
+@@ -56,7 +_,7 @@
+       Level level = p_112205_.m_7642_();
+       if (level != null) {
+          BlockState blockstate = p_112205_.m_58900_();
+-         DoubleBlockCombiner.NeighborCombineResult<? extends BedBlockEntity> neighborcombineresult = DoubleBlockCombiner.m_52822_(BlockEntityType.f_58940_, BedBlock::m_49559_, BedBlock::m_49557_, ChestBlock.f_51478_, blockstate, level, p_112205_.m_58899_(), (p_112202_, p_112203_) -> {
++         DoubleBlockCombiner.NeighborCombineResult<? extends BedBlockEntity> neighborcombineresult = DoubleBlockCombiner.m_52822_(BlockEntityType.f_58940_, BedBlock::m_49559_, BedBlock::m_49557_, ChestBlock.f_51478_, blockstate, level, p_112205_.m_58899_(), (p_228846_0_, p_228846_1_) -> {
+             return false;
+          });
+          int i = neighborcombineresult.<Int2IntFunction>m_5649_(new BrightnessCombiner<>()).get(p_112209_);

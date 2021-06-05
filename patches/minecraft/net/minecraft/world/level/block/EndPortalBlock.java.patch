@@ -1,0 +1,19 @@
+--- a/net/minecraft/world/level/block/EndPortalBlock.java
++++ b/net/minecraft/world/level/block/EndPortalBlock.java
+@@ -24,7 +_,7 @@
+ public class EndPortalBlock extends BaseEntityBlock {
+    protected static final VoxelShape f_53014_ = Block.m_49796_(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
+ 
+-   protected EndPortalBlock(BlockBehaviour.Properties p_53017_) {
++   public EndPortalBlock(BlockBehaviour.Properties p_53017_) {
+       super(p_53017_);
+    }
+ 
+@@ -57,7 +_,6 @@
+       p_53031_.m_7106_(ParticleTypes.f_123762_, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public ItemStack m_7397_(BlockGetter p_53021_, BlockPos p_53022_, BlockState p_53023_) {
+       return ItemStack.f_41583_;
+    }

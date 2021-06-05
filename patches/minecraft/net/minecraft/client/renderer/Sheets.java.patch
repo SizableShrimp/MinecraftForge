@@ -1,0 +1,46 @@
+--- a/net/minecraft/client/renderer/Sheets.java
++++ b/net/minecraft/client/renderer/Sheets.java
+@@ -41,14 +_,14 @@
+    private static final RenderType f_110733_ = RenderType.m_110467_(TextureAtlas.f_118259_);
+    private static final RenderType f_110734_ = RenderType.m_110470_(TextureAtlas.f_118259_);
+    public static final Material f_110741_ = new Material(f_110735_, new ResourceLocation("entity/shulker/shulker"));
+-   public static final List<Material> f_110742_ = Stream.of("white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black").map((p_110784_) -> {
+-      return new Material(f_110735_, new ResourceLocation("entity/shulker/shulker_" + p_110784_));
++   public static final List<Material> f_110742_ = Stream.of("white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black").map((p_228777_0_) -> {
++      return new Material(f_110735_, new ResourceLocation("entity/shulker/shulker_" + p_228777_0_));
+    }).collect(ImmutableList.toImmutableList());
+    public static final Map<WoodType, Material> f_110743_ = WoodType.m_61843_().collect(Collectors.toMap(Function.identity(), Sheets::m_110776_));
+-   public static final Material[] f_110744_ = Arrays.stream(DyeColor.values()).sorted(Comparator.comparingInt(DyeColor::m_41060_)).map((p_110766_) -> {
+-      return new Material(f_110736_, new ResourceLocation("entity/bed/" + p_110766_.m_41065_()));
+-   }).toArray((p_110764_) -> {
+-      return new Material[p_110764_];
++   public static final Material[] f_110744_ = Arrays.stream(DyeColor.values()).sorted(Comparator.comparingInt(DyeColor::m_41060_)).map((p_228770_0_) -> {
++      return new Material(f_110736_, new ResourceLocation("entity/bed/" + p_228770_0_.m_41065_()));
++   }).toArray((p_228769_0_) -> {
++      return new Material[p_228769_0_];
+    });
+    public static final Material f_110745_ = m_110778_("trapped");
+    public static final Material f_110746_ = m_110778_("trapped_left");
+@@ -129,7 +_,8 @@
+    }
+ 
+    public static Material m_110776_(WoodType p_110777_) {
+-      return new Material(f_110739_, new ResourceLocation("entity/signs/" + p_110777_.m_61846_()));
++      ResourceLocation location = new ResourceLocation(p_110777_.m_61846_());
++      return new Material(f_110739_, new ResourceLocation(location.m_135827_(), "entity/signs/" + location.m_135815_()));
+    }
+ 
+    private static Material m_110778_(String p_110779_) {
+@@ -156,5 +_,12 @@
+       default:
+          return p_110773_;
+       }
++   }
++
++   /**
++    * Not threadsafe. Enqueue it in client setup.
++    */
++   public static void addWoodType(WoodType woodType) {
++      f_110743_.put(woodType, m_110776_(woodType));
+    }
+ }

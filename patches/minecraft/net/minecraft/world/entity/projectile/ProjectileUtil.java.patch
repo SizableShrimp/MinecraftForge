@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/entity/projectile/ProjectileUtil.java
++++ b/net/minecraft/world/entity/projectile/ProjectileUtil.java
+@@ -60,7 +_,7 @@
+             Vec3 vec31 = optional.get();
+             double d1 = p_37289_.m_82557_(vec31);
+             if (d1 < d0 || d0 == 0.0D) {
+-               if (entity1.m_20201_() == p_37288_.m_20201_()) {
++               if (entity1.m_20201_() == p_37288_.m_20201_() && !entity1.canRiderInteract()) {
+                   if (d0 == 0.0D) {
+                      entity = entity1;
+                      vec3 = vec31;

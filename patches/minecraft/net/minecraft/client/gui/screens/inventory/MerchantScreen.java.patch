@@ -1,0 +1,15 @@
+--- a/net/minecraft/client/gui/screens/inventory/MerchantScreen.java
++++ b/net/minecraft/client/gui/screens/inventory/MerchantScreen.java
+@@ -48,9 +_,9 @@
+       int k = j + 16 + 2;
+ 
+       for(int l = 0; l < 7; ++l) {
+-         this.f_99118_[l] = this.m_7082_(new MerchantScreen.TradeOfferButton(i + 5, k, l, (p_99174_) -> {
+-            if (p_99174_ instanceof MerchantScreen.TradeOfferButton) {
+-               this.f_99117_ = ((MerchantScreen.TradeOfferButton)p_99174_).m_99209_() + this.f_99119_;
++         this.f_99118_[l] = this.m_7082_(new MerchantScreen.TradeOfferButton(i + 5, k, l, (p_214132_1_) -> {
++            if (p_214132_1_ instanceof MerchantScreen.TradeOfferButton) {
++               this.f_99117_ = ((MerchantScreen.TradeOfferButton)p_214132_1_).m_99209_() + this.f_99119_;
+                this.m_99200_();
+             }
+ 

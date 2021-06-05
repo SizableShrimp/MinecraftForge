@@ -1,0 +1,31 @@
+--- a/net/minecraft/world/level/block/ComparatorBlock.java
++++ b/net/minecraft/world/level/block/ComparatorBlock.java
+@@ -83,8 +_,8 @@
+ 
+    @Nullable
+    private ItemFrame m_51864_(Level p_51865_, Direction p_51866_, BlockPos p_51867_) {
+-      List<ItemFrame> list = p_51865_.m_6443_(ItemFrame.class, new AABB((double)p_51867_.m_123341_(), (double)p_51867_.m_123342_(), (double)p_51867_.m_123343_(), (double)(p_51867_.m_123341_() + 1), (double)(p_51867_.m_123342_() + 1), (double)(p_51867_.m_123343_() + 1)), (p_51890_) -> {
+-         return p_51890_ != null && p_51890_.m_6350_() == p_51866_;
++      List<ItemFrame> list = p_51865_.m_6443_(ItemFrame.class, new AABB((double)p_51867_.m_123341_(), (double)p_51867_.m_123342_(), (double)p_51867_.m_123343_(), (double)(p_51867_.m_123341_() + 1), (double)(p_51867_.m_123342_() + 1), (double)(p_51867_.m_123343_() + 1)), (p_210304_1_) -> {
++         return p_210304_1_ != null && p_210304_1_.m_6350_() == p_51866_;
+       });
+       return list.size() == 1 ? list.get(0) : null;
+    }
+@@ -155,5 +_,17 @@
+ 
+    protected void m_7926_(StateDefinition.Builder<Block, BlockState> p_51887_) {
+       p_51887_.m_61104_(f_54117_, f_51854_, f_52496_);
++   }
++
++   @Override
++   public boolean getWeakChanges(BlockState state, net.minecraft.world.level.LevelReader world, BlockPos pos) {
++      return state.m_60713_(Blocks.f_50328_);
++   }
++
++   @Override
++   public void onNeighborChange(BlockState state, net.minecraft.world.level.LevelReader world, BlockPos pos, BlockPos neighbor) {
++      if (pos.m_123342_() == neighbor.m_123342_() && world instanceof Level && !((Level)world).m_5776_()) {
++         state.m_60690_((Level)world, pos, world.m_8055_(neighbor).m_60734_(), neighbor, false);
++      }
+    }
+ }

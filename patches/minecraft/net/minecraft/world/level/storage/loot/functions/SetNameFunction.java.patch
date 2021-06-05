@@ -1,0 +1,27 @@
+--- a/net/minecraft/world/level/storage/loot/functions/SetNameFunction.java
++++ b/net/minecraft/world/level/storage/loot/functions/SetNameFunction.java
+@@ -45,19 +_,19 @@
+          Entity entity = p_81140_.m_78953_(p_81141_.m_79003_());
+          if (entity != null) {
+             CommandSourceStack commandsourcestack = entity.m_20203_().m_81325_(2);
+-            return (p_81147_) -> {
++            return (p_215937_2_) -> {
+                try {
+-                  return ComponentUtils.m_130731_(commandsourcestack, p_81147_, entity, 0);
++                  return ComponentUtils.m_130731_(commandsourcestack, p_215937_2_, entity, 0);
+                } catch (CommandSyntaxException commandsyntaxexception) {
+                   f_81122_.warn("Failed to resolve text component", (Throwable)commandsyntaxexception);
+-                  return p_81147_;
++                  return p_215937_2_;
+                }
+             };
+          }
+       }
+ 
+-      return (p_81152_) -> {
+-         return p_81152_;
++      return (p_215938_0_) -> {
++         return p_215938_0_;
+       };
+    }
+ 

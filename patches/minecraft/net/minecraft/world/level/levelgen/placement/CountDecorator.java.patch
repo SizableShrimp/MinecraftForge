@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/levelgen/placement/CountDecorator.java
++++ b/net/minecraft/world/level/levelgen/placement/CountDecorator.java
+@@ -13,7 +_,7 @@
+    }
+ 
+    public Stream<BlockPos> m_6193_(Random p_70496_, CountConfiguration p_70497_, BlockPos p_70498_) {
+-      return IntStream.range(0, p_70497_.m_67575_().m_14447_(p_70496_)).mapToObj((p_70494_) -> {
++      return IntStream.range(0, p_70497_.m_67575_().m_14447_(p_70496_)).mapToObj((p_242878_1_) -> {
+          return p_70498_;
+       });
+    }

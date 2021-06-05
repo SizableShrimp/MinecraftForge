@@ -1,0 +1,41 @@
+--- a/net/minecraft/world/inventory/BrewingStandMenu.java
++++ b/net/minecraft/world/inventory/BrewingStandMenu.java
+@@ -6,11 +_,9 @@
+ import net.minecraft.world.SimpleContainer;
+ import net.minecraft.world.entity.player.Inventory;
+ import net.minecraft.world.entity.player.Player;
+-import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
+ import net.minecraft.world.item.alchemy.Potion;
+-import net.minecraft.world.item.alchemy.PotionBrewing;
+ import net.minecraft.world.item.alchemy.PotionUtils;
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.api.distmarker.OnlyIn;
+@@ -141,7 +_,7 @@
+       }
+ 
+       public boolean m_5857_(ItemStack p_39121_) {
+-         return PotionBrewing.m_43506_(p_39121_);
++         return net.minecraftforge.common.brewing.BrewingRecipeRegistry.isValidIngredient(p_39121_);
+       }
+ 
+       public int m_6641_() {
+@@ -165,6 +_,7 @@
+       public ItemStack m_7265_(Player p_39129_, ItemStack p_39130_) {
+          Potion potion = PotionUtils.m_43579_(p_39130_);
+          if (p_39129_ instanceof ServerPlayer) {
++            net.minecraftforge.event.ForgeEventFactory.onPlayerBrewedPotion(p_39129_, p_39130_);
+             CriteriaTriggers.f_10577_.m_19120_((ServerPlayer)p_39129_, potion);
+          }
+ 
+@@ -173,8 +_,7 @@
+       }
+ 
+       public static boolean m_39133_(ItemStack p_39134_) {
+-         Item item = p_39134_.m_41720_();
+-         return item == Items.f_42589_ || item == Items.f_42736_ || item == Items.f_42739_ || item == Items.f_42590_;
++         return net.minecraftforge.common.brewing.BrewingRecipeRegistry.isValidInput(p_39134_);
+       }
+    }
+ }

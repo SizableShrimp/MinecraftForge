@@ -1,0 +1,42 @@
+--- a/net/minecraft/client/FullscreenResolutionProgressOption.java
++++ b/net/minecraft/client/FullscreenResolutionProgressOption.java
+@@ -17,30 +_,30 @@
+    }
+ 
+    private FullscreenResolutionProgressOption(Window p_90716_, @Nullable Monitor p_90717_) {
+-      super("options.fullscreen.resolution", -1.0D, p_90717_ != null ? (double)(p_90717_.m_84953_() - 1) : -1.0D, 1.0F, (p_90724_) -> {
++      super("options.fullscreen.resolution", -1.0D, p_90717_ != null ? (double)(p_90717_.m_84953_() - 1) : -1.0D, 1.0F, (p_225306_2_) -> {
+          if (p_90717_ == null) {
+             return -1.0D;
+          } else {
+             Optional<VideoMode> optional = p_90716_.m_85436_();
+-            return optional.map((p_90720_) -> {
+-               return (double)p_90717_.m_84946_(p_90720_);
++            return optional.map((p_225304_1_) -> {
++               return (double)p_90717_.m_84946_(p_225304_1_);
+             }).orElse(-1.0D);
+          }
+-      }, (p_90728_, p_90729_) -> {
++      }, (p_225303_2_, p_225303_3_) -> {
+          if (p_90717_ != null) {
+-            if (p_90729_ == -1.0D) {
++            if (p_225303_3_ == -1.0D) {
+                p_90716_.m_85405_(Optional.empty());
+             } else {
+-               p_90716_.m_85405_(Optional.of(p_90717_.m_84944_(p_90729_.intValue())));
++               p_90716_.m_85405_(Optional.of(p_90717_.m_84944_(p_225303_3_.intValue())));
+             }
+ 
+          }
+-      }, (p_90732_, p_90733_) -> {
++      }, (p_225305_1_, p_225305_2_) -> {
+          if (p_90717_ == null) {
+             return new TranslatableComponent("options.fullscreen.unavailable");
+          } else {
+-            double d0 = p_90733_.m_92221_(p_90732_);
+-            return d0 == -1.0D ? p_90733_.m_91740_(new TranslatableComponent("options.fullscreen.current")) : p_90733_.m_91740_(new TextComponent(p_90717_.m_84944_((int)d0).toString()));
++            double d0 = p_225305_2_.m_92221_(p_225305_1_);
++            return d0 == -1.0D ? p_225305_2_.m_91740_(new TranslatableComponent("options.fullscreen.current")) : p_225305_2_.m_91740_(new TextComponent(p_90717_.m_84944_((int)d0).toString()));
+          }
+       });
+    }

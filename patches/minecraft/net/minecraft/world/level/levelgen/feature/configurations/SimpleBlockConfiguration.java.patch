@@ -1,0 +1,29 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/SimpleBlockConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/SimpleBlockConfiguration.java
+@@ -6,16 +_,16 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class SimpleBlockConfiguration implements FeatureConfiguration {
+-   public static final Codec<SimpleBlockConfiguration> f_68068_ = RecordCodecBuilder.create((p_68082_) -> {
+-      return p_68082_.group(BlockState.f_61039_.fieldOf("to_place").forGetter((p_68088_) -> {
+-         return p_68088_.f_68069_;
+-      }), BlockState.f_61039_.listOf().fieldOf("place_on").forGetter((p_68086_) -> {
+-         return p_68086_.f_68070_;
+-      }), BlockState.f_61039_.listOf().fieldOf("place_in").forGetter((p_68084_) -> {
+-         return p_68084_.f_68071_;
+-      }), BlockState.f_61039_.listOf().fieldOf("place_under").forGetter((p_68080_) -> {
+-         return p_68080_.f_68072_;
+-      })).apply(p_68082_, SimpleBlockConfiguration::new);
++   public static final Codec<SimpleBlockConfiguration> f_68068_ = RecordCodecBuilder.create((p_236638_0_) -> {
++      return p_236638_0_.group(BlockState.f_61039_.fieldOf("to_place").forGetter((p_236641_0_) -> {
++         return p_236641_0_.f_68069_;
++      }), BlockState.f_61039_.listOf().fieldOf("place_on").forGetter((p_236640_0_) -> {
++         return p_236640_0_.f_68070_;
++      }), BlockState.f_61039_.listOf().fieldOf("place_in").forGetter((p_236639_0_) -> {
++         return p_236639_0_.f_68071_;
++      }), BlockState.f_61039_.listOf().fieldOf("place_under").forGetter((p_236637_0_) -> {
++         return p_236637_0_.f_68072_;
++      })).apply(p_236638_0_, SimpleBlockConfiguration::new);
+    });
+    public final BlockState f_68069_;
+    public final List<BlockState> f_68070_;

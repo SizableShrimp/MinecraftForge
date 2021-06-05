@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/GenerationStep.java
++++ b/net/minecraft/world/level/levelgen/GenerationStep.java
+@@ -13,8 +_,8 @@
+       LIQUID("liquid");
+ 
+       public static final Codec<GenerationStep.Carving> f_64194_ = StringRepresentable.m_14350_(GenerationStep.Carving::values, GenerationStep.Carving::m_64206_);
+-      private static final Map<String, GenerationStep.Carving> f_64195_ = Arrays.stream(values()).collect(Collectors.toMap(GenerationStep.Carving::m_64208_, (p_64205_) -> {
+-         return p_64205_;
++      private static final Map<String, GenerationStep.Carving> f_64195_ = Arrays.stream(values()).collect(Collectors.toMap(GenerationStep.Carving::m_64208_, (p_222672_0_) -> {
++         return p_222672_0_;
+       }));
+       private final String f_64196_;
+ 

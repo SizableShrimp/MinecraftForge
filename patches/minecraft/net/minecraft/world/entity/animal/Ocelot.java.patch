@@ -1,0 +1,43 @@
+--- a/net/minecraft/world/entity/animal/Ocelot.java
++++ b/net/minecraft/world/entity/animal/Ocelot.java
+@@ -28,13 +_,11 @@
+ import net.minecraft.world.entity.SpawnGroupData;
+ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+ import net.minecraft.world.entity.ai.attributes.Attributes;
+-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+ import net.minecraft.world.entity.ai.goal.BreedGoal;
+ import net.minecraft.world.entity.ai.goal.FloatGoal;
+ import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
+ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+ import net.minecraft.world.entity.ai.goal.OcelotAttackGoal;
+-import net.minecraft.world.entity.ai.goal.TemptGoal;
+ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+ import net.minecraft.world.entity.player.Player;
+@@ -165,7 +_,7 @@
+       if ((this.f_28984_ == null || this.f_28984_.m_25955_()) && !this.m_29038_() && this.m_6898_(itemstack) && p_29021_.m_20280_(this) < 9.0D) {
+          this.m_6470_(p_29021_, itemstack);
+          if (!this.f_19853_.f_46443_) {
+-            if (this.f_19796_.nextInt(3) == 0) {
++            if (this.f_19796_.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, p_29021_)) {
+                this.m_29045_(true);
+                this.m_29047_(true);
+                this.f_19853_.m_7605_(this, (byte)41);
+@@ -262,7 +_,7 @@
+       return new Vec3(0.0D, (double)(0.5F * this.m_20192_()), (double)(this.m_20205_() * 0.4F));
+    }
+ 
+-   static class OcelotAvoidEntityGoal<T extends LivingEntity> extends AvoidEntityGoal<T> {
++   static class OcelotAvoidEntityGoal<T extends LivingEntity> extends net.minecraft.world.entity.ai.goal.AvoidEntityGoal<T> {
+       private final Ocelot f_29049_;
+ 
+       public OcelotAvoidEntityGoal(Ocelot p_29051_, Class<T> p_29052_, float p_29053_, double p_29054_, double p_29055_) {
+@@ -279,7 +_,7 @@
+       }
+    }
+ 
+-   static class OcelotTemptGoal extends TemptGoal {
++   static class OcelotTemptGoal extends net.minecraft.world.entity.ai.goal.TemptGoal {
+       private final Ocelot f_29058_;
+ 
+       public OcelotTemptGoal(Ocelot p_29060_, double p_29061_, Ingredient p_29062_, boolean p_29063_) {

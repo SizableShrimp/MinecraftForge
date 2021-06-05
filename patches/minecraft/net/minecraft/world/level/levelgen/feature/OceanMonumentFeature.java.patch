@@ -1,0 +1,12 @@
+--- a/net/minecraft/world/level/levelgen/feature/OceanMonumentFeature.java
++++ b/net/minecraft/world/level/levelgen/feature/OceanMonumentFeature.java
+@@ -52,7 +_,8 @@
+       return OceanMonumentFeature.OceanMonumentStart::new;
+    }
+ 
+-   public List<MobSpawnSettings.SpawnerData> m_7963_() {
++   @Override
++   public List<MobSpawnSettings.SpawnerData> getDefaultSpawnList() {
+       return f_66469_;
+    }
+ 

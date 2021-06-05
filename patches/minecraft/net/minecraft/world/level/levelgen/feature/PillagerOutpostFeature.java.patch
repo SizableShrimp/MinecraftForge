@@ -1,0 +1,12 @@
+--- a/net/minecraft/world/level/levelgen/feature/PillagerOutpostFeature.java
++++ b/net/minecraft/world/level/levelgen/feature/PillagerOutpostFeature.java
+@@ -20,7 +_,8 @@
+       super(p_66562_, 0, true, true);
+    }
+ 
+-   public List<MobSpawnSettings.SpawnerData> m_7963_() {
++   @Override
++   public List<MobSpawnSettings.SpawnerData> getDefaultSpawnList() {
+       return f_66559_;
+    }
+ 

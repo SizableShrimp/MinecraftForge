@@ -1,0 +1,23 @@
+--- a/net/minecraft/world/entity/ai/memory/ExpirableValue.java
++++ b/net/minecraft/world/entity/ai/memory/ExpirableValue.java
+@@ -45,13 +_,13 @@
+    }
+ 
+    public static <T> Codec<ExpirableValue<T>> m_26304_(Codec<T> p_26305_) {
+-      return RecordCodecBuilder.create((p_26308_) -> {
+-         return p_26308_.group(p_26305_.fieldOf("value").forGetter((p_26318_) -> {
+-            return p_26318_.f_26296_;
+-         }), Codec.LONG.optionalFieldOf("ttl").forGetter((p_26303_) -> {
+-            return p_26303_.m_26321_() ? Optional.of(p_26303_.f_26297_) : Optional.empty();
+-         })).apply(p_26308_, (p_26315_, p_26316_) -> {
+-            return new ExpirableValue<>(p_26315_, p_26316_.orElse(Long.MAX_VALUE));
++      return RecordCodecBuilder.create((p_234067_1_) -> {
++         return p_234067_1_.group(p_26305_.fieldOf("value").forGetter((p_234071_0_) -> {
++            return p_234071_0_.f_26296_;
++         }), Codec.LONG.optionalFieldOf("ttl").forGetter((p_234065_0_) -> {
++            return p_234065_0_.m_26321_() ? Optional.of(p_234065_0_.f_26297_) : Optional.empty();
++         })).apply(p_234067_1_, (p_234070_0_, p_234070_1_) -> {
++            return new ExpirableValue<>(p_234070_0_, p_234070_1_.orElse(Long.MAX_VALUE));
+          });
+       });
+    }

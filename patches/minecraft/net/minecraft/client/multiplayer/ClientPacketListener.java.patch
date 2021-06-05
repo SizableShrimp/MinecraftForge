@@ -1,0 +1,215 @@
+--- a/net/minecraft/client/multiplayer/ClientPacketListener.java
++++ b/net/minecraft/client/multiplayer/ClientPacketListener.java
+@@ -213,9 +_,7 @@
+ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+ import net.minecraft.world.entity.animal.Bee;
+ import net.minecraft.world.entity.animal.horse.AbstractHorse;
+-import net.minecraft.world.entity.boss.EnderDragonPart;
+ import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
+-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+ import net.minecraft.world.entity.decoration.ArmorStand;
+ import net.minecraft.world.entity.decoration.ItemFrame;
+ import net.minecraft.world.entity.decoration.LeashFenceKnotEntity;
+@@ -378,6 +_,7 @@
+ 
+       this.f_104888_.f_91064_.m_113434_();
+       this.f_104888_.f_91074_.m_6092_();
++      net.minecraftforge.fml.client.ClientHooks.firePlayerLogin(this.f_104888_.f_91072_, this.f_104888_.f_91074_, this.f_104888_.m_91403_().m_6198_());
+       int i = p_105030_.m_132398_();
+       this.f_104889_.m_104630_(i, this.f_104888_.f_91074_);
+       this.f_104888_.f_91074_.f_108618_ = new KeyboardInput(this.f_104888_.f_91066_);
+@@ -389,6 +_,7 @@
+       this.f_104888_.f_91074_.m_108711_(p_105030_.m_132411_());
+       this.f_104888_.f_91072_.m_105279_(p_105030_.m_132403_());
+       this.f_104888_.f_91072_.m_105244_(p_105030_.m_132404_());
++      net.minecraftforge.fml.network.NetworkHooks.sendMCRegistryPackets(f_104885_, "PLAY_TO_SERVER");
+       this.f_104888_.f_91066_.m_92172_();
+       this.f_104885_.m_129512_(new ServerboundCustomPayloadPacket(ServerboundCustomPayloadPacket.f_133979_, (new FriendlyByteBuf(Unpooled.buffer())).m_130070_(ClientBrandRetriever.m_129629_())));
+       this.f_104888_.m_91309_().m_90739_();
+@@ -705,8 +_,8 @@
+    public void m_5771_(ClientboundSectionBlocksUpdatePacket p_105070_) {
+       PacketUtils.m_131363_(p_105070_, this, this.f_104888_);
+       int i = 19 | (p_105070_.m_133000_() ? 128 : 0);
+-      p_105070_.m_132992_((p_104922_, p_104923_) -> {
+-         this.f_104889_.m_7731_(p_104922_, p_104923_, i);
++      p_105070_.m_132992_((p_243492_2_, p_243492_3_) -> {
++         this.f_104889_.m_7731_(p_243492_2_, p_243492_3_, i);
+       });
+    }
+ 
+@@ -728,7 +_,7 @@
+          BlockPos blockpos = new BlockPos(compoundtag.m_128451_("x"), compoundtag.m_128451_("y"), compoundtag.m_128451_("z"));
+          BlockEntity blockentity = this.f_104889_.m_7702_(blockpos);
+          if (blockentity != null) {
+-            blockentity.m_8084_(this.f_104889_.m_8055_(blockpos), compoundtag);
++            blockentity.handleUpdateTag(this.f_104889_.m_8055_(blockpos), compoundtag);
+          }
+       }
+ 
+@@ -809,7 +_,9 @@
+ 
+    public void m_5784_(ClientboundChatPacket p_104986_) {
+       PacketUtils.m_131363_(p_104986_, this, this.f_104888_);
+-      this.f_104888_.f_91065_.m_93051_(p_104986_.m_131840_(), p_104986_.m_131836_(), p_104986_.m_131841_());
++      net.minecraft.network.chat.Component message = net.minecraftforge.event.ForgeEventFactory.onClientChat(p_104986_.m_131840_(), p_104986_.m_131836_(), p_104986_.m_131841_());
++      if (message == null) return;
++      this.f_104888_.f_91065_.m_93051_(p_104986_.m_131840_(), message, p_104986_.m_131841_());
+    }
+ 
+    public void m_7791_(ClientboundAnimatePacket p_104968_) {
+@@ -848,11 +_,11 @@
+          livingentity.m_20167_(d0, d1, d2);
+          livingentity.f_20883_ = (float)(p_104962_.m_131565_() * 360) / 256.0F;
+          livingentity.f_20885_ = (float)(p_104962_.m_131565_() * 360) / 256.0F;
+-         if (livingentity instanceof EnderDragon) {
+-            EnderDragonPart[] aenderdragonpart = ((EnderDragon)livingentity).m_31156_();
++         if (livingentity.isMultipartEntity()) {
++            net.minecraftforge.entity.PartEntity<?>[] aenderdragonpartentity = livingentity.getParts();
+ 
+-            for(int i = 0; i < aenderdragonpart.length; ++i) {
+-               aenderdragonpart[i].m_20234_(i + p_104962_.m_131552_());
++            for(int i = 0; i < aenderdragonpartentity.length; ++i) {
++               aenderdragonpartentity[i].m_20234_(i + p_104962_.m_131552_());
+             }
+          }
+ 
+@@ -998,8 +_,10 @@
+          localplayer1.m_21204_().m_22159_(localplayer.m_21204_());
+       }
+ 
++      localplayer1.updateSyncFields(localplayer); // Forge: fix MC-10657
+       localplayer1.m_6092_();
+       localplayer1.m_108748_(s);
++      net.minecraftforge.fml.client.ClientHooks.firePlayerRespawn(this.f_104888_.f_91072_, localplayer, localplayer1, localplayer1.f_108617_.m_6198_());
+       this.f_104889_.m_104630_(i, localplayer1);
+       localplayer1.f_19857_ = -180.0F;
+       localplayer1.f_108618_ = new KeyboardInput(this.f_104888_.f_91066_);
+@@ -1125,6 +_,12 @@
+ 
+       if (flag && this.f_104888_.f_91080_ instanceof CommandBlockEditScreen) {
+          ((CommandBlockEditScreen)this.f_104888_.f_91080_).m_98398_();
++      } else {
++         if(blockentity == null) {
++            f_104883_.error("Received invalid update packet for null tile entity at {} with data: {}", p_104976_.m_131704_(), p_104976_.m_131708_());
++            return;
++         }
++         blockentity.onDataPacket(f_104885_, p_104976_);
+       }
+ 
+    }
+@@ -1142,8 +_,8 @@
+       PacketUtils.m_131363_(p_105094_, this, this.f_104888_);
+       Entity entity = this.f_104889_.m_6815_(p_105094_.m_133210_());
+       if (entity != null) {
+-         p_105094_.m_133213_().forEach((p_104926_) -> {
+-            entity.m_8061_(p_104926_.getFirst(), p_104926_.getSecond());
++         p_105094_.m_133213_().forEach((p_241664_1_) -> {
++            entity.m_8061_(p_241664_1_.getFirst(), p_241664_1_.getSecond());
+          });
+       }
+ 
+@@ -1293,6 +_,7 @@
+       clientrecipebook.m_90625_(this.f_104900_.m_44051_());
+       clientrecipebook.m_90639_().forEach(mutablesearchtree::m_8080_);
+       mutablesearchtree.m_7729_();
++      net.minecraftforge.client.ForgeHooksClient.onRecipesUpdated(this.f_104900_);
+    }
+ 
+    public void m_7244_(ClientboundPlayerLookAtPacket p_105054_) {
+@@ -1349,16 +_,16 @@
+          break;
+       case ADD:
+          for(ResourceLocation resourcelocation : p_105058_.m_132865_()) {
+-            this.f_104900_.m_44043_(resourcelocation).ifPresent((p_104934_) -> {
+-               clientrecipebook.m_12700_(p_104934_);
+-               clientrecipebook.m_12723_(p_104934_);
+-               RecipeToast.m_94817_(this.f_104888_.m_91300_(), p_104934_);
++            this.f_104900_.m_44043_(resourcelocation).ifPresent((p_217278_2_) -> {
++               clientrecipebook.m_12700_(p_217278_2_);
++               clientrecipebook.m_12723_(p_217278_2_);
++               RecipeToast.m_94817_(this.f_104888_.m_91300_(), p_217278_2_);
+             });
+          }
+       }
+ 
+-      clientrecipebook.m_90639_().forEach((p_104937_) -> {
+-         p_104937_.m_100499_(clientrecipebook);
++      clientrecipebook.m_90639_().forEach((p_199527_1_) -> {
++         p_199527_1_.m_100499_(clientrecipebook);
+       });
+       if (this.f_104888_.f_91080_ instanceof RecipeUpdateListener) {
+          ((RecipeUpdateListener)this.f_104888_.f_91080_).m_6916_();
+@@ -1370,7 +_,7 @@
+       PacketUtils.m_131363_(p_105130_, this, this.f_104888_);
+       Entity entity = this.f_104889_.m_6815_(p_105130_.m_133622_());
+       if (entity instanceof LivingEntity) {
+-         MobEffect mobeffect = MobEffect.m_19453_(p_105130_.m_133623_());
++         MobEffect mobeffect = MobEffect.m_19453_(p_105130_.m_133623_() & 0xFF);
+          if (mobeffect != null) {
+             MobEffectInstance mobeffectinstance = new MobEffectInstance(mobeffect, p_105130_.m_133625_(), p_105130_.m_133624_(), p_105130_.m_133627_(), p_105130_.m_133626_(), p_105130_.m_133628_());
+             mobeffectinstance.m_19562_(p_105130_.m_133619_());
+@@ -1382,11 +_,14 @@
+    public void m_5859_(ClientboundUpdateTagsPacket p_105134_) {
+       PacketUtils.m_131363_(p_105134_, this, this.f_104888_);
+       TagContainer tagcontainer = p_105134_.m_133659_();
+-      Multimap<ResourceLocation, ResourceLocation> multimap = StaticTags.m_13283_(tagcontainer);
++      boolean vanillaConnection = net.minecraftforge.fml.network.NetworkHooks.isVanillaConnection(f_104885_);
++      Multimap<ResourceLocation, ResourceLocation> multimap = vanillaConnection ? StaticTags.m_13283_(net.minecraftforge.common.ForgeTagHandler.withNoCustom(tagcontainer)) : StaticTags.validateVanillaTags(tagcontainer);//Forge: If we are connecting to vanilla validate all tags to properly validate custom tags the client may "require", and if we are connecting to forge only validate the vanilla tag types as the custom tag types get synced in a separate packet so may still arrive
+       if (!multimap.isEmpty()) {
+          f_104883_.warn("Incomplete server tags, disconnecting. Missing: {}", (Object)multimap);
+          this.f_104885_.m_129507_(new TranslatableComponent("multiplayer.disconnect.missing_tags"));
+       } else {
++         net.minecraftforge.common.ForgeTagHandler.resetCachedTagCollections(true, vanillaConnection);
++         tagcontainer = TagContainer.reinjectOptionalTags(tagcontainer);
+          this.f_104895_ = tagcontainer;
+          if (!this.f_104885_.m_129531_()) {
+             tagcontainer.m_13431_();
+@@ -1568,10 +_,10 @@
+                this.m_105135_(ServerboundResourcePackPacket.Action.DECLINED);
+             } else {
+                this.f_104888_.execute(() -> {
+-                  this.f_104888_.m_91152_(new ConfirmScreen((p_104946_) -> {
++                  this.f_104888_.m_91152_(new ConfirmScreen((p_217274_3_) -> {
+                      this.f_104888_ = Minecraft.m_91087_();
+                      ServerData serverdata1 = this.f_104888_.m_91089_();
+-                     if (p_104946_) {
++                     if (p_217274_3_) {
+                         if (serverdata1 != null) {
+                            serverdata1.m_105379_(ServerData.ServerPackStatus.ENABLED);
+                         }
+@@ -1617,7 +_,7 @@
+    private void m_104951_(CompletableFuture<?> p_104952_) {
+       p_104952_.thenRun(() -> {
+          this.m_105135_(ServerboundResourcePackPacket.Action.SUCCESSFULLY_LOADED);
+-      }).exceptionally((p_104948_) -> {
++      }).exceptionally((p_217276_1_) -> {
+          this.m_105135_(ServerboundResourcePackPacket.Action.FAILED_DOWNLOAD);
+          return null;
+       });
+@@ -1879,10 +_,12 @@
+             int l5 = friendlybytebuf.readInt();
+             this.f_104888_.f_91064_.f_113430_.m_113524_(blockpos8, l3, s10, l5);
+          } else {
+-            f_104883_.warn("Unknown custom packed identifier: {}", (Object)resourcelocation);
++            if (!net.minecraftforge.fml.network.NetworkHooks.onCustomPayload(p_105004_, this.f_104885_))
++            f_104883_.warn("Unknown custom packet identifier: {}", (Object)resourcelocation);
+          }
+       } finally {
+          if (friendlybytebuf != null) {
++            if (false) // Forge: let packet handle releasing buffer
+             friendlybytebuf.release();
+          }
+ 
+@@ -2041,10 +_,10 @@
+       PacketUtils.m_131363_(p_105046_, this, this.f_104888_);
+       AbstractContainerMenu abstractcontainermenu = this.f_104888_.f_91074_.f_36096_;
+       if (abstractcontainermenu.f_38840_ == p_105046_.m_132658_() && abstractcontainermenu.m_38949_(this.f_104888_.f_91074_)) {
+-         this.f_104900_.m_44043_(p_105046_.m_132655_()).ifPresent((p_104931_) -> {
++         this.f_104900_.m_44043_(p_105046_.m_132655_()).ifPresent((p_241665_2_) -> {
+             if (this.f_104888_.f_91080_ instanceof RecipeUpdateListener) {
+                RecipeBookComponent recipebookcomponent = ((RecipeUpdateListener)this.f_104888_.f_91080_).m_5564_();
+-               recipebookcomponent.m_7173_(p_104931_, abstractcontainermenu.f_38839_);
++               recipebookcomponent.m_7173_(p_241665_2_, abstractcontainermenu.f_38839_);
+             }
+ 
+          });

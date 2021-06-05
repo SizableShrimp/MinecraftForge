@@ -19,7 +19,6 @@
 
 package net.minecraftforge.items;
 
-import net.minecraft.block.Block;
 import net.minecraft.world.level.block.DropperBlock;
 import net.minecraft.world.level.block.HopperBlock;
 import net.minecraft.world.item.ItemStack;
@@ -31,7 +30,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.LazyOptional;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;

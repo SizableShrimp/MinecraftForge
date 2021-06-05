@@ -1,0 +1,11 @@
+--- a/net/minecraft/client/gui/screens/ErrorScreen.java
++++ b/net/minecraft/client/gui/screens/ErrorScreen.java
+@@ -18,7 +_,7 @@
+ 
+    protected void m_7856_() {
+       super.m_7856_();
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 100, 140, 200, 20, CommonComponents.f_130656_, (p_96057_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 100, 140, 200, 20, CommonComponents.f_130656_, (p_213034_1_) -> {
+          this.f_96541_.m_91152_((Screen)null);
+       }));
+    }

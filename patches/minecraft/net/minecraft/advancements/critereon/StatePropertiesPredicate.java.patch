@@ -1,0 +1,24 @@
+--- a/net/minecraft/advancements/critereon/StatePropertiesPredicate.java
++++ b/net/minecraft/advancements/critereon/StatePropertiesPredicate.java
+@@ -63,8 +_,8 @@
+    }
+ 
+    public void m_67672_(StateDefinition<?, ?> p_67673_, Consumer<String> p_67674_) {
+-      this.f_67659_.forEach((p_67678_) -> {
+-         p_67678_.m_67721_(p_67673_, p_67674_);
++      this.f_67659_.forEach((p_227184_2_) -> {
++         p_227184_2_.m_67721_(p_67673_, p_67674_);
+       });
+    }
+ 
+@@ -89,8 +_,8 @@
+       } else {
+          JsonObject jsonobject = new JsonObject();
+          if (!this.f_67659_.isEmpty()) {
+-            this.f_67659_.forEach((p_67683_) -> {
+-               jsonobject.add(p_67683_.m_67726_(), p_67683_.m_7682_());
++            this.f_67659_.forEach((p_227187_1_) -> {
++               jsonobject.add(p_227187_1_.m_67726_(), p_227187_1_.m_7682_());
+             });
+          }
+ 

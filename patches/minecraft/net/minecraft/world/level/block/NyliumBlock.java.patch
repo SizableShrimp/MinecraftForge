@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/NyliumBlock.java
++++ b/net/minecraft/world/level/block/NyliumBlock.java
+@@ -15,7 +_,7 @@
+ import net.minecraft.world.level.lighting.LayerLightEngine;
+ 
+ public class NyliumBlock extends Block implements BonemealableBlock {
+-   protected NyliumBlock(BlockBehaviour.Properties p_55057_) {
++   public NyliumBlock(BlockBehaviour.Properties p_55057_) {
+       super(p_55057_);
+    }
+ 

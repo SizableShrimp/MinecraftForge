@@ -1,0 +1,41 @@
+--- a/net/minecraft/server/packs/resources/ProfiledReloadInstance.java
++++ b/net/minecraft/server/packs/resources/ProfiledReloadInstance.java
+@@ -18,7 +_,7 @@
+    private final Stopwatch f_10646_ = Stopwatch.createUnstarted();
+ 
+    public ProfiledReloadInstance(ResourceManager p_10649_, List<PreparableReloadListener> p_10650_, Executor p_10651_, Executor p_10652_, CompletableFuture<Unit> p_10653_) {
+-      super(p_10651_, p_10652_, p_10649_, p_10650_, (p_10668_, p_10669_, p_10670_, p_10671_, p_10672_) -> {
++      super(p_10651_, p_10652_, p_10649_, p_10650_, (p_219578_1_, p_219578_2_, p_219578_3_, p_219578_4_, p_219578_5_) -> {
+          AtomicLong atomiclong = new AtomicLong();
+          AtomicLong atomiclong1 = new AtomicLong();
+          ActiveProfiler activeprofiler = new ActiveProfiler(Util.f_137440_, () -> {
+@@ -27,21 +_,21 @@
+          ActiveProfiler activeprofiler1 = new ActiveProfiler(Util.f_137440_, () -> {
+             return 0;
+          }, false);
+-         CompletableFuture<Void> completablefuture = p_10670_.m_5540_(p_10668_, p_10669_, activeprofiler, activeprofiler1, (p_10683_) -> {
+-            p_10671_.execute(() -> {
++         CompletableFuture<Void> completablefuture = p_219578_3_.m_5540_(p_219578_1_, p_219578_2_, activeprofiler, activeprofiler1, (p_219577_2_) -> {
++            p_219578_4_.execute(() -> {
+                long i = Util.m_137569_();
+-               p_10683_.run();
++               p_219577_2_.run();
+                atomiclong.addAndGet(Util.m_137569_() - i);
+             });
+-         }, (p_10676_) -> {
+-            p_10672_.execute(() -> {
++         }, (p_219574_2_) -> {
++            p_219578_5_.execute(() -> {
+                long i = Util.m_137569_();
+-               p_10676_.run();
++               p_219574_2_.run();
+                atomiclong1.addAndGet(Util.m_137569_() - i);
+             });
+          });
+-         return completablefuture.thenApplyAsync((p_10660_) -> {
+-            return new ProfiledReloadInstance.State(p_10670_.m_7812_(), activeprofiler.m_5948_(), activeprofiler1.m_5948_(), atomiclong, atomiclong1);
++         return completablefuture.thenApplyAsync((p_219576_5_) -> {
++            return new ProfiledReloadInstance.State(p_219578_3_.m_7812_(), activeprofiler.m_5948_(), activeprofiler1.m_5948_(), atomiclong, atomiclong1);
+          }, p_10652_);
+       }, p_10653_);
+       this.f_10646_.start();

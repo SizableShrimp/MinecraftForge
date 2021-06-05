@@ -1,0 +1,24 @@
+--- a/net/minecraft/gametest/framework/GameTestRegistry.java
++++ b/net/minecraft/gametest/framework/GameTestRegistry.java
+@@ -19,8 +_,8 @@
+    private static final Collection<TestFunction> f_127656_ = Sets.newHashSet();
+ 
+    public static Collection<TestFunction> m_127659_(String p_127660_) {
+-      return f_127653_.stream().filter((p_127674_) -> {
+-         return m_127666_(p_127674_, p_127660_);
++      return f_127653_.stream().filter((p_229535_1_) -> {
++         return m_127666_(p_229535_1_, p_127660_);
+       }).collect(Collectors.toList());
+    }
+ 
+@@ -42,8 +_,8 @@
+    }
+ 
+    public static Optional<TestFunction> m_127679_(String p_127680_) {
+-      return m_127658_().stream().filter((p_127663_) -> {
+-         return p_127663_.m_128075_().equalsIgnoreCase(p_127680_);
++      return m_127658_().stream().filter((p_229531_1_) -> {
++         return p_229531_1_.m_128075_().equalsIgnoreCase(p_127680_);
+       }).findFirst();
+    }
+ 

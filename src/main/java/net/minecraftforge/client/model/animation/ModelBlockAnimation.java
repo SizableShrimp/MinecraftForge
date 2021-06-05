@@ -534,7 +534,7 @@ public class ModelBlockAnimation
             {
                 if(info.getWeights().containsKey(i))
                 {
-                    MBJoint joint = new MBJoint(info.getName());
+                    ModelBlockAnimation.MBJoint joint = new ModelBlockAnimation.MBJoint(info.getName());
                     Transformation trOp = state.getPartTransformation(joint);
                     if(!trOp.isIdentity())
                     {
@@ -589,5 +589,5 @@ public class ModelBlockAnimation
         .disableHtmlEscaping()
         .create();
 
-    private static final ModelBlockAnimation defaultModelBlockAnimation = new ModelBlockAnimation(ImmutableMap.<String, ImmutableMap<String, float[]>>of(), ImmutableMap.<String, MBClip>of());
+    private static final ModelBlockAnimation defaultModelBlockAnimation = new ModelBlockAnimation(ImmutableMap.<String, ImmutableMap<String, float[]>>of(), ImmutableMap.<String, ModelBlockAnimation.MBClip>of());
 }

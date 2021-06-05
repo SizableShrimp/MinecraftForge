@@ -1,0 +1,47 @@
+--- a/net/minecraft/server/commands/EnchantCommand.java
++++ b/net/minecraft/server/commands/EnchantCommand.java
+@@ -19,27 +_,27 @@
+ import net.minecraft.world.item.enchantment.EnchantmentHelper;
+ 
+ public class EnchantCommand {
+-   private static final DynamicCommandExceptionType f_137002_ = new DynamicCommandExceptionType((p_137029_) -> {
+-      return new TranslatableComponent("commands.enchant.failed.entity", p_137029_);
+-   });
+-   private static final DynamicCommandExceptionType f_137003_ = new DynamicCommandExceptionType((p_137027_) -> {
+-      return new TranslatableComponent("commands.enchant.failed.itemless", p_137027_);
+-   });
+-   private static final DynamicCommandExceptionType f_137004_ = new DynamicCommandExceptionType((p_137020_) -> {
+-      return new TranslatableComponent("commands.enchant.failed.incompatible", p_137020_);
+-   });
+-   private static final Dynamic2CommandExceptionType f_137005_ = new Dynamic2CommandExceptionType((p_137022_, p_137023_) -> {
+-      return new TranslatableComponent("commands.enchant.failed.level", p_137022_, p_137023_);
++   private static final DynamicCommandExceptionType f_137002_ = new DynamicCommandExceptionType((p_208839_0_) -> {
++      return new TranslatableComponent("commands.enchant.failed.entity", p_208839_0_);
++   });
++   private static final DynamicCommandExceptionType f_137003_ = new DynamicCommandExceptionType((p_208835_0_) -> {
++      return new TranslatableComponent("commands.enchant.failed.itemless", p_208835_0_);
++   });
++   private static final DynamicCommandExceptionType f_137004_ = new DynamicCommandExceptionType((p_208837_0_) -> {
++      return new TranslatableComponent("commands.enchant.failed.incompatible", p_208837_0_);
++   });
++   private static final Dynamic2CommandExceptionType f_137005_ = new Dynamic2CommandExceptionType((p_208840_0_, p_208840_1_) -> {
++      return new TranslatableComponent("commands.enchant.failed.level", p_208840_0_, p_208840_1_);
+    });
+    private static final SimpleCommandExceptionType f_137006_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.enchant.failed"));
+ 
+    public static void m_137008_(CommandDispatcher<CommandSourceStack> p_137009_) {
+-      p_137009_.register(Commands.m_82127_("enchant").requires((p_137013_) -> {
+-         return p_137013_.m_6761_(2);
+-      }).then(Commands.m_82129_("targets", EntityArgument.m_91460_()).then(Commands.m_82129_("enchantment", ItemEnchantmentArgument.m_95260_()).executes((p_137025_) -> {
+-         return m_137014_(p_137025_.getSource(), EntityArgument.m_91461_(p_137025_, "targets"), ItemEnchantmentArgument.m_95263_(p_137025_, "enchantment"), 1);
+-      }).then(Commands.m_82129_("level", IntegerArgumentType.integer(0)).executes((p_137011_) -> {
+-         return m_137014_(p_137011_.getSource(), EntityArgument.m_91461_(p_137011_, "targets"), ItemEnchantmentArgument.m_95263_(p_137011_, "enchantment"), IntegerArgumentType.getInteger(p_137011_, "level"));
++      p_137009_.register(Commands.m_82127_("enchant").requires((p_203630_0_) -> {
++         return p_203630_0_.m_6761_(2);
++      }).then(Commands.m_82129_("targets", EntityArgument.m_91460_()).then(Commands.m_82129_("enchantment", ItemEnchantmentArgument.m_95260_()).executes((p_202648_0_) -> {
++         return m_137014_(p_202648_0_.getSource(), EntityArgument.m_91461_(p_202648_0_, "targets"), ItemEnchantmentArgument.m_95263_(p_202648_0_, "enchantment"), 1);
++      }).then(Commands.m_82129_("level", IntegerArgumentType.integer(0)).executes((p_202650_0_) -> {
++         return m_137014_(p_202650_0_.getSource(), EntityArgument.m_91461_(p_202650_0_, "targets"), ItemEnchantmentArgument.m_95263_(p_202650_0_, "enchantment"), IntegerArgumentType.getInteger(p_202650_0_, "level"));
+       })))));
+    }
+ 

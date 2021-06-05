@@ -1,0 +1,17 @@
+--- a/net/minecraft/world/item/FireworkRocketItem.java
++++ b/net/minecraft/world/item/FireworkRocketItem.java
+@@ -92,10 +_,10 @@
+       CREEPER(3, "creeper"),
+       BURST(4, "burst");
+ 
+-      private static final FireworkRocketItem.Shape[] f_41226_ = Arrays.stream(values()).sorted(Comparator.comparingInt((p_41240_) -> {
+-         return p_41240_.f_41227_;
+-      })).toArray((p_41243_) -> {
+-         return new FireworkRocketItem.Shape[p_41243_];
++      private static final FireworkRocketItem.Shape[] f_41226_ = Arrays.stream(values()).sorted(Comparator.comparingInt((p_199796_0_) -> {
++         return p_199796_0_.f_41227_;
++      })).toArray((p_199797_0_) -> {
++         return new FireworkRocketItem.Shape[p_199797_0_];
+       });
+       private final int f_41227_;
+       private final String f_41228_;

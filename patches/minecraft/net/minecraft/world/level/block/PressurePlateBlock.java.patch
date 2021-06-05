@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/PressurePlateBlock.java
++++ b/net/minecraft/world/level/block/PressurePlateBlock.java
+@@ -21,7 +_,7 @@
+    public static final BooleanProperty f_55249_ = BlockStateProperties.f_61448_;
+    private final PressurePlateBlock.Sensitivity f_55250_;
+ 
+-   protected PressurePlateBlock(PressurePlateBlock.Sensitivity p_55253_, BlockBehaviour.Properties p_55254_) {
++   public PressurePlateBlock(PressurePlateBlock.Sensitivity p_55253_, BlockBehaviour.Properties p_55254_) {
+       super(p_55254_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_55249_, Boolean.valueOf(false)));
+       this.f_55250_ = p_55253_;

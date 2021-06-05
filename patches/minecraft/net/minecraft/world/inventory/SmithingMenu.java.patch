@@ -1,0 +1,24 @@
+--- a/net/minecraft/world/inventory/SmithingMenu.java
++++ b/net/minecraft/world/inventory/SmithingMenu.java
+@@ -40,8 +_,8 @@
+       this.f_39768_.m_8015_(p_40252_);
+       this.m_40270_(0);
+       this.m_40270_(1);
+-      this.f_39770_.m_39292_((p_40263_, p_40264_) -> {
+-         p_40263_.m_46796_(1044, p_40264_, 0);
++      this.f_39770_.m_39292_((p_234653_0_, p_234653_1_) -> {
++         p_234653_0_.m_46796_(1044, p_234653_1_, 0);
+       });
+       return p_40253_;
+    }
+@@ -66,8 +_,8 @@
+    }
+ 
+    protected boolean m_5861_(ItemStack p_40255_) {
+-      return this.f_40243_.stream().anyMatch((p_40261_) -> {
+-         return p_40261_.m_44535_(p_40255_);
++      return this.f_40243_.stream().anyMatch((p_241444_1_) -> {
++         return p_241444_1_.m_44535_(p_40255_);
+       });
+    }
+ 

@@ -22,10 +22,7 @@ package net.minecraftforge.event.village;
 import java.util.List;
 
 import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
-import net.minecraftforge.common.BasicTrade;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 
 /**
  * WandererTradesEvent is fired during the {@link FMLServerAboutToStartEvent}.  It is used to gather the trade lists for the wandering merchant.

@@ -1,0 +1,22 @@
+--- a/net/minecraft/client/tutorial/Tutorial.java
++++ b/net/minecraft/client/tutorial/Tutorial.java
+@@ -92,15 +_,15 @@
+    }
+ 
+    public void m_120570_(TutorialToast p_120571_) {
+-      this.f_120561_.removeIf((p_120577_) -> {
+-         return p_120577_.f_120599_ == p_120571_;
++      this.f_120561_.removeIf((p_244699_1_) -> {
++         return p_244699_1_.f_120599_ == p_120571_;
+       });
+       p_120571_.m_94968_();
+    }
+ 
+    public void m_120596_() {
+-      this.f_120561_.removeIf((p_120591_) -> {
+-         return p_120591_.m_120609_();
++      this.f_120561_.removeIf((p_244700_0_) -> {
++         return p_244700_0_.m_120609_();
+       });
+       if (this.f_120560_ != null) {
+          if (this.f_120559_.f_91073_ != null) {

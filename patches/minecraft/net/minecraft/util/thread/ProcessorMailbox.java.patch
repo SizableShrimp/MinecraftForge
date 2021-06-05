@@ -1,0 +1,13 @@
+--- a/net/minecraft/util/thread/ProcessorMailbox.java
++++ b/net/minecraft/util/thread/ProcessorMailbox.java
+@@ -97,8 +_,8 @@
+ 
+    public void run() {
+       try {
+-         this.m_18747_((p_18746_) -> {
+-            return p_18746_ == 0;
++         this.m_18747_((p_213147_0_) -> {
++            return p_213147_0_ == 0;
+          });
+       } finally {
+          this.m_18754_();

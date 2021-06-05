@@ -1,0 +1,21 @@
+--- a/net/minecraft/client/gui/font/glyphs/MissingGlyph.java
++++ b/net/minecraft/client/gui/font/glyphs/MissingGlyph.java
+@@ -10,15 +_,15 @@
+ public enum MissingGlyph implements RawGlyph {
+    INSTANCE;
+ 
+-   private static final NativeImage f_95289_ = Util.m_137469_(new NativeImage(NativeImage.Format.RGBA, 5, 8, false), (p_95299_) -> {
++   private static final NativeImage f_95289_ = Util.m_137469_(new NativeImage(NativeImage.Format.RGBA, 5, 8, false), (p_211580_0_) -> {
+       for(int i = 0; i < 8; ++i) {
+          for(int j = 0; j < 5; ++j) {
+             boolean flag = j == 0 || j + 1 == 5 || i == 0 || i + 1 == 8;
+-            p_95299_.m_84988_(j, i, flag ? -1 : 0);
++            p_211580_0_.m_84988_(j, i, flag ? -1 : 0);
+          }
+       }
+ 
+-      p_95299_.m_85123_();
++      p_211580_0_.m_85123_();
+    });
+ 
+    public int m_5631_() {

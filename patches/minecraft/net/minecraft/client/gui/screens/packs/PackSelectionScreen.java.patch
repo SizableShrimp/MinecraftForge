@@ -1,0 +1,98 @@
+--- a/net/minecraft/client/gui/screens/packs/PackSelectionScreen.java
++++ b/net/minecraft/client/gui/screens/packs/PackSelectionScreen.java
+@@ -56,8 +_,8 @@
+    @Nullable
+    private PackSelectionScreen.Watcher f_99975_;
+    private long f_99976_;
+-   private TransferableSelectionList f_99977_;
+-   private TransferableSelectionList f_99978_;
++   private net.minecraft.client.gui.screens.packs.TransferableSelectionList f_99977_;
++   private net.minecraft.client.gui.screens.packs.TransferableSelectionList f_99978_;
+    private final File f_99979_;
+    private Button f_99980_;
+    private final Map<String, ResourceLocation> f_99981_ = Maps.newHashMap();
+@@ -88,18 +_,18 @@
+    }
+ 
+    protected void m_7856_() {
+-      this.f_99980_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ - 48, 150, 20, CommonComponents.f_130655_, (p_100036_) -> {
++      this.f_99980_ = this.m_7082_(new Button(this.f_96543_ / 2 + 4, this.f_96544_ - 48, 150, 20, CommonComponents.f_130655_, (p_238903_1_) -> {
+          this.m_7379_();
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 154, this.f_96544_ - 48, 150, 20, new TranslatableComponent("pack.openFolder"), (p_100004_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 154, this.f_96544_ - 48, 150, 20, new TranslatableComponent("pack.openFolder"), (p_238896_1_) -> {
+          Util.m_137581_().m_137644_(this.f_99979_);
+-      }, (p_100006_, p_100007_, p_100008_, p_100009_) -> {
+-         this.m_96602_(p_100007_, f_99971_, p_100008_, p_100009_);
++      }, (p_238897_1_, p_238897_2_, p_238897_3_, p_238897_4_) -> {
++         this.m_96602_(p_238897_2_, f_99971_, p_238897_3_, p_238897_4_);
+       }));
+-      this.f_99977_ = new TransferableSelectionList(this.f_96541_, 200, this.f_96544_, new TranslatableComponent("pack.available.title"));
++      this.f_99977_ = new net.minecraft.client.gui.screens.packs.TransferableSelectionList(this.f_96541_, 200, this.f_96544_, new TranslatableComponent("pack.available.title"));
+       this.f_99977_.m_93507_(this.f_96543_ / 2 - 4 - 200);
+       this.f_96540_.add(this.f_99977_);
+-      this.f_99978_ = new TransferableSelectionList(this.f_96541_, 200, this.f_96544_, new TranslatableComponent("pack.selected.title"));
++      this.f_99978_ = new net.minecraft.client.gui.screens.packs.TransferableSelectionList(this.f_96541_, 200, this.f_96544_, new TranslatableComponent("pack.selected.title"));
+       this.f_99978_.m_93507_(this.f_96543_ / 2 + 4);
+       this.f_96540_.add(this.f_99978_);
+       this.m_100041_();
+@@ -129,10 +_,10 @@
+       this.f_99980_.f_93623_ = !this.f_99978_.m_6702_().isEmpty();
+    }
+ 
+-   private void m_100013_(TransferableSelectionList p_100014_, Stream<PackSelectionModel.Entry> p_100015_) {
++   private void m_100013_(net.minecraft.client.gui.screens.packs.TransferableSelectionList p_100014_, Stream<PackSelectionModel.Entry> p_100015_) {
+       p_100014_.m_6702_().clear();
+-      p_100015_.forEach((p_100012_) -> {
+-         p_100014_.m_6702_().add(new TransferableSelectionList.PackEntry(this.f_96541_, p_100014_, this, p_100012_));
++      p_100015_.filter(PackSelectionModel.Entry::notHidden).forEach((p_238898_2_) -> {
++         p_100014_.m_6702_().add(new net.minecraft.client.gui.screens.packs.TransferableSelectionList.PackEntry(this.f_96541_, p_100014_, this, p_238898_2_));
+       });
+    }
+ 
+@@ -154,19 +_,19 @@
+ 
+    protected static void m_99999_(Minecraft p_100000_, List<Path> p_100001_, Path p_100002_) {
+       MutableBoolean mutableboolean = new MutableBoolean();
+-      p_100001_.forEach((p_100027_) -> {
+-         try (Stream<Path> stream = Files.walk(p_100027_)) {
+-            stream.forEach((p_100023_) -> {
++      p_100001_.forEach((p_238901_2_) -> {
++         try (Stream<Path> stream = Files.walk(p_238901_2_)) {
++            stream.forEach((p_238900_3_) -> {
+                try {
+-                  Util.m_137563_(p_100027_.getParent(), p_100002_, p_100023_);
++                  Util.m_137563_(p_238901_2_.getParent(), p_100002_, p_238900_3_);
+                } catch (IOException ioexception1) {
+-                  f_99969_.warn("Failed to copy datapack file  from {} to {}", p_100023_, p_100002_, ioexception1);
++                  f_99969_.warn("Failed to copy datapack file  from {} to {}", p_238900_3_, p_100002_, ioexception1);
+                   mutableboolean.setTrue();
+                }
+ 
+             });
+          } catch (IOException ioexception) {
+-            f_99969_.warn("Failed to copy datapack file from {} to {}", p_100027_, p_100002_);
++            f_99969_.warn("Failed to copy datapack file from {} to {}", p_238901_2_, p_100002_);
+             mutableboolean.setTrue();
+          }
+ 
+@@ -179,8 +_,8 @@
+ 
+    public void m_7400_(List<Path> p_100029_) {
+       String s = p_100029_.stream().map(Path::getFileName).map(Path::toString).collect(Collectors.joining(", "));
+-      this.f_96541_.m_91152_(new ConfirmScreen((p_100032_) -> {
+-         if (p_100032_) {
++      this.f_96541_.m_91152_(new ConfirmScreen((p_238902_2_) -> {
++         if (p_238902_2_) {
+             m_99999_(this.f_96541_, p_100029_, this.f_99979_.toPath());
+             this.m_100041_();
+          }
+@@ -208,7 +_,7 @@
+    }
+ 
+    private ResourceLocation m_99989_(Pack p_99990_) {
+-      return this.f_99981_.computeIfAbsent(p_99990_.m_10446_(), (p_99993_) -> {
++      return this.f_99981_.computeIfAbsent(p_99990_.m_10446_(), (p_243396_2_) -> {
+          return this.m_100016_(this.f_96541_.m_91097_(), p_99990_);
+       });
+    }

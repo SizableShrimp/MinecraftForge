@@ -1,0 +1,20 @@
+--- a/net/minecraft/client/renderer/block/model/multipart/AndCondition.java
++++ b/net/minecraft/client/renderer/block/model/multipart/AndCondition.java
+@@ -19,12 +_,12 @@
+    }
+ 
+    public Predicate<BlockState> m_7289_(StateDefinition<Block, BlockState> p_111921_) {
+-      List<Predicate<BlockState>> list = Streams.stream(this.f_111908_).map((p_111916_) -> {
+-         return p_111916_.m_7289_(p_111921_);
++      List<Predicate<BlockState>> list = Streams.stream(this.f_111908_).map((p_200683_1_) -> {
++         return p_200683_1_.m_7289_(p_111921_);
+       }).collect(Collectors.toList());
+-      return (p_111919_) -> {
+-         return list.stream().allMatch((p_111913_) -> {
+-            return p_111913_.test(p_111919_);
++      return (p_212481_1_) -> {
++         return list.stream().allMatch((p_212480_1_) -> {
++            return p_212480_1_.test(p_212481_1_);
+          });
+       };
+    }

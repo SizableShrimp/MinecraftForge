@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/structure/templatesystem/BlockStateMatchTest.java
++++ b/net/minecraft/world/level/levelgen/structure/templatesystem/BlockStateMatchTest.java
+@@ -5,8 +_,8 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class BlockStateMatchTest extends RuleTest {
+-   public static final Codec<BlockStateMatchTest> f_74089_ = BlockState.f_61039_.fieldOf("block_state").xmap(BlockStateMatchTest::new, (p_74099_) -> {
+-      return p_74099_.f_74090_;
++   public static final Codec<BlockStateMatchTest> f_74089_ = BlockState.f_61039_.fieldOf("block_state").xmap(BlockStateMatchTest::new, (p_237080_0_) -> {
++      return p_237080_0_.f_74090_;
+    }).codec();
+    private final BlockState f_74090_;
+ 

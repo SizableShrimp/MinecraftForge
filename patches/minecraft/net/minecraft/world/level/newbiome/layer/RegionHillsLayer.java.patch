@@ -1,0 +1,53 @@
+--- a/net/minecraft/world/level/newbiome/layer/RegionHillsLayer.java
++++ b/net/minecraft/world/level/newbiome/layer/RegionHillsLayer.java
+@@ -14,28 +_,28 @@
+    INSTANCE;
+ 
+    private static final Logger f_76830_ = LogManager.getLogger();
+-   private static final Int2IntMap f_76831_ = Util.m_137469_(new Int2IntOpenHashMap(), (p_76844_) -> {
+-      p_76844_.put(1, 129);
+-      p_76844_.put(2, 130);
+-      p_76844_.put(3, 131);
+-      p_76844_.put(4, 132);
+-      p_76844_.put(5, 133);
+-      p_76844_.put(6, 134);
+-      p_76844_.put(12, 140);
+-      p_76844_.put(21, 149);
+-      p_76844_.put(23, 151);
+-      p_76844_.put(27, 155);
+-      p_76844_.put(28, 156);
+-      p_76844_.put(29, 157);
+-      p_76844_.put(30, 158);
+-      p_76844_.put(32, 160);
+-      p_76844_.put(33, 161);
+-      p_76844_.put(34, 162);
+-      p_76844_.put(35, 163);
+-      p_76844_.put(36, 164);
+-      p_76844_.put(37, 165);
+-      p_76844_.put(38, 166);
+-      p_76844_.put(39, 167);
++   private static final Int2IntMap f_76831_ = Util.m_137469_(new Int2IntOpenHashMap(), (p_242941_0_) -> {
++      p_242941_0_.put(1, 129);
++      p_242941_0_.put(2, 130);
++      p_242941_0_.put(3, 131);
++      p_242941_0_.put(4, 132);
++      p_242941_0_.put(5, 133);
++      p_242941_0_.put(6, 134);
++      p_242941_0_.put(12, 140);
++      p_242941_0_.put(21, 149);
++      p_242941_0_.put(23, 151);
++      p_242941_0_.put(27, 155);
++      p_242941_0_.put(28, 156);
++      p_242941_0_.put(29, 157);
++      p_242941_0_.put(30, 158);
++      p_242941_0_.put(32, 160);
++      p_242941_0_.put(33, 161);
++      p_242941_0_.put(34, 162);
++      p_242941_0_.put(35, 163);
++      p_242941_0_.put(36, 164);
++      p_242941_0_.put(37, 165);
++      p_242941_0_.put(38, 166);
++      p_242941_0_.put(39, 167);
+    });
+ 
+    public int m_5924_(Context p_76838_, Area p_76839_, Area p_76840_, int p_76841_, int p_76842_) {

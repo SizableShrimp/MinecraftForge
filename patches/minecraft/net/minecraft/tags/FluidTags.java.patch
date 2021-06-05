@@ -1,7 +1,12 @@
 --- a/net/minecraft/tags/FluidTags.java
 +++ b/net/minecraft/tags/FluidTags.java
-@@ -13,7 +_,20 @@
-       return field_206961_c.func_232937_a_(p_206956_0_);
+@@ -9,11 +_,24 @@
+    public static final Tag.Named<Fluid> f_13131_ = m_13134_("water");
+    public static final Tag.Named<Fluid> f_13132_ = m_13134_("lava");
+ 
+-   private static Tag.Named<Fluid> m_13134_(String p_13135_) {
++   public static Tag.Named<Fluid> m_13134_(String p_13135_) {
+       return f_13130_.m_13244_(p_13135_);
     }
  
 +   public static net.minecraftforge.common.Tags.IOptionalNamedTag<Fluid> createOptional(ResourceLocation name) {
@@ -9,15 +14,15 @@
 +   }
 +
 +   public static net.minecraftforge.common.Tags.IOptionalNamedTag<Fluid> createOptional(ResourceLocation name, @javax.annotation.Nullable java.util.Set<java.util.function.Supplier<Fluid>> defaults) {
-+      return field_206961_c.createOptional(name, defaults);
++      return f_13130_.createOptional(name, defaults);
 +   }
 +
-    public static List<? extends ITag.INamedTag<Fluid>> func_241280_c_() {
-       return field_206961_c.func_241288_c_();
+    public static List<? extends Tag.Named<Fluid>> m_13136_() {
+       return f_13130_.m_13249_();
 +   }
 +
 +   //Forge: Readd this stripped getter like the other tag classes
-+   public static ITagCollection<Fluid> func_226157_a_() {
-+       return field_206961_c.func_232939_b_();
++   public static TagCollection<Fluid> getAllTags() {
++       return f_13130_.m_13246_();
     }
  }

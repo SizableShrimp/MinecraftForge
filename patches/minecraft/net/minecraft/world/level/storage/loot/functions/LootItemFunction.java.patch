@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/storage/loot/functions/LootItemFunction.java
++++ b/net/minecraft/world/level/storage/loot/functions/LootItemFunction.java
+@@ -10,8 +_,8 @@
+    LootItemFunctionType m_7162_();
+ 
+    static Consumer<ItemStack> m_80724_(BiFunction<ItemStack, LootContext, ItemStack> p_80725_, Consumer<ItemStack> p_80726_, LootContext p_80727_) {
+-      return (p_80732_) -> {
+-         p_80726_.accept(p_80725_.apply(p_80732_, p_80727_));
++      return (p_215857_3_) -> {
++         p_80726_.accept(p_80725_.apply(p_215857_3_, p_80727_));
+       };
+    }
+ 

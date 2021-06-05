@@ -1,0 +1,20 @@
+--- a/net/minecraft/client/gui/screens/multiplayer/SafetyScreen.java
++++ b/net/minecraft/client/gui/screens/multiplayer/SafetyScreen.java
+@@ -32,7 +_,7 @@
+       super.m_7856_();
+       this.f_99740_ = MultiLineLabel.m_94341_(this.f_96547_, f_99736_, this.f_96543_ - 50);
+       int i = (this.f_99740_.m_5770_() + 1) * 9 * 2;
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 155, 100 + i, 150, 20, CommonComponents.f_130659_, (p_99754_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 155, 100 + i, 150, 20, CommonComponents.f_130659_, (p_230165_1_) -> {
+          if (this.f_99739_.m_93840_()) {
+             this.f_96541_.f_91066_.f_92083_ = true;
+             this.f_96541_.f_91066_.m_92169_();
+@@ -40,7 +_,7 @@
+ 
+          this.f_96541_.m_91152_(new JoinMultiplayerScreen(this.f_99734_));
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 155 + 160, 100 + i, 150, 20, CommonComponents.f_130660_, (p_99750_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 155 + 160, 100 + i, 150, 20, CommonComponents.f_130660_, (p_230164_1_) -> {
+          this.f_96541_.m_91152_(this.f_99734_);
+       }));
+       this.f_99739_ = new Checkbox(this.f_96543_ / 2 - 155 + 80, 76 + i, 150, 20, f_99737_, false);

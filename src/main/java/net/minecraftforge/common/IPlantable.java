@@ -39,7 +39,7 @@ public interface IPlantable
         if (this == Blocks.BROWN_MUSHROOM) return PlantType.CAVE;
         if (this == Blocks.NETHER_WART)    return PlantType.NETHER;
         if (this == Blocks.TALL_GRASS)      return PlantType.PLAINS;
-        return PlantType.PLAINS;
+        return net.minecraftforge.common.PlantType.PLAINS;
     }
 
     BlockState getPlant(BlockGetter world, BlockPos pos);

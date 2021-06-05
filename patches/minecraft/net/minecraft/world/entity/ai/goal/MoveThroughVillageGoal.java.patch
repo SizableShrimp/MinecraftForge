@@ -1,0 +1,17 @@
+--- a/net/minecraft/world/entity/ai/goal/MoveThroughVillageGoal.java
++++ b/net/minecraft/world/entity/ai/goal/MoveThroughVillageGoal.java
+@@ -54,11 +_,11 @@
+             if (!serverlevel.m_8736_(blockpos, 6)) {
+                return false;
+             } else {
+-               Vec3 vec3 = RandomPos.m_26939_(this.f_25573_, 15, 7, (p_25591_) -> {
+-                  if (!serverlevel.m_8802_(p_25591_)) {
++               Vec3 vec3 = RandomPos.m_26939_(this.f_25573_, 15, 7, (p_220734_3_) -> {
++                  if (!serverlevel.m_8802_(p_220734_3_)) {
+                      return Double.NEGATIVE_INFINITY;
+                   } else {
+-                     Optional<BlockPos> optional1 = serverlevel.m_8904_().m_27186_(PoiType.f_27330_, this::m_25592_, p_25591_, 10, PoiManager.Occupancy.IS_OCCUPIED);
++                     Optional<BlockPos> optional1 = serverlevel.m_8904_().m_27186_(PoiType.f_27330_, this::m_25592_, p_220734_3_, 10, PoiManager.Occupancy.IS_OCCUPIED);
+                      return !optional1.isPresent() ? Double.NEGATIVE_INFINITY : -optional1.get().m_123331_(blockpos);
+                   }
+                });

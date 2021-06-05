@@ -1,0 +1,46 @@
+--- a/net/minecraft/commands/arguments/ScoreHolderArgument.java
++++ b/net/minecraft/commands/arguments/ScoreHolderArgument.java
+@@ -23,9 +_,9 @@
+ import net.minecraft.world.entity.Entity;
+ 
+ public class ScoreHolderArgument implements ArgumentType<ScoreHolderArgument.Result> {
+-   public static final SuggestionProvider<CommandSourceStack> f_108210_ = (p_108221_, p_108222_) -> {
+-      StringReader stringreader = new StringReader(p_108222_.getInput());
+-      stringreader.setCursor(p_108222_.getStart());
++   public static final SuggestionProvider<CommandSourceStack> f_108210_ = (p_201323_0_, p_201323_1_) -> {
++      StringReader stringreader = new StringReader(p_201323_1_.getInput());
++      stringreader.setCursor(p_201323_1_.getStart());
+       EntitySelectorParser entityselectorparser = new EntitySelectorParser(stringreader);
+ 
+       try {
+@@ -33,8 +_,8 @@
+       } catch (CommandSyntaxException commandsyntaxexception) {
+       }
+ 
+-      return entityselectorparser.m_121249_(p_108222_, (p_108242_) -> {
+-         SharedSuggestionProvider.m_82970_(p_108221_.getSource().m_5982_(), p_108242_);
++      return entityselectorparser.m_121249_(p_201323_1_, (p_201949_1_) -> {
++         SharedSuggestionProvider.m_82970_(p_201323_0_.getSource().m_5982_(), p_201949_1_);
+       });
+    };
+    private static final Collection<String> f_108211_ = Arrays.asList("Player", "0123", "*", "@e");
+@@ -92,8 +_,8 @@
+ 
+          String s = p_108219_.getString().substring(i, p_108219_.getCursor());
+          if (s.equals("*")) {
+-            return (p_108231_, p_108232_) -> {
+-               Collection<String> collection1 = (Collection)p_108232_.get();
++            return (p_197208_0_, p_197208_1_) -> {
++               Collection<String> collection1 = p_197208_1_.get();
+                if (collection1.isEmpty()) {
+                   throw f_108212_.create();
+                } else {
+@@ -102,7 +_,7 @@
+             };
+          } else {
+             Collection<String> collection = Collections.singleton(s);
+-            return (p_108237_, p_108238_) -> {
++            return (p_197212_1_, p_197212_2_) -> {
+                return collection;
+             };
+          }

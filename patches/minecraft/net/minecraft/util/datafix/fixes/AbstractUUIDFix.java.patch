@@ -1,0 +1,47 @@
+--- a/net/minecraft/util/datafix/fixes/AbstractUUIDFix.java
++++ b/net/minecraft/util/datafix/fixes/AbstractUUIDFix.java
+@@ -26,34 +_,34 @@
+    protected Typed<?> m_14574_(Typed<?> p_14575_, String p_14576_, Function<Dynamic<?>, Dynamic<?>> p_14577_) {
+       Type<?> type = this.getInputSchema().getChoiceType(this.f_14569_, p_14576_);
+       Type<?> type1 = this.getOutputSchema().getChoiceType(this.f_14569_, p_14576_);
+-      return p_14575_.updateTyped(DSL.namedChoice(p_14576_, type), type1, (p_14607_) -> {
+-         return p_14607_.update(DSL.remainderFinder(), p_14577_);
++      return p_14575_.updateTyped(DSL.namedChoice(p_14576_, type), type1, (p_233061_1_) -> {
++         return p_233061_1_.update(DSL.remainderFinder(), p_14577_);
+       });
+    }
+ 
+    protected static Optional<Dynamic<?>> m_14590_(Dynamic<?> p_14591_, String p_14592_, String p_14593_) {
+-      return m_14587_(p_14591_, p_14592_).map((p_14616_) -> {
+-         return p_14591_.remove(p_14592_).set(p_14593_, p_14616_);
++      return m_14587_(p_14591_, p_14592_).map((p_233063_3_) -> {
++         return p_14591_.remove(p_14592_).set(p_14593_, p_233063_3_);
+       });
+    }
+ 
+    protected static Optional<Dynamic<?>> m_14608_(Dynamic<?> p_14609_, String p_14610_, String p_14611_) {
+-      return p_14609_.get(p_14610_).result().flatMap(AbstractUUIDFix::m_14578_).map((p_14598_) -> {
+-         return p_14609_.remove(p_14610_).set(p_14611_, p_14598_);
++      return p_14609_.get(p_14610_).result().flatMap(AbstractUUIDFix::m_14578_).map((p_233059_3_) -> {
++         return p_14609_.remove(p_14610_).set(p_14611_, p_233059_3_);
+       });
+    }
+ 
+    protected static Optional<Dynamic<?>> m_14617_(Dynamic<?> p_14618_, String p_14619_, String p_14620_) {
+       String s = p_14619_ + "Most";
+       String s1 = p_14619_ + "Least";
+-      return m_14621_(p_14618_, s, s1).map((p_14604_) -> {
+-         return p_14618_.remove(s).remove(s1).set(p_14620_, p_14604_);
++      return m_14621_(p_14618_, s, s1).map((p_233060_4_) -> {
++         return p_14618_.remove(s).remove(s1).set(p_14620_, p_233060_4_);
+       });
+    }
+ 
+    protected static Optional<Dynamic<?>> m_14587_(Dynamic<?> p_14588_, String p_14589_) {
+-      return p_14588_.get(p_14589_).result().flatMap((p_14586_) -> {
+-         String s = p_14586_.asString((String)null);
++      return p_14588_.get(p_14589_).result().flatMap((p_233056_1_) -> {
++         String s = p_233056_1_.asString((String)null);
+          if (s != null) {
+             try {
+                UUID uuid = UUID.fromString(s);

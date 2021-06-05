@@ -1,0 +1,11 @@
+--- a/net/minecraft/util/WeighedRandom.java
++++ b/net/minecraft/util/WeighedRandom.java
+@@ -45,7 +_,7 @@
+    }
+ 
+    public static class WeighedRandomItem {
+-      protected final int f_14482_;
++      public final int f_14482_;
+ 
+       public WeighedRandomItem(int p_14484_) {
+          this.f_14482_ = p_14484_;

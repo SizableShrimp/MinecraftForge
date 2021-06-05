@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/BredAnimalsTrigger.java
++++ b/net/minecraft/advancements/critereon/BredAnimalsTrigger.java
+@@ -26,8 +_,8 @@
+       LootContext lootcontext = EntityPredicate.m_36616_(p_18641_, p_18642_);
+       LootContext lootcontext1 = EntityPredicate.m_36616_(p_18641_, p_18643_);
+       LootContext lootcontext2 = p_18644_ != null ? EntityPredicate.m_36616_(p_18641_, p_18644_) : null;
+-      this.m_66234_(p_18641_, (p_18653_) -> {
+-         return p_18653_.m_18675_(lootcontext, lootcontext1, lootcontext2);
++      this.m_66234_(p_18641_, (p_233510_3_) -> {
++         return p_233510_3_.m_18675_(lootcontext, lootcontext1, lootcontext2);
+       });
+    }
+ 

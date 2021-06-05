@@ -28,7 +28,6 @@ import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.ITextProperties;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
 import net.minecraftforge.fml.ForgeI18n;
@@ -138,7 +137,7 @@ public class LoadingErrorScreen extends ErrorScreen {
             return this.width;
         }
 
-        public class LoadingMessageEntry extends Entry<LoadingMessageEntry> {
+        public class LoadingMessageEntry extends ObjectSelectionList.Entry<LoadingMessageEntry> {
             private final Component message;
             private final boolean center;
 

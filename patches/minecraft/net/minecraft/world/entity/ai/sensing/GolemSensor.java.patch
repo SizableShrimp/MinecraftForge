@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/entity/ai/sensing/GolemSensor.java
++++ b/net/minecraft/world/entity/ai/sensing/GolemSensor.java
+@@ -29,8 +_,8 @@
+    public static void m_26647_(LivingEntity p_26648_) {
+       Optional<List<LivingEntity>> optional = p_26648_.m_6274_().m_21952_(MemoryModuleType.f_26364_);
+       if (optional.isPresent()) {
+-         boolean flag = optional.get().stream().anyMatch((p_26652_) -> {
+-            return p_26652_.m_6095_().equals(EntityType.f_20460_);
++         boolean flag = optional.get().stream().anyMatch((p_223546_0_) -> {
++            return p_223546_0_.m_6095_().equals(EntityType.f_20460_);
+          });
+          if (flag) {
+             m_26649_(p_26648_);

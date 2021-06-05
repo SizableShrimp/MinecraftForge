@@ -1,0 +1,88 @@
+--- a/net/minecraft/commands/arguments/OperationArgument.java
++++ b/net/minecraft/commands/arguments/OperationArgument.java
+@@ -52,45 +_,45 @@
+    }
+ 
+    private static OperationArgument.Operation m_103281_(String p_103282_) throws CommandSyntaxException {
+-      return (p_103282_.equals("><") ? (p_103279_, p_103280_) -> {
+-         int i = p_103279_.m_83400_();
+-         p_103279_.m_83402_(p_103280_.m_83400_());
+-         p_103280_.m_83402_(i);
++      return (p_103282_.equals("><") ? (p_197175_0_, p_197175_1_) -> {
++         int i = p_197175_0_.m_83400_();
++         p_197175_0_.m_83402_(p_197175_1_.m_83400_());
++         p_197175_1_.m_83402_(i);
+       } : m_103286_(p_103282_));
+    }
+ 
+    private static OperationArgument.SimpleOperation m_103286_(String p_103287_) throws CommandSyntaxException {
+       switch(p_103287_) {
+       case "=":
+-         return (p_103298_, p_103299_) -> {
+-            return p_103299_;
++         return (p_197174_0_, p_197174_1_) -> {
++            return p_197174_1_;
+          };
+       case "+=":
+-         return (p_103295_, p_103296_) -> {
+-            return p_103295_ + p_103296_;
++         return (p_197176_0_, p_197176_1_) -> {
++            return p_197176_0_ + p_197176_1_;
+          };
+       case "-=":
+-         return (p_103292_, p_103293_) -> {
+-            return p_103292_ - p_103293_;
++         return (p_197183_0_, p_197183_1_) -> {
++            return p_197183_0_ - p_197183_1_;
+          };
+       case "*=":
+-         return (p_103289_, p_103290_) -> {
+-            return p_103289_ * p_103290_;
++         return (p_197173_0_, p_197173_1_) -> {
++            return p_197173_0_ * p_197173_1_;
+          };
+       case "/=":
+-         return (p_103284_, p_103285_) -> {
+-            if (p_103285_ == 0) {
++         return (p_197178_0_, p_197178_1_) -> {
++            if (p_197178_1_ == 0) {
+                throw f_103266_.create();
+             } else {
+-               return Mth.m_14042_(p_103284_, p_103285_);
++               return Mth.m_14042_(p_197178_0_, p_197178_1_);
+             }
+          };
+       case "%=":
+-         return (p_103271_, p_103272_) -> {
+-            if (p_103272_ == 0) {
++         return (p_197181_0_, p_197181_1_) -> {
++            if (p_197181_1_ == 0) {
+                throw f_103266_.create();
+             } else {
+-               return Mth.m_14100_(p_103271_, p_103272_);
++               return Mth.m_14100_(p_197181_0_, p_197181_1_);
+             }
+          };
+       case "<":
+@@ -103,16 +_,16 @@
+    }
+ 
+    @FunctionalInterface
+-   public interface Operation {
+-      void m_6407_(Score p_103306_, Score p_103307_) throws CommandSyntaxException;
+-   }
+-
+-   @FunctionalInterface
+    interface SimpleOperation extends OperationArgument.Operation {
+       int m_103308_(int p_103309_, int p_103310_) throws CommandSyntaxException;
+ 
+       default void m_6407_(Score p_103312_, Score p_103313_) throws CommandSyntaxException {
+          p_103312_.m_83402_(this.m_103308_(p_103312_.m_83400_(), p_103313_.m_83400_()));
+       }
++   }
++
++   @FunctionalInterface
++   public interface Operation {
++      void m_6407_(Score p_103306_, Score p_103307_) throws CommandSyntaxException;
+    }
+ }

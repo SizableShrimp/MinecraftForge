@@ -1,0 +1,154 @@
+--- a/net/minecraft/tags/StaticTagHelper.java
++++ b/net/minecraft/tags/StaticTagHelper.java
+@@ -16,23 +_,61 @@
+    private TagCollection<T> f_13227_ = TagCollection.m_13410_();
+    private final List<StaticTagHelper.Wrapper<T>> f_13228_ = Lists.newArrayList();
+    private final Function<TagContainer, TagCollection<T>> f_13229_;
++   private static java.util.Map<ResourceLocation, List<StaticTagHelper.Wrapper<?>>> toAdd = com.google.common.collect.Maps.newHashMap();
+ 
+    public StaticTagHelper(Function<TagContainer, TagCollection<T>> p_13231_) {
+       this.f_13229_ = p_13231_;
+    }
+ 
+    public Tag.Named<T> m_13244_(String p_13245_) {
+-      StaticTagHelper.Wrapper<T> wrapper = new StaticTagHelper.Wrapper<>(new ResourceLocation(p_13245_));
+-      this.f_13228_.add(wrapper);
+-      return wrapper;
++       return add(new StaticTagHelper.Wrapper<>(new ResourceLocation(p_13245_)));
++   }
++
++   public net.minecraftforge.common.Tags.IOptionalNamedTag<T> createOptional(ResourceLocation key, @Nullable Set<java.util.function.Supplier<T>> defaults) {
++       return add(new StaticTagHelper.OptionalNamedTag<>(key, defaults));
++   }
++
++   /** Call via ForgeTagHandler#makeWrapperTag to avoid any exceptions due to calling this after it is safe to call {@link #createTag(String)} */
++   public static <T> Tag.Named<T> createDelayedTag(ResourceLocation tagRegistry, ResourceLocation name) {
++      return delayedAdd(tagRegistry, new StaticTagHelper.Wrapper<>(name));
++   }
++
++   /** Call via ForgeTagHandler#createOptionalTag to avoid any exceptions due to calling this after it is safe to call {@link #createOptional(ResourceLocation, Set)} */
++   public static <T> net.minecraftforge.common.Tags.IOptionalNamedTag<T> createDelayedOptional(ResourceLocation tagRegistry, ResourceLocation key, @Nullable Set<java.util.function.Supplier<T>> defaults) {
++      return delayedAdd(tagRegistry, new StaticTagHelper.OptionalNamedTag<>(key, defaults));
++   }
++
++   private static synchronized <T, R extends StaticTagHelper.Wrapper<T>> R delayedAdd(ResourceLocation tagRegistry, R tag) {
++      if (toAdd == null) throw new RuntimeException("Creating delayed tags or optional tags, is only supported before custom tag types have been added.");
++      toAdd.computeIfAbsent(tagRegistry, registry -> Lists.newArrayList()).add(tag);
++      return tag;
++   }
++
++   public static void performDelayedAdd() {
++      if (toAdd != null) {
++         for (java.util.Map.Entry<ResourceLocation, List<StaticTagHelper.Wrapper<?>>> entry : toAdd.entrySet()) {
++            StaticTagHelper<?> tagRegistry = StaticTags.get(entry.getKey());
++            if (tagRegistry == null) throw new RuntimeException("A mod attempted to add a delayed tag for a registry that doesn't have custom tag support.");
++            for (StaticTagHelper.Wrapper<?> tag : entry.getValue()) {
++               tagRegistry.add((StaticTagHelper.Wrapper) tag);
++            }
++         }
++         toAdd = null;
++      }
++   }
++
++   private <R extends StaticTagHelper.Wrapper<T>> R add(R namedtag) {
++      namedtag.m_13260_(f_13227_::m_13404_);
++      this.f_13228_.add(namedtag);
++      return namedtag;
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
+    public void m_13232_() {
+       this.f_13227_ = TagCollection.m_13410_();
+       Tag<T> tag = SetTag.m_13216_();
+-      this.f_13228_.forEach((p_13235_) -> {
+-         p_13235_.m_13260_((p_13238_) -> {
++      this.f_13228_.forEach((p_232933_1_) -> {
++         p_232933_1_.m_13260_((p_232934_1_) -> {
+             return tag;
+          });
+       });
+@@ -41,9 +_,23 @@
+    public void m_13242_(TagContainer p_13243_) {
+       TagCollection<T> tagcollection = this.f_13229_.apply(p_13243_);
+       this.f_13227_ = tagcollection;
+-      this.f_13228_.forEach((p_13241_) -> {
+-         p_13241_.m_13260_(tagcollection::m_13404_);
++      this.f_13228_.forEach((p_232936_1_) -> {
++         p_232936_1_.m_13260_(tagcollection::m_13404_);
+       });
++   }
++
++   public TagCollection<T> reinjectOptionalTags(TagCollection<T> tagCollection) {
++      java.util.Map<ResourceLocation, Tag<T>> currentTags = tagCollection.m_5643_();
++      java.util.Map<ResourceLocation, Tag<T>> missingOptionals = this.f_13228_.stream().filter(e -> e instanceof OptionalNamedTag && !currentTags.containsKey(e.m_6979_())).collect(Collectors.toMap(Wrapper::m_6979_, namedTag -> {
++         OptionalNamedTag<T> optionalNamedTag = (OptionalNamedTag<T>) namedTag;
++         optionalNamedTag.defaulted = true;
++         return optionalNamedTag.resolveDefaulted();
++      }));
++      if (!missingOptionals.isEmpty()) {
++         missingOptionals.putAll(currentTags);
++         return TagCollection.m_13396_(missingOptionals);
++      }
++      return tagCollection;
+    }
+ 
+    public TagCollection<T> m_13246_() {
+@@ -56,14 +_,14 @@
+ 
+    public Set<ResourceLocation> m_13247_(TagContainer p_13248_) {
+       TagCollection<T> tagcollection = this.f_13229_.apply(p_13248_);
+-      Set<ResourceLocation> set = this.f_13228_.stream().map(StaticTagHelper.Wrapper::m_6979_).collect(Collectors.toSet());
++      Set<ResourceLocation> set = this.f_13228_.stream().filter(e -> !(e instanceof OptionalNamedTag)).map(StaticTagHelper.Wrapper::m_6979_).collect(Collectors.toSet());
+       ImmutableSet<ResourceLocation> immutableset = ImmutableSet.copyOf(tagcollection.m_13406_());
+       return Sets.difference(set, immutableset);
+    }
+ 
+    static class Wrapper<T> implements Tag.Named<T> {
+       @Nullable
+-      private Tag<T> f_13251_;
++      protected Tag<T> f_13251_;
+       protected final ResourceLocation f_13250_;
+ 
+       private Wrapper(ResourceLocation p_13253_) {
+@@ -92,6 +_,41 @@
+ 
+       public List<T> m_6497_() {
+          return this.m_13263_().m_6497_();
++      }
++
++      @Override
++      public String toString() {
++          return "NamedTag[" + m_6979_().toString() + ']';
++      }
++      @Override public boolean equals(Object o) { return (o == this) || (o instanceof Tag.Named && java.util.Objects.equals(this.m_6979_(), ((Tag.Named<T>)o).m_6979_())); }
++      @Override public int hashCode() { return m_6979_().hashCode(); }
++   }
++
++   private static class OptionalNamedTag<T> extends Wrapper<T> implements net.minecraftforge.common.Tags.IOptionalNamedTag<T> {
++      @Nullable
++      private final Set<java.util.function.Supplier<T>> defaults;
++      private boolean defaulted = false;
++
++      private OptionalNamedTag(ResourceLocation name, @Nullable Set<java.util.function.Supplier<T>> defaults) {
++         super(name);
++         this.defaults = defaults;
++      }
++
++      @Override
++      public boolean isDefaulted() {
++         return defaulted;
++      }
++
++      SetTag<T> resolveDefaulted() {
++         if (defaults == null || defaults.isEmpty()) {
++            return SetTag.m_13216_();
++         }
++         return SetTag.m_13222_(ImmutableSet.copyOf(defaults.stream().map(java.util.function.Supplier::get).collect(Collectors.toSet())));
++      }
++
++      @Override
++      public String toString() {
++          return "OptionalNamedTag[" + m_6979_().toString() + ']';
+       }
+    }
+ }

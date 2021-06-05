@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/FletchingTableBlock.java
++++ b/net/minecraft/world/level/block/FletchingTableBlock.java
+@@ -10,7 +_,7 @@
+ import net.minecraft.world.phys.BlockHitResult;
+ 
+ public class FletchingTableBlock extends CraftingTableBlock {
+-   protected FletchingTableBlock(BlockBehaviour.Properties p_53499_) {
++   public FletchingTableBlock(BlockBehaviour.Properties p_53499_) {
+       super(p_53499_);
+    }
+ 

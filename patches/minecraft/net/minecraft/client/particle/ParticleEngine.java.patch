@@ -1,0 +1,226 @@
+--- a/net/minecraft/client/particle/ParticleEngine.java
++++ b/net/minecraft/client/particle/ParticleEngine.java
+@@ -10,8 +_,6 @@
+ import com.mojang.blaze3d.vertex.BufferBuilder;
+ import com.mojang.blaze3d.vertex.PoseStack;
+ import com.mojang.blaze3d.vertex.Tesselator;
+-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+ import java.io.IOException;
+ import java.io.InputStreamReader;
+ import java.io.Reader;
+@@ -65,7 +_,7 @@
+    private final Queue<TrackingEmitter> f_107290_ = Queues.newArrayDeque();
+    private final TextureManager f_107291_;
+    private final Random f_107292_ = new Random();
+-   private final Int2ObjectMap<ParticleProvider<?>> f_107293_ = new Int2ObjectOpenHashMap<>();
++   private final Map<ResourceLocation, ParticleProvider<?>> f_107293_ = new java.util.HashMap<>();
+    private final Queue<Particle> f_107294_ = Queues.newArrayDeque();
+    private final Map<ResourceLocation, ParticleEngine.MutableSpriteSet> f_107295_ = Maps.newHashMap();
+    private final TextureAtlas f_107296_ = new TextureAtlas(TextureAtlas.f_118260_);
+@@ -152,42 +_,42 @@
+       this.m_107378_(ParticleTypes.f_123790_, WhiteAshParticle.Provider::new);
+    }
+ 
+-   private <T extends ParticleOptions> void m_107381_(ParticleType<T> p_107382_, ParticleProvider<T> p_107383_) {
+-      this.f_107293_.put(Registry.f_122829_.m_7447_(p_107382_), p_107383_);
++   public <T extends ParticleOptions> void m_107381_(ParticleType<T> p_107382_, ParticleProvider<T> p_107383_) {
++      this.f_107293_.put(Registry.f_122829_.m_7981_(p_107382_), p_107383_);
+    }
+ 
+-   private <T extends ParticleOptions> void m_107378_(ParticleType<T> p_107379_, ParticleEngine.SpriteParticleRegistration<T> p_107380_) {
++   public <T extends ParticleOptions> void m_107378_(ParticleType<T> p_107379_, ParticleEngine.SpriteParticleRegistration<T> p_107380_) {
+       ParticleEngine.MutableSpriteSet particleengine$mutablespriteset = new ParticleEngine.MutableSpriteSet();
+       this.f_107295_.put(Registry.f_122829_.m_7981_(p_107379_), particleengine$mutablespriteset);
+-      this.f_107293_.put(Registry.f_122829_.m_7447_(p_107379_), p_107380_.m_107419_(particleengine$mutablespriteset));
++      this.f_107293_.put(Registry.f_122829_.m_7981_(p_107379_), p_107380_.m_107419_(particleengine$mutablespriteset));
+    }
+ 
+    public CompletableFuture<Void> m_5540_(PreparableReloadListener.PreparationBarrier p_107305_, ResourceManager p_107306_, ProfilerFiller p_107307_, ProfilerFiller p_107308_, Executor p_107309_, Executor p_107310_) {
+       Map<ResourceLocation, List<ResourceLocation>> map = Maps.newConcurrentMap();
+-      CompletableFuture<?>[] completablefuture = Registry.f_122829_.m_6566_().stream().map((p_107315_) -> {
++      CompletableFuture<?>[] completablefuture = Registry.f_122829_.m_6566_().stream().map((p_215228_4_) -> {
+          return CompletableFuture.runAsync(() -> {
+-            this.m_107316_(p_107306_, p_107315_, map);
++            this.m_107316_(p_107306_, p_215228_4_, map);
+          }, p_107309_);
+-      }).toArray((p_107303_) -> {
+-         return new CompletableFuture[p_107303_];
++      }).toArray((p_215239_0_) -> {
++         return new CompletableFuture[p_215239_0_];
+       });
+-      return CompletableFuture.allOf(completablefuture).thenApplyAsync((p_107324_) -> {
++      return CompletableFuture.allOf(completablefuture).thenApplyAsync((p_228344_4_) -> {
+          p_107307_.m_7242_();
+          p_107307_.m_6180_("stitching");
+          TextureAtlas.Preparations textureatlas$preparations = this.f_107296_.m_118307_(p_107306_, map.values().stream().flatMap(Collection::stream), p_107307_, 0);
+          p_107307_.m_7238_();
+          p_107307_.m_7241_();
+          return textureatlas$preparations;
+-      }, p_107309_).thenCompose(p_107305_::m_6769_).thenAcceptAsync((p_107328_) -> {
++      }, p_107309_).thenCompose(p_107305_::m_6769_).thenAcceptAsync((p_215229_3_) -> {
+          this.f_107289_.clear();
+          p_107308_.m_7242_();
+          p_107308_.m_6180_("upload");
+-         this.f_107296_.m_118312_(p_107328_);
++         this.f_107296_.m_118312_(p_215229_3_);
+          p_107308_.m_6182_("bindSpriteSets");
+          TextureAtlasSprite textureatlassprite = this.f_107296_.m_118316_(MissingTextureAtlasSprite.m_118071_());
+-         map.forEach((p_107353_, p_107354_) -> {
+-            ImmutableList<TextureAtlasSprite> immutablelist = p_107354_.isEmpty() ? ImmutableList.of(textureatlassprite) : p_107354_.stream().map(this.f_107296_::m_118316_).collect(ImmutableList.toImmutableList());
+-            this.f_107295_.get(p_107353_).m_107415_(immutablelist);
++         map.forEach((p_215227_2_, p_215227_3_) -> {
++            ImmutableList<TextureAtlasSprite> immutablelist = p_215227_3_.isEmpty() ? ImmutableList.of(textureatlassprite) : p_215227_3_.stream().map(this.f_107296_::m_118316_).collect(ImmutableList.toImmutableList());
++            this.f_107295_.get(p_215227_2_).m_107415_(immutablelist);
+          });
+          p_107308_.m_7238_();
+          p_107308_.m_7241_();
+@@ -217,8 +_,8 @@
+                throw new IllegalStateException("Redundant texture list for particle " + p_107318_);
+             }
+ 
+-            p_107319_.put(p_107318_, list.stream().map((p_107387_) -> {
+-               return new ResourceLocation(p_107387_.m_135827_(), "particle/" + p_107387_.m_135815_());
++            p_107319_.put(p_107318_, list.stream().map((p_228349_0_) -> {
++               return new ResourceLocation(p_228349_0_.m_135827_(), "particle/" + p_228349_0_.m_135815_());
+             }).collect(Collectors.toList()));
+          }
+ 
+@@ -248,7 +_,7 @@
+ 
+    @Nullable
+    private <T extends ParticleOptions> Particle m_107395_(T p_107396_, double p_107397_, double p_107398_, double p_107399_, double p_107400_, double p_107401_, double p_107402_) {
+-      ParticleProvider<T> particleprovider = (ParticleProvider<T>)this.f_107293_.get(Registry.f_122829_.m_7447_(p_107396_.m_6012_()));
++      ParticleProvider<T> particleprovider = (ParticleProvider<T>)this.f_107293_.get(Registry.f_122829_.m_7981_(p_107396_.m_6012_()));
+       return particleprovider == null ? null : particleprovider.m_6966_(p_107396_, this.f_107287_, p_107397_, p_107398_, p_107399_, p_107400_, p_107401_, p_107402_);
+    }
+ 
+@@ -257,9 +_,9 @@
+    }
+ 
+    public void m_107388_() {
+-      this.f_107289_.forEach((p_107349_, p_107350_) -> {
+-         this.f_107287_.m_46473_().m_6180_(p_107349_.toString());
+-         this.m_107384_(p_107350_);
++      this.f_107289_.forEach((p_228347_1_, p_228347_2_) -> {
++         this.f_107287_.m_46473_().m_6180_(p_228347_1_.toString());
++         this.m_107384_(p_228347_2_);
+          this.f_107287_.m_46473_().m_7238_();
+       });
+       if (!this.f_107290_.isEmpty()) {
+@@ -278,7 +_,7 @@
+       Particle particle;
+       if (!this.f_107294_.isEmpty()) {
+          while((particle = this.f_107294_.poll()) != null) {
+-            this.f_107289_.computeIfAbsent(particle.m_7556_(), (p_107347_) -> {
++            this.f_107289_.computeIfAbsent(particle.m_7556_(), (p_228346_0_) -> {
+                return EvictingQueue.create(16384);
+             }).add(particle);
+          }
+@@ -313,16 +_,29 @@
+       }
+    }
+ 
++   /**@deprecated Forge: use {@link #renderParticles(MatrixStack, IRenderTypeBuffer.Impl, LightTexture, ActiveRenderInfo, float, net.minecraft.client.renderer.culling.ClippingHelper)} with ClippingHelper as additional parameter*/
++   @Deprecated
+    public void m_107336_(PoseStack p_107337_, MultiBufferSource.BufferSource p_107338_, LightTexture p_107339_, Camera p_107340_, float p_107341_) {
+-      p_107339_.m_109896_();
++      renderParticles(p_107337_, p_107338_, p_107339_, p_107340_, p_107341_, null);
++   }
++
++   public void renderParticles(PoseStack p_228345_1_, MultiBufferSource.BufferSource p_228345_2_, LightTexture p_228345_3_, Camera p_228345_4_, float p_228345_5_, @Nullable net.minecraft.client.renderer.culling.Frustum clippingHelper) {
++      p_228345_3_.m_109896_();
++      Runnable enable = () -> {
+       RenderSystem.m_69477_();
+       RenderSystem.m_69452_();
+       RenderSystem.m_69482_();
+       RenderSystem.m_69483_();
++         RenderSystem.m_69388_(org.lwjgl.opengl.GL13.GL_TEXTURE2);
++         RenderSystem.m_69493_();
++         RenderSystem.m_69388_(org.lwjgl.opengl.GL13.GL_TEXTURE0);
++      };
+       RenderSystem.m_69869_();
+-      RenderSystem.m_69841_(p_107337_.m_85850_().m_85861_());
++      RenderSystem.m_69841_(p_228345_1_.m_85850_().m_85861_());
+ 
+-      for(ParticleRenderType particlerendertype : f_107288_) {
++      for(ParticleRenderType particlerendertype : this.f_107289_.keySet()) { // Forge: allow custom IParticleRenderType's
++         if (particlerendertype == ParticleRenderType.f_107434_) continue;
++         enable.run(); //Forge: MC-168672 Make sure all render types have the correct GL state.
+          Iterable<Particle> iterable = this.f_107289_.get(particlerendertype);
+          if (iterable != null) {
+             RenderSystem.m_69439_(1.0F, 1.0F, 1.0F, 1.0F);
+@@ -331,8 +_,9 @@
+             particlerendertype.m_6505_(bufferbuilder, this.f_107291_);
+ 
+             for(Particle particle : iterable) {
++               if (clippingHelper != null && particle.shouldCull() && !clippingHelper.m_113029_(particle.m_107277_())) continue;
+                try {
+-                  particle.m_5744_(bufferbuilder, p_107340_, p_107341_);
++                  particle.m_5744_(bufferbuilder, p_228345_4_, p_228345_5_);
+                } catch (Throwable throwable) {
+                   CrashReport crashreport = CrashReport.m_127521_(throwable, "Rendering Particle");
+                   CrashReportCategory crashreportcategory = crashreport.m_127514_("Particle being rendered");
+@@ -351,7 +_,7 @@
+       RenderSystem.m_69456_(515);
+       RenderSystem.m_69461_();
+       RenderSystem.m_69452_();
+-      p_107339_.m_109891_();
++      p_228345_3_.m_109891_();
+       RenderSystem.m_69466_();
+    }
+ 
+@@ -362,13 +_,13 @@
+    }
+ 
+    public void m_107355_(BlockPos p_107356_, BlockState p_107357_) {
+-      if (!p_107357_.m_60795_()) {
++      if (!p_107357_.isAir(this.f_107287_, p_107356_) && !p_107357_.addDestroyEffects(this.f_107287_, p_107356_, this)) {
+          VoxelShape voxelshape = p_107357_.m_60808_(this.f_107287_, p_107356_);
+          double d0 = 0.25D;
+-         voxelshape.m_83286_((p_107361_, p_107362_, p_107363_, p_107364_, p_107365_, p_107366_) -> {
+-            double d1 = Math.min(1.0D, p_107364_ - p_107361_);
+-            double d2 = Math.min(1.0D, p_107365_ - p_107362_);
+-            double d3 = Math.min(1.0D, p_107366_ - p_107363_);
++         voxelshape.m_83286_((p_228348_3_, p_228348_5_, p_228348_7_, p_228348_9_, p_228348_11_, p_228348_13_) -> {
++            double d1 = Math.min(1.0D, p_228348_9_ - p_228348_3_);
++            double d2 = Math.min(1.0D, p_228348_11_ - p_228348_5_);
++            double d3 = Math.min(1.0D, p_228348_13_ - p_228348_7_);
+             int i = Math.max(2, Mth.m_14165_(d1 / 0.25D));
+             int j = Math.max(2, Mth.m_14165_(d2 / 0.25D));
+             int k = Math.max(2, Mth.m_14165_(d3 / 0.25D));
+@@ -379,9 +_,9 @@
+                      double d4 = ((double)l + 0.5D) / (double)i;
+                      double d5 = ((double)i1 + 0.5D) / (double)j;
+                      double d6 = ((double)j1 + 0.5D) / (double)k;
+-                     double d7 = d4 * d1 + p_107361_;
+-                     double d8 = d5 * d2 + p_107362_;
+-                     double d9 = d6 * d3 + p_107363_;
++                     double d7 = d4 * d1 + p_228348_3_;
++                     double d8 = d5 * d2 + p_228348_5_;
++                     double d9 = d6 * d3 + p_228348_7_;
+                      this.m_107344_((new TerrainParticle(this.f_107287_, (double)p_107356_.m_123341_() + d7, (double)p_107356_.m_123342_() + d8, (double)p_107356_.m_123343_() + d9, d4 - 0.5D, d5 - 0.5D, d6 - 0.5D, p_107357_)).m_108292_(p_107356_));
+                   }
+                }
+@@ -434,6 +_,12 @@
+       return String.valueOf(this.f_107289_.values().stream().mapToInt(Collection::size).sum());
+    }
+ 
++   public void addBlockHitEffects(BlockPos pos, net.minecraft.world.phys.BlockHitResult target) {
++      BlockState state = f_107287_.m_8055_(pos);
++      if (!state.addHitEffects(f_107287_, target, this))
++         m_107367_(pos, target.m_82434_());
++   }
++
+    @OnlyIn(Dist.CLIENT)
+    class MutableSpriteSet implements SpriteSet {
+       private List<TextureAtlasSprite> f_107406_;
+@@ -456,7 +_,7 @@
+ 
+    @FunctionalInterface
+    @OnlyIn(Dist.CLIENT)
+-   interface SpriteParticleRegistration<T extends ParticleOptions> {
++   public interface SpriteParticleRegistration<T extends ParticleOptions> {
+       ParticleProvider<T> m_107419_(SpriteSet p_107420_);
+    }
+ }

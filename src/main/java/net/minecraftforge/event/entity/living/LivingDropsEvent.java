@@ -19,12 +19,8 @@
 
 package net.minecraftforge.event.entity.living;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.LivingEntity;
@@ -48,7 +44,7 @@ import net.minecraft.world.entity.LivingEntity;
  * <br>
  * This event is fired on the {@link MinecraftForge#EVENT_BUS}.
  **/
-@Cancelable
+@net.minecraftforge.eventbus.api.Cancelable
 public class LivingDropsEvent extends LivingEvent
 {
     private final DamageSource source;

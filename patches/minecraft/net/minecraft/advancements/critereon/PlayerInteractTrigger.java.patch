@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/PlayerInteractTrigger.java
++++ b/net/minecraft/advancements/critereon/PlayerInteractTrigger.java
+@@ -22,8 +_,8 @@
+ 
+    public void m_61494_(ServerPlayer p_61495_, ItemStack p_61496_, Entity p_61497_) {
+       LootContext lootcontext = EntityPredicate.m_36616_(p_61495_, p_61497_);
+-      this.m_66234_(p_61495_, (p_61501_) -> {
+-         return p_61501_.m_61521_(p_61496_, lootcontext);
++      this.m_66234_(p_61495_, (p_241475_2_) -> {
++         return p_241475_2_.m_61521_(p_61496_, lootcontext);
+       });
+    }
+ 

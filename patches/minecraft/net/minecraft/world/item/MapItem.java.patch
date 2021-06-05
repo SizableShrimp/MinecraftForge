@@ -1,0 +1,25 @@
+--- a/net/minecraft/world/item/MapItem.java
++++ b/net/minecraft/world/item/MapItem.java
+@@ -52,9 +_,19 @@
+ 
+    @Nullable
+    public static MapItemSavedData m_42909_(ItemStack p_42910_, Level p_42911_) {
+-      MapItemSavedData mapitemsaveddata = m_42853_(p_42910_, p_42911_);
+-      if (mapitemsaveddata == null && p_42911_ instanceof ServerLevel) {
+-         mapitemsaveddata = m_42860_(p_42910_, p_42911_, p_42911_.m_6106_().m_6789_(), p_42911_.m_6106_().m_6526_(), 3, false, false, p_42911_.m_46472_());
++      // FORGE: Add instance method for mods to override
++      Item map = p_42910_.m_41720_();
++      if (map instanceof MapItem) {
++        return ((MapItem)map).getCustomMapData(p_42910_, p_42911_);
++      }
++      return null;
++   }
++
++   @Nullable
++   protected MapItemSavedData getCustomMapData(ItemStack p_195950_0_, Level p_195950_1_) {
++      MapItemSavedData mapitemsaveddata = m_42853_(p_195950_0_, p_195950_1_);
++      if (mapitemsaveddata == null && p_195950_1_ instanceof ServerLevel) {
++         mapitemsaveddata = m_42860_(p_195950_0_, p_195950_1_, p_195950_1_.m_6106_().m_6789_(), p_195950_1_.m_6106_().m_6526_(), 3, false, false, p_195950_1_.m_46472_());
+       }
+ 
+       return mapitemsaveddata;

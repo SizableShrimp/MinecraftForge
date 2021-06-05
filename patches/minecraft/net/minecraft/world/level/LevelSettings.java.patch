@@ -1,0 +1,21 @@
+--- a/net/minecraft/world/level/LevelSettings.java
++++ b/net/minecraft/world/level/LevelSettings.java
+@@ -24,8 +_,8 @@
+ 
+    public static LevelSettings m_46924_(Dynamic<?> p_46925_, DataPackConfig p_46926_) {
+       GameType gametype = GameType.m_46393_(p_46925_.get("GameType").asInt(0));
+-      return new LevelSettings(p_46925_.get("LevelName").asString(""), gametype, p_46925_.get("hardcore").asBoolean(false), p_46925_.get("Difficulty").asNumber().map((p_46928_) -> {
+-         return Difficulty.m_19029_(p_46928_.byteValue());
++      return new LevelSettings(p_46925_.get("LevelName").asString(""), gametype, p_46925_.get("hardcore").asBoolean(false), p_46925_.get("Difficulty").asNumber().map((p_234952_0_) -> {
++         return Difficulty.m_19029_(p_234952_0_.byteValue());
+       }).result().orElse(Difficulty.NORMAL), p_46925_.get("allowCommands").asBoolean(gametype == GameType.CREATIVE), new GameRules(p_46925_.get("GameRules")), p_46926_);
+    }
+ 
+@@ -62,6 +_,7 @@
+    }
+ 
+    public LevelSettings m_46918_(Difficulty p_46919_) {
++      net.minecraftforge.common.ForgeHooks.onDifficultyChange(p_46919_, this.f_46905_);
+       return new LevelSettings(this.f_46902_, this.f_46903_, this.f_46904_, p_46919_, this.f_46906_, this.f_46907_, this.f_46908_);
+    }
+ 

@@ -1,0 +1,24 @@
+--- a/net/minecraft/world/SimpleContainer.java
++++ b/net/minecraft/world/SimpleContainer.java
+@@ -44,8 +_,8 @@
+    }
+ 
+    public List<ItemStack> m_19195_() {
+-      List<ItemStack> list = this.f_19147_.stream().filter((p_19197_) -> {
+-         return !p_19197_.m_41619_();
++      List<ItemStack> list = this.f_19147_.stream().filter((p_233544_0_) -> {
++         return !p_233544_0_.m_41619_();
+       }).collect(Collectors.toList());
+       this.m_6211_();
+       return list;
+@@ -165,8 +_,8 @@
+    }
+ 
+    public String toString() {
+-      return this.f_19147_.stream().filter((p_19194_) -> {
+-         return !p_19194_.m_41619_();
++      return this.f_19147_.stream().filter((p_223371_0_) -> {
++         return !p_223371_0_.m_41619_();
+       }).collect(Collectors.toList()).toString();
+    }
+ 

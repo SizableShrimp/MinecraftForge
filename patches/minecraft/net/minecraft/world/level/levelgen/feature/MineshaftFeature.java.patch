@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/level/levelgen/feature/MineshaftFeature.java
++++ b/net/minecraft/world/level/levelgen/feature/MineshaftFeature.java
+@@ -63,8 +_,8 @@
+       MESA("mesa");
+ 
+       public static final Codec<MineshaftFeature.Type> f_66320_ = StringRepresentable.m_14350_(MineshaftFeature.Type::values, MineshaftFeature.Type::m_66334_);
+-      private static final Map<String, MineshaftFeature.Type> f_66321_ = Arrays.stream(values()).collect(Collectors.toMap(MineshaftFeature.Type::m_66336_, (p_66333_) -> {
+-         return p_66333_;
++      private static final Map<String, MineshaftFeature.Type> f_66321_ = Arrays.stream(values()).collect(Collectors.toMap(MineshaftFeature.Type::m_66336_, (p_214716_0_) -> {
++         return p_214716_0_;
+       }));
+       private final String f_66322_;
+ 

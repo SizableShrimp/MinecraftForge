@@ -1,0 +1,17 @@
+--- a/net/minecraft/world/level/levelgen/FlatLevelSource.java
++++ b/net/minecraft/world/level/levelgen/FlatLevelSource.java
+@@ -90,10 +_,10 @@
+    }
+ 
+    public BlockGetter m_6295_(int p_64173_, int p_64174_) {
+-      return new NoiseColumn(Arrays.stream(this.f_64165_.m_70402_()).map((p_64189_) -> {
+-         return p_64189_ == null ? Blocks.f_50016_.m_49966_() : p_64189_;
+-      }).toArray((p_64171_) -> {
+-         return new BlockState[p_64171_];
++      return new NoiseColumn(Arrays.stream(this.f_64165_.m_70402_()).map((p_236072_0_) -> {
++         return p_236072_0_ == null ? Blocks.f_50016_.m_49966_() : p_236072_0_;
++      }).toArray((p_236071_0_) -> {
++         return new BlockState[p_236071_0_];
+       }));
+    }
+ }

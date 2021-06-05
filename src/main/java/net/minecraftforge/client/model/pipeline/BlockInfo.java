@@ -28,7 +28,6 @@ import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.level.BlockAndTintGetter;
 
 public class BlockInfo

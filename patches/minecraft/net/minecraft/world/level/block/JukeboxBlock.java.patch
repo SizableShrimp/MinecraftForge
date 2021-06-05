@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/JukeboxBlock.java
++++ b/net/minecraft/world/level/block/JukeboxBlock.java
+@@ -26,7 +_,7 @@
+ public class JukeboxBlock extends BaseEntityBlock {
+    public static final BooleanProperty f_54254_ = BlockStateProperties.f_61439_;
+ 
+-   protected JukeboxBlock(BlockBehaviour.Properties p_54257_) {
++   public JukeboxBlock(BlockBehaviour.Properties p_54257_) {
+       super(p_54257_);
+       this.m_49959_(this.f_49792_.m_61090_().m_61124_(f_54254_, Boolean.valueOf(false)));
+    }

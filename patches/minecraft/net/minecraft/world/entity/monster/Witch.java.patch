@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/entity/monster/Witch.java
++++ b/net/minecraft/world/entity/monster/Witch.java
+@@ -58,8 +_,8 @@
+ 
+    protected void m_8099_() {
+       super.m_8099_();
+-      this.f_34130_ = new NearestHealableRaiderTargetGoal<>(this, Raider.class, true, (p_34159_) -> {
+-         return p_34159_ != null && this.m_37886_() && p_34159_.m_6095_() != EntityType.f_20495_;
++      this.f_34130_ = new NearestHealableRaiderTargetGoal<>(this, Raider.class, true, (p_213693_1_) -> {
++         return p_213693_1_ != null && this.m_37886_() && p_213693_1_.m_6095_() != EntityType.f_20495_;
+       });
+       this.f_34131_ = new NearestAttackableWitchTargetGoal<>(this, Player.class, 10, true, false, (Predicate<LivingEntity>)null);
+       this.f_21345_.m_25352_(1, new FloatGoal(this));

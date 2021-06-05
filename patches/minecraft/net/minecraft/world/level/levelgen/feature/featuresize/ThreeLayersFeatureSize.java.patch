@@ -1,0 +1,33 @@
+--- a/net/minecraft/world/level/levelgen/feature/featuresize/ThreeLayersFeatureSize.java
++++ b/net/minecraft/world/level/levelgen/feature/featuresize/ThreeLayersFeatureSize.java
+@@ -5,18 +_,18 @@
+ import java.util.OptionalInt;
+ 
+ public class ThreeLayersFeatureSize extends FeatureSize {
+-   public static final Codec<ThreeLayersFeatureSize> f_68306_ = RecordCodecBuilder.create((p_68326_) -> {
+-      return p_68326_.group(Codec.intRange(0, 80).fieldOf("limit").orElse(1).forGetter((p_68335_) -> {
+-         return p_68335_.f_68307_;
+-      }), Codec.intRange(0, 80).fieldOf("upper_limit").orElse(1).forGetter((p_68333_) -> {
+-         return p_68333_.f_68308_;
+-      }), Codec.intRange(0, 16).fieldOf("lower_size").orElse(0).forGetter((p_68331_) -> {
+-         return p_68331_.f_68309_;
+-      }), Codec.intRange(0, 16).fieldOf("middle_size").orElse(1).forGetter((p_68329_) -> {
+-         return p_68329_.f_68310_;
+-      }), Codec.intRange(0, 16).fieldOf("upper_size").orElse(1).forGetter((p_68324_) -> {
+-         return p_68324_.f_68311_;
+-      }), m_68286_()).apply(p_68326_, ThreeLayersFeatureSize::new);
++   public static final Codec<ThreeLayersFeatureSize> f_68306_ = RecordCodecBuilder.create((p_236722_0_) -> {
++      return p_236722_0_.group(Codec.intRange(0, 80).fieldOf("limit").orElse(1).forGetter((p_236727_0_) -> {
++         return p_236727_0_.f_68307_;
++      }), Codec.intRange(0, 80).fieldOf("upper_limit").orElse(1).forGetter((p_236726_0_) -> {
++         return p_236726_0_.f_68308_;
++      }), Codec.intRange(0, 16).fieldOf("lower_size").orElse(0).forGetter((p_236725_0_) -> {
++         return p_236725_0_.f_68309_;
++      }), Codec.intRange(0, 16).fieldOf("middle_size").orElse(1).forGetter((p_236724_0_) -> {
++         return p_236724_0_.f_68310_;
++      }), Codec.intRange(0, 16).fieldOf("upper_size").orElse(1).forGetter((p_236723_0_) -> {
++         return p_236723_0_.f_68311_;
++      }), m_68286_()).apply(p_236722_0_, ThreeLayersFeatureSize::new);
+    });
+    private final int f_68307_;
+    private final int f_68308_;

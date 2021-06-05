@@ -1,0 +1,66 @@
+--- a/net/minecraft/server/commands/ForceLoadCommand.java
++++ b/net/minecraft/server/commands/ForceLoadCommand.java
+@@ -18,32 +_,32 @@
+ import net.minecraft.world.level.Level;
+ 
+ public class ForceLoadCommand {
+-   private static final Dynamic2CommandExceptionType f_137668_ = new Dynamic2CommandExceptionType((p_137698_, p_137699_) -> {
+-      return new TranslatableComponent("commands.forceload.toobig", p_137698_, p_137699_);
++   private static final Dynamic2CommandExceptionType f_137668_ = new Dynamic2CommandExceptionType((p_212724_0_, p_212724_1_) -> {
++      return new TranslatableComponent("commands.forceload.toobig", p_212724_0_, p_212724_1_);
+    });
+-   private static final Dynamic2CommandExceptionType f_137669_ = new Dynamic2CommandExceptionType((p_137691_, p_137692_) -> {
+-      return new TranslatableComponent("commands.forceload.query.failure", p_137691_, p_137692_);
++   private static final Dynamic2CommandExceptionType f_137669_ = new Dynamic2CommandExceptionType((p_212717_0_, p_212717_1_) -> {
++      return new TranslatableComponent("commands.forceload.query.failure", p_212717_0_, p_212717_1_);
+    });
+    private static final SimpleCommandExceptionType f_137670_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.forceload.added.failure"));
+    private static final SimpleCommandExceptionType f_137671_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.forceload.removed.failure"));
+ 
+    public static void m_137676_(CommandDispatcher<CommandSourceStack> p_137677_) {
+-      p_137677_.register(Commands.m_82127_("forceload").requires((p_137703_) -> {
+-         return p_137703_.m_6761_(2);
+-      }).then(Commands.m_82127_("add").then(Commands.m_82129_("from", ColumnPosArgument.m_118989_()).executes((p_137711_) -> {
+-         return m_137685_(p_137711_.getSource(), ColumnPosArgument.m_118992_(p_137711_, "from"), ColumnPosArgument.m_118992_(p_137711_, "from"), true);
+-      }).then(Commands.m_82129_("to", ColumnPosArgument.m_118989_()).executes((p_137709_) -> {
+-         return m_137685_(p_137709_.getSource(), ColumnPosArgument.m_118992_(p_137709_, "from"), ColumnPosArgument.m_118992_(p_137709_, "to"), true);
+-      })))).then(Commands.m_82127_("remove").then(Commands.m_82129_("from", ColumnPosArgument.m_118989_()).executes((p_137707_) -> {
+-         return m_137685_(p_137707_.getSource(), ColumnPosArgument.m_118992_(p_137707_, "from"), ColumnPosArgument.m_118992_(p_137707_, "from"), false);
+-      }).then(Commands.m_82129_("to", ColumnPosArgument.m_118989_()).executes((p_137705_) -> {
+-         return m_137685_(p_137705_.getSource(), ColumnPosArgument.m_118992_(p_137705_, "from"), ColumnPosArgument.m_118992_(p_137705_, "to"), false);
+-      }))).then(Commands.m_82127_("all").executes((p_137701_) -> {
+-         return m_137695_(p_137701_.getSource());
+-      }))).then(Commands.m_82127_("query").executes((p_137694_) -> {
+-         return m_137680_(p_137694_.getSource());
+-      }).then(Commands.m_82129_("pos", ColumnPosArgument.m_118989_()).executes((p_137679_) -> {
+-         return m_137682_(p_137679_.getSource(), ColumnPosArgument.m_118992_(p_137679_, "pos"));
++      p_137677_.register(Commands.m_82127_("forceload").requires((p_212716_0_) -> {
++         return p_212716_0_.m_6761_(2);
++      }).then(Commands.m_82127_("add").then(Commands.m_82129_("from", ColumnPosArgument.m_118989_()).executes((p_212711_0_) -> {
++         return m_137685_(p_212711_0_.getSource(), ColumnPosArgument.m_118992_(p_212711_0_, "from"), ColumnPosArgument.m_118992_(p_212711_0_, "from"), true);
++      }).then(Commands.m_82129_("to", ColumnPosArgument.m_118989_()).executes((p_212714_0_) -> {
++         return m_137685_(p_212714_0_.getSource(), ColumnPosArgument.m_118992_(p_212714_0_, "from"), ColumnPosArgument.m_118992_(p_212714_0_, "to"), true);
++      })))).then(Commands.m_82127_("remove").then(Commands.m_82129_("from", ColumnPosArgument.m_118989_()).executes((p_218850_0_) -> {
++         return m_137685_(p_218850_0_.getSource(), ColumnPosArgument.m_118992_(p_218850_0_, "from"), ColumnPosArgument.m_118992_(p_218850_0_, "from"), false);
++      }).then(Commands.m_82129_("to", ColumnPosArgument.m_118989_()).executes((p_212718_0_) -> {
++         return m_137685_(p_212718_0_.getSource(), ColumnPosArgument.m_118992_(p_212718_0_, "from"), ColumnPosArgument.m_118992_(p_212718_0_, "to"), false);
++      }))).then(Commands.m_82127_("all").executes((p_212715_0_) -> {
++         return m_137695_(p_212715_0_.getSource());
++      }))).then(Commands.m_82127_("query").executes((p_212710_0_) -> {
++         return m_137680_(p_212710_0_.getSource());
++      }).then(Commands.m_82129_("pos", ColumnPosArgument.m_118989_()).executes((p_212723_0_) -> {
++         return m_137682_(p_212723_0_.getSource(), ColumnPosArgument.m_118992_(p_212723_0_, "pos"));
+       }))));
+    }
+ 
+@@ -83,8 +_,8 @@
+       ServerLevel serverlevel = p_137696_.m_81372_();
+       ResourceKey<Level> resourcekey = serverlevel.m_46472_();
+       LongSet longset = serverlevel.m_8902_();
+-      longset.forEach((long p_137675_) -> {
+-         serverlevel.m_8602_(ChunkPos.m_45592_(p_137675_), ChunkPos.m_45602_(p_137675_), false);
++      longset.forEach((long p_212720_1_) -> {
++         serverlevel.m_8602_(ChunkPos.m_45592_(p_212720_1_), ChunkPos.m_45602_(p_212720_1_), false);
+       });
+       p_137696_.m_81354_(new TranslatableComponent("commands.forceload.removed.all", resourcekey.m_135782_()), true);
+       return 0;

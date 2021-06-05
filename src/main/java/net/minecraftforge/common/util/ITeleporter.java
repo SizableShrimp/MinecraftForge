@@ -25,7 +25,6 @@ import javax.annotation.Nullable;
 
 import net.minecraft.world.level.portal.PortalInfo;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.portal.PortalForcer;

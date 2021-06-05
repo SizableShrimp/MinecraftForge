@@ -42,7 +42,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.biome.Biome;
 
 @SuppressWarnings("deprecation")
 public abstract class LanguageProvider implements DataProvider {

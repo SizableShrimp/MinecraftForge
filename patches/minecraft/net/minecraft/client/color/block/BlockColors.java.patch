@@ -1,0 +1,107 @@
+--- a/net/minecraft/client/color/block/BlockColors.java
++++ b/net/minecraft/client/color/block/BlockColors.java
+@@ -7,8 +_,6 @@
+ import javax.annotation.Nullable;
+ import net.minecraft.client.renderer.BiomeColors;
+ import net.minecraft.core.BlockPos;
+-import net.minecraft.core.IdMapper;
+-import net.minecraft.core.Registry;
+ import net.minecraft.world.level.BlockAndTintGetter;
+ import net.minecraft.world.level.FoliageColor;
+ import net.minecraft.world.level.GrassColor;
+@@ -27,56 +_,58 @@
+ 
+ @OnlyIn(Dist.CLIENT)
+ public class BlockColors {
+-   private final IdMapper<BlockColor> f_92571_ = new IdMapper<>(32);
++   // FORGE: Use RegistryDelegates as non-Vanilla block ids are not constant
++   private final java.util.Map<net.minecraftforge.registries.IRegistryDelegate<Block>, BlockColor> f_92571_ = new java.util.HashMap<>();
+    private final Map<Block, Set<Property<?>>> f_92572_ = Maps.newHashMap();
+ 
+    public static BlockColors m_92574_() {
+       BlockColors blockcolors = new BlockColors();
+-      blockcolors.m_92589_((p_92646_, p_92647_, p_92648_, p_92649_) -> {
+-         return p_92647_ != null && p_92648_ != null ? BiomeColors.m_108793_(p_92647_, p_92646_.m_61143_(DoublePlantBlock.f_52858_) == DoubleBlockHalf.UPPER ? p_92648_.m_7495_() : p_92648_) : -1;
++      blockcolors.m_92589_((p_228065_0_, p_228065_1_, p_228065_2_, p_228065_3_) -> {
++         return p_228065_1_ != null && p_228065_2_ != null ? BiomeColors.m_108793_(p_228065_1_, p_228065_0_.m_61143_(DoublePlantBlock.f_52858_) == DoubleBlockHalf.UPPER ? p_228065_2_.m_7495_() : p_228065_2_) : -1;
+       }, Blocks.f_50360_, Blocks.f_50359_);
+       blockcolors.m_92586_(DoublePlantBlock.f_52858_, Blocks.f_50360_, Blocks.f_50359_);
+-      blockcolors.m_92589_((p_92641_, p_92642_, p_92643_, p_92644_) -> {
+-         return p_92642_ != null && p_92643_ != null ? BiomeColors.m_108793_(p_92642_, p_92643_) : GrassColor.m_46415_(0.5D, 1.0D);
++      blockcolors.m_92589_((p_228064_0_, p_228064_1_, p_228064_2_, p_228064_3_) -> {
++         return p_228064_1_ != null && p_228064_2_ != null ? BiomeColors.m_108793_(p_228064_1_, p_228064_2_) : GrassColor.m_46415_(0.5D, 1.0D);
+       }, Blocks.f_50440_, Blocks.f_50035_, Blocks.f_50034_, Blocks.f_50231_);
+-      blockcolors.m_92589_((p_92636_, p_92637_, p_92638_, p_92639_) -> {
++      blockcolors.m_92589_((p_228063_0_, p_228063_1_, p_228063_2_, p_228063_3_) -> {
+          return FoliageColor.m_46106_();
+       }, Blocks.f_50051_);
+-      blockcolors.m_92589_((p_92631_, p_92632_, p_92633_, p_92634_) -> {
++      blockcolors.m_92589_((p_228062_0_, p_228062_1_, p_228062_2_, p_228062_3_) -> {
+          return FoliageColor.m_46112_();
+       }, Blocks.f_50052_);
+-      blockcolors.m_92589_((p_92626_, p_92627_, p_92628_, p_92629_) -> {
+-         return p_92627_ != null && p_92628_ != null ? BiomeColors.m_108804_(p_92627_, p_92628_) : FoliageColor.m_46113_();
++      blockcolors.m_92589_((p_228061_0_, p_228061_1_, p_228061_2_, p_228061_3_) -> {
++         return p_228061_1_ != null && p_228061_2_ != null ? BiomeColors.m_108804_(p_228061_1_, p_228061_2_) : FoliageColor.m_46113_();
+       }, Blocks.f_50050_, Blocks.f_50053_, Blocks.f_50054_, Blocks.f_50055_, Blocks.f_50191_);
+-      blockcolors.m_92589_((p_92621_, p_92622_, p_92623_, p_92624_) -> {
+-         return p_92622_ != null && p_92623_ != null ? BiomeColors.m_108811_(p_92622_, p_92623_) : -1;
++      blockcolors.m_92589_((p_228060_0_, p_228060_1_, p_228060_2_, p_228060_3_) -> {
++         return p_228060_1_ != null && p_228060_2_ != null ? BiomeColors.m_108811_(p_228060_1_, p_228060_2_) : -1;
+       }, Blocks.f_49990_, Blocks.f_50628_, Blocks.f_50256_);
+-      blockcolors.m_92589_((p_92616_, p_92617_, p_92618_, p_92619_) -> {
+-         return RedStoneWireBlock.m_55606_(p_92616_.m_61143_(RedStoneWireBlock.f_55500_));
++      blockcolors.m_92589_((p_228059_0_, p_228059_1_, p_228059_2_, p_228059_3_) -> {
++         return RedStoneWireBlock.m_55606_(p_228059_0_.m_61143_(RedStoneWireBlock.f_55500_));
+       }, Blocks.f_50088_);
+       blockcolors.m_92586_(RedStoneWireBlock.f_55500_, Blocks.f_50088_);
+-      blockcolors.m_92589_((p_92611_, p_92612_, p_92613_, p_92614_) -> {
+-         return p_92612_ != null && p_92613_ != null ? BiomeColors.m_108793_(p_92612_, p_92613_) : -1;
++      blockcolors.m_92589_((p_228058_0_, p_228058_1_, p_228058_2_, p_228058_3_) -> {
++         return p_228058_1_ != null && p_228058_2_ != null ? BiomeColors.m_108793_(p_228058_1_, p_228058_2_) : -1;
+       }, Blocks.f_50130_);
+-      blockcolors.m_92589_((p_92606_, p_92607_, p_92608_, p_92609_) -> {
++      blockcolors.m_92589_((p_228057_0_, p_228057_1_, p_228057_2_, p_228057_3_) -> {
+          return 14731036;
+       }, Blocks.f_50188_, Blocks.f_50187_);
+-      blockcolors.m_92589_((p_92601_, p_92602_, p_92603_, p_92604_) -> {
+-         int i = p_92601_.m_61143_(StemBlock.f_57013_);
++      blockcolors.m_92589_((p_228056_0_, p_228056_1_, p_228056_2_, p_228056_3_) -> {
++         int i = p_228056_0_.m_61143_(StemBlock.f_57013_);
+          int j = i * 32;
+          int k = 255 - i * 8;
+          int l = i * 4;
+          return j << 16 | k << 8 | l;
+       }, Blocks.f_50190_, Blocks.f_50189_);
+       blockcolors.m_92586_(StemBlock.f_57013_, Blocks.f_50190_, Blocks.f_50189_);
+-      blockcolors.m_92589_((p_92596_, p_92597_, p_92598_, p_92599_) -> {
+-         return p_92597_ != null && p_92598_ != null ? 2129968 : 7455580;
++      blockcolors.m_92589_((p_228055_0_, p_228055_1_, p_228055_2_, p_228055_3_) -> {
++         return p_228055_1_ != null && p_228055_2_ != null ? 2129968 : 7455580;
+       }, Blocks.f_50196_);
++      net.minecraftforge.client.ForgeHooksClient.onBlockColorsInit(blockcolors);
+       return blockcolors;
+    }
+ 
+    public int m_92582_(BlockState p_92583_, Level p_92584_, BlockPos p_92585_) {
+-      BlockColor blockcolor = this.f_92571_.m_7942_(Registry.f_122824_.m_7447_(p_92583_.m_60734_()));
++      BlockColor blockcolor = this.f_92571_.get(p_92583_.m_60734_().delegate);
+       if (blockcolor != null) {
+          return blockcolor.m_92566_(p_92583_, (BlockAndTintGetter)null, (BlockPos)null, 0);
+       } else {
+@@ -86,13 +_,13 @@
+    }
+ 
+    public int m_92577_(BlockState p_92578_, @Nullable BlockAndTintGetter p_92579_, @Nullable BlockPos p_92580_, int p_92581_) {
+-      BlockColor blockcolor = this.f_92571_.m_7942_(Registry.f_122824_.m_7447_(p_92578_.m_60734_()));
++      BlockColor blockcolor = this.f_92571_.get(p_92578_.m_60734_().delegate);
+       return blockcolor == null ? -1 : blockcolor.m_92566_(p_92578_, p_92579_, p_92580_, p_92581_);
+    }
+ 
+    public void m_92589_(BlockColor p_92590_, Block... p_92591_) {
+       for(Block block : p_92591_) {
+-         this.f_92571_.m_122664_(p_92590_, Registry.f_122824_.m_7447_(block));
++         this.f_92571_.put(block.delegate, p_92590_);
+       }
+ 
+    }

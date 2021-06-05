@@ -1,0 +1,44 @@
+--- a/net/minecraft/client/gui/font/FontSet.java
++++ b/net/minecraft/client/gui/font/FontSet.java
+@@ -61,15 +_,15 @@
+       }
+ 
+       Set<GlyphProvider> set = Sets.newHashSet();
+-      intset.forEach((int p_95076_) -> {
++      intset.forEach((int p_238558_3_) -> {
+          for(GlyphProvider glyphprovider1 : p_95072_) {
+-            GlyphInfo glyphinfo = (GlyphInfo)(p_95076_ == 32 ? f_95049_ : glyphprovider1.m_7823_(p_95076_));
++            GlyphInfo glyphinfo = (GlyphInfo)(p_238558_3_ == 32 ? f_95049_ : glyphprovider1.m_7823_(p_238558_3_));
+             if (glyphinfo != null) {
+                set.add(glyphprovider1);
+                if (glyphinfo != MissingGlyph.INSTANCE) {
+-                  this.f_95058_.computeIfAbsent(Mth.m_14167_(glyphinfo.m_83827_(false)), (p_95090_) -> {
++                  this.f_95058_.computeIfAbsent(Mth.m_14167_(glyphinfo.m_83827_(false)), (p_238563_0_) -> {
+                      return new IntArrayList();
+-                  }).add(p_95076_);
++                  }).add(p_238558_3_);
+                }
+                break;
+             }
+@@ -101,8 +_,8 @@
+    }
+ 
+    public GlyphInfo m_95065_(int p_95066_) {
+-      return this.f_95057_.computeIfAbsent(p_95066_, (p_95088_) -> {
+-         return (GlyphInfo)(p_95088_ == 32 ? f_95049_ : this.m_95081_(p_95088_));
++      return this.f_95057_.computeIfAbsent(p_95066_, (p_212457_1_) -> {
++         return (GlyphInfo)(p_212457_1_ == 32 ? f_95049_ : this.m_95081_(p_212457_1_));
+       });
+    }
+ 
+@@ -118,8 +_,8 @@
+    }
+ 
+    public BakedGlyph m_95078_(int p_95079_) {
+-      return this.f_95056_.computeIfAbsent(p_95079_, (p_95086_) -> {
+-         return (BakedGlyph)(p_95086_ == 32 ? f_95048_ : this.m_95069_(this.m_95081_(p_95086_)));
++      return this.f_95056_.computeIfAbsent(p_95079_, (p_212458_1_) -> {
++         return (BakedGlyph)(p_212458_1_ == 32 ? f_95048_ : this.m_95069_(this.m_95081_(p_212458_1_)));
+       });
+    }
+ 

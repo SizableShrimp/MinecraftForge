@@ -1,0 +1,15 @@
+--- a/net/minecraft/util/datafix/fixes/RecipesRenameFix.java
++++ b/net/minecraft/util/datafix/fixes/RecipesRenameFix.java
+@@ -25,9 +_,9 @@
+       if (!Objects.equals(type, this.getInputSchema().getType(References.f_16793_))) {
+          throw new IllegalStateException("Recipe type is not what was expected.");
+       } else {
+-         return this.fixTypeEverywhere(this.f_16729_, type, (p_16739_) -> {
+-            return (p_16737_) -> {
+-               return p_16737_.mapSecond(this.f_16730_);
++         return this.fixTypeEverywhere(this.f_16729_, type, (p_230075_1_) -> {
++            return (p_230076_1_) -> {
++               return p_230076_1_.mapSecond(this.f_16730_);
+             };
+          });
+       }

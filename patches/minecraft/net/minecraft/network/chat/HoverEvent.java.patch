@@ -1,0 +1,27 @@
+--- a/net/minecraft/network/chat/HoverEvent.java
++++ b/net/minecraft/network/chat/HoverEvent.java
+@@ -95,16 +_,16 @@
+ 
+    public static class Action<T> {
+       public static final HoverEvent.Action<Component> f_130831_ = new HoverEvent.Action<>("show_text", true, Component.Serializer::m_130691_, Component.Serializer::m_130716_, Function.identity());
+-      public static final HoverEvent.Action<HoverEvent.ItemStackInfo> f_130832_ = new HoverEvent.Action<>("show_item", true, (p_130863_) -> {
+-         return HoverEvent.ItemStackInfo.m_130906_(p_130863_);
+-      }, (p_130869_) -> {
+-         return p_130869_.m_130905_();
+-      }, (p_130867_) -> {
+-         return HoverEvent.ItemStackInfo.m_130908_(p_130867_);
++      public static final HoverEvent.Action<HoverEvent.ItemStackInfo> f_130832_ = new HoverEvent.Action<>("show_item", true, (p_240673_0_) -> {
++         return HoverEvent.ItemStackInfo.m_130906_(p_240673_0_);
++      }, (p_240676_0_) -> {
++         return p_240676_0_.m_130905_();
++      }, (p_240675_0_) -> {
++         return HoverEvent.ItemStackInfo.m_130908_(p_240675_0_);
+       });
+       public static final HoverEvent.Action<HoverEvent.EntityTooltipInfo> f_130833_ = new HoverEvent.Action<>("show_entity", true, HoverEvent.EntityTooltipInfo::m_130880_, HoverEvent.EntityTooltipInfo::m_130879_, HoverEvent.EntityTooltipInfo::m_130882_);
+-      private static final Map<String, HoverEvent.Action> f_130834_ = Stream.of(f_130831_, f_130832_, f_130833_).collect(ImmutableMap.toImmutableMap(HoverEvent.Action::m_130861_, (p_130857_) -> {
+-         return p_130857_;
++      private static final Map<String, HoverEvent.Action> f_130834_ = Stream.of(f_130831_, f_130832_, f_130833_).collect(ImmutableMap.toImmutableMap(HoverEvent.Action::m_130861_, (p_240671_0_) -> {
++         return p_240671_0_;
+       }));
+       private final String f_130835_;
+       private final boolean f_130836_;

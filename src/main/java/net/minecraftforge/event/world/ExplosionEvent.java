@@ -21,7 +21,6 @@ package net.minecraftforge.event.world;
 
 import java.util.List;
 
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraft.world.entity.Entity;
@@ -62,7 +61,7 @@ public class ExplosionEvent extends Event
 
     /** ExplosionEvent.Start is fired before the explosion actually occurs.  Canceling this event will stop the explosion.<br>
      * <br>
-     * This event is {@link Cancelable}.<br>
+     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
      * This event does not use {@link HasResult}.<br>
      * This event is fired on the {@link MinecraftForge#EVENT_BUS}.<br>
      */

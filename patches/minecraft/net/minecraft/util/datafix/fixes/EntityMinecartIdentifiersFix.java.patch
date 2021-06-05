@@ -1,0 +1,35 @@
+--- a/net/minecraft/util/datafix/fixes/EntityMinecartIdentifiersFix.java
++++ b/net/minecraft/util/datafix/fixes/EntityMinecartIdentifiersFix.java
+@@ -20,14 +_,14 @@
+    }
+ 
+    public TypeRewriteRule makeRule() {
+-      TaggedChoiceType<String> taggedchoicetype = (TaggedChoiceType<String>)this.getInputSchema().findChoiceType(References.f_16786_);
+-      TaggedChoiceType<String> taggedchoicetype1 = (TaggedChoiceType<String>)this.getOutputSchema().findChoiceType(References.f_16786_);
+-      return this.fixTypeEverywhere("EntityMinecartIdentifiersFix", taggedchoicetype, taggedchoicetype1, (p_15485_) -> {
+-         return (p_15490_) -> {
+-            if (!Objects.equals(p_15490_.getFirst(), "Minecart")) {
+-               return p_15490_;
++      TaggedChoiceType<String> taggedchoicetype = (TaggedChoiceType<String>) this.getInputSchema().findChoiceType(References.f_16786_);
++      TaggedChoiceType<String> taggedchoicetype1 = (TaggedChoiceType<String>) this.getOutputSchema().findChoiceType(References.f_16786_);
++      return this.fixTypeEverywhere("EntityMinecartIdentifiersFix", taggedchoicetype, taggedchoicetype1, (p_209746_2_) -> {
++         return (p_206328_3_) -> {
++            if (!Objects.equals(p_206328_3_.getFirst(), "Minecart")) {
++               return p_206328_3_;
+             } else {
+-               Typed<? extends Pair<String, ?>> typed = taggedchoicetype.point(p_15485_, "Minecart", p_15490_.getSecond()).orElseThrow(IllegalStateException::new);
++               Typed<? extends Pair<String, ?>> typed = taggedchoicetype.point(p_209746_2_, "Minecart", p_206328_3_.getSecond()).orElseThrow(IllegalStateException::new);
+                Dynamic<?> dynamic = typed.getOrCreate(DSL.remainderFinder());
+                int i = dynamic.get("Type").asInt(0);
+                String s;
+@@ -37,8 +_,8 @@
+                   s = "MinecartRideable";
+                }
+ 
+-               return Pair.of(s, typed.write().<com.mojang.serialization.DataResult>map((p_15494_) -> {
+-                  return taggedchoicetype1.types().get(s).read(p_15494_);
++               return Pair.of(s, typed.write().<com.mojang.serialization.DataResult>map((p_233177_2_) -> {
++                  return taggedchoicetype1.types().get(s).read(p_233177_2_);
+                }).result().orElseThrow(() -> {
+                   return new IllegalStateException("Could not read the new minecart.");
+                }));

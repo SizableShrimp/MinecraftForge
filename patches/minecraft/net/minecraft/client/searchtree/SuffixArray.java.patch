@@ -1,0 +1,31 @@
+--- a/net/minecraft/client/searchtree/SuffixArray.java
++++ b/net/minecraft/client/searchtree/SuffixArray.java
+@@ -61,17 +_,17 @@
+             return this.compare(p_119996_.intValue(), p_119997_.intValue());
+          }
+       };
+-      Swapper swapper = (p_119982_, p_119983_) -> {
+-         if (p_119982_ != p_119983_) {
+-            int i2 = aint1[p_119982_];
+-            aint1[p_119982_] = aint1[p_119983_];
+-            aint1[p_119983_] = i2;
+-            i2 = aint2[p_119982_];
+-            aint2[p_119982_] = aint2[p_119983_];
+-            aint2[p_119983_] = i2;
+-            i2 = aint3[p_119982_];
+-            aint3[p_119982_] = aint3[p_119983_];
+-            aint3[p_119983_] = i2;
++      Swapper swapper = (p_194054_3_, p_194054_4_) -> {
++         if (p_194054_3_ != p_194054_4_) {
++            int i2 = aint1[p_194054_3_];
++            aint1[p_194054_3_] = aint1[p_194054_4_];
++            aint1[p_194054_4_] = i2;
++            i2 = aint2[p_194054_3_];
++            aint2[p_194054_3_] = aint2[p_194054_4_];
++            aint2[p_194054_4_] = i2;
++            i2 = aint3[p_194054_3_];
++            aint3[p_194054_3_] = aint3[p_194054_4_];
++            aint3[p_194054_4_] = i2;
+          }
+ 
+       };

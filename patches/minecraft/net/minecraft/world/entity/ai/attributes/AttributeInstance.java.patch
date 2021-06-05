@@ -1,0 +1,22 @@
+--- a/net/minecraft/world/entity/ai/attributes/AttributeInstance.java
++++ b/net/minecraft/world/entity/ai/attributes/AttributeInstance.java
+@@ -50,7 +_,7 @@
+    }
+ 
+    public Set<AttributeModifier> m_22104_(AttributeModifier.Operation p_22105_) {
+-      return this.f_22089_.computeIfAbsent(p_22105_, (p_22124_) -> {
++      return this.f_22089_.computeIfAbsent(p_22105_, (p_233768_0_) -> {
+          return Sets.newHashSet();
+       });
+    }
+@@ -165,8 +_,8 @@
+       this.f_22091_.clear();
+       this.f_22091_.addAll(p_22103_.f_22091_);
+       this.f_22089_.clear();
+-      p_22103_.f_22089_.forEach((p_22107_, p_22108_) -> {
+-         this.m_22104_(p_22107_).addAll(p_22108_);
++      p_22103_.f_22089_.forEach((p_233764_1_, p_233764_2_) -> {
++         this.m_22104_(p_233764_1_).addAll(p_233764_2_);
+       });
+       this.m_22129_();
+    }

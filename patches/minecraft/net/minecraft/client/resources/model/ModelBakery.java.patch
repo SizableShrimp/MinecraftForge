@@ -1,0 +1,449 @@
+--- a/net/minecraft/client/resources/model/ModelBakery.java
++++ b/net/minecraft/client/resources/model/ModelBakery.java
+@@ -79,41 +_,41 @@
+    public static final Material f_119224_ = new Material(TextureAtlas.f_118259_, new ResourceLocation("entity/banner_base"));
+    public static final Material f_119225_ = new Material(TextureAtlas.f_118259_, new ResourceLocation("entity/shield_base"));
+    public static final Material f_119226_ = new Material(TextureAtlas.f_118259_, new ResourceLocation("entity/shield_base_nopattern"));
+-   public static final List<ResourceLocation> f_119227_ = IntStream.range(0, 10).mapToObj((p_119253_) -> {
+-      return new ResourceLocation("block/destroy_stage_" + p_119253_);
++   public static final List<ResourceLocation> f_119227_ = IntStream.range(0, 10).mapToObj((p_229323_0_) -> {
++      return new ResourceLocation("block/destroy_stage_" + p_229323_0_);
+    }).collect(Collectors.toList());
+-   public static final List<ResourceLocation> f_119228_ = f_119227_.stream().map((p_119371_) -> {
+-      return new ResourceLocation("textures/" + p_119371_.m_135815_() + ".png");
++   public static final List<ResourceLocation> f_119228_ = f_119227_.stream().map((p_229351_0_) -> {
++      return new ResourceLocation("textures/" + p_229351_0_.m_135815_() + ".png");
+    }).collect(Collectors.toList());
+    public static final List<RenderType> f_119229_ = f_119228_.stream().map(RenderType::m_110494_).collect(Collectors.toList());
+-   private static final Set<Material> f_119234_ = Util.m_137469_(Sets.newHashSet(), (p_119313_) -> {
+-      p_119313_.add(f_119222_);
+-      p_119313_.add(f_119221_);
+-      p_119313_.add(f_119223_);
+-      p_119313_.add(f_119219_);
+-      p_119313_.add(f_119220_);
+-      p_119313_.add(BellRenderer.f_112227_);
+-      p_119313_.add(ConduitRenderer.f_112378_);
+-      p_119313_.add(ConduitRenderer.f_112379_);
+-      p_119313_.add(ConduitRenderer.f_112380_);
+-      p_119313_.add(ConduitRenderer.f_112381_);
+-      p_119313_.add(ConduitRenderer.f_112382_);
+-      p_119313_.add(ConduitRenderer.f_112383_);
+-      p_119313_.add(EnchantTableRenderer.f_112405_);
+-      p_119313_.add(f_119224_);
+-      p_119313_.add(f_119225_);
+-      p_119313_.add(f_119226_);
++   protected static final Set<Material> f_119234_ = Util.m_137469_(Sets.newHashSet(), (p_229337_0_) -> {
++      p_229337_0_.add(f_119222_);
++      p_229337_0_.add(f_119221_);
++      p_229337_0_.add(f_119223_);
++      p_229337_0_.add(f_119219_);
++      p_229337_0_.add(f_119220_);
++      p_229337_0_.add(BellRenderer.f_112227_);
++      p_229337_0_.add(ConduitRenderer.f_112378_);
++      p_229337_0_.add(ConduitRenderer.f_112379_);
++      p_229337_0_.add(ConduitRenderer.f_112380_);
++      p_229337_0_.add(ConduitRenderer.f_112381_);
++      p_229337_0_.add(ConduitRenderer.f_112382_);
++      p_229337_0_.add(ConduitRenderer.f_112383_);
++      p_229337_0_.add(EnchantTableRenderer.f_112405_);
++      p_229337_0_.add(f_119224_);
++      p_229337_0_.add(f_119225_);
++      p_229337_0_.add(f_119226_);
+ 
+       for(ResourceLocation resourcelocation : f_119227_) {
+-         p_119313_.add(new Material(TextureAtlas.f_118259_, resourcelocation));
++         p_229337_0_.add(new Material(TextureAtlas.f_118259_, resourcelocation));
+       }
+ 
+-      p_119313_.add(new Material(TextureAtlas.f_118259_, InventoryMenu.f_39693_));
+-      p_119313_.add(new Material(TextureAtlas.f_118259_, InventoryMenu.f_39694_));
+-      p_119313_.add(new Material(TextureAtlas.f_118259_, InventoryMenu.f_39695_));
+-      p_119313_.add(new Material(TextureAtlas.f_118259_, InventoryMenu.f_39696_));
+-      p_119313_.add(new Material(TextureAtlas.f_118259_, InventoryMenu.f_39697_));
+-      Sheets.m_110780_(p_119313_::add);
++      p_229337_0_.add(new Material(TextureAtlas.f_118259_, InventoryMenu.f_39693_));
++      p_229337_0_.add(new Material(TextureAtlas.f_118259_, InventoryMenu.f_39694_));
++      p_229337_0_.add(new Material(TextureAtlas.f_118259_, InventoryMenu.f_39695_));
++      p_229337_0_.add(new Material(TextureAtlas.f_118259_, InventoryMenu.f_39696_));
++      p_229337_0_.add(new Material(TextureAtlas.f_118259_, InventoryMenu.f_39697_));
++      Sheets.m_110780_(p_229337_0_::add);
+    });
+    private static final Logger f_119235_ = LogManager.getLogger();
+    public static final ModelResourceLocation f_119230_ = new ModelResourceLocation("builtin/missing", "missing");
+@@ -123,16 +_,16 @@
+    private static final Map<String, String> f_119237_ = Maps.newHashMap(ImmutableMap.of("missing", f_119231_));
+    private static final Splitter f_119238_ = Splitter.on(',');
+    private static final Splitter f_119239_ = Splitter.on('=').limit(2);
+-   public static final BlockModel f_119232_ = Util.m_137469_(BlockModel.m_111463_("{\"gui_light\": \"front\"}"), (p_119359_) -> {
+-      p_119359_.f_111416_ = "generation marker";
++   public static final BlockModel f_119232_ = Util.m_137469_(BlockModel.m_111463_("{\"gui_light\": \"front\"}"), (p_229347_0_) -> {
++      p_229347_0_.f_111416_ = "generation marker";
+    });
+-   public static final BlockModel f_119233_ = Util.m_137469_(BlockModel.m_111463_("{\"gui_light\": \"side\"}"), (p_119297_) -> {
+-      p_119297_.f_111416_ = "block entity marker";
++   public static final BlockModel f_119233_ = Util.m_137469_(BlockModel.m_111463_("{\"gui_light\": \"side\"}"), (p_229332_0_) -> {
++      p_229332_0_.f_111416_ = "block entity marker";
+    });
+    private static final StateDefinition<Block, BlockState> f_119240_ = (new StateDefinition.Builder<Block, BlockState>(Blocks.f_50016_)).m_61104_(BooleanProperty.m_61465_("map")).m_61101_(Block::m_49966_, BlockState::new);
+    private static final ItemModelGenerator f_119241_ = new ItemModelGenerator();
+    private static final Map<ResourceLocation, StateDefinition<Block, BlockState>> f_119242_ = ImmutableMap.of(new ResourceLocation("item_frame"), f_119240_);
+-   private final ResourceManager f_119243_;
++   protected final ResourceManager f_119243_;
+    @Nullable
+    private AtlasSet f_119244_;
+    private final BlockColors f_119209_;
+@@ -142,16 +_,25 @@
+    private final Map<Triple<ResourceLocation, Transformation, Boolean>, BakedModel> f_119213_ = Maps.newHashMap();
+    private final Map<ResourceLocation, UnbakedModel> f_119214_ = Maps.newHashMap();
+    private final Map<ResourceLocation, BakedModel> f_119215_ = Maps.newHashMap();
+-   private final Map<ResourceLocation, Pair<TextureAtlas, TextureAtlas.Preparations>> f_119216_;
++   private Map<ResourceLocation, Pair<TextureAtlas, TextureAtlas.Preparations>> f_119216_;
+    private int f_119217_ = 1;
+-   private final Object2IntMap<BlockState> f_119218_ = Util.m_137469_(new Object2IntOpenHashMap<>(), (p_119309_) -> {
+-      p_119309_.defaultReturnValue(-1);
++   private final Object2IntMap<BlockState> f_119218_ = Util.m_137469_(new Object2IntOpenHashMap<>(), (p_229336_0_) -> {
++      p_229336_0_.defaultReturnValue(-1);
+    });
+ 
+    public ModelBakery(ResourceManager p_119247_, BlockColors p_119248_, ProfilerFiller p_119249_, int p_119250_) {
+-      this.f_119243_ = p_119247_;
+-      this.f_119209_ = p_119248_;
+-      p_119249_.m_6180_("missing_model");
++      this(p_119247_, p_119248_, true);
++      processLoading(p_119249_, p_119250_);
++   }
++
++   protected ModelBakery(ResourceManager p_i226056_1_, BlockColors p_i226056_2_, boolean vanillaBakery) {
++      this.f_119243_ = p_i226056_1_;
++      this.f_119209_ = p_i226056_2_;
++   }
++
++   protected void processLoading(ProfilerFiller p_i226056_3_, int p_i226056_4_) {
++      net.minecraftforge.client.model.ModelLoaderRegistry.onModelLoadingStart();
++      p_i226056_3_.m_6180_("missing_model");
+ 
+       try {
+          this.f_119212_.put(f_119230_, this.m_119364_(f_119230_));
+@@ -161,50 +_,54 @@
+          throw new RuntimeException(ioexception);
+       }
+ 
+-      p_119249_.m_6182_("static_definitions");
+-      f_119242_.forEach((p_119347_, p_119348_) -> {
+-         p_119348_.m_61056_().forEach((p_119345_) -> {
+-            this.m_119306_(BlockModelShaper.m_110889_(p_119347_, p_119345_));
++      p_i226056_3_.m_6182_("static_definitions");
++      f_119242_.forEach((p_229344_1_, p_229344_2_) -> {
++         p_229344_2_.m_61056_().forEach((p_229343_2_) -> {
++            this.m_119306_(BlockModelShaper.m_110889_(p_229344_1_, p_229343_2_));
+          });
+       });
+-      p_119249_.m_6182_("blocks");
++      p_i226056_3_.m_6182_("blocks");
+ 
+       for(Block block : Registry.f_122824_) {
+-         block.m_49965_().m_61056_().forEach((p_119264_) -> {
+-            this.m_119306_(BlockModelShaper.m_110895_(p_119264_));
++         block.m_49965_().m_61056_().forEach((p_229326_1_) -> {
++            this.m_119306_(BlockModelShaper.m_110895_(p_229326_1_));
+          });
+       }
+ 
+-      p_119249_.m_6182_("items");
++      p_i226056_3_.m_6182_("items");
+ 
+       for(ResourceLocation resourcelocation : Registry.f_122827_.m_6566_()) {
+          this.m_119306_(new ModelResourceLocation(resourcelocation, "inventory"));
+       }
+ 
+-      p_119249_.m_6182_("special");
++      p_i226056_3_.m_6182_("special");
+       this.m_119306_(new ModelResourceLocation("minecraft:trident_in_hand#inventory"));
+-      p_119249_.m_6182_("textures");
++      for (ResourceLocation rl : getSpecialModels()) {
++         addModelToCache(rl);
++      }
++      p_i226056_3_.m_6182_("textures");
+       Set<Pair<String, String>> set = Sets.newLinkedHashSet();
+-      Set<Material> set1 = this.f_119214_.values().stream().flatMap((p_119340_) -> {
+-         return p_119340_.m_5500_(this::m_119341_, set).stream();
++      Set<Material> set1 = this.f_119214_.values().stream().flatMap((p_229342_2_) -> {
++         return p_229342_2_.m_5500_(this::m_119341_, set).stream();
+       }).collect(Collectors.toSet());
+       set1.addAll(f_119234_);
+-      set.stream().filter((p_119357_) -> {
+-         return !p_119357_.getSecond().equals(f_119236_);
+-      }).forEach((p_119292_) -> {
+-         f_119235_.warn("Unable to resolve texture reference: {} in {}", p_119292_.getFirst(), p_119292_.getSecond());
++      net.minecraftforge.client.ForgeHooksClient.gatherFluidTextures(set1);
++      set.stream().filter((p_229346_0_) -> {
++         return !p_229346_0_.getSecond().equals(f_119236_);
++      }).forEach((p_229330_0_) -> {
++         f_119235_.warn("Unable to resolve texture reference: {} in {}", p_229330_0_.getFirst(), p_229330_0_.getSecond());
+       });
+       Map<ResourceLocation, List<Material>> map = set1.stream().collect(Collectors.groupingBy(Material::m_119193_));
+-      p_119249_.m_6182_("stitching");
++      p_i226056_3_.m_6182_("stitching");
+       this.f_119216_ = Maps.newHashMap();
+ 
+       for(Entry<ResourceLocation, List<Material>> entry : map.entrySet()) {
+          TextureAtlas textureatlas = new TextureAtlas(entry.getKey());
+-         TextureAtlas.Preparations textureatlas$preparations = textureatlas.m_118307_(this.f_119243_, entry.getValue().stream().map(Material::m_119203_), p_119249_, p_119250_);
++         TextureAtlas.Preparations textureatlas$preparations = textureatlas.m_118307_(this.f_119243_, entry.getValue().stream().map(Material::m_119203_), p_i226056_3_, p_i226056_4_);
+          this.f_119216_.put(entry.getKey(), Pair.of(textureatlas, textureatlas$preparations));
+       }
+ 
+-      p_119249_.m_7238_();
++      p_i226056_3_.m_7238_();
+    }
+ 
+    public AtlasSet m_119298_(TextureManager p_119299_, ProfilerFiller p_119300_) {
+@@ -221,17 +_,18 @@
+ 
+       this.f_119244_ = new AtlasSet(this.f_119216_.values().stream().map(Pair::getFirst).collect(Collectors.toList()));
+       p_119300_.m_6182_("baking");
+-      this.f_119214_.keySet().forEach((p_119369_) -> {
++      this.f_119214_.keySet().forEach((p_229350_1_) -> {
+          BakedModel bakedmodel = null;
+ 
+          try {
+-            bakedmodel = this.m_119349_(p_119369_, BlockModelRotation.X0_Y0);
++            bakedmodel = this.m_119349_(p_229350_1_, BlockModelRotation.X0_Y0);
+          } catch (Exception exception) {
+-            f_119235_.warn("Unable to bake model: '{}': {}", p_119369_, exception);
++            exception.printStackTrace();
++            f_119235_.warn("Unable to bake model: '{}': {}", p_229350_1_, exception);
+          }
+ 
+          if (bakedmodel != null) {
+-            this.f_119215_.put(p_119369_, bakedmodel);
++            this.f_119215_.put(p_229350_1_, bakedmodel);
+          }
+ 
+       });
+@@ -262,10 +_,10 @@
+       }
+ 
+       Block block = p_119274_.m_61091_();
+-      return (p_119262_) -> {
+-         if (p_119262_ != null && block == p_119262_.m_60734_()) {
++      return (p_229325_2_) -> {
++         if (p_229325_2_ != null && block == p_229325_2_.m_60734_()) {
+             for(Entry<Property<?>, Comparable<?>> entry : map.entrySet()) {
+-               if (!Objects.equals(p_119262_.m_61143_(entry.getKey()), entry.getValue())) {
++               if (!Objects.equals(p_229325_2_.m_61143_(entry.getKey()), entry.getValue())) {
+                   return false;
+                }
+             }
+@@ -332,8 +_,8 @@
+             List<Property<?>> list = ImmutableList.copyOf(this.f_119209_.m_92575_(statedefinition.m_61091_()));
+             ImmutableList<BlockState> immutablelist = statedefinition.m_61056_();
+             Map<ModelResourceLocation, BlockState> map = Maps.newHashMap();
+-            immutablelist.forEach((p_119330_) -> {
+-               BlockState blockstate = map.put(BlockModelShaper.m_110889_(resourcelocation, p_119330_), p_119330_);
++            immutablelist.forEach((p_229340_2_) -> {
++               BlockState blockstate = map.put(BlockModelShaper.m_110889_(resourcelocation, p_229340_2_), p_229340_2_);
+             });
+             Map<BlockState, Pair<UnbakedModel, Supplier<ModelBakery.ModelGroupKey>>> map1 = Maps.newHashMap();
+             ResourceLocation resourcelocation1 = new ResourceLocation(p_119363_.m_135827_(), "blockstates/" + p_119363_.m_135815_() + ".json");
+@@ -346,11 +_,11 @@
+             try {
+                List<Pair<String, BlockModelDefinition>> list1;
+                try {
+-                  list1 = this.f_119243_.m_7396_(resourcelocation1).stream().map((p_119258_) -> {
+-                     try (InputStream inputstream = p_119258_.m_6679_()) {
+-                        return Pair.of(p_119258_.m_7816_(), BlockModelDefinition.m_111540_(this.f_119211_, new InputStreamReader(inputstream, StandardCharsets.UTF_8)));
++                  list1 = this.f_119243_.m_7396_(resourcelocation1).stream().map((p_229345_1_) -> {
++                     try (InputStream inputstream = p_229345_1_.m_6679_()) {
++                        return Pair.of(p_229345_1_.m_7816_(), BlockModelDefinition.m_111540_(this.f_119211_, new InputStreamReader(inputstream, StandardCharsets.UTF_8)));
+                      } catch (Exception exception1) {
+-                        throw new ModelBakery.BlockStateDefinitionException(String.format("Exception loading blockstate definition: '%s' in resourcepack: '%s': %s", p_119258_.m_7843_(), p_119258_.m_7816_(), exception1.getMessage()));
++                        throw new ModelBakery.BlockStateDefinitionException(String.format("Exception loading blockstate definition: '%s' in resourcepack: '%s': %s", p_229345_1_.m_7843_(), p_229345_1_.m_7816_(), exception1.getMessage()));
+                      }
+                   }).collect(Collectors.toList());
+                } catch (IOException ioexception) {
+@@ -364,30 +_,30 @@
+                   MultiPart multipart;
+                   if (blockmodeldefinition.m_111543_()) {
+                      multipart = blockmodeldefinition.m_111544_();
+-                     immutablelist.forEach((p_119326_) -> {
+-                        Pair pair2 = map2.put(p_119326_, Pair.of(multipart, () -> {
+-                           return ModelBakery.ModelGroupKey.m_119379_(p_119326_, multipart, list);
++                     immutablelist.forEach((p_229339_3_) -> {
++                        Pair pair2 = map2.put(p_229339_3_, Pair.of(multipart, () -> {
++                           return ModelBakery.ModelGroupKey.m_119379_(p_229339_3_, multipart, list);
+                         }));
+                      });
+                   } else {
+                      multipart = null;
+                   }
+ 
+-                  blockmodeldefinition.m_111539_().forEach((p_119289_, p_119290_) -> {
++                  blockmodeldefinition.m_111539_().forEach((p_229329_9_, p_229329_10_) -> {
+                      try {
+-                        immutablelist.stream().filter(m_119273_(statedefinition, p_119289_)).forEach((p_119321_) -> {
+-                           Pair<UnbakedModel, Supplier<ModelBakery.ModelGroupKey>> pair2 = map2.put(p_119321_, Pair.of(p_119290_, () -> {
+-                              return ModelBakery.ModelGroupKey.m_119383_(p_119321_, p_119290_, list);
++                        immutablelist.stream().filter(m_119273_(statedefinition, p_229329_9_)).forEach((p_229338_6_) -> {
++                           Pair<UnbakedModel, Supplier<ModelBakery.ModelGroupKey>> pair2 = map2.put(p_229338_6_, Pair.of(p_229329_10_, () -> {
++                              return ModelBakery.ModelGroupKey.m_119383_(p_229338_6_, p_229329_10_, list);
+                            }));
+                            if (pair2 != null && pair2.getFirst() != multipart) {
+-                              map2.put(p_119321_, pair);
+-                              throw new RuntimeException("Overlapping definition with: " + (String)blockmodeldefinition.m_111539_().entrySet().stream().filter((p_119295_) -> {
+-                                 return p_119295_.getValue() == pair2.getFirst();
++                              map2.put(p_229338_6_, pair);
++                              throw new RuntimeException("Overlapping definition with: " + (String)blockmodeldefinition.m_111539_().entrySet().stream().filter((p_229331_1_) -> {
++                                 return p_229331_1_.getValue() == pair2.getFirst();
+                               }).findFirst().get().getKey());
+                            }
+                         });
+                      } catch (Exception exception1) {
+-                        f_119235_.warn("Exception loading blockstate definition: '{}' in resourcepack: '{}' for variant: '{}': {}", resourcelocation1, pair1.getFirst(), p_119289_, exception1.getMessage());
++                        f_119235_.warn("Exception loading blockstate definition: '{}' in resourcepack: '{}' for variant: '{}': {}", resourcelocation1, pair1.getFirst(), p_229329_9_, exception1.getMessage());
+                      }
+ 
+                   });
+@@ -400,27 +_,27 @@
+                throw new ModelBakery.BlockStateDefinitionException(String.format("Exception loading blockstate definition: '%s': %s", resourcelocation1, exception));
+             } finally {
+                HashMap<ModelBakery.ModelGroupKey, Set<BlockState>> lvt_20_1_ = Maps.newHashMap();
+-               map.forEach((p_119336_, p_119337_) -> {
+-                  Pair<UnbakedModel, Supplier<ModelBakery.ModelGroupKey>> pair2 = map1.get(p_119337_);
++               map.forEach((p_229341_5_, p_229341_6_) -> {
++                  Pair<UnbakedModel, Supplier<ModelBakery.ModelGroupKey>> pair2 = map1.get(p_229341_6_);
+                   if (pair2 == null) {
+-                     f_119235_.warn("Exception loading blockstate definition: '{}' missing model for variant: '{}'", resourcelocation1, p_119336_);
++                     f_119235_.warn("Exception loading blockstate definition: '{}' missing model for variant: '{}'", resourcelocation1, p_229341_5_);
+                      pair2 = pair;
+                   }
+ 
+-                  this.m_119352_(p_119336_, pair2.getFirst());
++                  this.m_119352_(p_229341_5_, pair2.getFirst());
+ 
+                   try {
+                      ModelBakery.ModelGroupKey modelbakery$modelgroupkey1 = pair2.getSecond().get();
+-                     lvt_20_1_.computeIfAbsent(modelbakery$modelgroupkey1, (p_119302_) -> {
++                     lvt_20_1_.computeIfAbsent(modelbakery$modelgroupkey1, (p_229334_0_) -> {
+                         return Sets.newIdentityHashSet();
+-                     }).add(p_119337_);
++                     }).add(p_229341_6_);
+                   } catch (Exception exception1) {
+-                     f_119235_.warn("Exception evaluating model definition: '{}'", p_119336_, exception1);
++                     f_119235_.warn("Exception evaluating model definition: '{}'", p_229341_5_, exception1);
+                   }
+ 
+                });
+-               lvt_20_1_.forEach((p_119304_, p_119305_) -> {
+-                  Iterator<BlockState> iterator = p_119305_.iterator();
++               lvt_20_1_.forEach((p_229335_1_, p_229335_2_) -> {
++                  Iterator<BlockState> iterator = p_229335_2_.iterator();
+ 
+                   while(iterator.hasNext()) {
+                      BlockState blockstate = iterator.next();
+@@ -430,8 +_,8 @@
+                      }
+                   }
+ 
+-                  if (p_119305_.size() > 1) {
+-                     this.m_119310_(p_119305_);
++                  if (p_229335_2_.size() > 1) {
++                     this.m_119310_(p_229335_2_);
+                   }
+ 
+                });
+@@ -445,6 +_,13 @@
+       this.f_119210_.addAll(p_119354_.m_7970_());
+    }
+ 
++   // Same as loadTopModel but without restricting to MRL's
++   private void addModelToCache(ResourceLocation p_217843_1_) {
++      UnbakedModel unbakedmodel = this.m_119341_(p_217843_1_);
++      this.f_119212_.put(p_217843_1_, unbakedmodel);
++      this.f_119214_.put(p_217843_1_, unbakedmodel);
++   }
++
+    private void m_119306_(ModelResourceLocation p_119307_) {
+       UnbakedModel unbakedmodel = this.m_119341_(p_119307_);
+       this.f_119212_.put(p_119307_, unbakedmodel);
+@@ -453,34 +_,40 @@
+ 
+    private void m_119310_(Iterable<BlockState> p_119311_) {
+       int i = this.f_119217_++;
+-      p_119311_.forEach((p_119256_) -> {
+-         this.f_119218_.put(p_119256_, i);
++      p_119311_.forEach((p_229324_2_) -> {
++         this.f_119218_.put(p_229324_2_, i);
+       });
+    }
+ 
+    @Nullable
++   @Deprecated
+    public BakedModel m_119349_(ResourceLocation p_119350_, ModelState p_119351_) {
+-      Triple<ResourceLocation, Transformation, Boolean> triple = Triple.of(p_119350_, p_119351_.m_6189_(), p_119351_.m_7538_());
++      return getBakedModel(p_119350_, p_119351_, this.f_119244_::m_117971_);
++   }
++
++   @Nullable
++   public BakedModel getBakedModel(ResourceLocation p_217845_1_, ModelState p_217845_2_, java.util.function.Function<Material, net.minecraft.client.renderer.texture.TextureAtlasSprite> textureGetter) {
++      Triple<ResourceLocation, Transformation, Boolean> triple = Triple.of(p_217845_1_, p_217845_2_.m_6189_(), p_217845_2_.m_7538_());
+       if (this.f_119213_.containsKey(triple)) {
+          return this.f_119213_.get(triple);
+       } else if (this.f_119244_ == null) {
+          throw new IllegalStateException("bake called too early");
+       } else {
+-         UnbakedModel unbakedmodel = this.m_119341_(p_119350_);
++         UnbakedModel unbakedmodel = this.m_119341_(p_217845_1_);
+          if (unbakedmodel instanceof BlockModel) {
+             BlockModel blockmodel = (BlockModel)unbakedmodel;
+             if (blockmodel.m_111490_() == f_119232_) {
+-               return f_119241_.m_111670_(this.f_119244_::m_117971_, blockmodel).m_111449_(this, blockmodel, this.f_119244_::m_117971_, p_119351_, p_119350_, false);
++               return f_119241_.m_111670_(textureGetter, blockmodel).m_111449_(this, blockmodel, this.f_119244_::m_117971_, p_217845_2_, p_217845_1_, false);
+             }
+          }
+ 
+-         BakedModel bakedmodel = unbakedmodel.m_7611_(this, this.f_119244_::m_117971_, p_119351_, p_119350_);
++         BakedModel bakedmodel = unbakedmodel.m_7611_(this, textureGetter, p_217845_2_, p_217845_1_);
+          this.f_119213_.put(triple, bakedmodel);
+          return bakedmodel;
+       }
+    }
+ 
+-   private BlockModel m_119364_(ResourceLocation p_119365_) throws IOException {
++   protected BlockModel m_119364_(ResourceLocation p_119365_) throws IOException {
+       Reader reader = null;
+       Resource resource = null;
+ 
+@@ -527,6 +_,10 @@
+       return this.f_119218_;
+    }
+ 
++   public Set<ResourceLocation> getSpecialModels() {
++      return java.util.Collections.emptySet();
++   }
++
+    @OnlyIn(Dist.CLIENT)
+    static class BlockStateDefinitionException extends RuntimeException {
+       public BlockStateDefinitionException(String p_119373_) {
+@@ -534,6 +_,10 @@
+       }
+    }
+ 
++   public AtlasSet getSpriteMap() {
++      return this.f_119244_;
++   }
++
+    @OnlyIn(Dist.CLIENT)
+    static class ModelGroupKey {
+       private final List<UnbakedModel> f_119374_;
+@@ -561,8 +_,8 @@
+ 
+       public static ModelBakery.ModelGroupKey m_119379_(BlockState p_119380_, MultiPart p_119381_, Collection<Property<?>> p_119382_) {
+          StateDefinition<Block, BlockState> statedefinition = p_119380_.m_60734_().m_49965_();
+-         List<UnbakedModel> list = p_119381_.m_111967_().stream().filter((p_119393_) -> {
+-            return p_119393_.m_112021_(statedefinition).test(p_119380_);
++         List<UnbakedModel> list = p_119381_.m_111967_().stream().filter((p_225338_2_) -> {
++            return p_225338_2_.m_112021_(statedefinition).test(p_119380_);
+          }).map(Selector::m_112020_).collect(ImmutableList.toImmutableList());
+          List<Object> list1 = m_119387_(p_119380_, p_119382_);
+          return new ModelBakery.ModelGroupKey(list, list1);

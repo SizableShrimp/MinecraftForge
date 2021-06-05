@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/ItemDurabilityTrigger.java
++++ b/net/minecraft/advancements/critereon/ItemDurabilityTrigger.java
+@@ -20,8 +_,8 @@
+    }
+ 
+    public void m_43669_(ServerPlayer p_43670_, ItemStack p_43671_, int p_43672_) {
+-      this.m_66234_(p_43670_, (p_43676_) -> {
+-         return p_43676_.m_43698_(p_43671_, p_43672_);
++      this.m_66234_(p_43670_, (p_226653_2_) -> {
++         return p_226653_2_.m_43698_(p_43671_, p_43672_);
+       });
+    }
+ 

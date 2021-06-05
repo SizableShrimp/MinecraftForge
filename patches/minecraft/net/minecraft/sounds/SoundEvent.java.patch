@@ -1,0 +1,15 @@
+--- a/net/minecraft/sounds/SoundEvent.java
++++ b/net/minecraft/sounds/SoundEvent.java
+@@ -5,9 +_,9 @@
+ import net.minecraftforge.api.distmarker.Dist;
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+-public class SoundEvent {
+-   public static final Codec<SoundEvent> f_11655_ = ResourceLocation.f_135803_.xmap(SoundEvent::new, (p_11662_) -> {
+-      return p_11662_.f_11656_;
++public class SoundEvent extends net.minecraftforge.registries.ForgeRegistryEntry<SoundEvent> {
++   public static final Codec<SoundEvent> f_11655_ = ResourceLocation.f_135803_.xmap(SoundEvent::new, (p_232679_0_) -> {
++      return p_232679_0_.f_11656_;
+    });
+    private final ResourceLocation f_11656_;
+ 

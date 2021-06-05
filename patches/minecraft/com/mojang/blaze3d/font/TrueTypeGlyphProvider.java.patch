@@ -1,0 +1,13 @@
+--- a/com/mojang/blaze3d/font/TrueTypeGlyphProvider.java
++++ b/com/mojang/blaze3d/font/TrueTypeGlyphProvider.java
+@@ -85,8 +_,8 @@
+    }
+ 
+    public IntSet m_6990_() {
+-      return IntStream.range(0, 65535).filter((p_83863_) -> {
+-         return !this.f_83840_.contains(p_83863_);
++      return IntStream.range(0, 65535).filter((p_237505_1_) -> {
++         return !this.f_83840_.contains(p_237505_1_);
+       }).collect(IntOpenHashSet::new, IntCollection::add, IntCollection::addAll);
+    }
+ 

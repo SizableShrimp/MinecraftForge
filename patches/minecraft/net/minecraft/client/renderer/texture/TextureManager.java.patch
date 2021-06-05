@@ -1,10 +1,30 @@
 --- a/net/minecraft/client/renderer/texture/TextureManager.java
 +++ b/net/minecraft/client/renderer/texture/TextureManager.java
-@@ -157,6 +_,7 @@
-    public void func_147645_c(ResourceLocation p_147645_1_) {
-       Texture texture = this.func_229267_b_(p_147645_1_);
-       if (texture != null) {
-+         this.field_110585_a.remove(p_147645_1_); // Forge: fix MC-98707
-          TextureUtil.func_225679_a_(texture.func_110552_b());
+@@ -158,6 +_,7 @@
+    public void m_118513_(ResourceLocation p_118514_) {
+       AbstractTexture abstracttexture = this.m_118506_(p_118514_);
+       if (abstracttexture != null) {
++         this.f_118468_.remove(p_118514_); // Forge: fix MC-98707
+          TextureUtil.m_85281_(abstracttexture.m_117963_());
        }
  
+@@ -171,7 +_,7 @@
+    }
+ 
+    public CompletableFuture<Void> m_5540_(PreparableReloadListener.PreparationBarrier p_118476_, ResourceManager p_118477_, ProfilerFiller p_118478_, ProfilerFiller p_118479_, Executor p_118480_, Executor p_118481_) {
+-      return CompletableFuture.allOf(TitleScreen.m_96754_(this, p_118480_), this.m_118501_(AbstractWidget.f_93617_, p_118480_)).thenCompose(p_118476_::m_6769_).thenAcceptAsync((p_118485_) -> {
++      return CompletableFuture.allOf(TitleScreen.m_96754_(this, p_118480_), this.m_118501_(AbstractWidget.f_93617_, p_118480_)).thenCompose(p_118476_::m_6769_).thenAcceptAsync((p_229265_3_) -> {
+          MissingTextureAtlasSprite.m_118080_();
+          RealmsMainScreen.m_86406_(this.f_118471_);
+          Iterator<Entry<ResourceLocation, AbstractTexture>> iterator = this.f_118468_.entrySet().iterator();
+@@ -187,8 +_,8 @@
+             }
+          }
+ 
+-      }, (p_118505_) -> {
+-         RenderSystem.m_69879_(p_118505_::run);
++      }, (p_229266_0_) -> {
++         RenderSystem.m_69879_(p_229266_0_::run);
+       });
+    }
+ }

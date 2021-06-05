@@ -1,0 +1,21 @@
+--- a/net/minecraft/world/level/storage/loot/predicates/LootItemBlockStatePropertyCondition.java
++++ b/net/minecraft/world/level/storage/loot/predicates/LootItemBlockStatePropertyCondition.java
+@@ -13,6 +_,7 @@
+ import net.minecraft.world.level.block.Block;
+ import net.minecraft.world.level.block.state.BlockState;
+ import net.minecraft.world.level.storage.loot.LootContext;
++import net.minecraft.world.level.storage.loot.Serializer;
+ import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
+ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+ 
+@@ -72,8 +_,8 @@
+             return new IllegalArgumentException("Can't find block " + resourcelocation);
+          });
+          StatePropertiesPredicate statepropertiespredicate = StatePropertiesPredicate.m_67679_(p_81805_.get("properties"));
+-         statepropertiespredicate.m_67672_(block.m_49965_(), (p_81790_) -> {
+-            throw new JsonSyntaxException("Block " + block + " has no property " + p_81790_);
++         statepropertiespredicate.m_67672_(block.m_49965_(), (p_227568_1_) -> {
++            throw new JsonSyntaxException("Block " + block + " has no property " + p_227568_1_);
+          });
+          return new LootItemBlockStatePropertyCondition(block, statepropertiespredicate);
+       }

@@ -74,7 +74,7 @@ public class StructureSpawnManager
     {
         StructureSpawnListGatherEvent event = new StructureSpawnListGatherEvent(structure);
         MinecraftForge.EVENT_BUS.post(event);
-        ImmutableMap.Builder<MobCategory, List<MobSpawnSettings.SpawnerData>> builder = ImmutableMap.builder();
+        ImmutableMap.Builder<net.minecraft.world.entity.MobCategory, List<MobSpawnSettings.SpawnerData>> builder = ImmutableMap.builder();
         event.getEntitySpawns().forEach((classification, spawns) -> {
             if (!spawns.isEmpty())
                 builder.put(classification, ImmutableList.copyOf(spawns));

@@ -1,0 +1,17 @@
+--- a/com/mojang/blaze3d/vertex/PoseStack.java
++++ b/com/mojang/blaze3d/vertex/PoseStack.java
+@@ -12,12 +_,12 @@
+ 
+ @OnlyIn(Dist.CLIENT)
+ public class PoseStack {
+-   private final Deque<PoseStack.Pose> f_85834_ = Util.m_137469_(Queues.newArrayDeque(), (p_85848_) -> {
++   private final Deque<PoseStack.Pose> f_85834_ = Util.m_137469_(Queues.newArrayDeque(), (p_227864_0_) -> {
+       Matrix4f matrix4f = new Matrix4f();
+       matrix4f.m_27624_();
+       Matrix3f matrix3f = new Matrix3f();
+       matrix3f.m_8180_();
+-      p_85848_.add(new PoseStack.Pose(matrix4f, matrix3f));
++      p_227864_0_.add(new PoseStack.Pose(matrix4f, matrix3f));
+    });
+ 
+    public void m_85837_(double p_85838_, double p_85839_, double p_85840_) {

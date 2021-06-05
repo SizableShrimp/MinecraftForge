@@ -1,0 +1,21 @@
+--- a/net/minecraft/network/chat/SubStringSource.java
++++ b/net/minecraft/network/chat/SubStringSource.java
+@@ -58,13 +_,13 @@
+    public static SubStringSource m_131251_(FormattedText p_131252_, Int2IntFunction p_131253_, UnaryOperator<String> p_131254_) {
+       StringBuilder stringbuilder = new StringBuilder();
+       List<Style> list = Lists.newArrayList();
+-      p_131252_.m_7451_((p_131249_, p_131250_) -> {
+-         StringDecomposer.m_14346_(p_131250_, p_131249_, (p_131243_, p_131244_, p_131245_) -> {
+-            stringbuilder.appendCodePoint(p_131245_);
+-            int i = Character.charCount(p_131245_);
++      p_131252_.m_7451_((p_244289_2_, p_244289_3_) -> {
++         StringDecomposer.m_14346_(p_244289_3_, p_244289_2_, (p_244288_2_, p_244288_3_, p_244288_4_) -> {
++            stringbuilder.appendCodePoint(p_244288_4_);
++            int i = Character.charCount(p_244288_4_);
+ 
+             for(int j = 0; j < i; ++j) {
+-               list.add(p_131244_);
++               list.add(p_244288_3_);
+             }
+ 
+             return true;

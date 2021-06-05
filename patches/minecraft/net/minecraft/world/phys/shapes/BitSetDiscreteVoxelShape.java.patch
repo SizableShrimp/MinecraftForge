@@ -1,0 +1,46 @@
+--- a/net/minecraft/world/phys/shapes/BitSetDiscreteVoxelShape.java
++++ b/net/minecraft/world/phys/shapes/BitSetDiscreteVoxelShape.java
+@@ -105,32 +_,32 @@
+    static BitSetDiscreteVoxelShape m_82641_(DiscreteVoxelShape p_82642_, DiscreteVoxelShape p_82643_, IndexMerger p_82644_, IndexMerger p_82645_, IndexMerger p_82646_, BooleanOp p_82647_) {
+       BitSetDiscreteVoxelShape bitsetdiscretevoxelshape = new BitSetDiscreteVoxelShape(p_82644_.m_6241_().size() - 1, p_82645_.m_6241_().size() - 1, p_82646_.m_6241_().size() - 1);
+       int[] aint = new int[]{Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE};
+-      p_82644_.m_6200_((p_82670_, p_82671_, p_82672_) -> {
++      p_82644_.m_6200_((p_199628_7_, p_199628_8_, p_199628_9_) -> {
+          boolean[] aboolean = new boolean[]{false};
+-         boolean flag = p_82645_.m_6200_((p_82659_, p_82660_, p_82661_) -> {
++         boolean flag = p_82645_.m_6200_((p_199627_10_, p_199627_11_, p_199627_12_) -> {
+             boolean[] aboolean1 = new boolean[]{false};
+-            boolean flag1 = p_82646_.m_6200_((p_82638_, p_82639_, p_82640_) -> {
+-               boolean flag2 = p_82647_.m_82701_(p_82642_.m_82846_(p_82670_, p_82659_, p_82638_), p_82643_.m_82846_(p_82671_, p_82660_, p_82639_));
++            boolean flag1 = p_82646_.m_6200_((p_199629_12_, p_199629_13_, p_199629_14_) -> {
++               boolean flag2 = p_82647_.m_82701_(p_82642_.m_82846_(p_199628_7_, p_199627_10_, p_199629_12_), p_82643_.m_82846_(p_199628_8_, p_199627_11_, p_199629_13_));
+                if (flag2) {
+-                  bitsetdiscretevoxelshape.f_82580_.set(bitsetdiscretevoxelshape.m_82604_(p_82672_, p_82661_, p_82640_));
+-                  aint[2] = Math.min(aint[2], p_82640_);
+-                  aint[5] = Math.max(aint[5], p_82640_);
++                  bitsetdiscretevoxelshape.f_82580_.set(bitsetdiscretevoxelshape.m_82604_(p_199628_9_, p_199627_12_, p_199629_14_));
++                  aint[2] = Math.min(aint[2], p_199629_14_);
++                  aint[5] = Math.max(aint[5], p_199629_14_);
+                   aboolean1[0] = true;
+                }
+ 
+                return true;
+             });
+             if (aboolean1[0]) {
+-               aint[1] = Math.min(aint[1], p_82661_);
+-               aint[4] = Math.max(aint[4], p_82661_);
++               aint[1] = Math.min(aint[1], p_199627_12_);
++               aint[4] = Math.max(aint[4], p_199627_12_);
+                aboolean[0] = true;
+             }
+ 
+             return flag1;
+          });
+          if (aboolean[0]) {
+-            aint[0] = Math.min(aint[0], p_82672_);
+-            aint[3] = Math.max(aint[3], p_82672_);
++            aint[0] = Math.min(aint[0], p_199628_9_);
++            aint[3] = Math.max(aint[3], p_199628_9_);
+          }
+ 
+          return flag;

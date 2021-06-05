@@ -5,7 +5,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.eventbus.api.Cancelable;
 
@@ -48,7 +47,7 @@ public class EntityTeleportEvent extends EntityEvent
      * EntityTeleportEvent.TeleportCommand is fired before a living entity is teleported
      * from use of {@link net.minecraft.command.impl.TeleportCommand}.
      * <br>
-     * This event is {@link Cancelable}.<br>
+     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
      * If the event is not canceled, the entity will be teleported.
      * <br>
      * This event does not have a result. {@link HasResult}<br>
@@ -72,7 +71,7 @@ public class EntityTeleportEvent extends EntityEvent
      * EntityTeleportEvent.SpreadPlayersCommand is fired before a living entity is teleported
      * from use of {@link net.minecraft.command.impl.SpreadPlayersCommand}.
      * <br>
-     * This event is {@link Cancelable}.<br>
+     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
      * If the event is not canceled, the entity will be teleported.
      * <br>
      * This event does not have a result. {@link HasResult}<br>
@@ -95,7 +94,7 @@ public class EntityTeleportEvent extends EntityEvent
     /**
      * EntityTeleportEvent.EnderEntity is fired before an Enderman or Shulker randomly teleports.
      * <br>
-     * This event is {@link Cancelable}.<br>
+     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
      * If the event is not canceled, the entity will be teleported.
      * <br>
      * This event does not have a result. {@link HasResult}<br>
@@ -126,7 +125,7 @@ public class EntityTeleportEvent extends EntityEvent
     /**
      * EntityTeleportEvent.EnderPearl is fired before an Entity is teleported from an EnderPearlEntity.
      * <br>
-     * This event is {@link Cancelable}.<br>
+     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
      * If the event is not canceled, the entity will be teleported.
      * <br>
      * This event does not have a result. {@link HasResult}<br>
@@ -176,7 +175,7 @@ public class EntityTeleportEvent extends EntityEvent
     /**
      * EntityTeleportEvent.ChorusFruit is fired before a LivingEntity is teleported due to consuming Chorus Fruit.
      * <br>
-     * This event is {@link Cancelable}.<br>
+     * This event is {@link net.minecraftforge.eventbus.api.Cancelable}.<br>
      * If the event is not canceled, the entity will be teleported.
      * <br>
      * This event does not have a result. {@link HasResult}<br>

@@ -20,7 +20,6 @@
 package net.minecraftforge.client.model;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.client.renderer.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.geometry.IModelGeometry;

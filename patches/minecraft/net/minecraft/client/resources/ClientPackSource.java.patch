@@ -1,0 +1,18 @@
+--- a/net/minecraft/client/resources/ClientPackSource.java
++++ b/net/minecraft/client/resources/ClientPackSource.java
+@@ -118,11 +_,11 @@
+             completablefuture = HttpUtil.m_13947_(file1, p_118581_, map, 104857600, progressscreen, minecraft.m_91096_());
+          }
+ 
+-         this.f_118549_ = completablefuture.thenCompose((p_118579_) -> {
++         this.f_118549_ = completablefuture.thenCompose((p_217812_3_) -> {
+             return !this.m_118573_(s1, file1) ? Util.m_137498_(new RuntimeException("Hash check failure for file " + file1 + ", see log")) : this.m_118566_(file1, PackSource.f_10530_);
+-         }).whenComplete((p_118571_, p_118572_) -> {
+-            if (p_118572_ != null) {
+-               f_118543_.warn("Pack application failed: {}, deleting file {}", p_118572_.getMessage(), file1);
++         }).whenComplete((p_217815_1_, p_217815_2_) -> {
++            if (p_217815_2_ != null) {
++               f_118543_.warn("Pack application failed: {}, deleting file {}", p_217815_2_.getMessage(), file1);
+                m_118564_(file1);
+             }
+ 

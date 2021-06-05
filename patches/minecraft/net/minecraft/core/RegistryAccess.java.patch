@@ -1,0 +1,95 @@
+--- a/net/minecraft/core/RegistryAccess.java
++++ b/net/minecraft/core/RegistryAccess.java
+@@ -48,10 +_,10 @@
+    private static final RegistryAccess.RegistryHolder f_123049_ = Util.m_137537_(() -> {
+       RegistryAccess.RegistryHolder registryaccess$registryholder = new RegistryAccess.RegistryHolder();
+       DimensionType.m_63926_(registryaccess$registryholder);
+-      f_123048_.keySet().stream().filter((p_123097_) -> {
+-         return !p_123097_.equals(Registry.f_122818_);
+-      }).forEach((p_123089_) -> {
+-         m_123078_(registryaccess$registryholder, p_123089_);
++      f_123048_.keySet().stream().filter((p_243616_0_) -> {
++         return !p_243616_0_.equals(Registry.f_122818_);
++      }).forEach((p_243611_1_) -> {
++         m_123078_(registryaccess$registryholder, p_243611_1_);
+       });
+       return registryaccess$registryholder;
+    });
+@@ -92,6 +_,8 @@
+       ResourceKey<? extends Registry<E>> resourcekey = p_123074_.m_123108_();
+       boolean flag = !resourcekey.equals(Registry.f_122878_) && !resourcekey.equals(Registry.f_122818_);
+       Registry<E> registry = f_123049_.m_123090_(resourcekey);
++      if (!resourcekey.equals(Registry.f_122818_))
++         registry = ((Registry<Registry<E>>)BuiltinRegistries.f_123858_).m_6246_((ResourceKey<Registry<E>>)resourcekey);
+       WritableRegistry<E> writableregistry = p_123072_.m_123090_(resourcekey);
+ 
+       for(Entry<ResourceKey<E>, E> entry : registry.m_6579_()) {
+@@ -136,14 +_,14 @@
+ 
+    private static <E> void m_123081_(RegistryReadOps<?> p_123082_, RegistryAccess.RegistryHolder p_123083_, RegistryAccess.RegistryData<E> p_123084_) {
+       ResourceKey<? extends Registry<E>> resourcekey = p_123084_.m_123108_();
+-      MappedRegistry<E> mappedregistry = Optional.ofNullable((MappedRegistry<E>)p_123083_.f_123113_.get(resourcekey)).map((p_123065_) -> {
+-         return p_123065_;
++      MappedRegistry<E> mappedregistry = Optional.ofNullable((MappedRegistry<E>)p_123083_.f_123113_.get(resourcekey)).map((p_243604_0_) -> {
++         return p_243604_0_;
+       }).orElseThrow(() -> {
+          return new IllegalStateException("Missing registry: " + resourcekey);
+       });
+       DataResult<MappedRegistry<E>> dataresult = p_123082_.m_135662_(mappedregistry, p_123084_.m_123108_(), p_123084_.m_123109_());
+-      dataresult.error().ifPresent((p_123063_) -> {
+-         f_123047_.error("Error loading registry data: {}", (Object)p_123063_.message());
++      dataresult.error().ifPresent((p_243603_0_) -> {
++         f_123047_.error("Error loading registry data: {}", (Object)p_243603_0_.message());
+       });
+    }
+ 
+@@ -183,11 +_,11 @@
+ 
+       private static <E> Codec<RegistryAccess.RegistryHolder> m_123139_() {
+          Codec<ResourceKey<? extends Registry<E>>> codec = ResourceLocation.f_135803_.xmap(ResourceKey::m_135788_, ResourceKey::m_135782_);
+-         Codec<MappedRegistry<E>> codec1 = codec.partialDispatch("type", (p_123134_) -> {
+-            return DataResult.success(p_123134_.m_123023_());
+-         }, (p_123145_) -> {
+-            return m_123137_(p_123145_).map((p_123132_) -> {
+-               return MappedRegistry.m_122715_(p_123145_, Lifecycle.experimental(), p_123132_);
++         Codec<MappedRegistry<E>> codec1 = codec.partialDispatch("type", (p_243634_0_) -> {
++            return DataResult.success(p_243634_0_.m_123023_());
++         }, (p_243640_0_) -> {
++            return m_123137_(p_243640_0_).map((p_243633_1_) -> {
++               return MappedRegistry.m_122715_(p_243640_0_, Lifecycle.experimental(), p_243633_1_);
+             });
+          });
+          UnboundedMapCodec<? extends ResourceKey<? extends Registry<?>>, ? extends MappedRegistry<?>> unboundedmapcodec = Codec.unboundedMap(codec, codec1);
+@@ -195,16 +_,16 @@
+       }
+ 
+       private static <K extends ResourceKey<? extends Registry<?>>, V extends MappedRegistry<?>> Codec<RegistryAccess.RegistryHolder> m_123118_(UnboundedMapCodec<K, V> p_123119_) {
+-         return p_123119_.xmap(RegistryAccess.RegistryHolder::new, (p_123136_) -> {
+-            return ((java.util.Set<Map.Entry<K, V>>)(Object)p_123136_.f_123113_.entrySet()).stream().filter((p_123127_) -> {
+-               return RegistryAccess.f_123048_.get(p_123127_.getKey()).m_123111_();
++         return p_123119_.xmap(RegistryAccess.RegistryHolder::new, (p_243635_0_) -> {
++            return ((java.util.Set<Map.Entry<K, V>>)(Object)(p_243635_0_.f_123113_.entrySet())).stream().filter((p_243632_0_) -> {
++               return RegistryAccess.f_123048_.get(p_243632_0_.getKey()).m_123111_();
+             }).collect(ImmutableMap.toImmutableMap(Entry::getKey, Entry::getValue));
+          });
+       }
+ 
+       private static <E> DataResult<? extends Codec<E>> m_123137_(ResourceKey<? extends Registry<E>> p_123138_) {
+-         return Optional.ofNullable((RegistryAccess.RegistryData<E>)RegistryAccess.f_123048_.get(p_123138_)).map((p_123123_) -> {
+-            return p_123123_.m_123110_();
++         return Optional.ofNullable((RegistryData<E>)RegistryAccess.f_123048_.get(p_123138_)).map((p_243630_0_) -> {
++            return p_243630_0_.m_123110_();
+          }).map(DataResult::success).orElseGet(() -> {
+             return DataResult.error("Unknown or not serializable registry: " + p_123138_);
+          });
+@@ -223,8 +_,8 @@
+       }
+ 
+       public <E> Optional<WritableRegistry<E>> m_6632_(ResourceKey<? extends Registry<E>> p_123129_) {
+-         return Optional.ofNullable((WritableRegistry<E>)this.f_123113_.get(p_123129_)).map((p_123121_) -> {
+-            return p_123121_;
++         return Optional.ofNullable((WritableRegistry<E>)this.f_123113_.get(p_123129_)).map((p_243629_0_) -> {
++            return p_243629_0_;
+          });
+       }
+    }

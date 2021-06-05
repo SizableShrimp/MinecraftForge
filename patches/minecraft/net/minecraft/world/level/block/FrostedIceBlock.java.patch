@@ -1,0 +1,19 @@
+--- a/net/minecraft/world/level/block/FrostedIceBlock.java
++++ b/net/minecraft/world/level/block/FrostedIceBlock.java
+@@ -13,8 +_,6 @@
+ import net.minecraft.world.level.block.state.StateDefinition;
+ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+ import net.minecraft.world.level.block.state.properties.IntegerProperty;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public class FrostedIceBlock extends IceBlock {
+    public static final IntegerProperty f_53561_ = BlockStateProperties.f_61407_;
+@@ -85,7 +_,6 @@
+       p_53586_.m_61104_(f_53561_);
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public ItemStack m_7397_(BlockGetter p_53570_, BlockPos p_53571_, BlockState p_53572_) {
+       return ItemStack.f_41583_;
+    }

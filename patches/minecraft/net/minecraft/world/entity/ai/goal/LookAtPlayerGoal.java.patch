@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/entity/ai/goal/LookAtPlayerGoal.java
++++ b/net/minecraft/world/entity/ai/goal/LookAtPlayerGoal.java
+@@ -28,8 +_,8 @@
+       this.f_25515_ = p_25527_;
+       this.m_7021_(EnumSet.of(Goal.Flag.LOOK));
+       if (p_25525_ == Player.class) {
+-         this.f_25517_ = (new TargetingConditions()).m_26883_((double)p_25526_).m_26890_().m_26882_().m_26892_().m_26888_((p_25531_) -> {
+-            return EntitySelector.m_20431_(p_25524_).test(p_25531_);
++         this.f_25517_ = (new TargetingConditions()).m_26883_((double)p_25526_).m_26890_().m_26882_().m_26892_().m_26888_((p_220715_1_) -> {
++            return EntitySelector.m_20431_(p_25524_).test(p_220715_1_);
+          });
+       } else {
+          this.f_25517_ = (new TargetingConditions()).m_26883_((double)p_25526_).m_26890_().m_26882_().m_26892_();

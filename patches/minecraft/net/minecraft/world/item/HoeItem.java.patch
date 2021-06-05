@@ -1,0 +1,45 @@
+--- a/net/minecraft/world/item/HoeItem.java
++++ b/net/minecraft/world/item/HoeItem.java
+@@ -21,23 +_,25 @@
+    private static final Set<Block> f_41333_ = ImmutableSet.of(Blocks.f_50451_, Blocks.f_50692_, Blocks.f_50335_, Blocks.f_50577_, Blocks.f_50716_, Blocks.f_50701_, Blocks.f_50056_, Blocks.f_50057_, Blocks.f_50053_, Blocks.f_50050_, Blocks.f_50051_, Blocks.f_50055_, Blocks.f_50054_, Blocks.f_50052_);
+    protected static final Map<Block, BlockState> f_41332_ = Maps.newHashMap(ImmutableMap.of(Blocks.f_50440_, Blocks.f_50093_.m_49966_(), Blocks.f_50445_, Blocks.f_50093_.m_49966_(), Blocks.f_50493_, Blocks.f_50093_.m_49966_(), Blocks.f_50546_, Blocks.f_50493_.m_49966_()));
+ 
+-   protected HoeItem(Tier p_41336_, int p_41337_, float p_41338_, Item.Properties p_41339_) {
+-      super((float)p_41337_, p_41338_, p_41336_, f_41333_, p_41339_);
++   public HoeItem(Tier p_41336_, int p_41337_, float p_41338_, Item.Properties p_41339_) {
++      super((float)p_41337_, p_41338_, p_41336_, f_41333_, p_41339_.addToolType(net.minecraftforge.common.ToolType.HOE, p_41336_.m_6604_()));
+    }
+ 
+    public InteractionResult m_6225_(UseOnContext p_41341_) {
+       Level level = p_41341_.m_43725_();
+       BlockPos blockpos = p_41341_.m_8083_();
+-      if (p_41341_.m_43719_() != Direction.DOWN && level.m_8055_(blockpos.m_7494_()).m_60795_()) {
+-         BlockState blockstate = f_41332_.get(level.m_8055_(blockpos).m_60734_());
++      int hook = net.minecraftforge.event.ForgeEventFactory.onHoeUse(p_41341_);
++      if (hook != 0) return hook > 0 ? InteractionResult.SUCCESS : InteractionResult.FAIL;
++      if (p_41341_.m_43719_() != Direction.DOWN && level.m_46859_(blockpos.m_7494_())) {
++         BlockState blockstate = level.m_8055_(blockpos).getToolModifiedState(level, blockpos, p_41341_.m_43723_(), p_41341_.m_43722_(), net.minecraftforge.common.ToolType.HOE);
+          if (blockstate != null) {
+             Player player = p_41341_.m_43723_();
+             level.m_5594_(player, blockpos, SoundEvents.f_11955_, SoundSource.BLOCKS, 1.0F, 1.0F);
+             if (!level.f_46443_) {
+                level.m_7731_(blockpos, blockstate, 11);
+                if (player != null) {
+-                  p_41341_.m_43722_().m_41622_(1, player, (p_41344_) -> {
+-                     p_41344_.m_21190_(p_41341_.m_43724_());
++                  p_41341_.m_43722_().m_41622_(1, player, (p_220043_1_) -> {
++                     p_220043_1_.m_21190_(p_41341_.m_43724_());
+                   });
+                }
+             }
+@@ -47,5 +_,10 @@
+       }
+ 
+       return InteractionResult.PASS;
++   }
++
++   @javax.annotation.Nullable
++   public static BlockState getHoeTillingState(BlockState originalState) {
++      return f_41332_.get(originalState.m_60734_());
+    }
+ }

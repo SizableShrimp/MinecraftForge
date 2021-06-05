@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/entity/monster/Stray.java
++++ b/net/minecraft/world/entity/monster/Stray.java
+@@ -36,7 +_,7 @@
+       return SoundEvents.f_12452_;
+    }
+ 
+-   SoundEvent m_7878_() {
++   protected SoundEvent m_7878_() {
+       return SoundEvents.f_12454_;
+    }
+ 

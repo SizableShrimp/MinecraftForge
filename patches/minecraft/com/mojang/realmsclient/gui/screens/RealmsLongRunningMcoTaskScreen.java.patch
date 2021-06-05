@@ -1,0 +1,20 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsLongRunningMcoTaskScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsLongRunningMcoTaskScreen.java
+@@ -60,7 +_,7 @@
+ 
+    public void m_7856_() {
+       this.f_88773_.m_90412_();
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 106, m_120774_(12), 212, 20, CommonComponents.f_130656_, (p_88795_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 106, m_120774_(12), 212, 20, CommonComponents.f_130656_, (p_237852_1_) -> {
+          this.m_88799_();
+       }));
+    }
+@@ -88,7 +_,7 @@
+       this.f_88770_ = p_88792_;
+       NarrationHelper.m_120670_(p_88792_.getString());
+       this.m_88800_();
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 106, this.f_96544_ / 4 + 120 + 12, 200, 20, CommonComponents.f_130660_, (p_88790_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 106, this.f_96544_ / 4 + 120 + 12, 200, 20, CommonComponents.f_130660_, (p_237851_1_) -> {
+          this.m_88799_();
+       }));
+    }

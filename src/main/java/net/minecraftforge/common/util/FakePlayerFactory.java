@@ -20,9 +20,7 @@
 package net.minecraftforge.common.util;
 
 import java.lang.ref.WeakReference;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 
 import com.google.common.collect.Maps;

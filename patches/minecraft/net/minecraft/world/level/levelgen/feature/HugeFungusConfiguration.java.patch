@@ -1,0 +1,33 @@
+--- a/net/minecraft/world/level/levelgen/feature/HugeFungusConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/HugeFungusConfiguration.java
+@@ -7,18 +_,18 @@
+ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+ 
+ public class HugeFungusConfiguration implements FeatureConfiguration {
+-   public static final Codec<HugeFungusConfiguration> f_65892_ = RecordCodecBuilder.create((p_65912_) -> {
+-      return p_65912_.group(BlockState.f_61039_.fieldOf("valid_base_block").forGetter((p_65920_) -> {
+-         return p_65920_.f_65897_;
+-      }), BlockState.f_61039_.fieldOf("stem_state").forGetter((p_65918_) -> {
+-         return p_65918_.f_65898_;
+-      }), BlockState.f_61039_.fieldOf("hat_state").forGetter((p_65916_) -> {
+-         return p_65916_.f_65899_;
+-      }), BlockState.f_61039_.fieldOf("decor_state").forGetter((p_65914_) -> {
+-         return p_65914_.f_65900_;
+-      }), Codec.BOOL.fieldOf("planted").orElse(false).forGetter((p_65910_) -> {
+-         return p_65910_.f_65901_;
+-      })).apply(p_65912_, HugeFungusConfiguration::new);
++   public static final Codec<HugeFungusConfiguration> f_65892_ = RecordCodecBuilder.create((p_236309_0_) -> {
++      return p_236309_0_.group(BlockState.f_61039_.fieldOf("valid_base_block").forGetter((p_236313_0_) -> {
++         return p_236313_0_.f_65897_;
++      }), BlockState.f_61039_.fieldOf("stem_state").forGetter((p_236312_0_) -> {
++         return p_236312_0_.f_65898_;
++      }), BlockState.f_61039_.fieldOf("hat_state").forGetter((p_236311_0_) -> {
++         return p_236311_0_.f_65899_;
++      }), BlockState.f_61039_.fieldOf("decor_state").forGetter((p_236310_0_) -> {
++         return p_236310_0_.f_65900_;
++      }), Codec.BOOL.fieldOf("planted").orElse(false).forGetter((p_236308_0_) -> {
++         return p_236308_0_.f_65901_;
++      })).apply(p_236309_0_, HugeFungusConfiguration::new);
+    });
+    public static final HugeFungusConfiguration f_65893_ = new HugeFungusConfiguration(Blocks.f_50699_.m_49966_(), Blocks.f_50695_.m_49966_(), Blocks.f_50451_.m_49966_(), Blocks.f_50701_.m_49966_(), true);
+    public static final HugeFungusConfiguration f_65894_;

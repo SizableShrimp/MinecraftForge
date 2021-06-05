@@ -1,0 +1,127 @@
+--- a/net/minecraft/client/KeyboardHandler.java
++++ b/net/minecraft/client/KeyboardHandler.java
+@@ -170,8 +_,8 @@
+             BlockState blockstate = this.f_90867_.f_91074_.f_19853_.m_8055_(blockpos);
+             if (p_90929_) {
+                if (p_90930_) {
+-                  this.f_90867_.f_91074_.f_108617_.m_105149_().m_90708_(blockpos, (p_90947_) -> {
+-                     this.m_90899_(blockstate, blockpos, p_90947_);
++                  this.f_90867_.f_91074_.f_108617_.m_105149_().m_90708_(blockpos, (p_211561_3_) -> {
++                     this.m_90899_(blockstate, blockpos, p_211561_3_);
+                      this.m_90913_("debug.inspect.server.block");
+                   });
+                } else {
+@@ -190,8 +_,8 @@
+             ResourceLocation resourcelocation = Registry.f_122826_.m_7981_(entity.m_6095_());
+             if (p_90929_) {
+                if (p_90930_) {
+-                  this.f_90867_.f_91074_.f_108617_.m_105149_().m_90702_(entity.m_19879_(), (p_90921_) -> {
+-                     this.m_90922_(resourcelocation, entity.m_20182_(), p_90921_);
++                  this.f_90867_.f_91074_.f_108617_.m_105149_().m_90702_(entity.m_19879_(), (p_227999_3_) -> {
++                     this.m_90922_(resourcelocation, entity.m_20182_(), p_227999_3_);
+                      this.m_90913_("debug.inspect.server.entity");
+                   });
+                } else {
+@@ -254,7 +_,9 @@
+          }
+ 
+          ContainerEventHandler containereventhandler = this.f_90867_.f_91080_;
+-         if (p_90897_ == 1 && (!(this.f_90867_.f_91080_ instanceof ControlsScreen) || ((ControlsScreen)containereventhandler).f_97515_ <= Util.m_137550_() - 20L)) {
++
++         if ((!(this.f_90867_.f_91080_ instanceof ControlsScreen) || ((ControlsScreen)containereventhandler).f_97515_ <= Util.m_137550_() - 20L)) {
++            if (p_90897_ == 1) {
+             if (this.f_90867_.f_91066_.f_92105_.m_90832_(p_90895_, p_90896_)) {
+                this.f_90867_.m_91268_().m_85438_();
+                this.f_90867_.f_91066_.f_92052_ = this.f_90867_.m_91268_().m_85440_();
+@@ -266,13 +_,15 @@
+                if (Screen.m_96637_()) {
+                }
+ 
+-               Screenshot.m_92289_(this.f_90867_.f_91069_, this.f_90867_.m_91268_().m_85441_(), this.f_90867_.m_91268_().m_85442_(), this.f_90867_.m_91385_(), (p_90917_) -> {
++               Screenshot.m_92289_(this.f_90867_.f_91069_, this.f_90867_.m_91268_().m_85441_(), this.f_90867_.m_91268_().m_85442_(), this.f_90867_.m_91385_(), (p_212449_1_) -> {
+                   this.f_90867_.execute(() -> {
+-                     this.f_90867_.f_91065_.m_93076_().m_93785_(p_90917_);
++                     this.f_90867_.f_91065_.m_93076_().m_93785_(p_212449_1_);
+                   });
+                });
+                return;
+             }
++            } else if (p_90897_ == 0 /*GLFW_RELEASE*/ && this.f_90867_.f_91080_ instanceof ControlsScreen)
++               ((ControlsScreen)this.f_90867_.f_91080_).f_97514_ = null; //Forge: Unset pure modifiers.
+          }
+ 
+          boolean flag = containereventhandler == null || !(containereventhandler.m_7222_() instanceof EditBox) || !((EditBox)containereventhandler.m_7222_()).m_94204_();
+@@ -288,10 +_,14 @@
+             Screen.m_96579_(() -> {
+                if (p_90897_ != 1 && (p_90897_ != 2 || !this.f_90868_)) {
+                   if (p_90897_ == 0) {
+-                     aboolean[0] = containereventhandler.m_7920_(p_90895_, p_90896_, p_90898_);
++                     aboolean[0] = net.minecraftforge.client.ForgeHooksClient.onGuiKeyReleasedPre(this.f_90867_.f_91080_, p_90895_, p_90896_, p_90898_);
++                     if (!aboolean[0]) aboolean[0] = containereventhandler.m_7920_(p_90895_, p_90896_, p_90898_);
++                     if (!aboolean[0]) aboolean[0] = net.minecraftforge.client.ForgeHooksClient.onGuiKeyReleasedPost(this.f_90867_.f_91080_, p_90895_, p_90896_, p_90898_);
+                   }
+                } else {
+-                  aboolean[0] = containereventhandler.m_7933_(p_90895_, p_90896_, p_90898_);
++                  aboolean[0] = net.minecraftforge.client.ForgeHooksClient.onGuiKeyPressedPre(this.f_90867_.f_91080_, p_90895_, p_90896_, p_90898_);
++                  if (!aboolean[0]) aboolean[0] = containereventhandler.m_7933_(p_90895_, p_90896_, p_90898_);
++                  if (!aboolean[0]) aboolean[0] = net.minecraftforge.client.ForgeHooksClient.onGuiKeyPressedPost(this.f_90867_.f_91080_, p_90895_, p_90896_, p_90898_);
+                }
+ 
+             }, "keyPressed event handler", containereventhandler.getClass().getCanonicalName());
+@@ -344,7 +_,7 @@
+                }
+             }
+          }
+-
++         net.minecraftforge.client.ForgeHooksClient.fireKeyInput(p_90895_, p_90896_, p_90897_, p_90898_);
+       }
+    }
+ 
+@@ -354,12 +_,16 @@
+          if (guieventlistener != null && this.f_90867_.m_91265_() == null) {
+             if (Character.charCount(p_90891_) == 1) {
+                Screen.m_96579_(() -> {
+-                  guieventlistener.m_5534_((char)p_90891_, p_90892_);
++                  if (net.minecraftforge.client.ForgeHooksClient.onGuiCharTypedPre(this.f_90867_.f_91080_, (char)p_90891_, p_90892_)) return;
++                  if (guieventlistener.m_5534_((char)p_90891_, p_90892_)) return;
++                  net.minecraftforge.client.ForgeHooksClient.onGuiCharTypedPost(this.f_90867_.f_91080_, (char)p_90891_, p_90892_);
+                }, "charTyped event handler", guieventlistener.getClass().getCanonicalName());
+             } else {
+                for(char c0 : Character.toChars(p_90891_)) {
+                   Screen.m_96579_(() -> {
+-                     guieventlistener.m_5534_(c0, p_90892_);
++                     if (net.minecraftforge.client.ForgeHooksClient.onGuiCharTypedPre(this.f_90867_.f_91080_, c0, p_90892_)) return;
++                     if (guieventlistener.m_5534_(c0, p_90892_)) return;
++                     net.minecraftforge.client.ForgeHooksClient.onGuiCharTypedPost(this.f_90867_.f_91080_, c0, p_90892_);
+                   }, "charTyped event handler", guieventlistener.getClass().getCanonicalName());
+                }
+             }
+@@ -373,21 +_,21 @@
+    }
+ 
+    public void m_90887_(long p_90888_) {
+-      InputConstants.m_84844_(p_90888_, (p_90939_, p_90940_, p_90941_, p_90942_, p_90943_) -> {
++      InputConstants.m_84844_(p_90888_, (p_228001_1_, p_228001_3_, p_228001_4_, p_228001_5_, p_228001_6_) -> {
+          this.f_90867_.execute(() -> {
+-            this.m_90893_(p_90939_, p_90940_, p_90941_, p_90942_, p_90943_);
++            this.m_90893_(p_228001_1_, p_228001_3_, p_228001_4_, p_228001_5_, p_228001_6_);
+          });
+-      }, (p_90935_, p_90936_, p_90937_) -> {
++      }, (p_228000_1_, p_228000_3_, p_228000_4_) -> {
+          this.f_90867_.execute(() -> {
+-            this.m_90889_(p_90935_, p_90936_, p_90937_);
++            this.m_90889_(p_228000_1_, p_228000_3_, p_228000_4_);
+          });
+       });
+    }
+ 
+    public String m_90876_() {
+-      return this.f_90869_.m_83995_(this.f_90867_.m_91268_().m_85439_(), (p_90878_, p_90879_) -> {
+-         if (p_90878_ != 65545) {
+-            this.f_90867_.m_91268_().m_85382_(p_90878_, p_90879_);
++      return this.f_90869_.m_83995_(this.f_90867_.m_91268_().m_85439_(), (p_227998_1_, p_227998_2_) -> {
++         if (p_227998_1_ != 65545) {
++            this.f_90867_.m_91268_().m_85382_(p_227998_1_, p_227998_2_);
+          }
+ 
+       });

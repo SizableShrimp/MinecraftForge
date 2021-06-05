@@ -1,0 +1,37 @@
+--- a/net/minecraft/world/inventory/CartographyTableMenu.java
++++ b/net/minecraft/world/inventory/CartographyTableMenu.java
+@@ -56,10 +_,10 @@
+             CartographyTableMenu.this.f_38839_.get(0).m_6201_(1);
+             CartographyTableMenu.this.f_38839_.get(1).m_6201_(1);
+             p_39215_.m_41720_().m_7836_(p_39215_, p_39214_.f_19853_, p_39214_);
+-            p_39145_.m_39292_((p_39219_, p_39220_) -> {
+-               long l = p_39219_.m_46467_();
++            p_39145_.m_39292_((p_242385_1_, p_242385_2_) -> {
++               long l = p_242385_1_.m_46467_();
+                if (CartographyTableMenu.this.f_39137_ != l) {
+-                  p_39219_.m_5594_((Player)null, p_39220_, SoundEvents.f_12493_, SoundSource.BLOCKS, 1.0F, 1.0F);
++                  p_242385_1_.m_5594_((Player)null, p_242385_2_, SoundEvents.f_12493_, SoundSource.BLOCKS, 1.0F, 1.0F);
+                   CartographyTableMenu.this.f_39137_ = l;
+                }
+ 
+@@ -99,9 +_,9 @@
+    }
+ 
+    private void m_39162_(ItemStack p_39163_, ItemStack p_39164_, ItemStack p_39165_) {
+-      this.f_39136_.m_39292_((p_39170_, p_39171_) -> {
++      this.f_39136_.m_39292_((p_216996_4_, p_216996_5_) -> {
+          Item item = p_39164_.m_41720_();
+-         MapItemSavedData mapitemsaveddata = MapItem.m_42853_(p_39163_, p_39170_);
++         MapItemSavedData mapitemsaveddata = MapItem.m_42853_(p_39163_, p_216996_4_);
+          if (mapitemsaveddata != null) {
+             ItemStack itemstack;
+             if (item == Items.f_42516_ && !mapitemsaveddata.f_77892_ && mapitemsaveddata.f_77890_ < 4) {
+@@ -192,7 +_,7 @@
+    public void m_6877_(Player p_39173_) {
+       super.m_6877_(p_39173_);
+       this.f_39138_.m_8016_(2);
+-      this.f_39136_.m_39292_((p_39152_, p_39153_) -> {
++      this.f_39136_.m_39292_((p_216995_2_, p_216995_3_) -> {
+          this.m_38877_(p_39173_, p_39173_.f_19853_, this.f_39135_);
+       });
+    }

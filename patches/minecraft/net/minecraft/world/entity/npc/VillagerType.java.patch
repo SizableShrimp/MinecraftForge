@@ -1,0 +1,110 @@
+--- a/net/minecraft/world/entity/npc/VillagerType.java
++++ b/net/minecraft/world/entity/npc/VillagerType.java
+@@ -19,51 +_,51 @@
+    public static final VillagerType f_35824_ = m_35831_("swamp");
+    public static final VillagerType f_35825_ = m_35831_("taiga");
+    private final String f_35826_;
+-   private static final Map<ResourceKey<Biome>, VillagerType> f_35827_ = Util.m_137469_(Maps.newHashMap(), (p_35834_) -> {
+-      p_35834_.put(Biomes.f_48159_, f_35819_);
+-      p_35834_.put(Biomes.f_48161_, f_35819_);
+-      p_35834_.put(Biomes.f_48203_, f_35819_);
+-      p_35834_.put(Biomes.f_48218_, f_35819_);
+-      p_35834_.put(Biomes.f_48177_, f_35819_);
+-      p_35834_.put(Biomes.f_48194_, f_35819_);
+-      p_35834_.put(Biomes.f_48196_, f_35819_);
+-      p_35834_.put(Biomes.f_48195_, f_35819_);
+-      p_35834_.put(Biomes.f_48160_, f_35819_);
+-      p_35834_.put(Biomes.f_48197_, f_35820_);
+-      p_35834_.put(Biomes.f_48198_, f_35820_);
+-      p_35834_.put(Biomes.f_48222_, f_35820_);
+-      p_35834_.put(Biomes.f_48224_, f_35820_);
+-      p_35834_.put(Biomes.f_48223_, f_35820_);
+-      p_35834_.put(Biomes.f_48183_, f_35820_);
+-      p_35834_.put(Biomes.f_48184_, f_35820_);
+-      p_35834_.put(Biomes.f_48158_, f_35822_);
+-      p_35834_.put(Biomes.f_48157_, f_35822_);
+-      p_35834_.put(Biomes.f_48192_, f_35822_);
+-      p_35834_.put(Biomes.f_48193_, f_35822_);
+-      p_35834_.put(Biomes.f_48172_, f_35823_);
+-      p_35834_.put(Biomes.f_48211_, f_35823_);
+-      p_35834_.put(Biomes.f_48212_, f_35823_);
+-      p_35834_.put(Biomes.f_48182_, f_35823_);
+-      p_35834_.put(Biomes.f_48148_, f_35823_);
+-      p_35834_.put(Biomes.f_48214_, f_35823_);
+-      p_35834_.put(Biomes.f_48152_, f_35823_);
+-      p_35834_.put(Biomes.f_48153_, f_35823_);
+-      p_35834_.put(Biomes.f_48188_, f_35823_);
+-      p_35834_.put(Biomes.f_48213_, f_35823_);
+-      p_35834_.put(Biomes.f_48207_, f_35824_);
+-      p_35834_.put(Biomes.f_48181_, f_35824_);
+-      p_35834_.put(Biomes.f_48189_, f_35825_);
+-      p_35834_.put(Biomes.f_48190_, f_35825_);
+-      p_35834_.put(Biomes.f_48154_, f_35825_);
+-      p_35834_.put(Biomes.f_48155_, f_35825_);
+-      p_35834_.put(Biomes.f_48178_, f_35825_);
+-      p_35834_.put(Biomes.f_48191_, f_35825_);
+-      p_35834_.put(Biomes.f_48221_, f_35825_);
+-      p_35834_.put(Biomes.f_48204_, f_35825_);
+-      p_35834_.put(Biomes.f_48206_, f_35825_);
+-      p_35834_.put(Biomes.f_48220_, f_35825_);
+-      p_35834_.put(Biomes.f_48180_, f_35825_);
+-      p_35834_.put(Biomes.f_48156_, f_35825_);
++   private static final Map<ResourceKey<Biome>, VillagerType> f_35827_ = Util.m_137469_(Maps.newHashMap(), (p_221172_0_) -> {
++      p_221172_0_.put(Biomes.f_48159_, f_35819_);
++      p_221172_0_.put(Biomes.f_48161_, f_35819_);
++      p_221172_0_.put(Biomes.f_48203_, f_35819_);
++      p_221172_0_.put(Biomes.f_48218_, f_35819_);
++      p_221172_0_.put(Biomes.f_48177_, f_35819_);
++      p_221172_0_.put(Biomes.f_48194_, f_35819_);
++      p_221172_0_.put(Biomes.f_48196_, f_35819_);
++      p_221172_0_.put(Biomes.f_48195_, f_35819_);
++      p_221172_0_.put(Biomes.f_48160_, f_35819_);
++      p_221172_0_.put(Biomes.f_48197_, f_35820_);
++      p_221172_0_.put(Biomes.f_48198_, f_35820_);
++      p_221172_0_.put(Biomes.f_48222_, f_35820_);
++      p_221172_0_.put(Biomes.f_48224_, f_35820_);
++      p_221172_0_.put(Biomes.f_48223_, f_35820_);
++      p_221172_0_.put(Biomes.f_48183_, f_35820_);
++      p_221172_0_.put(Biomes.f_48184_, f_35820_);
++      p_221172_0_.put(Biomes.f_48158_, f_35822_);
++      p_221172_0_.put(Biomes.f_48157_, f_35822_);
++      p_221172_0_.put(Biomes.f_48192_, f_35822_);
++      p_221172_0_.put(Biomes.f_48193_, f_35822_);
++      p_221172_0_.put(Biomes.f_48172_, f_35823_);
++      p_221172_0_.put(Biomes.f_48211_, f_35823_);
++      p_221172_0_.put(Biomes.f_48212_, f_35823_);
++      p_221172_0_.put(Biomes.f_48182_, f_35823_);
++      p_221172_0_.put(Biomes.f_48148_, f_35823_);
++      p_221172_0_.put(Biomes.f_48214_, f_35823_);
++      p_221172_0_.put(Biomes.f_48152_, f_35823_);
++      p_221172_0_.put(Biomes.f_48153_, f_35823_);
++      p_221172_0_.put(Biomes.f_48188_, f_35823_);
++      p_221172_0_.put(Biomes.f_48213_, f_35823_);
++      p_221172_0_.put(Biomes.f_48207_, f_35824_);
++      p_221172_0_.put(Biomes.f_48181_, f_35824_);
++      p_221172_0_.put(Biomes.f_48189_, f_35825_);
++      p_221172_0_.put(Biomes.f_48190_, f_35825_);
++      p_221172_0_.put(Biomes.f_48154_, f_35825_);
++      p_221172_0_.put(Biomes.f_48155_, f_35825_);
++      p_221172_0_.put(Biomes.f_48178_, f_35825_);
++      p_221172_0_.put(Biomes.f_48191_, f_35825_);
++      p_221172_0_.put(Biomes.f_48221_, f_35825_);
++      p_221172_0_.put(Biomes.f_48204_, f_35825_);
++      p_221172_0_.put(Biomes.f_48206_, f_35825_);
++      p_221172_0_.put(Biomes.f_48220_, f_35825_);
++      p_221172_0_.put(Biomes.f_48180_, f_35825_);
++      p_221172_0_.put(Biomes.f_48156_, f_35825_);
+    });
+ 
+    private VillagerType(String p_35830_) {
+@@ -79,8 +_,8 @@
+    }
+ 
+    public static VillagerType m_35835_(Optional<ResourceKey<Biome>> p_35836_) {
+-      return p_35836_.flatMap((p_35838_) -> {
+-         return Optional.ofNullable(f_35827_.get(p_35838_));
++      return p_35836_.flatMap((p_242372_0_) -> {
++         return Optional.ofNullable(f_35827_.get(p_242372_0_));
+       }).orElse(f_35821_);
+    }
+ }

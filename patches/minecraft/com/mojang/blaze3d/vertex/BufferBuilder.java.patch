@@ -1,0 +1,37 @@
+--- a/com/mojang/blaze3d/vertex/BufferBuilder.java
++++ b/com/mojang/blaze3d/vertex/BufferBuilder.java
+@@ -86,8 +_,8 @@
+       for(int k = 0; k < aint.length; aint[k] = k++) {
+       }
+ 
+-      IntArrays.mergeSort(aint, (p_85718_, p_85719_) -> {
+-         return Floats.compare(afloat[p_85719_], afloat[p_85718_]);
++      IntArrays.mergeSort(aint, (p_227830_1_, p_227830_2_) -> {
++         return Floats.compare(afloat[p_227830_2_], afloat[p_227830_1_]);
+       });
+       BitSet bitset = new BitSet();
+       FloatBuffer floatbuffer1 = MemoryTracker.m_84934_(this.f_85658_.m_86017_() * 4);
+@@ -292,6 +_,7 @@
+       }
+ 
+       ByteBuffer bytebuffer = this.f_85648_.slice();
++      bytebuffer.order(this.f_85648_.order()); // FORGE: Fix incorrect byte order
+       ((Buffer)this.f_85648_).clear();
+       return Pair.of(bufferbuilder$drawstate, bytebuffer);
+    }
+@@ -359,4 +_,15 @@
+          this.f_85749_ = p_85752_;
+       }
+    }
++
++   // Forge start
++   public void putBulkData(ByteBuffer buffer) {
++      m_85722_(buffer.limit() + this.f_85658_.m_86020_());
++      ((Buffer)this.f_85648_).position(this.f_85654_ * this.f_85658_.m_86020_());
++      this.f_85648_.put(buffer);
++      this.f_85654_ += buffer.limit() / this.f_85658_.m_86020_();
++      this.f_85652_ += buffer.limit();
++   }
++
++   public VertexFormat getVertexFormat() { return this.f_85658_; }
+ }

@@ -1,0 +1,32 @@
+--- a/net/minecraft/util/datafix/fixes/OptionsKeyTranslationFix.java
++++ b/net/minecraft/util/datafix/fixes/OptionsKeyTranslationFix.java
+@@ -13,20 +_,20 @@
+    }
+ 
+    public TypeRewriteRule makeRule() {
+-      return this.fixTypeEverywhereTyped("OptionsKeyTranslationFix", this.getInputSchema().getType(References.f_16775_), (p_16648_) -> {
+-         return p_16648_.update(DSL.remainderFinder(), (p_16650_) -> {
+-            return p_16650_.getMapValues().<com.mojang.serialization.Dynamic<?>>map((p_16656_) -> {
+-               return p_16650_.createMap(p_16656_.entrySet().stream().map((p_16653_) -> {
+-                  if (p_16653_.getKey().asString("").startsWith("key_")) {
+-                     String s = p_16653_.getValue().asString("");
++      return this.fixTypeEverywhereTyped("OptionsKeyTranslationFix", this.getInputSchema().getType(References.f_16775_), (p_209667_0_) -> {
++         return p_209667_0_.update(DSL.remainderFinder(), (p_209668_0_) -> {
++            return p_209668_0_.getMapValues().<com.mojang.serialization.Dynamic<?>>map((p_209669_1_) -> {
++               return p_209668_0_.createMap(p_209669_1_.entrySet().stream().map((p_209666_1_) -> {
++                  if (p_209666_1_.getKey().asString("").startsWith("key_")) {
++                     String s = p_209666_1_.getValue().asString("");
+                      if (!s.startsWith("key.mouse") && !s.startsWith("scancode.")) {
+-                        return Pair.of(p_16653_.getKey(), p_16650_.createString("key.keyboard." + s.substring("key.".length())));
++                        return Pair.of(p_209666_1_.getKey(), p_209668_0_.createString("key.keyboard." + s.substring("key.".length())));
+                      }
+                   }
+ 
+-                  return Pair.of(p_16653_.getKey(), p_16653_.getValue());
++                  return Pair.of(p_209666_1_.getKey(), p_209666_1_.getValue());
+                }).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond)));
+-            }).result().orElse(p_16650_);
++            }).result().orElse(p_209668_0_);
+          });
+       });
+    }

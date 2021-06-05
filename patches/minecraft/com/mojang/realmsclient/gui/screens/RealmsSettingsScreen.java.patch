@@ -1,0 +1,27 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsSettingsScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsSettingsScreen.java
+@@ -37,19 +_,19 @@
+    public void m_7856_() {
+       this.f_96541_.f_91068_.m_90926_(true);
+       int i = this.f_96543_ / 2 - 106;
+-      this.f_89823_ = this.m_7082_(new Button(i - 2, m_120774_(12), 106, 20, new TranslatableComponent("mco.configure.world.buttons.done"), (p_89847_) -> {
++      this.f_89823_ = this.m_7082_(new Button(i - 2, m_120774_(12), 106, 20, new TranslatableComponent("mco.configure.world.buttons.done"), (p_238033_1_) -> {
+          this.m_89831_();
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 2, m_120774_(12), 106, 20, CommonComponents.f_130656_, (p_89845_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 2, m_120774_(12), 106, 20, CommonComponents.f_130656_, (p_238032_1_) -> {
+          this.f_96541_.m_91152_(this.f_89821_);
+       }));
+       String s = this.f_89822_.f_87477_ == RealmsServer.State.OPEN ? "mco.configure.world.buttons.close" : "mco.configure.world.buttons.open";
+-      Button button = new Button(this.f_96543_ / 2 - 53, m_120774_(0), 106, 20, new TranslatableComponent(s), (p_89842_) -> {
++      Button button = new Button(this.f_96543_ / 2 - 53, m_120774_(0), 106, 20, new TranslatableComponent(s), (p_238031_1_) -> {
+          if (this.f_89822_.f_87477_ == RealmsServer.State.OPEN) {
+             Component component = new TranslatableComponent("mco.configure.world.close.question.line1");
+             Component component1 = new TranslatableComponent("mco.configure.world.close.question.line2");
+-            this.f_96541_.m_91152_(new RealmsLongConfirmationScreen((p_89849_) -> {
+-               if (p_89849_) {
++            this.f_96541_.m_91152_(new RealmsLongConfirmationScreen((p_238034_1_) -> {
++               if (p_238034_1_) {
+                   this.f_89821_.m_88452_(this);
+                } else {
+                   this.f_96541_.m_91152_(this);

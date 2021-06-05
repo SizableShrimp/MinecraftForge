@@ -1,0 +1,42 @@
+--- a/net/minecraft/resources/ResourceKey.java
++++ b/net/minecraft/resources/ResourceKey.java
+@@ -6,7 +_,7 @@
+ import java.util.function.Function;
+ import net.minecraft.core.Registry;
+ 
+-public class ResourceKey<T> {
++public class ResourceKey<T> implements Comparable<ResourceKey<?>> {
+    private static final Map<String, ResourceKey<?>> f_135775_ = Collections.synchronizedMap(Maps.newIdentityHashMap());
+    private final ResourceLocation f_135776_;
+    private final ResourceLocation f_135777_;
+@@ -21,7 +_,7 @@
+ 
+    private static <T> ResourceKey<T> m_135790_(ResourceLocation p_135791_, ResourceLocation p_135792_) {
+       String s = (p_135791_ + ":" + p_135792_).intern();
+-      return (ResourceKey<T>)f_135775_.computeIfAbsent(s, (p_135796_) -> {
++      return (ResourceKey<T>)f_135775_.computeIfAbsent(s, (p_240906_2_) -> {
+          return new ResourceKey(p_135791_, p_135792_);
+       });
+    }
+@@ -44,8 +_,19 @@
+    }
+ 
+    public static <T> Function<ResourceLocation, ResourceKey<T>> m_135797_(ResourceKey<? extends Registry<T>> p_135798_) {
+-      return (p_135801_) -> {
+-         return m_135785_(p_135798_, p_135801_);
++      return (p_240907_1_) -> {
++         return m_135785_(p_135798_, p_240907_1_);
+       };
++   }
++
++   public ResourceLocation getRegistryName() {
++      return this.f_135776_;
++   }
++
++   @Override
++   public int compareTo(ResourceKey<?> o) {
++      int ret = this.getRegistryName().compareTo(o.getRegistryName());
++      if (ret == 0) ret = this.m_135782_().compareTo(o.m_135782_());
++      return ret;
+    }
+ }

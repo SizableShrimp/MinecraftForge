@@ -1,0 +1,14 @@
+--- a/net/minecraft/client/gui/screens/packs/TransferableSelectionList.java
++++ b/net/minecraft/client/gui/screens/packs/TransferableSelectionList.java
+@@ -158,9 +_,9 @@
+                   this.f_100078_.m_7849_();
+                } else {
+                   Component component = packcompatibility.m_10493_();
+-                  this.f_100075_.m_91152_(new ConfirmScreen((p_100108_) -> {
++                  this.f_100075_.m_91152_(new ConfirmScreen((p_238921_1_) -> {
+                      this.f_100075_.m_91152_(this.f_100076_);
+-                     if (p_100108_) {
++                     if (p_238921_1_) {
+                         this.f_100078_.m_7849_();
+                      }
+ 

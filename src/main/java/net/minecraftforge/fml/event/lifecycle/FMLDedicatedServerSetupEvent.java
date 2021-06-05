@@ -19,10 +19,7 @@
 
 package net.minecraftforge.fml.event.lifecycle;
 
-import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraftforge.fml.ModContainer;
-
-import java.util.function.Supplier;
 
 /**
  * This is the second of four commonly called events during mod lifecycle startup.

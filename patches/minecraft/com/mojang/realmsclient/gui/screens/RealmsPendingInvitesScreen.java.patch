@@ -1,0 +1,32 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsPendingInvitesScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsPendingInvitesScreen.java
+@@ -62,8 +_,8 @@
+ 
+             try {
+                List<PendingInvite> list = realmsclient.m_87261_().f_87432_;
+-               List<RealmsPendingInvitesScreen.Entry> list1 = list.stream().map((p_88969_) -> {
+-                  return RealmsPendingInvitesScreen.this.new Entry(p_88969_);
++               List<RealmsPendingInvitesScreen.Entry> list1 = list.stream().map((p_225146_1_) -> {
++                  return RealmsPendingInvitesScreen.this.new Entry(p_225146_1_);
+                }).collect(Collectors.toList());
+                RealmsPendingInvitesScreen.this.f_96541_.execute(() -> {
+                   RealmsPendingInvitesScreen.this.f_88883_.m_5988_(list1);
+@@ -77,15 +_,15 @@
+          }
+       }).start();
+       this.m_7787_(this.f_88883_);
+-      this.f_88886_ = this.m_7082_(new Button(this.f_96543_ / 2 - 174, this.f_96544_ - 32, 100, 20, new TranslatableComponent("mco.invites.button.accept"), (p_88940_) -> {
++      this.f_88886_ = this.m_7082_(new Button(this.f_96543_ / 2 - 174, this.f_96544_ - 32, 100, 20, new TranslatableComponent("mco.invites.button.accept"), (p_237878_1_) -> {
+          this.m_88932_(this.f_88885_);
+          this.f_88885_ = -1;
+          this.m_88957_();
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 50, this.f_96544_ - 32, 100, 20, CommonComponents.f_130655_, (p_88930_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 50, this.f_96544_ - 32, 100, 20, CommonComponents.f_130655_, (p_237875_1_) -> {
+          this.f_96541_.m_91152_(new RealmsMainScreen(this.f_88880_));
+       }));
+-      this.f_88887_ = this.m_7082_(new Button(this.f_96543_ / 2 + 74, this.f_96544_ - 32, 100, 20, new TranslatableComponent("mco.invites.button.reject"), (p_88920_) -> {
++      this.f_88887_ = this.m_7082_(new Button(this.f_96543_ / 2 + 74, this.f_96544_ - 32, 100, 20, new TranslatableComponent("mco.invites.button.reject"), (p_237871_1_) -> {
+          this.m_88922_(this.f_88885_);
+          this.f_88885_ = -1;
+          this.m_88957_();

@@ -1,0 +1,155 @@
+--- a/net/minecraft/client/sounds/SoundEngine.java
++++ b/net/minecraft/client/sounds/SoundEngine.java
+@@ -40,7 +_,7 @@
+    private static final Marker f_120214_ = MarkerManager.getMarker("SOUNDS");
+    private static final Logger f_120215_ = LogManager.getLogger();
+    private static final Set<ResourceLocation> f_120216_ = Sets.newHashSet();
+-   private final SoundManager f_120217_;
++   public final SoundManager f_120217_;
+    private final Options f_120218_;
+    private boolean f_120219_;
+    private final Library f_120220_ = new Library();
+@@ -62,6 +_,7 @@
+       this.f_120217_ = p_120236_;
+       this.f_120218_ = p_120237_;
+       this.f_120222_ = new SoundBufferLibrary(p_120238_);
++      net.minecraftforge.fml.ModLoader.get().postEvent(new net.minecraftforge.client.event.sound.SoundLoadEvent(this));
+    }
+ 
+    public void m_120239_() {
+@@ -77,6 +_,7 @@
+ 
+       this.m_120304_();
+       this.m_120323_();
++      net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.sound.SoundLoadEvent(this));
+    }
+ 
+    private synchronized void m_120323_() {
+@@ -104,13 +_,13 @@
+          if (p_120261_ == SoundSource.MASTER) {
+             this.f_120221_.m_83737_(p_120262_);
+          } else {
+-            this.f_120226_.forEach((p_120280_, p_120281_) -> {
+-               float f = this.m_120327_(p_120280_);
+-               p_120281_.m_120154_((p_120257_) -> {
++            this.f_120226_.forEach((p_217926_1_, p_217926_2_) -> {
++               float f = this.m_120327_(p_217926_1_);
++               p_217926_2_.m_120154_((p_217923_1_) -> {
+                   if (f <= 0.0F) {
+-                     p_120257_.m_83679_();
++                     p_217923_1_.m_83679_();
+                   } else {
+-                     p_120257_.m_83666_(f);
++                     p_217923_1_.m_83666_(f);
+                   }
+ 
+                });
+@@ -142,8 +_,8 @@
+    public void m_120311_() {
+       if (this.f_120219_) {
+          this.f_120223_.m_120332_();
+-         this.f_120226_.values().forEach((p_120288_) -> {
+-            p_120288_.m_120154_(Channel::m_83679_);
++         this.f_120226_.values().forEach((p_217922_0_) -> {
++            p_217922_0_.m_120154_(Channel::m_83679_);
+          });
+          this.f_120226_.clear();
+          this.f_120224_.m_120139_();
+@@ -191,10 +_,10 @@
+             Vec3 vec3 = new Vec3(tickablesoundinstance.m_7772_(), tickablesoundinstance.m_7780_(), tickablesoundinstance.m_7778_());
+             ChannelAccess.ChannelHandle channelaccess$channelhandle = this.f_120226_.get(tickablesoundinstance);
+             if (channelaccess$channelhandle != null) {
+-               channelaccess$channelhandle.m_120154_((p_120244_) -> {
+-                  p_120244_.m_83666_(f);
+-                  p_120244_.m_83650_(f1);
+-                  p_120244_.m_83654_(vec3);
++               channelaccess$channelhandle.m_120154_((p_217924_3_) -> {
++                  p_217924_3_.m_83666_(f);
++                  p_217924_3_.m_83650_(f1);
++                  p_217924_3_.m_83654_(vec3);
+                });
+             }
+          }
+@@ -272,7 +_,8 @@
+ 
+    public void m_120312_(SoundInstance p_120313_) {
+       if (this.f_120219_) {
+-         if (p_120313_.m_7767_()) {
++         p_120313_ = net.minecraftforge.client.ForgeHooksClient.playSound(this, p_120313_);
++         if (p_120313_ != null && p_120313_.m_7767_()) {
+             WeighedSoundEvents weighedsoundevents = p_120313_.m_6775_(this.f_120217_);
+             ResourceLocation resourcelocation = p_120313_.m_7904_();
+             if (weighedsoundevents == null) {
+@@ -324,31 +_,34 @@
+                            this.f_120230_.put(p_120313_, this.f_120225_ + 20);
+                            this.f_120226_.put(p_120313_, channelaccess$channelhandle);
+                            this.f_120227_.put(soundsource, p_120313_);
+-                           channelaccess$channelhandle.m_120154_((p_120254_) -> {
+-                              p_120254_.m_83650_(f3);
+-                              p_120254_.m_83666_(f2);
++                           channelaccess$channelhandle.m_120154_((p_239543_8_) -> {
++                              p_239543_8_.m_83650_(f3);
++                              p_239543_8_.m_83666_(f2);
+                               if (soundinstance$attenuation == SoundInstance.Attenuation.LINEAR) {
+-                                 p_120254_.m_83673_(f1);
++                                 p_239543_8_.m_83673_(f1);
+                               } else {
+-                                 p_120254_.m_83681_();
++                                 p_239543_8_.m_83681_();
+                               }
+ 
+-                              p_120254_.m_83663_(flag2 && !flag3);
+-                              p_120254_.m_83654_(vec3);
+-                              p_120254_.m_83670_(flag);
++                              p_239543_8_.m_83663_(flag2 && !flag3);
++                              p_239543_8_.m_83654_(vec3);
++                              p_239543_8_.m_83670_(flag);
+                            });
++                           final SoundInstance soundinstance = p_120313_;
+                            if (!flag3) {
+-                              this.f_120222_.m_120202_(sound.m_119790_()).thenAccept((p_120291_) -> {
+-                                 channelaccess$channelhandle.m_120154_((p_120269_) -> {
+-                                    p_120269_.m_83656_(p_120291_);
+-                                    p_120269_.m_83672_();
++                              this.f_120222_.m_120202_(sound.m_119790_()).thenAccept((p_217934_1_) -> {
++                                 channelaccess$channelhandle.m_120154_((p_217925_1_) -> {
++                                    p_217925_1_.m_83656_(p_217934_1_);
++                                    p_217925_1_.m_83672_();
++                                    net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.sound.PlaySoundSourceEvent(this, soundinstance, p_217925_1_));
+                                  });
+                               });
+                            } else {
+-                              this.f_120222_.m_120204_(sound.m_119790_(), flag2).thenAccept((p_120294_) -> {
+-                                 channelaccess$channelhandle.m_120154_((p_120286_) -> {
+-                                    p_120286_.m_83658_(p_120294_);
+-                                    p_120286_.m_83672_();
++                              this.f_120222_.m_120204_(sound.m_119790_(), flag2).thenAccept((p_217928_1_) -> {
++                                 channelaccess$channelhandle.m_120154_((p_217935_1_) -> {
++                                    p_217935_1_.m_83658_(p_217928_1_);
++                                    p_217935_1_.m_83672_();
++                                    net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.sound.PlayStreamingSourceEvent(this, soundinstance, p_217935_1_));
+                                  });
+                               });
+                            }
+@@ -384,8 +_,8 @@
+ 
+    public void m_120314_() {
+       if (this.f_120219_) {
+-         this.f_120224_.m_120137_((p_120310_) -> {
+-            p_120310_.forEach(Channel::m_83677_);
++         this.f_120224_.m_120137_((p_217929_0_) -> {
++            p_217929_0_.forEach(Channel::m_83677_);
+          });
+       }
+ 
+@@ -393,8 +_,8 @@
+ 
+    public void m_120317_() {
+       if (this.f_120219_) {
+-         this.f_120224_.m_120137_((p_120298_) -> {
+-            p_120298_.forEach(Channel::m_83678_);
++         this.f_120224_.m_120137_((p_217936_0_) -> {
++            p_217936_0_.forEach(Channel::m_83678_);
+          });
+       }
+ 

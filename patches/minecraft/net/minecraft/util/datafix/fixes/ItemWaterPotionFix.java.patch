@@ -1,0 +1,30 @@
+--- a/net/minecraft/util/datafix/fixes/ItemWaterPotionFix.java
++++ b/net/minecraft/util/datafix/fixes/ItemWaterPotionFix.java
+@@ -21,22 +_,22 @@
+       Type<?> type = this.getInputSchema().getType(References.f_16782_);
+       OpticFinder<Pair<String, String>> opticfinder = DSL.fieldFinder("id", DSL.named(References.f_16788_.typeName(), NamespacedSchema.m_17310_()));
+       OpticFinder<?> opticfinder1 = type.findField("tag");
+-      return this.fixTypeEverywhereTyped("ItemWaterPotionFix", type, (p_16161_) -> {
+-         Optional<Pair<String, String>> optional = p_16161_.getOptional(opticfinder);
++      return this.fixTypeEverywhereTyped("ItemWaterPotionFix", type, (p_206363_2_) -> {
++         Optional<Pair<String, String>> optional = p_206363_2_.getOptional(opticfinder);
+          if (optional.isPresent()) {
+             String s = optional.get().getSecond();
+             if ("minecraft:potion".equals(s) || "minecraft:splash_potion".equals(s) || "minecraft:lingering_potion".equals(s) || "minecraft:tipped_arrow".equals(s)) {
+-               Typed<?> typed = p_16161_.getOrCreateTyped(opticfinder1);
++               Typed<?> typed = p_206363_2_.getOrCreateTyped(opticfinder1);
+                Dynamic<?> dynamic = typed.get(DSL.remainderFinder());
+                if (!dynamic.get("Potion").asString().result().isPresent()) {
+                   dynamic = dynamic.set("Potion", dynamic.createString("minecraft:water"));
+                }
+ 
+-               return p_16161_.set(opticfinder1, typed.set(DSL.remainderFinder(), dynamic));
++               return p_206363_2_.set(opticfinder1, typed.set(DSL.remainderFinder(), dynamic));
+             }
+          }
+ 
+-         return p_16161_;
++         return p_206363_2_;
+       });
+    }
+ }

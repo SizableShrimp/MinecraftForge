@@ -1,0 +1,13 @@
+--- a/net/minecraft/world/item/enchantment/ThornsEnchantment.java
++++ b/net/minecraft/world/item/enchantment/ThornsEnchantment.java
+@@ -39,8 +_,8 @@
+          }
+ 
+          if (entry != null) {
+-            entry.getValue().m_41622_(2, p_45215_, (p_45208_) -> {
+-               p_45208_.m_21166_(entry.getKey());
++            entry.getValue().m_41622_(2, p_45215_, (p_222183_1_) -> {
++               p_222183_1_.m_21166_(entry.getKey());
+             });
+          }
+       }

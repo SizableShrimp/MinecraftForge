@@ -1,0 +1,20 @@
+--- a/net/minecraft/world/entity/ai/sensing/SensorType.java
++++ b/net/minecraft/world/entity/ai/sensing/SensorType.java
+@@ -4,7 +_,7 @@
+ import net.minecraft.core.Registry;
+ import net.minecraft.resources.ResourceLocation;
+ 
+-public class SensorType<U extends Sensor<?>> {
++public class SensorType<U extends Sensor<?>> extends net.minecraftforge.registries.ForgeRegistryEntry<SensorType<?>> {
+    public static final SensorType<DummySensor> f_26809_ = m_26828_("dummy", DummySensor::new);
+    public static final SensorType<NearestItemSensor> f_26810_ = m_26828_("nearest_items", NearestItemSensor::new);
+    public static final SensorType<NearestLivingEntitySensor> f_26811_ = m_26828_("nearest_living_entities", NearestLivingEntitySensor::new);
+@@ -21,7 +_,7 @@
+    public static final SensorType<AdultSensor> f_26822_ = m_26828_("nearest_adult", AdultSensor::new);
+    private final Supplier<U> f_26823_;
+ 
+-   private SensorType(Supplier<U> p_26826_) {
++   public SensorType(Supplier<U> p_26826_) {
+       this.f_26823_ = p_26826_;
+    }
+ 

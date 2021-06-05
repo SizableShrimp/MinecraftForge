@@ -1,0 +1,36 @@
+--- a/net/minecraft/server/commands/DifficultyCommand.java
++++ b/net/minecraft/server/commands/DifficultyCommand.java
+@@ -11,24 +_,24 @@
+ import net.minecraft.world.Difficulty;
+ 
+ public class DifficultyCommand {
+-   private static final DynamicCommandExceptionType f_136933_ = new DynamicCommandExceptionType((p_136948_) -> {
+-      return new TranslatableComponent("commands.difficulty.failure", p_136948_);
++   private static final DynamicCommandExceptionType f_136933_ = new DynamicCommandExceptionType((p_208823_0_) -> {
++      return new TranslatableComponent("commands.difficulty.failure", p_208823_0_);
+    });
+ 
+    public static void m_136938_(CommandDispatcher<CommandSourceStack> p_136939_) {
+       LiteralArgumentBuilder<CommandSourceStack> literalargumentbuilder = Commands.m_82127_("difficulty");
+ 
+       for(Difficulty difficulty : Difficulty.values()) {
+-         literalargumentbuilder.then(Commands.m_82127_(difficulty.m_19036_()).executes((p_136937_) -> {
+-            return m_136944_(p_136937_.getSource(), difficulty);
++         literalargumentbuilder.then(Commands.m_82127_(difficulty.m_19036_()).executes((p_198347_1_) -> {
++            return m_136944_(p_198347_1_.getSource(), difficulty);
+          }));
+       }
+ 
+-      p_136939_.register(literalargumentbuilder.requires((p_136943_) -> {
+-         return p_136943_.m_6761_(2);
+-      }).executes((p_136941_) -> {
+-         Difficulty difficulty1 = p_136941_.getSource().m_81372_().m_46791_();
+-         p_136941_.getSource().m_81354_(new TranslatableComponent("commands.difficulty.query", difficulty1.m_19033_()), false);
++      p_136939_.register(literalargumentbuilder.requires((p_198348_0_) -> {
++         return p_198348_0_.m_6761_(2);
++      }).executes((p_198346_0_) -> {
++         Difficulty difficulty1 = p_198346_0_.getSource().m_81372_().m_46791_();
++         p_198346_0_.getSource().m_81354_(new TranslatableComponent("commands.difficulty.query", difficulty1.m_19033_()), false);
+          return difficulty1.m_19028_();
+       }));
+    }

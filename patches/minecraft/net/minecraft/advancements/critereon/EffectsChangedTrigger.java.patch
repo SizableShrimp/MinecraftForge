@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/EffectsChangedTrigger.java
++++ b/net/minecraft/advancements/critereon/EffectsChangedTrigger.java
+@@ -17,8 +_,8 @@
+    }
+ 
+    public void m_26760_(ServerPlayer p_26761_) {
+-      this.m_66234_(p_26761_, (p_26764_) -> {
+-         return p_26764_.m_26778_(p_26761_);
++      this.m_66234_(p_26761_, (p_226524_1_) -> {
++         return p_226524_1_.m_26778_(p_26761_);
+       });
+    }
+ 

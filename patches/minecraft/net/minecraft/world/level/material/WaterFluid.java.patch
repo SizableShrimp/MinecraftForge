@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/material/WaterFluid.java
++++ b/net/minecraft/world/level/material/WaterFluid.java
+@@ -60,7 +_,7 @@
+    }
+ 
+    protected void m_7456_(LevelAccessor p_76450_, BlockPos p_76451_, BlockState p_76452_) {
+-      BlockEntity blockentity = p_76452_.m_60734_().m_60588_() ? p_76450_.m_7702_(p_76451_) : null;
++      BlockEntity blockentity = p_76452_.hasTileEntity() ? p_76450_.m_7702_(p_76451_) : null;
+       Block.m_49892_(p_76452_, p_76450_, p_76451_, blockentity);
+    }
+ 

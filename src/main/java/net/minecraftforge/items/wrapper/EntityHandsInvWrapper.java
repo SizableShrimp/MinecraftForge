@@ -21,7 +21,6 @@ package net.minecraftforge.items.wrapper;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraftforge.items.IItemHandler;
 
 /**
  * Exposes the hands inventory of an {@link EntityLivingBase} as an {@link IItemHandler} using {@link EntityLivingBase#getItemStackFromSlot} and

@@ -1,0 +1,9 @@
+--- a/net/minecraft/world/level/timers/TimerCallbacks.java
++++ b/net/minecraft/world/level/timers/TimerCallbacks.java
+@@ -1,6 +_,5 @@
+ package net.minecraft.world.level.timers;
+ 
+-import com.google.common.annotations.VisibleForTesting;
+ import com.google.common.collect.Maps;
+ import java.util.Map;
+ import javax.annotation.Nullable;

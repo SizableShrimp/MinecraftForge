@@ -1,0 +1,12 @@
+--- a/net/minecraft/client/renderer/block/model/BlockElementFace.java
++++ b/net/minecraft/client/renderer/block/model/BlockElementFace.java
+@@ -28,9 +_,6 @@
+ 
+    @OnlyIn(Dist.CLIENT)
+    public static class Deserializer implements JsonDeserializer<BlockElementFace> {
+-      protected Deserializer() {
+-      }
+-
+       public BlockElementFace deserialize(JsonElement p_111365_, Type p_111366_, JsonDeserializationContext p_111367_) throws JsonParseException {
+          JsonObject jsonobject = p_111365_.getAsJsonObject();
+          Direction direction = this.m_111372_(jsonobject);

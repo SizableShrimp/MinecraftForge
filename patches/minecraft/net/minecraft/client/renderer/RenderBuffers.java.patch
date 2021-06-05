@@ -1,0 +1,51 @@
+--- a/net/minecraft/client/renderer/RenderBuffers.java
++++ b/net/minecraft/client/renderer/RenderBuffers.java
+@@ -11,27 +_,27 @@
+ @OnlyIn(Dist.CLIENT)
+ public class RenderBuffers {
+    private final ChunkBufferBuilderPack f_110092_ = new ChunkBufferBuilderPack();
+-   private final SortedMap<RenderType, BufferBuilder> f_110093_ = Util.m_137469_(new Object2ObjectLinkedOpenHashMap<>(), (p_110100_) -> {
+-      p_110100_.put(Sheets.m_110789_(), this.f_110092_.m_108839_(RenderType.m_110451_()));
+-      p_110100_.put(Sheets.m_110790_(), this.f_110092_.m_108839_(RenderType.m_110463_()));
+-      p_110100_.put(Sheets.m_110762_(), this.f_110092_.m_108839_(RenderType.m_110457_()));
+-      p_110100_.put(Sheets.m_110792_(), this.f_110092_.m_108839_(RenderType.m_110466_()));
+-      m_110101_(p_110100_, Sheets.m_110782_());
+-      m_110101_(p_110100_, Sheets.m_110785_());
+-      m_110101_(p_110100_, Sheets.m_110786_());
+-      m_110101_(p_110100_, Sheets.m_110787_());
+-      m_110101_(p_110100_, Sheets.m_110788_());
+-      m_110101_(p_110100_, RenderType.m_110472_());
+-      m_110101_(p_110100_, RenderType.m_110481_());
+-      m_110101_(p_110100_, RenderType.m_110484_());
+-      m_110101_(p_110100_, RenderType.m_110490_());
+-      m_110101_(p_110100_, RenderType.m_110493_());
+-      m_110101_(p_110100_, RenderType.m_110487_());
+-      m_110101_(p_110100_, RenderType.m_110496_());
+-      m_110101_(p_110100_, RenderType.m_110499_());
+-      m_110101_(p_110100_, RenderType.m_110478_());
+-      ModelBakery.f_119229_.forEach((p_110107_) -> {
+-         m_110101_(p_110100_, p_110107_);
++   private final SortedMap<RenderType, BufferBuilder> f_110093_ = Util.m_137469_(new Object2ObjectLinkedOpenHashMap<>(), (p_228485_1_) -> {
++      p_228485_1_.put(Sheets.m_110789_(), this.f_110092_.m_108839_(RenderType.m_110451_()));
++      p_228485_1_.put(Sheets.m_110790_(), this.f_110092_.m_108839_(RenderType.m_110463_()));
++      p_228485_1_.put(Sheets.m_110762_(), this.f_110092_.m_108839_(RenderType.m_110457_()));
++      p_228485_1_.put(Sheets.m_110792_(), this.f_110092_.m_108839_(RenderType.m_110466_()));
++      m_110101_(p_228485_1_, Sheets.m_110782_());
++      m_110101_(p_228485_1_, Sheets.m_110785_());
++      m_110101_(p_228485_1_, Sheets.m_110786_());
++      m_110101_(p_228485_1_, Sheets.m_110787_());
++      m_110101_(p_228485_1_, Sheets.m_110788_());
++      m_110101_(p_228485_1_, RenderType.m_110472_());
++      m_110101_(p_228485_1_, RenderType.m_110481_());
++      m_110101_(p_228485_1_, RenderType.m_110484_());
++      m_110101_(p_228485_1_, RenderType.m_110490_());
++      m_110101_(p_228485_1_, RenderType.m_110493_());
++      m_110101_(p_228485_1_, RenderType.m_110487_());
++      m_110101_(p_228485_1_, RenderType.m_110496_());
++      m_110101_(p_228485_1_, RenderType.m_110499_());
++      m_110101_(p_228485_1_, RenderType.m_110478_());
++      ModelBakery.f_119229_.forEach((p_228488_1_) -> {
++         m_110101_(p_228485_1_, p_228488_1_);
+       });
+    });
+    private final MultiBufferSource.BufferSource f_110094_ = MultiBufferSource.m_109900_(this.f_110093_, new BufferBuilder(256));

@@ -1,0 +1,13 @@
+--- a/net/minecraft/advancements/critereon/TargetBlockTrigger.java
++++ b/net/minecraft/advancements/critereon/TargetBlockTrigger.java
+@@ -22,8 +_,8 @@
+ 
+    public void m_70211_(ServerPlayer p_70212_, Entity p_70213_, Vec3 p_70214_, int p_70215_) {
+       LootContext lootcontext = EntityPredicate.m_36616_(p_70212_, p_70213_);
+-      this.m_66234_(p_70212_, (p_70224_) -> {
+-         return p_70224_.m_70241_(lootcontext, p_70214_, p_70215_);
++      this.m_66234_(p_70212_, (p_236349_3_) -> {
++         return p_236349_3_.m_70241_(lootcontext, p_70214_, p_70215_);
+       });
+    }
+ 

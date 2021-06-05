@@ -1,0 +1,11 @@
+--- a/net/minecraft/client/gui/screens/InBedChatScreen.java
++++ b/net/minecraft/client/gui/screens/InBedChatScreen.java
+@@ -15,7 +_,7 @@
+ 
+    protected void m_7856_() {
+       super.m_7856_();
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 40, 200, 20, new TranslatableComponent("multiplayer.stopSleeping"), (p_96074_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ - 40, 200, 20, new TranslatableComponent("multiplayer.stopSleeping"), (p_212998_1_) -> {
+          this.m_96077_();
+       }));
+    }

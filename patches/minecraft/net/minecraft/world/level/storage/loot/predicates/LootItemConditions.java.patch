@@ -1,0 +1,44 @@
+--- a/net/minecraft/world/level/storage/loot/predicates/LootItemConditions.java
++++ b/net/minecraft/world/level/storage/loot/predicates/LootItemConditions.java
+@@ -35,7 +_,7 @@
+    public static <T> Predicate<T> m_81834_(Predicate<T>[] p_81835_) {
+       switch(p_81835_.length) {
+       case 0:
+-         return (p_81840_) -> {
++         return (p_216304_0_) -> {
+             return true;
+          };
+       case 1:
+@@ -43,9 +_,9 @@
+       case 2:
+          return p_81835_[0].and(p_81835_[1]);
+       default:
+-         return (p_81845_) -> {
++         return (p_216307_1_) -> {
+             for(Predicate<T> predicate : p_81835_) {
+-               if (!predicate.test(p_81845_)) {
++               if (!predicate.test(p_216307_1_)) {
+                   return false;
+                }
+             }
+@@ -58,7 +_,7 @@
+    public static <T> Predicate<T> m_81841_(Predicate<T>[] p_81842_) {
+       switch(p_81842_.length) {
+       case 0:
+-         return (p_81830_) -> {
++         return (p_216308_0_) -> {
+             return false;
+          };
+       case 1:
+@@ -66,9 +_,9 @@
+       case 2:
+          return p_81842_[0].or(p_81842_[1]);
+       default:
+-         return (p_81838_) -> {
++         return (p_216309_1_) -> {
+             for(Predicate<T> predicate : p_81842_) {
+-               if (predicate.test(p_81838_)) {
++               if (predicate.test(p_216309_1_)) {
+                   return true;
+                }
+             }

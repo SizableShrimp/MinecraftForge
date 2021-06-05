@@ -1,0 +1,46 @@
+--- a/net/minecraft/world/entity/animal/IronGolem.java
++++ b/net/minecraft/world/entity/animal/IronGolem.java
+@@ -79,8 +_,8 @@
+       this.f_21346_.m_25352_(1, new DefendVillageTargetGoal(this));
+       this.f_21346_.m_25352_(2, new HurtByTargetGoal(this));
+       this.f_21346_.m_25352_(3, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::m_21674_));
+-      this.f_21346_.m_25352_(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (p_28879_) -> {
+-         return p_28879_ instanceof Enemy && !(p_28879_ instanceof Creeper);
++      this.f_21346_.m_25352_(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (p_234199_0_) -> {
++         return p_234199_0_ instanceof Enemy && !(p_234199_0_ instanceof Creeper);
+       }));
+       this.f_21346_.m_25352_(4, new ResetUniversalAngerTargetGoal<>(this, false));
+    }
+@@ -120,9 +_,10 @@
+          int i = Mth.m_14107_(this.m_20185_());
+          int j = Mth.m_14107_(this.m_20186_() - (double)0.2F);
+          int k = Mth.m_14107_(this.m_20189_());
+-         BlockState blockstate = this.f_19853_.m_8055_(new BlockPos(i, j, k));
+-         if (!blockstate.m_60795_()) {
+-            this.f_19853_.m_7106_(new BlockParticleOption(ParticleTypes.f_123794_, blockstate), this.m_20185_() + ((double)this.f_19796_.nextFloat() - 0.5D) * (double)this.m_20205_(), this.m_20186_() + 0.1D, this.m_20189_() + ((double)this.f_19796_.nextFloat() - 0.5D) * (double)this.m_20205_(), 4.0D * ((double)this.f_19796_.nextFloat() - 0.5D), 0.5D, ((double)this.f_19796_.nextFloat() - 0.5D) * 4.0D);
++         BlockPos pos = new BlockPos(i, j, k);
++         BlockState blockstate = this.f_19853_.m_8055_(pos);
++         if (!blockstate.isAir(this.f_19853_, pos)) {
++            this.f_19853_.m_7106_(new BlockParticleOption(ParticleTypes.f_123794_, blockstate).setPos(pos), this.m_20185_() + ((double)this.f_19796_.nextFloat() - 0.5D) * (double)this.m_20205_(), this.m_20186_() + 0.1D, this.m_20189_() + ((double)this.f_19796_.nextFloat() - 0.5D) * (double)this.m_20205_(), 4.0D * ((double)this.f_19796_.nextFloat() - 0.5D), 0.5D, ((double)this.f_19796_.nextFloat() - 0.5D) * 4.0D);
+          }
+       }
+ 
+@@ -149,6 +_,7 @@
+    public void m_7378_(CompoundTag p_28857_) {
+       super.m_7378_(p_28857_);
+       this.m_28887_(p_28857_.m_128471_("PlayerCreated"));
++      if(!f_19853_.f_46443_) //FORGE: allow this entity to be read from nbt on client. (Fixes MC-189565)
+       this.m_21663_((ServerLevel)this.f_19853_, p_28857_);
+    }
+ 
+@@ -323,8 +_,8 @@
+       MEDIUM(0.5F),
+       HIGH(0.25F);
+ 
+-      private static final List<IronGolem.Crackiness> f_28893_ = Stream.of(values()).sorted(Comparator.comparingDouble((p_28904_) -> {
+-         return (double)p_28904_.f_28894_;
++      private static final List<IronGolem.Crackiness> f_28893_ = Stream.of(values()).sorted(Comparator.comparingDouble((p_226516_0_) -> {
++         return (double)p_226516_0_.f_28894_;
+       })).collect(ImmutableList.toImmutableList());
+       private final float f_28894_;
+ 

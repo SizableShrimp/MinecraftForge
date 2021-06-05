@@ -1,0 +1,11 @@
+--- a/net/minecraft/network/protocol/game/ServerboundContainerClickPacket.java
++++ b/net/minecraft/network/protocol/game/ServerboundContainerClickPacket.java
+@@ -48,7 +_,7 @@
+       p_133961_.writeByte(this.f_133941_);
+       p_133961_.writeShort(this.f_133942_);
+       p_133961_.m_130068_(this.f_133944_);
+-      p_133961_.m_130055_(this.f_133943_);
++      p_133961_.writeItemStack(this.f_133943_, false); //Forge: Include full tag for C->S
+    }
+ 
+    public int m_133959_() {

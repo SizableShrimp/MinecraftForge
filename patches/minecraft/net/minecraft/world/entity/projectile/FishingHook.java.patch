@@ -1,0 +1,76 @@
+--- a/net/minecraft/world/entity/projectile/FishingHook.java
++++ b/net/minecraft/world/entity/projectile/FishingHook.java
+@@ -300,7 +_,7 @@
+             double d1 = (double)((float)Mth.m_14107_(this.m_20186_()) + 1.0F);
+             double d2 = this.m_20189_() + (double)(f2 * (float)this.f_37091_ * 0.1F);
+             BlockState blockstate = serverlevel.m_8055_(new BlockPos(d0, d1 - 1.0D, d2));
+-            if (blockstate.m_60713_(Blocks.f_49990_)) {
++            if (serverlevel.m_8055_(new BlockPos((int)d0, (int)d1 - 1, (int)d2)).m_60767_() == net.minecraft.world.level.material.Material.f_76305_) {
+                if (this.f_19796_.nextFloat() < 0.15F) {
+                   serverlevel.m_8767_(ParticleTypes.f_123795_, d0, d1 - (double)0.1F, d2, 1, (double)f1, 0.1D, (double)f2, 0.0D);
+                }
+@@ -336,7 +_,7 @@
+             double d5 = (double)((float)Mth.m_14107_(this.m_20186_()) + 1.0F);
+             double d6 = this.m_20189_() + (double)(Mth.m_14089_(f6) * f7 * 0.1F);
+             BlockState blockstate1 = serverlevel.m_8055_(new BlockPos(d4, d5 - 1.0D, d6));
+-            if (blockstate1.m_60713_(Blocks.f_49990_)) {
++            if (serverlevel.m_8055_(new BlockPos(d4, d5 - 1.0D, d6)).m_60767_() == net.minecraft.world.level.material.Material.f_76305_) {
+                serverlevel.m_8767_(ParticleTypes.f_123769_, d4, d5, d6, 2 + this.f_19796_.nextInt(2), (double)0.1F, 0.0D, (double)0.1F, 0.0D);
+             }
+          }
+@@ -378,8 +_,8 @@
+    }
+ 
+    private FishingHook.OpenWaterType m_37147_(BlockPos p_37148_, BlockPos p_37149_) {
+-      return BlockPos.m_121990_(p_37148_, p_37149_).map(this::m_37163_).reduce((p_37139_, p_37140_) -> {
+-         return p_37139_ == p_37140_ ? p_37139_ : FishingHook.OpenWaterType.INVALID;
++      return BlockPos.m_121990_(p_37148_, p_37149_).map(this::m_37163_).reduce((p_234601_0_, p_234601_1_) -> {
++         return p_234601_0_ == p_234601_1_ ? p_234601_0_ : FishingHook.OpenWaterType.INVALID;
+       }).orElse(FishingHook.OpenWaterType.INVALID);
+    }
+ 
+@@ -407,6 +_,7 @@
+       Player player = this.m_37168_();
+       if (!this.f_19853_.f_46443_ && player != null) {
+          int i = 0;
++         net.minecraftforge.event.entity.player.ItemFishedEvent event = null;
+          if (this.f_37094_ != null) {
+             this.m_37167_();
+             CriteriaTriggers.f_10553_.m_40416_((ServerPlayer)player, p_37157_, this, Collections.emptyList());
+@@ -414,8 +_,15 @@
+             i = this.f_37094_ instanceof ItemEntity ? 3 : 5;
+          } else if (this.f_37089_ > 0) {
+             LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel)this.f_19853_)).m_78972_(LootContextParams.f_81460_, this.m_20182_()).m_78972_(LootContextParams.f_81463_, p_37157_).m_78972_(LootContextParams.f_81455_, this).m_78977_(this.f_19796_).m_78963_((float)this.f_37096_ + player.m_36336_());
++            lootcontext$builder.m_78972_(LootContextParams.f_81458_, this.m_37282_()).m_78972_(LootContextParams.f_81455_, this);
+             LootTable loottable = this.f_19853_.m_7654_().m_129898_().m_79217_(BuiltInLootTables.f_78720_);
+             List<ItemStack> list = loottable.m_79129_(lootcontext$builder.m_78975_(LootContextParamSets.f_81414_));
++            event = new net.minecraftforge.event.entity.player.ItemFishedEvent(list, this.f_19861_ ? 2 : 1, this);
++            net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
++            if (event.isCanceled()) {
++               this.m_6091_();
++               return event.getRodDamage();
++            }
+             CriteriaTriggers.f_10553_.m_40416_((ServerPlayer)player, p_37157_, this, list);
+ 
+             for(ItemStack itemstack : list) {
+@@ -440,7 +_,7 @@
+          }
+ 
+          this.m_6091_();
+-         return i;
++         return event == null ? i : event.getRodDamage();
+       } else {
+          return 0;
+       }
+@@ -467,8 +_,9 @@
+       return false;
+    }
+ 
+-   public void m_6091_() {
+-      super.m_6091_();
++   @Override
++   public void remove(boolean keepData) {
++      super.remove(keepData);
+       Player player = this.m_37168_();
+       if (player != null) {
+          player.f_36083_ = null;

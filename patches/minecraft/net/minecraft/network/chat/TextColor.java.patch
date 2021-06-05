@@ -1,0 +1,18 @@
+--- a/net/minecraft/network/chat/TextColor.java
++++ b/net/minecraft/network/chat/TextColor.java
+@@ -11,11 +_,11 @@
+ import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public final class TextColor {
+-   private static final Map<ChatFormatting, TextColor> f_131255_ = Stream.of(ChatFormatting.values()).filter(ChatFormatting::m_126664_).collect(ImmutableMap.toImmutableMap(Function.identity(), (p_131276_) -> {
+-      return new TextColor(p_131276_.m_126665_(), p_131276_.m_126666_());
++   private static final Map<ChatFormatting, TextColor> f_131255_ = Stream.of(ChatFormatting.values()).filter(ChatFormatting::m_126664_).collect(ImmutableMap.toImmutableMap(Function.identity(), (p_240748_0_) -> {
++      return new TextColor(p_240748_0_.m_126665_(), p_240748_0_.m_126666_());
+    }));
+-   private static final Map<String, TextColor> f_131256_ = f_131255_.values().stream().collect(ImmutableMap.toImmutableMap((p_131273_) -> {
+-      return p_131273_.f_131258_;
++   private static final Map<String, TextColor> f_131256_ = f_131255_.values().stream().collect(ImmutableMap.toImmutableMap((p_240746_0_) -> {
++      return p_240746_0_.f_131258_;
+    }, Function.identity()));
+    private final int f_131257_;
+    @Nullable

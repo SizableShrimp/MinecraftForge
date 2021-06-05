@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/FaceAttachedHorizontalDirectionalBlock.java
++++ b/net/minecraft/world/level/block/FaceAttachedHorizontalDirectionalBlock.java
+@@ -15,7 +_,7 @@
+ public class FaceAttachedHorizontalDirectionalBlock extends HorizontalDirectionalBlock {
+    public static final EnumProperty<AttachFace> f_53179_ = BlockStateProperties.f_61376_;
+ 
+-   protected FaceAttachedHorizontalDirectionalBlock(BlockBehaviour.Properties p_53182_) {
++   public FaceAttachedHorizontalDirectionalBlock(BlockBehaviour.Properties p_53182_) {
+       super(p_53182_);
+    }
+ 

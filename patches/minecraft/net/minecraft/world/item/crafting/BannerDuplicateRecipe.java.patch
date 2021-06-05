@@ -1,0 +1,30 @@
+--- a/net/minecraft/world/item/crafting/BannerDuplicateRecipe.java
++++ b/net/minecraft/world/item/crafting/BannerDuplicateRecipe.java
+@@ -9,8 +_,6 @@
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.level.Level;
+ import net.minecraft.world.level.block.entity.BannerBlockEntity;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public class BannerDuplicateRecipe extends CustomRecipe {
+    public BannerDuplicateRecipe(ResourceLocation p_43773_) {
+@@ -79,8 +_,8 @@
+       for(int i = 0; i < nonnulllist.size(); ++i) {
+          ItemStack itemstack = p_43791_.m_8020_(i);
+          if (!itemstack.m_41619_()) {
+-            if (itemstack.m_41720_().m_41470_()) {
+-               nonnulllist.set(i, new ItemStack(itemstack.m_41720_().m_41469_()));
++            if (itemstack.hasContainerItem()) {
++               nonnulllist.set(i, itemstack.getContainerItem());
+             } else if (itemstack.m_41782_() && BannerBlockEntity.m_58504_(itemstack) > 0) {
+                ItemStack itemstack1 = itemstack.m_41777_();
+                itemstack1.m_41764_(1);
+@@ -96,7 +_,6 @@
+       return RecipeSerializer.f_44086_;
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public boolean m_8004_(int p_43775_, int p_43776_) {
+       return p_43775_ * p_43776_ >= 2;
+    }

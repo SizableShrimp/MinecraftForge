@@ -1,0 +1,151 @@
+--- a/net/minecraft/world/entity/animal/Dolphin.java
++++ b/net/minecraft/world/entity/animal/Dolphin.java
+@@ -75,8 +_,8 @@
+    private static final EntityDataAccessor<Boolean> f_28313_ = SynchedEntityData.m_135353_(Dolphin.class, EntityDataSerializers.f_135035_);
+    private static final EntityDataAccessor<Integer> f_28310_ = SynchedEntityData.m_135353_(Dolphin.class, EntityDataSerializers.f_135028_);
+    private static final TargetingConditions f_28311_ = (new TargetingConditions()).m_26883_(10.0D).m_26890_().m_26882_().m_26891_();
+-   public static final Predicate<ItemEntity> f_28309_ = (p_28369_) -> {
+-      return !p_28369_.m_32063_() && p_28369_.m_6084_() && p_28369_.m_20069_();
++   public static final Predicate<ItemEntity> f_28309_ = (p_205023_0_) -> {
++      return !p_205023_0_.m_32063_() && p_205023_0_.m_6084_() && p_205023_0_.m_20069_();
+    };
+ 
+    public Dolphin(EntityType<? extends Dolphin> p_28316_, Level p_28317_) {
+@@ -409,6 +_,68 @@
+       }
+    }
+ 
++   class PlayWithItemsGoal extends Goal {
++      private int f_28421_;
++
++      private PlayWithItemsGoal() {
++      }
++
++      public boolean m_8036_() {
++         if (this.f_28421_ > Dolphin.this.f_19797_) {
++            return false;
++         } else {
++            List<ItemEntity> list = Dolphin.this.f_19853_.m_6443_(ItemEntity.class, Dolphin.this.m_20191_().m_82377_(8.0D, 8.0D, 8.0D), Dolphin.f_28309_);
++            return !list.isEmpty() || !Dolphin.this.m_6844_(EquipmentSlot.MAINHAND).m_41619_();
++         }
++      }
++
++      public void m_8056_() {
++         List<ItemEntity> list = Dolphin.this.f_19853_.m_6443_(ItemEntity.class, Dolphin.this.m_20191_().m_82377_(8.0D, 8.0D, 8.0D), Dolphin.f_28309_);
++         if (!list.isEmpty()) {
++            Dolphin.this.m_21573_().m_5624_(list.get(0), (double)1.2F);
++            Dolphin.this.m_5496_(SoundEvents.f_11806_, 1.0F, 1.0F);
++         }
++
++         this.f_28421_ = 0;
++      }
++
++      public void m_8041_() {
++         ItemStack itemstack = Dolphin.this.m_6844_(EquipmentSlot.MAINHAND);
++         if (!itemstack.m_41619_()) {
++            this.m_28428_(itemstack);
++            Dolphin.this.m_8061_(EquipmentSlot.MAINHAND, ItemStack.f_41583_);
++            this.f_28421_ = Dolphin.this.f_19797_ + Dolphin.this.f_19796_.nextInt(100);
++         }
++
++      }
++
++      public void m_8037_() {
++         List<ItemEntity> list = Dolphin.this.f_19853_.m_6443_(ItemEntity.class, Dolphin.this.m_20191_().m_82377_(8.0D, 8.0D, 8.0D), Dolphin.f_28309_);
++         ItemStack itemstack = Dolphin.this.m_6844_(EquipmentSlot.MAINHAND);
++         if (!itemstack.m_41619_()) {
++            this.m_28428_(itemstack);
++            Dolphin.this.m_8061_(EquipmentSlot.MAINHAND, ItemStack.f_41583_);
++         } else if (!list.isEmpty()) {
++            Dolphin.this.m_21573_().m_5624_(list.get(0), (double)1.2F);
++         }
++
++      }
++
++      private void m_28428_(ItemStack p_28429_) {
++         if (!p_28429_.m_41619_()) {
++            double d0 = Dolphin.this.m_20188_() - (double)0.3F;
++            ItemEntity itementity = new ItemEntity(Dolphin.this.f_19853_, Dolphin.this.m_20185_(), d0, Dolphin.this.m_20189_(), p_28429_);
++            itementity.m_32010_(40);
++            itementity.m_32052_(Dolphin.this.m_20148_());
++            float f = 0.3F;
++            float f1 = Dolphin.this.f_19796_.nextFloat() * ((float)Math.PI * 2F);
++            float f2 = 0.02F * Dolphin.this.f_19796_.nextFloat();
++            itementity.m_20334_((double)(0.3F * -Mth.m_14031_(Dolphin.this.f_19857_ * ((float)Math.PI / 180F)) * Mth.m_14089_(Dolphin.this.f_19858_ * ((float)Math.PI / 180F)) + Mth.m_14089_(f1) * f2), (double)(0.3F * Mth.m_14031_(Dolphin.this.f_19858_ * ((float)Math.PI / 180F)) * 1.5F), (double)(0.3F * Mth.m_14089_(Dolphin.this.f_19857_ * ((float)Math.PI / 180F)) * Mth.m_14089_(Dolphin.this.f_19858_ * ((float)Math.PI / 180F)) + Mth.m_14031_(f1) * f2));
++            Dolphin.this.f_19853_.m_7967_(itementity);
++         }
++      }
++   }
++
+    static class DolphinSwimToTreasureGoal extends Goal {
+       private final Dolphin f_28399_;
+       private boolean f_28400_;
+@@ -540,68 +_,6 @@
+             this.f_28411_.m_7292_(new MobEffectInstance(MobEffects.f_19593_, 100));
+          }
+ 
+-      }
+-   }
+-
+-   class PlayWithItemsGoal extends Goal {
+-      private int f_28421_;
+-
+-      private PlayWithItemsGoal() {
+-      }
+-
+-      public boolean m_8036_() {
+-         if (this.f_28421_ > Dolphin.this.f_19797_) {
+-            return false;
+-         } else {
+-            List<ItemEntity> list = Dolphin.this.f_19853_.m_6443_(ItemEntity.class, Dolphin.this.m_20191_().m_82377_(8.0D, 8.0D, 8.0D), Dolphin.f_28309_);
+-            return !list.isEmpty() || !Dolphin.this.m_6844_(EquipmentSlot.MAINHAND).m_41619_();
+-         }
+-      }
+-
+-      public void m_8056_() {
+-         List<ItemEntity> list = Dolphin.this.f_19853_.m_6443_(ItemEntity.class, Dolphin.this.m_20191_().m_82377_(8.0D, 8.0D, 8.0D), Dolphin.f_28309_);
+-         if (!list.isEmpty()) {
+-            Dolphin.this.m_21573_().m_5624_(list.get(0), (double)1.2F);
+-            Dolphin.this.m_5496_(SoundEvents.f_11806_, 1.0F, 1.0F);
+-         }
+-
+-         this.f_28421_ = 0;
+-      }
+-
+-      public void m_8041_() {
+-         ItemStack itemstack = Dolphin.this.m_6844_(EquipmentSlot.MAINHAND);
+-         if (!itemstack.m_41619_()) {
+-            this.m_28428_(itemstack);
+-            Dolphin.this.m_8061_(EquipmentSlot.MAINHAND, ItemStack.f_41583_);
+-            this.f_28421_ = Dolphin.this.f_19797_ + Dolphin.this.f_19796_.nextInt(100);
+-         }
+-
+-      }
+-
+-      public void m_8037_() {
+-         List<ItemEntity> list = Dolphin.this.f_19853_.m_6443_(ItemEntity.class, Dolphin.this.m_20191_().m_82377_(8.0D, 8.0D, 8.0D), Dolphin.f_28309_);
+-         ItemStack itemstack = Dolphin.this.m_6844_(EquipmentSlot.MAINHAND);
+-         if (!itemstack.m_41619_()) {
+-            this.m_28428_(itemstack);
+-            Dolphin.this.m_8061_(EquipmentSlot.MAINHAND, ItemStack.f_41583_);
+-         } else if (!list.isEmpty()) {
+-            Dolphin.this.m_21573_().m_5624_(list.get(0), (double)1.2F);
+-         }
+-
+-      }
+-
+-      private void m_28428_(ItemStack p_28429_) {
+-         if (!p_28429_.m_41619_()) {
+-            double d0 = Dolphin.this.m_20188_() - (double)0.3F;
+-            ItemEntity itementity = new ItemEntity(Dolphin.this.f_19853_, Dolphin.this.m_20185_(), d0, Dolphin.this.m_20189_(), p_28429_);
+-            itementity.m_32010_(40);
+-            itementity.m_32052_(Dolphin.this.m_20148_());
+-            float f = 0.3F;
+-            float f1 = Dolphin.this.f_19796_.nextFloat() * ((float)Math.PI * 2F);
+-            float f2 = 0.02F * Dolphin.this.f_19796_.nextFloat();
+-            itementity.m_20334_((double)(0.3F * -Mth.m_14031_(Dolphin.this.f_19857_ * ((float)Math.PI / 180F)) * Mth.m_14089_(Dolphin.this.f_19858_ * ((float)Math.PI / 180F)) + Mth.m_14089_(f1) * f2), (double)(0.3F * Mth.m_14031_(Dolphin.this.f_19858_ * ((float)Math.PI / 180F)) * 1.5F), (double)(0.3F * Mth.m_14089_(Dolphin.this.f_19857_ * ((float)Math.PI / 180F)) * Mth.m_14089_(Dolphin.this.f_19858_ * ((float)Math.PI / 180F)) + Mth.m_14031_(f1) * f2));
+-            Dolphin.this.f_19853_.m_7967_(itementity);
+-         }
+       }
+    }
+ }

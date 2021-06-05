@@ -1,0 +1,45 @@
+--- a/net/minecraft/world/item/AxeItem.java
++++ b/net/minecraft/world/item/AxeItem.java
+@@ -22,8 +_,8 @@
+    private static final Set<Block> f_40518_ = Sets.newHashSet(Blocks.f_50155_, Blocks.f_50616_, Blocks.f_50251_, Blocks.f_50252_, Blocks.f_50253_, Blocks.f_50254_, Blocks.f_50309_, Blocks.f_50308_, Blocks.f_50669_, Blocks.f_50670_);
+    protected static final Map<Block, Block> f_40516_ = (new Builder<Block, Block>()).put(Blocks.f_50011_, Blocks.f_50044_).put(Blocks.f_49999_, Blocks.f_50010_).put(Blocks.f_50043_, Blocks.f_50049_).put(Blocks.f_50004_, Blocks.f_50009_).put(Blocks.f_50015_, Blocks.f_50048_).put(Blocks.f_50003_, Blocks.f_50008_).put(Blocks.f_50013_, Blocks.f_50046_).put(Blocks.f_50001_, Blocks.f_50006_).put(Blocks.f_50014_, Blocks.f_50047_).put(Blocks.f_50002_, Blocks.f_50007_).put(Blocks.f_50012_, Blocks.f_50045_).put(Blocks.f_50000_, Blocks.f_50005_).put(Blocks.f_50686_, Blocks.f_50687_).put(Blocks.f_50688_, Blocks.f_50689_).put(Blocks.f_50695_, Blocks.f_50696_).put(Blocks.f_50697_, Blocks.f_50698_).build();
+ 
+-   protected AxeItem(Tier p_40521_, float p_40522_, float p_40523_, Item.Properties p_40524_) {
+-      super(p_40522_, p_40523_, p_40521_, f_40518_, p_40524_);
++   public AxeItem(Tier p_40521_, float p_40522_, float p_40523_, Item.Properties p_40524_) {
++      super(p_40522_, p_40523_, p_40521_, f_40518_, p_40524_.addToolType(net.minecraftforge.common.ToolType.AXE, p_40521_.m_6604_()));
+    }
+ 
+    public float m_8102_(ItemStack p_40526_, BlockState p_40527_) {
+@@ -35,15 +_,15 @@
+       Level level = p_40529_.m_43725_();
+       BlockPos blockpos = p_40529_.m_8083_();
+       BlockState blockstate = level.m_8055_(blockpos);
+-      Block block = f_40516_.get(blockstate.m_60734_());
++      BlockState block = blockstate.getToolModifiedState(level, blockpos, p_40529_.m_43723_(), p_40529_.m_43722_(), net.minecraftforge.common.ToolType.AXE);
+       if (block != null) {
+          Player player = p_40529_.m_43723_();
+          level.m_5594_(player, blockpos, SoundEvents.f_11688_, SoundSource.BLOCKS, 1.0F, 1.0F);
+          if (!level.f_46443_) {
+-            level.m_7731_(blockpos, block.m_49966_().m_61124_(RotatedPillarBlock.f_55923_, blockstate.m_61143_(RotatedPillarBlock.f_55923_)), 11);
++            level.m_7731_(blockpos, block, 11);
+             if (player != null) {
+-               p_40529_.m_43722_().m_41622_(1, player, (p_40532_) -> {
+-                  p_40532_.m_21190_(p_40529_.m_43724_());
++               p_40529_.m_43722_().m_41622_(1, player, (p_220040_1_) -> {
++                  p_220040_1_.m_21190_(p_40529_.m_43724_());
+                });
+             }
+          }
+@@ -52,5 +_,11 @@
+       } else {
+          return InteractionResult.PASS;
+       }
++   }
++
++   @javax.annotation.Nullable
++   public static BlockState getAxeStrippingState(BlockState originalState) {
++      Block block = f_40516_.get(originalState.m_60734_());
++      return block != null ? block.m_49966_().m_61124_(RotatedPillarBlock.f_55923_, originalState.m_61143_(RotatedPillarBlock.f_55923_)) : null;
+    }
+ }

@@ -1,0 +1,105 @@
+--- a/net/minecraft/util/datafix/fixes/WorldGenSettingsFix.java
++++ b/net/minecraft/util/datafix/fixes/WorldGenSettingsFix.java
+@@ -31,8 +_,8 @@
+    }
+ 
+    protected TypeRewriteRule makeRule() {
+-      return this.fixTypeEverywhereTyped("WorldGenSettings building", this.getInputSchema().getType(References.f_16795_), (p_17184_) -> {
+-         return p_17184_.update(DSL.remainderFinder(), WorldGenSettingsFix::m_17185_);
++      return this.fixTypeEverywhereTyped("WorldGenSettings building", this.getInputSchema().getType(References.f_16795_), (p_233425_0_) -> {
++         return p_233425_0_.update(DSL.remainderFinder(), WorldGenSettingsFix::m_17185_);
+       });
+    }
+ 
+@@ -52,8 +_,8 @@
+    private static <T> Dynamic<T> m_17185_(Dynamic<T> p_17186_) {
+       DynamicOps<T> dynamicops = p_17186_.getOps();
+       long i = p_17186_.get("RandomSeed").asLong(0L);
+-      Optional<String> optional = p_17186_.get("generatorName").asString().map((p_17227_) -> {
+-         return p_17227_.toLowerCase(Locale.ROOT);
++      Optional<String> optional = p_17186_.get("generatorName").asString().map((p_233433_0_) -> {
++         return p_233433_0_.toLowerCase(Locale.ROOT);
+       }).result();
+       Optional<String> optional1 = p_17186_.get("legacy_custom_options").asString().result().map(Optional::of).orElseGet(() -> {
+          return optional.equals(Optional.of("customized")) ? p_17186_.get("generatorOptions").asString().result() : Optional.empty();
+@@ -96,8 +_,8 @@
+             });
+             Dynamic<T> dynamic3;
+             if (dynamic2.get("type").asString().result().equals(Optional.of("minecraft:fixed"))) {
+-               String s1 = dynamic2.get("options").get("biomes").asStream().findFirst().flatMap((p_17259_) -> {
+-                  return p_17259_.asString().result();
++               String s1 = dynamic2.get("options").get("biomes").asStream().findFirst().flatMap((p_233440_0_) -> {
++                  return p_233440_0_.asString().result();
+                }).orElse("minecraft:ocean");
+                dynamic3 = dynamic2.remove("options").set("biome", p_17186_.createString(s1));
+             } else {
+@@ -122,8 +_,8 @@
+       builder.put(dynamicops.createString("generate_features"), dynamicops.createBoolean(flag4));
+       builder.put(dynamicops.createString("bonus_chest"), dynamicops.createBoolean(flag5));
+       builder.put(dynamicops.createString("dimensions"), m_17190_(p_17186_, i, dynamic, flag));
+-      optional1.ifPresent((p_17182_) -> {
+-         builder.put(dynamicops.createString("legacy_custom_options"), dynamicops.createString(p_17182_));
++      optional1.ifPresent((p_233424_2_) -> {
++         builder.put(dynamicops.createString("legacy_custom_options"), dynamicops.createString(p_233424_2_));
+       });
+       return new Dynamic<>(dynamicops, dynamicops.createMap(builder.build()));
+    }
+@@ -148,13 +_,13 @@
+          map.put("minecraft:village", f_17170_.get("minecraft:village"));
+       }
+ 
+-      p_17219_.get("structures").flatMap(Dynamic::getMapValues).result().ifPresent((p_17257_) -> {
+-         p_17257_.forEach((p_17249_, p_17250_) -> {
+-            p_17250_.getMapValues().result().ifPresent((p_17216_) -> {
+-               p_17216_.forEach((p_17207_, p_17208_) -> {
+-                  String s = p_17249_.asString("");
+-                  String s1 = p_17207_.asString("");
+-                  String s2 = p_17208_.asString("");
++      p_17219_.get("structures").flatMap(Dynamic::getMapValues).result().ifPresent((p_233439_5_) -> {
++         p_233439_5_.forEach((p_233438_5_, p_233438_6_) -> {
++            p_233438_6_.getMapValues().result().ifPresent((p_233429_6_) -> {
++               p_233429_6_.forEach((p_233428_6_, p_233428_7_) -> {
++                  String s = p_233438_5_.asString("");
++                  String s1 = p_233428_6_.asString("");
++                  String s2 = p_233428_7_.asString("");
+                   if ("stronghold".equals(s)) {
+                      mutableboolean.setTrue();
+                      switch(s1) {
+@@ -214,10 +_,10 @@
+          });
+       });
+       Builder<Dynamic<T>, Dynamic<T>> builder = ImmutableMap.builder();
+-      builder.put(p_17219_.createString("structures"), p_17219_.createMap(map.entrySet().stream().collect(Collectors.toMap((p_17225_) -> {
+-         return p_17219_.createString(p_17225_.getKey());
+-      }, (p_17222_) -> {
+-         return p_17222_.getValue().m_17276_(p_17218_);
++      builder.put(p_17219_.createString("structures"), p_17219_.createMap(map.entrySet().stream().collect(Collectors.toMap((p_233432_1_) -> {
++         return p_17219_.createString(p_233432_1_.getKey());
++      }, (p_233431_1_) -> {
++         return p_233431_1_.getValue().m_17276_(p_17218_);
+       }))));
+       if (mutableboolean.isTrue()) {
+          builder.put(p_17219_.createString("stronghold"), p_17219_.createMap(ImmutableMap.of(p_17219_.createString("distance"), p_17219_.createInt(mutableint.getValue()), p_17219_.createString("spread"), p_17219_.createInt(mutableint1.getValue()), p_17219_.createString("count"), p_17219_.createInt(mutableint2.getValue()))));
+@@ -241,14 +_,14 @@
+    }
+ 
+    static final class StructureFeatureConfiguration {
+-      public static final Codec<WorldGenSettingsFix.StructureFeatureConfiguration> f_17265_ = RecordCodecBuilder.create((p_17279_) -> {
+-         return p_17279_.group(Codec.INT.fieldOf("spacing").forGetter((p_17289_) -> {
+-            return p_17289_.f_17266_;
+-         }), Codec.INT.fieldOf("separation").forGetter((p_17287_) -> {
+-            return p_17287_.f_17267_;
+-         }), Codec.INT.fieldOf("salt").forGetter((p_17285_) -> {
+-            return p_17285_.f_17268_;
+-         })).apply(p_17279_, WorldGenSettingsFix.StructureFeatureConfiguration::new);
++      public static final Codec<WorldGenSettingsFix.StructureFeatureConfiguration> f_17265_ = RecordCodecBuilder.create((p_233448_0_) -> {
++         return p_233448_0_.group(Codec.INT.fieldOf("spacing").forGetter((p_233453_0_) -> {
++            return p_233453_0_.f_17266_;
++         }), Codec.INT.fieldOf("separation").forGetter((p_233452_0_) -> {
++            return p_233452_0_.f_17267_;
++         }), Codec.INT.fieldOf("salt").forGetter((p_233451_0_) -> {
++            return p_233451_0_.f_17268_;
++         })).apply(p_233448_0_, WorldGenSettingsFix.StructureFeatureConfiguration::new);
+       });
+       private final int f_17266_;
+       private final int f_17267_;

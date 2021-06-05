@@ -1,0 +1,74 @@
+--- a/net/minecraft/world/entity/animal/Cat.java
++++ b/net/minecraft/world/entity/animal/Cat.java
+@@ -45,7 +_,6 @@
+ import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+ import net.minecraft.world.entity.ai.goal.OcelotAttackGoal;
+ import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
+-import net.minecraft.world.entity.ai.goal.TemptGoal;
+ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+ import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
+ import net.minecraft.world.entity.item.ItemEntity;
+@@ -76,21 +_,21 @@
+    private static final EntityDataAccessor<Boolean> f_28105_ = SynchedEntityData.m_135353_(Cat.class, EntityDataSerializers.f_135035_);
+    private static final EntityDataAccessor<Boolean> f_28106_ = SynchedEntityData.m_135353_(Cat.class, EntityDataSerializers.f_135035_);
+    private static final EntityDataAccessor<Integer> f_28107_ = SynchedEntityData.m_135353_(Cat.class, EntityDataSerializers.f_135028_);
+-   public static final Map<Integer, ResourceLocation> f_28102_ = Util.m_137469_(Maps.newHashMap(), (p_28140_) -> {
+-      p_28140_.put(0, new ResourceLocation("textures/entity/cat/tabby.png"));
+-      p_28140_.put(1, new ResourceLocation("textures/entity/cat/black.png"));
+-      p_28140_.put(2, new ResourceLocation("textures/entity/cat/red.png"));
+-      p_28140_.put(3, new ResourceLocation("textures/entity/cat/siamese.png"));
+-      p_28140_.put(4, new ResourceLocation("textures/entity/cat/british_shorthair.png"));
+-      p_28140_.put(5, new ResourceLocation("textures/entity/cat/calico.png"));
+-      p_28140_.put(6, new ResourceLocation("textures/entity/cat/persian.png"));
+-      p_28140_.put(7, new ResourceLocation("textures/entity/cat/ragdoll.png"));
+-      p_28140_.put(8, new ResourceLocation("textures/entity/cat/white.png"));
+-      p_28140_.put(9, new ResourceLocation("textures/entity/cat/jellie.png"));
+-      p_28140_.put(10, new ResourceLocation("textures/entity/cat/all_black.png"));
++   public static final Map<Integer, ResourceLocation> f_28102_ = Util.m_137469_(Maps.newHashMap(), (p_213410_0_) -> {
++      p_213410_0_.put(0, new ResourceLocation("textures/entity/cat/tabby.png"));
++      p_213410_0_.put(1, new ResourceLocation("textures/entity/cat/black.png"));
++      p_213410_0_.put(2, new ResourceLocation("textures/entity/cat/red.png"));
++      p_213410_0_.put(3, new ResourceLocation("textures/entity/cat/siamese.png"));
++      p_213410_0_.put(4, new ResourceLocation("textures/entity/cat/british_shorthair.png"));
++      p_213410_0_.put(5, new ResourceLocation("textures/entity/cat/calico.png"));
++      p_213410_0_.put(6, new ResourceLocation("textures/entity/cat/persian.png"));
++      p_213410_0_.put(7, new ResourceLocation("textures/entity/cat/ragdoll.png"));
++      p_213410_0_.put(8, new ResourceLocation("textures/entity/cat/white.png"));
++      p_213410_0_.put(9, new ResourceLocation("textures/entity/cat/jellie.png"));
++      p_213410_0_.put(10, new ResourceLocation("textures/entity/cat/all_black.png"));
+    });
+    private Cat.CatAvoidEntityGoal<Player> f_28108_;
+-   private TemptGoal f_28109_;
++   private net.minecraft.world.entity.ai.goal.TemptGoal f_28109_;
+    private float f_28110_;
+    private float f_28111_;
+    private float f_28098_;
+@@ -404,7 +_,7 @@
+             }
+          } else if (this.m_6898_(itemstack)) {
+             this.m_6470_(p_28153_, itemstack);
+-            if (this.f_19796_.nextInt(3) == 0) {
++            if (this.f_19796_.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, p_28153_)) {
+                this.m_21828_(p_28153_);
+                this.m_21839_(true);
+                this.f_19853_.m_7605_(this, (byte)7);
+@@ -496,8 +_,8 @@
+                BlockPos blockpos = this.f_28199_.m_20183_();
+                BlockState blockstate = this.f_28198_.f_19853_.m_8055_(blockpos);
+                if (blockstate.m_60734_().m_49809_(BlockTags.f_13038_)) {
+-                  this.f_28200_ = blockstate.m_61145_(BedBlock.f_54117_).map((p_28209_) -> {
+-                     return blockpos.m_121945_(p_28209_.m_122424_());
++                  this.f_28200_ = blockstate.m_61145_(BedBlock.f_54117_).map((p_234186_1_) -> {
++                     return blockpos.m_121945_(p_234186_1_.m_122424_());
+                   }).orElseGet(() -> {
+                      return new BlockPos(blockpos);
+                   });
+@@ -579,7 +_,7 @@
+       }
+    }
+ 
+-   static class CatTemptGoal extends TemptGoal {
++   static class CatTemptGoal extends net.minecraft.world.entity.ai.goal.TemptGoal {
+       @Nullable
+       private Player f_28216_;
+       private final Cat f_28217_;

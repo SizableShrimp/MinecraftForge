@@ -1,0 +1,11 @@
+--- a/net/minecraft/world/level/block/WitherWallSkullBlock.java
++++ b/net/minecraft/world/level/block/WitherWallSkullBlock.java
+@@ -9,7 +_,7 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class WitherWallSkullBlock extends WallSkullBlock {
+-   protected WitherWallSkullBlock(BlockBehaviour.Properties p_58276_) {
++   public WitherWallSkullBlock(BlockBehaviour.Properties p_58276_) {
+       super(SkullBlock.Types.WITHER_SKELETON, p_58276_);
+    }
+ 

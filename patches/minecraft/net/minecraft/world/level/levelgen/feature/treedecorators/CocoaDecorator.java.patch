@@ -1,0 +1,31 @@
+--- a/net/minecraft/world/level/levelgen/feature/treedecorators/CocoaDecorator.java
++++ b/net/minecraft/world/level/levelgen/feature/treedecorators/CocoaDecorator.java
+@@ -14,8 +_,8 @@
+ import net.minecraft.world.level.levelgen.structure.BoundingBox;
+ 
+ public class CocoaDecorator extends TreeDecorator {
+-   public static final Codec<CocoaDecorator> f_69972_ = Codec.floatRange(0.0F, 1.0F).fieldOf("probability").xmap(CocoaDecorator::new, (p_69989_) -> {
+-      return p_69989_.f_69973_;
++   public static final Codec<CocoaDecorator> f_69972_ = Codec.floatRange(0.0F, 1.0F).fieldOf("probability").xmap(CocoaDecorator::new, (p_236868_0_) -> {
++      return p_236868_0_.f_69973_;
+    }).codec();
+    private final float f_69973_;
+ 
+@@ -30,13 +_,13 @@
+    public void m_6218_(WorldGenLevel p_69982_, Random p_69983_, List<BlockPos> p_69984_, List<BlockPos> p_69985_, Set<BlockPos> p_69986_, BoundingBox p_69987_) {
+       if (!(p_69983_.nextFloat() >= this.f_69973_)) {
+          int i = p_69984_.get(0).m_123342_();
+-         p_69984_.stream().filter((p_69980_) -> {
+-            return p_69980_.m_123342_() - i <= 2;
+-         }).forEach((p_69995_) -> {
++         p_69984_.stream().filter((p_236867_1_) -> {
++            return p_236867_1_.m_123342_() - i <= 2;
++         }).forEach((p_242865_5_) -> {
+             for(Direction direction : Direction.Plane.HORIZONTAL) {
+                if (p_69983_.nextFloat() <= 0.25F) {
+                   Direction direction1 = direction.m_122424_();
+-                  BlockPos blockpos = p_69995_.m_7918_(direction1.m_122429_(), 0, direction1.m_122431_());
++                  BlockPos blockpos = p_242865_5_.m_7918_(direction1.m_122429_(), 0, direction1.m_122431_());
+                   if (Feature.m_65810_(p_69982_, blockpos)) {
+                      BlockState blockstate = Blocks.f_50262_.m_49966_().m_61124_(CocoaBlock.f_51736_, Integer.valueOf(p_69983_.nextInt(3))).m_61124_(CocoaBlock.f_54117_, direction);
+                      this.m_70024_(p_69982_, blockpos, blockstate, p_69986_, p_69987_);

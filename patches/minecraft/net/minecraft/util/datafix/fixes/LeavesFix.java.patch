@@ -1,0 +1,96 @@
+--- a/net/minecraft/util/datafix/fixes/LeavesFix.java
++++ b/net/minecraft/util/datafix/fixes/LeavesFix.java
+@@ -34,13 +_,13 @@
+ 
+ public class LeavesFix extends DataFix {
+    private static final int[][] f_16200_ = new int[][]{{-1, 0, 0}, {1, 0, 0}, {0, -1, 0}, {0, 1, 0}, {0, 0, -1}, {0, 0, 1}};
+-   private static final Object2IntMap<String> f_16201_ = DataFixUtils.make(new Object2IntOpenHashMap<>(), (p_16235_) -> {
+-      p_16235_.put("minecraft:acacia_leaves", 0);
+-      p_16235_.put("minecraft:birch_leaves", 1);
+-      p_16235_.put("minecraft:dark_oak_leaves", 2);
+-      p_16235_.put("minecraft:jungle_leaves", 3);
+-      p_16235_.put("minecraft:oak_leaves", 4);
+-      p_16235_.put("minecraft:spruce_leaves", 5);
++   private static final Object2IntMap<String> f_16201_ = DataFixUtils.make(new Object2IntOpenHashMap<>(), (p_208417_0_) -> {
++      p_208417_0_.put("minecraft:acacia_leaves", 0);
++      p_208417_0_.put("minecraft:birch_leaves", 1);
++      p_208417_0_.put("minecraft:dark_oak_leaves", 2);
++      p_208417_0_.put("minecraft:jungle_leaves", 3);
++      p_208417_0_.put("minecraft:oak_leaves", 4);
++      p_208417_0_.put("minecraft:spruce_leaves", 5);
+    });
+    private static final Set<String> f_16202_ = ImmutableSet.of("minecraft:acacia_bark", "minecraft:birch_bark", "minecraft:dark_oak_bark", "minecraft:jungle_bark", "minecraft:oak_bark", "minecraft:spruce_bark", "minecraft:acacia_log", "minecraft:birch_log", "minecraft:dark_oak_log", "minecraft:jungle_log", "minecraft:oak_log", "minecraft:spruce_log", "minecraft:stripped_acacia_log", "minecraft:stripped_birch_log", "minecraft:stripped_dark_oak_log", "minecraft:stripped_jungle_log", "minecraft:stripped_oak_log", "minecraft:stripped_spruce_log");
+ 
+@@ -58,17 +_,17 @@
+       } else {
+          Type<?> type2 = ((ListType)type1).getElement();
+          OpticFinder<?> opticfinder2 = DSL.typeFinder(type2);
+-         return this.fixTypeEverywhereTyped("Leaves fix", type, (p_16220_) -> {
+-            return p_16220_.updateTyped(opticfinder, (p_16224_) -> {
++         return this.fixTypeEverywhereTyped("Leaves fix", type, (p_208422_4_) -> {
++            return p_208422_4_.updateTyped(opticfinder, (p_208420_3_) -> {
+                int[] aint = new int[]{0};
+-               Typed<?> typed = p_16224_.updateTyped(opticfinder1, (p_16228_) -> {
+-                  Int2ObjectMap<LeavesFix.LeavesSection> int2objectmap = new Int2ObjectOpenHashMap<>(p_16228_.getAllTyped(opticfinder2).stream().map((p_16230_) -> {
+-                     return new LeavesFix.LeavesSection(p_16230_, this.getInputSchema());
+-                  }).collect(Collectors.toMap(LeavesFix.Section::m_16301_, (p_16215_) -> {
+-                     return p_16215_;
++               Typed<?> typed = p_208420_3_.updateTyped(opticfinder1, (p_208415_3_) -> {
++                  Int2ObjectMap<LeavesFix.LeavesSection> int2objectmap = new Int2ObjectOpenHashMap<>(p_208415_3_.getAllTyped(opticfinder2).stream().map((p_212527_1_) -> {
++                     return new LeavesFix.LeavesSection(p_212527_1_, this.getInputSchema());
++                  }).collect(Collectors.toMap(LeavesFix.Section::m_16301_, (p_208410_0_) -> {
++                     return p_208410_0_;
+                   })));
+                   if (int2objectmap.values().stream().allMatch(LeavesFix.Section::m_16298_)) {
+-                     return p_16228_;
++                     return p_208415_3_;
+                   } else {
+                      List<IntSet> list = Lists.newArrayList();
+ 
+@@ -124,15 +_,15 @@
+                         }
+                      }
+ 
+-                     return p_16228_.updateTyped(opticfinder2, (p_16233_) -> {
+-                        return int2objectmap.get(p_16233_.get(DSL.remainderFinder()).get("Y").asInt(0)).m_16288_(p_16233_);
++                     return p_208415_3_.updateTyped(opticfinder2, (p_208413_1_) -> {
++                        return int2objectmap.get(p_208413_1_.get(DSL.remainderFinder()).get("Y").asInt(0)).m_16288_(p_208413_1_);
+                      });
+                   }
+                });
+                if (aint[0] != 0) {
+-                  typed = typed.update(DSL.remainderFinder(), (p_16243_) -> {
+-                     Dynamic<?> dynamic = DataFixUtils.orElse(p_16243_.get("UpgradeData").result(), p_16243_.emptyMap());
+-                     return p_16243_.set("UpgradeData", dynamic.set("Sides", p_16243_.createByte((byte)(dynamic.get("Sides").asByte((byte)0) | aint[0]))));
++                  typed = typed.update(DSL.remainderFinder(), (p_208419_1_) -> {
++                     Dynamic<?> dynamic = DataFixUtils.orElse(p_208419_1_.get("UpgradeData").result(), p_208419_1_.emptyMap());
++                     return p_208419_1_.set("UpgradeData", dynamic.set("Sides", p_208419_1_.createByte((byte)(dynamic.get("Sides").asByte((byte)0) | aint[0]))));
+                   });
+                }
+ 
+@@ -281,8 +_,8 @@
+             throw new IllegalStateException("Block state type is not what was expected.");
+          } else {
+             Optional<List<Pair<String, Dynamic<?>>>> optional = p_16286_.getOptional(this.f_16280_);
+-            this.f_16281_ = optional.<List<Dynamic<?>>>map((p_16297_) -> {
+-               return p_16297_.stream().map(Pair::getSecond).collect(Collectors.toList());
++            this.f_16281_ = optional.<List<Dynamic<?>>>map((p_208463_0_) -> {
++               return p_208463_0_.stream().map(Pair::getSecond).collect(Collectors.toList());
+             }).orElse(ImmutableList.of());
+             Dynamic<?> dynamic = p_16286_.get(DSL.remainderFinder());
+             this.f_16282_ = dynamic.get("Y").asInt(0);
+@@ -302,10 +_,10 @@
+       }
+ 
+       public Typed<?> m_16288_(Typed<?> p_16289_) {
+-         return this.m_16298_() ? p_16289_ : p_16289_.update(DSL.remainderFinder(), (p_16305_) -> {
+-            return p_16305_.set("BlockStates", p_16305_.createLongList(Arrays.stream(this.f_16283_.m_14561_())));
+-         }).set(this.f_16280_, this.f_16281_.stream().<Pair<String, Dynamic<?>>>map((p_16300_) -> {
+-            return Pair.of(References.f_16783_.typeName(), p_16300_);
++         return this.m_16298_() ? p_16289_ : p_16289_.update(DSL.remainderFinder(), (p_212510_1_) -> {
++            return p_212510_1_.set("BlockStates", p_212510_1_.createLongList(Arrays.stream(this.f_16283_.m_14561_())));
++         }).set(this.f_16280_, this.f_16281_.stream().<Pair<String, Dynamic<?>>>map((p_212509_0_) -> {
++            return Pair.of(References.f_16783_.typeName(), p_212509_0_);
+          }).collect(Collectors.toList()));
+       }
+ 

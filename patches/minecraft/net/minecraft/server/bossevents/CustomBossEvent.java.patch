@@ -1,0 +1,13 @@
+--- a/net/minecraft/server/bossevents/CustomBossEvent.java
++++ b/net/minecraft/server/bossevents/CustomBossEvent.java
+@@ -71,8 +_,8 @@
+    }
+ 
+    public final Component m_136288_() {
+-      return ComponentUtils.m_130748_(this.m_18861_()).m_130938_((p_136276_) -> {
+-         return p_136276_.m_131140_(this.m_18862_().m_18883_()).m_131144_(new HoverEvent(HoverEvent.Action.f_130831_, new TextComponent(this.m_136263_().toString()))).m_131138_(this.m_136263_().toString());
++      return ComponentUtils.m_130748_(this.m_18861_()).m_130938_((p_211569_1_) -> {
++         return p_211569_1_.m_131140_(this.m_18862_().m_18883_()).m_131144_(new HoverEvent(HoverEvent.Action.f_130831_, new TextComponent(this.m_136263_().toString()))).m_131138_(this.m_136263_().toString());
+       });
+    }
+ 

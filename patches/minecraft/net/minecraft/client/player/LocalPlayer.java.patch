@@ -1,0 +1,90 @@
+--- a/net/minecraft/client/player/LocalPlayer.java
++++ b/net/minecraft/client/player/LocalPlayer.java
+@@ -60,7 +_,6 @@
+ import net.minecraft.world.entity.Pose;
+ import net.minecraft.world.entity.vehicle.AbstractMinecart;
+ import net.minecraft.world.entity.vehicle.Boat;
+-import net.minecraft.world.item.ElytraItem;
+ import net.minecraft.world.item.Item;
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
+@@ -133,6 +_,7 @@
+    }
+ 
+    public boolean m_6469_(DamageSource p_108662_, float p_108663_) {
++      net.minecraftforge.common.ForgeHooks.onPlayerAttack(this, p_108662_, p_108663_);
+       return false;
+    }
+ 
+@@ -418,8 +_,8 @@
+    private boolean m_108746_(BlockPos p_108747_) {
+       AABB aabb = this.m_20191_();
+       AABB aabb1 = (new AABB((double)p_108747_.m_123341_(), aabb.f_82289_, (double)p_108747_.m_123343_(), (double)p_108747_.m_123341_() + 1.0D, aabb.f_82292_, (double)p_108747_.m_123343_() + 1.0D)).m_82406_(1.0E-7D);
+-      return !this.f_19853_.m_45746_(this, aabb1, (p_108688_, p_108689_) -> {
+-         return p_108688_.m_60828_(this.f_19853_, p_108689_);
++      return !this.f_19853_.m_45746_(this, aabb1, (p_243494_1_, p_243494_2_) -> {
++         return p_243494_1_.m_60828_(this.f_19853_, p_243494_2_);
+       });
+    }
+ 
+@@ -456,6 +_,11 @@
+    }
+ 
+    public void m_5496_(SoundEvent p_108651_, float p_108652_, float p_108653_) {
++      net.minecraftforge.event.entity.PlaySoundAtEntityEvent event = net.minecraftforge.event.ForgeEventFactory.onPlaySoundAtEntity(this, p_108651_, this.m_5720_(), p_108652_, p_108653_);
++      if (event.isCanceled() || event.getSound() == null) return;
++      p_108651_ = event.getSound();
++      p_108652_ = event.getVolume();
++      p_108653_ = event.getPitch();
+       this.f_19853_.m_7785_(this.m_20185_(), this.m_20186_(), this.m_20189_(), p_108651_, this.m_5720_(), p_108652_, p_108653_, false);
+    }
+ 
+@@ -594,6 +_,7 @@
+       boolean flag2 = this.m_108733_();
+       this.f_108601_ = !this.f_36077_.f_35935_ && !this.m_6069_() && this.m_20175_(Pose.CROUCHING) && (this.m_6144_() || !this.m_5803_() && !this.m_20175_(Pose.STANDING));
+       this.f_108618_.m_7606_(this.m_108635_());
++      net.minecraftforge.client.ForgeHooksClient.onInputUpdate(this, this.f_108618_);
+       this.f_108619_.m_91301_().m_120586_(this.f_108618_);
+       if (this.m_6117_() && !this.m_20159_()) {
+          this.f_108618_.f_108566_ *= 0.2F;
+@@ -666,7 +_,7 @@
+ 
+       if (this.f_108618_.f_108572_ && !flag7 && !flag && !this.f_36077_.f_35935_ && !this.m_20159_() && !this.m_6147_()) {
+          ItemStack itemstack = this.m_6844_(EquipmentSlot.CHEST);
+-         if (itemstack.m_41720_() == Items.f_42741_ && ElytraItem.m_41140_(itemstack) && this.m_36319_()) {
++         if (itemstack.canElytraFly(this) && this.m_36319_()) {
+             this.f_108617_.m_104955_(new ServerboundPlayerCommandPacket(this, ServerboundPlayerCommandPacket.Action.START_FALL_FLYING));
+          }
+       }
+@@ -861,10 +_,10 @@
+                   Vec3 vec38 = vec34.m_82546_(vec36);
+                   Vec3 vec39 = lvt_19_1_.m_82549_(vec36);
+                   Vec3 vec310 = vec34.m_82549_(vec36);
+-                  Iterator<AABB> iterator = this.f_19853_.m_7786_(this, aabb, (p_108722_) -> {
++                  Iterator<AABB> iterator = this.f_19853_.m_7786_(this, aabb, (p_239205_0_) -> {
+                      return true;
+-                  }).flatMap((p_108691_) -> {
+-                     return p_108691_.m_83299_().stream();
++                  }).flatMap((p_212329_0_) -> {
++                     return p_212329_0_.m_83299_().stream();
+                   }).iterator();
+                   float f11 = Float.MIN_VALUE;
+ 
+@@ -973,5 +_,17 @@
+       } else {
+          return super.m_7398_(p_108758_);
+       }
++   }
++
++   public void updateSyncFields(LocalPlayer old) {
++      this.f_108595_ = old.f_108595_;
++      this.f_108596_ = old.f_108596_;
++      this.f_108597_ = old.f_108597_;
++      this.f_108598_ = old.f_108598_;
++      this.f_108599_ = old.f_108599_;
++      this.f_108600_ = old.f_108600_;
++      this.f_108602_ = old.f_108602_;
++      this.f_108603_ = old.f_108603_;
++      this.f_108604_ = old.f_108604_;
+    }
+ }

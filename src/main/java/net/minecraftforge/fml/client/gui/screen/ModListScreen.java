@@ -31,9 +31,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import cpw.mods.modlauncher.Environment;
-import net.minecraft.util.text.*;
-import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

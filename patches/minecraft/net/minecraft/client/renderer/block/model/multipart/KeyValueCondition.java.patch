@@ -1,0 +1,31 @@
+--- a/net/minecraft/client/renderer/block/model/multipart/KeyValueCondition.java
++++ b/net/minecraft/client/renderer/block/model/multipart/KeyValueCondition.java
+@@ -43,12 +_,12 @@
+             if (list.size() == 1) {
+                predicate = this.m_111944_(p_111960_, property, s);
+             } else {
+-               List<Predicate<BlockState>> list1 = list.stream().map((p_111958_) -> {
+-                  return this.m_111944_(p_111960_, property, p_111958_);
++               List<Predicate<BlockState>> list1 = list.stream().map((p_212482_3_) -> {
++                  return this.m_111944_(p_111960_, property, p_212482_3_);
+                }).collect(Collectors.toList());
+-               predicate = (p_111954_) -> {
+-                  return list1.stream().anyMatch((p_111943_) -> {
+-                     return p_111943_.test(p_111954_);
++               predicate = (p_200687_1_) -> {
++                  return list1.stream().anyMatch((p_200685_1_) -> {
++                     return p_200685_1_.test(p_200687_1_);
+                   });
+                };
+             }
+@@ -63,8 +_,8 @@
+       if (!optional.isPresent()) {
+          throw new RuntimeException(String.format("Unknown value '%s' for property '%s' on '%s' in '%s'", p_111947_, this.f_111935_, p_111945_.m_61091_().toString(), this.f_111936_));
+       } else {
+-         return (p_111951_) -> {
+-            return p_111951_.m_61143_(p_111946_).equals(optional.get());
++         return (p_212483_2_) -> {
++            return p_212483_2_.m_61143_(p_111946_).equals(optional.get());
+          };
+       }
+    }

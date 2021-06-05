@@ -1,0 +1,35 @@
+--- a/net/minecraft/client/gui/screens/EditServerScreen.java
++++ b/net/minecraft/client/gui/screens/EditServerScreen.java
+@@ -26,11 +_,11 @@
+    private EditBox f_96011_;
+    private Button f_96012_;
+    private final Screen f_96013_;
+-   private final Predicate<String> f_96014_ = (p_96042_) -> {
+-      if (StringUtil.m_14408_(p_96042_)) {
++   private final Predicate<String> f_96014_ = (p_210141_0_) -> {
++      if (StringUtil.m_14408_(p_210141_0_)) {
+          return true;
+       } else {
+-         String[] astring = p_96042_.split(":");
++         String[] astring = p_210141_0_.split(":");
+          if (astring.length == 0) {
+             return true;
+          } else {
+@@ -69,14 +_,14 @@
+       this.f_96010_.m_94153_(this.f_96014_);
+       this.f_96010_.m_94151_(this::m_96037_);
+       this.f_96540_.add(this.f_96010_);
+-      this.f_96012_ = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 72, 200, 20, m_96031_(this.f_96009_.m_105387_()), (p_96040_) -> {
++      this.f_96012_ = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 72, 200, 20, m_96031_(this.f_96009_.m_105387_()), (p_213031_1_) -> {
+          this.f_96009_.m_105379_(ServerData.ServerPackStatus.values()[(this.f_96009_.m_105387_().ordinal() + 1) % ServerData.ServerPackStatus.values().length]);
+          this.f_96012_.m_93666_(m_96031_(this.f_96009_.m_105387_()));
+       }));
+-      this.f_96007_ = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 96 + 18, 200, 20, new TranslatableComponent("addServer.add"), (p_96036_) -> {
++      this.f_96007_ = this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 96 + 18, 200, 20, new TranslatableComponent("addServer.add"), (p_213030_1_) -> {
+          this.m_96045_();
+       }));
+-      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 120 + 18, 200, 20, CommonComponents.f_130656_, (p_96030_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 - 100, this.f_96544_ / 4 + 120 + 18, 200, 20, CommonComponents.f_130656_, (p_213029_1_) -> {
+          this.f_96008_.accept(false);
+       }));
+       this.m_96046_();

@@ -1,0 +1,103 @@
+--- a/net/minecraft/world/entity/monster/Shulker.java
++++ b/net/minecraft/world/entity/monster/Shulker.java
+@@ -166,7 +_,7 @@
+          this.f_33399_ = 0;
+       } else if (!this.f_19853_.f_46443_) {
+          BlockState blockstate = this.f_19853_.m_8055_(blockpos);
+-         if (!blockstate.m_60795_()) {
++         if (!blockstate.isAir(this.f_19853_, blockpos)) {
+             if (blockstate.m_60713_(Blocks.f_50110_)) {
+                Direction direction = blockstate.m_61143_(PistonBaseBlock.f_52588_);
+                if (this.f_19853_.m_46859_(blockpos.m_121945_(direction))) {
+@@ -219,6 +_,7 @@
+          this.m_20264_((double)blockpos.m_123341_() + 0.5D, (double)blockpos.m_123342_(), (double)blockpos.m_123343_() + 0.5D);
+          double d2 = 0.5D - (double)Mth.m_14031_((0.5F + this.f_33397_) * (float)Math.PI) * 0.5D;
+          double d0 = 0.5D - (double)Mth.m_14031_((0.5F + this.f_33396_) * (float)Math.PI) * 0.5D;
++         if (this.isAddedToWorld() && this.f_19853_ instanceof net.minecraft.server.level.ServerLevel) ((net.minecraft.server.level.ServerLevel)this.f_19853_).m_8819_(this); // Forge - Process chunk registration after moving.
+          Direction direction2 = this.m_33461_().m_122424_();
+          this.m_20011_((new AABB(this.m_20185_() - 0.5D, this.m_20186_(), this.m_20189_() - 0.5D, this.m_20185_() + 0.5D, this.m_20186_() + 1.0D, this.m_20189_() + 0.5D)).m_82363_((double)direction2.m_122429_() * d2, (double)direction2.m_122430_() * d2, (double)direction2.m_122431_() * d2));
+          double d1 = d2 - d0;
+@@ -249,6 +_,7 @@
+       super.m_6034_(p_33449_, p_33450_, p_33451_);
+       if (this.f_19804_ != null && this.f_19797_ != 0) {
+          Optional<BlockPos> optional = this.f_19804_.m_135370_(f_33400_);
++         if (this.isAddedToWorld() && this.f_19853_ instanceof net.minecraft.server.level.ServerLevel) ((net.minecraft.server.level.ServerLevel)this.f_19853_).m_8819_(this); // Forge - Process chunk registration after moving.
+          Optional<BlockPos> optional1 = Optional.of(new BlockPos(p_33449_, p_33450_, p_33451_));
+          if (!optional1.equals(optional)) {
+             this.f_19804_.m_135381_(f_33400_, optional1);
+@@ -283,6 +_,12 @@
+             if (blockpos1.m_123342_() > 0 && this.f_19853_.m_46859_(blockpos1) && this.f_19853_.m_6857_().m_61937_(blockpos1) && this.f_19853_.m_45756_(this, new AABB(blockpos1))) {
+                Direction direction = this.m_33469_(blockpos1);
+                if (direction != null) {
++                  net.minecraftforge.event.entity.living.EntityTeleportEvent.EnderEntity event = net.minecraftforge.event.ForgeEventFactory.onEnderTeleport(this, blockpos1.m_123341_(), blockpos1.m_123342_(), blockpos1.m_123343_());
++                  if (event.isCanceled()) direction = null;
++                  blockpos1 = new BlockPos(event.getTargetX(), event.getTargetY(), event.getTargetZ());
++               }
++
++               if (direction != null) {
+                   this.f_19804_.m_135381_(f_33392_, direction);
+                   this.m_5496_(SoundEvents.f_12418_, 1.0F, 1.0F);
+                   this.f_19804_.m_135381_(f_33400_, Optional.of(blockpos1));
+@@ -481,6 +_,25 @@
+       }
+    }
+ 
++   class ShulkerNearestAttackGoal extends NearestAttackableTargetGoal<Player> {
++      public ShulkerNearestAttackGoal(Shulker p_33505_) {
++         super(p_33505_, Player.class, true);
++      }
++
++      public boolean m_8036_() {
++         return Shulker.this.f_19853_.m_46791_() == Difficulty.PEACEFUL ? false : super.m_8036_();
++      }
++
++      protected AABB m_7255_(double p_33508_) {
++         Direction direction = ((Shulker)this.f_26135_).m_33461_();
++         if (direction.m_122434_() == Direction.Axis.X) {
++            return this.f_26135_.m_20191_().m_82377_(4.0D, p_33508_, p_33508_);
++         } else {
++            return direction.m_122434_() == Direction.Axis.Z ? this.f_26135_.m_20191_().m_82377_(p_33508_, p_33508_, 4.0D) : this.f_26135_.m_20191_().m_82377_(p_33508_, 4.0D, p_33508_);
++         }
++      }
++   }
++
+    class ShulkerBodyRotationControl extends BodyRotationControl {
+       public ShulkerBodyRotationControl(Mob p_33493_) {
+          super(p_33493_);
+@@ -492,8 +_,8 @@
+ 
+    static class ShulkerDefenseAttackGoal extends NearestAttackableTargetGoal<LivingEntity> {
+       public ShulkerDefenseAttackGoal(Shulker p_33496_) {
+-         super(p_33496_, LivingEntity.class, 10, true, false, (p_33501_) -> {
+-            return p_33501_ instanceof Enemy;
++         super(p_33496_, LivingEntity.class, 10, true, false, (p_200826_0_) -> {
++            return p_200826_0_ instanceof Enemy;
+          });
+       }
+ 
+@@ -507,25 +_,6 @@
+             return this.f_26135_.m_20191_().m_82377_(4.0D, p_33499_, p_33499_);
+          } else {
+             return direction.m_122434_() == Direction.Axis.Z ? this.f_26135_.m_20191_().m_82377_(p_33499_, p_33499_, 4.0D) : this.f_26135_.m_20191_().m_82377_(p_33499_, 4.0D, p_33499_);
+-         }
+-      }
+-   }
+-
+-   class ShulkerNearestAttackGoal extends NearestAttackableTargetGoal<Player> {
+-      public ShulkerNearestAttackGoal(Shulker p_33505_) {
+-         super(p_33505_, Player.class, true);
+-      }
+-
+-      public boolean m_8036_() {
+-         return Shulker.this.f_19853_.m_46791_() == Difficulty.PEACEFUL ? false : super.m_8036_();
+-      }
+-
+-      protected AABB m_7255_(double p_33508_) {
+-         Direction direction = ((Shulker)this.f_26135_).m_33461_();
+-         if (direction.m_122434_() == Direction.Axis.X) {
+-            return this.f_26135_.m_20191_().m_82377_(4.0D, p_33508_, p_33508_);
+-         } else {
+-            return direction.m_122434_() == Direction.Axis.Z ? this.f_26135_.m_20191_().m_82377_(p_33508_, p_33508_, 4.0D) : this.f_26135_.m_20191_().m_82377_(p_33508_, 4.0D, p_33508_);
+          }
+       }
+    }

@@ -1,0 +1,22 @@
+--- a/net/minecraft/world/level/block/ShulkerBoxBlock.java
++++ b/net/minecraft/world/level/block/ShulkerBoxBlock.java
+@@ -134,9 +_,9 @@
+       BlockEntity blockentity = p_56247_.m_78982_(LootContextParams.f_81462_);
+       if (blockentity instanceof ShulkerBoxBlockEntity) {
+          ShulkerBoxBlockEntity shulkerboxblockentity = (ShulkerBoxBlockEntity)blockentity;
+-         p_56247_ = p_56247_.m_78979_(f_56184_, (p_56218_, p_56219_) -> {
++         p_56247_ = p_56247_.m_78979_(f_56184_, (p_220168_1_, p_220168_2_) -> {
+             for(int i = 0; i < shulkerboxblockentity.m_6643_(); ++i) {
+-               p_56219_.accept(shulkerboxblockentity.m_8020_(i));
++               p_220168_2_.accept(shulkerboxblockentity.m_8020_(i));
+             }
+ 
+          });
+@@ -218,7 +_,6 @@
+       return AbstractContainerMenu.m_38938_((Container)p_56224_.m_7702_(p_56225_));
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public ItemStack m_7397_(BlockGetter p_56202_, BlockPos p_56203_, BlockState p_56204_) {
+       ItemStack itemstack = super.m_7397_(p_56202_, p_56203_, p_56204_);
+       ShulkerBoxBlockEntity shulkerboxblockentity = (ShulkerBoxBlockEntity)p_56202_.m_7702_(p_56203_);

@@ -1,0 +1,206 @@
+--- a/net/minecraft/client/gui/screens/worldselection/CreateWorldScreen.java
++++ b/net/minecraft/client/gui/screens/worldselection/CreateWorldScreen.java
+@@ -9,7 +_,6 @@
+ import java.nio.file.Path;
+ import java.util.Comparator;
+ import java.util.List;
+-import java.util.Optional;
+ import java.util.OptionalLong;
+ import java.util.stream.Stream;
+ import javax.annotation.Nullable;
+@@ -114,7 +_,7 @@
+ 
+    public static CreateWorldScreen m_100898_(@Nullable Screen p_100899_) {
+       RegistryAccess.RegistryHolder registryaccess$registryholder = RegistryAccess.m_123086_();
+-      return new CreateWorldScreen(p_100899_, DataPackConfig.f_45842_, new WorldGenSettingsComponent(registryaccess$registryholder, WorldGenSettings.m_64641_(registryaccess$registryholder.m_123090_(Registry.f_122818_), registryaccess$registryholder.m_123090_(Registry.f_122885_), registryaccess$registryholder.m_123090_(Registry.f_122878_)), Optional.of(WorldPreset.f_101506_), OptionalLong.empty()));
++      return new CreateWorldScreen(p_100899_, DataPackConfig.f_45842_, new WorldGenSettingsComponent(registryaccess$registryholder, net.minecraftforge.client.ForgeHooksClient.getDefaultWorldType().map(type -> type.m_7012_(registryaccess$registryholder, new java.util.Random().nextLong(), true, false)).orElseGet(() -> WorldGenSettings.m_64641_(registryaccess$registryholder.m_123090_(Registry.f_122818_), registryaccess$registryholder.m_123090_(Registry.f_122885_), registryaccess$registryholder.m_123090_(Registry.f_122878_))), net.minecraftforge.client.ForgeHooksClient.getDefaultWorldType(), OptionalLong.empty()));
+    }
+ 
+    private CreateWorldScreen(@Nullable Screen p_100861_, DataPackConfig p_100862_, WorldGenSettingsComponent p_100863_) {
+@@ -138,15 +_,15 @@
+          }
+       };
+       this.f_100856_.m_94144_(this.f_100843_);
+-      this.f_100856_.m_94151_((p_100932_) -> {
+-         this.f_100843_ = p_100932_;
++      this.f_100856_.m_94151_((p_214319_1_) -> {
++         this.f_100843_ = p_214319_1_;
+          this.f_100834_.f_93623_ = !this.f_100856_.m_94155_().isEmpty();
+          this.m_100971_();
+       });
+       this.f_96540_.add(this.f_100856_);
+       int i = this.f_96543_ / 2 - 155;
+       int j = this.f_96543_ / 2 + 5;
+-      this.f_100835_ = this.m_7082_(new Button(i, 100, 150, 20, TextComponent.f_131282_, (p_100966_) -> {
++      this.f_100835_ = this.m_7082_(new Button(i, 100, 150, 20, TextComponent.f_131282_, (p_214316_1_) -> {
+          switch(this.f_100858_) {
+          case SURVIVAL:
+             this.m_100900_(CreateWorldScreen.SelectedGameMode.HARDCORE);
+@@ -158,7 +_,7 @@
+             this.m_100900_(CreateWorldScreen.SelectedGameMode.SURVIVAL);
+          }
+ 
+-         p_100966_.m_93687_(250);
++         p_214316_1_.m_93687_(250);
+       }) {
+          public Component m_6035_() {
+             return new TranslatableComponent("options.generic_value", CreateWorldScreen.f_100849_, new TranslatableComponent("selectWorld.gameMode." + CreateWorldScreen.this.f_100858_.f_101028_));
+@@ -168,19 +_,19 @@
+             return super.m_5646_().m_130946_(". ").m_7220_(CreateWorldScreen.this.f_100841_).m_130946_(" ").m_7220_(CreateWorldScreen.this.f_100842_);
+          }
+       });
+-      this.f_100836_ = this.m_7082_(new Button(j, 100, 150, 20, new TranslatableComponent("options.difficulty"), (p_100963_) -> {
++      this.f_100836_ = this.m_7082_(new Button(j, 100, 150, 20, new TranslatableComponent("options.difficulty"), (p_238956_1_) -> {
+          this.f_100827_ = this.f_100827_.m_19037_();
+          this.f_100828_ = this.f_100827_;
+-         p_100963_.m_93687_(250);
++         p_238956_1_.m_93687_(250);
+       }) {
+          public Component m_6035_() {
+             return (new TranslatableComponent("options.difficulty")).m_130946_(": ").m_7220_(CreateWorldScreen.this.f_100828_.m_19033_());
+          }
+       });
+-      this.f_100840_ = this.m_7082_(new Button(i, 151, 150, 20, new TranslatableComponent("selectWorld.allowCommands"), (p_100959_) -> {
++      this.f_100840_ = this.m_7082_(new Button(i, 151, 150, 20, new TranslatableComponent("selectWorld.allowCommands"), (p_214322_1_) -> {
+          this.f_100830_ = true;
+          this.f_100829_ = !this.f_100829_;
+-         p_100959_.m_93687_(250);
++         p_214322_1_.m_93687_(250);
+       }) {
+          public Component m_6035_() {
+             return CommonComponents.m_130663_(super.m_6035_(), CreateWorldScreen.this.f_100829_ && !CreateWorldScreen.this.f_100845_);
+@@ -190,26 +_,26 @@
+             return super.m_5646_().m_130946_(". ").m_7220_(new TranslatableComponent("selectWorld.allowCommands.info"));
+          }
+       });
+-      this.f_100839_ = this.m_7082_(new Button(j, 151, 150, 20, new TranslatableComponent("selectWorld.dataPacks"), (p_100955_) -> {
++      this.f_100839_ = this.m_7082_(new Button(j, 151, 150, 20, new TranslatableComponent("selectWorld.dataPacks"), (p_214320_1_) -> {
+          this.m_100975_();
+       }));
+-      this.f_100838_ = this.m_7082_(new Button(i, 185, 150, 20, new TranslatableComponent("selectWorld.gameRules"), (p_100946_) -> {
+-         this.f_96541_.m_91152_(new EditGameRulesScreen(this.f_100844_.m_46202_(), (p_100920_) -> {
++      this.f_100838_ = this.m_7082_(new Button(i, 185, 150, 20, new TranslatableComponent("selectWorld.gameRules"), (p_214312_1_) -> {
++         this.f_96541_.m_91152_(new EditGameRulesScreen(this.f_100844_.m_46202_(), (p_238946_1_) -> {
+             this.f_96541_.m_91152_(this);
+-            p_100920_.ifPresent((p_100888_) -> {
+-               this.f_100844_ = p_100888_;
++            p_238946_1_.ifPresent((p_238941_1_) -> {
++               this.f_100844_ = p_238941_1_;
+             });
+          }));
+       }));
+       this.f_100847_.m_101429_(this, this.f_96541_, this.f_96547_);
+-      this.f_100837_ = this.m_7082_(new Button(j, 185, 150, 20, new TranslatableComponent("selectWorld.moreWorldOptions"), (p_100939_) -> {
++      this.f_100837_ = this.m_7082_(new Button(j, 185, 150, 20, new TranslatableComponent("selectWorld.moreWorldOptions"), (p_214321_1_) -> {
+          this.m_100973_();
+       }));
+-      this.f_100834_ = this.m_7082_(new Button(i, this.f_96544_ - 28, 150, 20, new TranslatableComponent("selectWorld.create"), (p_100928_) -> {
++      this.f_100834_ = this.m_7082_(new Button(i, this.f_96544_ - 28, 150, 20, new TranslatableComponent("selectWorld.create"), (p_214318_1_) -> {
+          this.m_100972_();
+       }));
+       this.f_100834_.f_93623_ = !this.f_100843_.isEmpty();
+-      this.m_7082_(new Button(j, this.f_96544_ - 28, 150, 20, CommonComponents.f_130656_, (p_100897_) -> {
++      this.m_7082_(new Button(j, this.f_96544_ - 28, 150, 20, CommonComponents.f_130656_, (p_214317_1_) -> {
+          this.m_100967_();
+       }));
+       this.m_100964_();
+@@ -417,8 +_,8 @@
+ 
+    private void m_100878_(PackRepository p_100879_) {
+       List<String> list = ImmutableList.copyOf(p_100879_.m_10523_());
+-      List<String> list1 = p_100879_.m_10514_().stream().filter((p_100918_) -> {
+-         return !list.contains(p_100918_);
++      List<String> list1 = p_100879_.m_10514_().stream().filter((p_241626_1_) -> {
++         return !list.contains(p_241626_1_);
+       }).collect(ImmutableList.toImmutableList());
+       DataPackConfig datapackconfig = new DataPackConfig(list, list1);
+       if (list.equals(this.f_100846_.m_45850_())) {
+@@ -427,12 +_,12 @@
+          this.f_96541_.m_6937_(() -> {
+             this.f_96541_.m_91152_(new GenericDirtMessageScreen(new TranslatableComponent("dataPack.validation.working")));
+          });
+-         ServerResources.m_136158_(p_100879_.m_10525_(), Commands.CommandSelection.INTEGRATED, 2, Util.m_137578_(), this.f_96541_).handle((p_100885_, p_100886_) -> {
+-            if (p_100886_ != null) {
+-               f_100848_.warn("Failed to validate datapack", p_100886_);
++         ServerResources.m_136158_(p_100879_.m_10525_(), Commands.CommandSelection.INTEGRATED, 2, Util.m_137578_(), this.f_96541_).handle((p_241623_2_, p_241623_3_) -> {
++            if (p_241623_3_ != null) {
++               f_100848_.warn("Failed to validate datapack", p_241623_3_);
+                this.f_96541_.m_6937_(() -> {
+-                  this.f_96541_.m_91152_(new ConfirmScreen((p_100952_) -> {
+-                     if (p_100952_) {
++                  this.f_96541_.m_91152_(new ConfirmScreen((p_241630_1_) -> {
++                     if (p_241630_1_) {
+                         this.m_100975_();
+                      } else {
+                         this.f_100846_ = DataPackConfig.f_45842_;
+@@ -444,8 +_,8 @@
+             } else {
+                this.f_96541_.m_6937_(() -> {
+                   this.f_100846_ = datapackconfig;
+-                  this.f_100847_.m_101452_(p_100885_);
+-                  p_100885_.close();
++                  this.f_100847_.m_101452_(p_241623_2_);
++                  p_241623_2_.close();
+                   this.f_96541_.m_91152_(this);
+                });
+             }
+@@ -458,11 +_,11 @@
+    private void m_100976_() {
+       if (this.f_100831_ != null) {
+          try (Stream<Path> stream = Files.walk(this.f_100831_)) {
+-            stream.sorted(Comparator.reverseOrder()).forEach((p_100934_) -> {
++            stream.sorted(Comparator.reverseOrder()).forEach((p_238948_0_) -> {
+                try {
+-                  Files.delete(p_100934_);
++                  Files.delete(p_238948_0_);
+                } catch (IOException ioexception1) {
+-                  f_100848_.warn("Failed to remove temporary file {}", p_100934_, ioexception1);
++                  f_100848_.warn("Failed to remove temporary file {}", p_238948_0_, ioexception1);
+                }
+ 
+             });
+@@ -492,10 +_,10 @@
+          ) {
+             Path path = levelstoragesource$levelstorageaccess.m_78283_(LevelResource.f_78180_);
+             Files.createDirectories(path);
+-            stream.filter((p_100905_) -> {
+-               return !p_100905_.equals(this.f_100831_);
+-            }).forEach((p_100937_) -> {
+-               m_100912_(this.f_100831_, path, p_100937_);
++            stream.filter((p_238942_1_) -> {
++               return !p_238942_1_.equals(this.f_100831_);
++            }).forEach((p_238949_2_) -> {
++               m_100912_(this.f_100831_, path, p_238949_2_);
+             });
+          } catch (CreateWorldScreen.OperationFailedException | IOException ioexception) {
+             f_100848_.warn("Failed to copy datapacks to world {}", this.f_100857_, ioexception);
+@@ -513,9 +_,9 @@
+       MutableObject<Path> mutableobject = new MutableObject<>();
+ 
+       try (Stream<Path> stream = Files.walk(p_100907_)) {
+-         stream.filter((p_100911_) -> {
+-            return !p_100911_.equals(p_100907_);
+-         }).forEach((p_100924_) -> {
++         stream.filter((p_238944_1_) -> {
++            return !p_238944_1_.equals(p_100907_);
++         }).forEach((p_238947_2_) -> {
+             Path path = mutableobject.getValue();
+             if (path == null) {
+                try {
+@@ -528,7 +_,7 @@
+                mutableobject.setValue(path);
+             }
+ 
+-            m_100912_(p_100907_, path, p_100924_);
++            m_100912_(p_100907_, path, p_238947_2_);
+          });
+       } catch (CreateWorldScreen.OperationFailedException | IOException ioexception) {
+          f_100848_.warn("Failed to copy datapacks from world {}", p_100907_, ioexception);
+@@ -546,6 +_,7 @@
+          File file1 = path.toFile();
+          if (this.f_100832_ == null) {
+             this.f_100832_ = new PackRepository(new ServerPacksSource(), new FolderRepositorySource(file1, PackSource.f_10527_));
++            net.minecraftforge.fml.packs.ResourcePackLoader.loadResourcePacks(this.f_100832_, net.minecraftforge.fml.server.ServerLifecycleHooks::buildPackFinder);
+             this.f_100832_.m_10506_();
+          }
+ 

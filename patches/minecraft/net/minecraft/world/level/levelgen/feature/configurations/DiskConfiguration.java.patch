@@ -1,0 +1,29 @@
+--- a/net/minecraft/world/level/levelgen/feature/configurations/DiskConfiguration.java
++++ b/net/minecraft/world/level/levelgen/feature/configurations/DiskConfiguration.java
+@@ -7,16 +_,16 @@
+ import net.minecraft.world.level.block.state.BlockState;
+ 
+ public class DiskConfiguration implements FeatureConfiguration {
+-   public static final Codec<DiskConfiguration> f_67618_ = RecordCodecBuilder.create((p_67632_) -> {
+-      return p_67632_.group(BlockState.f_61039_.fieldOf("state").forGetter((p_67638_) -> {
+-         return p_67638_.f_67619_;
+-      }), UniformInt.m_14432_(0, 4, 4).fieldOf("radius").forGetter((p_67636_) -> {
+-         return p_67636_.f_67620_;
+-      }), Codec.intRange(0, 4).fieldOf("half_height").forGetter((p_67634_) -> {
+-         return p_67634_.f_67621_;
+-      }), BlockState.f_61039_.listOf().fieldOf("targets").forGetter((p_67630_) -> {
+-         return p_67630_.f_67622_;
+-      })).apply(p_67632_, DiskConfiguration::new);
++   public static final Codec<DiskConfiguration> f_67618_ = RecordCodecBuilder.create((p_236518_0_) -> {
++      return p_236518_0_.group(BlockState.f_61039_.fieldOf("state").forGetter((p_236521_0_) -> {
++         return p_236521_0_.f_67619_;
++      }), UniformInt.m_14432_(0, 4, 4).fieldOf("radius").forGetter((p_236520_0_) -> {
++         return p_236520_0_.f_67620_;
++      }), Codec.intRange(0, 4).fieldOf("half_height").forGetter((p_236519_0_) -> {
++         return p_236519_0_.f_67621_;
++      }), BlockState.f_61039_.listOf().fieldOf("targets").forGetter((p_236517_0_) -> {
++         return p_236517_0_.f_67622_;
++      })).apply(p_236518_0_, DiskConfiguration::new);
+    });
+    public final BlockState f_67619_;
+    public final UniformInt f_67620_;

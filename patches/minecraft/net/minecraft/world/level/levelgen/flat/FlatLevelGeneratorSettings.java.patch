@@ -1,0 +1,91 @@
+--- a/net/minecraft/world/level/levelgen/flat/FlatLevelGeneratorSettings.java
++++ b/net/minecraft/world/level/levelgen/flat/FlatLevelGeneratorSettings.java
+@@ -37,34 +_,34 @@
+ 
+ public class FlatLevelGeneratorSettings {
+    private static final Logger f_70348_ = LogManager.getLogger();
+-   public static final Codec<FlatLevelGeneratorSettings> f_70347_ = RecordCodecBuilder.<FlatLevelGeneratorSettings>create((p_70373_) -> {
+-      return p_70373_.group(RegistryLookupCodec.m_135622_(Registry.f_122885_).forGetter((p_70397_) -> {
+-         return p_70397_.f_70350_;
+-      }), StructureSettings.f_64579_.fieldOf("structures").forGetter(FlatLevelGeneratorSettings::m_70395_), FlatLayerInfo.f_70329_.listOf().fieldOf("layers").forGetter(FlatLevelGeneratorSettings::m_70401_), Codec.BOOL.fieldOf("lakes").orElse(false).forGetter((p_70392_) -> {
+-         return p_70392_.f_70357_;
+-      }), Codec.BOOL.fieldOf("features").orElse(false).forGetter((p_70387_) -> {
+-         return p_70387_.f_70356_;
+-      }), Biome.f_47431_.optionalFieldOf("biome").orElseGet(Optional::empty).forGetter((p_70375_) -> {
+-         return Optional.of(p_70375_.f_70353_);
+-      })).apply(p_70373_, FlatLevelGeneratorSettings::new);
++   public static final Codec<FlatLevelGeneratorSettings> f_70347_ = RecordCodecBuilder.<FlatLevelGeneratorSettings>create((p_236938_0_) -> {
++      return p_236938_0_.group(RegistryLookupCodec.m_135622_(Registry.f_122885_).forGetter((p_242874_0_) -> {
++         return p_242874_0_.f_70350_;
++      }), StructureSettings.f_64579_.fieldOf("structures").forGetter(FlatLevelGeneratorSettings::m_70395_), FlatLayerInfo.f_70329_.listOf().fieldOf("layers").forGetter(FlatLevelGeneratorSettings::m_70401_), Codec.BOOL.fieldOf("lakes").orElse(false).forGetter((p_241528_0_) -> {
++         return p_241528_0_.f_70357_;
++      }), Codec.BOOL.fieldOf("features").orElse(false).forGetter((p_242871_0_) -> {
++         return p_242871_0_.f_70356_;
++      }), Biome.f_47431_.optionalFieldOf("biome").orElseGet(Optional::empty).forGetter((p_242868_0_) -> {
++         return Optional.of(p_242868_0_.f_70353_);
++      })).apply(p_236938_0_, FlatLevelGeneratorSettings::new);
+    }).stable();
+-   private static final Map<StructureFeature<?>, ConfiguredStructureFeature<?, ?>> f_70349_ = Util.m_137469_(Maps.newHashMap(), (p_70379_) -> {
+-      p_70379_.put(StructureFeature.f_67014_, StructureFeatures.f_127240_);
+-      p_70379_.put(StructureFeature.f_67028_, StructureFeatures.f_127258_);
+-      p_70379_.put(StructureFeature.f_67022_, StructureFeatures.f_127249_);
+-      p_70379_.put(StructureFeature.f_67021_, StructureFeatures.f_127248_);
+-      p_70379_.put(StructureFeature.f_67017_, StructureFeatures.f_127244_);
+-      p_70379_.put(StructureFeature.f_67016_, StructureFeatures.f_127243_);
+-      p_70379_.put(StructureFeature.f_67018_, StructureFeatures.f_127245_);
+-      p_70379_.put(StructureFeature.f_67024_, StructureFeatures.f_127251_);
+-      p_70379_.put(StructureFeature.f_67020_, StructureFeatures.f_127246_);
+-      p_70379_.put(StructureFeature.f_67023_, StructureFeatures.f_127250_);
+-      p_70379_.put(StructureFeature.f_67026_, StructureFeatures.f_127255_);
+-      p_70379_.put(StructureFeature.f_67015_, StructureFeatures.f_127242_);
+-      p_70379_.put(StructureFeature.f_67025_, StructureFeatures.f_127253_);
+-      p_70379_.put(StructureFeature.f_67013_, StructureFeatures.f_127239_);
+-      p_70379_.put(StructureFeature.f_67019_, StructureFeatures.f_127263_);
+-      p_70379_.put(StructureFeature.f_67030_, StructureFeatures.f_127257_);
++   private static final Map<StructureFeature<?>, ConfiguredStructureFeature<?, ?>> f_70349_ = Util.m_137469_(Maps.newHashMap(), (p_236940_0_) -> {
++      p_236940_0_.put(StructureFeature.f_67014_, StructureFeatures.f_127240_);
++      p_236940_0_.put(StructureFeature.f_67028_, StructureFeatures.f_127258_);
++      p_236940_0_.put(StructureFeature.f_67022_, StructureFeatures.f_127249_);
++      p_236940_0_.put(StructureFeature.f_67021_, StructureFeatures.f_127248_);
++      p_236940_0_.put(StructureFeature.f_67017_, StructureFeatures.f_127244_);
++      p_236940_0_.put(StructureFeature.f_67016_, StructureFeatures.f_127243_);
++      p_236940_0_.put(StructureFeature.f_67018_, StructureFeatures.f_127245_);
++      p_236940_0_.put(StructureFeature.f_67024_, StructureFeatures.f_127251_);
++      p_236940_0_.put(StructureFeature.f_67020_, StructureFeatures.f_127246_);
++      p_236940_0_.put(StructureFeature.f_67023_, StructureFeatures.f_127250_);
++      p_236940_0_.put(StructureFeature.f_67026_, StructureFeatures.f_127255_);
++      p_236940_0_.put(StructureFeature.f_67015_, StructureFeatures.f_127242_);
++      p_236940_0_.put(StructureFeature.f_67025_, StructureFeatures.f_127253_);
++      p_236940_0_.put(StructureFeature.f_67013_, StructureFeatures.f_127239_);
++      p_236940_0_.put(StructureFeature.f_67019_, StructureFeatures.f_127263_);
++      p_236940_0_.put(StructureFeature.f_67030_, StructureFeatures.f_127257_);
+    });
+    private final Registry<Biome> f_70350_;
+    private final StructureSettings f_70351_;
+@@ -149,8 +_,16 @@
+          biomegenerationsettings$builder.m_47842_(GenerationStep.Decoration.LAKES, Features.f_126876_);
+       }
+ 
++      Map<StructureFeature<?>, ConfiguredStructureFeature<?, ?>> map = new java.util.HashMap<>(f_70349_);
++      net.minecraft.data.BuiltinRegistries.f_123862_.m_123024_().filter(f -> !map.containsKey(f.f_65403_)).forEach(f -> map.put(f.f_65403_, f));
+       for(Entry<StructureFeature<?>, StructureFeatureConfiguration> entry : this.f_70351_.m_64590_().entrySet()) {
+-         biomegenerationsettings$builder.m_47849_(biomegenerationsettings.m_47803_(f_70349_.get(entry.getKey())));
++         if (!map.containsKey(entry.getKey())) {
++            f_70348_.error("FORGE: There's no known StructureFeature for {} when preparing the {} flatworld biome." +
++                    " The structure will be skipped and may not spawn." +
++                    " Please register your StructureFeatures in the WorldGenRegistries!", entry.getKey().m_67098_(), biome.getRegistryName());
++            continue;
++         }
++         biomegenerationsettings$builder.m_47849_(biomegenerationsettings.m_47803_(map.get(entry.getKey())));
+       }
+ 
+       boolean flag = (!this.f_70355_ || this.f_70350_.m_7854_(biome).equals(Optional.of(Biomes.f_48173_))) && this.f_70356_;
+@@ -176,7 +_,7 @@
+          }
+       }
+ 
+-      return (new Biome.BiomeBuilder()).m_47597_(biome.m_47530_()).m_47595_(biome.m_47567_()).m_47593_(biome.m_47545_()).m_47607_(biome.m_47551_()).m_47609_(biome.m_47554_()).m_47611_(biome.m_47548_()).m_47603_(biome.m_47557_()).m_47601_(biomegenerationsettings$builder.m_47831_()).m_47605_(biome.m_47518_()).m_47592_();
++      return (new Biome.BiomeBuilder()).m_47597_(biome.m_47530_()).m_47595_(biome.m_47567_()).m_47593_(biome.m_47545_()).m_47607_(biome.m_47551_()).m_47609_(biome.m_47554_()).m_47611_(biome.m_47548_()).m_47603_(biome.m_47557_()).m_47601_(biomegenerationsettings$builder.m_47831_()).m_47605_(biome.m_47518_()).m_47592_().setRegistryName(biome.getRegistryName());
+    }
+ 
+    public StructureSettings m_70395_() {

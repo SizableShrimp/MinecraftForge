@@ -1,0 +1,39 @@
+--- a/com/mojang/realmsclient/dto/RealmsServer.java
++++ b/com/mojang/realmsclient/dto/RealmsServer.java
+@@ -130,8 +_,8 @@
+    }
+ 
+    private static void m_87504_(RealmsServer p_87505_) {
+-      p_87505_.f_87480_.sort((p_87502_, p_87503_) -> {
+-         return ComparisonChain.start().compareFalseFirst(p_87503_.m_87460_(), p_87502_.m_87460_()).compare(p_87502_.m_87447_().toLowerCase(Locale.ROOT), p_87503_.m_87447_().toLowerCase(Locale.ROOT)).result();
++      p_87505_.f_87480_.sort((p_229951_0_, p_229951_1_) -> {
++         return ComparisonChain.start().compareFalseFirst(p_229951_1_.m_87460_(), p_229951_0_.m_87460_()).compare(p_229951_0_.m_87447_().toLowerCase(Locale.ROOT), p_229951_1_.m_87447_().toLowerCase(Locale.ROOT)).result();
+       });
+    }
+ 
+@@ -292,18 +_,18 @@
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
+-   public static enum State {
+-      CLOSED,
+-      OPEN,
+-      UNINITIALIZED;
+-   }
+-
+-   @OnlyIn(Dist.CLIENT)
+    public static enum WorldType {
+       NORMAL,
+       MINIGAME,
+       ADVENTUREMAP,
+       EXPERIENCE,
+       INSPIRATION;
++   }
++
++   @OnlyIn(Dist.CLIENT)
++   public static enum State {
++      CLOSED,
++      OPEN,
++      UNINITIALIZED;
+    }
+ }

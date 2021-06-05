@@ -1,0 +1,10 @@
+--- a/net/minecraft/world/level/storage/loot/predicates/BonusLevelTableCondition.java
++++ b/net/minecraft/world/level/storage/loot/predicates/BonusLevelTableCondition.java
+@@ -13,6 +_,7 @@
+ import net.minecraft.world.item.enchantment.Enchantment;
+ import net.minecraft.world.item.enchantment.EnchantmentHelper;
+ import net.minecraft.world.level.storage.loot.LootContext;
++import net.minecraft.world.level.storage.loot.Serializer;
+ import net.minecraft.world.level.storage.loot.parameters.LootContextParam;
+ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+ 

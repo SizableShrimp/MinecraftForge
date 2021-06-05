@@ -1,0 +1,19 @@
+--- a/net/minecraft/world/item/crafting/FireworkRocketRecipe.java
++++ b/net/minecraft/world/item/crafting/FireworkRocketRecipe.java
+@@ -7,8 +_,6 @@
+ import net.minecraft.world.item.ItemStack;
+ import net.minecraft.world.item.Items;
+ import net.minecraft.world.level.Level;
+-import net.minecraftforge.api.distmarker.Dist;
+-import net.minecraftforge.api.distmarker.OnlyIn;
+ 
+ public class FireworkRocketRecipe extends CustomRecipe {
+    private static final Ingredient f_43837_ = Ingredient.m_43929_(Items.f_42516_);
+@@ -74,7 +_,6 @@
+       return itemstack;
+    }
+ 
+-   @OnlyIn(Dist.CLIENT)
+    public boolean m_8004_(int p_43844_, int p_43845_) {
+       return p_43844_ * p_43845_ >= 2;
+    }

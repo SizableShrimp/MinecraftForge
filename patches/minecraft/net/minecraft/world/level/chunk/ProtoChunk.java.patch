@@ -1,0 +1,69 @@
+--- a/net/minecraft/world/level/chunk/ProtoChunk.java
++++ b/net/minecraft/world/level/chunk/ProtoChunk.java
+@@ -63,10 +_,10 @@
+    private volatile boolean f_63167_;
+ 
+    public ProtoChunk(ChunkPos p_63170_, UpgradeData p_63171_) {
+-      this(p_63170_, p_63171_, (LevelChunkSection[])null, new ProtoTickList<>((p_63185_) -> {
+-         return p_63185_ == null || p_63185_.m_49966_().m_60795_();
+-      }, p_63170_), new ProtoTickList<>((p_63212_) -> {
+-         return p_63212_ == null || p_63212_ == Fluids.f_76191_;
++      this(p_63170_, p_63171_, (LevelChunkSection[])null, new ProtoTickList<>((p_205332_0_) -> {
++         return p_205332_0_ == null || p_205332_0_.m_49966_().m_60795_();
++      }, p_63170_), new ProtoTickList<>((p_205766_0_) -> {
++         return p_205766_0_ == null || p_205766_0_ == Fluids.f_76191_;
+       }, p_63170_));
+    }
+ 
+@@ -136,13 +_,13 @@
+          if (this.f_63156_[j >> 4] == LevelChunk.f_62770_ && p_63218_.m_60713_(Blocks.f_50016_)) {
+             return p_63218_;
+          } else {
+-            if (p_63218_.m_60791_() > 0) {
++            if (p_63218_.getLightValue(this, p_63217_) > 0) {
+                this.f_63158_.add(new BlockPos((i & 15) + this.m_7697_().m_45604_(), j, (k & 15) + this.m_7697_().m_45605_()));
+             }
+ 
+             LevelChunkSection levelchunksection = this.m_63178_(j >> 4);
+             BlockState blockstate = levelchunksection.m_62986_(i & 15, j & 15, k & 15, p_63218_);
+-            if (this.f_63153_.m_62427_(ChunkStatus.f_62322_) && p_63218_ != blockstate && (p_63218_.m_60739_(this, p_63217_) != blockstate.m_60739_(this, p_63217_) || p_63218_.m_60791_() != blockstate.m_60791_() || p_63218_.m_60787_() || blockstate.m_60787_())) {
++            if (this.f_63153_.m_62427_(ChunkStatus.f_62322_) && p_63218_ != blockstate && (p_63218_.m_60739_(this, p_63217_) != blockstate.m_60739_(this, p_63217_) || p_63218_.getLightValue(this, p_63217_) != blockstate.getLightValue(this, p_63217_) || p_63218_.m_60787_() || blockstate.m_60787_())) {
+                LevelLightEngine levellightengine = this.m_7893_();
+                levellightengine.m_7174_(p_63217_);
+             }
+@@ -264,8 +_,8 @@
+    }
+ 
+    public Heightmap m_6005_(Heightmap.Types p_63193_) {
+-      return this.f_63152_.computeIfAbsent(p_63193_, (p_63253_) -> {
+-         return new Heightmap(this, p_63253_);
++      return this.f_63152_.computeIfAbsent(p_63193_, (p_217333_1_) -> {
++         return new Heightmap(this, p_217333_1_);
+       });
+    }
+ 
+@@ -307,13 +_,13 @@
+    }
+ 
+    public LongSet m_6705_(StructureFeature<?> p_63237_) {
+-      return this.f_63161_.computeIfAbsent(p_63237_, (p_63260_) -> {
++      return this.f_63161_.computeIfAbsent(p_63237_, (p_235966_0_) -> {
+          return new LongOpenHashSet();
+       });
+    }
+ 
+    public void m_6306_(StructureFeature<?> p_63204_, long p_63205_) {
+-      this.f_63161_.computeIfAbsent(p_63204_, (p_63255_) -> {
++      this.f_63161_.computeIfAbsent(p_63204_, (p_235965_0_) -> {
+          return new LongOpenHashSet();
+       }).add(p_63205_);
+       this.f_63149_ = true;
+@@ -410,7 +_,7 @@
+    }
+ 
+    public BitSet m_6547_(GenerationStep.Carving p_63235_) {
+-      return this.f_63166_.computeIfAbsent(p_63235_, (p_63251_) -> {
++      return this.f_63166_.computeIfAbsent(p_63235_, (p_235964_0_) -> {
+          return new BitSet(65536);
+       });
+    }

@@ -1,0 +1,31 @@
+--- a/com/mojang/realmsclient/gui/screens/RealmsSelectFileToUploadScreen.java
++++ b/com/mojang/realmsclient/gui/screens/RealmsSelectFileToUploadScreen.java
+@@ -55,11 +_,11 @@
+    }
+ 
+    private void m_89551_() throws Exception {
+-      this.f_89492_ = this.f_96541_.m_91392_().m_78244_().stream().sorted((p_89512_, p_89513_) -> {
+-         if (p_89512_.m_78366_() < p_89513_.m_78366_()) {
++      this.f_89492_ = this.f_96541_.m_91392_().m_78244_().stream().sorted((p_237970_0_, p_237970_1_) -> {
++         if (p_237970_0_.m_78366_() < p_237970_1_.m_78366_()) {
+             return 1;
+          } else {
+-            return p_89512_.m_78366_() > p_89513_.m_78366_() ? -1 : p_89512_.m_78358_().compareTo(p_89513_.m_78358_());
++            return p_237970_0_.m_78366_() > p_237970_1_.m_78366_() ? -1 : p_237970_0_.m_78358_().compareTo(p_237970_1_.m_78358_());
+          }
+       }).collect(Collectors.toList());
+ 
+@@ -82,11 +_,11 @@
+       }
+ 
+       this.m_7787_(this.f_89494_);
+-      this.f_89491_ = this.m_7082_(new Button(this.f_96543_ / 2 - 154, this.f_96544_ - 32, 153, 20, new TranslatableComponent("mco.upload.button.name"), (p_89532_) -> {
++      this.f_89491_ = this.m_7082_(new Button(this.f_96543_ / 2 - 154, this.f_96544_ - 32, 153, 20, new TranslatableComponent("mco.upload.button.name"), (p_237976_1_) -> {
+          this.m_89552_();
+       }));
+       this.f_89491_.f_93623_ = this.f_89493_ >= 0 && this.f_89493_ < this.f_89492_.size();
+-      this.m_7082_(new Button(this.f_96543_ / 2 + 6, this.f_96544_ - 32, 153, 20, CommonComponents.f_130660_, (p_89525_) -> {
++      this.m_7082_(new Button(this.f_96543_ / 2 + 6, this.f_96544_ - 32, 153, 20, CommonComponents.f_130660_, (p_237973_1_) -> {
+          this.f_96541_.m_91152_(this.f_89488_);
+       }));
+       this.f_89495_ = this.m_7787_(new RealmsLabel(new TranslatableComponent("mco.upload.select.world.title"), this.f_96543_ / 2, 13, 16777215));

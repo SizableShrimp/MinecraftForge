@@ -1,0 +1,92 @@
+--- a/net/minecraft/server/commands/CloneCommands.java
++++ b/net/minecraft/server/commands/CloneCommands.java
+@@ -26,53 +_,53 @@
+ 
+ public class CloneCommands {
+    private static final SimpleCommandExceptionType f_136723_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.clone.overlap"));
+-   private static final Dynamic2CommandExceptionType f_136724_ = new Dynamic2CommandExceptionType((p_136743_, p_136744_) -> {
+-      return new TranslatableComponent("commands.clone.toobig", p_136743_, p_136744_);
++   private static final Dynamic2CommandExceptionType f_136724_ = new Dynamic2CommandExceptionType((p_208796_0_, p_208796_1_) -> {
++      return new TranslatableComponent("commands.clone.toobig", p_208796_0_, p_208796_1_);
+    });
+    private static final SimpleCommandExceptionType f_136725_ = new SimpleCommandExceptionType(new TranslatableComponent("commands.clone.failed"));
+-   public static final Predicate<BlockInWorld> f_136722_ = (p_136762_) -> {
+-      return !p_136762_.m_61168_().m_60795_();
++   public static final Predicate<BlockInWorld> f_136722_ = (p_198275_0_) -> {
++      return !p_198275_0_.m_61168_().m_60795_();
+    };
+ 
+    public static void m_136729_(CommandDispatcher<CommandSourceStack> p_136730_) {
+-      p_136730_.register(Commands.m_82127_("clone").requires((p_136734_) -> {
+-         return p_136734_.m_6761_(2);
+-      }).then(Commands.m_82129_("begin", BlockPosArgument.m_118239_()).then(Commands.m_82129_("end", BlockPosArgument.m_118239_()).then(Commands.m_82129_("destination", BlockPosArgument.m_118239_()).executes((p_136778_) -> {
+-         return m_136735_(p_136778_.getSource(), BlockPosArgument.m_118242_(p_136778_, "begin"), BlockPosArgument.m_118242_(p_136778_, "end"), BlockPosArgument.m_118242_(p_136778_, "destination"), (p_136758_) -> {
+-            return true;
+-         }, CloneCommands.Mode.NORMAL);
+-      }).then(Commands.m_82127_("replace").executes((p_136776_) -> {
+-         return m_136735_(p_136776_.getSource(), BlockPosArgument.m_118242_(p_136776_, "begin"), BlockPosArgument.m_118242_(p_136776_, "end"), BlockPosArgument.m_118242_(p_136776_, "destination"), (p_136754_) -> {
+-            return true;
+-         }, CloneCommands.Mode.NORMAL);
+-      }).then(Commands.m_82127_("force").executes((p_136774_) -> {
+-         return m_136735_(p_136774_.getSource(), BlockPosArgument.m_118242_(p_136774_, "begin"), BlockPosArgument.m_118242_(p_136774_, "end"), BlockPosArgument.m_118242_(p_136774_, "destination"), (p_136750_) -> {
++      p_136730_.register(Commands.m_82127_("clone").requires((p_198271_0_) -> {
++         return p_198271_0_.m_6761_(2);
++      }).then(Commands.m_82129_("begin", BlockPosArgument.m_118239_()).then(Commands.m_82129_("end", BlockPosArgument.m_118239_()).then(Commands.m_82129_("destination", BlockPosArgument.m_118239_()).executes((p_198264_0_) -> {
++         return m_136735_(p_198264_0_.getSource(), BlockPosArgument.m_118242_(p_198264_0_, "begin"), BlockPosArgument.m_118242_(p_198264_0_, "end"), BlockPosArgument.m_118242_(p_198264_0_, "destination"), (p_198269_0_) -> {
++            return true;
++         }, CloneCommands.Mode.NORMAL);
++      }).then(Commands.m_82127_("replace").executes((p_198268_0_) -> {
++         return m_136735_(p_198268_0_.getSource(), BlockPosArgument.m_118242_(p_198268_0_, "begin"), BlockPosArgument.m_118242_(p_198268_0_, "end"), BlockPosArgument.m_118242_(p_198268_0_, "destination"), (p_198272_0_) -> {
++            return true;
++         }, CloneCommands.Mode.NORMAL);
++      }).then(Commands.m_82127_("force").executes((p_198277_0_) -> {
++         return m_136735_(p_198277_0_.getSource(), BlockPosArgument.m_118242_(p_198277_0_, "begin"), BlockPosArgument.m_118242_(p_198277_0_, "end"), BlockPosArgument.m_118242_(p_198277_0_, "destination"), (p_198262_0_) -> {
+             return true;
+          }, CloneCommands.Mode.FORCE);
+-      })).then(Commands.m_82127_("move").executes((p_136772_) -> {
+-         return m_136735_(p_136772_.getSource(), BlockPosArgument.m_118242_(p_136772_, "begin"), BlockPosArgument.m_118242_(p_136772_, "end"), BlockPosArgument.m_118242_(p_136772_, "destination"), (p_136746_) -> {
++      })).then(Commands.m_82127_("move").executes((p_198280_0_) -> {
++         return m_136735_(p_198280_0_.getSource(), BlockPosArgument.m_118242_(p_198280_0_, "begin"), BlockPosArgument.m_118242_(p_198280_0_, "end"), BlockPosArgument.m_118242_(p_198280_0_, "destination"), (p_198281_0_) -> {
+             return true;
+          }, CloneCommands.Mode.MOVE);
+-      })).then(Commands.m_82127_("normal").executes((p_136770_) -> {
+-         return m_136735_(p_136770_.getSource(), BlockPosArgument.m_118242_(p_136770_, "begin"), BlockPosArgument.m_118242_(p_136770_, "end"), BlockPosArgument.m_118242_(p_136770_, "destination"), (p_136728_) -> {
++      })).then(Commands.m_82127_("normal").executes((p_198270_0_) -> {
++         return m_136735_(p_198270_0_.getSource(), BlockPosArgument.m_118242_(p_198270_0_, "begin"), BlockPosArgument.m_118242_(p_198270_0_, "end"), BlockPosArgument.m_118242_(p_198270_0_, "destination"), (p_198279_0_) -> {
+             return true;
+          }, CloneCommands.Mode.NORMAL);
+-      }))).then(Commands.m_82127_("masked").executes((p_136768_) -> {
+-         return m_136735_(p_136768_.getSource(), BlockPosArgument.m_118242_(p_136768_, "begin"), BlockPosArgument.m_118242_(p_136768_, "end"), BlockPosArgument.m_118242_(p_136768_, "destination"), f_136722_, CloneCommands.Mode.NORMAL);
+-      }).then(Commands.m_82127_("force").executes((p_136766_) -> {
+-         return m_136735_(p_136766_.getSource(), BlockPosArgument.m_118242_(p_136766_, "begin"), BlockPosArgument.m_118242_(p_136766_, "end"), BlockPosArgument.m_118242_(p_136766_, "destination"), f_136722_, CloneCommands.Mode.FORCE);
+-      })).then(Commands.m_82127_("move").executes((p_136764_) -> {
+-         return m_136735_(p_136764_.getSource(), BlockPosArgument.m_118242_(p_136764_, "begin"), BlockPosArgument.m_118242_(p_136764_, "end"), BlockPosArgument.m_118242_(p_136764_, "destination"), f_136722_, CloneCommands.Mode.MOVE);
+-      })).then(Commands.m_82127_("normal").executes((p_136760_) -> {
+-         return m_136735_(p_136760_.getSource(), BlockPosArgument.m_118242_(p_136760_, "begin"), BlockPosArgument.m_118242_(p_136760_, "end"), BlockPosArgument.m_118242_(p_136760_, "destination"), f_136722_, CloneCommands.Mode.NORMAL);
+-      }))).then(Commands.m_82127_("filtered").then(Commands.m_82129_("filter", BlockPredicateArgument.m_115570_()).executes((p_136756_) -> {
+-         return m_136735_(p_136756_.getSource(), BlockPosArgument.m_118242_(p_136756_, "begin"), BlockPosArgument.m_118242_(p_136756_, "end"), BlockPosArgument.m_118242_(p_136756_, "destination"), BlockPredicateArgument.m_115573_(p_136756_, "filter"), CloneCommands.Mode.NORMAL);
+-      }).then(Commands.m_82127_("force").executes((p_136752_) -> {
+-         return m_136735_(p_136752_.getSource(), BlockPosArgument.m_118242_(p_136752_, "begin"), BlockPosArgument.m_118242_(p_136752_, "end"), BlockPosArgument.m_118242_(p_136752_, "destination"), BlockPredicateArgument.m_115573_(p_136752_, "filter"), CloneCommands.Mode.FORCE);
+-      })).then(Commands.m_82127_("move").executes((p_136748_) -> {
+-         return m_136735_(p_136748_.getSource(), BlockPosArgument.m_118242_(p_136748_, "begin"), BlockPosArgument.m_118242_(p_136748_, "end"), BlockPosArgument.m_118242_(p_136748_, "destination"), BlockPredicateArgument.m_115573_(p_136748_, "filter"), CloneCommands.Mode.MOVE);
+-      })).then(Commands.m_82127_("normal").executes((p_136732_) -> {
+-         return m_136735_(p_136732_.getSource(), BlockPosArgument.m_118242_(p_136732_, "begin"), BlockPosArgument.m_118242_(p_136732_, "end"), BlockPosArgument.m_118242_(p_136732_, "destination"), BlockPredicateArgument.m_115573_(p_136732_, "filter"), CloneCommands.Mode.NORMAL);
++      }))).then(Commands.m_82127_("masked").executes((p_198276_0_) -> {
++         return m_136735_(p_198276_0_.getSource(), BlockPosArgument.m_118242_(p_198276_0_, "begin"), BlockPosArgument.m_118242_(p_198276_0_, "end"), BlockPosArgument.m_118242_(p_198276_0_, "destination"), f_136722_, CloneCommands.Mode.NORMAL);
++      }).then(Commands.m_82127_("force").executes((p_198282_0_) -> {
++         return m_136735_(p_198282_0_.getSource(), BlockPosArgument.m_118242_(p_198282_0_, "begin"), BlockPosArgument.m_118242_(p_198282_0_, "end"), BlockPosArgument.m_118242_(p_198282_0_, "destination"), f_136722_, CloneCommands.Mode.FORCE);
++      })).then(Commands.m_82127_("move").executes((p_198263_0_) -> {
++         return m_136735_(p_198263_0_.getSource(), BlockPosArgument.m_118242_(p_198263_0_, "begin"), BlockPosArgument.m_118242_(p_198263_0_, "end"), BlockPosArgument.m_118242_(p_198263_0_, "destination"), f_136722_, CloneCommands.Mode.MOVE);
++      })).then(Commands.m_82127_("normal").executes((p_198266_0_) -> {
++         return m_136735_(p_198266_0_.getSource(), BlockPosArgument.m_118242_(p_198266_0_, "begin"), BlockPosArgument.m_118242_(p_198266_0_, "end"), BlockPosArgument.m_118242_(p_198266_0_, "destination"), f_136722_, CloneCommands.Mode.NORMAL);
++      }))).then(Commands.m_82127_("filtered").then(Commands.m_82129_("filter", BlockPredicateArgument.m_115570_()).executes((p_198273_0_) -> {
++         return m_136735_(p_198273_0_.getSource(), BlockPosArgument.m_118242_(p_198273_0_, "begin"), BlockPosArgument.m_118242_(p_198273_0_, "end"), BlockPosArgument.m_118242_(p_198273_0_, "destination"), BlockPredicateArgument.m_115573_(p_198273_0_, "filter"), CloneCommands.Mode.NORMAL);
++      }).then(Commands.m_82127_("force").executes((p_198267_0_) -> {
++         return m_136735_(p_198267_0_.getSource(), BlockPosArgument.m_118242_(p_198267_0_, "begin"), BlockPosArgument.m_118242_(p_198267_0_, "end"), BlockPosArgument.m_118242_(p_198267_0_, "destination"), BlockPredicateArgument.m_115573_(p_198267_0_, "filter"), CloneCommands.Mode.FORCE);
++      })).then(Commands.m_82127_("move").executes((p_198261_0_) -> {
++         return m_136735_(p_198261_0_.getSource(), BlockPosArgument.m_118242_(p_198261_0_, "begin"), BlockPosArgument.m_118242_(p_198261_0_, "end"), BlockPosArgument.m_118242_(p_198261_0_, "destination"), BlockPredicateArgument.m_115573_(p_198261_0_, "filter"), CloneCommands.Mode.MOVE);
++      })).then(Commands.m_82127_("normal").executes((p_198278_0_) -> {
++         return m_136735_(p_198278_0_.getSource(), BlockPosArgument.m_118242_(p_198278_0_, "begin"), BlockPosArgument.m_118242_(p_198278_0_, "end"), BlockPosArgument.m_118242_(p_198278_0_, "destination"), BlockPredicateArgument.m_115573_(p_198278_0_, "filter"), CloneCommands.Mode.NORMAL);
+       }))))))));
+    }
+ 

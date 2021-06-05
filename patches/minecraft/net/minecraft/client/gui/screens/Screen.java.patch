@@ -1,0 +1,156 @@
+--- a/net/minecraft/client/gui/screens/Screen.java
++++ b/net/minecraft/client/gui/screens/Screen.java
+@@ -114,7 +_,10 @@
+    }
+ 
+    protected void m_6057_(PoseStack p_96566_, ItemStack p_96567_, int p_96568_, int p_96569_) {
+-      this.m_96597_(p_96566_, this.m_96555_(p_96567_), p_96568_, p_96569_);
++      Font font = p_96567_.m_41720_().getFontRenderer(p_96567_);
++      net.minecraftforge.fml.client.gui.GuiUtils.preItemToolTip(p_96567_);
++      this.renderWrappedToolTip(p_96566_, this.m_96555_(p_96567_), p_96568_, p_96569_, (font == null ? this.f_96547_ : font));
++      net.minecraftforge.fml.client.gui.GuiUtils.postItemToolTip();
+    }
+ 
+    public List<Component> m_96555_(ItemStack p_96556_) {
+@@ -122,29 +_,35 @@
+    }
+ 
+    public void m_96602_(PoseStack p_96603_, Component p_96604_, int p_96605_, int p_96606_) {
+-      this.m_96617_(p_96603_, Arrays.asList(p_96604_.m_7532_()), p_96605_, p_96606_);
++      this.m_96597_(p_96603_, Arrays.asList(p_96604_), p_96605_, p_96606_);
+    }
+ 
+    public void m_96597_(PoseStack p_96598_, List<Component> p_96599_, int p_96600_, int p_96601_) {
+-      this.m_96617_(p_96598_, Lists.transform(p_96599_, Component::m_7532_), p_96600_, p_96601_);
++      this.renderWrappedToolTip(p_96598_, p_96599_, p_96600_, p_96601_, f_96547_);
++   }
++   public void renderWrappedToolTip(PoseStack matrixStack, List<? extends net.minecraft.network.chat.FormattedText> tooltips, int mouseX, int mouseY, Font font) {
++      net.minecraftforge.fml.client.gui.GuiUtils.drawHoveringText(matrixStack, tooltips, mouseX, mouseY, f_96543_, f_96544_, -1, font);
+    }
+ 
+    public void m_96617_(PoseStack p_96618_, List<? extends FormattedCharSequence> p_96619_, int p_96620_, int p_96621_) {
+-      if (!p_96619_.isEmpty()) {
++      this.renderToolTip(p_96618_, p_96619_, p_96620_, p_96621_, f_96547_);
++   }
++   public void renderToolTip(PoseStack p_238654_1_, List<? extends FormattedCharSequence> p_238654_2_, int p_238654_3_, int p_238654_4_, Font font) {
++      if (!p_238654_2_.isEmpty()) {
+          int i = 0;
+ 
+-         for(FormattedCharSequence formattedcharsequence : p_96619_) {
++         for(FormattedCharSequence formattedcharsequence : p_238654_2_) {
+             int j = this.f_96547_.m_92724_(formattedcharsequence);
+             if (j > i) {
+                i = j;
+             }
+          }
+ 
+-         int i2 = p_96620_ + 12;
+-         int j2 = p_96621_ - 12;
++         int i2 = p_238654_3_ + 12;
++         int j2 = p_238654_4_ - 12;
+          int k = 8;
+-         if (p_96619_.size() > 1) {
+-            k += 2 + (p_96619_.size() - 1) * 10;
++         if (p_238654_2_.size() > 1) {
++            k += 2 + (p_238654_2_.size() - 1) * 10;
+          }
+ 
+          if (i2 + i > this.f_96543_) {
+@@ -155,7 +_,7 @@
+             j2 = this.f_96544_ - k - 6;
+          }
+ 
+-         p_96618_.m_85836_();
++         p_238654_1_.m_85836_();
+          int l = -267386864;
+          int i1 = 1347420415;
+          int j1 = 1344798847;
+@@ -163,7 +_,7 @@
+          Tesselator tesselator = Tesselator.m_85913_();
+          BufferBuilder bufferbuilder = tesselator.m_85915_();
+          bufferbuilder.m_85696_(7, DefaultVertexFormat.f_85815_);
+-         Matrix4f matrix4f = p_96618_.m_85850_().m_85861_();
++         Matrix4f matrix4f = p_238654_1_.m_85850_().m_85861_();
+          m_93123_(matrix4f, bufferbuilder, i2 - 3, j2 - 4, i2 + i + 3, j2 - 3, 400, -267386864, -267386864);
+          m_93123_(matrix4f, bufferbuilder, i2 - 3, j2 + k + 3, i2 + i + 3, j2 + k + 4, 400, -267386864, -267386864);
+          m_93123_(matrix4f, bufferbuilder, i2 - 3, j2 - 3, i2 + i + 3, j2 + k + 3, 400, -267386864, -267386864);
+@@ -184,10 +_,10 @@
+          RenderSystem.m_69461_();
+          RenderSystem.m_69493_();
+          MultiBufferSource.BufferSource multibuffersource$buffersource = MultiBufferSource.m_109898_(Tesselator.m_85913_().m_85915_());
+-         p_96618_.m_85837_(0.0D, 0.0D, 400.0D);
++         p_238654_1_.m_85837_(0.0D, 0.0D, 400.0D);
+ 
+-         for(int l1 = 0; l1 < p_96619_.size(); ++l1) {
+-            FormattedCharSequence formattedcharsequence1 = p_96619_.get(l1);
++         for(int l1 = 0; l1 < p_238654_2_.size(); ++l1) {
++            FormattedCharSequence formattedcharsequence1 = p_238654_2_.get(l1);
+             if (formattedcharsequence1 != null) {
+                this.f_96547_.m_92733_(formattedcharsequence1, (float)i2, (float)j2, -1, true, matrix4f, multibuffersource$buffersource, false, 0, 15728880);
+             }
+@@ -200,7 +_,7 @@
+          }
+ 
+          multibuffersource$buffersource.m_109911_();
+-         p_96618_.m_85849_();
++         p_238654_1_.m_85849_();
+       }
+    }
+ 
+@@ -290,9 +_,12 @@
+    }
+ 
+    public void m_96612_(String p_96613_, boolean p_96614_) {
++      p_96613_ = net.minecraftforge.event.ForgeEventFactory.onClientSendMessage(p_96613_);
++      if (p_96613_.isEmpty()) return;
+       if (p_96614_) {
+          this.f_96541_.f_91065_.m_93076_().m_93783_(p_96613_);
+       }
++      //if (net.minecraftforge.client.ClientCommandHandler.instance.executeCommand(mc.player, msg) != 0) return; //Forge: TODO Client command re-write
+ 
+       this.f_96541_.f_91074_.m_108739_(p_96613_);
+    }
+@@ -303,10 +_,17 @@
+       this.f_96547_ = p_96607_.f_91062_;
+       this.f_96543_ = p_96608_;
+       this.f_96544_ = p_96609_;
++      java.util.function.Consumer<AbstractWidget> remove = (b) -> {
++         f_96545_.remove(b);
++         f_96540_.remove(b);
++      };
++      if (!net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent.Pre(this, this.f_96545_, this::m_7082_, remove))) {
+       this.f_96545_.clear();
+       this.f_96540_.clear();
+       this.m_7522_((GuiEventListener)null);
+       this.m_7856_();
++      }
++      net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent.Post(this, this.f_96545_, this::m_7082_, remove));
+    }
+ 
+    public List<? extends GuiEventListener> m_6702_() {
+@@ -329,6 +_,7 @@
+    public void m_96558_(PoseStack p_96559_, int p_96560_) {
+       if (this.f_96541_.f_91073_ != null) {
+          this.m_93179_(p_96559_, 0, 0, this.f_96543_, this.f_96544_, -1072689136, -804253680);
++         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.GuiScreenEvent.BackgroundDrawnEvent(this, p_96559_));
+       } else {
+          this.m_96626_(p_96560_);
+       }
+@@ -347,6 +_,7 @@
+       bufferbuilder.m_5483_((double)this.f_96543_, 0.0D, 0.0D).m_7421_((float)this.f_96543_ / 32.0F, (float)p_96627_).m_6122_(64, 64, 64, 255).m_5752_();
+       bufferbuilder.m_5483_(0.0D, 0.0D, 0.0D).m_7421_(0.0F, (float)p_96627_).m_6122_(64, 64, 64, 255).m_5752_();
+       tesselator.m_85914_();
++      net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.GuiScreenEvent.BackgroundDrawnEvent(this, new PoseStack()));
+    }
+ 
+    public boolean m_7043_() {
+@@ -432,5 +_,9 @@
+    }
+ 
+    public void m_7400_(List<Path> p_96591_) {
++   }
++
++   public Minecraft getMinecraft() {
++      return this.f_96541_;
+    }
+ }

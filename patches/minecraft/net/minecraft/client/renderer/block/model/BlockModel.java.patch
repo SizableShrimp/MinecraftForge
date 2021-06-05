@@ -1,0 +1,140 @@
+--- a/net/minecraft/client/renderer/block/model/BlockModel.java
++++ b/net/minecraft/client/renderer/block/model/BlockModel.java
+@@ -54,19 +_,20 @@
+    private final List<BlockElement> f_111422_;
+    @Nullable
+    private final BlockModel.GuiLight f_111423_;
+-   private final boolean f_111424_;
++   public final boolean f_111424_;
+    private final ItemTransforms f_111425_;
+    private final List<ItemOverride> f_111426_;
+    public String f_111416_ = "";
+    @VisibleForTesting
+-   protected final Map<String, Either<Material, String>> f_111417_;
++   public final Map<String, Either<Material, String>> f_111417_;
+    @Nullable
+-   protected BlockModel f_111418_;
++   public BlockModel f_111418_;
+    @Nullable
+    protected ResourceLocation f_111419_;
++   public final net.minecraftforge.client.model.BlockModelConfiguration customData = new net.minecraftforge.client.model.BlockModelConfiguration(this);
+ 
+    public static BlockModel m_111461_(Reader p_111462_) {
+-      return GsonHelper.m_13776_(f_111415_, p_111462_, BlockModel.class);
++      return GsonHelper.m_13776_(net.minecraftforge.client.model.ModelLoaderRegistry.ExpandedBlockModelDeserializer.INSTANCE, p_111462_, BlockModel.class);
+    }
+ 
+    public static BlockModel m_111463_(String p_111464_) {
+@@ -83,10 +_,15 @@
+       this.f_111426_ = p_111435_;
+    }
+ 
++   @Deprecated
+    public List<BlockElement> m_111436_() {
++      if (customData.hasCustomGeometry()) return java.util.Collections.emptyList();
+       return this.f_111422_.isEmpty() && this.f_111418_ != null ? this.f_111418_.m_111436_() : this.f_111422_;
+    }
+ 
++   @Nullable
++   public ResourceLocation getParentLocation() { return f_111419_; }
++
+    public boolean m_111476_() {
+       return this.f_111418_ != null ? this.f_111418_.m_111476_() : this.f_111424_;
+    }
+@@ -107,6 +_,10 @@
+       return this.f_111426_.isEmpty() ? ItemOverrides.f_111734_ : new ItemOverrides(p_111447_, p_111448_, p_111447_::m_119341_, this.f_111426_);
+    }
+ 
++   public ItemOverrides getOverrides(ModelBakery p_217646_1_, BlockModel p_217646_2_, Function<Material, TextureAtlasSprite> textureGetter) {
++      return this.f_111426_.isEmpty() ? ItemOverrides.f_111734_ : new ItemOverrides(p_217646_1_, p_217646_2_, p_217646_1_::m_119341_, textureGetter, this.f_111426_);
++   }
++
+    public Collection<ResourceLocation> m_7970_() {
+       Set<ResourceLocation> set = Sets.newHashSet();
+ 
+@@ -150,6 +_,9 @@
+ 
+       Set<Material> set1 = Sets.newHashSet(this.m_111480_("particle"));
+ 
++      if(customData.hasCustomGeometry())
++         set1.addAll(customData.getTextureDependencies(p_111469_, p_111470_));
++      else
+       for(BlockElement blockelement : this.m_111436_()) {
+          for(BlockElementFace blockelementface : blockelement.f_111310_.values()) {
+             Material material = this.m_111480_(blockelementface.f_111356_);
+@@ -161,40 +_,46 @@
+          }
+       }
+ 
+-      this.f_111426_.forEach((p_111475_) -> {
+-         UnbakedModel unbakedmodel1 = p_111469_.apply(p_111475_.m_111718_());
++      this.f_111426_.forEach((p_228815_4_) -> {
++         UnbakedModel unbakedmodel1 = p_111469_.apply(p_228815_4_.m_111718_());
+          if (!Objects.equals(unbakedmodel1, this)) {
+             set1.addAll(unbakedmodel1.m_5500_(p_111469_, p_111470_));
+          }
+       });
+       if (this.m_111490_() == ModelBakery.f_119232_) {
+-         ItemModelGenerator.f_111635_.forEach((p_111467_) -> {
+-            set1.add(this.m_111480_(p_111467_));
++         ItemModelGenerator.f_111635_.forEach((p_228814_2_) -> {
++            set1.add(this.m_111480_(p_228814_2_));
+          });
+       }
+ 
+       return set1;
+    }
+ 
++   @Deprecated //Forge: Use Boolean variant
+    public BakedModel m_7611_(ModelBakery p_111457_, Function<Material, TextureAtlasSprite> p_111458_, ModelState p_111459_, ResourceLocation p_111460_) {
+       return this.m_111449_(p_111457_, this, p_111458_, p_111459_, p_111460_, true);
+    }
+ 
+    public BakedModel m_111449_(ModelBakery p_111450_, BlockModel p_111451_, Function<Material, TextureAtlasSprite> p_111452_, ModelState p_111453_, ResourceLocation p_111454_, boolean p_111455_) {
+-      TextureAtlasSprite textureatlassprite = p_111452_.apply(this.m_111480_("particle"));
++      return net.minecraftforge.client.model.ModelLoaderRegistry.bakeHelper(this, p_111450_, p_111451_, p_111452_, p_111453_, p_111454_, p_111455_);
++   }
++
++   @Deprecated //Forge: exposed for our callbacks only. Use the above function.
++   public BakedModel bakeVanilla(ModelBakery p_228813_1_, BlockModel p_228813_2_, Function<Material, TextureAtlasSprite> p_228813_3_, ModelState p_228813_4_, ResourceLocation p_228813_5_, boolean p_228813_6_) {
++      TextureAtlasSprite textureatlassprite = p_228813_3_.apply(this.m_111480_("particle"));
+       if (this.m_111490_() == ModelBakery.f_119233_) {
+-         return new BuiltInModel(this.m_111491_(), this.m_111446_(p_111450_, p_111451_), textureatlassprite, this.m_111479_().m_111526_());
++         return new BuiltInModel(this.m_111491_(), this.m_111446_(p_228813_1_, p_228813_2_), textureatlassprite, this.m_111479_().m_111526_());
+       } else {
+-         SimpleBakedModel.Builder simplebakedmodel$builder = (new SimpleBakedModel.Builder(this, this.m_111446_(p_111450_, p_111451_), p_111455_)).m_119528_(textureatlassprite);
++         SimpleBakedModel.Builder simplebakedmodel$builder = (new SimpleBakedModel.Builder(this, this.m_111446_(p_228813_1_, p_228813_2_), p_228813_6_)).m_119528_(textureatlassprite);
+ 
+          for(BlockElement blockelement : this.m_111436_()) {
+             for(Direction direction : blockelement.f_111310_.keySet()) {
+                BlockElementFace blockelementface = blockelement.f_111310_.get(direction);
+-               TextureAtlasSprite textureatlassprite1 = p_111452_.apply(this.m_111480_(blockelementface.f_111356_));
++               TextureAtlasSprite textureatlassprite1 = p_228813_3_.apply(this.m_111480_(blockelementface.f_111356_));
+                if (blockelementface.f_111354_ == null) {
+-                  simplebakedmodel$builder.m_119526_(m_111437_(blockelement, blockelementface, textureatlassprite1, direction, p_111453_, p_111454_));
++                  simplebakedmodel$builder.m_119526_(m_111437_(blockelement, blockelementface, textureatlassprite1, direction, p_228813_4_, p_228813_5_));
+                } else {
+-                  simplebakedmodel$builder.m_119530_(Direction.m_122384_(p_111453_.m_6189_().m_121104_(), blockelementface.f_111354_), m_111437_(blockelement, blockelementface, textureatlassprite1, direction, p_111453_, p_111454_));
++                  simplebakedmodel$builder.m_119530_(Direction.m_122384_(p_228813_4_.m_6189_().m_121104_(), blockelementface.f_111354_), m_111437_(blockelement, blockelementface, textureatlassprite1, direction, p_228813_4_, p_228813_5_));
+                }
+             }
+          }
+@@ -207,6 +_,10 @@
+       return f_111421_.m_111600_(p_111438_.f_111308_, p_111438_.f_111309_, p_111439_, p_111440_, p_111441_, p_111442_, p_111438_.f_111311_, p_111438_.f_111312_, p_111443_);
+    }
+ 
++   public static BakedQuad makeBakedQuad(BlockElement p_228812_0_, BlockElementFace p_228812_1_, TextureAtlasSprite p_228812_2_, Direction p_228812_3_, ModelState p_228812_4_, ResourceLocation p_228812_5_) {
++      return m_111437_(p_228812_0_, p_228812_1_, p_228812_2_, p_228812_3_, p_228812_4_, p_228812_5_);
++   }
++
+    public boolean m_111477_(String p_111478_) {
+       return !MissingTextureAtlasSprite.m_118071_().equals(this.m_111480_(p_111478_).m_119203_());
+    }
+@@ -380,5 +_,7 @@
+       public boolean m_111526_() {
+          return this == SIDE;
+       }
++      
++      public String getSerializedName() { return f_111519_; }
+    }
+ }

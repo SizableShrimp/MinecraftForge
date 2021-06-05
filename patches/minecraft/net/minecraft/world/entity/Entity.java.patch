@@ -1,0 +1,453 @@
+--- a/net/minecraft/world/entity/Entity.java
++++ b/net/minecraft/world/entity/Entity.java
+@@ -76,7 +_,6 @@
+ import net.minecraft.world.level.LevelReader;
+ import net.minecraft.world.level.block.Block;
+ import net.minecraft.world.level.block.Blocks;
+-import net.minecraft.world.level.block.FenceGateBlock;
+ import net.minecraft.world.level.block.HoneyBlock;
+ import net.minecraft.world.level.block.Mirror;
+ import net.minecraft.world.level.block.RenderShape;
+@@ -107,12 +_,13 @@
+ import org.apache.logging.log4j.LogManager;
+ import org.apache.logging.log4j.Logger;
+ 
+-public abstract class Entity implements Nameable, CommandSource {
++public abstract class Entity extends net.minecraftforge.common.capabilities.CapabilityProvider<Entity> implements Nameable, CommandSource, net.minecraftforge.common.extensions.IForgeEntity {
+    protected static final Logger f_19849_ = LogManager.getLogger();
+    private static final AtomicInteger f_19843_ = new AtomicInteger();
+    private static final List<ItemStack> f_19844_ = Collections.emptyList();
+    private static final AABB f_19845_ = new AABB(0.0D, 0.0D, 0.0D, 0.0D, 0.0D, 0.0D);
+    private static double f_19846_ = 1.0D;
++   @Deprecated // Forge: Use the getter to allow overriding in mods
+    private final EntityType<?> f_19847_;
+    private int f_19848_ = f_19843_.incrementAndGet();
+    public boolean f_19850_;
+@@ -138,6 +_,7 @@
+    public boolean f_19863_;
+    public boolean f_19864_;
+    protected Vec3 f_19865_ = Vec3.f_82478_;
++   @Deprecated //Forge: Use isAlive, remove(boolean) and revive() instead of directly accessing this field. To allow the entity to react to and better control this information.
+    public boolean f_19866_;
+    public float f_19867_;
+    public float f_19787_;
+@@ -193,6 +_,7 @@
+    private float f_19816_;
+ 
+    public Entity(EntityType<?> p_19870_, Level p_19871_) {
++      super(Entity.class);
+       this.f_19847_ = p_19870_;
+       this.f_19853_ = p_19871_;
+       this.f_19815_ = p_19870_.m_20680_();
+@@ -209,7 +_,11 @@
+       this.f_19804_.m_135372_(f_19836_, false);
+       this.f_19804_.m_135372_(f_19806_, Pose.STANDING);
+       this.m_8097_();
+-      this.f_19816_ = this.m_6380_(Pose.STANDING, this.f_19815_);
++      net.minecraftforge.event.entity.EntityEvent.Size sizeEvent = net.minecraftforge.event.ForgeEventFactory.getEntitySizeForge(this, Pose.STANDING, this.f_19815_, this.m_6380_(Pose.STANDING, this.f_19815_));
++      this.f_19815_ = sizeEvent.getNewSize();
++      this.f_19816_ = sizeEvent.getNewEyeHeight();
++      net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.entity.EntityEvent.EntityConstructing(this));
++      this.gatherCapabilities();
+    }
+ 
+    @OnlyIn(Dist.CLIENT)
+@@ -315,7 +_,13 @@
+    }
+ 
+    public void m_6091_() {
++      this.remove(false);
++   }
++
++   public void remove(boolean keepData) {
+       this.f_19866_ = true;
++      if (!keepData)
++         this.invalidateCaps();
+    }
+ 
+    public void m_20124_(Pose p_20125_) {
+@@ -328,6 +_,7 @@
+ 
+    public boolean m_19950_(Entity p_19951_, double p_19952_) {
+       double d0 = p_19951_.f_19825_.f_82479_ - this.f_19825_.f_82479_;
++      if (this.isAddedToWorld() && !this.f_19853_.f_46443_ && f_19853_ instanceof ServerLevel) ((ServerLevel)this.f_19853_).m_8819_(this); // Forge - Process chunk registration after moving.
+       double d1 = p_19951_.f_19825_.f_82480_ - this.f_19825_.f_82480_;
+       double d2 = p_19951_.f_19825_.f_82481_ - this.f_19825_.f_82481_;
+       return d0 * d0 + d1 * d1 + d2 * d2 < p_19952_ * p_19952_;
+@@ -558,7 +_,7 @@
+ 
+             this.f_19787_ = (float)((double)this.f_19787_ + (double)Mth.m_14003_(m_20179_(vec3)) * 0.6D);
+             this.f_19788_ = (float)((double)this.f_19788_ + (double)Mth.m_14003_(d0 * d0 + d1 * d1 + d2 * d2) * 0.6D);
+-            if (this.f_19788_ > this.f_19829_ && !blockstate.m_60795_()) {
++            if (this.f_19788_ > this.f_19829_ && !blockstate.isAir(this.f_19853_, blockpos)) {
+                this.f_19829_ = this.m_6059_();
+                if (this.m_20069_()) {
+                   Entity entity = this.m_20160_() && this.m_6688_() != null ? this.m_6688_() : this;
+@@ -573,7 +_,7 @@
+                } else {
+                   this.m_7355_(blockpos, blockstate);
+                }
+-            } else if (this.f_19788_ > this.f_19830_ && this.m_6077_() && blockstate.m_60795_()) {
++            } else if (this.f_19788_ > this.f_19830_ && this.m_6077_() && blockstate.isAir(this.f_19853_, blockpos)) {
+                this.f_19830_ = this.m_5684_(this.f_19788_);
+             }
+          }
+@@ -589,8 +_,9 @@
+ 
+          float f2 = this.m_6041_();
+          this.m_20256_(this.m_20184_().m_82542_((double)f2, 1.0D, (double)f2));
+-         if (this.f_19853_.m_46847_(this.m_20191_().m_82406_(0.001D)).noneMatch((p_20127_) -> {
+-            return p_20127_.m_60620_(BlockTags.f_13076_) || p_20127_.m_60713_(Blocks.f_49991_);
++         if (BlockPos.m_121921_(this.m_20191_().m_82406_(0.001D)).noneMatch((p_233572_0_) -> {
++            BlockState state = f_19853_.m_8055_(p_233572_0_);
++            return state.m_60620_(BlockTags.f_13076_) || state.m_60713_(Blocks.f_49991_) || state.isBurning(f_19853_, p_233572_0_);
+          }) && this.f_19831_ <= 0) {
+             this.m_7311_(-this.m_6101_());
+          }
+@@ -609,11 +_,10 @@
+       int j = Mth.m_14107_(this.f_19825_.f_82480_ - (double)0.2F);
+       int k = Mth.m_14107_(this.f_19825_.f_82481_);
+       BlockPos blockpos = new BlockPos(i, j, k);
+-      if (this.f_19853_.m_8055_(blockpos).m_60795_()) {
++      if (this.f_19853_.m_46859_(blockpos)) {
+          BlockPos blockpos1 = blockpos.m_7495_();
+          BlockState blockstate = this.f_19853_.m_8055_(blockpos1);
+-         Block block = blockstate.m_60734_();
+-         if (block.m_49809_(BlockTags.f_13039_) || block.m_49809_(BlockTags.f_13032_) || block instanceof FenceGateBlock) {
++         if (blockstate.collisionExtendsVertically(this.f_19853_, blockpos1, this)) {
+             return blockpos1;
+          }
+       }
+@@ -683,7 +_,7 @@
+       CollisionContext collisioncontext = CollisionContext.m_82750_(this);
+       VoxelShape voxelshape = this.f_19853_.m_6857_().m_61946_();
+       Stream<VoxelShape> stream = Shapes.m_83157_(voxelshape, Shapes.m_83064_(aabb.m_82406_(1.0E-7D)), BooleanOp.f_82689_) ? Stream.empty() : Stream.of(voxelshape);
+-      Stream<VoxelShape> stream1 = this.f_19853_.m_5454_(this, aabb.m_82369_(p_20273_), (p_19949_) -> {
++      Stream<VoxelShape> stream1 = this.f_19853_.m_5454_(this, aabb.m_82369_(p_20273_), (p_233561_0_) -> {
+          return true;
+       });
+       RewindableStream<VoxelShape> rewindablestream = new RewindableStream<>(Stream.concat(stream1, stream));
+@@ -799,6 +_,7 @@
+    public void m_20100_() {
+       AABB aabb = this.m_20191_();
+       this.m_20343_((aabb.f_82288_ + aabb.f_82291_) / 2.0D, aabb.f_82289_, (aabb.f_82290_ + aabb.f_82293_) / 2.0D);
++      if (this.isAddedToWorld() && !this.f_19853_.f_46443_ && f_19853_ instanceof ServerLevel) ((ServerLevel)this.f_19853_).m_8819_(this); // Forge - Process chunk registration after moving.
+    }
+ 
+    protected SoundEvent m_5501_() {
+@@ -847,7 +_,7 @@
+    protected void m_7355_(BlockPos p_20135_, BlockState p_20136_) {
+       if (!p_20136_.m_60767_().m_76332_()) {
+          BlockState blockstate = this.f_19853_.m_8055_(p_20135_.m_7494_());
+-         SoundType soundtype = blockstate.m_60713_(Blocks.f_50125_) ? blockstate.m_60827_() : p_20136_.m_60827_();
++         SoundType soundtype = blockstate.m_60713_(Blocks.f_50125_) ? blockstate.getSoundType(f_19853_, p_20135_, this) : p_20136_.getSoundType(f_19853_, p_20135_, this);
+          this.m_5496_(soundtype.m_56776_(), soundtype.m_56773_() * 0.15F, soundtype.m_56774_());
+       }
+    }
+@@ -1054,9 +_,10 @@
+       int k = Mth.m_14107_(this.m_20189_());
+       BlockPos blockpos = new BlockPos(i, j, k);
+       BlockState blockstate = this.f_19853_.m_8055_(blockpos);
++      if(!blockstate.addRunningEffects(f_19853_, blockpos, this))
+       if (blockstate.m_60799_() != RenderShape.INVISIBLE) {
+          Vec3 vec3 = this.m_20184_();
+-         this.f_19853_.m_7106_(new BlockParticleOption(ParticleTypes.f_123794_, blockstate), this.m_20185_() + (this.f_19796_.nextDouble() - 0.5D) * (double)this.f_19815_.f_20377_, this.m_20186_() + 0.1D, this.m_20189_() + (this.f_19796_.nextDouble() - 0.5D) * (double)this.f_19815_.f_20377_, vec3.f_82479_ * -4.0D, 1.5D, vec3.f_82481_ * -4.0D);
++         this.f_19853_.m_7106_(new BlockParticleOption(ParticleTypes.f_123794_, blockstate).setPos(blockpos), this.m_20185_() + (this.f_19796_.nextDouble() - 0.5D) * (double)this.f_19815_.f_20377_, this.m_20186_() + 0.1D, this.m_20189_() + (this.f_19796_.nextDouble() - 0.5D) * (double)this.f_19815_.f_20377_, vec3.f_82479_ * -4.0D, 1.5D, vec3.f_82481_ * -4.0D);
+       }
+ 
+    }
+@@ -1375,6 +_,7 @@
+          if (this.f_19822_) {
+             p_20241_.m_128379_("Glowing", this.f_19822_);
+          }
++         p_20241_.m_128379_("CanUpdate", canUpdate);
+ 
+          if (!this.f_19841_.isEmpty()) {
+             ListTag listtag = new ListTag();
+@@ -1386,6 +_,10 @@
+             p_20241_.m_128365_("Tags", listtag);
+          }
+ 
++         CompoundTag caps = serializeCaps();
++         if (caps != null) p_20241_.m_128365_("ForgeCaps", caps);
++         if (persistentData != null) p_20241_.m_128365_("ForgeData", persistentData);
++
+          this.m_7380_(p_20241_);
+          if (this.m_20160_()) {
+             ListTag listtag1 = new ListTag();
+@@ -1456,6 +_,9 @@
+                this.m_20225_(p_20259_.m_128471_("Silent"));
+                this.m_20242_(p_20259_.m_128471_("NoGravity"));
+                this.m_20294_(p_20259_.m_128471_("Glowing"));
++               if (p_20259_.m_128425_("ForgeData", 10)) persistentData = p_20259_.m_128469_("ForgeData");
++               if (p_20259_.m_128425_("CanUpdate", 99)) this.canUpdate(p_20259_.m_128471_("CanUpdate"));
++               if (p_20259_.m_128425_("ForgeCaps", 10)) deserializeCaps(p_20259_.m_128469_("ForgeCaps"));
+                if (p_20259_.m_128425_("Tags", 9)) {
+                   this.f_19841_.clear();
+                   ListTag listtag3 = p_20259_.m_128437_("Tags", 8);
+@@ -1490,7 +_,7 @@
+    }
+ 
+    @Nullable
+-   protected final String m_20078_() {
++   public final String m_20078_() {
+       EntityType<?> entitytype = this.m_6095_();
+       ResourceLocation resourcelocation = EntityType.m_20613_(entitytype);
+       return entitytype.m_20584_() && resourcelocation != null ? resourcelocation.toString() : null;
+@@ -1544,6 +_,8 @@
+       } else {
+          ItemEntity itementity = new ItemEntity(this.f_19853_, this.m_20185_(), this.m_20186_() + (double)p_19986_, this.m_20189_(), p_19985_);
+          itementity.m_32060_();
++         if (captureDrops() != null) captureDrops().add(itementity);
++         else
+          this.f_19853_.m_7967_(itementity);
+          return itementity;
+       }
+@@ -1560,8 +_,8 @@
+          float f = 0.1F;
+          float f1 = this.f_19815_.f_20377_ * 0.8F;
+          AABB aabb = AABB.m_82402_((double)f1, (double)0.1F, (double)f1).m_82386_(this.m_20185_(), this.m_20188_(), this.m_20189_());
+-         return this.f_19853_.m_45764_(this, aabb, (p_20129_, p_20130_) -> {
+-            return p_20129_.m_60828_(this.f_19853_, p_20130_);
++         return this.f_19853_.m_45764_(this, aabb, (p_241338_1_, p_241338_2_) -> {
++            return p_241338_1_.m_60828_(this.f_19853_, p_241338_2_);
+          }).findAny().isPresent();
+       }
+    }
+@@ -1580,6 +_,7 @@
+ 
+    public void m_6083_() {
+       this.m_20256_(Vec3.f_82478_);
++      if (canUpdate())
+       this.m_8119_();
+       if (this.m_20159_()) {
+          this.m_20202_().m_7332_(this);
+@@ -1625,6 +_,7 @@
+          }
+       }
+ 
++      if (!net.minecraftforge.event.ForgeEventFactory.canMountEntity(this, p_19966_, true)) return false;
+       if (p_19967_ || this.m_7341_(p_19966_) && p_19966_.m_7310_(this)) {
+          if (this.m_20159_()) {
+             this.m_8127_();
+@@ -1657,6 +_,7 @@
+    public void m_6038_() {
+       if (this.f_19824_ != null) {
+          Entity entity = this.f_19824_;
++         if (!net.minecraftforge.event.ForgeEventFactory.canMountEntity(this, entity, false)) return;
+          this.f_19824_ = null;
+          entity.m_20351_(this);
+       }
+@@ -1814,6 +_,7 @@
+       return !this.m_20197_().isEmpty();
+    }
+ 
++   @Deprecated //Forge: Use rider sensitive version
+    public boolean m_6146_() {
+       return true;
+    }
+@@ -2030,7 +_,7 @@
+    }
+ 
+    protected Component m_5677_() {
+-      return this.f_19847_.m_20676_();
++      return this.m_6095_().m_20676_(); // Forge: Use getter to allow overriding by mods
+    }
+ 
+    public boolean m_7306_(Entity p_20356_) {
+@@ -2085,32 +_,39 @@
+ 
+    @Nullable
+    public Entity m_5489_(ServerLevel p_20118_) {
++      return this.changeDimension(p_20118_, p_20118_.m_8871_());
++   }
++   @Nullable
++   public Entity changeDimension(ServerLevel p_241206_1_, net.minecraftforge.common.util.ITeleporter teleporter) {
+       if (this.f_19853_ instanceof ServerLevel && !this.f_19866_) {
+          this.f_19853_.m_46473_().m_6180_("changeDimension");
+          this.m_19877_();
+          this.f_19853_.m_46473_().m_6180_("reposition");
+-         PortalInfo portalinfo = this.m_7937_(p_20118_);
++         PortalInfo portalinfo = teleporter.getPortalInfo(this, p_241206_1_, this::m_7937_);
+          if (portalinfo == null) {
+             return null;
+          } else {
++            Entity transportedEntity = teleporter.placeEntity(this, (ServerLevel) this.f_19853_, p_241206_1_, this.f_19857_, spawnPortal -> { //Forge: Start vanilla logic
+             this.f_19853_.m_46473_().m_6182_("reloading");
+-            Entity entity = this.m_6095_().m_20615_(p_20118_);
++            Entity entity = this.m_6095_().m_20615_(p_241206_1_);
+             if (entity != null) {
+                entity.m_20361_(this);
+                entity.m_7678_(portalinfo.f_77676_.f_82479_, portalinfo.f_77676_.f_82480_, portalinfo.f_77676_.f_82481_, portalinfo.f_77678_, entity.f_19858_);
+                entity.m_20256_(portalinfo.f_77677_);
+-               p_20118_.m_8851_(entity);
+-               if (p_20118_.m_46472_() == Level.f_46430_) {
+-                  ServerLevel.m_8617_(p_20118_);
++               p_241206_1_.m_8851_(entity);
++               if (spawnPortal && p_241206_1_.m_46472_() == Level.f_46430_) {
++                  ServerLevel.m_8617_(p_241206_1_);
+                }
+             }
++            return entity;
++            }); //Forge: End vanilla logic
+ 
+             this.m_6089_();
+             this.f_19853_.m_46473_().m_7238_();
+             ((ServerLevel)this.f_19853_).m_8886_();
+-            p_20118_.m_8886_();
++            p_241206_1_.m_8886_();
+             this.f_19853_.m_46473_().m_7238_();
+-            return entity;
++            return transportedEntity;
+          }
+       } else {
+          return null;
+@@ -2137,14 +_,14 @@
+             double d3 = Math.min(2.9999872E7D, worldborder.m_61958_() - 16.0D);
+             double d4 = DimensionType.m_63908_(this.f_19853_.m_6042_(), p_19923_.m_6042_());
+             BlockPos blockpos1 = new BlockPos(Mth.m_14008_(this.m_20185_() * d4, d0, d2), this.m_20186_(), Mth.m_14008_(this.m_20189_() * d4, d1, d3));
+-            return this.m_7436_(p_19923_, blockpos1, flag2).map((p_19936_) -> {
++            return this.m_7436_(p_19923_, blockpos1, flag2).map((p_242275_2_) -> {
+                BlockState blockstate = this.f_19853_.m_8055_(this.f_19819_);
+                Direction.Axis direction$axis;
+                Vec3 vec3;
+                if (blockstate.m_61138_(BlockStateProperties.f_61364_)) {
+                   direction$axis = blockstate.m_61143_(BlockStateProperties.f_61364_);
+-                  BlockUtil.FoundRectangle blockutil$foundrectangle = BlockUtil.m_124334_(this.f_19819_, direction$axis, 21, Direction.Axis.Y, 21, (p_20010_) -> {
+-                     return this.f_19853_.m_8055_(p_20010_) == blockstate;
++                  BlockUtil.FoundRectangle blockutil$foundrectangle = BlockUtil.m_124334_(this.f_19819_, direction$axis, 21, Direction.Axis.Y, 21, (p_242276_2_) -> {
++                     return this.f_19853_.m_8055_(p_242276_2_) == blockstate;
+                   });
+                   vec3 = this.m_7643_(direction$axis, blockutil$foundrectangle);
+                } else {
+@@ -2152,7 +_,7 @@
+                   vec3 = new Vec3(0.5D, 0.0D, 0.0D);
+                }
+ 
+-               return PortalShape.m_77699_(p_19923_, p_19936_, direction$axis, vec3, this.m_6972_(this.m_20089_()), this.m_20184_(), this.f_19857_, this.f_19858_);
++               return PortalShape.m_77699_(p_19923_, p_242275_2_, direction$axis, vec3, this.m_6972_(this.m_20089_()), this.m_20184_(), this.f_19857_, this.f_19858_);
+             }).orElse((PortalInfo)null);
+          }
+       } else {
+@@ -2252,8 +_,8 @@
+    }
+ 
+    public Component m_5446_() {
+-      return PlayerTeam.m_83348_(this.m_5647_(), this.m_7755_()).m_130938_((p_20058_) -> {
+-         return p_20058_.m_131144_(this.m_20190_()).m_131138_(this.m_20149_());
++      return PlayerTeam.m_83348_(this.m_5647_(), this.m_7755_()).m_130938_((p_211516_1_) -> {
++         return p_211516_1_.m_131144_(this.m_20190_()).m_131138_(this.m_20149_());
+       });
+    }
+ 
+@@ -2291,12 +_,12 @@
+       if (this.f_19853_ instanceof ServerLevel) {
+          ServerLevel serverlevel = (ServerLevel)this.f_19853_;
+          this.m_7678_(p_19887_, p_19888_, p_19889_, this.f_19857_, this.f_19858_);
+-         this.m_20199_().forEach((p_19926_) -> {
+-            serverlevel.m_8819_(p_19926_);
+-            p_19926_.f_19842_ = true;
++         this.m_20199_().forEach((p_233565_1_) -> {
++            serverlevel.m_8819_(p_233565_1_);
++            p_233565_1_.f_19842_ = true;
+ 
+-            for(Entity entity : p_19926_.f_19823_) {
+-               p_19926_.m_19956_(entity, Entity::m_6027_);
++            for(Entity entity : p_233565_1_.f_19823_) {
++               p_233565_1_.m_19956_(entity, Entity::m_6027_);
+             }
+ 
+          });
+@@ -2319,8 +_,10 @@
+       EntityDimensions entitydimensions = this.f_19815_;
+       Pose pose = this.m_20089_();
+       EntityDimensions entitydimensions1 = this.m_6972_(pose);
++      net.minecraftforge.event.entity.EntityEvent.Size sizeEvent = net.minecraftforge.event.ForgeEventFactory.getEntitySizeForge(this, pose, entitydimensions, entitydimensions1, this.m_6380_(pose, entitydimensions1));
++      entitydimensions1 = sizeEvent.getNewSize();
+       this.f_19815_ = entitydimensions1;
+-      this.f_19816_ = this.m_6380_(pose, entitydimensions1);
++      this.f_19816_ = sizeEvent.getNewEyeHeight();
+       if (entitydimensions1.f_20377_ < entitydimensions.f_20377_) {
+          double d0 = (double)entitydimensions1.f_20377_ / 2.0D;
+          this.m_20011_(new AABB(this.m_20185_() - d0, this.m_20186_(), this.m_20189_() - d0, this.m_20185_() + d0, this.m_20186_() + (double)entitydimensions1.f_20378_, this.m_20189_() + d0));
+@@ -2794,6 +_,7 @@
+ 
+          this.f_19837_ = true;
+       }
++      if (this.isAddedToWorld() && !this.f_19853_.f_46443_ && !this.f_19866_) this.f_19853_.m_6325_((int) Math.floor(p_20344_) >> 4, (int) Math.floor(p_20346_) >> 4); // Forge - ensure target chunk is loaded.
+ 
+    }
+ 
+@@ -2808,5 +_,72 @@
+    @FunctionalInterface
+    public interface MoveFunction {
+       void m_20372_(Entity p_20373_, double p_20374_, double p_20375_, double p_20376_);
++   }
++
++   /* ================================== Forge Start =====================================*/
++
++   private boolean canUpdate = true;
++   @Override
++   public void canUpdate(boolean value) {
++      this.canUpdate = value;
++   }
++   @Override
++   public boolean canUpdate() {
++      return this.canUpdate;
++   }
++   private Collection<ItemEntity> captureDrops = null;
++   @Override
++   public Collection<ItemEntity> captureDrops() {
++      return captureDrops;
++   }
++   @Override
++   public Collection<ItemEntity> captureDrops(Collection<ItemEntity> value) {
++      Collection<ItemEntity> ret = captureDrops;
++      this.captureDrops = value;
++      return ret;
++   }
++   private CompoundTag persistentData;
++   @Override
++   public CompoundTag getPersistentData() {
++      if (persistentData == null)
++         persistentData = new CompoundTag();
++      return persistentData;
++   }
++   @Override
++   public boolean canTrample(BlockState state, BlockPos pos, float fallDistance) {
++      return f_19853_.f_46441_.nextFloat() < fallDistance - 0.5F
++              && this instanceof LivingEntity
++              && (this instanceof Player || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(f_19853_, this))
++              && this.m_20205_() * this.m_20205_() * this.m_20206_() > 0.512F;
++   }
++
++   /**
++    * Internal use for keeping track of entities that are tracked by a world, to
++    * allow guarantees that entity position changes will force a chunk load, avoiding
++    * potential issues with entity desyncing and bad chunk data.
++    */
++   private boolean isAddedToWorld;
++
++   @Override
++   public final boolean isAddedToWorld() { return this.isAddedToWorld; }
++
++   @Override
++   public void onAddedToWorld() { this.isAddedToWorld = true; }
++
++   @Override
++   public void onRemovedFromWorld() { this.isAddedToWorld = false; }
++
++   @Override
++   public void revive() {
++      this.f_19866_ = false;
++      this.reviveCaps();
++   }
++
++   // no AT because of overrides
++   /**
++    * Accessor method for {@link #getEyeHeight(Pose, EntitySize)}
++    */
++   public float getEyeHeightAccess(Pose pose, EntityDimensions size) {
++      return this.m_6380_(pose, size);
+    }
+ }
