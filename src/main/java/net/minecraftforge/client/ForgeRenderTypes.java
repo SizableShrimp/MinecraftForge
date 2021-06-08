@@ -20,7 +20,9 @@
 package net.minecraftforge.client;
 
 import net.minecraft.client.renderer.RenderStateShard;
+import net.minecraft.client.renderer.RenderStateShard.TextureStateShard;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderType.CompositeState;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
@@ -28,9 +30,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.util.NonNullLazy;
 import net.minecraftforge.common.util.NonNullSupplier;
 import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.renderer.RenderStateShard.TextureStateShard;
-import net.minecraft.client.renderer.RenderType.CompositeState;
+import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
 public enum ForgeRenderTypes
@@ -42,6 +42,8 @@ public enum ForgeRenderTypes
     ITEM_UNSORTED_TRANSLUCENT(()-> getUnsortedTranslucent(TextureAtlas.LOCATION_BLOCKS)),
     ITEM_UNLIT_TRANSLUCENT(()-> getUnlitTranslucent(TextureAtlas.LOCATION_BLOCKS)),
     ITEM_UNSORTED_UNLIT_TRANSLUCENT(()-> getUnlitTranslucent(TextureAtlas.LOCATION_BLOCKS, false));
+
+    public static boolean enableTextTextureLinearFiltering = false;
 
     /**
      * @return A RenderType fit for multi-layer solid item rendering.
@@ -108,6 +110,22 @@ public enum ForgeRenderTypes
     public static RenderType getEntityCutoutMipped(ResourceLocation textureLocation)
     {
         return Internal.layeredItemCutoutMipped(textureLocation);
+    }
+
+    /**
+     * @return Replacement of {@link RenderType#getText(ResourceLocation)}, but with optional linear texture filtering.
+     */
+    public static RenderType getText(ResourceLocation locationIn)
+    {
+        return Internal.getText(locationIn);
+    }
+
+    /**
+     * @return Replacement of {@link RenderType#getTextSeeThrough(ResourceLocation)}, but with optional linear texture filtering.
+     */
+    public static RenderType getTextSeeThrough(ResourceLocation locationIn)
+    {
+        return Internal.getTextSeeThrough(locationIn);
     }
 
     // ----------------------------------------
@@ -208,6 +226,44 @@ public enum ForgeRenderTypes
                     .setOverlayState(OVERLAY)
                     .createCompositeState(true);
             return create("forge_item_entity_translucent_cull", DefaultVertexFormat.NEW_ENTITY, 7, 256, true, true, rendertype$state);
+        }
+
+        public static RenderType getText(ResourceLocation locationIn) {
+            RenderType.CompositeState rendertype$state = RenderType.CompositeState.builder()
+                    .setTextureState(new CustomizableTextureState(locationIn, () -> ForgeRenderTypes.enableTextTextureLinearFiltering, () -> false))
+                    .setAlphaState(DEFAULT_ALPHA)
+                    .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                    .setLightmapState(LIGHTMAP)
+                    .createCompositeState(false);
+            return create("forge_text", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, 7, 256, false, true, rendertype$state);
+        }
+
+        public static RenderType getTextSeeThrough(ResourceLocation locationIn) {
+            RenderType.CompositeState rendertype$state = RenderType.CompositeState.builder()
+                    .setTextureState(new CustomizableTextureState(locationIn, () -> ForgeRenderTypes.enableTextTextureLinearFiltering, () -> false))
+                    .setAlphaState(DEFAULT_ALPHA)
+                    .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                    .setLightmapState(LIGHTMAP)
+                    .setDepthTestState(NO_DEPTH_TEST)
+                    .setWriteMaskState(COLOR_WRITE)
+                    .createCompositeState(false);
+            return create("forge_text_see_through", DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP, 7, 256, false, true, rendertype$state);
+        }
+    }
+
+    private static class CustomizableTextureState extends TextureStateShard
+    {
+        private CustomizableTextureState(ResourceLocation resLoc, Supplier<Boolean> blur, Supplier<Boolean> mipmap)
+        {
+            super(resLoc, blur.get(), mipmap.get());
+            this.setupState = () -> {
+                this.blur = blur.get();
+                this.mipmap = mipmap.get();
+                RenderSystem.enableTexture();
+                TextureManager texturemanager = Minecraft.getInstance().getTextureManager();
+                texturemanager.bind(resLoc);
+                texturemanager.getTexture(resLoc).setFilter(this.blur, this.mipmap);
+            };
         }
     }
 }
