@@ -192,7 +192,7 @@ project(':forge') {
         // ForgeMC is a unique identifier for every MC version we have supported.
         // Essentially, the same as the old, except dropping the first number, and the builds are no longer unique.
         MCP_ARTIFACT = project(':mcp').mcp.config
-        SPECIAL_SOURCE = 'net.md-5:SpecialSource:1.9.0'
+        SPECIAL_SOURCE = 'net.md-5:SpecialSource:1.9.1'
         SPECIAL_SOURCE_MCP = 'net.md-5:SpecialSource:1.8.5'
         VERSION_JSON = project(':mcp').file('build/mcp/downloadJson/version.json')
         BINPATCH_TOOL = 'net.minecraftforge:binarypatcher:1.0.12:fatjar'
@@ -538,7 +538,7 @@ project(':forge') {
     }
 
     task checkExcs(type: CheckExcs, dependsOn: jar) {
-        binary = jar.archivePath
+        binary = jar.archiveFile.get().asFile
         excs = patcher.excs
     }
 
@@ -559,8 +559,8 @@ project(':forge') {
     }
 
     task launcherJson(dependsOn: ['signUniversalJar', 'signLauncherJar']) {
-        inputs.file universalJar.archivePath
-        inputs.file { launcherJar.archivePath }
+        inputs.file universalJar.archiveFile.get().asFile
+        inputs.file { launcherJar.archiveFile.get().asFile }
         ext {
             output = file('build/version.json')
             vanilla = project(':mcp').file('build/mcp/downloadJson/version.json')
@@ -597,8 +597,8 @@ project(':forge') {
                             artifact: [
                                 path: "${project.group.replace('.', '/')}/${project.name}/${project.version}/${project.name}-${project.version}.jar",
                                 url: "", //Do not include the URL so that the installer/launcher won't grab it. This is also why we don't have the universal classifier
-                                sha1: launcherJar.archivePath.sha1(),
-                                size: launcherJar.archivePath.length()
+                                sha1: launcherJar.archiveFile.get().asFile.sha1(),
+                                size: launcherJar.archiveFile.get().asFile.length()
                             ]
                         ]
                     ] 
@@ -639,8 +639,8 @@ project(':forge') {
                         artifact: [
                             path: "${project.group.replace('.', '/')}/${project.name}/${project.version}/${project.name}-${project.version}-universal.jar",
                             url: "", //Do not include the URL so that the installer/launcher won't grab it. This is also why we don't have the universal classifier
-                            sha1: universalJar.archivePath.sha1(),
-                            size: universalJar.archivePath.length()
+                            sha1: universalJar.archiveFile.get().asFile.sha1(),
+                            size: universalJar.archiveFile.get().asFile.length()
                         ]
                     ]
                 ]
@@ -866,8 +866,8 @@ project(':forge') {
             storePass = jarsigner.storepass
             keyPass = jarsigner.keypass
             keyStore = jarsigner.keystore
-            inputFile = t.archivePath
-            outputFile = t.archivePath
+            inputFile = t.archiveFile.get().asFile
+            outputFile = t.archiveFile.get().asFile
             doFirst {
                 project.logger.lifecycle('Signing: ' + inputFile)
             }
@@ -996,8 +996,8 @@ project(':forge') {
 
     task userdevExtrasReobf(type:TaskReobfuscateJar) {
         dependsOn userdevExtras, createMcp2Srg
-        input = tasks.userdevExtras.archivePath
-        classpath = project.configurations.implementation
+        input = tasks.userdevExtras.archiveFile.get().asFile
+        classpath = project.configurations.userdevCompileClasspath
         srg = tasks.createMcp2Srg.output
         tool = SPECIAL_SOURCE + ':shaded'
     }
@@ -1013,7 +1013,7 @@ project(':forge') {
     }
 
     extractRangeMap {
-        addDependencies jar.archivePath
+        addDependencies jar.archiveFile.get().asFile
         addSources sourceSets.userdev.java.srcDirs
     }
     applyRangeMap {
