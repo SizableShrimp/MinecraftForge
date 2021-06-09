@@ -29,10 +29,6 @@ plugins {
     id 'eclipse'
 }
 
-repositories {
-    mavenLocal()
-}
-
 Util.init() //Init all our extension methods!
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
@@ -192,7 +188,7 @@ project(':forge') {
         // ForgeMC is a unique identifier for every MC version we have supported.
         // Essentially, the same as the old, except dropping the first number, and the builds are no longer unique.
         MCP_ARTIFACT = project(':mcp').mcp.config
-        SPECIAL_SOURCE = 'net.md-5:SpecialSource:1.9.1'
+        SPECIAL_SOURCE = 'net.md-5:SpecialSource:1.9.0'
         SPECIAL_SOURCE_MCP = 'net.md-5:SpecialSource:1.8.5'
         VERSION_JSON = project(':mcp').file('build/mcp/downloadJson/version.json')
         BINPATCH_TOOL = 'net.minecraftforge:binarypatcher:1.0.12:fatjar'
