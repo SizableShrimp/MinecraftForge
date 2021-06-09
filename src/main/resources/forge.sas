@@ -8,7 +8,6 @@
 # Block.getItem called from Block.getPickBlock.
 net/minecraft/world/level/block/Block m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/AbstractBannerBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
-	net/minecraft/world/level/block/GrowingPlantBodyBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/AttachedStemBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/BambooSaplingBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/CropBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
@@ -16,15 +15,16 @@ net/minecraft/world/level/block/Block m_7397_(Lnet/minecraft/world/level/BlockGe
 	net/minecraft/world/level/block/EndPortalBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/FlowerPotBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/FrostedIceBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
-	net/minecraft/world/level/block/piston/MovingPistonBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
+	net/minecraft/world/level/block/GrowingPlantBodyBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/NetherPortalBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/NetherWartBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
-	net/minecraft/world/level/block/piston/PistonHeadBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/ShulkerBoxBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/SpawnerBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/StemBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/SweetBerryBushBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/level/block/TallSeagrass m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
+	net/minecraft/world/level/block/piston/MovingPistonBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
+	net/minecraft/world/level/block/piston/PistonHeadBlock m_7397_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 # Vanilla blocks calling these sided methods in getItem
 net/minecraft/world/level/block/entity/BannerBlockEntity m_58492_(Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/item/ItemStack;
 net/minecraft/world/level/block/BannerBlock m_49014_(Lnet/minecraft/world/item/DyeColor;)Lnet/minecraft/world/level/block/Block;
@@ -47,9 +47,9 @@ net/minecraft/world/item/crafting/Recipe m_8042_()Lnet/minecraft/world/item/Item
 	net/minecraft/world/item/crafting/BlastingRecipe m_8042_()Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/item/crafting/CampfireCookingRecipe m_8042_()Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/item/crafting/SmeltingRecipe m_8042_()Lnet/minecraft/world/item/ItemStack;
-	net/minecraft/world/item/crafting/UpgradeRecipe m_8042_()Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/item/crafting/SmokingRecipe m_8042_()Lnet/minecraft/world/item/ItemStack;
 	net/minecraft/world/item/crafting/StonecutterRecipe m_8042_()Lnet/minecraft/world/item/ItemStack;
+	net/minecraft/world/item/crafting/UpgradeRecipe m_8042_()Lnet/minecraft/world/item/ItemStack;
 net/minecraft/world/item/crafting/Recipe m_8004_(II)Z # canFit
 	net/minecraft/world/item/crafting/AbstractCookingRecipe m_8004_(II)Z
 	net/minecraft/world/item/crafting/ArmorDyeRecipe m_8004_(II)Z
@@ -65,9 +65,9 @@ net/minecraft/world/item/crafting/Recipe m_8004_(II)Z # canFit
 	net/minecraft/world/item/crafting/ShieldDecorationRecipe m_8004_(II)Z
 	net/minecraft/world/item/crafting/ShulkerBoxColoring m_8004_(II)Z
 	net/minecraft/world/item/crafting/SingleItemRecipe m_8004_(II)Z
-	net/minecraft/world/item/crafting/UpgradeRecipe m_8004_(II)Z
 	net/minecraft/world/item/crafting/SuspiciousStewRecipe m_8004_(II)Z
 	net/minecraft/world/item/crafting/TippedArrowRecipe m_8004_(II)Z
+	net/minecraft/world/item/crafting/UpgradeRecipe m_8004_(II)Z
 net/minecraft/world/item/crafting/Recipe m_6076_()Ljava/lang/String; # getGroup
 	net/minecraft/world/item/crafting/AbstractCookingRecipe m_6076_()Ljava/lang/String;
 	net/minecraft/world/item/crafting/ShapedRecipe m_6076_()Ljava/lang/String;
@@ -90,7 +90,6 @@ net/minecraft/server/packs/resources/ResourceManager m_7165_(Lnet/minecraft/reso
 	net/minecraft/server/packs/resources/FallbackResourceManager m_7165_(Lnet/minecraft/resources/ResourceLocation;)Z
 	net/minecraft/server/packs/resources/ResourceManager$Empty m_7165_(Lnet/minecraft/resources/ResourceLocation;)Z
 	net/minecraft/server/packs/resources/SimpleReloadableResourceManager m_7165_(Lnet/minecraft/resources/ResourceLocation;)Z
-net/minecraft/tags/SetTagCollection m_13394_(Ljava/lang/Object;)Ljava/util/Collection; # getOwningTags
 net/minecraft/core/Direction m_122402_(Ljava/lang/String;)Lnet/minecraft/core/Direction; # byName
 net/minecraft/core/Direction$Axis m_122473_(Ljava/lang/String;)Lnet/minecraft/core/Direction$Axis; # byName
 net/minecraft/world/phys/Vec3 m_82548_()Lnet/minecraft/world/phys/Vec3;
