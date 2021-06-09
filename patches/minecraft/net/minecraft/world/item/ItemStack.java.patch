@@ -1,21 +1,5 @@
 --- a/net/minecraft/world/item/ItemStack.java
 +++ b/net/minecraft/world/item/ItemStack.java
-@@ -30,6 +_,7 @@
- import net.minecraft.core.Registry;
- import net.minecraft.nbt.CompoundTag;
- import net.minecraft.nbt.ListTag;
-+import net.minecraft.nbt.Tag;
- import net.minecraft.network.chat.Component;
- import net.minecraft.network.chat.ComponentUtils;
- import net.minecraft.network.chat.HoverEvent;
-@@ -42,7 +_,6 @@
- import net.minecraft.sounds.SoundEvent;
- import net.minecraft.stats.Stats;
- import net.minecraft.tags.BlockTags;
--import net.minecraft.tags.Tag;
- import net.minecraft.tags.TagContainer;
- import net.minecraft.world.InteractionHand;
- import net.minecraft.world.InteractionResult;
 @@ -71,7 +_,7 @@
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
@@ -224,24 +208,6 @@
  
 +      net.minecraftforge.event.ForgeEventFactory.onItemTooltip(this, p_41652_, list, p_41653_);
        return list;
-    }
- 
-@@ -714,7 +_,7 @@
-                return Lists.newArrayList(blockstate.m_60734_().m_49954_().m_130940_(ChatFormatting.DARK_GRAY));
-             }
- 
--            Tag<Block> tag = BlockTags.m_13115_().m_13404_(resourcelocation);
-+             net.minecraft.tags.Tag<Block> tag = BlockTags.m_13115_().m_13404_(resourcelocation);
-             if (tag != null) {
-                Collection<Block> collection = tag.m_6497_();
-                if (!collection.isEmpty()) {
-@@ -767,7 +_,7 @@
-       }
-    }
- 
--   public void m_41700_(String p_41701_, net.minecraft.nbt.Tag p_41702_) {
-+   public void m_41700_(String p_41701_, Tag p_41702_) {
-       this.m_41784_().m_128365_(p_41701_, p_41702_);
     }
  
 @@ -816,9 +_,10 @@

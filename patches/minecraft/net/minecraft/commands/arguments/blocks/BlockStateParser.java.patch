@@ -9,15 +9,6 @@
        } else {
           if (this.f_116757_ != null) {
              Tag<Block> tag = p_116768_.m_13404_(this.f_116757_);
-@@ -209,7 +_,7 @@
-    private static <T extends Comparable<T>> SuggestionsBuilder m_116786_(SuggestionsBuilder p_116787_, Property<T> p_116788_) {
-       for(T t : p_116788_.m_6908_()) {
-          if (t instanceof Integer) {
--            p_116787_.suggest((Integer)t);
-+            p_116787_.suggest((Integer) t);
-          } else {
-             p_116787_.suggest(p_116788_.m_6940_(t));
-          }
 @@ -283,7 +_,7 @@
              p_116848_.suggest(String.valueOf('['));
           }

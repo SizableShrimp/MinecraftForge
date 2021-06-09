@@ -1,17 +1,9 @@
 --- a/net/minecraft/tags/TagManager.java
 +++ b/net/minecraft/tags/TagManager.java
-@@ -16,10 +_,11 @@
- import net.minecraft.world.level.material.Fluid;
- 
- public class TagManager implements PreparableReloadListener {
--   private final TagLoader<Block> f_13474_ = new TagLoader<>(Registry.f_122824_::m_6612_, "tags/blocks", "block");
--   private final TagLoader<Item> f_13475_ = new TagLoader<>(Registry.f_122827_::m_6612_, "tags/items", "item");
--   private final TagLoader<Fluid> f_13476_ = new TagLoader<>(Registry.f_122822_::m_6612_, "tags/fluids", "fluid");
--   private final TagLoader<EntityType<?>> f_13477_ = new TagLoader<>(Registry.f_122826_::m_6612_, "tags/entity_types", "entity_type");
-+   protected TagLoader<Block> f_13474_ = new TagLoader<>(Registry.f_122824_::m_6612_, "tags/blocks", "block");
-+   protected TagLoader<Item> f_13475_ = new TagLoader<>(Registry.f_122827_::m_6612_, "tags/items", "item");
-+   protected TagLoader<Fluid> f_13476_ = new TagLoader<>(Registry.f_122822_::m_6612_, "tags/fluids", "fluid");
-+   protected TagLoader<EntityType<?>> f_13477_ = new TagLoader<>(Registry.f_122826_::m_6612_, "tags/entity_types", "entity_type");
+@@ -20,6 +_,7 @@
+    protected TagLoader<Item> f_13475_ = new TagLoader<>(Registry.f_122827_::m_6612_, "tags/items", "item");
+    protected TagLoader<Fluid> f_13476_ = new TagLoader<>(Registry.f_122822_::m_6612_, "tags/fluids", "fluid");
+    protected TagLoader<EntityType<?>> f_13477_ = new TagLoader<>(Registry.f_122826_::m_6612_, "tags/entity_types", "entity_type");
 +   protected Map<ResourceLocation, TagLoader<?>> customTagTypeReaders = net.minecraftforge.common.ForgeTagHandler.createCustomTagTypeReaders();
     private TagContainer f_13478_ = TagContainer.f_13420_;
  

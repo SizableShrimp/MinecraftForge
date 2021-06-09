@@ -1,20 +1,17 @@
 --- a/net/minecraft/tags/BlockTags.java
 +++ b/net/minecraft/tags/BlockTags.java
-@@ -93,8 +_,16 @@
-    public static final Tag.Named<Block> f_13061_ = m_13116_("base_stone_overworld");
-    public static final Tag.Named<Block> f_13062_ = m_13116_("base_stone_nether");
- 
--   private static Tag.Named<Block> m_13116_(String p_13117_) {
-+   public static Tag.Named<Block> m_13116_(String p_13117_) {
+@@ -97,6 +_,14 @@
        return f_13053_.m_13244_(p_13117_);
-+   }
-+
+    }
+ 
 +   public static net.minecraftforge.common.Tags.IOptionalNamedTag<Block> createOptional(ResourceLocation name) {
 +       return createOptional(name, null);
 +   }
 +
 +   public static net.minecraftforge.common.Tags.IOptionalNamedTag<Block> createOptional(ResourceLocation name, @javax.annotation.Nullable java.util.Set<java.util.function.Supplier<Block>> defaults) {
 +      return f_13053_.createOptional(name, defaults);
-    }
- 
++   }
++
     public static TagCollection<Block> m_13115_() {
+       return f_13053_.m_13246_();
+    }

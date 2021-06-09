@@ -26,12 +26,3 @@
        m_125998_(p_125993_, Blocks.f_50744_, ItemTags.f_13186_);
        m_126017_(p_125993_, Blocks.f_50742_, ItemTags.f_13185_);
        m_126017_(p_125993_, Blocks.f_50655_, ItemTags.f_13189_);
-@@ -1078,7 +_,7 @@
-       return m_126011_(ItemPredicate.Builder.m_45068_().m_45073_(p_125978_).m_45077_());
-    }
- 
--   private static InventoryChangeTrigger.TriggerInstance m_125975_(Tag<Item> p_125976_) {
-+   protected static InventoryChangeTrigger.TriggerInstance m_125975_(Tag<Item> p_125976_) {
-       return m_126011_(ItemPredicate.Builder.m_45068_().m_45069_(p_125976_).m_45077_());
-    }
- 

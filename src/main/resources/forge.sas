@@ -112,3 +112,4 @@ net/minecraft/world/level/biome/BiomeSpecialEffects m_47993_()Ljava/util/Optiona
 net/minecraft/world/level/biome/BiomeSpecialEffects m_47996_()Ljava/util/Optional; # getMoodSound
 net/minecraft/world/level/biome/BiomeSpecialEffects m_47999_()Ljava/util/Optional; # getAdditionsSound
 net/minecraft/world/level/biome/BiomeSpecialEffects m_48002_()Ljava/util/Optional; # getMusic
+net/minecraft/client/resources/model/ModelResourceLocation # ModelResourceLocation class

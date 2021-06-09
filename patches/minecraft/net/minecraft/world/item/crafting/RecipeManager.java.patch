@@ -19,12 +19,3 @@
              map.computeIfAbsent(recipe.m_6671_(), (p_44075_) -> {
                 return ImmutableMap.builder();
              }).put(resourcelocation, recipe);
-@@ -76,7 +_,7 @@
- 
-    public <C extends Container, T extends Recipe<C>> List<T> m_44013_(RecipeType<T> p_44014_) {
-       return this.m_44054_(p_44014_).values().stream().map((p_44053_) -> {
--         return (T)p_44053_;
-+         return (T) p_44053_;
-       }).collect(Collectors.toList());
-    }
- 

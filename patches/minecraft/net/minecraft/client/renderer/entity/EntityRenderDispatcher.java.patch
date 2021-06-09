@@ -29,18 +29,6 @@
        for(EntityType<?> entitytype : Registry.f_122826_) {
           if (entitytype != EntityType.f_20532_ && !this.f_114362_.containsKey(entitytype)) {
              throw new IllegalStateException("No renderer registered for " + Registry.f_122826_.m_7981_(entitytype));
-@@ -202,9 +_,9 @@
-       if (p_114383_ instanceof AbstractClientPlayer) {
-          String s = ((AbstractClientPlayer)p_114383_).m_108564_();
-          PlayerRenderer playerrenderer = this.f_114363_.get(s);
--         return (EntityRenderer<? super T>)(playerrenderer != null ? playerrenderer : this.f_114364_);
-+         return (EntityRenderer<? super T>) (playerrenderer != null ? playerrenderer : this.f_114364_);
-       } else {
--         return (EntityRenderer<? super T>)this.f_114362_.get(p_114383_.m_6095_());
-+         return (EntityRenderer<? super T>) this.f_114362_.get(p_114383_.m_6095_());
-       }
-    }
- 
 @@ -281,18 +_,18 @@
     private void m_114441_(PoseStack p_114442_, VertexConsumer p_114443_, Entity p_114444_, float p_114445_) {
        float f = p_114444_.m_20205_() / 2.0F;

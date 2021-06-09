@@ -1,20 +1,17 @@
 --- a/net/minecraft/tags/ItemTags.java
 +++ b/net/minecraft/tags/ItemTags.java
-@@ -61,8 +_,16 @@
-    public static final Tag.Named<Item> f_13165_ = m_13194_("stone_tool_materials");
-    public static final Tag.Named<Item> f_13166_ = m_13194_("stone_crafting_materials");
- 
--   private static Tag.Named<Item> m_13194_(String p_13195_) {
-+   public static Tag.Named<Item> m_13194_(String p_13195_) {
+@@ -65,6 +_,14 @@
        return f_13163_.m_13244_(p_13195_);
-+   }
-+
+    }
+ 
 +   public static net.minecraftforge.common.Tags.IOptionalNamedTag<Item> createOptional(ResourceLocation name) {
 +       return createOptional(name, null);
 +   }
 +
 +   public static net.minecraftforge.common.Tags.IOptionalNamedTag<Item> createOptional(ResourceLocation name, @javax.annotation.Nullable java.util.Set<java.util.function.Supplier<Item>> defaults) {
 +      return f_13163_.createOptional(name, defaults);
-    }
- 
++   }
++
     public static TagCollection<Item> m_13193_() {
+       return f_13163_.m_13246_();
+    }

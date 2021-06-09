@@ -31,7 +31,7 @@
        this.f_46446_ = p_46453_;
        this.f_46442_ = p_46450_;
        this.f_46445_ = p_46452_;
-@@ -182,48 +_,74 @@
+@@ -182,41 +_,32 @@
        } else {
           LevelChunk levelchunk = this.m_46745_(p_46605_);
           Block block = p_46606_.m_60734_();
@@ -87,9 +87,9 @@
 +            if (blockSnapshot == null) { // Don't notify clients or update physics while capturing blockstates
 +               this.markAndNotifyBlock(p_46605_, levelchunk, blockstate, p_46606_, p_46607_, p_46608_);
              }
--
+ 
              return true;
-          }
+@@ -224,6 +_,42 @@
        }
     }
  

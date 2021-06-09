@@ -1,21 +1,5 @@
 --- a/net/minecraft/server/rcon/thread/RconClient.java
 +++ b/net/minecraft/server/rcon/thread/RconClient.java
-@@ -34,7 +_,6 @@
-    }
- 
-    public void run() {
--	   {
-          try {
-          while(true) {
-             if (!this.f_11515_) {
-@@ -100,7 +_,6 @@
-             this.f_11515_ = false;
-          }
-       }
--   }
- 
-    private void m_11590_(int p_11591_, int p_11592_, String p_11593_) throws IOException {
-       ByteArrayOutputStream bytearrayoutputstream = new ByteArrayOutputStream(1248);
 @@ -120,13 +_,14 @@
     }
  

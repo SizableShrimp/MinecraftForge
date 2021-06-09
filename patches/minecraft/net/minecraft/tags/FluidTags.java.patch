@@ -1,11 +1,6 @@
 --- a/net/minecraft/tags/FluidTags.java
 +++ b/net/minecraft/tags/FluidTags.java
-@@ -9,11 +_,24 @@
-    public static final Tag.Named<Fluid> f_13131_ = m_13134_("water");
-    public static final Tag.Named<Fluid> f_13132_ = m_13134_("lava");
- 
--   private static Tag.Named<Fluid> m_13134_(String p_13135_) {
-+   public static Tag.Named<Fluid> m_13134_(String p_13135_) {
+@@ -13,7 +_,20 @@
        return f_13130_.m_13244_(p_13135_);
     }
  

@@ -1,12 +1,6 @@
 --- a/net/minecraft/recipebook/PlaceRecipe.java
 +++ b/net/minecraft/recipebook/PlaceRecipe.java
-@@ -3,16 +_,15 @@
- import java.util.Iterator;
- import net.minecraft.util.Mth;
- import net.minecraft.world.item.crafting.Recipe;
--import net.minecraft.world.item.crafting.ShapedRecipe;
- 
- public interface PlaceRecipe<T> {
+@@ -9,10 +_,10 @@
     default void m_135408_(int p_135409_, int p_135410_, int p_135411_, Recipe<?> p_135412_, Iterator<T> p_135413_, int p_135414_) {
        int i = p_135409_;
        int j = p_135410_;

@@ -1,20 +1,17 @@
 --- a/net/minecraft/tags/EntityTypeTags.java
 +++ b/net/minecraft/tags/EntityTypeTags.java
-@@ -12,8 +_,16 @@
-    public static final Tag.Named<EntityType<?>> f_13123_ = m_13127_("arrows");
-    public static final Tag.Named<EntityType<?>> f_13124_ = m_13127_("impact_projectiles");
- 
--   private static Tag.Named<EntityType<?>> m_13127_(String p_13128_) {
-+   public static Tag.Named<EntityType<?>> m_13127_(String p_13128_) {
+@@ -16,6 +_,14 @@
        return f_13119_.m_13244_(p_13128_);
-+   }
-+
+    }
+ 
 +   public static net.minecraftforge.common.Tags.IOptionalNamedTag<EntityType<?>> createOptional(ResourceLocation name) {
 +       return createOptional(name, null);
 +   }
 +
 +   public static net.minecraftforge.common.Tags.IOptionalNamedTag<EntityType<?>> createOptional(ResourceLocation name, @javax.annotation.Nullable java.util.Set<java.util.function.Supplier<EntityType<?>>> defaults) {
 +      return f_13119_.createOptional(name, defaults);
-    }
- 
++   }
++
     public static TagCollection<EntityType<?>> m_13126_() {
+       return f_13119_.m_13246_();
+    }
