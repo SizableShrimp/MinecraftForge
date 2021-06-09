@@ -1,13 +1,5 @@
 --- a/net/minecraft/world/entity/monster/EnderMan.java
 +++ b/net/minecraft/world/entity/monster/EnderMan.java
-@@ -47,7 +_,6 @@
- import net.minecraft.world.entity.player.Player;
- import net.minecraft.world.item.ItemStack;
- import net.minecraft.world.level.ClipContext;
--import net.minecraft.world.level.GameRules;
- import net.minecraft.world.level.Level;
- import net.minecraft.world.level.block.Block;
- import net.minecraft.world.level.block.Blocks;
 @@ -98,7 +_,6 @@
     }
  

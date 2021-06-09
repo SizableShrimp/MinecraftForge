@@ -1,14 +1,5 @@
 --- a/net/minecraft/world/level/block/RedStoneOreBlock.java
 +++ b/net/minecraft/world/level/block/RedStoneOreBlock.java
-@@ -12,8 +_,6 @@
- import net.minecraft.world.item.BlockItem;
- import net.minecraft.world.item.ItemStack;
- import net.minecraft.world.item.context.BlockPlaceContext;
--import net.minecraft.world.item.enchantment.EnchantmentHelper;
--import net.minecraft.world.item.enchantment.Enchantments;
- import net.minecraft.world.level.Level;
- import net.minecraft.world.level.block.state.BlockBehaviour;
- import net.minecraft.world.level.block.state.BlockState;
 @@ -73,11 +_,11 @@
  
     public void m_8101_(BlockState p_55462_, ServerLevel p_55463_, BlockPos p_55464_, ItemStack p_55465_) {

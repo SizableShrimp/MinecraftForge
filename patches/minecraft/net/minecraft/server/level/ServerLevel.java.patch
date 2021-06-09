@@ -1,13 +1,5 @@
 --- a/net/minecraft/server/level/ServerLevel.java
 +++ b/net/minecraft/server/level/ServerLevel.java
-@@ -87,7 +_,6 @@
- import net.minecraft.world.entity.animal.Animal;
- import net.minecraft.world.entity.animal.WaterAnimal;
- import net.minecraft.world.entity.animal.horse.SkeletonHorse;
--import net.minecraft.world.entity.boss.EnderDragonPart;
- import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
- import net.minecraft.world.entity.npc.Npc;
- import net.minecraft.world.entity.player.Player;
 @@ -143,7 +_,7 @@
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;

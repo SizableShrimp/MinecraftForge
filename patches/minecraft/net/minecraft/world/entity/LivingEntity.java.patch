@@ -1,21 +1,5 @@
 --- a/net/minecraft/world/entity/LivingEntity.java
 +++ b/net/minecraft/world/entity/LivingEntity.java
-@@ -70,7 +_,6 @@
- import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
- import net.minecraft.world.entity.ai.targeting.TargetingConditions;
- import net.minecraft.world.entity.animal.FlyingAnimal;
--import net.minecraft.world.entity.animal.Wolf;
- import net.minecraft.world.entity.boss.wither.WitherBoss;
- import net.minecraft.world.entity.item.ItemEntity;
- import net.minecraft.world.entity.player.Player;
-@@ -90,7 +_,6 @@
- import net.minecraft.world.level.GameRules;
- import net.minecraft.world.level.Level;
- import net.minecraft.world.level.block.BedBlock;
--import net.minecraft.world.level.block.Block;
- import net.minecraft.world.level.block.Blocks;
- import net.minecraft.world.level.block.HoneyBlock;
- import net.minecraft.world.level.block.LadderBlock;
 @@ -113,7 +_,9 @@
  public abstract class LivingEntity extends Entity {
     private static final UUID f_20929_ = UUID.fromString("662A6B8D-DA3E-4C1C-8813-96EA6097278D");

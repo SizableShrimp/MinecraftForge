@@ -1,21 +1,5 @@
 --- a/net/minecraft/world/entity/player/Player.java
 +++ b/net/minecraft/world/entity/player/Player.java
-@@ -67,7 +_,6 @@
- import net.minecraft.world.entity.animal.Parrot;
- import net.minecraft.world.entity.animal.Pig;
- import net.minecraft.world.entity.animal.horse.AbstractHorse;
--import net.minecraft.world.entity.boss.EnderDragonPart;
- import net.minecraft.world.entity.decoration.ArmorStand;
- import net.minecraft.world.entity.item.ItemEntity;
- import net.minecraft.world.entity.monster.Strider;
-@@ -79,7 +_,6 @@
- import net.minecraft.world.inventory.InventoryMenu;
- import net.minecraft.world.inventory.PlayerEnderChestContainer;
- import net.minecraft.world.item.ArmorItem;
--import net.minecraft.world.item.AxeItem;
- import net.minecraft.world.item.ElytraItem;
- import net.minecraft.world.item.ItemCooldowns;
- import net.minecraft.world.item.ItemStack;
 @@ -111,6 +_,7 @@
  import net.minecraftforge.api.distmarker.OnlyIn;
  

@@ -1,12 +1,5 @@
 --- a/net/minecraft/client/gui/screens/inventory/EffectRenderingInventoryScreen.java
 +++ b/net/minecraft/client/gui/screens/inventory/EffectRenderingInventoryScreen.java
-@@ -1,6 +_,5 @@
- package net.minecraft.client.gui.screens.inventory;
- 
--import com.google.common.collect.Ordering;
- import com.mojang.blaze3d.systems.RenderSystem;
- import com.mojang.blaze3d.vertex.PoseStack;
- import java.util.Collection;
 @@ -34,6 +_,9 @@
           this.f_97735_ = (this.f_96543_ - this.f_97726_) / 2;
           this.f_98699_ = false;

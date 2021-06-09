@@ -1,13 +1,5 @@
 --- a/net/minecraft/client/player/AbstractClientPlayer.java
 +++ b/net/minecraft/client/player/AbstractClientPlayer.java
-@@ -12,7 +_,6 @@
- import net.minecraft.client.renderer.texture.TextureManager;
- import net.minecraft.client.resources.DefaultPlayerSkin;
- import net.minecraft.resources.ResourceLocation;
--import net.minecraft.util.Mth;
- import net.minecraft.util.StringUtil;
- import net.minecraft.world.entity.ai.attributes.Attributes;
- import net.minecraft.world.entity.player.Player;
 @@ -126,6 +_,6 @@
           f *= 1.0F - f1 * 0.15F;
        }

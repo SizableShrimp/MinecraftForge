@@ -1,13 +1,5 @@
 --- a/net/minecraft/client/player/LocalPlayer.java
 +++ b/net/minecraft/client/player/LocalPlayer.java
-@@ -60,7 +_,6 @@
- import net.minecraft.world.entity.Pose;
- import net.minecraft.world.entity.vehicle.AbstractMinecart;
- import net.minecraft.world.entity.vehicle.Boat;
--import net.minecraft.world.item.ElytraItem;
- import net.minecraft.world.item.Item;
- import net.minecraft.world.item.ItemStack;
- import net.minecraft.world.item.Items;
 @@ -133,6 +_,7 @@
     }
  

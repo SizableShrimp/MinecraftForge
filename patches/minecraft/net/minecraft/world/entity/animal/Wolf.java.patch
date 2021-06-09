@@ -1,13 +1,5 @@
 --- a/net/minecraft/world/entity/animal/Wolf.java
 +++ b/net/minecraft/world/entity/animal/Wolf.java
-@@ -29,7 +_,6 @@
- import net.minecraft.world.entity.TamableAnimal;
- import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
- import net.minecraft.world.entity.ai.attributes.Attributes;
--import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
- import net.minecraft.world.entity.ai.goal.BegGoal;
- import net.minecraft.world.entity.ai.goal.BreedGoal;
- import net.minecraft.world.entity.ai.goal.FloatGoal;
 @@ -135,6 +_,7 @@
           this.m_30397_(DyeColor.m_41053_(p_30402_.m_128451_("CollarColor")));
        }

@@ -1,21 +1,5 @@
 --- a/net/minecraft/world/entity/animal/Fox.java
 +++ b/net/minecraft/world/entity/animal/Fox.java
-@@ -51,15 +_,12 @@
- import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
- import net.minecraft.world.entity.ai.goal.BreedGoal;
- import net.minecraft.world.entity.ai.goal.FleeSunGoal;
--import net.minecraft.world.entity.ai.goal.FloatGoal;
- import net.minecraft.world.entity.ai.goal.FollowParentGoal;
- import net.minecraft.world.entity.ai.goal.Goal;
--import net.minecraft.world.entity.ai.goal.JumpGoal;
- import net.minecraft.world.entity.ai.goal.LeapAtTargetGoal;
- import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
- import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
- import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
--import net.minecraft.world.entity.ai.goal.PanicGoal;
- import net.minecraft.world.entity.ai.goal.StrollThroughVillageGoal;
- import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
- import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 @@ -665,79 +_,6 @@
        return new Vec3(0.0D, (double)(0.55F * this.m_20192_()), (double)(this.m_20205_() * 0.4F));
     }

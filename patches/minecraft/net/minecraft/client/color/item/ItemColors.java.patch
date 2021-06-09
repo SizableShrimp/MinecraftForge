@@ -1,14 +1,5 @@
 --- a/net/minecraft/client/color/item/ItemColors.java
 +++ b/net/minecraft/client/color/item/ItemColors.java
-@@ -2,8 +_,6 @@
- 
- import net.minecraft.client.color.block.BlockColors;
- import net.minecraft.core.BlockPos;
--import net.minecraft.core.IdMapper;
--import net.minecraft.core.Registry;
- import net.minecraft.nbt.CompoundTag;
- import net.minecraft.world.item.BlockItem;
- import net.minecraft.world.item.DyeableLeatherItem;
 @@ -23,7 +_,8 @@
  
  @OnlyIn(Dist.CLIENT)

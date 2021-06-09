@@ -1,17 +1,5 @@
 --- a/net/minecraft/world/entity/animal/PolarBear.java
 +++ b/net/minecraft/world/entity/animal/PolarBear.java
-@@ -35,11 +_,8 @@
- import net.minecraft.world.entity.ai.goal.FloatGoal;
- import net.minecraft.world.entity.ai.goal.FollowParentGoal;
- import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
--import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
--import net.minecraft.world.entity.ai.goal.PanicGoal;
- import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
- import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
--import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
- import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
- import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
- import net.minecraft.world.entity.player.Player;
 @@ -106,6 +_,7 @@
  
     public void m_7378_(CompoundTag p_29541_) {

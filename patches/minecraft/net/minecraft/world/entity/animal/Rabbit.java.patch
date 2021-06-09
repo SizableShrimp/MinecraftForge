@@ -1,27 +1,5 @@
 --- a/net/minecraft/world/entity/animal/Rabbit.java
 +++ b/net/minecraft/world/entity/animal/Rabbit.java
-@@ -28,13 +_,11 @@
- import net.minecraft.world.entity.ai.attributes.Attributes;
- import net.minecraft.world.entity.ai.control.JumpControl;
- import net.minecraft.world.entity.ai.control.MoveControl;
--import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
- import net.minecraft.world.entity.ai.goal.BreedGoal;
- import net.minecraft.world.entity.ai.goal.FloatGoal;
- import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
- import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
- import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
--import net.minecraft.world.entity.ai.goal.PanicGoal;
- import net.minecraft.world.entity.ai.goal.TemptGoal;
- import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
- import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-@@ -45,7 +_,6 @@
- import net.minecraft.world.item.ItemStack;
- import net.minecraft.world.item.Items;
- import net.minecraft.world.item.crafting.Ingredient;
--import net.minecraft.world.level.GameRules;
- import net.minecraft.world.level.Level;
- import net.minecraft.world.level.LevelAccessor;
- import net.minecraft.world.level.LevelReader;
 @@ -382,17 +_,7 @@
        return new Vec3(0.0D, (double)(0.6F * this.m_20192_()), (double)(this.m_20205_() * 0.4F));
     }

@@ -1,13 +1,5 @@
 --- a/net/minecraft/world/level/block/entity/BeaconBlockEntity.java
 +++ b/net/minecraft/world/level/block/entity/BeaconBlockEntity.java
-@@ -29,7 +_,6 @@
- import net.minecraft.world.inventory.BeaconMenu;
- import net.minecraft.world.inventory.ContainerData;
- import net.minecraft.world.inventory.ContainerLevelAccess;
--import net.minecraft.world.level.block.BeaconBeamBlock;
- import net.minecraft.world.level.block.Block;
- import net.minecraft.world.level.block.Blocks;
- import net.minecraft.world.level.block.state.BlockState;
 @@ -112,8 +_,8 @@
        for(int i1 = 0; i1 < 10 && blockpos.m_123342_() <= l; ++i1) {
           BlockState blockstate = this.f_58857_.m_8055_(blockpos);

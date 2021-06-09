@@ -1,13 +1,5 @@
 --- a/net/minecraft/client/renderer/block/BlockRenderDispatcher.java
 +++ b/net/minecraft/client/renderer/block/BlockRenderDispatcher.java
-@@ -7,7 +_,6 @@
- import net.minecraft.CrashReportCategory;
- import net.minecraft.ReportedException;
- import net.minecraft.client.color.block.BlockColors;
--import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
- import net.minecraft.client.renderer.ItemBlockRenderTypes;
- import net.minecraft.client.renderer.MultiBufferSource;
- import net.minecraft.client.renderer.block.model.ItemTransforms;
 @@ -35,7 +_,7 @@
     public BlockRenderDispatcher(BlockModelShaper p_110905_, BlockColors p_110906_) {
        this.f_110899_ = p_110905_;

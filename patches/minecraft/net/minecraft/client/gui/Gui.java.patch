@@ -1,13 +1,5 @@
 --- a/net/minecraft/client/gui/Gui.java
 +++ b/net/minecraft/client/gui/Gui.java
-@@ -75,7 +_,6 @@
- import net.minecraft.world.scores.Scoreboard;
- import net.minecraftforge.api.distmarker.Dist;
- import net.minecraftforge.api.distmarker.OnlyIn;
--import org.apache.commons.lang3.StringUtils;
- 
- @OnlyIn(Dist.CLIENT)
- public class Gui extends GuiComponent {
 @@ -418,6 +_,9 @@
  
           for(MobEffectInstance mobeffectinstance : Ordering.natural().reverse().sortedCopy(collection)) {

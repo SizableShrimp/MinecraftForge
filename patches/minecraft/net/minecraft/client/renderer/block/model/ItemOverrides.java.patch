@@ -1,13 +1,5 @@
 --- a/net/minecraft/client/renderer/block/model/ItemOverrides.java
 +++ b/net/minecraft/client/renderer/block/model/ItemOverrides.java
-@@ -10,6 +_,7 @@
- import net.minecraft.client.multiplayer.ClientLevel;
- import net.minecraft.client.resources.model.BakedModel;
- import net.minecraft.client.resources.model.BlockModelRotation;
-+import net.minecraft.client.resources.model.Material;
- import net.minecraft.client.resources.model.ModelBakery;
- import net.minecraft.client.resources.model.UnbakedModel;
- import net.minecraft.resources.ResourceLocation;
 @@ -28,10 +_,14 @@
        this.f_111736_ = Collections.emptyList();
     }
@@ -16,7 +8,7 @@
     public ItemOverrides(ModelBakery p_111740_, BlockModel p_111741_, Function<ResourceLocation, UnbakedModel> p_111742_, List<ItemOverride> p_111743_) {
 +      this(p_111740_, (UnbakedModel)p_111741_, p_111742_, p_111740_.getSpriteMap()::m_117971_, p_111743_);
 +   }
-+   public ItemOverrides(ModelBakery p_111740_, UnbakedModel p_111741_, Function<ResourceLocation, UnbakedModel> p_111742_, Function<Material, net.minecraft.client.renderer.texture.TextureAtlasSprite> textureGetter, List<ItemOverride> p_111743_) {
++   public ItemOverrides(ModelBakery p_111740_, UnbakedModel p_111741_, Function<ResourceLocation, UnbakedModel> p_111742_, Function<net.minecraft.client.resources.model.Material, net.minecraft.client.renderer.texture.TextureAtlasSprite> textureGetter, List<ItemOverride> p_111743_) {
        this.f_111736_ = p_111743_.stream().map((p_111753_) -> {
           UnbakedModel unbakedmodel = p_111742_.apply(p_111753_.m_111718_());
 -         return Objects.equals(unbakedmodel, p_111741_) ? null : p_111740_.m_119349_(p_111753_.m_111718_(), BlockModelRotation.X0_Y0);

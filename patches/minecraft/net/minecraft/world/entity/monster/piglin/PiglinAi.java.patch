@@ -1,14 +1,5 @@
 --- a/net/minecraft/world/entity/monster/piglin/PiglinAi.java
 +++ b/net/minecraft/world/entity/monster/piglin/PiglinAi.java
-@@ -57,8 +_,6 @@
- import net.minecraft.world.entity.monster.hoglin.Hoglin;
- import net.minecraft.world.entity.player.Player;
- import net.minecraft.world.entity.schedule.Activity;
--import net.minecraft.world.item.ArmorItem;
--import net.minecraft.world.item.ArmorMaterials;
- import net.minecraft.world.item.Item;
- import net.minecraft.world.item.ItemStack;
- import net.minecraft.world.item.Items;
 @@ -100,7 +_,7 @@
     }
  

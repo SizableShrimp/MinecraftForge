@@ -1,13 +1,5 @@
 --- a/net/minecraft/world/entity/Mob.java
 +++ b/net/minecraft/world/entity/Mob.java
-@@ -59,7 +_,6 @@
- import net.minecraft.world.item.SpawnEggItem;
- import net.minecraft.world.item.SwordItem;
- import net.minecraft.world.item.enchantment.EnchantmentHelper;
--import net.minecraft.world.level.GameRules;
- import net.minecraft.world.level.Level;
- import net.minecraft.world.level.LevelAccessor;
- import net.minecraft.world.level.LevelReader;
 @@ -196,6 +_,7 @@
  
     public void m_6710_(@Nullable LivingEntity p_21544_) {

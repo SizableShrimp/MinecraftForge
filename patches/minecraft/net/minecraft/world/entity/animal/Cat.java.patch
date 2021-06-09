@@ -1,13 +1,5 @@
 --- a/net/minecraft/world/entity/animal/Cat.java
 +++ b/net/minecraft/world/entity/animal/Cat.java
-@@ -45,7 +_,6 @@
- import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
- import net.minecraft.world.entity.ai.goal.OcelotAttackGoal;
- import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
--import net.minecraft.world.entity.ai.goal.TemptGoal;
- import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
- import net.minecraft.world.entity.ai.goal.target.NonTameRandomTargetGoal;
- import net.minecraft.world.entity.item.ItemEntity;
 @@ -90,7 +_,7 @@
        p_28140_.put(10, new ResourceLocation("textures/entity/cat/all_black.png"));
     });

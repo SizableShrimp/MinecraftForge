@@ -1,21 +1,5 @@
 --- a/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -140,7 +_,6 @@
- import net.minecraft.world.level.block.entity.JigsawBlockEntity;
- import net.minecraft.world.level.block.entity.SignBlockEntity;
- import net.minecraft.world.level.block.entity.StructureBlockEntity;
--import net.minecraft.world.level.block.state.BlockBehaviour;
- import net.minecraft.world.level.block.state.BlockState;
- import net.minecraft.world.phys.AABB;
- import net.minecraft.world.phys.BlockHitResult;
-@@ -148,7 +_,6 @@
- import net.minecraft.world.phys.shapes.BooleanOp;
- import net.minecraft.world.phys.shapes.Shapes;
- import net.minecraft.world.phys.shapes.VoxelShape;
--import org.apache.commons.lang3.StringUtils;
- import org.apache.logging.log4j.LogManager;
- import org.apache.logging.log4j.Logger;
- 
 @@ -392,9 +_,11 @@
              }
  

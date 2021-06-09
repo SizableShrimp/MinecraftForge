@@ -1,24 +1,5 @@
 --- a/net/minecraft/client/renderer/block/LiquidBlockRenderer.java
 +++ b/net/minecraft/client/renderer/block/LiquidBlockRenderer.java
-@@ -2,7 +_,6 @@
- 
- import com.mojang.blaze3d.vertex.VertexConsumer;
- import net.minecraft.client.Minecraft;
--import net.minecraft.client.renderer.BiomeColors;
- import net.minecraft.client.renderer.LevelRenderer;
- import net.minecraft.client.renderer.texture.TextureAtlasSprite;
- import net.minecraft.client.resources.model.ModelBakery;
-@@ -12,10 +_,7 @@
- import net.minecraft.util.Mth;
- import net.minecraft.world.level.BlockAndTintGetter;
- import net.minecraft.world.level.BlockGetter;
--import net.minecraft.world.level.block.Block;
- import net.minecraft.world.level.block.Blocks;
--import net.minecraft.world.level.block.HalfTransparentBlock;
--import net.minecraft.world.level.block.LeavesBlock;
- import net.minecraft.world.level.block.state.BlockState;
- import net.minecraft.world.level.material.Fluid;
- import net.minecraft.world.level.material.FluidState;
 @@ -71,9 +_,10 @@
  
     public boolean m_110954_(BlockAndTintGetter p_110955_, BlockPos p_110956_, VertexConsumer p_110957_, FluidState p_110958_) {

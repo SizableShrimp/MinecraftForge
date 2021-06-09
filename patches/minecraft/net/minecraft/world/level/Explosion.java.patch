@@ -1,13 +1,5 @@
 --- a/net/minecraft/world/level/Explosion.java
 +++ b/net/minecraft/world/level/Explosion.java
-@@ -29,7 +_,6 @@
- import net.minecraft.world.item.enchantment.ProtectionEnchantment;
- import net.minecraft.world.level.block.BaseFireBlock;
- import net.minecraft.world.level.block.Block;
--import net.minecraft.world.level.block.Blocks;
- import net.minecraft.world.level.block.entity.BlockEntity;
- import net.minecraft.world.level.block.state.BlockState;
- import net.minecraft.world.level.material.FluidState;
 @@ -57,6 +_,7 @@
     private final ExplosionDamageCalculator f_46019_;
     private final List<BlockPos> f_46020_ = Lists.newArrayList();

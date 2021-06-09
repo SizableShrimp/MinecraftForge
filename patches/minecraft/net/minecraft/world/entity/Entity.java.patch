@@ -1,13 +1,5 @@
 --- a/net/minecraft/world/entity/Entity.java
 +++ b/net/minecraft/world/entity/Entity.java
-@@ -76,7 +_,6 @@
- import net.minecraft.world.level.LevelReader;
- import net.minecraft.world.level.block.Block;
- import net.minecraft.world.level.block.Blocks;
--import net.minecraft.world.level.block.FenceGateBlock;
- import net.minecraft.world.level.block.HoneyBlock;
- import net.minecraft.world.level.block.Mirror;
- import net.minecraft.world.level.block.RenderShape;
 @@ -107,12 +_,13 @@
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;

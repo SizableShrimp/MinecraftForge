@@ -1,13 +1,5 @@
 --- a/net/minecraft/world/level/block/CampfireBlock.java
 +++ b/net/minecraft/world/level/block/CampfireBlock.java
-@@ -24,7 +_,6 @@
- import net.minecraft.world.item.crafting.CampfireCookingRecipe;
- import net.minecraft.world.item.enchantment.EnchantmentHelper;
- import net.minecraft.world.level.BlockGetter;
--import net.minecraft.world.level.GameRules;
- import net.minecraft.world.level.Level;
- import net.minecraft.world.level.LevelAccessor;
- import net.minecraft.world.level.block.entity.BlockEntity;
 @@ -181,7 +_,7 @@
     public void m_5581_(Level p_51244_, BlockState p_51245_, BlockHitResult p_51246_, Projectile p_51247_) {
        if (!p_51244_.f_46443_ && p_51247_.m_6060_()) {

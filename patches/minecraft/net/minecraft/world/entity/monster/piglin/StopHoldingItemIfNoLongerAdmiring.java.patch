@@ -1,13 +1,5 @@
 --- a/net/minecraft/world/entity/monster/piglin/StopHoldingItemIfNoLongerAdmiring.java
 +++ b/net/minecraft/world/entity/monster/piglin/StopHoldingItemIfNoLongerAdmiring.java
-@@ -5,7 +_,6 @@
- import net.minecraft.world.entity.ai.behavior.Behavior;
- import net.minecraft.world.entity.ai.memory.MemoryModuleType;
- import net.minecraft.world.entity.ai.memory.MemoryStatus;
--import net.minecraft.world.item.Items;
- 
- public class StopHoldingItemIfNoLongerAdmiring<E extends Piglin> extends Behavior<E> {
-    public StopHoldingItemIfNoLongerAdmiring() {
 @@ -13,7 +_,7 @@
     }
  

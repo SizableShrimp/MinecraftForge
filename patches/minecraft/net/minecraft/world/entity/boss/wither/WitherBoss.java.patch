@@ -1,13 +1,5 @@
 --- a/net/minecraft/world/entity/boss/wither/WitherBoss.java
 +++ b/net/minecraft/world/entity/boss/wither/WitherBoss.java
-@@ -47,7 +_,6 @@
- import net.minecraft.world.entity.projectile.WitherSkull;
- import net.minecraft.world.item.Items;
- import net.minecraft.world.level.Explosion;
--import net.minecraft.world.level.GameRules;
- import net.minecraft.world.level.Level;
- import net.minecraft.world.level.block.state.BlockState;
- import net.minecraft.world.phys.Vec3;
 @@ -213,7 +_,7 @@
        if (this.m_31502_() > 0) {
           int j1 = this.m_31502_() - 1;

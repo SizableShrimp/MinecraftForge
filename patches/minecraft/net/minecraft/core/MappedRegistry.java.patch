@@ -1,13 +1,5 @@
 --- a/net/minecraft/core/MappedRegistry.java
 +++ b/net/minecraft/core/MappedRegistry.java
-@@ -24,7 +_,6 @@
- import java.util.OptionalInt;
- import java.util.Random;
- import java.util.Set;
--import java.util.Map.Entry;
- import javax.annotation.Nullable;
- import net.minecraft.Util;
- import net.minecraft.resources.RegistryDataPackCodec;
 @@ -166,7 +_,7 @@
        return Collections.unmodifiableSet(this.f_122674_.keySet());
     }

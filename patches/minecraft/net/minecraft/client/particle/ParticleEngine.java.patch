@@ -1,14 +1,5 @@
 --- a/net/minecraft/client/particle/ParticleEngine.java
 +++ b/net/minecraft/client/particle/ParticleEngine.java
-@@ -10,8 +_,6 @@
- import com.mojang.blaze3d.vertex.BufferBuilder;
- import com.mojang.blaze3d.vertex.PoseStack;
- import com.mojang.blaze3d.vertex.Tesselator;
--import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
--import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
- import java.io.IOException;
- import java.io.InputStreamReader;
- import java.io.Reader;
 @@ -65,7 +_,7 @@
     private final Queue<TrackingEmitter> f_107290_ = Queues.newArrayDeque();
     private final TextureManager f_107291_;

@@ -1,15 +1,5 @@
 --- a/net/minecraft/client/multiplayer/ClientPacketListener.java
 +++ b/net/minecraft/client/multiplayer/ClientPacketListener.java
-@@ -213,9 +_,7 @@
- import net.minecraft.world.entity.ai.attributes.AttributeModifier;
- import net.minecraft.world.entity.animal.Bee;
- import net.minecraft.world.entity.animal.horse.AbstractHorse;
--import net.minecraft.world.entity.boss.EnderDragonPart;
- import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
--import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
- import net.minecraft.world.entity.decoration.ArmorStand;
- import net.minecraft.world.entity.decoration.ItemFrame;
- import net.minecraft.world.entity.decoration.LeashFenceKnotEntity;
 @@ -378,6 +_,7 @@
  
        this.f_104888_.f_91064_.m_113434_();

@@ -1,13 +1,5 @@
 --- a/net/minecraft/client/gui/components/AbstractSelectionList.java
 +++ b/net/minecraft/client/gui/components/AbstractSelectionList.java
-@@ -7,7 +_,6 @@
- import com.mojang.blaze3d.vertex.DefaultVertexFormat;
- import com.mojang.blaze3d.vertex.PoseStack;
- import com.mojang.blaze3d.vertex.Tesselator;
--import java.util.AbstractList;
- import java.util.Collection;
- import java.util.List;
- import java.util.Objects;
 @@ -492,6 +_,13 @@
        p_93506_.f_93521_ = this;
     }

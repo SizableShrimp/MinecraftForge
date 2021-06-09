@@ -1,13 +1,5 @@
 --- a/net/minecraft/world/entity/ai/goal/EatBlockGoal.java
 +++ b/net/minecraft/world/entity/ai/goal/EatBlockGoal.java
-@@ -4,7 +_,6 @@
- import java.util.function.Predicate;
- import net.minecraft.core.BlockPos;
- import net.minecraft.world.entity.Mob;
--import net.minecraft.world.level.GameRules;
- import net.minecraft.world.level.Level;
- import net.minecraft.world.level.block.Block;
- import net.minecraft.world.level.block.Blocks;
 @@ -59,7 +_,7 @@
        if (this.f_25204_ == 4) {
           BlockPos blockpos = this.f_25202_.m_20183_();

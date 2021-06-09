@@ -1,13 +1,5 @@
 --- a/net/minecraft/world/level/Level.java
 +++ b/net/minecraft/world/level/Level.java
-@@ -42,7 +_,6 @@
- import net.minecraft.world.level.block.Block;
- import net.minecraft.world.level.block.Blocks;
- import net.minecraft.world.level.block.entity.BlockEntity;
--import net.minecraft.world.level.block.entity.BlockEntityType;
- import net.minecraft.world.level.block.entity.TickableBlockEntity;
- import net.minecraft.world.level.block.state.BlockState;
- import net.minecraft.world.level.border.WorldBorder;
 @@ -65,7 +_,7 @@
  import org.apache.logging.log4j.LogManager;
  import org.apache.logging.log4j.Logger;
