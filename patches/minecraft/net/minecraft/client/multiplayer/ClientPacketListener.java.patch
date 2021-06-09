@@ -36,22 +36,17 @@
     }
  
     public void m_7791_(ClientboundAnimatePacket p_104968_) {
-@@ -848,11 +_,11 @@
+@@ -848,8 +_,8 @@
           livingentity.m_20167_(d0, d1, d2);
           livingentity.f_20883_ = (float)(p_104962_.m_131565_() * 360) / 256.0F;
           livingentity.f_20885_ = (float)(p_104962_.m_131565_() * 360) / 256.0F;
 -         if (livingentity instanceof EnderDragon) {
 -            EnderDragonPart[] aenderdragonpart = ((EnderDragon)livingentity).m_31156_();
 +         if (livingentity.isMultipartEntity()) {
-+            net.minecraftforge.entity.PartEntity<?>[] aenderdragonpartentity = livingentity.getParts();
++            net.minecraftforge.entity.PartEntity<?>[] aenderdragonpart = livingentity.getParts();
  
--            for(int i = 0; i < aenderdragonpart.length; ++i) {
--               aenderdragonpart[i].m_20234_(i + p_104962_.m_131552_());
-+            for(int i = 0; i < aenderdragonpartentity.length; ++i) {
-+               aenderdragonpartentity[i].m_20234_(i + p_104962_.m_131552_());
-             }
-          }
- 
+             for(int i = 0; i < aenderdragonpart.length; ++i) {
+                aenderdragonpart[i].m_20234_(i + p_104962_.m_131552_());
 @@ -998,8 +_,10 @@
           localplayer1.m_21204_().m_22159_(localplayer.m_21204_());
        }

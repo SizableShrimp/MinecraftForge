@@ -16,18 +16,6 @@
              }
  
              return levelchunk;
-@@ -622,9 +_,9 @@
-       completablefuture1.thenAcceptAsync((p_140237_) -> {
-          p_140237_.mapLeft((p_140234_) -> {
-             this.f_140146_.getAndIncrement();
--            Packet<?>[] packet = new Packet[2];
-+            Packet<?>[] ipacket = new Packet[2];
-             this.m_5960_(chunkpos, false).forEach((p_140323_) -> {
--               this.m_140195_(p_140323_, packet, p_140234_);
-+               this.m_140195_(p_140323_, ipacket, p_140234_);
-             });
-             return Either.left(p_140234_);
-          });
 @@ -673,6 +_,7 @@
  
              this.f_140133_.m_46473_().m_6174_("chunkSave");
@@ -36,21 +24,6 @@
              this.m_63502_(chunkpos, compoundtag);
              this.m_140229_(chunkpos, chunkstatus.m_62494_());
              return true;
-@@ -715,12 +_,12 @@
- 
-          for(ChunkHolder chunkholder : this.f_140129_.values()) {
-             ChunkPos chunkpos = chunkholder.m_140092_();
--            Packet<?>[] packet = new Packet[2];
-+            Packet<?>[] ipacket = new Packet[2];
-             this.m_5960_(chunkpos, false).forEach((p_140218_) -> {
-                int k = m_140338_(chunkpos, p_140218_, true);
-                boolean flag = k <= j;
-                boolean flag1 = k <= this.f_140126_;
--               this.m_140186_(p_140218_, chunkpos, packet, flag, flag1);
-+               this.m_140186_(p_140218_, chunkpos, ipacket, flag, flag1);
-             });
-          }
-       }
 @@ -729,6 +_,7 @@
  
     protected void m_140186_(ServerPlayer p_140187_, ChunkPos p_140188_, Packet<?>[] p_140189_, boolean p_140190_, boolean p_140191_) {
@@ -68,57 +41,3 @@
           EntityType<?> entitytype = p_140200_.m_6095_();
           int i = entitytype.m_20681_() * 16;
           int j = entitytype.m_20682_();
-@@ -1072,26 +_,6 @@
-       });
-    }
- 
--   class DistanceManager extends net.minecraft.server.level.DistanceManager {
--      protected DistanceManager(Executor p_140459_, Executor p_140460_) {
--         super(p_140459_, p_140460_);
--      }
--
--      protected boolean m_7009_(long p_140462_) {
--         return ChunkMap.this.f_140139_.contains(p_140462_);
--      }
--
--      @Nullable
--      protected ChunkHolder m_7316_(long p_140469_) {
--         return ChunkMap.this.m_140174_(p_140469_);
--      }
--
--      @Nullable
--      protected ChunkHolder m_7288_(long p_140464_, int p_140465_, @Nullable ChunkHolder p_140466_, int p_140467_) {
--         return ChunkMap.this.m_140176_(p_140464_, p_140465_, p_140466_, p_140467_);
--      }
--   }
--
-    class TrackedEntity {
-       private final ServerEntity f_140471_;
-       private final Entity f_140472_;
-@@ -1195,6 +_,26 @@
-             this.m_140497_(serverplayer);
-          }
- 
-+      }
-+   }
-+
-+   class DistanceManager extends net.minecraft.server.level.DistanceManager {
-+      protected DistanceManager(Executor p_140459_, Executor p_140460_) {
-+         super(p_140459_, p_140460_);
-+      }
-+
-+      protected boolean m_7009_(long p_140462_) {
-+         return ChunkMap.this.f_140139_.contains(p_140462_);
-+      }
-+
-+      @Nullable
-+      protected ChunkHolder m_7316_(long p_140469_) {
-+         return ChunkMap.this.m_140174_(p_140469_);
-+      }
-+
-+      @Nullable
-+      protected ChunkHolder m_7288_(long p_140464_, int p_140465_, @Nullable ChunkHolder p_140466_, int p_140467_) {
-+         return ChunkMap.this.m_140176_(p_140464_, p_140465_, p_140466_, p_140467_);
-       }
-    }
- }

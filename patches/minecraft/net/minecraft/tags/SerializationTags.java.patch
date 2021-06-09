@@ -1,25 +1,20 @@
 --- a/net/minecraft/tags/SerializationTags.java
 +++ b/net/minecraft/tags/SerializationTags.java
-@@ -3,14 +_,14 @@
+@@ -3,13 +_,13 @@
  import java.util.stream.Collectors;
  
  public class SerializationTags {
 -   private static volatile TagContainer f_13197_ = TagContainer.m_13422_(TagCollection.m_13396_(BlockTags.m_13118_().stream().collect(Collectors.toMap(Tag.Named::m_6979_, (p_13209_) -> {
--      return p_13209_;
++   private static volatile TagContainer f_13197_ = net.minecraftforge.common.ForgeTagHandler.populateTagCollectionManager(TagCollection.m_13396_(BlockTags.m_13118_().stream().distinct().collect(Collectors.toMap(Tag.Named::m_6979_, (p_13209_) -> {
+       return p_13209_;
 -   }))), TagCollection.m_13396_(ItemTags.m_13196_().stream().collect(Collectors.toMap(Tag.Named::m_6979_, (p_13207_) -> {
--      return p_13207_;
++   }))), TagCollection.m_13396_(ItemTags.m_13196_().stream().distinct().collect(Collectors.toMap(Tag.Named::m_6979_, (p_13207_) -> {
+       return p_13207_;
 -   }))), TagCollection.m_13396_(FluidTags.m_13136_().stream().collect(Collectors.toMap(Tag.Named::m_6979_, (p_13205_) -> {
--      return p_13205_;
++   }))), TagCollection.m_13396_(FluidTags.m_13136_().stream().distinct().collect(Collectors.toMap(Tag.Named::m_6979_, (p_13205_) -> {
+       return p_13205_;
 -   }))), TagCollection.m_13396_(EntityTypeTags.m_13129_().stream().collect(Collectors.toMap(Tag.Named::m_6979_, (p_13201_) -> {
--      return p_13201_;
-+   private static volatile TagContainer f_13197_ = net.minecraftforge.common.ForgeTagHandler.populateTagCollectionManager(TagCollection.m_13396_(BlockTags.m_13118_().stream().distinct().collect(Collectors.toMap(Tag.Named::m_6979_, (p_242183_0_) -> {
-+      return p_242183_0_;
-+   }))), TagCollection.m_13396_(ItemTags.m_13196_().stream().distinct().collect(Collectors.toMap(Tag.Named::m_6979_, (p_242182_0_) -> {
-+      return p_242182_0_;
-+   }))), TagCollection.m_13396_(FluidTags.m_13136_().stream().distinct().collect(Collectors.toMap(Tag.Named::m_6979_, (p_242181_0_) -> {
-+      return p_242181_0_;
-+   }))), TagCollection.m_13396_(EntityTypeTags.m_13129_().stream().distinct().collect(Collectors.toMap(Tag.Named::m_6979_, (p_242179_0_) -> {
-+      return p_242179_0_;
++   }))), TagCollection.m_13396_(EntityTypeTags.m_13129_().stream().distinct().collect(Collectors.toMap(Tag.Named::m_6979_, (p_13201_) -> {
+       return p_13201_;
     }))));
  
-    public static TagContainer m_13199_() {

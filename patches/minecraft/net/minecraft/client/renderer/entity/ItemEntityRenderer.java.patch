@@ -1,18 +1,5 @@
 --- a/net/minecraft/client/renderer/entity/ItemEntityRenderer.java
 +++ b/net/minecraft/client/renderer/entity/ItemEntityRenderer.java
-@@ -19,10 +_,10 @@
- 
- @OnlyIn(Dist.CLIENT)
- public class ItemEntityRenderer extends EntityRenderer<ItemEntity> {
--   private final ItemRenderer f_115019_;
-+   private final net.minecraft.client.renderer.entity.ItemRenderer f_115019_;
-    private final Random f_115020_ = new Random();
- 
--   public ItemEntityRenderer(EntityRenderDispatcher p_115022_, ItemRenderer p_115023_) {
-+   public ItemEntityRenderer(EntityRenderDispatcher p_115022_, net.minecraft.client.renderer.entity.ItemRenderer p_115023_) {
-       super(p_115022_);
-       this.f_115019_ = p_115023_;
-       this.f_114477_ = 0.15F;
 @@ -54,17 +_,14 @@
        int j = this.m_115042_(itemstack);
        float f = 0.25F;
@@ -61,7 +48,7 @@
     public ResourceLocation m_5478_(ItemEntity p_115034_) {
        return TextureAtlas.f_118259_;
     }
-+   
++
 +   /*==================================== FORGE START ===========================================*/
 +
 +   /**

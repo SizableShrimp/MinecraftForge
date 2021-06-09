@@ -31,29 +31,12 @@
           } else {
              flag = flag1 && i <= j;
           }
-@@ -139,8 +_,13 @@
+@@ -139,7 +_,7 @@
        }
  
        public String toString() {
 -         return "Holder{width=" + this.f_118203_ + ", height=" + this.f_118204_ + '}';
 +         return "Holder{width=" + this.f_118203_ + ", height=" + this.f_118204_ + ", name=" + this.f_118202_.m_118431_() + '}';
        }
-+   }
-+
-+   @OnlyIn(Dist.CLIENT)
-+   public interface SpriteLoader {
-+      void m_118228_(TextureAtlasSprite.Info p_118229_, int p_118230_, int p_118231_, int p_118232_, int p_118233_);
     }
  
-    @OnlyIn(Dist.CLIENT)
-@@ -232,10 +_,5 @@
-       public String toString() {
-          return "Slot{originX=" + this.f_118209_ + ", originY=" + this.f_118210_ + ", width=" + this.f_118211_ + ", height=" + this.f_118212_ + ", texture=" + this.f_118214_ + ", subSlots=" + this.f_118213_ + '}';
-       }
--   }
--
--   @OnlyIn(Dist.CLIENT)
--   public interface SpriteLoader {
--      void m_118228_(TextureAtlasSprite.Info p_118229_, int p_118230_, int p_118231_, int p_118232_, int p_118233_);
-    }
- }

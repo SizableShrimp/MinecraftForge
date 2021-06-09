@@ -8,23 +8,3 @@
           TextureUtil.m_85281_(abstracttexture.m_117963_());
        }
  
-@@ -171,7 +_,7 @@
-    }
- 
-    public CompletableFuture<Void> m_5540_(PreparableReloadListener.PreparationBarrier p_118476_, ResourceManager p_118477_, ProfilerFiller p_118478_, ProfilerFiller p_118479_, Executor p_118480_, Executor p_118481_) {
--      return CompletableFuture.allOf(TitleScreen.m_96754_(this, p_118480_), this.m_118501_(AbstractWidget.f_93617_, p_118480_)).thenCompose(p_118476_::m_6769_).thenAcceptAsync((p_118485_) -> {
-+      return CompletableFuture.allOf(TitleScreen.m_96754_(this, p_118480_), this.m_118501_(AbstractWidget.f_93617_, p_118480_)).thenCompose(p_118476_::m_6769_).thenAcceptAsync((p_229265_3_) -> {
-          MissingTextureAtlasSprite.m_118080_();
-          RealmsMainScreen.m_86406_(this.f_118471_);
-          Iterator<Entry<ResourceLocation, AbstractTexture>> iterator = this.f_118468_.entrySet().iterator();
-@@ -187,8 +_,8 @@
-             }
-          }
- 
--      }, (p_118505_) -> {
--         RenderSystem.m_69879_(p_118505_::run);
-+      }, (p_229266_0_) -> {
-+         RenderSystem.m_69879_(p_229266_0_::run);
-       });
-    }
- }

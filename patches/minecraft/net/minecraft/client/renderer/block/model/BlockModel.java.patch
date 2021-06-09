@@ -49,7 +49,7 @@
        for(BlockElement blockelement : this.m_111436_()) {
           for(BlockElementFace blockelementface : blockelement.f_111310_.values()) {
              Material material = this.m_111480_(blockelementface.f_111356_);
-@@ -176,25 +_,31 @@
+@@ -176,11 +_,17 @@
        return set1;
     }
  
@@ -59,34 +59,14 @@
     }
  
     public BakedModel m_111449_(ModelBakery p_111450_, BlockModel p_111451_, Function<Material, TextureAtlasSprite> p_111452_, ModelState p_111453_, ResourceLocation p_111454_, boolean p_111455_) {
--      TextureAtlasSprite textureatlassprite = p_111452_.apply(this.m_111480_("particle"));
 +      return net.minecraftforge.client.model.ModelLoaderRegistry.bakeHelper(this, p_111450_, p_111451_, p_111452_, p_111453_, p_111454_, p_111455_);
 +   }
 +
 +   @Deprecated //Forge: exposed for our callbacks only. Use the above function.
-+   public BakedModel bakeVanilla(ModelBakery p_228813_1_, BlockModel p_228813_2_, Function<Material, TextureAtlasSprite> p_228813_3_, ModelState p_228813_4_, ResourceLocation p_228813_5_, boolean p_228813_6_) {
-+      TextureAtlasSprite textureatlassprite = p_228813_3_.apply(this.m_111480_("particle"));
++   public BakedModel bakeVanilla(ModelBakery p_111450_, BlockModel p_111451_, Function<Material, TextureAtlasSprite> p_111452_, ModelState p_111453_, ResourceLocation p_111454_, boolean p_111455_) {
+       TextureAtlasSprite textureatlassprite = p_111452_.apply(this.m_111480_("particle"));
        if (this.m_111490_() == ModelBakery.f_119233_) {
--         return new BuiltInModel(this.m_111491_(), this.m_111446_(p_111450_, p_111451_), textureatlassprite, this.m_111479_().m_111526_());
-+         return new BuiltInModel(this.m_111491_(), this.m_111446_(p_228813_1_, p_228813_2_), textureatlassprite, this.m_111479_().m_111526_());
-       } else {
--         SimpleBakedModel.Builder simplebakedmodel$builder = (new SimpleBakedModel.Builder(this, this.m_111446_(p_111450_, p_111451_), p_111455_)).m_119528_(textureatlassprite);
-+         SimpleBakedModel.Builder simplebakedmodel$builder = (new SimpleBakedModel.Builder(this, this.m_111446_(p_228813_1_, p_228813_2_), p_228813_6_)).m_119528_(textureatlassprite);
- 
-          for(BlockElement blockelement : this.m_111436_()) {
-             for(Direction direction : blockelement.f_111310_.keySet()) {
-                BlockElementFace blockelementface = blockelement.f_111310_.get(direction);
--               TextureAtlasSprite textureatlassprite1 = p_111452_.apply(this.m_111480_(blockelementface.f_111356_));
-+               TextureAtlasSprite textureatlassprite1 = p_228813_3_.apply(this.m_111480_(blockelementface.f_111356_));
-                if (blockelementface.f_111354_ == null) {
--                  simplebakedmodel$builder.m_119526_(m_111437_(blockelement, blockelementface, textureatlassprite1, direction, p_111453_, p_111454_));
-+                  simplebakedmodel$builder.m_119526_(m_111437_(blockelement, blockelementface, textureatlassprite1, direction, p_228813_4_, p_228813_5_));
-                } else {
--                  simplebakedmodel$builder.m_119530_(Direction.m_122384_(p_111453_.m_6189_().m_121104_(), blockelementface.f_111354_), m_111437_(blockelement, blockelementface, textureatlassprite1, direction, p_111453_, p_111454_));
-+                  simplebakedmodel$builder.m_119530_(Direction.m_122384_(p_228813_4_.m_6189_().m_121104_(), blockelementface.f_111354_), m_111437_(blockelement, blockelementface, textureatlassprite1, direction, p_228813_4_, p_228813_5_));
-                }
-             }
-          }
+          return new BuiltInModel(this.m_111491_(), this.m_111446_(p_111450_, p_111451_), textureatlassprite, this.m_111479_().m_111526_());
 @@ -207,6 +_,10 @@
        return f_111421_.m_111600_(p_111438_.f_111308_, p_111438_.f_111309_, p_111439_, p_111440_, p_111441_, p_111442_, p_111438_.f_111311_, p_111438_.f_111312_, p_111443_);
     }

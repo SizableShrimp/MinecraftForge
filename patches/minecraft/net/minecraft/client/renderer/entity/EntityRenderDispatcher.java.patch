@@ -1,23 +1,5 @@
 --- a/net/minecraft/client/renderer/entity/EntityRenderDispatcher.java
 +++ b/net/minecraft/client/renderer/entity/EntityRenderDispatcher.java
-@@ -71,7 +_,7 @@
-       this.f_114362_.put(p_114404_, p_114405_);
-    }
- 
--   private void m_114465_(ItemRenderer p_114466_, ReloadableResourceManager p_114467_) {
-+   private void m_114465_(net.minecraft.client.renderer.entity.ItemRenderer p_114466_, ReloadableResourceManager p_114467_) {
-       this.m_114403_(EntityType.f_20476_, new AreaEffectCloudRenderer(this));
-       this.m_114403_(EntityType.f_20529_, new ArmorStandRenderer(this));
-       this.m_114403_(EntityType.f_20548_, new TippableArrowRenderer(this));
-@@ -181,7 +_,7 @@
-       this.m_114403_(EntityType.f_20482_, new StriderRenderer(this));
-    }
- 
--   public EntityRenderDispatcher(TextureManager p_114372_, ItemRenderer p_114373_, ReloadableResourceManager p_114374_, Font p_114375_, Options p_114376_) {
-+   public EntityRenderDispatcher(TextureManager p_114372_, net.minecraft.client.renderer.entity.ItemRenderer p_114373_, ReloadableResourceManager p_114374_, Font p_114375_, Options p_114376_) {
-       this.f_114357_ = p_114372_;
-       this.f_114365_ = p_114375_;
-       this.f_114360_ = p_114376_;
 @@ -189,7 +_,10 @@
        this.f_114364_ = new PlayerRenderer(this);
        this.f_114363_.put("default", this.f_114364_);
@@ -29,7 +11,7 @@
        for(EntityType<?> entitytype : Registry.f_122826_) {
           if (entitytype != EntityType.f_20532_ && !this.f_114362_.containsKey(entitytype)) {
              throw new IllegalStateException("No renderer registered for " + Registry.f_122826_.m_7981_(entitytype));
-@@ -281,18 +_,18 @@
+@@ -281,12 +_,12 @@
     private void m_114441_(PoseStack p_114442_, VertexConsumer p_114443_, Entity p_114444_, float p_114445_) {
        float f = p_114444_.m_20205_() / 2.0F;
        this.m_114446_(p_114442_, p_114443_, p_114444_, 1.0F, 1.0F, 1.0F);
@@ -40,20 +22,10 @@
           double d2 = -Mth.m_14139_((double)p_114445_, p_114444_.f_19792_, p_114444_.m_20189_());
  
 -         for(EnderDragonPart enderdragonpart : ((EnderDragon)p_114444_).m_31156_()) {
-+         for(net.minecraftforge.entity.PartEntity<?> enderdragonpartentity : p_114444_.getParts()) {
++         for(net.minecraftforge.entity.PartEntity<?> enderdragonpart : p_114444_.getParts()) {
              p_114442_.m_85836_();
--            double d3 = d0 + Mth.m_14139_((double)p_114445_, enderdragonpart.f_19790_, enderdragonpart.m_20185_());
--            double d4 = d1 + Mth.m_14139_((double)p_114445_, enderdragonpart.f_19791_, enderdragonpart.m_20186_());
--            double d5 = d2 + Mth.m_14139_((double)p_114445_, enderdragonpart.f_19792_, enderdragonpart.m_20189_());
-+            double d3 = d0 + Mth.m_14139_((double)p_114445_, enderdragonpartentity.f_19790_, enderdragonpartentity.m_20185_());
-+            double d4 = d1 + Mth.m_14139_((double)p_114445_, enderdragonpartentity.f_19791_, enderdragonpartentity.m_20186_());
-+            double d5 = d2 + Mth.m_14139_((double)p_114445_, enderdragonpartentity.f_19792_, enderdragonpartentity.m_20189_());
-             p_114442_.m_85837_(d3, d4, d5);
--            this.m_114446_(p_114442_, p_114443_, enderdragonpart, 0.25F, 1.0F, 0.0F);
-+            this.m_114446_(p_114442_, p_114443_, enderdragonpartentity, 0.25F, 1.0F, 0.0F);
-             p_114442_.m_85849_();
-          }
-       }
+             double d3 = d0 + Mth.m_14139_((double)p_114445_, enderdragonpart.f_19790_, enderdragonpart.m_20185_());
+             double d4 = d1 + Mth.m_14139_((double)p_114445_, enderdragonpart.f_19791_, enderdragonpart.m_20186_());
 @@ -450,5 +_,9 @@
  
     public Font m_114475_() {

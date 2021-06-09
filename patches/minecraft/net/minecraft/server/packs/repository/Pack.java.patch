@@ -8,66 +8,42 @@
     private final PackSource f_10409_;
  
     @Nullable
-@@ -54,20 +_,31 @@
+@@ -54,7 +_,12 @@
        return null;
     }
  
 +   @Deprecated
     public Pack(String p_10420_, boolean p_10421_, Supplier<PackResources> p_10422_, Component p_10423_, Component p_10424_, PackCompatibility p_10425_, Pack.Position p_10426_, boolean p_10427_, PackSource p_10428_) {
--      this.f_10401_ = p_10420_;
--      this.f_10402_ = p_10422_;
--      this.f_10403_ = p_10423_;
--      this.f_10404_ = p_10424_;
--      this.f_10405_ = p_10425_;
--      this.f_10407_ = p_10421_;
--      this.f_10406_ = p_10426_;
--      this.f_10408_ = p_10427_;
--      this.f_10409_ = p_10428_;
--   }
--
 +       this(p_10420_, p_10421_, p_10422_, p_10423_, p_10424_, p_10425_, p_10426_, p_10427_, p_10428_, false);
 +   }
 +
-+   public Pack(String p_i231422_1_, boolean p_i231422_2_, Supplier<PackResources> p_i231422_3_, Component p_i231422_4_, Component p_i231422_5_, PackCompatibility p_i231422_6_, Pack.Position p_i231422_7_, boolean p_i231422_8_, PackSource p_i231422_9_, boolean hidden) {
-+      this.f_10401_ = p_i231422_1_;
-+      this.f_10402_ = p_i231422_3_;
-+      this.f_10403_ = p_i231422_4_;
-+      this.f_10404_ = p_i231422_5_;
-+      this.f_10405_ = p_i231422_6_;
-+      this.f_10407_ = p_i231422_2_;
-+      this.f_10406_ = p_i231422_7_;
-+      this.f_10408_ = p_i231422_8_;
-+      this.f_10409_ = p_i231422_9_;
++   public Pack(String p_10420_, boolean p_10421_, Supplier<PackResources> p_10422_, Component p_10423_, Component p_10424_, PackCompatibility p_10425_, Pack.Position p_10426_, boolean p_10427_, PackSource p_10428_, boolean hidden) {
+       this.f_10401_ = p_10420_;
+       this.f_10402_ = p_10422_;
+       this.f_10403_ = p_10423_;
+@@ -64,10 +_,16 @@
+       this.f_10406_ = p_10426_;
+       this.f_10408_ = p_10427_;
+       this.f_10409_ = p_10428_;
 +      this.hidden = hidden;
-+   }
-+
+    }
+ 
 +   @Deprecated
     public Pack(String p_10412_, boolean p_10413_, Supplier<PackResources> p_10414_, PackResources p_10415_, PackMetadataSection p_10416_, Pack.Position p_10417_, PackSource p_10418_) {
 -      this(p_10412_, p_10413_, p_10414_, new TextComponent(p_10415_.m_8017_()), p_10416_.m_10373_(), PackCompatibility.m_10490_(p_10416_.m_10374_()), p_10417_, false, p_10418_);
-+       this(p_10412_, p_10413_, p_10414_, p_10415_, p_10416_, p_10417_, p_10418_, false);
++      this(p_10412_, p_10413_, p_10414_, p_10415_, p_10416_, p_10417_, p_10418_, false);
 +   }
 +
-+   public Pack(String p_i231421_1_, boolean p_i231421_2_, Supplier<PackResources> p_i231421_3_, PackResources p_i231421_4_, PackMetadataSection p_i231421_5_, Pack.Position p_i231421_6_, PackSource p_i231421_7_, boolean hidden) {
-+      this(p_i231421_1_, p_i231421_2_, p_i231421_3_, new TextComponent(p_i231421_4_.m_8017_()), p_i231421_5_.m_10373_(), PackCompatibility.m_10490_(p_i231421_5_.m_10374_()), p_i231421_6_, false, p_i231421_7_, hidden);
++   public Pack(String p_10412_, boolean p_10413_, Supplier<PackResources> p_10414_, PackResources p_10415_, PackMetadataSection p_10416_, Pack.Position p_10417_, PackSource p_10418_, boolean hidden) {
++      this(p_10412_, p_10413_, p_10414_, new TextComponent(p_10415_.m_8017_()), p_10416_.m_10373_(), PackCompatibility.m_10490_(p_10416_.m_10374_()), p_10417_, false, p_10418_, hidden);
     }
  
     @OnlyIn(Dist.CLIENT)
-@@ -81,8 +_,8 @@
-    }
- 
-    public Component m_10437_(boolean p_10438_) {
--      return ComponentUtils.m_130748_(this.f_10409_.m_10540_(new TextComponent(this.f_10401_))).m_130938_((p_10441_) -> {
--         return p_10441_.m_131140_(p_10438_ ? ChatFormatting.GREEN : ChatFormatting.RED).m_131138_(StringArgumentType.escapeIfRequired(this.f_10401_)).m_131144_(new HoverEvent(HoverEvent.Action.f_130831_, (new TextComponent("")).m_7220_(this.f_10403_).m_130946_("\n").m_7220_(this.f_10404_)));
-+      return ComponentUtils.m_130748_(this.f_10409_.m_10540_(new TextComponent(this.f_10401_))).m_130938_((p_211689_2_) -> {
-+         return p_211689_2_.m_131140_(p_10438_ ? ChatFormatting.GREEN : ChatFormatting.RED).m_131138_(StringArgumentType.escapeIfRequired(this.f_10401_)).m_131144_(new HoverEvent(HoverEvent.Action.f_130831_, (new TextComponent("")).m_7220_(this.f_10403_).m_130946_("\n").m_7220_(this.f_10404_)));
-       });
-    }
- 
 @@ -114,6 +_,8 @@
     public PackSource m_10453_() {
        return this.f_10409_;
     }
-+   
++
 +   public boolean isHidden() { return hidden; }
  
     public boolean equals(Object p_10448_) {

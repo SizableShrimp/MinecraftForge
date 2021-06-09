@@ -1,14 +1,5 @@
 --- a/net/minecraft/core/MappedRegistry.java
 +++ b/net/minecraft/core/MappedRegistry.java
-@@ -166,7 +_,7 @@
-       return Collections.unmodifiableSet(this.f_122674_.keySet());
-    }
- 
--   public Set<Entry<ResourceKey<T>, T>> m_6579_() {
-+   public Set<Map.Entry<ResourceKey<T>, T>> m_6579_() {
-       return Collections.unmodifiableMap(this.f_122675_).entrySet();
-    }
- 
 @@ -214,7 +_,8 @@
     }
  

@@ -1,84 +1,19 @@
 --- a/net/minecraft/client/gui/screens/packs/PackSelectionModel.java
 +++ b/net/minecraft/client/gui/screens/packs/PackSelectionModel.java
-@@ -62,49 +_,6 @@
+@@ -102,6 +_,8 @@
+       boolean m_7802_();
+ 
+       boolean m_7803_();
++
++      default boolean notHidden() { return true; }
     }
  
     @OnlyIn(Dist.CLIENT)
--   public interface Entry {
--      ResourceLocation m_6876_();
--
--      PackCompatibility m_7709_();
--
--      Component m_7356_();
--
--      Component m_7359_();
--
--      PackSource m_7485_();
--
--      default Component m_99929_() {
--         return this.m_7485_().m_10540_(this.m_7359_());
--      }
--
--      boolean m_7867_();
--
--      boolean m_7844_();
--
--      void m_7849_();
--
--      void m_7850_();
--
--      void m_7852_();
--
--      void m_7845_();
--
--      boolean m_7857_();
--
--      default boolean m_99930_() {
--         return !this.m_7857_();
--      }
--
--      default boolean m_99931_() {
--         return this.m_7857_() && !this.m_7844_();
--      }
--
--      boolean m_7802_();
--
--      boolean m_7803_();
--   }
--
--   @OnlyIn(Dist.CLIENT)
-    abstract class EntryBase implements PackSelectionModel.Entry {
-       private final Pack f_99933_;
+@@ -176,6 +_,11 @@
  
-@@ -177,31 +_,10 @@
        public void m_7845_() {
           this.m_99938_(1);
-       }
--   }
--
--   @OnlyIn(Dist.CLIENT)
--   class SelectedPackEntry extends PackSelectionModel.EntryBase {
--      public SelectedPackEntry(Pack p_99954_) {
--         super(p_99954_);
--      }
--
--      protected List<Pack> m_6956_() {
--         return PackSelectionModel.this.f_99903_;
--      }
--
--      protected List<Pack> m_6958_() {
--         return PackSelectionModel.this.f_99904_;
--      }
--
--      public boolean m_7857_() {
--         return true;
--      }
--
--      public void m_7849_() {
--      }
--
--      public void m_7850_() {
--         this.m_99950_();
++      }
 +
 +      @Override
 +      public boolean notHidden() {
@@ -86,80 +21,3 @@
        }
     }
  
-@@ -229,5 +_,76 @@
- 
-       public void m_7850_() {
-       }
-+   }
-+
-+   @OnlyIn(Dist.CLIENT)
-+   class SelectedPackEntry extends PackSelectionModel.EntryBase {
-+      public SelectedPackEntry(Pack p_99954_) {
-+         super(p_99954_);
-+      }
-+
-+      protected List<Pack> m_6956_() {
-+         return PackSelectionModel.this.f_99903_;
-+      }
-+
-+      protected List<Pack> m_6958_() {
-+         return PackSelectionModel.this.f_99904_;
-+      }
-+
-+      public boolean m_7857_() {
-+         return true;
-+      }
-+
-+      public void m_7849_() {
-+      }
-+
-+      public void m_7850_() {
-+         this.m_99950_();
-+      }
-+   }
-+
-+   @OnlyIn(Dist.CLIENT)
-+   public interface Entry {
-+      ResourceLocation m_6876_();
-+
-+      PackCompatibility m_7709_();
-+
-+      Component m_7356_();
-+
-+      Component m_7359_();
-+
-+      PackSource m_7485_();
-+
-+      default Component m_99929_() {
-+         return this.m_7485_().m_10540_(this.m_7359_());
-+      }
-+
-+      boolean m_7867_();
-+
-+      boolean m_7844_();
-+
-+      void m_7849_();
-+
-+      void m_7850_();
-+
-+      void m_7852_();
-+
-+      void m_7845_();
-+
-+      boolean m_7857_();
-+
-+      default boolean m_99930_() {
-+         return !this.m_7857_();
-+      }
-+
-+      default boolean m_99931_() {
-+         return this.m_7857_() && !this.m_7844_();
-+      }
-+
-+      boolean m_7802_();
-+
-+      boolean m_7803_();
-+
-+      default boolean notHidden() { return true; }
-    }
- }

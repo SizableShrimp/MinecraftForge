@@ -9,23 +9,20 @@
        this.f_110901_ = new LiquidBlockRenderer();
     }
  
-@@ -43,22 +_,30 @@
+@@ -43,18 +_,26 @@
        return this.f_110899_;
     }
  
 +   @Deprecated //Forge: Model parameter
     public void m_110918_(BlockState p_110919_, BlockPos p_110920_, BlockAndTintGetter p_110921_, PoseStack p_110922_, VertexConsumer p_110923_) {
--      if (p_110919_.m_60799_() == RenderShape.MODEL) {
--         BakedModel bakedmodel = this.f_110899_.m_110893_(p_110919_);
--         long i = p_110919_.m_60726_(p_110920_);
--         this.f_110900_.m_111047_(p_110921_, bakedmodel, p_110919_, p_110920_, p_110922_, p_110923_, true, this.f_110902_, i, OverlayTexture.f_118083_);
 +       renderBlockDamage(p_110919_,p_110920_, p_110921_, p_110922_, p_110923_, net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
 +   }
-+   public void renderBlockDamage(BlockState blockStateIn, BlockPos posIn, BlockAndTintGetter lightReaderIn, PoseStack matrixStackIn, VertexConsumer vertexBuilderIn, net.minecraftforge.client.model.data.IModelData modelData) {
-+      if (blockStateIn.m_60799_() == RenderShape.MODEL) {
-+         BakedModel bakedmodel = this.f_110899_.m_110893_(blockStateIn);
-+         long i = blockStateIn.m_60726_(posIn);
-+         this.f_110900_.renderModel(lightReaderIn, bakedmodel, blockStateIn, posIn, matrixStackIn, vertexBuilderIn, true, this.f_110902_, i, OverlayTexture.f_118083_, modelData);
++   public void renderBlockDamage(BlockState p_110919_, BlockPos p_110920_, BlockAndTintGetter p_110921_, PoseStack p_110922_, VertexConsumer p_110923_, net.minecraftforge.client.model.data.IModelData modelData) {
+       if (p_110919_.m_60799_() == RenderShape.MODEL) {
+          BakedModel bakedmodel = this.f_110899_.m_110893_(p_110919_);
+          long i = p_110919_.m_60726_(p_110920_);
+-         this.f_110900_.m_111047_(p_110921_, bakedmodel, p_110919_, p_110920_, p_110922_, p_110923_, true, this.f_110902_, i, OverlayTexture.f_118083_);
++         this.f_110900_.renderModel(p_110921_, bakedmodel, p_110919_, p_110920_, p_110922_, p_110923_, true, this.f_110902_, i, OverlayTexture.f_118083_, modelData);
        }
     }
  
@@ -33,20 +30,14 @@
     public boolean m_110924_(BlockState p_110925_, BlockPos p_110926_, BlockAndTintGetter p_110927_, PoseStack p_110928_, VertexConsumer p_110929_, boolean p_110930_, Random p_110931_) {
 +       return renderModel(p_110925_, p_110926_, p_110927_, p_110928_, p_110929_, p_110930_, p_110931_, net.minecraftforge.client.model.data.EmptyModelData.INSTANCE);
 +   }
-+   public boolean renderModel(BlockState blockStateIn, BlockPos posIn, BlockAndTintGetter lightReaderIn, PoseStack matrixStackIn, VertexConsumer vertexBuilderIn, boolean checkSides, Random rand, net.minecraftforge.client.model.data.IModelData modelData) {
++   public boolean renderModel(BlockState p_110925_, BlockPos p_110926_, BlockAndTintGetter p_110927_, PoseStack p_110928_, VertexConsumer p_110929_, boolean p_110930_, Random p_110931_, net.minecraftforge.client.model.data.IModelData modelData) {
        try {
--         RenderShape rendershape = p_110925_.m_60799_();
+          RenderShape rendershape = p_110925_.m_60799_();
 -         return rendershape != RenderShape.MODEL ? false : this.f_110900_.m_111047_(p_110927_, this.m_110910_(p_110925_), p_110925_, p_110926_, p_110928_, p_110929_, p_110930_, p_110931_, p_110925_.m_60726_(p_110926_), OverlayTexture.f_118083_);
-+         RenderShape rendershape = blockStateIn.m_60799_();
-+         return rendershape != RenderShape.MODEL ? false : this.f_110900_.renderModel(lightReaderIn, this.m_110910_(blockStateIn), blockStateIn, posIn, matrixStackIn, vertexBuilderIn, checkSides, rand, blockStateIn.m_60726_(posIn), OverlayTexture.f_118083_, modelData);
++         return rendershape != RenderShape.MODEL ? false : this.f_110900_.renderModel(p_110927_, this.m_110910_(p_110925_), p_110925_, p_110926_, p_110928_, p_110929_, p_110930_, p_110931_, p_110925_.m_60726_(p_110926_), OverlayTexture.f_118083_, modelData);
        } catch (Throwable throwable) {
           CrashReport crashreport = CrashReport.m_127521_(throwable, "Tesselating block in world");
           CrashReportCategory crashreportcategory = crashreport.m_127514_("Block being tesselated");
--         CrashReportCategory.m_128170_(crashreportcategory, p_110926_, p_110925_);
-+         CrashReportCategory.m_128170_(crashreportcategory, posIn, blockStateIn);
-          throw new ReportedException(crashreport);
-       }
-    }
 @@ -82,7 +_,11 @@
        return this.f_110899_.m_110893_(p_110911_);
     }

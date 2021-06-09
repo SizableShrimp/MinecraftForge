@@ -1,75 +1,11 @@
 --- a/net/minecraft/client/gui/screens/multiplayer/ServerSelectionList.java
 +++ b/net/minecraft/client/gui/screens/multiplayer/ServerSelectionList.java
-@@ -124,31 +_,6 @@
-    }
- 
-    @OnlyIn(Dist.CLIENT)
--   public static class LANHeader extends ServerSelectionList.Entry {
--      private final Minecraft f_99815_ = Minecraft.m_91087_();
--
--      public void m_6311_(PoseStack p_99818_, int p_99819_, int p_99820_, int p_99821_, int p_99822_, int p_99823_, int p_99824_, int p_99825_, boolean p_99826_, float p_99827_) {
--         int i = p_99820_ + p_99823_ / 2 - 9 / 2;
--         this.f_99815_.f_91062_.m_92889_(p_99818_, ServerSelectionList.f_99760_, (float)(this.f_99815_.f_91080_.f_96543_ / 2 - this.f_99815_.f_91062_.m_92852_(ServerSelectionList.f_99760_) / 2), (float)i, 16777215);
--         String s;
--         switch((int)(Util.m_137550_() / 300L % 4L)) {
--         case 0:
--         default:
--            s = "O o o";
--            break;
--         case 1:
--         case 3:
--            s = "o O o";
--            break;
--         case 2:
--            s = "o o O";
--         }
--
--         this.f_99815_.f_91062_.m_92883_(p_99818_, s, (float)(this.f_99815_.f_91080_.f_96543_ / 2 - this.f_99815_.f_91062_.m_92895_(s) / 2), (float)(i + 9), 8421504);
--      }
--   }
--
--   @OnlyIn(Dist.CLIENT)
-    public static class NetworkServerEntry extends ServerSelectionList.Entry {
-       private static final Component f_99830_ = new TranslatableComponent("lanServer.title");
-       private static final Component f_99831_ = new TranslatableComponent("selectServer.hiddenAddress");
-@@ -190,6 +_,31 @@
-    }
- 
-    @OnlyIn(Dist.CLIENT)
-+   public static class LANHeader extends ServerSelectionList.Entry {
-+      private final Minecraft f_99815_ = Minecraft.m_91087_();
-+
-+      public void m_6311_(PoseStack p_99818_, int p_99819_, int p_99820_, int p_99821_, int p_99822_, int p_99823_, int p_99824_, int p_99825_, boolean p_99826_, float p_99827_) {
-+         int i = p_99820_ + p_99823_ / 2 - 9 / 2;
-+         this.f_99815_.f_91062_.m_92889_(p_99818_, ServerSelectionList.f_99760_, (float)(this.f_99815_.f_91080_.f_96543_ / 2 - this.f_99815_.f_91062_.m_92852_(ServerSelectionList.f_99760_) / 2), (float)i, 16777215);
-+         String s;
-+         switch((int)(Util.m_137550_() / 300L % 4L)) {
-+         case 0:
-+         default:
-+            s = "O o o";
-+            break;
-+         case 1:
-+         case 3:
-+            s = "o O o";
-+            break;
-+         case 2:
-+            s = "o o O";
-+         }
-+
-+         this.f_99815_.f_91062_.m_92883_(p_99818_, s, (float)(this.f_99815_.f_91080_.f_96543_ / 2 - this.f_99815_.f_91062_.m_92895_(s) / 2), (float)(i + 9), 8421504);
-+      }
-+   }
-+
-+   @OnlyIn(Dist.CLIENT)
-    public class OnlineServerEntry extends ServerSelectionList.Entry {
-       private final JoinMultiplayerScreen f_99855_;
-       private final Minecraft f_99856_;
-@@ -307,6 +_,8 @@
-          } else if (i1 >= p_99883_ - j - 15 - 2 && i1 <= p_99883_ - 15 - 2 && j1 >= 0 && j1 <= 8) {
+@@ -308,6 +_,8 @@
              this.f_99855_.m_99707_(list1);
           }
-+
-+         net.minecraftforge.fml.client.ClientHooks.drawForgePingInfo(this.f_99855_, f_99857_, p_99879_, p_99882_, p_99881_, p_99883_, i1, j1);
  
++         net.minecraftforge.fml.client.ClientHooks.drawForgePingInfo(this.f_99855_, f_99857_, p_99879_, p_99882_, p_99881_, p_99883_, i1, j1);
++
           if (this.f_99856_.f_91066_.f_92051_ || p_99887_) {
              this.f_99856_.m_91097_().m_118493_(ServerSelectionList.f_99759_);
+             GuiComponent.m_93172_(p_99879_, p_99882_, p_99881_, p_99882_ + 32, p_99881_ + 32, -1601138544);

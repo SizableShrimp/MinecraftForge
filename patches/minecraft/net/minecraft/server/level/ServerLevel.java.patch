@@ -153,8 +153,8 @@
 +   }
 +   public void removeEntityComplete(Entity p_8865_, boolean keepData) {
 +      if (p_8865_.isMultipartEntity()) {
-+         for(net.minecraftforge.entity.PartEntity<?> enderdragonpartentity : p_8865_.getParts()) {
-+            enderdragonpartentity.remove(keepData);
++         for(net.minecraftforge.entity.PartEntity<?> enderdragonpart : p_8865_.getParts()) {
++            enderdragonpart.remove(keepData);
           }
        }
 +      p_8865_.remove(keepData);
@@ -170,19 +170,17 @@
     }
  
     private void m_8880_(Entity p_8881_) {
-@@ -905,9 +_,9 @@
+@@ -905,8 +_,8 @@
           this.f_8545_.add(p_8881_);
        } else {
           this.f_8567_.put(p_8881_.m_19879_(), p_8881_);
 -         if (p_8881_ instanceof EnderDragon) {
 -            for(EnderDragonPart enderdragonpart : ((EnderDragon)p_8881_).m_31156_()) {
--               this.f_8567_.put(enderdragonpart.m_19879_(), enderdragonpart);
 +         if (p_8881_.isMultipartEntity()) {
-+            for(net.minecraftforge.entity.PartEntity<?> enderdragonpartentity : p_8881_.getParts()) {
-+               this.f_8567_.put(enderdragonpartentity.m_19879_(), enderdragonpartentity);
++            for(net.minecraftforge.entity.PartEntity<?> enderdragonpart : p_8881_.getParts()) {
+                this.f_8567_.put(enderdragonpart.m_19879_(), enderdragonpart);
              }
           }
- 
 @@ -918,15 +_,19 @@
           }
        }

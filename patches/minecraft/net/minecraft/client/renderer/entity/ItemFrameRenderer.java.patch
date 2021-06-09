@@ -1,17 +1,5 @@
 --- a/net/minecraft/client/renderer/entity/ItemFrameRenderer.java
 +++ b/net/minecraft/client/renderer/entity/ItemFrameRenderer.java
-@@ -29,9 +_,9 @@
-    private static final ModelResourceLocation f_115044_ = new ModelResourceLocation("item_frame", "map=false");
-    private static final ModelResourceLocation f_115045_ = new ModelResourceLocation("item_frame", "map=true");
-    private final Minecraft f_115046_ = Minecraft.m_91087_();
--   private final ItemRenderer f_115047_;
-+   private final net.minecraft.client.renderer.entity.ItemRenderer f_115047_;
- 
--   public ItemFrameRenderer(EntityRenderDispatcher p_115050_, ItemRenderer p_115051_) {
-+   public ItemFrameRenderer(EntityRenderDispatcher p_115050_, net.minecraft.client.renderer.entity.ItemRenderer p_115051_) {
-       super(p_115050_);
-       this.f_115047_ = p_115051_;
-    }
 @@ -50,7 +_,7 @@
        if (!flag) {
           BlockRenderDispatcher blockrenderdispatcher = this.f_115046_.m_91289_();

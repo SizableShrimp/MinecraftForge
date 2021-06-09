@@ -253,29 +253,7 @@
        this.m_93228_(p_98582_, l, i1, j, k, 28, 32);
        this.f_96542_.f_115093_ = 100.0F;
        l = l + 6;
-@@ -758,21 +_,6 @@
-    }
- 
-    @OnlyIn(Dist.CLIENT)
--   static class CustomCreativeSlot extends Slot {
--      public CustomCreativeSlot(Container p_98633_, int p_98634_, int p_98635_, int p_98636_) {
--         super(p_98633_, p_98634_, p_98635_, p_98636_);
--      }
--
--      public boolean m_8010_(Player p_98638_) {
--         if (super.m_8010_(p_98638_) && this.m_6657_()) {
--            return this.m_7993_().m_41737_("CustomCreativeLock") == null;
--         } else {
--            return !this.m_6657_();
--         }
--      }
--   }
--
--   @OnlyIn(Dist.CLIENT)
-    public static class ItemPickerMenu extends AbstractContainerMenu {
-       public final NonNullList<ItemStack> f_98639_ = NonNullList.m_122779_();
- 
-@@ -897,6 +_,37 @@
+@@ -897,6 +_,22 @@
  
        public boolean m_8010_(Player p_98665_) {
           return this.f_98655_.m_8010_(p_98665_);
@@ -295,21 +273,6 @@
 +      public Slot setBackground(ResourceLocation atlas, ResourceLocation sprite) {
 +         this.f_98655_.setBackground(atlas, sprite);
 +         return this;
-+      }
-+   }
-+
-+   @OnlyIn(Dist.CLIENT)
-+   static class CustomCreativeSlot extends Slot {
-+      public CustomCreativeSlot(Container p_98633_, int p_98634_, int p_98635_, int p_98636_) {
-+         super(p_98633_, p_98634_, p_98635_, p_98636_);
-+      }
-+
-+      public boolean m_8010_(Player p_98638_) {
-+         if (super.m_8010_(p_98638_) && this.m_6657_()) {
-+            return this.m_7993_().m_41737_("CustomCreativeLock") == null;
-+         } else {
-+            return !this.m_6657_();
-+         }
        }
     }
  }

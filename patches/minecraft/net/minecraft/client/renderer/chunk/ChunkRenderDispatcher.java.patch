@@ -17,48 +17,10 @@
        this.f_112678_ = p_112690_;
        List<ChunkBufferBuilderPack> list = Lists.newArrayListWithExpectedSize(l);
  
-@@ -206,45 +_,7 @@
+@@ -244,7 +_,7 @@
     }
  
     @OnlyIn(Dist.CLIENT)
--   static enum ChunkTaskResult {
--      SUCCESSFUL,
--      CANCELLED;
--   }
--
--   @OnlyIn(Dist.CLIENT)
--   public static class CompiledChunk {
--      public static final ChunkRenderDispatcher.CompiledChunk f_112748_ = new ChunkRenderDispatcher.CompiledChunk() {
--         public boolean m_7259_(Direction p_112782_, Direction p_112783_) {
--            return false;
--         }
--      };
--      private final Set<RenderType> f_112749_ = new ObjectArraySet<>();
--      private final Set<RenderType> f_112750_ = new ObjectArraySet<>();
--      private boolean f_112751_ = true;
--      private final List<BlockEntity> f_112752_ = Lists.newArrayList();
--      private VisibilitySet f_112753_ = new VisibilitySet();
--      @Nullable
--      private BufferBuilder.State f_112754_;
--
--      public boolean m_112757_() {
--         return this.f_112751_;
--      }
--
--      public boolean m_112758_(RenderType p_112759_) {
--         return !this.f_112749_.contains(p_112759_);
--      }
--
--      public List<BlockEntity> m_112773_() {
--         return this.f_112752_;
--      }
--
--      public boolean m_7259_(Direction p_112771_, Direction p_112772_) {
--         return this.f_112753_.m_112983_(p_112771_, p_112772_);
--      }
--   }
--
--   @OnlyIn(Dist.CLIENT)
 -   public class RenderChunk {
 +   public class RenderChunk implements net.minecraftforge.client.extensions.IForgeRenderChunk {
        public final AtomicReference<ChunkRenderDispatcher.CompiledChunk> f_112784_ = new AtomicReference<>(ChunkRenderDispatcher.CompiledChunk.f_112748_);
@@ -91,12 +53,11 @@
 +         protected java.util.Map<net.minecraft.core.BlockPos, net.minecraftforge.client.model.data.IModelData> modelData;
  
           public ChunkCompileTask(double p_112852_) {
--            this.f_112847_ = p_112852_;
 +            this(null, p_112852_);
 +         }
 +
-+         public ChunkCompileTask(@Nullable net.minecraft.world.level.ChunkPos pos, double p_i226023_2_) {
-+            this.f_112847_ = p_i226023_2_;
++         public ChunkCompileTask(@Nullable net.minecraft.world.level.ChunkPos pos, double p_112852_) {
+             this.f_112847_ = p_112852_;
 +            if (pos == null) {
 +               this.modelData = java.util.Collections.emptyMap();
 +            } else {
@@ -209,48 +170,3 @@
              this.f_112886_ = p_112890_;
           }
  
-@@ -634,6 +_,44 @@
-          public void m_6204_() {
-             this.f_112848_.set(true);
-          }
-+      }
-+   }
-+
-+   @OnlyIn(Dist.CLIENT)
-+   static enum ChunkTaskResult {
-+      SUCCESSFUL,
-+      CANCELLED;
-+   }
-+
-+   @OnlyIn(Dist.CLIENT)
-+   public static class CompiledChunk {
-+      public static final ChunkRenderDispatcher.CompiledChunk f_112748_ = new ChunkRenderDispatcher.CompiledChunk() {
-+         public boolean m_7259_(Direction p_112782_, Direction p_112783_) {
-+            return false;
-+         }
-+      };
-+      private final Set<RenderType> f_112749_ = new ObjectArraySet<>();
-+      private final Set<RenderType> f_112750_ = new ObjectArraySet<>();
-+      private boolean f_112751_ = true;
-+      private final List<BlockEntity> f_112752_ = Lists.newArrayList();
-+      private VisibilitySet f_112753_ = new VisibilitySet();
-+      @Nullable
-+      private BufferBuilder.State f_112754_;
-+
-+      public boolean m_112757_() {
-+         return this.f_112751_;
-+      }
-+
-+      public boolean m_112758_(RenderType p_112759_) {
-+         return !this.f_112749_.contains(p_112759_);
-+      }
-+
-+      public List<BlockEntity> m_112773_() {
-+         return this.f_112752_;
-+      }
-+
-+      public boolean m_7259_(Direction p_112771_, Direction p_112772_) {
-+         return this.f_112753_.m_112983_(p_112771_, p_112772_);
-       }
-    }
- }

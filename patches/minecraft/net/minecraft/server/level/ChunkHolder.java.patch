@@ -9,32 +9,3 @@
           this.m_140029_(p_140033_, p_140034_);
        }
  
-@@ -391,6 +_,14 @@
-       };
-    }
- 
-+   public interface LevelChangeListener {
-+      void m_6250_(ChunkPos p_140119_, IntSupplier p_140120_, int p_140121_, IntConsumer p_140122_);
-+   }
-+
-+   public interface PlayerProvider {
-+      Stream<ServerPlayer> m_5960_(ChunkPos p_140123_, boolean p_140124_);
-+   }
-+
-    public static enum FullChunkStatus {
-       INACCESSIBLE,
-       BORDER,
-@@ -400,13 +_,5 @@
-       public boolean m_140114_(ChunkHolder.FullChunkStatus p_140115_) {
-          return this.ordinal() >= p_140115_.ordinal();
-       }
--   }
--
--   public interface LevelChangeListener {
--      void m_6250_(ChunkPos p_140119_, IntSupplier p_140120_, int p_140121_, IntConsumer p_140122_);
--   }
--
--   public interface PlayerProvider {
--      Stream<ServerPlayer> m_5960_(ChunkPos p_140123_, boolean p_140124_);
-    }
- }
