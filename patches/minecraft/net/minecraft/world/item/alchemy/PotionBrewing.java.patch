@@ -61,14 +61,12 @@
 -      private final T f_43534_;
 +      private final net.minecraftforge.registries.IRegistryDelegate<T> f_43534_;
  
--      public Mix(T p_43536_, Ingredient p_43537_, T p_43538_) {
+       public Mix(T p_43536_, Ingredient p_43537_, T p_43538_) {
 -         this.f_43532_ = p_43536_;
--         this.f_43533_ = p_43537_;
++         this.f_43532_ = p_43536_.delegate;
+          this.f_43533_ = p_43537_;
 -         this.f_43534_ = p_43538_;
-+      public Mix(T p_i47570_1_, Ingredient p_i47570_2_, T p_i47570_3_) {
-+         this.f_43532_ = p_i47570_1_.delegate;
-+         this.f_43533_ = p_i47570_2_;
-+         this.f_43534_ = p_i47570_3_.delegate;
++         this.f_43534_ = p_43538_.delegate;
        }
     }
  }

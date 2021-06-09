@@ -17,12 +17,3 @@
                 this.m_21828_(p_30412_);
                 this.f_21344_.m_26573_();
                 this.m_6710_((LivingEntity)null);
-@@ -491,7 +_,7 @@
-       return new Vec3(0.0D, (double)(0.6F * this.m_20192_()), (double)(this.m_20205_() * 0.4F));
-    }
- 
--   class WolfAvoidEntityGoal<T extends LivingEntity> extends AvoidEntityGoal<T> {
-+   class WolfAvoidEntityGoal<T extends LivingEntity> extends net.minecraft.world.entity.ai.goal.AvoidEntityGoal<T> {
-       private final Wolf f_30451_;
- 
-       public WolfAvoidEntityGoal(Wolf p_30454_, Class<T> p_30455_, float p_30456_, double p_30457_, double p_30458_) {

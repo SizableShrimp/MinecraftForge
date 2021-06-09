@@ -42,161 +42,32 @@
           if (flag2 && !this.m_20067_()) {
              this.f_19853_.m_6263_((Player)null, this.f_19854_, this.f_19855_, this.f_19856_, SoundEvents.f_11852_, this.m_5720_(), 1.0F, 1.0F);
              this.m_5496_(SoundEvents.f_11852_, 1.0F, 1.0F);
-@@ -344,77 +_,6 @@
-       return super.m_8023_() || this.m_32530_() != null;
-    }
- 
--   static class EndermanFreezeWhenLookedAt extends Goal {
--      private final EnderMan f_32547_;
--      private LivingEntity f_32548_;
--
--      public EndermanFreezeWhenLookedAt(EnderMan p_32550_) {
--         this.f_32547_ = p_32550_;
--         this.m_7021_(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
--      }
--
--      public boolean m_8036_() {
--         this.f_32548_ = this.f_32547_.m_5448_();
--         if (!(this.f_32548_ instanceof Player)) {
--            return false;
--         } else {
--            double d0 = this.f_32548_.m_20280_(this.f_32547_);
--            return d0 > 256.0D ? false : this.f_32547_.m_32534_((Player)this.f_32548_);
--         }
--      }
--
--      public void m_8056_() {
--         this.f_32547_.m_21573_().m_26573_();
--      }
--
--      public void m_8037_() {
--         this.f_32547_.m_21563_().m_24946_(this.f_32548_.m_20185_(), this.f_32548_.m_20188_(), this.f_32548_.m_20189_());
--      }
--   }
--
--   static class EndermanLeaveBlockGoal extends Goal {
--      private final EnderMan f_32554_;
--
--      public EndermanLeaveBlockGoal(EnderMan p_32556_) {
--         this.f_32554_ = p_32556_;
--      }
--
--      public boolean m_8036_() {
--         if (this.f_32554_.m_32530_() == null) {
--            return false;
+@@ -382,7 +_,7 @@
+       public boolean m_8036_() {
+          if (this.f_32554_.m_32530_() == null) {
+             return false;
 -         } else if (!this.f_32554_.f_19853_.m_46469_().m_46207_(GameRules.f_46132_)) {
--            return false;
--         } else {
--            return this.f_32554_.m_21187_().nextInt(2000) == 0;
--         }
--      }
--
--      public void m_8037_() {
--         Random random = this.f_32554_.m_21187_();
--         Level level = this.f_32554_.f_19853_;
--         int i = Mth.m_14107_(this.f_32554_.m_20185_() - 1.0D + random.nextDouble() * 2.0D);
--         int j = Mth.m_14107_(this.f_32554_.m_20186_() + random.nextDouble() * 2.0D);
--         int k = Mth.m_14107_(this.f_32554_.m_20189_() - 1.0D + random.nextDouble() * 2.0D);
--         BlockPos blockpos = new BlockPos(i, j, k);
--         BlockState blockstate = level.m_8055_(blockpos);
--         BlockPos blockpos1 = blockpos.m_7495_();
--         BlockState blockstate1 = level.m_8055_(blockpos1);
--         BlockState blockstate2 = this.f_32554_.m_32530_();
--         if (blockstate2 != null) {
--            blockstate2 = Block.m_49931_(blockstate2, this.f_32554_.f_19853_, blockpos);
++         } else if (!net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.f_32554_.f_19853_, this.f_32554_)) {
+             return false;
+          } else {
+             return this.f_32554_.m_21187_().nextInt(2000) == 0;
+@@ -402,7 +_,7 @@
+          BlockState blockstate2 = this.f_32554_.m_32530_();
+          if (blockstate2 != null) {
+             blockstate2 = Block.m_49931_(blockstate2, this.f_32554_.f_19853_, blockpos);
 -            if (this.m_32558_(level, blockpos, blockstate2, blockstate, blockstate1, blockpos1)) {
--               level.m_7731_(blockpos, blockstate2, 3);
--               this.f_32554_.m_32521_((BlockState)null);
--            }
--
--         }
--      }
--
--      private boolean m_32558_(Level p_32559_, BlockPos p_32560_, BlockState p_32561_, BlockState p_32562_, BlockState p_32563_, BlockPos p_32564_) {
++            if (this.m_32558_(level, blockpos, blockstate2, blockstate, blockstate1, blockpos1) && !net.minecraftforge.event.ForgeEventFactory.onBlockPlace(f_32554_, net.minecraftforge.common.util.BlockSnapshot.create(level.m_46472_(), level, blockpos1), net.minecraft.core.Direction.UP)) {
+                level.m_7731_(blockpos, blockstate2, 3);
+                this.f_32554_.m_32521_((BlockState)null);
+             }
+@@ -411,7 +_,7 @@
+       }
+ 
+       private boolean m_32558_(Level p_32559_, BlockPos p_32560_, BlockState p_32561_, BlockState p_32562_, BlockState p_32563_, BlockPos p_32564_) {
 -         return p_32562_.m_60795_() && !p_32563_.m_60795_() && !p_32563_.m_60713_(Blocks.f_50752_) && p_32563_.m_60838_(p_32559_, p_32564_) && p_32561_.m_60710_(p_32559_, p_32560_) && p_32559_.m_45933_(this.f_32554_, AABB.m_82333_(Vec3.m_82528_(p_32560_))).isEmpty();
--      }
--   }
--
-    static class EndermanLookForPlayerGoal extends NearestAttackableTargetGoal<Player> {
-       private final EnderMan f_32566_;
-       private Player f_32567_;
-@@ -490,6 +_,77 @@
++         return p_32562_.isAir(p_32559_, p_32560_) && !p_32563_.isAir(p_32559_, p_32564_) && !p_32563_.m_60713_(Blocks.f_50752_) && !p_32563_.m_60620_(net.minecraftforge.common.Tags.Blocks.ENDERMAN_PLACE_ON_BLACKLIST) && p_32563_.m_60838_(p_32559_, p_32564_) && p_32561_.m_60710_(p_32559_, p_32560_) && p_32559_.m_45933_(this.f_32554_, AABB.m_82333_(Vec3.m_82528_(p_32560_))).isEmpty();
        }
     }
- 
-+   static class EndermanLeaveBlockGoal extends Goal {
-+      private final EnderMan f_32554_;
-+
-+      public EndermanLeaveBlockGoal(EnderMan p_32556_) {
-+         this.f_32554_ = p_32556_;
-+      }
-+
-+      public boolean m_8036_() {
-+         if (this.f_32554_.m_32530_() == null) {
-+            return false;
-+         } else if (!net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.f_32554_.f_19853_, this.f_32554_)) {
-+            return false;
-+         } else {
-+            return this.f_32554_.m_21187_().nextInt(2000) == 0;
-+         }
-+      }
-+
-+      public void m_8037_() {
-+         Random random = this.f_32554_.m_21187_();
-+         Level level = this.f_32554_.f_19853_;
-+         int i = Mth.m_14107_(this.f_32554_.m_20185_() - 1.0D + random.nextDouble() * 2.0D);
-+         int j = Mth.m_14107_(this.f_32554_.m_20186_() + random.nextDouble() * 2.0D);
-+         int k = Mth.m_14107_(this.f_32554_.m_20189_() - 1.0D + random.nextDouble() * 2.0D);
-+         BlockPos blockpos = new BlockPos(i, j, k);
-+         BlockState blockstate = level.m_8055_(blockpos);
-+         BlockPos blockpos1 = blockpos.m_7495_();
-+         BlockState blockstate1 = level.m_8055_(blockpos1);
-+         BlockState blockstate2 = this.f_32554_.m_32530_();
-+         if (blockstate2 != null) {
-+            blockstate2 = Block.m_49931_(blockstate2, this.f_32554_.f_19853_, blockpos);
-+            if (this.m_32558_(level, blockpos, blockstate2, blockstate, blockstate1, blockpos1) && !net.minecraftforge.event.ForgeEventFactory.onBlockPlace(f_32554_, net.minecraftforge.common.util.BlockSnapshot.create(level.m_46472_(), level, blockpos1), net.minecraft.core.Direction.UP)) {
-+               level.m_7731_(blockpos, blockstate2, 3);
-+               this.f_32554_.m_32521_((BlockState)null);
-+            }
-+
-+         }
-+      }
-+
-+      private boolean m_32558_(Level p_32559_, BlockPos p_32560_, BlockState p_32561_, BlockState p_32562_, BlockState p_32563_, BlockPos p_32564_) {
-+         return p_32562_.isAir(p_32559_, p_32560_) && !p_32563_.isAir(p_32559_, p_32564_) && !p_32563_.m_60713_(Blocks.f_50752_) && !p_32563_.m_60620_(net.minecraftforge.common.Tags.Blocks.ENDERMAN_PLACE_ON_BLACKLIST) && p_32563_.m_60838_(p_32559_, p_32564_) && p_32561_.m_60710_(p_32559_, p_32560_) && p_32559_.m_45933_(this.f_32554_, AABB.m_82333_(Vec3.m_82528_(p_32560_))).isEmpty();
-+      }
-+   }
-+
-+   static class EndermanFreezeWhenLookedAt extends Goal {
-+      private final EnderMan f_32547_;
-+      private LivingEntity f_32548_;
-+
-+      public EndermanFreezeWhenLookedAt(EnderMan p_32550_) {
-+         this.f_32547_ = p_32550_;
-+         this.m_7021_(EnumSet.of(Goal.Flag.JUMP, Goal.Flag.MOVE));
-+      }
-+
-+      public boolean m_8036_() {
-+         this.f_32548_ = this.f_32547_.m_5448_();
-+         if (!(this.f_32548_ instanceof Player)) {
-+            return false;
-+         } else {
-+            double d0 = this.f_32548_.m_20280_(this.f_32547_);
-+            return d0 > 256.0D ? false : this.f_32547_.m_32534_((Player)this.f_32548_);
-+         }
-+      }
-+
-+      public void m_8056_() {
-+         this.f_32547_.m_21573_().m_26573_();
-+      }
-+
-+      public void m_8037_() {
-+         this.f_32547_.m_21563_().m_24946_(this.f_32548_.m_20185_(), this.f_32548_.m_20188_(), this.f_32548_.m_20189_());
-+      }
-+   }
-+
-    static class EndermanTakeBlockGoal extends Goal {
-       private final EnderMan f_32583_;
  
 @@ -500,7 +_,7 @@
        public boolean m_8036_() {

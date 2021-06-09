@@ -81,7 +81,7 @@
           if (p_43918_.isJsonObject()) {
              return m_43938_(Stream.of(m_43919_(p_43918_.getAsJsonObject())));
           } else if (p_43918_.isJsonArray()) {
-@@ -193,6 +_,18 @@
+@@ -193,6 +_,12 @@
        }
     }
  
@@ -89,12 +89,6 @@
 +   //Only public for internal use, so we can access a private field in here.
 +   public static Ingredient merge(Collection<Ingredient> parts) {
 +      return m_43938_(parts.stream().flatMap(i -> Arrays.stream(i.f_43902_)));
-+   }
-+
-+   public interface Value {
-+      Collection<ItemStack> m_6223_();
-+
-+      JsonObject m_6544_();
 +   }
 +
     public static class ItemValue implements Ingredient.Value {
@@ -110,15 +104,3 @@
           return list;
        }
  
-@@ -233,11 +_,5 @@
-          jsonobject.addProperty("tag", SerializationTags.m_13199_().m_5881_().m_13407_(this.f_43959_).toString());
-          return jsonobject;
-       }
--   }
--
--   public interface Value {
--      Collection<ItemStack> m_6223_();
--
--      JsonObject m_6544_();
-    }
- }

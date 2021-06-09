@@ -38,10 +38,39 @@
                    this.f_19804_.m_135381_(f_33392_, direction);
                    this.m_5496_(SoundEvents.f_12418_, 1.0F, 1.0F);
                    this.f_19804_.m_135381_(f_33400_, Optional.of(blockpos1));
-@@ -481,6 +_,25 @@
+@@ -511,25 +_,6 @@
        }
     }
  
+-   class ShulkerNearestAttackGoal extends NearestAttackableTargetGoal<Player> {
+-      public ShulkerNearestAttackGoal(Shulker p_33505_) {
+-         super(p_33505_, Player.class, true);
+-      }
+-
+-      public boolean m_8036_() {
+-         return Shulker.this.f_19853_.m_46791_() == Difficulty.PEACEFUL ? false : super.m_8036_();
+-      }
+-
+-      protected AABB m_7255_(double p_33508_) {
+-         Direction direction = ((Shulker)this.f_26135_).m_33461_();
+-         if (direction.m_122434_() == Direction.Axis.X) {
+-            return this.f_26135_.m_20191_().m_82377_(4.0D, p_33508_, p_33508_);
+-         } else {
+-            return direction.m_122434_() == Direction.Axis.Z ? this.f_26135_.m_20191_().m_82377_(p_33508_, p_33508_, 4.0D) : this.f_26135_.m_20191_().m_82377_(p_33508_, 4.0D, p_33508_);
+-         }
+-      }
+-   }
+-
+    class ShulkerPeekGoal extends Goal {
+       private int f_33510_;
+ 
+@@ -558,6 +_,25 @@
+ 
+       public void m_8037_() {
+          --this.f_33510_;
++      }
++   }
++
 +   class ShulkerNearestAttackGoal extends NearestAttackableTargetGoal<Player> {
 +      public ShulkerNearestAttackGoal(Shulker p_33505_) {
 +         super(p_33505_, Player.class, true);
@@ -58,35 +87,6 @@
 +         } else {
 +            return direction.m_122434_() == Direction.Axis.Z ? this.f_26135_.m_20191_().m_82377_(p_33508_, p_33508_, 4.0D) : this.f_26135_.m_20191_().m_82377_(p_33508_, 4.0D, p_33508_);
 +         }
-+      }
-+   }
-+
-    class ShulkerBodyRotationControl extends BodyRotationControl {
-       public ShulkerBodyRotationControl(Mob p_33493_) {
-          super(p_33493_);
-@@ -507,25 +_,6 @@
-             return this.f_26135_.m_20191_().m_82377_(4.0D, p_33499_, p_33499_);
-          } else {
-             return direction.m_122434_() == Direction.Axis.Z ? this.f_26135_.m_20191_().m_82377_(p_33499_, p_33499_, 4.0D) : this.f_26135_.m_20191_().m_82377_(p_33499_, 4.0D, p_33499_);
--         }
--      }
--   }
--
--   class ShulkerNearestAttackGoal extends NearestAttackableTargetGoal<Player> {
--      public ShulkerNearestAttackGoal(Shulker p_33505_) {
--         super(p_33505_, Player.class, true);
--      }
--
--      public boolean m_8036_() {
--         return Shulker.this.f_19853_.m_46791_() == Difficulty.PEACEFUL ? false : super.m_8036_();
--      }
--
--      protected AABB m_7255_(double p_33508_) {
--         Direction direction = ((Shulker)this.f_26135_).m_33461_();
--         if (direction.m_122434_() == Direction.Axis.X) {
--            return this.f_26135_.m_20191_().m_82377_(4.0D, p_33508_, p_33508_);
--         } else {
--            return direction.m_122434_() == Direction.Axis.Z ? this.f_26135_.m_20191_().m_82377_(p_33508_, p_33508_, 4.0D) : this.f_26135_.m_20191_().m_82377_(p_33508_, 4.0D, p_33508_);
-          }
        }
     }
+ }

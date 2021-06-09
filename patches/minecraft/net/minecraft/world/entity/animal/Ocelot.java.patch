@@ -9,21 +9,3 @@
                 this.m_29045_(true);
                 this.m_29047_(true);
                 this.f_19853_.m_7605_(this, (byte)41);
-@@ -262,7 +_,7 @@
-       return new Vec3(0.0D, (double)(0.5F * this.m_20192_()), (double)(this.m_20205_() * 0.4F));
-    }
- 
--   static class OcelotAvoidEntityGoal<T extends LivingEntity> extends AvoidEntityGoal<T> {
-+   static class OcelotAvoidEntityGoal<T extends LivingEntity> extends net.minecraft.world.entity.ai.goal.AvoidEntityGoal<T> {
-       private final Ocelot f_29049_;
- 
-       public OcelotAvoidEntityGoal(Ocelot p_29051_, Class<T> p_29052_, float p_29053_, double p_29054_, double p_29055_) {
-@@ -279,7 +_,7 @@
-       }
-    }
- 
--   static class OcelotTemptGoal extends TemptGoal {
-+   static class OcelotTemptGoal extends net.minecraft.world.entity.ai.goal.TemptGoal {
-       private final Ocelot f_29058_;
- 
-       public OcelotTemptGoal(Ocelot p_29060_, double p_29061_, Ingredient p_29062_, boolean p_29063_) {

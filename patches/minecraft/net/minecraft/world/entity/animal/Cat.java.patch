@@ -18,17 +18,6 @@
                 this.m_21828_(p_28153_);
                 this.m_21839_(true);
                 this.f_19853_.m_7605_(this, (byte)7);
-@@ -496,8 +_,8 @@
-                BlockPos blockpos = this.f_28199_.m_20183_();
-                BlockState blockstate = this.f_28198_.f_19853_.m_8055_(blockpos);
-                if (blockstate.m_60734_().m_49809_(BlockTags.f_13038_)) {
--                  this.f_28200_ = blockstate.m_61145_(BedBlock.f_54117_).map((p_28209_) -> {
--                     return blockpos.m_121945_(p_28209_.m_122424_());
-+                  this.f_28200_ = blockstate.m_61145_(BedBlock.f_54117_).map((p_234186_1_) -> {
-+                     return blockpos.m_121945_(p_234186_1_.m_122424_());
-                   }).orElseGet(() -> {
-                      return new BlockPos(blockpos);
-                   });
 @@ -579,7 +_,7 @@
        }
     }

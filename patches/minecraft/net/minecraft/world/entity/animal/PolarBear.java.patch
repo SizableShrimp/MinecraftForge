@@ -8,30 +8,3 @@
        this.m_21663_((ServerLevel)this.f_19853_, p_29541_);
     }
  
-@@ -258,7 +_,7 @@
-       }
-    }
- 
--   class PolarBearHurtByTargetGoal extends HurtByTargetGoal {
-+   class PolarBearHurtByTargetGoal extends net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal {
-       public PolarBearHurtByTargetGoal() {
-          super(PolarBear.this);
-       }
-@@ -280,7 +_,7 @@
-       }
-    }
- 
--   class PolarBearMeleeAttackGoal extends MeleeAttackGoal {
-+   class PolarBearMeleeAttackGoal extends net.minecraft.world.entity.ai.goal.MeleeAttackGoal {
-       public PolarBearMeleeAttackGoal() {
-          super(PolarBear.this, 1.25D, true);
-       }
-@@ -318,7 +_,7 @@
-       }
-    }
- 
--   class PolarBearPanicGoal extends PanicGoal {
-+   class PolarBearPanicGoal extends net.minecraft.world.entity.ai.goal.PanicGoal {
-       public PolarBearPanicGoal() {
-          super(PolarBear.this, 2.0D);
-       }
