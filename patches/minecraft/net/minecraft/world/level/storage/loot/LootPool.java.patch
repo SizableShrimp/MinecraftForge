@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/storage/loot/LootPool.java
 +++ b/net/minecraft/world/level/storage/loot/LootPool.java
-@@ -29,22 +_,24 @@
+@@ -29,17 +_,19 @@
  import org.apache.commons.lang3.mutable.MutableInt;
  
  public class LootPool {
@@ -18,23 +18,13 @@
 -   private LootPool(LootPoolEntryContainer[] p_79031_, LootItemCondition[] p_79032_, LootItemFunction[] p_79033_, RandomIntGenerator p_79034_, RandomValueBounds p_79035_) {
 -      this.f_79023_ = p_79031_;
 -      this.f_79024_ = p_79032_;
--      this.f_79025_ = LootItemConditions.m_81834_(p_79032_);
--      this.f_79026_ = p_79033_;
--      this.f_79027_ = LootItemFunctions.m_80770_(p_79033_);
--      this.f_79028_ = p_79034_;
--      this.f_79029_ = p_79035_;
-+   private LootPool(LootPoolEntryContainer[] p_i51268_1_, LootItemCondition[] p_i51268_2_, LootItemFunction[] p_i51268_3_, RandomIntGenerator p_i51268_4_, RandomValueBounds p_i51268_5_, String name) {
++   private LootPool(LootPoolEntryContainer[] p_79031_, LootItemCondition[] p_79032_, LootItemFunction[] p_79033_, RandomIntGenerator p_79034_, RandomValueBounds p_79035_, String name) {
 +      this.name = name;
-+      this.f_79023_ = Lists.newArrayList(p_i51268_1_);
-+      this.f_79024_ = Lists.newArrayList(p_i51268_2_);
-+      this.f_79025_ = LootItemConditions.m_81834_(p_i51268_2_);
-+      this.f_79026_ = p_i51268_3_;
-+      this.f_79027_ = LootItemFunctions.m_80770_(p_i51268_3_);
-+      this.f_79028_ = p_i51268_4_;
-+      this.f_79029_ = p_i51268_5_;
-    }
- 
-    private void m_79058_(Consumer<ItemStack> p_79059_, LootContext p_79060_) {
++      this.f_79023_ = Lists.newArrayList(p_79031_);
++      this.f_79024_ = Lists.newArrayList(p_79032_);
+       this.f_79025_ = LootItemConditions.m_81834_(p_79032_);
+       this.f_79026_ = p_79033_;
+       this.f_79027_ = LootItemFunctions.m_80770_(p_79033_);
 @@ -96,19 +_,33 @@
     }
  

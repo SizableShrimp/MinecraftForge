@@ -106,21 +106,6 @@
        public BlockState m_60717_(Rotation p_60718_) {
           return this.m_60734_().m_6843_(this.m_7160_(), p_60718_);
        }
-@@ -773,6 +_,14 @@
-       }
-    }
- 
-+   public interface StateArgumentPredicate<A> {
-+      boolean m_61030_(BlockState p_61031_, BlockGetter p_61032_, BlockPos p_61033_, A p_61034_);
-+   }
-+
-+   public interface StatePredicate {
-+      boolean m_61035_(BlockState p_61036_, BlockGetter p_61037_, BlockPos p_61038_);
-+   }
-+
-    public static enum OffsetType {
-       NONE,
-       XZ,
 @@ -797,8 +_,11 @@
        private ResourceLocation f_60894_;
        private boolean f_60895_ = true;
@@ -185,17 +170,3 @@
        }
  
        public BlockBehaviour.Properties m_60996_() {
-@@ -971,13 +_,5 @@
-          this.f_60889_ = true;
-          return this;
-       }
--   }
--
--   public interface StateArgumentPredicate<A> {
--      boolean m_61030_(BlockState p_61031_, BlockGetter p_61032_, BlockPos p_61033_, A p_61034_);
--   }
--
--   public interface StatePredicate {
--      boolean m_61035_(BlockState p_61036_, BlockGetter p_61037_, BlockPos p_61038_);
-    }
- }

@@ -18,7 +18,7 @@
     }
  
     public boolean m_7898_(BlockState p_55585_, LevelReader p_55586_, BlockPos p_55587_) {
-@@ -335,20 +_,16 @@
+@@ -335,11 +_,7 @@
        }
     }
  
@@ -27,23 +27,16 @@
 -   }
 -
 -   protected static boolean m_55594_(BlockState p_55595_, @Nullable Direction p_55596_) {
--      if (p_55595_.m_60713_(Blocks.f_50088_)) {
-+   protected static boolean canConnectTo(BlockState p_176343_0_, BlockGetter world, BlockPos pos, @Nullable Direction p_176343_1_) {
-+      if (p_176343_0_.m_60713_(Blocks.f_50088_)) {
++   protected static boolean canConnectTo(BlockState p_55595_, BlockGetter level, BlockPos pos, @Nullable Direction p_55596_) {
+       if (p_55595_.m_60713_(Blocks.f_50088_)) {
           return true;
--      } else if (p_55595_.m_60713_(Blocks.f_50146_)) {
--         Direction direction = p_55595_.m_61143_(RepeaterBlock.f_54117_);
--         return direction == p_55596_ || direction.m_122424_() == p_55596_;
--      } else if (p_55595_.m_60713_(Blocks.f_50455_)) {
--         return p_55596_ == p_55595_.m_61143_(ObserverBlock.f_52588_);
-+      } else if (p_176343_0_.m_60713_(Blocks.f_50146_)) {
-+         Direction direction = p_176343_0_.m_61143_(RepeaterBlock.f_54117_);
-+         return direction == p_176343_1_ || direction.m_122424_() == p_176343_1_;
-+      } else if (p_176343_0_.m_60713_(Blocks.f_50455_)) {
-+         return p_176343_1_ == p_176343_0_.m_61143_(ObserverBlock.f_52588_);
+       } else if (p_55595_.m_60713_(Blocks.f_50146_)) {
+@@ -348,7 +_,7 @@
+       } else if (p_55595_.m_60713_(Blocks.f_50455_)) {
+          return p_55596_ == p_55595_.m_61143_(ObserverBlock.f_52588_);
        } else {
 -         return p_55595_.m_60803_() && p_55596_ != null;
-+         return p_176343_0_.canConnectRedstone(world, pos, p_176343_1_) && p_176343_1_ != null;
++         return p_55595_.canConnectRedstone(level, pos, p_55596_) && p_55596_ != null;
        }
     }
  

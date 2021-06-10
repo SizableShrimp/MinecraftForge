@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/levelgen/feature/structures/StructureTemplatePool.java
 +++ b/net/minecraft/world/level/levelgen/feature/structures/StructureTemplatePool.java
-@@ -104,13 +_,13 @@
+@@ -104,11 +_,11 @@
        return this.f_69250_.size();
     }
  
@@ -10,14 +10,10 @@
        RIGID("rigid", ImmutableList.of());
  
 -      public static final Codec<StructureTemplatePool.Projection> f_69281_ = StringRepresentable.m_14350_(StructureTemplatePool.Projection::values, StructureTemplatePool.Projection::m_69295_);
--      private static final Map<String, StructureTemplatePool.Projection> f_69282_ = Arrays.stream(values()).collect(Collectors.toMap(StructureTemplatePool.Projection::m_69297_, (p_69294_) -> {
--         return p_69294_;
 +      public static final Codec<StructureTemplatePool.Projection> f_69281_ = net.minecraftforge.common.IExtensibleEnum.createCodecForExtensibleEnum(StructureTemplatePool.Projection::values, StructureTemplatePool.Projection::m_69295_);
-+      private static final Map<String, StructureTemplatePool.Projection> f_69282_ = Arrays.stream(values()).collect(Collectors.toMap(StructureTemplatePool.Projection::m_69297_, (p_214935_0_) -> {
-+         return p_214935_0_;
+       private static final Map<String, StructureTemplatePool.Projection> f_69282_ = Arrays.stream(values()).collect(Collectors.toMap(StructureTemplatePool.Projection::m_69297_, (p_69294_) -> {
+          return p_69294_;
        }));
-       private final String f_69283_;
-       private final ImmutableList<StructureProcessor> f_69284_;
 @@ -134,6 +_,16 @@
  
        public String m_7912_() {

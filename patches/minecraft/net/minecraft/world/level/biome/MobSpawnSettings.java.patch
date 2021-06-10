@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/level/biome/MobSpawnSettings.java
 +++ b/net/minecraft/world/level/biome/MobSpawnSettings.java
-@@ -42,23 +_,35 @@
+@@ -42,21 +_,33 @@
     private final Map<MobCategory, List<MobSpawnSettings.SpawnerData>> f_48329_;
     private final Map<EntityType<?>, MobSpawnSettings.MobSpawnCost> f_48330_;
     private final boolean f_48331_;
@@ -27,39 +27,10 @@
     @Nullable
     public MobSpawnSettings.MobSpawnCost m_48345_(EntityType<?> p_48346_) {
        return this.f_48330_.get(p_48346_);
-    }
- 
-+   public java.util.Set<EntityType<?>> getEntityTypes() {
-+       return this.costView;
 +   }
 +
-    public float m_48344_() {
-       return this.f_48328_;
-    }
-@@ -130,16 +_,16 @@
++   public java.util.Set<EntityType<?>> getEntityTypes() {
++       return this.costView;
     }
  
-    public static class SpawnerData extends WeighedRandom.WeighedRandomItem {
--      public static final Codec<MobSpawnSettings.SpawnerData> f_48403_ = RecordCodecBuilder.create((p_48416_) -> {
--         return p_48416_.group(Registry.f_122826_.fieldOf("type").forGetter((p_48422_) -> {
--            return p_48422_.f_48404_;
--         }), Codec.INT.fieldOf("weight").forGetter((p_48420_) -> {
--            return p_48420_.f_14482_;
--         }), Codec.INT.fieldOf("minCount").forGetter((p_48418_) -> {
--            return p_48418_.f_48405_;
--         }), Codec.INT.fieldOf("maxCount").forGetter((p_48414_) -> {
--            return p_48414_.f_48406_;
--         })).apply(p_48416_, MobSpawnSettings.SpawnerData::new);
-+      public static final Codec<MobSpawnSettings.SpawnerData> f_48403_ = RecordCodecBuilder.create((p_242592_0_) -> {
-+         return p_242592_0_.group(Registry.f_122826_.fieldOf("type").forGetter((p_242595_0_) -> {
-+            return p_242595_0_.f_48404_;
-+         }), Codec.INT.fieldOf("weight").forGetter((p_242594_0_) -> {
-+            return p_242594_0_.f_14482_;
-+         }), Codec.INT.fieldOf("minCount").forGetter((p_242593_0_) -> {
-+            return p_242593_0_.f_48405_;
-+         }), Codec.INT.fieldOf("maxCount").forGetter((p_242591_0_) -> {
-+            return p_242591_0_.f_48406_;
-+         })).apply(p_242592_0_, MobSpawnSettings.SpawnerData::new);
-       });
-       public final EntityType<?> f_48404_;
-       public final int f_48405_;
+    public float m_48344_() {

@@ -32,18 +32,7 @@
           } catch (Exception exception) {
              f_78191_.error("Exception reading {}", p_78214_, exception);
              return null;
-@@ -274,8 +_,8 @@
-       }
- 
-       public Path m_78283_(LevelResource p_78284_) {
--         return this.f_78273_.computeIfAbsent(p_78284_, (p_78303_) -> {
--            return this.f_78271_.resolve(p_78303_.m_78187_());
-+         return this.f_78273_.computeIfAbsent(p_78284_, (p_237293_1_) -> {
-+            return this.f_78271_.resolve(p_237293_1_.m_78187_());
-          });
-       }
- 
-@@ -313,14 +_,14 @@
+@@ -313,7 +_,7 @@
        @Nullable
        public WorldData m_78280_(DynamicOps<Tag> p_78281_, DataPackConfig p_78282_) {
           this.m_78313_();
@@ -52,15 +41,6 @@
        }
  
        @Nullable
-       public DataPackConfig m_78309_() {
-          this.m_78313_();
--         return LevelStorageSource.this.m_78229_(this.f_78271_.toFile(), (p_78295_, p_78296_) -> {
--            return LevelStorageSource.m_78252_(p_78295_, p_78296_);
-+         return LevelStorageSource.this.m_78229_(this.f_78271_.toFile(), (p_237289_0_, p_237289_1_) -> {
-+            return LevelStorageSource.m_78252_(p_237289_0_, p_237289_1_);
-          });
-       }
- 
 @@ -334,6 +_,8 @@
           CompoundTag compoundtag1 = new CompoundTag();
           compoundtag1.m_128365_("Data", compoundtag);
