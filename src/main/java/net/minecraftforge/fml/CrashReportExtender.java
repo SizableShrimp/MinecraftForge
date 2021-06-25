@@ -23,7 +23,7 @@ import cpw.mods.modlauncher.log.TransformingThrowablePatternConverter;
 import joptsimple.internal.Strings;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
-import net.minecraftforge.fml.common.ICrashCallable;
+import net.minecraftforge.fml.ICrashCallable;
 import net.minecraftforge.fml.loading.moddiscovery.ModFileInfo;
 import net.minecraftforge.forgespi.language.IModInfo;
 import org.apache.logging.log4j.Logger;
@@ -31,37 +31,18 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.Callable;
 
 public class CrashReportExtender
 {
-    private static List<ICrashCallable> crashCallables = Collections.synchronizedList(new ArrayList<>());
 
     public static void enhanceCrashReport(final CrashReport crashReport, final CrashReportCategory category)
     {
-        for (final ICrashCallable call: crashCallables)
+        for (final ICrashCallable call: CrashReportCallables.allCrashCallables())
         {
             category.setDetail(call.getLabel(), call);
         }
     }
 
-    public static void registerCrashCallable(ICrashCallable callable)
-    {
-        crashCallables.add(callable);
-    }
-
-    public static void registerCrashCallable(String headerName, Callable<String> reportGenerator) {
-        registerCrashCallable(new ICrashCallable() {
-            @Override
-            public String getLabel() {
-                return headerName;
-            }
-            @Override
-            public String call() throws Exception {
-                return reportGenerator.call();
-            }
-        });
-    }
     public static void addCrashReportHeader(StringBuilder stringbuilder, CrashReport crashReport)
     {
     }

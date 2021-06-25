@@ -90,7 +90,7 @@ import net.minecraftforge.common.model.TransformationHelper;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.VersionChecker;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fmlclient.registry.ClientRegistry;
 import net.minecraftforge.fml.loading.progress.StartupMessageManager;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.resource.ReloadRequirements;

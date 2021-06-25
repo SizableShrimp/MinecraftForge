@@ -1,0 +1,150 @@
+plugins {
+    id 'org.ajoberstar.grgit' version '4.1.0'
+    id 'com.github.ben-manes.versions'
+    id 'org.javamodularity.moduleplugin' version '1.8.3' apply false
+}
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+apply plugin: 'eclipse'
+apply plugin: 'jacoco'
+apply plugin: 'org.javamodularity.moduleplugin'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        name = 'forge'
+        url = 'https://maven.minecraftforge.net/'
+    }
+}
+
+def isNonStable = { String version ->
+    def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { it -> version.toUpperCase().contains(it) }
+    def regex = /^[0-9,.v-]+(-r)?$/
+    return !stableKeyword && !(version ==~ regex)
+}
+
+dependencyUpdates {
+    rejectVersionIf {
+        isNonStable(it.candidate.version)
+    }
+}
+
+group = 'net.minecraftforge'
+ext.asmVersion = 9.1
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(16)
+//compileJava {
+//    sourceCompatibility = JavaVersion.VERSION_16
+//    targetCompatibility = JavaVersion.VERSION_16
+//}
+
+version = grgit.describe(longDescr: true).split('-').with { "${it[0]}.${it[1]}" }
+
+dependencies {
+    implementation('net.sf.jopt-simple:jopt-simple:5.0.4')
+    compileOnly('org.jetbrains:annotations:21.0.0')
+    api("org.ow2.asm:asm:${asmVersion}")
+    api("org.ow2.asm:asm-tree:${asmVersion}")
+    api("org.ow2.asm:asm-commons:${asmVersion}")
+    api('net.minecraftforge:forgespi:4.0.+')
+    api('org.apache.logging.log4j:log4j-api:2.14.1')
+    api('com.google.guava:guava:21.0')
+    api('com.google.code.gson:gson:2.8.0')
+    api('org.apache.maven:maven-artifact:3.8.1')
+    api('com.electronwill.night-config:core:3.6.3')
+    api('com.electronwill.night-config:toml:3.6.3')
+    api('cpw.mods:modlauncher:9.0.+')
+    implementation('cpw.mods:securejarhandler:0.9.+')
+    implementation('org.apache.logging.log4j:log4j-core:2.14.1')
+    annotationProcessor('org.apache.logging.log4j:log4j-core:2.14.1')
+    implementation('net.minecraftforge:accesstransformers:8.0.0')
+    implementation('net.minecrell:terminalconsoleappender:1.2.0')
+//    implementation('org.jline:jline:3.12.+')
+    testCompileOnly('org.jetbrains:annotations:21.0.0')
+    testRuntimeOnly('cpw.mods:bootstraplauncher:0.1.+')
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+
+ext {
+    MANIFESTS = [
+            '/': [
+                    'Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                    'Git-Commit': grgit.head().abbreviatedId,
+                    'Git-Branch': grgit.branch.current().getName(),
+                    'Build-Number': "${System.getenv('BUILD_NUMBER')?:0}",
+            ] as LinkedHashMap,
+            'net/minecraftforge/fml/loading/': [
+                        'Specification-Title':      'FMLLoader',
+                        'Specification-Vendor':     'Forge Development LLC',
+                        'Specification-Version':    '1',
+                        'Implementation-Title':     'FML Loader',
+                        'Implementation-Version':   '1.0',
+                        'Implementation-Vendor':    'Forge'
+                ] as LinkedHashMap
+            ]
+}
+
+jar {
+    doFirst {
+        MANIFESTS.each { pkg, values ->
+            manifest.attributes(values, pkg)
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-Xlint:unchecked'
+}
+
+artifacts {
+    archives jar
+    archives sourcesJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            pom {
+                name = 'FML Mod Loader'
+                description = 'FML implementation of modlauncher'
+                url = 'https://github.com/MinecraftForge/MinecraftForge'
+                scm {
+                    url = 'https://github.com/MinecraftForge/MinecraftForge'
+                    connection = 'scm:git:git://github.com/MinecraftForge/MinecraftForge.git'
+                    developerConnection = 'scm:git:git@github.com:MinecraftForge/MinecraftForge.git'
+                }
+                issueManagement {
+                    system = 'github'
+                    url = 'https://github.com/MinecraftForge/MinecraftForge/issues'
+                }
+
+                developers {
+                    developer {
+                        id = 'cpw'
+                        name = 'cpw'
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                username = System.env.MAVEN_USER ?: 'not'
+                password = System.env.MAVEN_PASSWORD ?: 'set'
+            }
+            url 'https://maven.minecraftforge.net/releases/'
+        }
+    }
+}

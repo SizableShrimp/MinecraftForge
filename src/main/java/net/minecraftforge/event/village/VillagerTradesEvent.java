@@ -28,7 +28,7 @@ import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
 import net.minecraftforge.common.BasicTrade;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.Event;
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
+import net.minecraftforge.fmlserverevents.FMLServerAboutToStartEvent;
 
 /**
  * VillagerTradesEvent is fired during the {@link FMLServerAboutToStartEvent}.  It is used to gather the trade lists for each profession.

@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:4.1.+'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:5.0.2'
     }
 }
 
@@ -65,7 +65,7 @@ project(':clean') {
     apply plugin: 'eclipse'
     apply plugin: 'net.minecraftforge.gradle.patcher'
     
-    java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+    java.toolchain.languageVersion = JavaLanguageVersion.of(16)
     
     repositories {
         mavenLocal()
@@ -107,6 +107,45 @@ project(':clean') {
     }
 }
 
+project(':fmlonly') {
+    evaluationDependsOn(':clean')
+    apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
+    apply plugin: 'eclipse'
+    apply plugin: 'net.minecraftforge.gradle.patcher'
+    java.toolchain.languageVersion = JavaLanguageVersion.of(16)
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    ext {
+        GIT_INFO = Util.gitInfo(rootProject.file('.'))
+    }
+
+    version = Util.getVersion(GIT_INFO, MC_VERSION)
+    dependencies {
+        implementation project(':fmlcore')
+        implementation project(':fmlloader')
+    }
+    patcher {
+        parent = project(':mcp')
+        mcVersion = MC_VERSION
+        patchedSrc = file('src/main/java')
+
+        mappings channel: MAPPING_CHANNEL, version: MAPPING_VERSION
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDirs = ["$rootDir/fmlonly/src/main/java"]
+            }
+            resources {
+                srcDirs = ["$rootDir/fmlonly/src/main/resources"]
+            }
+        }
+    }
+}
 project(':forge') {    
     evaluationDependsOn(':clean')
     apply plugin: 'java-library'
@@ -115,21 +154,11 @@ project(':forge') {
     apply plugin: 'net.minecraftforge.gradle.patcher'
     apply plugin: 'org.cadixdev.licenser'
 
-    java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+    java.toolchain.languageVersion = JavaLanguageVersion.of(16)
     group = 'net.minecraftforge'
 
     sourceSets {
-        fmllauncher {
-            java {
-                srcDirs = ["$rootDir/src/fmllauncher/java"]
-            }
-            resources {
-                srcDirs = ["$rootDir/src/fmllauncher/resources"]
-            }
-        }
         main {
-            compileClasspath += sourceSets.fmllauncher.runtimeClasspath
-            runtimeClasspath += sourceSets.fmllauncher.runtimeClasspath
             java {
                 srcDirs = ["$rootDir/src/main/java"]
             }
@@ -141,12 +170,10 @@ project(':forge') {
             }
         }
         test {
-            compileClasspath += sourceSets.fmllauncher.runtimeClasspath
-            runtimeClasspath += sourceSets.fmllauncher.runtimeClasspath
             java {
                 srcDirs = [
                     "$rootDir/src/test/java", 
-                    "$rootDir/src/fmllaunchertest/java"
+                    "$rootDir/src/fmlonlytest/java"
                 ]
             }
             resources {
@@ -400,7 +427,7 @@ project(':forge') {
             transitive = false //Don't pull all libraries, if we're missing something, add it to the installer list so the installer knows to download it.
         }
         api.extendsFrom(installer)
-        fmllauncherImplementation.extendsFrom(installer, implementation)
+        fmlonlyImplementation.extendsFrom(installer, implementation)
     }
     dependencies {
         installer 'org.ow2.asm:asm:9.0'
@@ -408,8 +435,7 @@ project(':forge') {
         installer 'org.ow2.asm:asm-tree:9.0'
         installer 'org.ow2.asm:asm-util:9.0'
         installer 'org.ow2.asm:asm-analysis:9.0'
-        installer 'cpw.mods:modlauncher:8.0.9'
-        installer 'cpw.mods:grossjava9hacks:1.3.3'
+        installer 'cpw.mods:grossjava9hacks:2.0.+'
         installer 'net.minecraftforge:accesstransformers:3.0.1'
         installer 'org.antlr:antlr4-runtime:4.9.1' //Dep of AccessTransformer
         installer 'net.minecraftforge:eventbus:4.0.+'
@@ -429,12 +455,12 @@ project(':forge') {
         // This is org.openjdk.nashorn:nashorn-core:15.1.1 repackaged so it doesn't crash on JREs < 15.
         // See: https://github.com/LexManos/NashornLegacyPackager
         installer 'net.minecraftforge:nashorn-core-compat:15.1.1.1'
-        fmllauncherImplementation 'com.google.guava:guava:21.0'
-        fmllauncherImplementation 'com.google.code.gson:gson:2.8.0'
-        fmllauncherImplementation 'org.lwjgl:lwjgl:3.2.2'
-        fmllauncherImplementation 'org.lwjgl:lwjgl-glfw:3.2.2'
-        fmllauncherImplementation 'org.lwjgl:lwjgl-opengl:3.2.2'
-        fmllauncherImplementation 'org.lwjgl:lwjgl-stb:3.2.2'
+        installer 'com.google.guava:guava:21.0'
+        installer 'com.google.code.gson:gson:2.8.0'
+        installer 'org.lwjgl:lwjgl:3.2.2'
+        installer 'org.lwjgl:lwjgl-glfw:3.2.2'
+        installer 'org.lwjgl:lwjgl-opengl:3.2.2'
+        installer 'org.lwjgl:lwjgl-stb:3.2.2'
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
         testImplementation 'org.junit.vintage:junit-vintage-engine:5.+'
         testImplementation 'org.opentest4j:opentest4j:1.2.0' // needed for junit 5
@@ -766,7 +792,7 @@ project(':forge') {
             installerJson.inputs.file(tasks.getByName(name).output)
         }
     }
-    
+
     universalJar {
         from extraTxts
         
@@ -788,7 +814,7 @@ project(':forge') {
     
     task launcherJar(type: Jar) {
         classifier 'launcher'
-        from sourceSets.fmllauncher.output
+        from sourceSets.main.output
         doFirst {
             def classpath = new StringBuilder()
             def artifacts = getArtifacts(project, project.configurations.installer, false)
@@ -993,7 +1019,7 @@ project(':forge') {
     task userdevExtrasReobf(type:TaskReobfuscateJar) {
         dependsOn userdevExtras, createMcp2Srg
         input = tasks.userdevExtras.archivePath
-        classpath = project.configurations.compile
+        classpath = project.configurations.implementation
         srg = tasks.createMcp2Srg.output
         tool = SPECIAL_SOURCE + ':shaded'
     }

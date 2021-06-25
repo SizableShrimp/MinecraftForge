@@ -44,3 +44,13 @@ changelog.txt
 # Srg2Source causes import bugs on these patches. If you intentionnally change these, remove the ignore.
 /patches/minecraft/net/minecraft/client/renderer/ViewFrustum.java.patch
 /patches/minecraft/net/minecraft/data/BlockModelDefinition.java.patch
+/fmlcore/build/
+/fmlcore/out/production/classes/net/minecraftforge/fml/
+/fmlloader/build/
+/fmlloader/.gradle/
+/fmlloader/logs/
+/fmlloader/out/production/
+/fmlloader/test/gamedir/
+/projects/fmlonly/
+/javafmllanguage/build/
+/mclanguage/build/
