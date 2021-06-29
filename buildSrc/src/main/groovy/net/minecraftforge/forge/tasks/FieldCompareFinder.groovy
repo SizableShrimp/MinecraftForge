@@ -21,7 +21,7 @@ import org.objectweb.asm.tree.MethodNode
 
 import static org.objectweb.asm.Opcodes.*
 
-public class FieldCompareFinder extends BytecodeFinder {
+abstract class FieldCompareFinder extends BytecodeFinder {
     @Nested
     Map<String, Search> fields = [:] as HashMap
     Map<Search, String> fieldsReverse = [:] as HashMap

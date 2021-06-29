@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:5.0.2'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:5.+'
     }
 }
 
@@ -16,15 +16,15 @@ import java.util.Date
 import java.util.LinkedHashMap
 import net.minecraftforge.forge.tasks.*
 import static net.minecraftforge.forge.tasks.Util.*
-import net.minecraftforge.gradle.common.task.DownloadMavenArtifact
-import net.minecraftforge.gradle.common.task.ExtractInheritance
-import net.minecraftforge.gradle.common.task.SignJar
-import net.minecraftforge.gradle.patcher.task.TaskReobfuscateJar
+import net.minecraftforge.gradle.common.tasks.DownloadMavenArtifact
+import net.minecraftforge.gradle.common.tasks.ExtractInheritance
+import net.minecraftforge.gradle.common.tasks.SignJar
+import net.minecraftforge.gradle.patcher.tasks.ReobfuscateJar
 import org.apache.tools.ant.filters.ReplaceTokens
 import org.gradle.plugins.ide.eclipse.model.SourceFolder
 
 plugins {
-    id 'org.cadixdev.licenser' version '0.5.0'
+    id 'org.cadixdev.licenser' version '0.6.1'
     id 'com.github.ben-manes.versions' version '0.36.0'
     id 'eclipse'
 }
@@ -55,7 +55,7 @@ project(':mcp') {
         mavenLocal()
     }
     mcp {
-        config = MC_VERSION + '-' + MCP_VERSION
+        config MC_VERSION + '-' + MCP_VERSION
         pipeline = 'joined'
     }
 }
@@ -146,7 +146,7 @@ project(':fmlonly') {
         }
     }
 }
-project(':forge') {    
+project(':forge') {
     evaluationDependsOn(':clean')
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
@@ -214,7 +214,7 @@ project(':forge') {
         // The new versioning sceme is <MCVersion>-<ForgeMC>.<RB>.<CommitsSinceRB>
         // ForgeMC is a unique identifier for every MC version we have supported.
         // Essentially, the same as the old, except dropping the first number, and the builds are no longer unique.
-        MCP_ARTIFACT = project(':mcp').mcp.config
+        MCP_ARTIFACT = project(':mcp').mcp.config.get()
         SPECIAL_SOURCE = 'net.md-5:SpecialSource:1.9.0'
         SPECIAL_SOURCE_MCP = 'net.md-5:SpecialSource:1.8.5'
         VERSION_JSON = project(':mcp').file('build/mcp/downloadJson/version.json')
@@ -226,13 +226,13 @@ project(':forge') {
     println('Forge Version: ' + version)
 
     patcher {
-        exc = file("$rootDir/src/main/resources/forge.exc")
+        excs.from file("$rootDir/src/main/resources/forge.exc")
         parent = project(':clean')
         patches = file("$rootDir/patches/minecraft")
         patchedSrc = file('src/main/java')
         srgPatches = true
-        accessTransformer = file("$rootDir/src/main/resources/META-INF/accesstransformer.cfg")
-        sideAnnotationStripper = file("$rootDir/src/main/resources/forge.sas")
+        accessTransformers.from file("$rootDir/src/main/resources/META-INF/accesstransformer.cfg")
+        sideAnnotationStrippers.from file("$rootDir/src/main/resources/forge.sas")
 
         runs {
             forge_client {
@@ -244,7 +244,7 @@ project(':forge') {
                 environment 'target', 'fmldevclient'
                 environment 'assetIndex', '{asset_index}'
                 environment 'assetDirectory', downloadAssets.output
-                environment 'nativesDirectory', extractNatives.output
+                environment 'nativesDirectory', extractNatives.output.get().getAsFile()
 
                 environment 'MC_VERSION', MC_VERSION
                 environment 'MCP_VERSION', MCP_VERSION
@@ -485,8 +485,8 @@ project(':forge') {
     ['Client', 'Server', 'Joined'].each { side ->
         def gen = tasks.getByName("gen${side}BinPatches")
         gen.tool = BINPATCH_TOOL
-        task "apply${side}BinPatches"(type: net.minecraftforge.gradle.common.task.ApplyBinPatches, dependsOn: gen) {
-            clean = { gen.cleanJar }
+        task "apply${side}BinPatches"(type: net.minecraftforge.gradle.common.tasks.ApplyBinPatches, dependsOn: gen) {
+            clean = gen.cleanJar
             patch = gen.output
             tool = BINPATCH_TOOL
         }
@@ -496,8 +496,8 @@ project(':forge') {
         task "create${side}SRG"(type: net.minecraftforge.gradle.userdev.tasks.RenameJar, dependsOn: srgTask) {
             tool = SPECIAL_SOURCE_MCP + ':shaded'
             args = ['--stable', '--in-jar', '{input}', '--out-jar', '{output}', '--srg-in', '{mappings}']
-            mappings = { srgTask.output }
-            input = { gen.cleanJar }
+            mappings = srgTask.output
+            input = gen.cleanJar
             output = file("build/create${name}SRG/output.jar")
         }
     }
@@ -509,7 +509,7 @@ project(':forge') {
     
     task extractInheritance(type: ExtractInheritance, dependsOn: [genJoinedBinPatches, downloadLibraries]) {
         tool = INSTALLER_TOOLS + ':fatjar'
-        input { genJoinedBinPatches.cleanJar }
+        input = genJoinedBinPatches.cleanJar
         doFirst { downloadLibraries.libraries.each{ addLibrary(it) } }
     }
 
@@ -551,17 +551,17 @@ project(':forge') {
 
     task checkATs(type: CheckATs, dependsOn: extractInheritance) {
         inheritance = extractInheritance.output
-        ats = patcher.accessTransformers
+        ats.from patcher.accessTransformers
     }
 
     task checkSAS(type: CheckSAS, dependsOn: extractInheritance) {
         inheritance = extractInheritance.output
-        sass = patcher.sideAnnotationStrippers
+        sass.from patcher.sideAnnotationStrippers
     }
 
     task checkExcs(type: CheckExcs, dependsOn: jar) {
         binary = jar.archivePath
-        excs = patcher.excs
+        excs.from patcher.excs
     }
 
     task checkAll(dependsOn: [checkATs, checkSAS, checkExcs, findFieldInstanceChecks]){}
@@ -693,16 +693,16 @@ project(':forge') {
                         server: "[net.minecraft:server:${MC_VERSION}-${MCP_VERSION}:slim]"
                     ],
                     MC_SLIM_SHA: [
-                        client: "'${tasks.getByName('downloadClientSlim').output.sha1()}'",
-                        server: "'${tasks.getByName('downloadServerSlim').output.sha1()}'"
+                        client: "'${tasks.getByName('downloadClientSlim').output.get().asFile.sha1()}'",
+                        server: "'${tasks.getByName('downloadServerSlim').output.get().asFile.sha1()}'"
                     ],
                     MC_EXTRA: [
                         client: "[net.minecraft:client:${MC_VERSION}-${MCP_VERSION}:extra]",
                         server: "[net.minecraft:server:${MC_VERSION}-${MCP_VERSION}:extra]"
                     ],
                     MC_EXTRA_SHA: [
-                        client: "'${tasks.getByName('downloadClientExtra').output.sha1()}'",
-                        server: "'${tasks.getByName('downloadServerExtra').output.sha1()}'"
+                        client: "'${tasks.getByName('downloadClientExtra').output.get().asFile.sha1()}'",
+                        server: "'${tasks.getByName('downloadServerExtra').output.get().asFile.sha1()}'"
                     ],
                     MC_SRG: [
                         client: "[net.minecraft:client:${MC_VERSION}-${MCP_VERSION}:srg]",
@@ -717,8 +717,8 @@ project(':forge') {
                         server: "[${project.group}:${project.name}:${project.version}:server]"
                     ],
                     PATCHED_SHA: [
-                        client: "'${applyClientBinPatches.output.sha1()}'",
-                        server: "'${applyServerBinPatches.output.sha1()}'"
+                        client: "'${applyClientBinPatches.output.get().asFile.sha1()}'",
+                        server: "'${applyServerBinPatches.output.get().asFile.sha1()}'"
                     ],
                     MCP_VERSION: [
                         client: "'${MCP_VERSION}'",
@@ -797,7 +797,7 @@ project(':forge') {
         from extraTxts
         
         // add crowdin locales
-        from { crowdin.output.exists() ? zipTree(crowdin.output) : null}
+        from { crowdin.output.present && crowdin.output.get().asFile.exists() ? zipTree(crowdin.output) : null}
         dependsOn crowdin
         duplicatesStrategy = 'exclude'
 
@@ -873,8 +873,10 @@ project(':forge') {
         }
         from(installerJson.output)
         from(launcherJson.output)
-        from(zipTree(downloadInstaller.output)) {
-            duplicatesStrategy = 'exclude'
+        afterEvaluate {
+            from(zipTree(downloadInstaller.output)) {
+                duplicatesStrategy = 'exclude'
+            }
         }
     }
     
@@ -932,9 +934,9 @@ project(':forge') {
     userdevConfig {
         def artifacts = getArtifacts(project, project.configurations.installer, true)
         artifacts.each { key, lib ->
-            addLibrary(lib.name)
+            libraries.add(lib.name)
         }
-        addLibrary("${project.group}:${project.name}:${project.version}:launcher")
+        libraries.add("${project.group}:${project.name}:${project.version}:launcher")
         runs {
             client {
                 main 'net.minecraftforge.userdev.LaunchTesting'
@@ -998,10 +1000,10 @@ project(':forge') {
 
         tasks {
             main {
-                files = files("$rootDir/src/main/java")
+                files.from files("$rootDir/src/main/java")
             }
             test {
-                files = files("$rootDir/src/test/java")
+                files.from files("$rootDir/src/test/java")
             }
         }
     }
@@ -1016,16 +1018,16 @@ project(':forge') {
         tool = SPECIAL_SOURCE + ':shaded'
     }
 
-    task userdevExtrasReobf(type:TaskReobfuscateJar) {
+    task userdevExtrasReobf(type: ReobfuscateJar) {
         dependsOn userdevExtras, createMcp2Srg
         input = tasks.userdevExtras.archivePath
-        classpath = project.configurations.implementation
+        classpath.from project.configurations.userdevCompileClasspath
         srg = tasks.createMcp2Srg.output
         tool = SPECIAL_SOURCE + ':shaded'
     }
 
     userdevJar {
-        dependsOn userdevExtrasReobf
+        dependsOn tasks.userdevExtrasReobf
         from (zipTree(tasks.userdevExtrasReobf.output)) {
             into '/inject/'
         }
@@ -1035,22 +1037,22 @@ project(':forge') {
     }
 
     extractRangeMap {
-        addDependencies jar.archivePath
-        addSources sourceSets.userdev.java.srcDirs
+        dependencies.from jar.archiveFile
+        sources.from sourceSets.userdev.java.srcDirs
     }
     applyRangeMap {
-        setSources sourceSets.userdev.java.srcDirs
+        sources.from sourceSets.userdev.java.srcDirs
     }
     
     tasks.eclipse.dependsOn('genEclipseRuns')
     
     if (project.hasProperty('UPDATE_MAPPINGS')) {
         extractRangeMap {
-            sources sourceSets.test.java.srcDirs
+            sources.from sourceSets.test.java.srcDirs
             addDependencies compileTestJava.classpath
         }
         applyRangeMap {
-            sources sourceSets.test.java.srcDirs
+            sources.from sourceSets.test.java.srcDirs
         }
         sourceSets.test.java.srcDirs.each { extractMappedNew.addTarget it }
     }

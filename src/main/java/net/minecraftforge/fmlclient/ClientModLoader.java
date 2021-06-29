@@ -129,7 +129,7 @@ public class ClientModLoader
 
     private static void startModLoading(ModWorkManager.DrivenExecutor syncExecutor, Executor parallelExecutor) {
         earlyLoaderGUI.handleElsewhere();
-        createRunnableWithCatch(() -> ModLoader.get().loadMods(syncExecutor, parallelExecutor, executor), new SpacedRunnable(earlyLoaderGUI::renderTick))).run();
+        createRunnableWithCatch(() -> ModLoader.get().loadMods(syncExecutor, parallelExecutor, executor), new SpacedRunnable(earlyLoaderGUI::renderTick)).run();
     }
 
     private static void postSidedRunnable() {
