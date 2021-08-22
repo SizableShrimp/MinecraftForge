@@ -838,6 +838,7 @@ project(':forge') {
         implementation project(':fmlloader')
         implementation project(':javafmllanguage')
         implementation project(':mclanguage')
+        runtimeOnly "cpw.mods:bootstraplauncher:${BOOTSTRAPLAUNCHER_VERSION}"
     }
     dependencies sharedDeps
 
@@ -864,6 +865,7 @@ project(':forge') {
                 parent runs.forge_client
                 taskName 'forge_test_client'
 
+                property 'forge.enablegametest', 'true'
                 environment 'MOD_CLASSES', 'dummy' // Needed to work around FG limitation, FG will replace this!
 
                 ideaModule "${rootProject.name}.${project.name}.test"
@@ -886,6 +888,7 @@ project(':forge') {
                 parent runs.forge_server
                 taskName 'forge_test_server'
 
+                property 'forge.enablegametest', 'true'
                 environment 'MOD_CLASSES', 'dummy' // Needed to work around FG limitation, FG will replace this!
 
                 ideaModule "${rootProject.name}.${project.name}.test"
