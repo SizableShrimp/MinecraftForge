@@ -62,9 +62,8 @@ ext {
     // FML_VERSION = gradleutils.getFilteredMCTagOffsetBranchVersion(true, 'FML', MC_VERSION)
     FORGE_VERSION = VERSION.substring(MC_VERSION.length() + 1)
 
-    SPECIAL_SOURCE = 'net.md-5:SpecialSource:1.10.0'
     BINPATCH_TOOL = 'net.minecraftforge:binarypatcher:1.0.12:fatjar'
-    INSTALLER_TOOLS = 'net.minecraftforge:installertools:1.2.7'
+    INSTALLER_TOOLS = 'net.minecraftforge:installertools:1.2.10'
     JAR_SPLITTER = 'net.minecraftforge:jarsplitter:1.1.4'
     FART = 'net.minecraftforge:ForgeAutoRenamingTool:0.1.17:all'
 }
@@ -1366,10 +1365,6 @@ project(':forge') {
                 files.from files("$rootDir/src/test/java")
             }
         }
-    }
-
-    reobfJar {
-        tool = SPECIAL_SOURCE + ':shaded'
     }
 
     tasks.eclipse.dependsOn('genEclipseRuns')
