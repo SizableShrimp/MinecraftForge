@@ -75,7 +75,8 @@
 +   @Deprecated public static final Registry<MenuType<?>> f_122863_ = forge(f_122913_, (registry) -> {
        return MenuType.f_39964_;
     });
-    public static final Registry<RecipeType<?>> f_122864_ = m_206008_(f_122914_, (p_205954_) -> {
+-   public static final Registry<RecipeType<?>> f_122864_ = m_206008_(f_122914_, (p_205954_) -> {
++   @Deprecated public static final Registry<RecipeType<?>> f_122864_ = forge(f_122914_, (p_205954_) -> {
        return RecipeType.f_44107_;
     });
 -   public static final Registry<RecipeSerializer<?>> f_122865_ = m_206008_(f_122915_, (p_205952_) -> {
@@ -164,7 +165,7 @@
        return m_205999_(p_206009_, Lifecycle.experimental(), p_206010_);
     }
  
-+   private static <T extends net.minecraftforge.registries.IForgeRegistryEntry<T>> Registry<T> forge(ResourceKey<? extends Registry<T>> key, Registry.RegistryBootstrap<T> def) {
++   private static <T> Registry<T> forge(ResourceKey<? extends Registry<T>> key, Registry.RegistryBootstrap<T> def) {
 +      return forge(key, Lifecycle.experimental(), def);
 +   }
 +
@@ -172,7 +173,7 @@
        return m_206016_(p_206028_, p_206029_, Lifecycle.experimental(), p_206030_);
     }
  
-+   private static <T extends net.minecraftforge.registries.IForgeRegistryEntry<T>> DefaultedRegistry<T> forge(ResourceKey<? extends Registry<T>> key, String defKey, Registry.RegistryBootstrap<T> def) {
++   private static <T> DefaultedRegistry<T> forge(ResourceKey<? extends Registry<T>> key, String defKey, Registry.RegistryBootstrap<T> def) {
 +      return forge(key, defKey, Lifecycle.experimental(), def);
 +   }
 +
@@ -180,7 +181,7 @@
        return m_206021_(p_206032_, p_206033_, Lifecycle.experimental(), p_206034_, p_206035_);
     }
  
-+   private static <T extends net.minecraftforge.registries.IForgeRegistryEntry<T>> Registry<T> forge(ResourceKey<? extends Registry<T>> key, Lifecycle cycle, Registry.RegistryBootstrap<T> def) {
++   private static <T> Registry<T> forge(ResourceKey<? extends Registry<T>> key, Lifecycle cycle, Registry.RegistryBootstrap<T> def) {
 +      return m_206011_(key, net.minecraftforge.registries.GameData.getWrapper(key, cycle), def, cycle);
 +   }
 +
@@ -188,7 +189,7 @@
        return m_206011_(p_206000_, new MappedRegistry<>(p_206000_, p_206001_, (Function<T, Holder.Reference<T>>)null), p_206002_, p_206001_);
 +   }
 +
-+   private static <T extends net.minecraftforge.registries.IForgeRegistryEntry<T>> DefaultedRegistry<T> forge(ResourceKey<? extends Registry<T>> key, String defKey, Lifecycle cycle, Registry.RegistryBootstrap<T> def) {
++   private static <T> DefaultedRegistry<T> forge(ResourceKey<? extends Registry<T>> key, String defKey, Lifecycle cycle, Registry.RegistryBootstrap<T> def) {
 +      return m_206011_(key, net.minecraftforge.registries.GameData.getWrapper(key, cycle, defKey), def, cycle);
     }
  

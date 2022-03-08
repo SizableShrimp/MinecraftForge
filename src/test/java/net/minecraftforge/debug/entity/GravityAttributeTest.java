@@ -15,6 +15,8 @@ import java.util.stream.StreamSupport;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,7 +36,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -112,9 +113,10 @@ public class GravityAttributeTest
     }
 
     @SubscribeEvent
-    public void registerItems(RegistryEvent.Register<Item> event)
+    public void registerItems(RegisterEvent event)
     {
-        event.getRegistry().register(new ItemGravityStick(new Properties().tab(CreativeModeTab.TAB_TOOLS).rarity(Rarity.RARE)).setRegistryName("gravity_attribute_test:gravity_stick"));
+        event.register(ForgeRegistries.Keys.ITEMS, helper -> helper.register("gravity_stick",
+                new ItemGravityStick(new Properties().tab(CreativeModeTab.TAB_TOOLS).rarity(Rarity.RARE))));
     }
 
     public static class ItemGravityStick extends Item

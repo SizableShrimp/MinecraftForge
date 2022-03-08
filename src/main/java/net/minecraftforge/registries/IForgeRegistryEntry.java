@@ -4,9 +4,13 @@
  */
 
 package net.minecraftforge.registries;
-import net.minecraft.resources.ResourceLocation;
 
-import javax.annotation.Nullable;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public interface IForgeRegistryEntry<V>
 {
@@ -37,11 +41,11 @@ public interface IForgeRegistryEntry<V>
     @Nullable
     ResourceLocation getRegistryName();
 
-    /**
-     * Determines the type for this entry, used to look up the correct registry in the global registries list as there can only be one
-     * registry per concrete class.
-     *
-     * @return Root registry type.
-     */
-    Class<V> getRegistryType();
+    @NotNull
+    Optional<Holder.Reference<V>> getDelegate();
+
+    @NotNull
+    Holder.Reference<V> getDelegateOrThrow();
+
+    void setDelegate(@NotNull Holder.Reference<V> delegate);
 }

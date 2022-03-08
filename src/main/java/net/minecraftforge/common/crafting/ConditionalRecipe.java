@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 
 public class ConditionalRecipe
 {
-    @ObjectHolder("forge:conditional")
+    @ObjectHolder(registryName = "recipe_serializer", value = "forge:conditional")
     public static final RecipeSerializer<Recipe<?>> SERIALZIER = null;
 
     public static Builder builder()
@@ -38,33 +38,6 @@ public class ConditionalRecipe
 
     public static class Serializer<T extends Recipe<?>> implements RecipeSerializer<T>
     {
-        private ResourceLocation name;
-
-        @Override
-        public RecipeSerializer<?> setRegistryName(ResourceLocation name)
-        {
-            this.name = name;
-            return this;
-        }
-
-        @Override
-        public ResourceLocation getRegistryName()
-        {
-            return name;
-        }
-
-        @Override
-        public Class<RecipeSerializer<?>> getRegistryType()
-        {
-            return Serializer.<RecipeSerializer<?>>castClass(RecipeSerializer.class);
-        }
-
-        @SuppressWarnings("unchecked") // Need this wrapper, because generics
-        private static <G> Class<G> castClass(Class<?> cls)
-        {
-            return (Class<G>)cls;
-        }
-
         @Override
         public T fromJson(ResourceLocation recipeId, JsonObject json)
         {

@@ -162,11 +162,9 @@ import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.resource.ResourcePackLoader;
-import net.minecraftforge.registries.DataSerializerEntry;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.GameData;
-import net.minecraftforge.registries.IRegistryDelegate;
 import net.minecraftforge.registries.RegistryManager;
 
 import org.apache.logging.log4j.LogManager;
@@ -240,7 +238,7 @@ public class ForgeHooks
             result = state.getCloneItemStack(target, level, pos, player);
 
             if (result.isEmpty())
-                LOGGER.warn("Picking on: [{}] {} gave null item", target.getType(), state.getBlock().getRegistryName());
+                LOGGER.warn("Picking on: [{}] {} gave null item", target.getType(), ForgeRegistries.BLOCKS.getKey(state.getBlock()));
         }
         else if (target.getType() == HitResult.Type.ENTITY)
         {
@@ -248,7 +246,7 @@ public class ForgeHooks
             result = entity.getPickedResult(target);
 
             if (result.isEmpty())
-                LOGGER.warn("Picking on: [{}] {} gave null item", target.getType(), entity.getType().getRegistryName());
+                LOGGER.warn("Picking on: [{}] {} gave null item", target.getType(), ForgeRegistries.ENTITIES.getKey(entity.getType()));
         }
 
         if (result.isEmpty())
@@ -860,7 +858,7 @@ public class ForgeHooks
     {
         ForgeWorldPreset def = ForgeWorldPreset.getDefaultWorldPreset();
         if (def != null)
-            return def.getRegistryName().toString();
+            return ForgeRegistries.WORLD_TYPES.get().getKey(def).toString();
         return "default";
     }
 
@@ -1033,7 +1031,7 @@ public class ForgeHooks
     public static String getDefaultCreatorModId(@Nonnull ItemStack itemStack)
     {
         Item item = itemStack.getItem();
-        ResourceLocation registryName = item.getRegistryName();
+        ResourceLocation registryName = ForgeRegistries.ITEMS.getKey(item);
         String modId = registryName == null ? null : registryName.getNamespace();
         if ("minecraft".equals(modId))
         {
@@ -1061,7 +1059,7 @@ public class ForgeHooks
             }
             else if (item instanceof SpawnEggItem)
             {
-                ResourceLocation resourceLocation = ((SpawnEggItem)item).getType(null).getRegistryName();
+                ResourceLocation resourceLocation = ForgeRegistries.ENTITIES.getKey(((SpawnEggItem) item).getType(null));
                 if (resourceLocation != null)
                 {
                     return resourceLocation.getNamespace();
@@ -1124,18 +1122,16 @@ public class ForgeHooks
         }
     }
 
-    private static Map<EntityDataSerializer<?>, DataSerializerEntry> serializerEntries = GameData.getSerializerMap();
-    //private static final ForgeRegistry<DataSerializerEntry> serializerRegistry = (ForgeRegistry<DataSerializerEntry>) ForgeRegistries.DATA_SERIALIZERS;
-    // Do not reimplement this ^ it introduces a chicken-egg scenario by classloading registries during bootstrap
-
     @Nullable
     public static EntityDataSerializer<?> getSerializer(int id, CrudeIncrementalIntIdentityHashBiMap<EntityDataSerializer<?>> vanilla)
     {
         EntityDataSerializer<?> serializer = vanilla.byId(id);
         if (serializer == null)
         {
-            DataSerializerEntry entry = ((ForgeRegistry<DataSerializerEntry>)ForgeRegistries.DATA_SERIALIZERS.get()).getValue(id);
-            if (entry != null) serializer = entry.getSerializer();
+            // ForgeRegistries.DATA_SERIALIZERS is a deferred register now, so if this method is called too early, the registry will be null
+            ForgeRegistry<EntityDataSerializer<?>> registry = (ForgeRegistry<EntityDataSerializer<?>>) ForgeRegistries.DATA_SERIALIZERS.get();
+            if (registry != null)
+                serializer = registry.getValue(id);
         }
         return serializer;
     }
@@ -1145,16 +1141,11 @@ public class ForgeHooks
         int id = vanilla.getId(serializer);
         if (id < 0)
         {
-            // ForgeRegistries.DATA_SERIALIZERS is a deferred register now, so if this method is called too early, the serializer map will be null
-            // This should keep checking until it's not null
-            if (serializerEntries == null)
-                serializerEntries = GameData.getSerializerMap();
-            if (serializerEntries != null)
-            {
-                DataSerializerEntry entry = serializerEntries.get(serializer);
-                if (entry != null)
-                    id = ((ForgeRegistry<DataSerializerEntry>) ForgeRegistries.DATA_SERIALIZERS.get()).getID(entry);
-            }
+            id = ((ForgeRegistry<EntityDataSerializer<?>>) ForgeRegistries.DATA_SERIALIZERS).getID(serializer);
+            // ForgeRegistries.DATA_SERIALIZERS is a deferred register now, so if this method is called too early, the registry will be null
+            ForgeRegistry<EntityDataSerializer<?>> registry = (ForgeRegistry<EntityDataSerializer<?>>) ForgeRegistries.DATA_SERIALIZERS.get();
+            if (registry != null)
+                id = registry.getID(serializer);
         }
         return id;
     }
@@ -1167,7 +1158,7 @@ public class ForgeHooks
         return ForgeEventFactory.getMobGriefingEvent(level, entity) && state.canEntityDestroy(level, pos, entity) && ForgeEventFactory.onEntityDestroyBlock(entity, pos, state);
     }
 
-    private static final Map<IRegistryDelegate<Item>, Integer> VANILLA_BURNS = new HashMap<>();
+    private static final Map<Holder.Reference<Item>, Integer> VANILLA_BURNS = new HashMap<>();
 
     /**
      * Gets the burn time of this itemstack.
@@ -1182,7 +1173,7 @@ public class ForgeHooks
         {
             Item item = stack.getItem();
             int ret = stack.getBurnTime(recipeType);
-            return ForgeEventFactory.getItemBurnTime(stack, ret == -1 ? VANILLA_BURNS.getOrDefault(item.delegate, 0) : ret, recipeType);
+            return ForgeEventFactory.getItemBurnTime(stack, ret == -1 ? VANILLA_BURNS.getOrDefault(ForgeRegistries.ITEMS.getDelegateOrThrow(item), 0) : ret, recipeType);
         }
     }
 
@@ -1190,7 +1181,7 @@ public class ForgeHooks
     public static synchronized void updateBurns()
     {
         VANILLA_BURNS.clear();
-        FurnaceBlockEntity.getFuel().entrySet().forEach(e -> VANILLA_BURNS.put(e.getKey().delegate, e.getValue()));
+        FurnaceBlockEntity.getFuel().entrySet().forEach(e -> VANILLA_BURNS.put(ForgeRegistries.ITEMS.getDelegateOrThrow(e.getKey()), e.getValue()));
     }
 
     /**
@@ -1456,7 +1447,7 @@ public class ForgeHooks
 
     public static void saveMobEffect(CompoundTag nbt, String key, MobEffect effect)
     {
-        var registryName = effect.getRegistryName();
+        var registryName = ForgeRegistries.MOB_EFFECTS.getKey(effect);
         if (registryName != null)
         {
             nbt.putString(key, registryName.toString());

@@ -30,7 +30,7 @@ import net.minecraft.core.DefaultedRegistry;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Lifecycle;
 
-class NamespacedDefaultedWrapper<T extends IForgeRegistryEntry<T>> extends DefaultedRegistry<T> implements ILockableRegistry, IHolderHelperHolder<T>
+class NamespacedDefaultedWrapper<T> extends DefaultedRegistry<T> implements ILockableRegistry, IHolderHelperHolder<T>
 {
     private final ForgeRegistry<T> delegate;
     private final NamespacedHolderHelper<T> holders;
@@ -54,14 +54,11 @@ class NamespacedDefaultedWrapper<T extends IForgeRegistryEntry<T>> extends Defau
         Validate.notNull(value);
         this.elementsLifecycle = this.elementsLifecycle.add(lifecycle);
 
-        if (value.getRegistryName() == null)
-            value.setRegistryName(key.location());
+        T oldValue = this.delegate.getRaw(key.location());
 
-        T oldValue = this.delegate.getRaw(value.getRegistryName());
+        int realId = this.delegate.add(id, key.location(), value);
 
-        int realId = this.delegate.add(id, value);
-
-        return this.holders.onAdded(RegistryManager.ACTIVE, realId, value, oldValue);
+        return this.holders.onAdded(RegistryManager.ACTIVE, realId, key, value, oldValue);
     }
 
     @Override
@@ -212,7 +209,7 @@ class NamespacedDefaultedWrapper<T extends IForgeRegistryEntry<T>> extends Defau
     @Deprecated @Override public void lock(){ this.locked = true; }
 
 
-    public static class Factory<V extends IForgeRegistryEntry<V>> implements IForgeRegistry.CreateCallback<V>, IForgeRegistry.AddCallback<V>
+    public static class Factory<V> implements IForgeRegistry.CreateCallback<V>, IForgeRegistry.AddCallback<V>
     {
         public static final ResourceLocation ID = new ResourceLocation("forge", "registry_defaulted_wrapper");
 
@@ -225,9 +222,9 @@ class NamespacedDefaultedWrapper<T extends IForgeRegistryEntry<T>> extends Defau
 
         @Override
         @SuppressWarnings("unchecked")
-        public void onAdd(IForgeRegistryInternal<V> owner, RegistryManager stage, int id, V value, V oldValue)
+        public void onAdd(IForgeRegistryInternal<V> owner, RegistryManager stage, int id, ResourceKey<V> key, V value, V oldValue)
         {
-            owner.getSlaveMap(ID, NamespacedDefaultedWrapper.class).holders.onAdded(stage, id, value, oldValue);
+            owner.getSlaveMap(ID, NamespacedDefaultedWrapper.class).holders.onAdded(stage, id, key, value, oldValue);
         }
     }
 }

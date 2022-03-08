@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.ModList;
@@ -72,6 +71,17 @@ public class ObjectHolderRegistry
     private static final Set<Consumer<Predicate<ResourceLocation>>> objectHolders = new HashSet<>();
     private static final Type OBJECT_HOLDER = Type.getType(ObjectHolder.class);
     private static final Type MOD = Type.getType(Mod.class);
+    // Hardcoded list of vanilla classes that should have object holders for each field of the given registry type.
+    // IMPORTANT: Updates to this collection must be reflected in ObjectHolderDefinalize. Duplicated cuz classloaders, yay!
+    // Classnames are validated below.
+    private static final List<VanillaObjectHolderData> VANILLA_OBJECT_HOLDERS = List.of(
+            new VanillaObjectHolderData("net.minecraft.world.level.block.Blocks", "block", "net.minecraft.world.level.block.Block"),
+            new VanillaObjectHolderData("net.minecraft.world.item.Items", "item", "net.minecraft.world.item.Item"),
+            new VanillaObjectHolderData("net.minecraft.world.item.enchantment.Enchantments", "enchantment", "net.minecraft.world.item.enchantment.Enchantment"),
+            new VanillaObjectHolderData("net.minecraft.world.effect.MobEffects", "mob_effect", "net.minecraft.world.effect.MobEffect"),
+            new VanillaObjectHolderData("net.minecraft.core.particles.ParticleTypes", "particle_type", "net.minecraft.core.particles.ParticleType"),
+            new VanillaObjectHolderData("net.minecraft.sounds.SoundEvents", "sound_event", "net.minecraft.sounds.SoundEvent")
+    );
 
     public static void findObjectHolders()
     {
@@ -80,24 +90,46 @@ public class ObjectHolderRegistry
             .map(ModFileScanData::getAnnotations)
             .flatMap(Collection::stream)
             .filter(a -> OBJECT_HOLDER.equals(a.annotationType()) || MOD.equals(a.annotationType()))
-            .collect(Collectors.toList());
+            .toList();
 
         Map<Type, String> classModIds = Maps.newHashMap();
         Map<Type, Class<?>> classCache = Maps.newHashMap();
 
-        // Gather all @Mod classes, so that @ObjectHolder's in those classes don't need to specify the mod id, Modder convince
-        annotations.stream().filter(a -> MOD.equals(a.annotationType())).forEach(data -> classModIds.put(data.clazz(), (String)data.annotationData().get("value")));
+        // Gather all @Mod classes so that @ObjectHolder's in those classes don't need to specify the mod id; modder convenience
+        annotations.stream()
+                .filter(a -> MOD.equals(a.annotationType()))
+                .forEach(data -> classModIds.put(data.clazz(), (String)data.annotationData().get("value")));
 
-        // double pass - get all the class level annotations first, then the field level annotations
-        annotations.stream().filter(a -> OBJECT_HOLDER.equals(a.annotationType())).filter(a -> a.targetType() == ElementType.TYPE)
-        .forEach(data -> scanTarget(classModIds, classCache, data.clazz(), null, (String)data.annotationData().get("value"), true, data.clazz().getClassName().startsWith("net.minecraft.")));
+        // Validate all the vanilla class-level object holders then scan those first
+        VANILLA_OBJECT_HOLDERS.forEach(data -> {
+            try
+            {
+                Class<?> holderClass = Class.forName(data.holderClass(), true, ObjectHolderRegistry.class.getClassLoader());
+                Class<?> registryClass = Class.forName(data.registryType(), true, ObjectHolderRegistry.class.getClassLoader());
 
-        annotations.stream().filter(a -> OBJECT_HOLDER.equals(a.annotationType())).filter(a -> a.targetType() == ElementType.FIELD)
-        .forEach(data -> scanTarget(classModIds, classCache, data.clazz(), data.memberName(), (String)data.annotationData().get("value"), false, false));
+                Type holderType = Type.getType(holderClass);
+                classCache.put(holderType, holderClass);
+                scanTarget(classModIds, classCache, holderType, null, registryClass, data.registryName(), "minecraft", true, true);
+            }
+            catch (ClassNotFoundException e)
+            {
+                throw new RuntimeException("Vanilla class not found, should not be possible", e);
+            }
+        });
+
+        // Scan actual fields annotated with @ObjectHolder second
+        annotations.stream()
+                .filter(a -> OBJECT_HOLDER.equals(a.annotationType())).filter(a -> a.targetType() == ElementType.FIELD)
+                .forEach(data -> scanTarget(classModIds, classCache, data.clazz(),
+                        data.memberName(), null, (String)data.annotationData().get("registryName"),
+                        (String)data.annotationData().get("value"), false, false));
+
         LOGGER.debug(REGISTRIES,"Found {} ObjectHolder annotations", objectHolders.size());
     }
 
-    private static void scanTarget(Map<Type, String> classModIds, Map<Type, Class<?>> classCache, Type type, @Nullable String annotationTarget, String value, boolean isClass, boolean extractFromValue)
+    private static void scanTarget(Map<Type, String> classModIds, Map<Type, Class<?>> classCache, Type type,
+            @Nullable String annotationTarget, @Nullable Class<?> registryClass, String registryName,
+            String value, boolean isClass, boolean extractFromValue)
     {
         Class<?> clazz;
         if (classCache.containsKey(type))
@@ -119,7 +151,7 @@ public class ObjectHolderRegistry
         }
         if (isClass)
         {
-            scanClassForFields(classModIds, type, value, clazz, extractFromValue);
+            scanClassForFields(classModIds, type, new ResourceLocation(registryName), registryClass, value, clazz, extractFromValue);
         }
         else
         {
@@ -136,8 +168,8 @@ public class ObjectHolderRegistry
             try
             {
                 Field f = clazz.getDeclaredField(annotationTarget);
-                ObjectHolderRef ref = new ObjectHolderRef(f, value, extractFromValue);
-                if (ref.isValid())
+                ObjectHolderRef ref = ObjectHolderRef.create(new ResourceLocation(registryName), f, value, extractFromValue);
+                if (ref != null)
                     addHandler(ref);
             }
             catch (NoSuchFieldException ex)
@@ -148,18 +180,31 @@ public class ObjectHolderRegistry
         }
     }
 
-    private static void scanClassForFields(Map<Type, String> classModIds, Type targetClass, String value, Class<?> clazz, boolean extractFromExistingValues)
+    private static void scanClassForFields(Map<Type, String> classModIds, Type targetClass,
+            ResourceLocation registryName, Class<?> registryClass, String value, Class<?> clazz, boolean extractFromExistingValues)
     {
         classModIds.put(targetClass, value);
         final int flags = Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC | Opcodes.ACC_SYNTHETIC;
         for (Field f : clazz.getFields())
         {
-            if (((f.getModifiers() & flags) != flags) || f.isAnnotationPresent(ObjectHolder.class))
+            if (((f.getModifiers() & flags) != flags) || f.isAnnotationPresent(ObjectHolder.class) || !registryClass.isAssignableFrom(f.getType()))
                 continue;
-            ObjectHolderRef ref = new ObjectHolderRef(f, value + ':' + f.getName().toLowerCase(Locale.ENGLISH), extractFromExistingValues);
-            if (ref.isValid())
+            ObjectHolderRef ref = ObjectHolderRef.create(registryName, f, value + ':' + f.getName().toLowerCase(Locale.ENGLISH), extractFromExistingValues);
+            if (ref != null)
                 addHandler(ref);
         }
+    }
+
+    private static ResourceLocation getRegistryName(Map<Type, ResourceLocation> classRegistryNames, @Nullable String registryName,
+            Type targetClass, Object declaration)
+    {
+        if (registryName != null)
+            return new ResourceLocation(registryName);
+
+        if (classRegistryNames.containsKey(targetClass))
+            return classRegistryNames.get(targetClass);
+
+        throw new IllegalStateException("No registry name was declared for " + declaration);
     }
 
     public static void applyObjectHolders()
@@ -191,4 +236,5 @@ public class ObjectHolderRegistry
         }
     }
 
+    private record VanillaObjectHolderData(String holderClass, String registryName, String registryType) {}
 }

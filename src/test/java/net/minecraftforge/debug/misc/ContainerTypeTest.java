@@ -25,18 +25,19 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeMenuType;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.registries.RegisterEvent;
 
 @Mod("containertypetest")
 public class ContainerTypeTest
 {
-    @ObjectHolder("containertypetest:container")
+    @ObjectHolder(registryName = "menu", value = "containertypetest:container")
     public static final MenuType<TestContainer> TYPE = null;
     public class TestContainer extends AbstractContainerMenu
     {
@@ -80,14 +81,14 @@ public class ContainerTypeTest
 
     public ContainerTypeTest()
     {
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(MenuType.class, this::registerContainers);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::registerContainers);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         MinecraftForge.EVENT_BUS.addListener(this::onRightClick);
     }
 
-    private void registerContainers(final RegistryEvent.Register<MenuType<?>> event)
+    private void registerContainers(final RegisterEvent event)
     {
-        event.getRegistry().register(IForgeMenuType.create(TestContainer::new).setRegistryName("container"));
+        event.register(ForgeRegistries.Keys.CONTAINER_TYPES, helper -> helper.register("container", IForgeMenuType.create(TestContainer::new)));
     }
     
     private void setup(FMLClientSetupEvent event)

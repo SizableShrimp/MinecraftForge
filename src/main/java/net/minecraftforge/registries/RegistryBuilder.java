@@ -18,12 +18,11 @@ import net.minecraftforge.registries.IForgeRegistry.*;
 
 import javax.annotation.Nullable;
 
-public class RegistryBuilder<T extends IForgeRegistryEntry<T>>
+public class RegistryBuilder<T>
 {
     private static final int MAX_ID = Integer.MAX_VALUE - 1;
 
     private ResourceLocation registryName;
-    private Class<T> registryType;
     private ResourceLocation optionalDefaultKey;
     private int minId = 0;
     private int maxId = MAX_ID;
@@ -45,12 +44,6 @@ public class RegistryBuilder<T extends IForgeRegistryEntry<T>>
     public RegistryBuilder<T> setName(ResourceLocation name)
     {
         this.registryName = name;
-        return this;
-    }
-
-    public RegistryBuilder<T> setType(Class<T> type)
-    {
-        this.registryType = type;
         return this;
     }
 
@@ -253,10 +246,10 @@ public class RegistryBuilder<T extends IForgeRegistryEntry<T>>
         if (addCallback.size() == 1)
             return addCallback.get(0);
 
-        return (owner, stage, id, obj, old) ->
+        return (owner, stage, id, key, obj, old) ->
         {
             for (AddCallback<T> cb : this.addCallback)
-                cb.onAdd(owner, stage, id, obj, old);
+                cb.onAdd(owner, stage, id, key, obj, old);
         };
     }
 
@@ -318,11 +311,6 @@ public class RegistryBuilder<T extends IForgeRegistryEntry<T>>
             for (BakeCallback<T> cb : this.bakeCallback)
                 cb.onBake(owner, stage);
         };
-    }
-
-    public Class<T> getType()
-    {
-        return registryType;
     }
 
     @Nullable

@@ -32,7 +32,7 @@ import org.apache.logging.log4j.Logger;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Lifecycle;
 
-class NamespacedWrapper<T extends IForgeRegistryEntry<T>> extends MappedRegistry<T> implements ILockableRegistry, IHolderHelperHolder<T>
+class NamespacedWrapper<T> extends MappedRegistry<T> implements ILockableRegistry, IHolderHelperHolder<T>
 {
     private static final Logger LOGGER = LogManager.getLogger();
     private final ForgeRegistry<T> delegate;
@@ -57,16 +57,13 @@ class NamespacedWrapper<T extends IForgeRegistryEntry<T>> extends MappedRegistry
         Validate.notNull(value);
         this.elementsLifecycle = this.elementsLifecycle.add(lifecycle);
 
-        if (value.getRegistryName() == null)
-            value.setRegistryName(key.location());
+        T oldValue = get(key);
 
-        T oldValue = get(value.getRegistryName());
-
-        int realId = this.delegate.add(id, value);
+        int realId = this.delegate.add(id, key.location(), value);
         if (realId != id && id != -1)
-            LOGGER.warn("Registered object did not get ID it asked for. Name: {} Type: {} Expected: {} Got: {}", key, value.getRegistryType().getName(), id, realId);
+            LOGGER.warn("Registered object did not get ID it asked for. Name: {} Expected: {} Got: {}", key, id, realId);
 
-        return this.holders.onAdded(RegistryManager.ACTIVE, realId, value, oldValue);
+        return this.holders.onAdded(RegistryManager.ACTIVE, realId, key, value, oldValue);
     }
 
     @Override
@@ -210,7 +207,7 @@ class NamespacedWrapper<T extends IForgeRegistryEntry<T>> extends MappedRegistry
     @Deprecated @Override public void lock(){ this.locked = true; }
 
 
-    public static class Factory<V extends IForgeRegistryEntry<V>> implements IForgeRegistry.CreateCallback<V>, IForgeRegistry.AddCallback<V>
+    public static class Factory<V> implements IForgeRegistry.CreateCallback<V>, IForgeRegistry.AddCallback<V>
     {
         public static final ResourceLocation ID = new ResourceLocation("forge", "registry_defaulted_wrapper");
 
@@ -223,9 +220,9 @@ class NamespacedWrapper<T extends IForgeRegistryEntry<T>> extends MappedRegistry
 
         @Override
         @SuppressWarnings("unchecked")
-        public void onAdd(IForgeRegistryInternal<V> owner, RegistryManager stage, int id, V value, V oldValue)
+        public void onAdd(IForgeRegistryInternal<V> owner, RegistryManager stage, int id, ResourceKey<V> key, V value, V oldValue)
         {
-            owner.getSlaveMap(ID, NamespacedWrapper.class).holders.onAdded(stage, id, value, oldValue);
+            owner.getSlaveMap(ID, NamespacedWrapper.class).holders.onAdded(stage, id, key, value, oldValue);
         }
     }
 }

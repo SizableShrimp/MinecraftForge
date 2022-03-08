@@ -7,6 +7,7 @@ package net.minecraftforge.fluids;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -17,7 +18,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IRegistryDelegate;
 
 import javax.annotation.Nonnull;
 
@@ -55,7 +55,7 @@ public class FluidStack
     private boolean isEmpty;
     private int amount;
     private CompoundTag tag;
-    private IRegistryDelegate<Fluid> fluidDelegate;
+    private Holder.Reference<Fluid> fluidDelegate;
 
     public FluidStack(Fluid fluid, int amount)
     {
@@ -66,10 +66,10 @@ public class FluidStack
         }
         else if (ForgeRegistries.FLUIDS.getKey(fluid) == null)
         {
-            LOGGER.fatal("Failed attempt to create a FluidStack for an unregistered Fluid {} (type {})", fluid.getRegistryName(), fluid.getClass().getName());
+            LOGGER.fatal("Failed attempt to create a FluidStack for an unregistered Fluid {} (type {})", ForgeRegistries.FLUIDS.getKey(fluid), fluid.getClass().getName());
             throw new IllegalArgumentException("Cannot create a fluidstack from an unregistered fluid");
         }
-        this.fluidDelegate = fluid.delegate;
+        this.fluidDelegate = ForgeRegistries.FLUIDS.getDelegateOrThrow(fluid);
         this.amount = amount;
 
         updateEmpty();
@@ -122,7 +122,7 @@ public class FluidStack
 
     public CompoundTag writeToNBT(CompoundTag nbt)
     {
-        nbt.putString("FluidName", getFluid().getRegistryName().toString());
+        nbt.putString("FluidName", ForgeRegistries.FLUIDS.getKey(getFluid()).toString());
         nbt.putInt("Amount", amount);
 
         if (tag != null)
@@ -134,7 +134,7 @@ public class FluidStack
 
     public void writeToPacket(FriendlyByteBuf buf)
     {
-        buf.writeRegistryId(getFluid());
+        buf.writeRegistryId(ForgeRegistries.FLUIDS, getFluid());
         buf.writeVarInt(getAmount());
         buf.writeNbt(tag);
     }
