@@ -15,6 +15,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class NBTIngredient extends Ingredient
 {
@@ -51,7 +52,7 @@ public class NBTIngredient extends Ingredient
     {
         JsonObject json = new JsonObject();
         json.addProperty("type", CraftingHelper.getID(Serializer.INSTANCE).toString());
-        json.addProperty("item", stack.getItem().getRegistryName().toString());
+        json.addProperty("item", ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
         json.addProperty("count", stack.getCount());
         if (stack.hasTag())
             json.addProperty("nbt", stack.getTag().toString());

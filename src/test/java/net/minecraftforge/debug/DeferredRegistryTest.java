@@ -45,7 +45,7 @@ public class DeferredRegistryTest {
 
     private static final Supplier<IForgeRegistry<Custom>> CUSTOM_REG = CUSTOMS.makeRegistry("test_registry", () ->
         new RegistryBuilder<Custom>().disableSaving().setMaxID(Integer.MAX_VALUE - 1)
-            .onAdd((owner, stage, id, obj, old) -> LOGGER.info("Custom Added: " + id + " " + obj.foo()))
+            .onAdd((owner, stage, id, key, obj, old) -> LOGGER.info("Custom Added: " + id + " " + obj.foo()))
     );
 
     public DeferredRegistryTest() {
@@ -63,7 +63,7 @@ public class DeferredRegistryTest {
             gen.addProvider(new BlockStateProvider(gen, MODID, event.getExistingFileHelper()) {
                 @Override
                 protected void registerStatesAndModels() {
-                    ModelFile model = models().cubeAll(BLOCK.get().getRegistryName().getPath(), mcLoc("block/furnace_top"));
+                    ModelFile model = models().cubeAll(BLOCK.getId().getPath(), mcLoc("block/furnace_top"));
                     simpleBlock(BLOCK.get(), model);
                     simpleBlockItem(BLOCK.get(), model);
                 }

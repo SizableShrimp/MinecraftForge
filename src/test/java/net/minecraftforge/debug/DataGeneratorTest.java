@@ -37,6 +37,7 @@ import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraftforge.common.data.SoundDefinition;
 import net.minecraftforge.common.data.SoundDefinitionsProvider;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Triple;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -687,7 +688,7 @@ public class DataGeneratorTest
             logBlock((RotatedPillarBlock) Blocks.ACACIA_LOG);
 
             stairsBlock((StairBlock) Blocks.ACACIA_STAIRS, "acacia", mcLoc("block/acacia_planks"));
-            slabBlock((SlabBlock) Blocks.ACACIA_SLAB, Blocks.ACACIA_PLANKS.getRegistryName(), mcLoc("block/acacia_planks"));
+            slabBlock((SlabBlock) Blocks.ACACIA_SLAB, ForgeRegistries.BLOCKS.getKey(Blocks.ACACIA_PLANKS), mcLoc("block/acacia_planks"));
 
             fenceBlock((FenceBlock) Blocks.ACACIA_FENCE, "acacia", mcLoc("block/acacia_planks"));
             fenceGateBlock((FenceGateBlock) Blocks.ACACIA_FENCE_GATE, "acacia", mcLoc("block/acacia_planks"));
@@ -733,7 +734,7 @@ public class DataGeneratorTest
                 if (IGNORED_BLOCKS.contains(block)) return;
                 JsonObject generated = state.toJson();
                 try {
-                    Resource vanillaResource = models().existingFileHelper.getResource(block.getRegistryName(), PackType.CLIENT_RESOURCES, ".json", "blockstates");
+                    Resource vanillaResource = models().existingFileHelper.getResource(ForgeRegistries.BLOCKS.getKey(block), PackType.CLIENT_RESOURCES, ".json", "blockstates");
                     JsonObject existing = GSON.fromJson(new InputStreamReader(vanillaResource.getInputStream()), JsonObject.class);
                     if (state instanceof VariantBlockStateBuilder) {
                         compareVariantBlockstates(block, generated, existing);

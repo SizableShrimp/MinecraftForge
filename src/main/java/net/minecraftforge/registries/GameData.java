@@ -393,7 +393,7 @@ public class GameData
         static final BlockCallbacks INSTANCE = new BlockCallbacks();
 
         @Override
-        public void onAdd(IForgeRegistryInternal<Block> owner, RegistryManager stage, int id, Block block, @Nullable Block oldBlock)
+        public void onAdd(IForgeRegistryInternal<Block> owner, RegistryManager stage, int id, ResourceKey<Block> key, Block block, @Nullable Block oldBlock)
         {
             if (oldBlock != null)
             {
@@ -401,7 +401,7 @@ public class GameData
                 StateDefinition<Block, BlockState> newContainer = block.getStateDefinition();
 
                 // Test vanilla blockstates, if the number matches, make sure they also match in their string representations
-                if (block.getRegistryName().getNamespace().equals("minecraft") && !oldContainer.getProperties().equals(newContainer.getProperties()))
+                if (key.location().getNamespace().equals("minecraft") && !oldContainer.getProperties().equals(newContainer.getProperties()))
                 {
                     String oldSequence = oldContainer.getProperties().stream()
                             .map(s -> String.format(Locale.ENGLISH, "%s={%s}", s.getName(),
@@ -413,8 +413,8 @@ public class GameData
                             .collect(Collectors.joining(";"));
 
                     LOGGER.error(REGISTRIES,()-> LogMessageAdapter.adapt(sb-> {
-                        sb.append("Registry replacements for vanilla block '").append(block.getRegistryName()).
-                                append("' must not change the number or order of blockstates.\n");
+                        sb.append("Registry replacements for vanilla block '").append(key.location())
+                                .append("' must not change the number or order of blockstates.\n");
                         sb.append("\tOld: ").append(oldSequence).append('\n');
                         sb.append("\tNew: ").append(newSequence);
                     }));
@@ -496,7 +496,7 @@ public class GameData
         static final ItemCallbacks INSTANCE = new ItemCallbacks();
 
         @Override
-        public void onAdd(IForgeRegistryInternal<Item> owner, RegistryManager stage, int id, Item item, @Nullable Item oldItem)
+        public void onAdd(IForgeRegistryInternal<Item> owner, RegistryManager stage, int id, ResourceKey<Item> key, Item item, @Nullable Item oldItem)
         {
             if (oldItem instanceof BlockItem)
             {
@@ -544,7 +544,7 @@ public class GameData
         static final SerializerCallbacks INSTANCE = new SerializerCallbacks();
 
         @Override
-        public void onAdd(IForgeRegistryInternal<DataSerializerEntry> owner, RegistryManager stage, int id, DataSerializerEntry entry, @Nullable DataSerializerEntry oldEntry)
+        public void onAdd(IForgeRegistryInternal<DataSerializerEntry> owner, RegistryManager stage, int id, ResourceKey<DataSerializerEntry> key, DataSerializerEntry entry, @Nullable DataSerializerEntry oldEntry)
         {
             @SuppressWarnings("unchecked")
             Map<EntityDataSerializer<?>, DataSerializerEntry> map = owner.getSlaveMap(SERIALIZER_TO_ENTRY, Map.class);
@@ -587,7 +587,7 @@ public class GameData
         static final PointOfInterestTypeCallbacks INSTANCE = new PointOfInterestTypeCallbacks();
 
         @Override
-        public void onAdd(IForgeRegistryInternal<PoiType> owner, RegistryManager stage, int id, PoiType obj, @Nullable PoiType oldObj)
+        public void onAdd(IForgeRegistryInternal<PoiType> owner, RegistryManager stage, int id, ResourceKey<PoiType> key, PoiType obj, @Nullable PoiType oldObj)
         {
             Map<BlockState, PoiType> map = owner.getSlaveMap(BLOCKSTATE_TO_POINT_OF_INTEREST_TYPE, Map.class);
             if (oldObj != null)
