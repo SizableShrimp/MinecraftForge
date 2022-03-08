@@ -161,7 +161,6 @@ import net.minecraftforge.registries.DataSerializerEntry;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.GameData;
-import net.minecraftforge.registries.IRegistryDelegate;
 import net.minecraftforge.registries.RegistryManager;
 
 import org.apache.logging.log4j.LogManager;
@@ -1129,7 +1128,7 @@ public class ForgeHooks
         return ForgeEventFactory.getMobGriefingEvent(level, entity) && state.canEntityDestroy(level, pos, entity) && ForgeEventFactory.onEntityDestroyBlock(entity, pos, state);
     }
 
-    private static final Map<IRegistryDelegate<Item>, Integer> VANILLA_BURNS = new HashMap<>();
+    private static final Map<Holder.Reference<Item>, Integer> VANILLA_BURNS = new HashMap<>();
 
     /**
      * Gets the burn time of this itemstack.
@@ -1144,7 +1143,7 @@ public class ForgeHooks
         {
             Item item = stack.getItem();
             int ret = stack.getBurnTime(recipeType);
-            return ForgeEventFactory.getItemBurnTime(stack, ret == -1 ? VANILLA_BURNS.getOrDefault(item.delegate, 0) : ret, recipeType);
+            return ForgeEventFactory.getItemBurnTime(stack, ret == -1 ? VANILLA_BURNS.getOrDefault(ForgeRegistries.ITEMS.getDelegateOrThrow(item), 0) : ret, recipeType);
         }
     }
 
@@ -1152,7 +1151,7 @@ public class ForgeHooks
     public static synchronized void updateBurns()
     {
         VANILLA_BURNS.clear();
-        FurnaceBlockEntity.getFuel().entrySet().forEach(e -> VANILLA_BURNS.put(e.getKey().delegate, e.getValue()));
+        FurnaceBlockEntity.getFuel().entrySet().forEach(e -> VANILLA_BURNS.put(ForgeRegistries.ITEMS.getDelegateOrThrow(e.getKey()), e.getValue()));
     }
 
     /**
