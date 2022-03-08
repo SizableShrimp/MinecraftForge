@@ -40,12 +40,12 @@ import java.util.function.Supplier;
  *
  * @param <T> The base registry type, must be a concrete base class, do not use subclasses or wild cards.
  */
-public class DeferredRegister<T extends IForgeRegistryEntry<T>>
+public class DeferredRegister<T>
 {
     /**
      * Use for vanilla/forge registries. See example above.
      */
-    public static <B extends IForgeRegistryEntry<B>> DeferredRegister<B> create(IForgeRegistry<B> reg, String modid)
+    public static <B> DeferredRegister<B> create(IForgeRegistry<B> reg, String modid)
     {
         return new DeferredRegister<B>(reg, modid);
     }
@@ -53,7 +53,7 @@ public class DeferredRegister<T extends IForgeRegistryEntry<T>>
     /**
      * Use for custom registries that are made during the NewRegistry event. 
      */
-    public static <B extends IForgeRegistryEntry<B>> DeferredRegister<B> create(Class<B> base, String modid)
+    public static <B> DeferredRegister<B> create(Class<B> base, String modid)
     {
         return new DeferredRegister<B>(base, modid);
     }

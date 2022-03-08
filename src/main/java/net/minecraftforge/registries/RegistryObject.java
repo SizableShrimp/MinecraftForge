@@ -18,27 +18,27 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public final class RegistryObject<T extends IForgeRegistryEntry<? super T>> implements Supplier<T>
+public final class RegistryObject<T> implements Supplier<T>
 {
     private final ResourceLocation name;
     @Nullable
     private T value;
 
-    public static <T extends IForgeRegistryEntry<T>, U extends T> RegistryObject<U> of(final ResourceLocation name, Supplier<Class<? super T>> registryType) {
+    public static <T, U extends T> RegistryObject<U> of(final ResourceLocation name, Supplier<Class<? super T>> registryType) {
         return new RegistryObject<>(name, registryType);
     }
 
-    public static <T extends IForgeRegistryEntry<T>, U extends T> RegistryObject<U> of(final ResourceLocation name, IForgeRegistry<T> registry) {
+    public static <T, U extends T> RegistryObject<U> of(final ResourceLocation name, IForgeRegistry<T> registry) {
         return new RegistryObject<>(name, registry);
     }
 
-    public static <T extends IForgeRegistryEntry<T>, U extends T> RegistryObject<U> of(final ResourceLocation name, final Class<T> baseType, String modid) {
+    public static <T, U extends T> RegistryObject<U> of(final ResourceLocation name, final Class<T> baseType, String modid) {
         return new RegistryObject<>(name, baseType, modid);
     }
 
     private static RegistryObject<?> EMPTY = new RegistryObject<>();
 
-    private static <T extends IForgeRegistryEntry<? super T>> RegistryObject<T> empty() {
+    private static <T> RegistryObject<T> empty() {
         @SuppressWarnings("unchecked")
         RegistryObject<T> t = (RegistryObject<T>) EMPTY;
         return t;
@@ -48,13 +48,13 @@ public final class RegistryObject<T extends IForgeRegistryEntry<? super T>> impl
         this.name = null;
     }
 
-    private <V extends IForgeRegistryEntry<V>> RegistryObject(ResourceLocation name, Supplier<Class<? super V>> registryType)
+    private <V> RegistryObject(ResourceLocation name, Supplier<Class<? super V>> registryType)
     {
         this(name, RegistryManager.ACTIVE.<V>getRegistry(registryType.get()));
     }
 
     @SuppressWarnings("unchecked")
-    private <V extends IForgeRegistryEntry<V>> RegistryObject(ResourceLocation name, IForgeRegistry<V> registry)
+    private <V> RegistryObject(ResourceLocation name, IForgeRegistry<V> registry)
     {
         if (registry == null)
             throw new IllegalArgumentException("Invalid registry argument, must not be null");
@@ -68,7 +68,7 @@ public final class RegistryObject<T extends IForgeRegistryEntry<? super T>> impl
     }
 
     @SuppressWarnings("unchecked")
-    private <V extends IForgeRegistryEntry<V>> RegistryObject(final ResourceLocation name, final Class<V> baseType, final String modid)
+    private <V> RegistryObject(final ResourceLocation name, final Class<V> baseType, final String modid)
     {
         this.name = name;
         final Throwable callerStack = new Throwable("Calling Site from mod: " + modid);
