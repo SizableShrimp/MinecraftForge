@@ -157,7 +157,6 @@ import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.resource.ResourcePackLoader;
-import net.minecraftforge.registries.DataSerializerEntry;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 import net.minecraftforge.registries.GameData;
@@ -1095,20 +1094,11 @@ public class ForgeHooks
         }
     }
 
-    private static final Map<EntityDataSerializer<?>, DataSerializerEntry> serializerEntries = GameData.getSerializerMap();
-    //private static final ForgeRegistry<DataSerializerEntry> serializerRegistry = (ForgeRegistry<DataSerializerEntry>) ForgeRegistries.DATA_SERIALIZERS;
-    // Do not reimplement this ^ it introduces a chicken-egg scenario by classloading registries during bootstrap
-
     @Nullable
     public static EntityDataSerializer<?> getSerializer(int id, CrudeIncrementalIntIdentityHashBiMap<EntityDataSerializer<?>> vanilla)
     {
         EntityDataSerializer<?> serializer = vanilla.byId(id);
-        if (serializer == null)
-        {
-            DataSerializerEntry entry = ((ForgeRegistry<DataSerializerEntry>)ForgeRegistries.DATA_SERIALIZERS).getValue(id);
-            if (entry != null) serializer = entry.getSerializer();
-        }
-        return serializer;
+        return serializer == null ? ((ForgeRegistry<EntityDataSerializer<?>>) ForgeRegistries.DATA_SERIALIZERS).getValue(id) : serializer;
     }
 
     public static int getSerializerId(EntityDataSerializer<?> serializer, CrudeIncrementalIntIdentityHashBiMap<EntityDataSerializer<?>> vanilla)
@@ -1116,8 +1106,7 @@ public class ForgeHooks
         int id = vanilla.getId(serializer);
         if (id < 0)
         {
-            DataSerializerEntry entry = serializerEntries.get(serializer);
-            if (entry != null) id = ((ForgeRegistry<DataSerializerEntry>)ForgeRegistries.DATA_SERIALIZERS).getID(entry);
+            id = ((ForgeRegistry<EntityDataSerializer<?>>) ForgeRegistries.DATA_SERIALIZERS).getID(serializer);
         }
         return id;
     }

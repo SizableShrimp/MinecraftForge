@@ -5,6 +5,7 @@
 
 package net.minecraftforge.registries;
 
+import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.entity.EntityType;
@@ -89,7 +90,7 @@ public class ForgeRegistries
     public static final IForgeRegistry<Biome> BIOMES = RegistryManager.ACTIVE.getRegistry(Keys.BIOMES);
 
     // Custom forge registries
-    public static final IForgeRegistry<DataSerializerEntry> DATA_SERIALIZERS = RegistryManager.ACTIVE.getRegistry(DataSerializerEntry.class);
+    public static final IForgeRegistry<EntityDataSerializer<?>> DATA_SERIALIZERS = RegistryManager.ACTIVE.getRegistry(EntityDataSerializer.class);
     public static final IForgeRegistry<GlobalLootModifierSerializer<?>> LOOT_MODIFIER_SERIALIZERS = RegistryManager.ACTIVE.getRegistry(GlobalLootModifierSerializer.class);
     public static final IForgeRegistry<ForgeWorldPreset> WORLD_TYPES = RegistryManager.ACTIVE.getRegistry(ForgeWorldPreset.class);
 
@@ -129,7 +130,7 @@ public class ForgeRegistries
 
         // Forge
         // New forge-added registries should be populated in VanillaConnectionNetworkFilter#FORGE_ADDED_REGISTRIES
-        public static final ResourceKey<Registry<DataSerializerEntry>> DATA_SERIALIZERS = key("data_serializers");
+        public static final ResourceKey<Registry<EntityDataSerializer<?>>> DATA_SERIALIZERS = key("data_serializers");
         public static final ResourceKey<Registry<GlobalLootModifierSerializer<?>>> LOOT_MODIFIER_SERIALIZERS = key("forge:loot_modifier_serializers");
         public static final ResourceKey<Registry<ForgeWorldPreset>> WORLD_TYPES = key("forge:world_types");
 
