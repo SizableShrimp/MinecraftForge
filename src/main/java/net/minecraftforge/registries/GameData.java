@@ -198,25 +198,25 @@ public class GameData
     @SuppressWarnings("unchecked")
     public static Map<Block,Item> getBlockItemMap()
     {
-        return RegistryManager.ACTIVE.getRegistry(Item.class).getSlaveMap(BLOCK_TO_ITEM, Map.class);
+        return RegistryManager.ACTIVE.getRegistry(ForgeRegistries.Keys.ITEMS).getSlaveMap(BLOCK_TO_ITEM, Map.class);
     }
 
     @SuppressWarnings("unchecked")
     public static IdMapper<BlockState> getBlockStateIDMap()
     {
-        return RegistryManager.ACTIVE.getRegistry(Block.class).getSlaveMap(BLOCKSTATE_TO_ID, IdMapper.class);
+        return RegistryManager.ACTIVE.getRegistry(ForgeRegistries.Keys.BLOCKS).getSlaveMap(BLOCKSTATE_TO_ID, IdMapper.class);
     }
 
     @SuppressWarnings("unchecked")
     public static Map<BlockState, PoiType> getBlockStatePointOfInterestTypeMap()
     {
-        return RegistryManager.ACTIVE.getRegistry(PoiType.class).getSlaveMap(BLOCKSTATE_TO_POINT_OF_INTEREST_TYPE, Map.class);
+        return RegistryManager.ACTIVE.getRegistry(ForgeRegistries.Keys.POI_TYPES).getSlaveMap(BLOCKSTATE_TO_POINT_OF_INTEREST_TYPE, Map.class);
     }
 
     @SuppressWarnings("unchecked")
     public static BiMap<String, StructureFeature<?>> getStructureMap()
     {
-        return (BiMap<String, StructureFeature<?>>) RegistryManager.ACTIVE.getRegistry(Feature.class).getSlaveMap(STRUCTURES, BiMap.class);
+        return RegistryManager.ACTIVE.getRegistry(ForgeRegistries.Keys.FEATURES).getSlaveMap(STRUCTURES, BiMap.class);
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })

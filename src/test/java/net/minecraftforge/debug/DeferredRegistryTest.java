@@ -7,6 +7,7 @@ package net.minecraftforge.debug;
 
 import java.util.function.Supplier;
 
+import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -37,13 +38,13 @@ public class DeferredRegistryTest {
 
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    private static final DeferredRegister<Custom> CUSTOMS = DeferredRegister.create(Custom.class, MODID);
+    private static final DeferredRegister<Custom> CUSTOMS = DeferredRegister.create(new ResourceLocation(MODID, "test_registry"), MODID);
 
     private static final RegistryObject<Block> BLOCK = BLOCKS.register("test", () -> new Block(Block.Properties.of(Material.STONE)));
     private static final RegistryObject<Item>  ITEM  = ITEMS .register("test", () -> new BlockItem(BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
     private static final RegistryObject<Custom> CUSTOM = CUSTOMS.register("test", () -> new Custom(){});
 
-    private static final Supplier<IForgeRegistry<Custom>> CUSTOM_REG = CUSTOMS.makeRegistry("test_registry", () ->
+    private static final Supplier<IForgeRegistry<Custom>> CUSTOM_REG = CUSTOMS.makeRegistry(Custom.class, () ->
         new RegistryBuilder<Custom>().disableSaving().setMaxID(Integer.MAX_VALUE - 1)
             .onAdd((owner, stage, id, key, obj, old) -> LOGGER.info("Custom Added: " + id + " " + obj.foo()))
     );

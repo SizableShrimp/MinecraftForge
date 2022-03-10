@@ -5,6 +5,8 @@
 
 package net.minecraftforge.registries;
 
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
@@ -24,16 +26,16 @@ public final class RegistryObject<T> implements Supplier<T>
     @Nullable
     private T value;
 
-    public static <T, U extends T> RegistryObject<U> of(final ResourceLocation name, Supplier<Class<? super T>> registryType) {
-        return new RegistryObject<>(name, registryType);
-    }
-
     public static <T, U extends T> RegistryObject<U> of(final ResourceLocation name, IForgeRegistry<T> registry) {
         return new RegistryObject<>(name, registry);
     }
 
-    public static <T, U extends T> RegistryObject<U> of(final ResourceLocation name, final Class<T> baseType, String modid) {
-        return new RegistryObject<>(name, baseType, modid);
+    public static <T, U extends T> RegistryObject<U> of(final ResourceLocation name, final ResourceKey<? extends Registry<T>> key, String modid) {
+        return new RegistryObject<>(name, key.location(), modid);
+    }
+
+    public static <T, U extends T> RegistryObject<U> of(final ResourceLocation name, final ResourceLocation registryName, String modid) {
+        return new RegistryObject<>(name, registryName, modid);
     }
 
     private static RegistryObject<?> EMPTY = new RegistryObject<>();
@@ -46,11 +48,6 @@ public final class RegistryObject<T> implements Supplier<T>
 
     private RegistryObject() {
         this.name = null;
-    }
-
-    private <V> RegistryObject(ResourceLocation name, Supplier<Class<? super V>> registryType)
-    {
-        this(name, RegistryManager.ACTIVE.<V>getRegistry(registryType.get()));
     }
 
     @SuppressWarnings("unchecked")
@@ -68,7 +65,7 @@ public final class RegistryObject<T> implements Supplier<T>
     }
 
     @SuppressWarnings("unchecked")
-    private <V> RegistryObject(final ResourceLocation name, final Class<V> baseType, final String modid)
+    private <V> RegistryObject(final ResourceLocation name, final ResourceLocation registryName, final String modid)
     {
         this.name = name;
         final Throwable callerStack = new Throwable("Calling Site from mod: " + modid);
@@ -81,15 +78,15 @@ public final class RegistryObject<T> implements Supplier<T>
             {
                 if (registry == null)
                 {
-                    this.registry = RegistryManager.ACTIVE.getRegistry(baseType);
+                    this.registry = RegistryManager.ACTIVE.getRegistry(registryName);
                     if (registry == null)
-                        throw new IllegalStateException("Unable to find registry for type " + baseType.getName() + " for mod \"" + modid + "\". Check the 'caused by' to see futher stack.", callerStack);
+                        throw new IllegalStateException("Unable to find registry with key " + registryName + " for mod \"" + modid + "\". Check the 'caused by' to see further stack.", callerStack);
                 }
                 if (pred.test(registry.getRegistryName()))
                     RegistryObject.this.updateReference((IForgeRegistry<? extends T>) registry);
             }
         });
-        IForgeRegistry<V> registry = RegistryManager.ACTIVE.getRegistry(baseType);
+        IForgeRegistry<V> registry = RegistryManager.ACTIVE.getRegistry(registryName);
         // allow registry to be null, this might be for a custom registry that does not exist yet
         if (registry != null)
         {
