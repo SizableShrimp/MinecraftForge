@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Spliterator;
 import java.util.stream.Stream;
 
-class ForgeRegistryTag<V extends IForgeRegistryEntry<V>> implements ITag<V>
+class ForgeRegistryTag<V> implements ITag<V>
 {
     private final TagKey<V> key;
     @Nullable
