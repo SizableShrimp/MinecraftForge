@@ -156,6 +156,7 @@ import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoader;
+import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.resource.ResourcePackLoader;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
@@ -853,7 +854,7 @@ public class ForgeHooks
     {
         ForgeWorldPreset def = ForgeWorldPreset.getDefaultWorldPreset();
         if (def != null)
-            return ForgeRegistries.WORLD_TYPES.getKey(def).toString();
+            return ForgeRegistries.WORLD_TYPES.get().getKey(def).toString();
         return "default";
     }
 
@@ -1098,7 +1099,14 @@ public class ForgeHooks
     public static EntityDataSerializer<?> getSerializer(int id, CrudeIncrementalIntIdentityHashBiMap<EntityDataSerializer<?>> vanilla)
     {
         EntityDataSerializer<?> serializer = vanilla.byId(id);
-        return serializer == null ? ((ForgeRegistry<EntityDataSerializer<?>>) ForgeRegistries.DATA_SERIALIZERS).getValue(id) : serializer;
+        if (serializer == null)
+        {
+            // ForgeRegistries.DATA_SERIALIZERS is a deferred register now, so if this method is called too early, the registry will be null
+            ForgeRegistry<EntityDataSerializer<?>> registry = (ForgeRegistry<EntityDataSerializer<?>>) ForgeRegistries.DATA_SERIALIZERS.get();
+            if (registry != null)
+                serializer = registry.getValue(id);
+        }
+        return serializer;
     }
 
     public static int getSerializerId(EntityDataSerializer<?> serializer, CrudeIncrementalIntIdentityHashBiMap<EntityDataSerializer<?>> vanilla)
@@ -1106,7 +1114,10 @@ public class ForgeHooks
         int id = vanilla.getId(serializer);
         if (id < 0)
         {
-            id = ((ForgeRegistry<EntityDataSerializer<?>>) ForgeRegistries.DATA_SERIALIZERS).getID(serializer);
+            // ForgeRegistries.DATA_SERIALIZERS is a deferred register now, so if this method is called too early, the registry will be null
+            ForgeRegistry<EntityDataSerializer<?>> registry = (ForgeRegistry<EntityDataSerializer<?>>) ForgeRegistries.DATA_SERIALIZERS.get();
+            if (registry != null)
+                id = registry.getID(serializer);
         }
         return id;
     }

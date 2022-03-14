@@ -153,14 +153,25 @@ public class GameData
 
         // Dynamic Worldgen
         makeRegistry(BIOMES, Biome.class).disableSync().create();
-
-        // Custom forge registries
-        makeRegistry(DATA_SERIALIZERS, c(EntityDataSerializer.class), 256 /*vanilla space*/, MAX_VARINT).disableSaving().disableOverrides().create();
-        makeRegistry(LOOT_MODIFIER_SERIALIZERS, c(GlobalLootModifierSerializer.class)).disableSaving().disableSync().create();
-        makeRegistry(WORLD_TYPES, ForgeWorldPreset.class).disableSaving().disableSync().create();
     }
+
+    static RegistryBuilder<EntityDataSerializer<?>> getDataSerializersRegistryBuilder()
+    {
+        return makeRegistry(DATA_SERIALIZERS, c(EntityDataSerializer.class), 256 /*vanilla space*/, MAX_VARINT).disableSaving().disableOverrides();
+    }
+
+    static RegistryBuilder<GlobalLootModifierSerializer<?>> getGLMSerializersRegistryBuilder()
+    {
+        return makeRegistry(LOOT_MODIFIER_SERIALIZERS, c(GlobalLootModifierSerializer.class)).disableSaving().disableSync();
+    }
+
+    static RegistryBuilder<ForgeWorldPreset> getWorldTypesRegistryBuilder()
+    {
+        return makeRegistry(WORLD_TYPES, ForgeWorldPreset.class).disableSaving().disableSync();
+    }
+
     @SuppressWarnings("unchecked") //Ugly hack to let us pass in a typed Class object. Remove when we remove type specific references.
-    private static <T> Class<T> c(Class<?> cls) { return (Class<T>)cls; }
+    static <T> Class<T> c(Class<?> cls) { return (Class<T>)cls; }
 
     private static <T> RegistryBuilder<T> makeRegistry(ResourceKey<? extends Registry<T>> key, Class<T> type)
     {
@@ -198,25 +209,25 @@ public class GameData
     @SuppressWarnings("unchecked")
     public static Map<Block,Item> getBlockItemMap()
     {
-        return RegistryManager.ACTIVE.getRegistry(ForgeRegistries.Keys.ITEMS).getSlaveMap(BLOCK_TO_ITEM, Map.class);
+        return RegistryManager.ACTIVE.getRegistry(ITEMS).getSlaveMap(BLOCK_TO_ITEM, Map.class);
     }
 
     @SuppressWarnings("unchecked")
     public static IdMapper<BlockState> getBlockStateIDMap()
     {
-        return RegistryManager.ACTIVE.getRegistry(ForgeRegistries.Keys.BLOCKS).getSlaveMap(BLOCKSTATE_TO_ID, IdMapper.class);
+        return RegistryManager.ACTIVE.getRegistry(BLOCKS).getSlaveMap(BLOCKSTATE_TO_ID, IdMapper.class);
     }
 
     @SuppressWarnings("unchecked")
     public static Map<BlockState, PoiType> getBlockStatePointOfInterestTypeMap()
     {
-        return RegistryManager.ACTIVE.getRegistry(ForgeRegistries.Keys.POI_TYPES).getSlaveMap(BLOCKSTATE_TO_POINT_OF_INTEREST_TYPE, Map.class);
+        return RegistryManager.ACTIVE.getRegistry(POI_TYPES).getSlaveMap(BLOCKSTATE_TO_POINT_OF_INTEREST_TYPE, Map.class);
     }
 
     @SuppressWarnings("unchecked")
     public static BiMap<String, StructureFeature<?>> getStructureMap()
     {
-        return RegistryManager.ACTIVE.getRegistry(ForgeRegistries.Keys.FEATURES).getSlaveMap(STRUCTURES, BiMap.class);
+        return (BiMap<String, StructureFeature<?>>) RegistryManager.ACTIVE.getRegistry(FEATURES).getSlaveMap(STRUCTURES, BiMap.class);
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })

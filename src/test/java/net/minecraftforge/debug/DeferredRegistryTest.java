@@ -5,9 +5,11 @@
 
 package net.minecraftforge.debug;
 
+import java.util.Set;
 import java.util.function.Supplier;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -44,8 +46,9 @@ public class DeferredRegistryTest {
     private static final RegistryObject<Item>  ITEM  = ITEMS .register("test", () -> new BlockItem(BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_BUILDING_BLOCKS)));
     private static final RegistryObject<Custom> CUSTOM = CUSTOMS.register("test", () -> new Custom(){});
 
+    private static final TagKey<Custom> CUSTOM_TAG_KEY = CUSTOMS.createOptionalTagKey("test_tag", Set.of(CUSTOM));
     private static final Supplier<IForgeRegistry<Custom>> CUSTOM_REG = CUSTOMS.makeRegistry(Custom.class, () ->
-        new RegistryBuilder<Custom>().disableSaving().setMaxID(Integer.MAX_VALUE - 1)
+        new RegistryBuilder<Custom>().disableSaving().setMaxID(Integer.MAX_VALUE - 1).hasTags()
             .onAdd((owner, stage, id, key, obj, old) -> LOGGER.info("Custom Added: " + id + " " + obj.foo()))
     );
 

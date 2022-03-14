@@ -5,12 +5,16 @@
 
 package net.minecraftforge.event;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -25,6 +29,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.eventbus.api.GenericEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * RegistryEvent supertype.
@@ -39,7 +45,72 @@ public class RegistryEvent<T> extends GenericEvent<T> implements IModBusEvent
      */
     public static class NewRegistry extends net.minecraftforge.eventbus.api.Event implements IModBusEvent
     {
-        public NewRegistry(ModContainer mc) {}
+        private final List<RegistryData<?>> registries = new ArrayList<>();
+
+        public NewRegistry() {}
+
+        /**
+         * Adds a registry builder to be created.
+         *
+         * @param builder The builder to turn into a {@link IForgeRegistry}
+         * @return A supplier of the {@link IForgeRegistry} created by the builder. Resolving too early will return null.
+         */
+        public <V extends IForgeRegistryEntry<V>> Supplier<IForgeRegistry<V>> create(RegistryBuilder<V> builder)
+        {
+            return create(builder, null);
+        }
+
+        /**
+         * Adds a registry builder to be created.
+         *
+         * @param builder The builder to turn into a {@link IForgeRegistry}
+         * @param onFill Called when the returned supplier is filled with the registry
+         * @return a supplier of the {@link IForgeRegistry} created by the builder. Resolving too early will return null.
+         */
+        public <V extends IForgeRegistryEntry<V>> Supplier<IForgeRegistry<V>> create(RegistryBuilder<V> builder, @Nullable Consumer<IForgeRegistry<V>> onFill)
+        {
+            RegistryHolder<V> registryHolder = new RegistryHolder<>();
+
+            registries.add(new RegistryData<>(builder, registryHolder, onFill));
+
+            return registryHolder;
+        }
+
+        public Stream<RegistryBuilder<?>> getRegistryBuilders()
+        {
+            return registries.stream().map(RegistryData::builder);
+        }
+
+        /**
+         * Internal forge method. Do not call.
+         */
+        @SuppressWarnings("rawtypes")
+        public void fill(Map<RegistryBuilder<?>, IForgeRegistry<?>> filledRegistries)
+        {
+            for (RegistryData data : this.registries)
+            {
+                IForgeRegistry<?> registry = filledRegistries.get(data.builder);
+                if (registry != null)
+                {
+                    data.registryHolder.registry = registry;
+                    if (data.onFill != null)
+                        data.onFill.accept(registry);
+                }
+            }
+        }
+
+        private record RegistryData<V extends IForgeRegistryEntry<V>>(RegistryBuilder<V> builder, RegistryHolder<V> registryHolder, Consumer<IForgeRegistry<V>> onFill) {}
+
+        private static class RegistryHolder<V extends IForgeRegistryEntry<V>> implements Supplier<IForgeRegistry<V>> {
+            IForgeRegistry<V> registry = null;
+
+            @Override
+            public IForgeRegistry<V> get()
+            {
+                return this.registry;
+            }
+        }
+
         @Override
         public String toString() {
             return "RegistryEvent.NewRegistry";

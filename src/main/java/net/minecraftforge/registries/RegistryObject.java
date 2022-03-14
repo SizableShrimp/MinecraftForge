@@ -26,15 +26,38 @@ public final class RegistryObject<T> implements Supplier<T>
     @Nullable
     private T value;
 
+    /**
+     * Factory for a {@link RegistryObject} that stores the value of an object in a registry once it is ready.
+     *
+     * @param name The name of the object to look up in a forge registry
+     * @param registry The forge registry to query the registry value from
+     * @return A {@link RegistryObject} that stores the value of an object in a registry once it is ready
+     */
     public static <T, U extends T> RegistryObject<U> of(final ResourceLocation name, IForgeRegistry<T> registry) {
         return new RegistryObject<>(name, registry);
     }
 
-    public static <T, U extends T> RegistryObject<U> of(final ResourceLocation name, final ResourceKey<? extends Registry<T>> key, String modid) {
+    /**
+     * Factory for a {@link RegistryObject} that stores the value of an object in a registry once it is ready.
+     *
+     * @param name The name of the object to look up in a forge registry
+     * @param key The key of the forge registry to grab from {@link RegistryManager#ACTIVE}
+     * @param modid The mod id calling context
+     * @return A {@link RegistryObject} that stores the value of an object in a registry once it is ready
+     */
+    public static <T extends IForgeRegistryEntry<T>, U extends T> RegistryObject<U> of(final ResourceLocation name, final ResourceKey<? extends Registry<T>> key, String modid) {
         return new RegistryObject<>(name, key.location(), modid);
     }
 
-    public static <T, U extends T> RegistryObject<U> of(final ResourceLocation name, final ResourceLocation registryName, String modid) {
+    /**
+     * Factory for a {@link RegistryObject} that stores the value of an object in a registry once it is ready.
+     *
+     * @param name The name of the object to look up in a forge registry
+     * @param registryName The name of the forge registry to grab from {@link RegistryManager#ACTIVE}
+     * @param modid The mod id calling context
+     * @return A {@link RegistryObject} that stores the value of an object in a registry once it is ready
+     */
+    public static <T extends IForgeRegistryEntry<T>, U extends T> RegistryObject<U> of(final ResourceLocation name, final ResourceLocation registryName, String modid) {
         return new RegistryObject<>(name, registryName, modid);
     }
 
@@ -65,11 +88,11 @@ public final class RegistryObject<T> implements Supplier<T>
     }
 
     @SuppressWarnings("unchecked")
-    private <V> RegistryObject(final ResourceLocation name, final ResourceLocation registryName, final String modid)
+    private <V extends IForgeRegistryEntry<V>> RegistryObject(final ResourceLocation name, final ResourceLocation registryName, final String modid)
     {
         this.name = name;
         final Throwable callerStack = new Throwable("Calling Site from mod: " + modid);
-        ObjectHolderRegistry.addHandler(new Consumer<Predicate<ResourceLocation>>()
+        ObjectHolderRegistry.addHandler(new Consumer<>()
         {
             private IForgeRegistry<V> registry;
 

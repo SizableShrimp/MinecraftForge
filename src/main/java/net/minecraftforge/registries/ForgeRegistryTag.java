@@ -5,6 +5,7 @@
 
 package net.minecraftforge.registries;
 
+import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.tags.TagKey;
@@ -14,6 +15,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.Spliterator;
 import java.util.stream.Stream;
 
@@ -50,6 +53,18 @@ class ForgeRegistryTag<V> implements ITag<V>
     }
 
     @Override
+    public boolean isEmpty()
+    {
+        return this.getContents().isEmpty();
+    }
+
+    @Override
+    public int size()
+    {
+        return this.getContents().size();
+    }
+
+    @Override
     public Stream<V> stream()
     {
         return this.getContents().stream();
@@ -59,6 +74,12 @@ class ForgeRegistryTag<V> implements ITag<V>
     public boolean contains(V value)
     {
         return this.getContents().contains(value);
+    }
+
+    @Override
+    public Optional<V> getRandomElement(Random random)
+    {
+        return Util.getRandomSafe(this.getContents(), random);
     }
 
     @Override
