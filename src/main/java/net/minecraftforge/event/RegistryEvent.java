@@ -55,7 +55,7 @@ public class RegistryEvent<T> extends GenericEvent<T> implements IModBusEvent
          * @param builder The builder to turn into a {@link IForgeRegistry}
          * @return A supplier of the {@link IForgeRegistry} created by the builder. Resolving too early will return null.
          */
-        public <V extends IForgeRegistryEntry<V>> Supplier<IForgeRegistry<V>> create(RegistryBuilder<V> builder)
+        public <V> Supplier<IForgeRegistry<V>> create(RegistryBuilder<V> builder)
         {
             return create(builder, null);
         }
@@ -67,7 +67,7 @@ public class RegistryEvent<T> extends GenericEvent<T> implements IModBusEvent
          * @param onFill Called when the returned supplier is filled with the registry
          * @return a supplier of the {@link IForgeRegistry} created by the builder. Resolving too early will return null.
          */
-        public <V extends IForgeRegistryEntry<V>> Supplier<IForgeRegistry<V>> create(RegistryBuilder<V> builder, @Nullable Consumer<IForgeRegistry<V>> onFill)
+        public <V> Supplier<IForgeRegistry<V>> create(RegistryBuilder<V> builder, @Nullable Consumer<IForgeRegistry<V>> onFill)
         {
             RegistryHolder<V> registryHolder = new RegistryHolder<>();
 
@@ -99,9 +99,9 @@ public class RegistryEvent<T> extends GenericEvent<T> implements IModBusEvent
             }
         }
 
-        private record RegistryData<V extends IForgeRegistryEntry<V>>(RegistryBuilder<V> builder, RegistryHolder<V> registryHolder, Consumer<IForgeRegistry<V>> onFill) {}
+        private record RegistryData<V>(RegistryBuilder<V> builder, RegistryHolder<V> registryHolder, Consumer<IForgeRegistry<V>> onFill) {}
 
-        private static class RegistryHolder<V extends IForgeRegistryEntry<V>> implements Supplier<IForgeRegistry<V>> {
+        private static class RegistryHolder<V> implements Supplier<IForgeRegistry<V>> {
             IForgeRegistry<V> registry = null;
 
             @Override

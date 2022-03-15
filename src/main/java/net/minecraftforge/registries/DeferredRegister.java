@@ -67,7 +67,7 @@ public class DeferredRegister<T>
      * @param key The key of the registry to reference
      * @param modid The namespace for all objects registered to this DeferredRegister
      */
-    public static <B extends IForgeRegistryEntry<B>> DeferredRegister<B> create(ResourceKey<? extends Registry<B>> key, String modid)
+    public static <B> DeferredRegister<B> create(ResourceKey<? extends Registry<B>> key, String modid)
     {
         return new DeferredRegister<>(key.location(), modid);
     }
@@ -79,7 +79,7 @@ public class DeferredRegister<T>
      * @param registryName The name of the registry, should include namespace. May come from another DeferredRegister through {@link #getRegistryName()}.
      * @param modid The namespace for all objects registered to this DeferredRegister
      */
-    public static <B extends IForgeRegistryEntry<B>> DeferredRegister<B> create(ResourceLocation registryName, String modid)
+    public static <B> DeferredRegister<B> create(ResourceLocation registryName, String modid)
     {
         return new DeferredRegister<>(registryName, modid);
     }

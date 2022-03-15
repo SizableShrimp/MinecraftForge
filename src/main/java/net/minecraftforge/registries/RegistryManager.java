@@ -135,7 +135,7 @@ public class RegistryManager
     }
 
     @SuppressWarnings("unchecked")
-    private static <V extends IForgeRegistryEntry<V>> void registerToRootRegistry(ForgeRegistry<V> forgeReg)
+    private static <V> void registerToRootRegistry(ForgeRegistry<V> forgeReg)
     {
         WritableRegistry<Registry<V>> registry = (WritableRegistry<Registry<V>>) Registry.REGISTRY;
         Registry<V> wrapper = forgeReg.getWrapper();
