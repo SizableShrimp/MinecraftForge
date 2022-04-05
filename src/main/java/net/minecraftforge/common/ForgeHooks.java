@@ -400,24 +400,24 @@ public class ForgeHooks
         MinecraftForge.EVENT_BUS.post(new LivingJumpEvent(entity));
     }
 
-    @Nullable
-    public static ItemEntity onPlayerTossEvent(@Nonnull Player player, @Nonnull ItemStack item, boolean includeName)
-    {
-        player.captureDrops(Lists.newArrayList());
-        ItemEntity ret = player.drop(item, false, includeName);
-        player.captureDrops(null);
-
-        if (ret == null)
-            return null;
-
-        ItemTossEvent event = new ItemTossEvent(ret, player);
-        if (MinecraftForge.EVENT_BUS.post(event))
-            return null;
-
-        if (!player.level.isClientSide)
-            player.getCommandSenderWorld().addFreshEntity(event.getEntityItem());
-        return event.getEntityItem();
-    }
+    // @Nullable
+    // public static ItemEntity onPlayerTossEvent(@Nonnull Player player, @Nonnull ItemStack item, boolean includeName)
+    // {
+    //     player.captureDrops(Lists.newArrayList());
+    //     ItemEntity ret = player.drop(item, false, includeName);
+    //     player.captureDrops(null);
+    //
+    //     if (ret == null)
+    //         return null;
+    //
+    //     ItemTossEvent event = new ItemTossEvent(ret, player);
+    //     if (MinecraftForge.EVENT_BUS.post(event))
+    //         return null;
+    //
+    //     if (!player.level.isClientSide)
+    //         player.getCommandSenderWorld().addFreshEntity(event.getEntityItem());
+    //     return event.getEntityItem();
+    // }
 
     public static boolean onVanillaGameEvent(Level level, @Nullable Entity cause, GameEvent vanillaEvent, BlockPos position)
     {
@@ -517,22 +517,13 @@ public class ForgeHooks
         // Logic from tryHarvestBlock for pre-canceling the event
         boolean preCancelEvent = false;
         ItemStack itemstack = entityPlayer.getMainHandItem();
-        if (!itemstack.isEmpty() && !itemstack.getItem().canAttackBlock(level.getBlockState(pos), level, pos, entityPlayer))
+        if (!itemstack.isEmpty() && entityPlayer.getCarried() != LivingEntity.Carried.NONE && !(entityPlayer.getCarriedAsItem().getItem() instanceof DiggerItem))
         {
             preCancelEvent = true;
         }
 
-        if (gameType.isBlockPlacingRestricted())
-        {
-            if (gameType == GameType.SPECTATOR)
-                preCancelEvent = true;
-
-            if (!entityPlayer.mayBuild())
-            {
-                if (itemstack.isEmpty() || !itemstack.hasAdventureModeBreakTagForBlock(level.registryAccess().registryOrThrow(Registry.BLOCK_REGISTRY), new BlockInWorld(level, pos, false)))
-                    preCancelEvent = true;
-            }
-        }
+        if (entityPlayer.blockActionRestricted(level, pos, gameType))
+            preCancelEvent = true;
 
         // Tell client the block is gone immediately then process events
         if (level.getBlockEntity(pos) == null)
@@ -1318,7 +1309,7 @@ public class ForgeHooks
         boolean generateBonusChest = wgs.generateBonusChest();
         Registry<LevelStem> originalRegistry = wgs.dimensions();
         Optional<String> legacyCustomOptions = wgs.legacyCustomOptions;
-        
+
         // make a copy of the dimension registry; for dimensions that specify that they should use the server seed instead
         // of the hardcoded json seed, recreate them with the correct seed
         MappedRegistry<LevelStem> seededRegistry = new MappedRegistry<>(Registry.LEVEL_STEM_REGISTRY, Lifecycle.experimental(), (Function<LevelStem, Holder.Reference<LevelStem>>)null);
@@ -1335,10 +1326,10 @@ public class ForgeHooks
                 seededRegistry.register(key, dimension, originalRegistry.lifecycle(dimension));
             }
         }
-        
+
         return new WorldGenSettings(seed, generateFeatures, generateBonusChest, seededRegistry, legacyCustomOptions);
     }
-    
+
     /** Called in the LevelStem codec builder to add extra fields to dimension jsons **/
     public static App<Mu<LevelStem>, LevelStem> expandLevelStemCodec(RecordCodecBuilder.Instance<LevelStem> builder, Supplier<App<Mu<LevelStem>, LevelStem>> vanillaFieldsSupplier)
     {
@@ -1451,7 +1442,7 @@ public class ForgeHooks
             return Lifecycle.deprecated(Integer.parseInt(lifecycle.substring(lifecycle.indexOf('=') + 1)));
         throw new IllegalArgumentException("Unknown lifecycle.");
     }
-  
+
     public static void saveMobEffect(CompoundTag nbt, String key, MobEffect effect)
     {
         var registryName = effect.getRegistryName();

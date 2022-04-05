@@ -1,11 +1,11 @@
 --- a/net/minecraft/client/renderer/ItemInHandRenderer.java
 +++ b/net/minecraft/client/renderer/ItemInHandRenderer.java
-@@ -286,12 +_,14 @@
-       if (iteminhandrenderer$handrenderselection.f_172921_) {
-          float f4 = interactionhand == InteractionHand.MAIN_HAND ? f : 0.0F;
+@@ -293,12 +_,14 @@
           float f5 = 1.0F - Mth.m_14179_(p_109315_, this.f_109303_, this.f_109302_);
+          BlockState blockstate = Optional.ofNullable(p_109318_.m_213294_()).orElse(Blocks.f_50016_.m_49966_());
+          ItemStack itemstack = CarriedBlocks.m_213977_(blockstate);
 +         if(!net.minecraftforge.client.ForgeHooksClient.renderSpecificFirstPersonHand(InteractionHand.MAIN_HAND, p_109316_, p_109317_, p_109319_, p_109315_, f1, f4, f5, this.f_109300_))
-          this.m_109371_(p_109318_, p_109315_, f1, InteractionHand.MAIN_HAND, f4, this.f_109300_, f5, p_109316_, p_109317_, p_109319_);
+          this.m_109371_(p_109318_, p_109315_, f1, InteractionHand.MAIN_HAND, f4, itemstack, f5, p_109316_, p_109317_, p_109319_);
        }
  
        if (iteminhandrenderer$handrenderselection.f_172922_) {
@@ -15,7 +15,7 @@
           this.m_109371_(p_109318_, p_109315_, f1, InteractionHand.OFF_HAND, f6, this.f_109301_, f7, p_109316_, p_109317_, p_109319_);
        }
  
-@@ -487,8 +_,16 @@
+@@ -511,8 +_,16 @@
           this.f_109304_ = Mth.m_14036_(this.f_109304_ - 0.4F, 0.0F, 1.0F);
        } else {
           float f = localplayer.m_36403_(1.0F);

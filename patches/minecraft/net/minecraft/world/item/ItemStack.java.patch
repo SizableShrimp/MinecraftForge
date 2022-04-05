@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/item/ItemStack.java
 +++ b/net/minecraft/world/item/ItemStack.java
-@@ -72,7 +_,7 @@
+@@ -74,7 +_,7 @@
  import net.minecraft.world.level.block.state.pattern.BlockInWorld;
  import org.slf4j.Logger;
  
@@ -9,7 +9,7 @@
     public static final Codec<ItemStack> f_41582_ = RecordCodecBuilder.create((p_41697_) -> {
        return p_41697_.group(Registry.f_122827_.m_194605_().fieldOf("id").forGetter((p_150946_) -> {
           return p_150946_.f_41589_;
-@@ -82,6 +_,9 @@
+@@ -84,6 +_,9 @@
           return Optional.ofNullable(p_150939_.f_41590_);
        })).apply(p_41697_, ItemStack::new);
     });
@@ -19,7 +19,7 @@
     private static final Logger f_41585_ = LogUtils.getLogger();
     public static final ItemStack f_41583_ = new ItemStack((Item)null);
     public static final DecimalFormat f_41584_ = Util.m_137469_(new DecimalFormat("#.##"), (p_41704_) -> {
-@@ -132,10 +_,15 @@
+@@ -136,10 +_,15 @@
        p_41606_.ifPresent(this::m_41751_);
     }
  
@@ -39,7 +39,7 @@
           this.m_41721_(this.m_41773_());
        }
  
-@@ -148,14 +_,19 @@
+@@ -156,14 +_,19 @@
     }
  
     private ItemStack(CompoundTag p_41608_) {
@@ -60,7 +60,7 @@
           this.m_41721_(this.m_41773_());
        }
  
-@@ -190,7 +_,7 @@
+@@ -198,7 +_,7 @@
     }
  
     public Item m_41720_() {
@@ -69,7 +69,7 @@
     }
  
     public boolean m_204117_(TagKey<Item> p_204118_) {
-@@ -206,6 +_,15 @@
+@@ -214,6 +_,15 @@
     }
  
     public InteractionResult m_41661_(UseOnContext p_41662_) {
@@ -85,16 +85,16 @@
        Player player = p_41662_.m_43723_();
        BlockPos blockpos = p_41662_.m_8083_();
        BlockInWorld blockinworld = new BlockInWorld(p_41662_.m_43725_(), blockpos, false);
-@@ -213,7 +_,7 @@
+@@ -221,7 +_,7 @@
           return InteractionResult.PASS;
        } else {
           Item item = this.m_41720_();
 -         InteractionResult interactionresult = item.m_6225_(p_41662_);
 +         InteractionResult interactionresult = callback.apply(p_41662_);
-          if (player != null && interactionresult.m_146666_()) {
-             player.m_36246_(Stats.f_12982_.m_12902_(item));
-          }
-@@ -242,11 +_,15 @@
+          if (interactionresult == InteractionResult.PASS) {
+             BlockState blockstate = GenericItemBlock.m_214057_(item);
+             if (blockstate != null) {
+@@ -257,11 +_,15 @@
           p_41740_.m_128365_("tag", this.f_41590_.m_6426_());
        }
  
@@ -111,7 +111,7 @@
     }
  
     public boolean m_41753_() {
-@@ -254,7 +_,7 @@
+@@ -269,7 +_,7 @@
     }
  
     public boolean m_41763_() {
@@ -120,7 +120,7 @@
           CompoundTag compoundtag = this.m_41783_();
           return compoundtag == null || !compoundtag.m_128471_("Unbreakable");
        } else {
-@@ -263,19 +_,19 @@
+@@ -278,15 +_,15 @@
     }
  
     public boolean m_41768_() {
@@ -136,6 +136,10 @@
     public void m_41721_(int p_41722_) {
 -      this.m_41784_().m_128405_("Damage", Math.max(0, p_41722_));
 +      this.m_41720_().setDamage(this, p_41722_);
+       if (p_41722_ < this.m_41776_() && this.f_213841_ != null && !this.f_213841_.f_19853_.f_46443_) {
+          this.f_213841_.m_213059_();
+       }
+@@ -294,7 +_,7 @@
     }
  
     public int m_41776_() {
@@ -144,7 +148,7 @@
     }
  
     public boolean m_41629_(int p_41630_, Random p_41631_, @Nullable ServerPlayer p_41632_) {
-@@ -311,6 +_,7 @@
+@@ -330,6 +_,7 @@
     public <T extends LivingEntity> void m_41622_(int p_41623_, T p_41624_, Consumer<T> p_41625_) {
        if (!p_41624_.f_19853_.f_46443_ && (!(p_41624_ instanceof Player) || !((Player)p_41624_).m_150110_().f_35937_)) {
           if (this.m_41763_()) {
@@ -152,7 +156,7 @@
              if (this.m_41629_(p_41623_, p_41624_.m_21187_(), p_41624_ instanceof ServerPlayer ? (ServerPlayer)p_41624_ : null)) {
                 p_41625_.accept(p_41624_);
                 Item item = this.m_41720_();
-@@ -363,7 +_,7 @@
+@@ -382,7 +_,7 @@
     }
  
     public boolean m_41735_(BlockState p_41736_) {
@@ -161,7 +165,7 @@
     }
  
     public InteractionResult m_41647_(Player p_41648_, LivingEntity p_41649_, InteractionHand p_41650_) {
-@@ -374,7 +_,7 @@
+@@ -393,7 +_,7 @@
        if (this.m_41619_()) {
           return f_41583_;
        } else {
@@ -170,7 +174,7 @@
           itemstack.m_41754_(this.m_41612_());
           if (this.f_41590_ != null) {
              itemstack.f_41590_ = this.f_41590_.m_6426_();
-@@ -391,7 +_,7 @@
+@@ -410,7 +_,7 @@
           if (p_41659_.f_41590_ == null && p_41660_.f_41590_ != null) {
              return false;
           } else {
@@ -179,7 +183,7 @@
           }
        } else {
           return false;
-@@ -414,7 +_,7 @@
+@@ -433,7 +_,7 @@
        } else if (this.f_41590_ == null && p_41745_.f_41590_ != null) {
           return false;
        } else {
@@ -188,7 +192,7 @@
        }
     }
  
-@@ -538,7 +_,7 @@
+@@ -557,7 +_,7 @@
  
     public void m_41751_(@Nullable CompoundTag p_41752_) {
        this.f_41590_ = p_41752_;
@@ -197,7 +201,7 @@
           this.m_41721_(this.m_41773_());
        }
  
-@@ -738,6 +_,7 @@
+@@ -757,6 +_,7 @@
           }
        }
  
@@ -205,7 +209,7 @@
        return list;
     }
  
-@@ -746,7 +_,7 @@
+@@ -765,7 +_,7 @@
     }
  
     private int m_41618_() {
@@ -214,7 +218,7 @@
     }
  
     public void m_41654_(ItemStack.TooltipPart p_41655_) {
-@@ -874,9 +_,10 @@
+@@ -893,9 +_,10 @@
              }
           }
        } else {
@@ -226,7 +230,7 @@
        return multimap;
     }
  
-@@ -957,12 +_,31 @@
+@@ -976,12 +_,31 @@
        this.m_41720_().m_5929_(p_41732_, p_41733_, this, p_41734_);
     }
  

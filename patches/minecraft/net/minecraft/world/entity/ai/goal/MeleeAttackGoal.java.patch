@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/entity/ai/goal/MeleeAttackGoal.java
 +++ b/net/minecraft/world/entity/ai/goal/MeleeAttackGoal.java
-@@ -21,6 +_,8 @@
+@@ -23,6 +_,8 @@
     private final int f_25549_ = 20;
     private long f_25550_;
     private static final long f_148125_ = 20L;
@@ -9,8 +9,8 @@
  
     public MeleeAttackGoal(PathfinderMob p_25552_, double p_25553_, boolean p_25554_) {
        this.f_25540_ = p_25552_;
-@@ -41,6 +_,15 @@
-          } else if (!livingentity.m_6084_()) {
+@@ -49,6 +_,15 @@
+          } else if (livingentity.m_6844_(EquipmentSlot.HEAD).m_150930_(Items.f_42768_) && livingentity.m_6047_()) {
              return false;
           } else {
 +           if (canPenalize) {
@@ -25,7 +25,7 @@
              this.f_25543_ = this.f_25540_.m_21573_().m_6570_(livingentity, 0);
              if (this.f_25543_ != null) {
                 return true;
-@@ -98,6 +_,18 @@
+@@ -112,6 +_,18 @@
              this.f_25545_ = livingentity.m_20186_();
              this.f_25546_ = livingentity.m_20189_();
              this.f_25547_ = 4 + this.f_25540_.m_21187_().nextInt(7);

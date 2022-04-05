@@ -8,7 +8,7 @@
     private static final Map<Block, RenderType> f_109275_ = Util.m_137469_(Maps.newHashMap(), (p_109296_) -> {
        RenderType rendertype = RenderType.m_110503_();
        p_109296_.put(Blocks.f_50267_, rendertype);
-@@ -286,6 +_,7 @@
+@@ -288,6 +_,7 @@
        p_109296_.put(Blocks.f_50628_, rendertype3);
        p_109296_.put(Blocks.f_152498_, rendertype3);
     });
@@ -16,7 +16,7 @@
     private static final Map<Fluid, RenderType> f_109276_ = Util.m_137469_(Maps.newHashMap(), (p_109290_) -> {
        RenderType rendertype = RenderType.m_110466_();
        p_109290_.put(Fluids.f_76192_, rendertype);
-@@ -293,6 +_,7 @@
+@@ -295,6 +_,7 @@
     });
     private static boolean f_109277_;
  
@@ -24,7 +24,7 @@
     public static RenderType m_109282_(BlockState p_109283_) {
        Block block = p_109283_.m_60734_();
        if (block instanceof LeavesBlock) {
-@@ -303,6 +_,7 @@
+@@ -305,6 +_,7 @@
        }
     }
  
@@ -32,7 +32,7 @@
     public static RenderType m_109293_(BlockState p_109294_) {
        Block block = p_109294_.m_60734_();
        if (block instanceof LeavesBlock) {
-@@ -318,8 +_,7 @@
+@@ -320,8 +_,7 @@
     }
  
     public static RenderType m_109284_(BlockState p_109285_, boolean p_109286_) {
@@ -42,7 +42,7 @@
           if (!Minecraft.m_91085_()) {
              return Sheets.m_110792_();
           } else {
-@@ -340,9 +_,58 @@
+@@ -342,9 +_,58 @@
        }
     }
  

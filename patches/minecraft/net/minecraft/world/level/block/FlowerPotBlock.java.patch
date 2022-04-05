@@ -47,7 +47,7 @@
        boolean flag1 = this.m_153267_();
        if (flag != flag1) {
 @@ -63,7 +_,7 @@
-                p_53543_.m_36176_(itemstack1, false);
+                p_53543_.m_213802_(itemstack1, false);
              }
  
 -            p_53541_.m_7731_(p_53542_, Blocks.f_50276_.m_49966_(), 3);

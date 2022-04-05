@@ -1,6 +1,6 @@
 --- a/net/minecraft/client/renderer/block/BlockRenderDispatcher.java
 +++ b/net/minecraft/client/renderer/block/BlockRenderDispatcher.java
-@@ -37,7 +_,7 @@
+@@ -43,7 +_,7 @@
        this.f_110899_ = p_173399_;
        this.f_173397_ = p_173400_;
        this.f_110903_ = p_173401_;
@@ -9,7 +9,7 @@
        this.f_110901_ = new LiquidBlockRenderer();
     }
  
-@@ -45,18 +_,26 @@
+@@ -51,15 +_,23 @@
        return this.f_110899_;
     }
  
@@ -33,12 +33,22 @@
 +   public boolean renderBatched(BlockState p_110925_, BlockPos p_110926_, BlockAndTintGetter p_110927_, PoseStack p_110928_, VertexConsumer p_110929_, boolean p_110930_, Random p_110931_, net.minecraftforge.client.model.data.IModelData modelData) {
        try {
           RenderShape rendershape = p_110925_.m_60799_();
--         return rendershape != RenderShape.MODEL ? false : this.f_110900_.m_111047_(p_110927_, this.m_110910_(p_110925_), p_110925_, p_110926_, p_110928_, p_110929_, p_110930_, p_110931_, p_110925_.m_60726_(p_110926_), OverlayTexture.f_118083_);
-+         return rendershape != RenderShape.MODEL ? false : this.f_110900_.tesselateBlock(p_110927_, this.m_110910_(p_110925_), p_110925_, p_110926_, p_110928_, p_110929_, p_110930_, p_110931_, p_110925_.m_60726_(p_110926_), OverlayTexture.f_118083_, modelData);
+          if (rendershape != RenderShape.MODEL) {
+@@ -72,11 +_,11 @@
+                p_110928_.m_85836_();
+                p_110928_.m_85837_(0.0D, 0.5D, 0.0D);
+                p_110928_.m_85845_(Vector3f.f_122223_.m_122270_(1.55F));
+-               boolean flag = this.f_110900_.m_111047_(p_110927_, bakedmodel, p_110925_, p_110926_, p_110928_, p_110929_, p_110930_, p_110931_, p_110925_.m_60726_(p_110926_), OverlayTexture.f_118083_);
++               boolean flag = this.f_110900_.tesselateBlock(p_110927_, bakedmodel, p_110925_, p_110926_, p_110928_, p_110929_, p_110930_, p_110931_, p_110925_.m_60726_(p_110926_), OverlayTexture.f_118083_, modelData);
+                p_110928_.m_85849_();
+                return flag;
+             } else {
+-               return this.f_110900_.m_111047_(p_110927_, this.m_110910_(p_110925_), p_110925_, p_110926_, p_110928_, p_110929_, p_110930_, p_110931_, p_110925_.m_60726_(p_110926_), OverlayTexture.f_118083_);
++               return this.f_110900_.tesselateBlock(p_110927_, this.m_110910_(p_110925_), p_110925_, p_110926_, p_110928_, p_110929_, p_110930_, p_110931_, p_110925_.m_60726_(p_110926_), OverlayTexture.f_118083_, modelData);
+             }
+          }
        } catch (Throwable throwable) {
-          CrashReport crashreport = CrashReport.m_127521_(throwable, "Tesselating block in world");
-          CrashReportCategory crashreportcategory = crashreport.m_127514_("Block being tesselated");
-@@ -84,7 +_,11 @@
+@@ -106,7 +_,11 @@
        return this.f_110899_.m_110893_(p_110911_);
     }
  
@@ -50,7 +60,7 @@
        RenderShape rendershape = p_110913_.m_60799_();
        if (rendershape != RenderShape.INVISIBLE) {
           switch(rendershape) {
-@@ -94,10 +_,11 @@
+@@ -116,10 +_,11 @@
              float f = (float)(i >> 16 & 255) / 255.0F;
              float f1 = (float)(i >> 8 & 255) / 255.0F;
              float f2 = (float)(i & 255) / 255.0F;

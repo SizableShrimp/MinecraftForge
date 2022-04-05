@@ -1,6 +1,6 @@
 --- a/net/minecraft/world/entity/boss/enderdragon/EnderDragon.java
 +++ b/net/minecraft/world/entity/boss/enderdragon/EnderDragon.java
-@@ -150,7 +_,11 @@
+@@ -151,7 +_,11 @@
        return adouble;
     }
  
@@ -12,7 +12,7 @@
        this.m_146874_();
        if (this.f_19853_.f_46443_) {
           this.m_21153_(this.m_21223_());
-@@ -420,7 +_,7 @@
+@@ -434,7 +_,7 @@
                 BlockPos blockpos = new BlockPos(k1, l1, i2);
                 BlockState blockstate = this.f_19853_.m_8055_(blockpos);
                 if (!blockstate.m_60795_() && blockstate.m_60767_() != Material.f_76309_) {
@@ -21,7 +21,7 @@
                       flag1 = this.f_19853_.m_7471_(blockpos, false) || flag1;
                    } else {
                       flag = true;
-@@ -514,7 +_,8 @@
+@@ -528,7 +_,8 @@
  
        if (this.f_19853_ instanceof ServerLevel) {
           if (this.f_31084_ > 150 && this.f_31084_ % 5 == 0 && flag) {
@@ -31,7 +31,7 @@
           }
  
           if (this.f_31084_ == 1 && !this.m_20067_()) {
-@@ -527,7 +_,8 @@
+@@ -541,7 +_,8 @@
        this.f_20883_ = this.m_146908_();
        if (this.f_31084_ == 200 && this.f_19853_ instanceof ServerLevel) {
           if (flag) {
@@ -41,7 +41,7 @@
           }
  
           if (this.f_31073_ != null) {
-@@ -847,6 +_,16 @@
+@@ -870,6 +_,16 @@
  
     public boolean m_6072_() {
        return false;

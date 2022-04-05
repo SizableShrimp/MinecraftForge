@@ -44,9 +44,10 @@ ext {
         ]
     }
     MAPPING_CHANNEL = 'official'
-    MAPPING_VERSION = '1.18.2'
-    MC_VERSION = '1.18.2'
-    MCP_VERSION = '20220404.173914'
+    MAPPING_VERSION = '22w13oneblockatatime'
+    MC_VERSION = '22w13oneblockatatime'
+    MC_NEXT_VERSION = '1.19'
+    MCP_VERSION = '20220404.211149'
     SPI_VERSION = '4.0.10'
     ACCESSTRANSFORMERS_VERSION = '8.0.4'
     COREMODS_VERSION = '5.0.1'
@@ -63,7 +64,7 @@ ext {
     // FML_VERSION = gradleutils.getFilteredMCTagOffsetBranchVersion(true, 'FML', MC_VERSION)
     FORGE_VERSION = VERSION.substring(MC_VERSION.length() + 1)
 
-    SPECIAL_SOURCE = 'net.md-5:SpecialSource:1.10.0'
+    SPECIAL_SOURCE = 'net.md-5:SpecialSource:1.11.0'
     BINPATCH_TOOL = 'net.minecraftforge:binarypatcher:1.0.12:fatjar'
     INSTALLER_TOOLS = 'net.minecraftforge:installertools:1.2.10'
     JAR_SPLITTER = 'net.minecraftforge:jarsplitter:1.1.4'
@@ -486,7 +487,7 @@ def sharedFmlonlyForge = { Project prj ->
             IGNORE_LIST: Util.getArtifacts(prj, prj.configurations.moduleonly, false).values().collect{it.downloads.artifact.path.rsplit('/', 1)[1]}.join(','),
             MODULES: 'ALL-MODULE-PATH'
     ]
-    
+
     prj.task([dependsOn: rootProject.downloadServerRaw], 'makeClasspathFiles') {
         doLast {
             def CLASS_PATH = Util.getArtifacts(prj, prj.configurations.installer, false).values().collect{"libraries/${it.downloads.artifact.path}"} +
@@ -1482,7 +1483,7 @@ project(':forge') {
                 MAPPING_CHANNEL: MAPPING_CHANNEL,
                 MAPPING_VERSION: MAPPING_VERSION,
                 FORGE_SPEC_VERSION: SPEC_VERSION.split("\\.")[0],
-                MC_NEXT_VERSION: "1."+((MC_VERSION.split("[\\.-]")[1] as int)+1)
+                MC_NEXT_VERSION: MC_NEXT_VERSION
             ])
             rename 'gitignore\\.txt', '.gitignore'
             rename 'gitattributes\\.txt', '.gitattributes'

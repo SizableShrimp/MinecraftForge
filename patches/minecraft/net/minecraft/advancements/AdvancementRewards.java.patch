@@ -1,6 +1,6 @@
 --- a/net/minecraft/advancements/AdvancementRewards.java
 +++ b/net/minecraft/advancements/AdvancementRewards.java
-@@ -43,7 +_,7 @@
+@@ -42,7 +_,7 @@
  
     public void m_9989_(ServerPlayer p_9990_) {
        p_9990_.m_6756_(this.f_9979_);

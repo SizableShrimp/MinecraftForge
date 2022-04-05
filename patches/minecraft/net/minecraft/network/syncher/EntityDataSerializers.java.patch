@@ -1,6 +1,6 @@
 --- a/net/minecraft/network/syncher/EntityDataSerializers.java
 +++ b/net/minecraft/network/syncher/EntityDataSerializers.java
-@@ -301,16 +_,16 @@
+@@ -319,16 +_,16 @@
     };
  
     public static void m_135050_(EntityDataSerializer<?> p_135051_) {

@@ -156,7 +156,7 @@
        }
     }
  
-@@ -454,6 +_,7 @@
+@@ -458,6 +_,7 @@
  
     public Explosion m_7703_(@Nullable Entity p_46526_, @Nullable DamageSource p_46527_, @Nullable ExplosionDamageCalculator p_46528_, double p_46529_, double p_46530_, double p_46531_, float p_46532_, boolean p_46533_, Explosion.BlockInteraction p_46534_) {
        Explosion explosion = new Explosion(this, p_46526_, p_46527_, p_46528_, p_46529_, p_46530_, p_46531_, p_46532_, p_46533_, p_46534_);
@@ -164,7 +164,7 @@
        explosion.m_46061_();
        explosion.m_46075_(true);
        return explosion;
-@@ -481,6 +_,7 @@
+@@ -485,6 +_,7 @@
        if (!this.m_151570_(p_46748_)) {
           this.m_46745_(p_46748_).m_8114_(p_46748_);
        }
@@ -172,7 +172,7 @@
     }
  
     public boolean m_46749_(BlockPos p_46750_) {
-@@ -538,8 +_,8 @@
+@@ -542,8 +_,8 @@
              list.add(p_151522_);
           }
  
@@ -183,7 +183,7 @@
                 if (p_151522_ != p_46536_ && p_46538_.test(enderdragonpart)) {
                    list.add(enderdragonpart);
                 }
-@@ -558,10 +_,8 @@
+@@ -562,10 +_,8 @@
              list.add(p_151539_);
           }
  
@@ -196,7 +196,7 @@
                 T t = p_151528_.m_141992_(enderdragonpart);
                 if (t != null && p_151530_.test(t)) {
                    list.add(t);
-@@ -581,6 +_,7 @@
+@@ -585,6 +_,7 @@
           this.m_46745_(p_151544_).m_8092_(true);
        }
  
@@ -204,7 +204,7 @@
     }
  
     public int m_5736_() {
-@@ -625,7 +_,7 @@
+@@ -629,7 +_,7 @@
     public int m_46681_(BlockPos p_46682_, Direction p_46683_) {
        BlockState blockstate = this.m_8055_(p_46682_);
        int i = blockstate.m_60746_(this, p_46682_, p_46683_);
@@ -213,7 +213,7 @@
     }
  
     public boolean m_46753_(BlockPos p_46754_) {
-@@ -778,16 +_,15 @@
+@@ -782,16 +_,15 @@
     public abstract Scoreboard m_6188_();
  
     public void m_46717_(BlockPos p_46718_, Block p_46719_) {
@@ -234,7 +234,7 @@
                    blockstate.m_60690_(this, blockpos, p_46719_, p_46718_, false);
                 }
              }
-@@ -868,6 +_,18 @@
+@@ -872,6 +_,18 @@
  
     public BiomeManager m_7062_() {
        return this.f_46420_;
