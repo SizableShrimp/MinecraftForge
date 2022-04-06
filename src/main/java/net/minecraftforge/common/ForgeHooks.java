@@ -58,9 +58,11 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.DefaultAttributes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.GenericItemBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.storage.WorldData;
@@ -643,6 +645,13 @@ public class ForgeHooks
             }
         }
         level.capturedBlockSnapshots.clear();
+
+        if (ret == InteractionResult.PASS) {
+            BlockState blockstate = GenericItemBlock.genericBlockFromItem(item);
+            if (blockstate != null) {
+                return BlockItem.placeSpecificStateBecauseCodeQualityIsNotImportant(new BlockPlaceContext(context), blockstate);
+            }
+        }
 
         return ret;
     }
