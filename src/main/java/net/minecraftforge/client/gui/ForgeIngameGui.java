@@ -20,6 +20,7 @@ import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -43,6 +44,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.common.MinecraftForge;
 
+import net.minecraftforge.common.Tags;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.GL11;
@@ -62,8 +64,8 @@ public class ForgeIngameGui extends Gui
      */
     public static double rayTraceDistance = 20.0D;
 
-    public int left_height = 39;
-    public int right_height = 39;
+    public int left_height = 9;
+    public int right_height = 9;
 
     private Font font = null;
     private RenderGameOverlayEvent eventParent;
@@ -146,15 +148,16 @@ public class ForgeIngameGui extends Gui
     public static final IIngameOverlay HOTBAR_ELEMENT = OverlayRegistry.registerOverlayTop("Hotbar", (gui, poseStack, partialTick, screenWidth, screenHeight) -> {
         if (!gui.minecraft.options.hideGui)
         {
-            gui.setupOverlayRenderState(true, false);
-            if (gui.minecraft.gameMode.getPlayerMode() == GameType.SPECTATOR)
-            {
-                gui.spectatorGui.renderHotbar(poseStack);
-            }
-            else
-            {
-                gui.renderHotbar(partialTick, poseStack);
-            }
+            // No hotbar in 22w13oneblockatatime
+            // gui.setupOverlayRenderState(true, false);
+            // if (gui.minecraft.gameMode.getPlayerMode() == GameType.SPECTATOR)
+            // {
+            //     gui.spectatorGui.renderHotbar(poseStack);
+            // }
+            // else
+            // {
+            //     gui.renderHotbar(partialTick, poseStack);
+            // }
         }
     });
 
@@ -189,8 +192,9 @@ public class ForgeIngameGui extends Gui
     public static final IIngameOverlay ARMOR_LEVEL_ELEMENT = OverlayRegistry.registerOverlayTop("Armor Level",(gui, poseStack, partialTick, screenWidth, screenHeight) -> {
         if (!gui.minecraft.options.hideGui && gui.shouldDrawSurvivalElements())
         {
-            gui.setupOverlayRenderState(true, false);
-            gui.renderArmor(poseStack, screenWidth, screenHeight);
+            // No armor display in 22w13oneblockatatime
+            // gui.setupOverlayRenderState(true, false);
+            // gui.renderArmor(poseStack, screenWidth, screenHeight);
         }
     });
 
@@ -198,8 +202,9 @@ public class ForgeIngameGui extends Gui
         boolean isMounted = gui.minecraft.player.getVehicle() instanceof LivingEntity;
         if (!isMounted && !gui.minecraft.options.hideGui && gui.shouldDrawSurvivalElements())
         {
-            gui.setupOverlayRenderState(true, false);
-            gui.renderFood(screenWidth, screenHeight, poseStack);
+            // No food display in 22w13oneblockatatime
+            // gui.setupOverlayRenderState(true, false);
+            // gui.renderFood(screenWidth, screenHeight, poseStack);
         }
     });
 
@@ -230,8 +235,9 @@ public class ForgeIngameGui extends Gui
     public static final IIngameOverlay EXPERIENCE_BAR_ELEMENT = OverlayRegistry.registerOverlayTop("Experience Bar", (gui, poseStack, partialTick, screenWidth, screenHeight) -> {
         if (!gui.minecraft.player.isRidingJumpable() && !gui.minecraft.options.hideGui)
         {
-            gui.setupOverlayRenderState(true, false);
-            gui.renderExperience(screenWidth / 2 - 91, poseStack);
+            // No experience bar 22w13oneblockatatime
+            // gui.setupOverlayRenderState(true, false);
+            // gui.renderExperience(screenWidth / 2 - 91, poseStack);
         }
     });
 
@@ -240,7 +246,8 @@ public class ForgeIngameGui extends Gui
         {
             gui.setupOverlayRenderState(true, false);
             if (gui.minecraft.options.heldItemTooltips && gui.minecraft.gameMode.getPlayerMode() != GameType.SPECTATOR) {
-                gui.renderSelectedItemName(poseStack);
+                // No rendering of held item tooltips in 22w13oneblockatatime
+                // gui.renderSelectedItemName(poseStack);
             } else if (gui.minecraft.player.isSpectator()) {
                 gui.spectatorGui.renderTooltip(poseStack);
             }
@@ -330,8 +337,8 @@ public class ForgeIngameGui extends Gui
         this.screenHeight = this.minecraft.getWindow().getGuiScaledHeight();
         eventParent = new RenderGameOverlayEvent(poseStack, partialTick, this.minecraft.getWindow());
 
-        right_height = 39;
-        left_height = 39;
+        left_height = 9;
+        right_height = 9;
 
         if (pre(ALL, poseStack)) return;
 
@@ -396,7 +403,7 @@ public class ForgeIngameGui extends Gui
 
     private void renderHelmet(float partialTick, PoseStack poseStack)
     {
-        ItemStack itemstack = this.minecraft.player.getInventory().getArmor(3);
+        ItemStack itemstack = this.minecraft.player.getItemBySlot(EquipmentSlot.HEAD);
 
         if (this.minecraft.options.getCameraType().isFirstPerson() && !itemstack.isEmpty())
         {
@@ -404,6 +411,10 @@ public class ForgeIngameGui extends Gui
             if (item == Blocks.CARVED_PUMPKIN.asItem())
             {
                 renderTextureOverlay(PUMPKIN_BLUR_LOCATION, 1.0F);
+            }
+            else if (itemstack.is(Tags.Items.BARRELS))
+            {
+                renderBarrelOverlay();
             }
             else
             {
@@ -466,7 +477,7 @@ public class ForgeIngameGui extends Gui
         minecraft.getProfiler().push("air");
         Player player = (Player)this.minecraft.getCameraEntity();
         RenderSystem.enableBlend();
-        int left = width / 2 + 91;
+        int left = width;
         int top = height - right_height;
 
         int air = player.getAirSupply();
@@ -526,7 +537,7 @@ public class ForgeIngameGui extends Gui
 
         this.random.setSeed((long)(tickCount * 312871));
 
-        int left = width / 2 - 91;
+        int left = width / 2;
         int top = height - left_height;
         left_height += (healthRows * rowHeight);
         if (rowHeight != 10) left_height += 10 - rowHeight;
@@ -816,7 +827,7 @@ public class ForgeIngameGui extends Gui
         bind(GUI_ICONS_LOCATION);
 
         boolean unused = false;
-        int left_align = width / 2 + 91;
+        int left_align = (width - 80) / 2;
 
         minecraft.getProfiler().popPush("mountHealth");
         RenderSystem.enableBlend();
@@ -834,14 +845,14 @@ public class ForgeIngameGui extends Gui
 
         for (int heart = 0; hearts > 0; heart += 20)
         {
-            int top = height - right_height;
+            int top = height - left_height;
 
             int rowCount = Math.min(hearts, 10);
             hearts -= rowCount;
 
             for (int i = 0; i < rowCount; ++i)
             {
-                int x = left_align - i * 8 - 9;
+                int x = left_align + i * 8;
                 blit(poseStack, x, top, BACKGROUND, 9, 9, 9);
 
                 if (i * 2 + 1 + heart < health)
@@ -850,8 +861,9 @@ public class ForgeIngameGui extends Gui
                     blit(poseStack, x, top, HALF, 9, 9, 9);
             }
 
-            right_height += 10;
+            left_height += 10;
         }
+
         RenderSystem.disableBlend();
     }
 
