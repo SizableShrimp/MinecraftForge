@@ -70,9 +70,9 @@ ext {
     MC_VERSION = '1.11.2'
     MCP_VERSION = '20210824.173128'
     POST_PROCESSOR = [
-        tool: 'net.minecraftforge:mcpcleanup:2.3.2:fatjar',
+        tool: 'net.minecraftforge:mcpcleanup:2.3.6:fatjar',
         repo: 'https://maven.minecraftforge.net/',
-        args: ['--input', '{input}', '--output', '{output}']
+        args: ['--input', '{input}', '--output', '{output}', '--fix-generic-params']
     ]
 }
 
@@ -165,10 +165,18 @@ project(':forge') {
     apply plugin: 'java-library'
     apply plugin: 'maven-publish'
     apply plugin: 'eclipse'
+    apply plugin: 'idea'
     apply plugin: 'net.minecraftforge.gradle.patcher'
 
     java.toolchain.languageVersion = JavaLanguageVersion.of(8)
     group = 'net.minecraftforge'
+
+    idea {
+        module {
+            // Fix resource loading with older FML versions that relied on a unified output folder
+            inheritOutputDirs = true
+        }
+    }
 
     sourceSets {
         main {
@@ -198,6 +206,9 @@ project(':forge') {
             runtimeClasspath += sourceSets.userdev.runtimeClasspath
             compileClasspath += sourceSets.test.runtimeClasspath
             runtimeClasspath += sourceSets.test.runtimeClasspath
+        }
+        all {
+            output.resourcesDir = java.destinationDirectory
         }
     }
     //Eclipse adds the sourcesets twice, once where we tell it to, once in the projects folder. No idea why. So delete them

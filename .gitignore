@@ -11,6 +11,7 @@
 /.idea
 /classes
 *.iml
+/out
 
 #gradle
 /build
